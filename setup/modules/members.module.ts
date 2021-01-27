@@ -3,6 +3,7 @@ import {FORMAT_SEARCH} from './shared/format-search';
 
 export const MEMBERS_MODULE = {
   id: 'members',
+  name: 'Članovi',
   authorization: {
     read: ['admin'],
     write: ['admin']
@@ -71,7 +72,6 @@ export const MEMBERS_MODULE = {
       formatOnSave: FORMAT_SEARCH('name'),
       disableOn: 'edit',
     },
-    ...CREATED_ON.definition(),
     name: {label: 'Puno ime'},
     title: {label: 'Titula'},
     shortBio: {
@@ -83,7 +83,7 @@ export const MEMBERS_MODULE = {
     bio: {
       label: 'Biografija',
       component: {
-        type: 'fb-tinymce'
+        type: 'tinymce'
       }
     },
     image: {
@@ -91,6 +91,7 @@ export const MEMBERS_MODULE = {
       component: {
         type: 'image'
       }
-    }
+    },
+    ...CREATED_ON.definition(),
   }
 };

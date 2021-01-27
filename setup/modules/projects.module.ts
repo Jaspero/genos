@@ -3,6 +3,7 @@ import {FORMAT_SEARCH} from './shared/format-search';
 
 export const PROJECTS_MODULE = {
   id: 'projects',
+  name: 'Projekti',
   authorization: {
     read: ['admin'],
     write: ['admin']
@@ -51,16 +52,19 @@ export const PROJECTS_MODULE = {
       image: {type: 'string'},
       excerpt: {type: 'string'},
       content: {type: 'string'},
-    }
+      ...CREATED_ON.property
+    },
+    required: [
+      'title'
+    ]
   },
   definitions: {
     id: {
       label: 'URL',
-      hint: 'URL se kreira iz imena ako je ostavljen prazan',
-      formatOnSave: FORMAT_SEARCH('name'),
+      hint: 'URL se kreira iz naslova ako je ostavljen prazan',
+      formatOnSave: FORMAT_SEARCH(),
       disableOn: 'edit',
     },
-    ...CREATED_ON.definition(),
     title: {label: 'Naslov'},
     image: {
       label: 'Slika',
@@ -77,8 +81,9 @@ export const PROJECTS_MODULE = {
     content: {
       label: 'Sadržaj',
       component: {
-        type: 'fb-tinymce'
+        type: 'tinymce'
       }
-    }
+    },
+    ...CREATED_ON.definition(),
   }
 };

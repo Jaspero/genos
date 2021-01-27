@@ -2,7 +2,8 @@ import {CREATED_ON} from './shared/created-on';
 import {FORMAT_SEARCH} from './shared/format-search';
 
 export const NEWS_MODULE = {
-  id: 'projects',
+  id: 'news',
+  name: 'Novosti',
   authorization: {
     read: ['admin'],
     write: ['admin']
@@ -57,16 +58,19 @@ export const NEWS_MODULE = {
       image: {type: 'string'},
       excerpt: {type: 'string'},
       content: {type: 'string'},
-    }
+      ...CREATED_ON.property
+    },
+    required: [
+      'title'
+    ]
   },
   definitions: {
     id: {
       label: 'URL',
-      hint: 'URL se kreira iz imena ako je ostavljen prazan',
-      formatOnSave: FORMAT_SEARCH('name'),
+      hint: 'URL se kreira iz naslova ako je ostavljen prazan',
+      formatOnSave: FORMAT_SEARCH(),
       disableOn: 'edit',
     },
-    ...CREATED_ON.definition(),
     title: {label: 'Naslov'},
     subTitle: {label: 'Podnaslov'},
     image: {
@@ -84,8 +88,9 @@ export const NEWS_MODULE = {
     content: {
       label: 'Sadržaj',
       component: {
-        type: 'fb-tinymce'
+        type: 'tinymce'
       }
-    }
+    },
+    ...CREATED_ON.definition(),
   }
 };

@@ -3,6 +3,7 @@ import {FORMAT_SEARCH} from './shared/format-search';
 
 export const PUBLICATIONS_MODULE = {
   id: 'publications',
+  name: 'Publikacije',
   authorization: {
     read: ['admin'],
     write: ['admin']
@@ -62,16 +63,19 @@ export const PUBLICATIONS_MODULE = {
       authors: {type: 'string'},
       link: {type: 'string'},
       description: {type: 'string'},
-    }
+      ...CREATED_ON.property
+    },
+    required: [
+      'title'
+    ]
   },
   definitions: {
     id: {
       label: 'URL',
-      hint: 'URL se kreira iz imena ako je ostavljen prazan',
-      formatOnSave: FORMAT_SEARCH('name'),
+      hint: 'URL se kreira iz naslova ako je ostavljen prazan',
+      formatOnSave: FORMAT_SEARCH(),
       disableOn: 'edit',
     },
-    ...CREATED_ON.definition(),
     title: {label: 'Naslov'},
     authors: {label: 'Autori'},
     link: {label: 'Link'},
@@ -80,6 +84,7 @@ export const PUBLICATIONS_MODULE = {
       component: {
         type: 'textarea'
       }
-    }
+    },
+    ...CREATED_ON.definition(),
   }
 };
