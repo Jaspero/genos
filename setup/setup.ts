@@ -8,8 +8,7 @@ const serviceAccount = require('./serviceAccountKey.json');
  * Add your firebase config
  */
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://jaspero-jms.firebaseio.com'
+  credential: admin.credential.cert(serviceAccount)
 });
 
 async function exec() {

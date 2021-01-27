@@ -23,6 +23,7 @@
     "@angular/platform-browser": "11.1.0",
     "@angular/platform-browser-dynamic": "11.1.0",
     "@angular/router": "11.1.0",
+    "@jaspero/fb-tinymce": "^1.2.0",
     "@jaspero/form-builder": "3.13.3",
     "@jaspero/jmsp-notes": "1.0.1",
     "@jaspero/ng-helpers": "4.3.0",
@@ -36,7 +37,7 @@
     "jsoneditor": "9.0.5",
     "lodash-es": "4.17.15",
     "rxjs": "7.0.0-beta.5",
-    "tinymce": "5.6.0",
+    "tinymce": "^5.6.0",
     "tslib": "^2.0.0",
     "zone.js": "0.11.3"
   },

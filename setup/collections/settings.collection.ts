@@ -4,20 +4,6 @@ export const SETTINGS_COLLECTION = {
     {
       id: 'user',
       roles: [
-
-        /**
-         * List all users that should be created initially.
-         * Initially created users can only login through
-         * third party provides (google, facebook...).
-         * If you want to create a user with email/password
-         * add an account for him in Authentication in the
-         * firebase dashboard.
-         */
-        {
-          email: 'test@test.com',
-          role: 'user'
-        },
-
         {
           email: 'info@jaspero.co',
           role: 'admin'
@@ -33,6 +19,30 @@ export const SETTINGS_COLLECTION = {
             label: 'LAYOUT.DASHBOARD',
             type: 'link',
             value: '/dashboard'
+          },
+          {
+            icon: 'style',
+            label: 'LAYOUT.NEWS',
+            type: 'link',
+            value: '/m/news/overview'
+          },
+          {
+            icon: 'supervisor_account',
+            label: 'LAYOUT.MEMBERS',
+            type: 'link',
+            value: '/m/members/overview'
+          },
+          {
+            icon: '360',
+            label: 'LAYOUT.PROJECTS',
+            type: 'link',
+            value: '/m/projects/overview'
+          },
+          {
+            icon: 'public',
+            label: 'LAYOUT.PUBLICATIONS',
+            type: 'link',
+            value: '/m/publications/overview'
           },
           {
             children: [
@@ -53,25 +63,6 @@ export const SETTINGS_COLLECTION = {
             label: 'LAYOUT.MANAGEMENT',
             type: 'expandable'
           },
-          {
-            children: [
-              {
-                icon: 'view_module',
-                label: 'LAYOUT.MODULES',
-                type: 'link',
-                value: '/module-definition/overview'
-              },
-              {
-                icon: 'settings',
-                label: 'LAYOUT.SETTINGS',
-                type: 'link',
-                value: '/settings'
-              }
-            ],
-            icon: 'dns',
-            label: 'LAYOUT.SYSTEM',
-            type: 'expandable'
-          }
         ]
       }
     }

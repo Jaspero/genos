@@ -65,7 +65,12 @@
     "LOG_OUT": "Odjavi se",
 
     "MANAGEMENT": "Upravljanje",
-    "SYSTEM": "Sustav"
+    "SYSTEM": "Sustav",
+
+    "NEWS": "Novosti",
+    "MEMBERS": "Članovi",
+    "PROJECTS": "Projekti",
+    "PUBLICATIONS": "Publikacije"
   },
   "MODULES": {
     "ADD_MODULE": "Dodaj Modul",

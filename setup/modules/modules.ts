@@ -1,3 +1,7 @@
+import {MEMBERS_MODULE} from './members.module';
+import {NEWS_MODULE} from './news.module';
+import {PROJECTS_MODULE} from './projects.module';
+import {PUBLICATIONS_MODULE} from './publications.module';
 import {ROLES_MODULE} from './roles.module';
 import {USERS_MODULE} from './users.module';
 
@@ -8,35 +12,8 @@ export const MODULES = [
   USERS_MODULE,
   ROLES_MODULE,
 
-  {
-    id: 'users~{docId}~notes',
-    name: 'User Notes',
-    layout: {
-      authorization: {
-        read: ['admin'],
-        write: ['admin']
-      },
-      instance: {
-        segments: [
-          {
-            fields: ['/note']
-          }
-        ]
-      },
-      table: {
-        tableColumns: [
-          {
-            key: '/note',
-            label: 'Note'
-          }
-        ]
-      }
-    },
-    schema: {
-      properties: {
-        id: {type: 'string'},
-        note: {type: 'string'}
-      }
-    }
-  }
+  NEWS_MODULE,
+  MEMBERS_MODULE,
+  PROJECTS_MODULE,
+  PUBLICATIONS_MODULE
 ];

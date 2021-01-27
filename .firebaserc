@@ -1,9 +1,9 @@
 {
   "targets": {
-    "jaspero-jms": {
+    "genos-ec52a": {
       "hosting": {
         "cms": [
-          "jaspero-jms"
+          "genos-ec52a-cms"
         ]
       }
     }
