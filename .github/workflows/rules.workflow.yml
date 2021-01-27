@@ -6,7 +6,6 @@ on:
     paths:
       - 'firestore.rules'
       - '.github/workflows/rules.workflow.yml'
-
 jobs:
   deploy:
     name: Deploy

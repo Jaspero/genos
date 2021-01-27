@@ -6,7 +6,6 @@ on:
     paths:
       - 'firestore.indexes.json'
       - '.github/workflows/indexes.workflow.yml'
-
 jobs:
   deploy:
     name: Deploy

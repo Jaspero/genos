@@ -6,7 +6,6 @@ on:
     paths:
       - 'storage.rules'
       - '.github/workflows/storage.workflow.yml'
-
 jobs:
   deploy:
     name: Deploy
