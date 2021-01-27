@@ -85,15 +85,6 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  loginFacebook() {
-    this.afAuth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
-      .catch(e => {
-        if (e.code === 'auth/multi-factor-auth-required') {
-          this.openMfa(e.resolver);
-        }
-      });
-  }
-
   loginEmail() {
     return () => {
       const data = this.loginForm.getRawValue();
