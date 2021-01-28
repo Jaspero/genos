@@ -5,8 +5,8 @@
 ![Deploy Rules](https://github.com/Jaspero/genos/workflows/Deploy%20Rules/badge.svg)
 
 # Genos
-This is the full source code for the [Genos](https://genos.com/).
-The app is built in [Svelte](https://github.com/sveltejs/sveltejs) and the database and hosting is on [Firebase](https://firebase.google.com/). 
+This is the full source code for the [Genos](https://genos.com/) website.
+Genos is built in [Svelte](https://github.com/sveltejs/sveltejs) and the database and hosting is on [Firebase](https://firebase.google.com/). 
 
 Content management is done through [JMS](https://github.com/Jaspero/jms) our open source content management system. 
 
@@ -18,4 +18,4 @@ We don't have the required manpower and experties to build frameworks and tools 
 
 ## License 
 
-The source code is publised under MIT © [Jaspero Ltd](mailto:info@jaspero.co) and all media assets are property of [Genos Ltd](glauc@genos.hr)
+The source code is published under MIT © [Jaspero Ltd](mailto:info@jaspero.co) and all media assets are property of [Genos Ltd](glauc@genos.hr)
