@@ -70,7 +70,9 @@
     "NEWS": "Novosti",
     "MEMBERS": "Članovi",
     "PROJECTS": "Projekti",
-    "PUBLICATIONS": "Publikacije"
+    "CATEGORIES": "Categories",
+    "PUBLICATIONS": "Publikacije",
+    "SERVICES": "Usluge"
   },
   "MODULES": {
     "ADD_MODULE": "Dodaj Modul",

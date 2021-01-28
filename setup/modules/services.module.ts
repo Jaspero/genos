@@ -8,16 +8,16 @@ const CATEGORY_DEFINITION = {
       type: 'select',
       configuration: {
         populate: {
-          collection: 'project-categories'
+          collection: 'service-categories'
         }
       }
     }
   }
 };
 
-export const PROJECTS_MODULE = {
-  id: 'projects',
-  name: 'Projekti',
+export const SERVICES_MODULE = {
+  id: 'services',
+  name: 'Usluge',
   authorization: {
     read: ['admin'],
     write: ['admin']
@@ -39,8 +39,6 @@ export const PROJECTS_MODULE = {
           title: 'Informacije',
           fields: [
             '/title',
-            '/image',
-            '/excerpt',
             '/content',
           ]
         }
@@ -57,12 +55,8 @@ export const PROJECTS_MODULE = {
           key: '/category',
           label: 'Kategorija',
           populate: {
-            collection: 'project-categories'
+            collection: 'service-categories'
           }
-        },
-        {
-          key: '/excerpt',
-          label: 'Opis'
         }
       ]
     },
@@ -87,8 +81,6 @@ export const PROJECTS_MODULE = {
       id: {type: 'string'},
       title: {type: 'string'},
       category: {type: 'string'},
-      image: {type: 'string'},
-      excerpt: {type: 'string'},
       content: {type: 'string'},
       ...CREATED_ON.property
     },
@@ -105,18 +97,6 @@ export const PROJECTS_MODULE = {
       disableOn: 'edit',
     },
     title: {label: 'Naslov'},
-    image: {
-      label: 'Slika',
-      component: {
-        type: 'image'
-      }
-    },
-    excerpt: {
-      label: 'Opis',
-      component: {
-        type: 'textarea'
-      }
-    },
     content: {
       label: 'Sadržaj',
       component: {

@@ -1,8 +1,11 @@
 import {MEMBERS_MODULE} from './members.module';
 import {NEWS_MODULE} from './news.module';
+import {PROJECT_CATEGORIES_MODULE} from './project-categories.module';
 import {PROJECTS_MODULE} from './projects.module';
 import {PUBLICATIONS_MODULE} from './publications.module';
 import {ROLES_MODULE} from './roles.module';
+import {SERVICE_CATEGORIES_MODULE} from './service-categories.module';
+import {SERVICES_MODULE} from './services.module';
 import {USERS_MODULE} from './users.module';
 
 /**
@@ -15,5 +18,8 @@ export const MODULES = [
   NEWS_MODULE,
   MEMBERS_MODULE,
   PROJECTS_MODULE,
-  PUBLICATIONS_MODULE
+  PROJECT_CATEGORIES_MODULE,
+  PUBLICATIONS_MODULE,
+  SERVICES_MODULE,
+  SERVICE_CATEGORIES_MODULE
 ];

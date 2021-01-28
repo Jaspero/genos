@@ -33,10 +33,42 @@ export const SETTINGS_COLLECTION = {
             value: '/m/members/overview'
           },
           {
+            children: [
+              {
+                icon: 'arrow_forward',
+                label: 'LAYOUT.SERVICES',
+                type: 'link',
+                value: '/m/services/overview'
+              },
+              {
+                icon: 'arrow_forward',
+                label: 'LAYOUT.CATEGORIES',
+                type: 'link',
+                value: '/m/service-categories/overview'
+              }
+            ],
+            icon: 'mediation',
+            label: 'LAYOUT.SERVICES',
+            type: 'expandable'
+          },
+          {
+            children: [
+              {
+                icon: 'arrow_forward',
+                label: 'LAYOUT.PROJECTS',
+                type: 'link',
+                value: '/m/projects/overview'
+              },
+              {
+                icon: 'arrow_forward',
+                label: 'LAYOUT.CATEGORIES',
+                type: 'link',
+                value: '/m/project-categories/overview'
+              }
+            ],
             icon: '360',
             label: 'LAYOUT.PROJECTS',
-            type: 'link',
-            value: '/m/projects/overview'
+            type: 'expandable'
           },
           {
             icon: 'public',
@@ -47,13 +79,13 @@ export const SETTINGS_COLLECTION = {
           {
             children: [
               {
-                icon: 'supervised_user_circle',
+                icon: 'arrow_forward',
                 label: 'GENERAL.USERS',
                 type: 'link',
                 value: '/m/users/overview'
               },
               {
-                icon: 'vpn_key',
+                icon: 'arrow_forward',
                 label: 'GENERAL.ROLES',
                 type: 'link',
                 value: '/m/roles/overview'
