@@ -1,0 +1,8 @@
+/___ELDER___/
+/node_modules/
+/public/
+/build/
+___ELDER___
+key.json
+env-config.js
+.env

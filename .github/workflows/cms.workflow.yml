@@ -4,7 +4,7 @@ on:
     branches:
       - master
     paths:
-      - 'client/**/*'
+      - 'cms/**/*'
       - '.github/workflows/cms.workflow.yml'
 jobs:
   deploy:
@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@master
       - name: Install Dependencies
         run: |
-          npm --prefix client ci
+          npm --prefix cms ci
       - name: Build
         run: npm run build:cms
       - name: Deploy to Firebase
