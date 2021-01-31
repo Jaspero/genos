@@ -1,6 +1,6 @@
 <script>
   import {onMount} from 'svelte';
-  import { firebase } from '../../config/firebase';
+  import {firebase} from '../../config/firebase';
 
   export let publications;
 
@@ -9,7 +9,7 @@
   let items = publications.slice(0, 10);
 
   async function loadMore() {
-    const data = await fs.collection('publications')
+    const data = await fb.collection('publications')
       .orderBy('createdOn', 'desc')
       .startAfter(items[items.length - 1].createdOn)
       .limit(11)
@@ -17,7 +17,7 @@
 
     items = [
       ...items,
-      data.docs.slice(0, 10).map(it => ({
+      ...data.docs.slice(0, 10).map(it => ({
         id: it.id,
         ...it.data()
       }))
@@ -49,9 +49,9 @@
             <td data-label="Title">{publication.title}</td>
           <td data-label="Reference">
             {#if publication.link}
-              <a class="link" href="{publication.link}" rel="noopener" target="_blank">{publication.description}</a>
+              <a class="link" href="{publication.link}" rel="noopener" target="_blank">{publication.description || ''}</a>
             {:else}
-              {publication.description}
+              {publication.description || ''}
             {/if}
             <td data-label="Authors">{publication.authors}</td>
           </tr>
@@ -60,7 +60,7 @@
       </table>
     </div>
     <div class="col-12 ta-center">
-      <button class="gg-button m-y-xs" disabled={!hasMore} on:click={loadMore}>Load more</button>
+      <button type="button" class="gg-button m-y-xs" disabled={!hasMore} on:click={loadMore}>Load more</button>
     </div>
   </div>
 </section>

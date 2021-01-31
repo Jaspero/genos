@@ -4,12 +4,12 @@
   export let templateHtml, data, request;
 
   const urls = [
-    {label: 'Publikacije', link: 'publikacije'},
-    {label: 'Usluge', link: 'usluge'},
-    {label: 'Projekti', link: 'projekti'},
-    {label: 'Novosti', link: 'novosti'},
-    {label: 'Naš Tim', link: 'tim'},
-    {label: 'Kontaks', link: 'kontakt'},
+    {label: 'Publikacije', link: '/publikacije'},
+    {label: 'Usluge', link: '/usluge'},
+    {label: 'Projekti', link: '/projekti'},
+    {label: 'Novosti', link: '/novosti'},
+    {label: 'Naš Tim', link: '/tim'},
+    {label: 'Kontaks', link: '/kontakt'},
   ];
   const year = new Date().getFullYear();
   const active = request.permalink.split('/')[1];
@@ -77,53 +77,6 @@
 </footer>
 
 <style>
-  #load-bar {
-    animation: cssAnimation 0s 250ms forwards;
-    visibility: hidden;
-  }
-
-  @keyframes cssAnimation {
-    to   { visibility: visible; }
-  }
-
-  .slider {
-    position: fixed;
-    width: 100%;
-    height: 5px;
-    top: 0;
-    left: 0;
-    overflow-x: hidden;
-  }
-
-  .line{
-    position: absolute;
-    opacity: 0.4;
-    background: #4a8df8;
-    width: 150%;
-    height: 5px;
-  }
-
-  .subline {
-    position: absolute;
-    background: #4a8df8;
-    height: 5px;
-  }
-  .inc {
-    animation: increase 2s infinite;
-  }
-  .dec {
-    animation: decrease 2s 0.5s infinite;
-  }
-
-  @keyframes increase {
-    from { left: -5%; width: 5%; }
-    to { left: 130%; width: 100%;}
-  }
-  @keyframes decrease {
-    from { left: -80%; width: 80%; }
-    to { left: 110%; width: 10%;}
-  }
-
   .gg-header {
     position: absolute;
     top: 0;

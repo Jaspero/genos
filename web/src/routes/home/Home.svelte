@@ -30,7 +30,7 @@
     </div>
     <div class="col-6 col-s-12">
       <div class="flex ai-start m-b-m">
-        <span class="gg-icon" aria-hidden="true"><img src="/images/icon-team.svg" alt=""></span>
+        <span class="gg-icon" aria-hidden="true"><img src="/images/icon-team.svg" /></span>
         <div class="p-l-s">
           <h6 class="m-b-xs">Global leader in glycomics</h6>
           <p>
@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="flex ai-start m-b-m">
-        <span class="gg-icon" aria-hidden="true"><img src="/images/icon-publication.svg" alt=""></span>
+        <span class="gg-icon" aria-hidden="true"><img src="/images/icon-publication.svg" /></span>
         <div class="p-l-s">
           <h6 class="m-b-xs">Research</h6>
           <p>
@@ -48,7 +48,7 @@
         </div>
       </div>
       <div class="flex ai-start m-b-m">
-        <span class="gg-icon" aria-hidden="true"><img src="/images/icon-service.svg" alt=""></span>
+        <span class="gg-icon" aria-hidden="true"><img src="/images/icon-service.svg" /></span>
         <div class="p-l-s">
           <h6 class="m-b-xs">Commercial services</h6>
           <p>Our knowledge and expertise is available to any interested party in academia or industry through high-throughput glycan analysis and other commercial services that we offer, ranging from analytical chemistry to study design and statistical data analysis.</p>
@@ -81,9 +81,9 @@
             <td data-label="Title">{publication.title}</td>
             <td data-label="Reference">
               {#if publication.link}
-                <a class="link" href={publication.link} rel="noopener" target="_blank">{publication.description}</a>
+                <a class="link" href={publication.link} rel="noopener" target="_blank">{publication.description || ''}</a>
               {:else}
-                {publication.description}
+                {publication.description || ''}
               {/if}
             </td>
             <td data-label="Authors">{publication.authors}</td>
@@ -129,7 +129,7 @@
     </div>
     {#each projects as project}
       <div class="col-6 col-s-12">
-        <a class="gg-card" rel="prefetch" href="/projects/{project.id}">
+        <a class="gg-card" rel="prefetch" href="/projekti/{project.id}">
           <p class="m-b-s fw-bold">{project.title}</p>
           <p class="m-b-s">{project.excerpt}</p>
         </a>
@@ -153,7 +153,7 @@
     </div>
     {#each news as item}
       <div class="col-6 col-s-12">
-        <a class="gg-card" rel="prefetch" href="/news/{item.id}">
+        <a class="gg-card" rel="prefetch" href="/novosti/{item.id}">
           <p class="fs-small m-b-xs m-t-s">{new Date(item.createdOn).toLocaleDateString('en-GB')}</p>
           <p class="m-b-s fw-bold">{item.title}</p>
           <p class="m-b-s">{item.subTitle}</p>

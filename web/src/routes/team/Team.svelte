@@ -22,7 +22,7 @@
     </div>
     {#each members as member, i}
       <div class="col-3 col-m-4 col-s-6 col-xs-12 p-a-s ta-center">
-        <Member hydrate-client={{member}}>
+        <Member hydrate-client={{member}} />
       </div>
     {/each}
   </div>

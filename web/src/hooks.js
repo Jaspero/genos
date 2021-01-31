@@ -2,6 +2,22 @@ const path = require('path');
 const glob = require('glob');
 const fs = require('fs-extra');
 
+const { firestore } = require('firebase-admin');
+
+async function shared() {
+
+  const fs = firestore();
+  const [news, projects] = await Promise.all([
+    fs.collection('news').orderBy('createdOn', 'desc').get(),
+    fs.collection('projects').orderBy('createdOn', 'desc').get(),
+  ]);
+
+  return {
+    projects: projects.docs.map(it => ({id: it.id, ...it.data()})),
+    news: news.docs.map(it => ({id: it.id, ...it.data()}))
+  }
+}
+
 const hooks = [
   {
     hook: 'bootstrap',
@@ -31,6 +47,7 @@ const hooks = [
     description: 'Populates environment information for the routes.',
     priority: 99,
     run: async ({data}) => {
+      data.shared = await shared();
       data.dev = process.env.NODE_ENV !== 'production';
     }
   }

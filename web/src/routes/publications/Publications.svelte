@@ -6,7 +6,7 @@
   const {publications} = data;
 </script>
 
-<section class="gg-publications-intro">
+<section class="gg-intro">
   <div class="grid">
     <div class="col-12">
       <h4 class="gg-title c-l-primary">

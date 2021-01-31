@@ -2,20 +2,12 @@ const {firestore} = require('firebase-admin');
 const fs = firestore();
 
 module.exports = {
-  data: async () => {
-    const [publications, projects, news, members, services] = await Promise.all ([
+  data: async ({data}) => {
+    const [publications, members, services] = await Promise.all ([
       fs.collection('publications')
         .where('featured', '==', true)
         .orderBy('createdOn', 'desc')
         .limit(5)
-        .get(),
-      fs.collection('projects')
-        .orderBy('createdOn', 'desc')
-        .limit(4)
-        .get(),
-      fs.collection('news')
-        .orderBy('createdOn', 'desc')
-        .limit(4)
         .get(),
       fs.collection('members')
         .orderBy('order', 'asc')
@@ -27,26 +19,18 @@ module.exports = {
 
     return {
       publications: publications.docs.map((it) => it.data()),
-      projects: projects.docs
-        .map((it) => {
-          const item = it.data();
-
-          return {
-            id: it.id,
-            title: item.title,
-            excerpt: item.excerpt
-          }
-        }),
-      news: news.docs.map((it) => {
-        const item = it.data();
-
-        return {
-          id: item.id,
-          createdOn: item.createdOn,
-          title: item.title,
-          subTitle: item.subTitle,
-        }
-      }),
+      projects: data.shared.projects.slice(0, 4)
+        .map((it) => ({
+          id: it.id,
+          title: it.title,
+          excerpt: it.excerpt
+        })),
+      news: data.shared.news.slice(0, 4).map((it) => ({
+        id: it.id,
+        createdOn: it.createdOn,
+        title: it.title,
+        subTitle: it.subTitle,
+      })),
       members: members.docs.map(it => it.data()),
       services: services.docs.map((it) => it.data().title),
     };

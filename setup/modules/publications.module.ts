@@ -56,6 +56,7 @@ export const PUBLICATIONS_MODULE = {
       authors: {type: 'string'},
       link: {type: 'string'},
       description: {type: 'string'},
+      featured: {type: 'boolean'},
       ...CREATED_ON.property
     },
     required: ['title']
