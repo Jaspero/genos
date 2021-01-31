@@ -9,7 +9,7 @@
     {label: 'Projekti', link: 'projekti'},
     {label: 'Novosti', link: 'novosti'},
     {label: 'Naš Tim', link: 'tim'},
-    {label: 'Kontaks', link: 'kontak'},
+    {label: 'Kontaks', link: 'kontakt'},
   ];
   const year = new Date().getFullYear();
   const active = request.permalink.split('/')[1];

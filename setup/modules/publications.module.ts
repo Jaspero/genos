@@ -5,7 +5,6 @@ export const PUBLICATIONS_MODULE = {
   id: 'publications',
   name: 'Publikacije',
   authorization: {
-    read: ['admin'],
     write: ['admin']
   },
   layout: {

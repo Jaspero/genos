@@ -77,6 +77,12 @@ export const SETTINGS_COLLECTION = {
             value: '/m/publications/overview'
           },
           {
+            icon: 'email',
+            label: 'LAYOUT.CONTACTS',
+            type: 'link',
+            value: '/m/contacts/overview'
+          },
+          {
             children: [
               {
                 icon: 'arrow_forward',

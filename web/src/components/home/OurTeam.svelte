@@ -48,7 +48,7 @@
 <section class="bg-l-secondary team p-y-l">
   <div class="grid p-b-m">
     <div class="col-12 flex jc-between ai-center">
-      <h4 class="gg-title">Our team<span class="gg-icon" aria-hidden="true"><img src="assets/images/icon-team.svg" alt=""></span></h4>
+      <h4 class="gg-title">Our team<span class="gg-icon" aria-hidden="true"><img src="/images/icon-team.svg" alt=""></span></h4>
       <div class="arrows flex">
         <button aria-label="Previous slide" class="arrow flex ai-center bg-l-primary m-r-s" on:click="{prevSlide}">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="24px" width="24px" fill="#00407F">
@@ -73,7 +73,7 @@
             <div class="gg-member-avatar">
               <img draggable="false" src="{member.image}" width="150" alt="">
             </div>
-            <p class="fw-bold m-t-s m-b-xs">{member.fullName}</p>
+            <p class="fw-bold m-t-s m-b-xs">{member.name}</p>
             {#if member.title}
               <p class="m-b-s">{member.title}</p>
             {/if}
@@ -94,13 +94,13 @@
         </div>
       </div>
       <div class="p-y-l p-x-m">
-        <h6 class:m-b-s={!dialogOpen.title}>{dialogOpen.fullName}</h6>
+        <h6 class:m-b-s={!dialogOpen.title}>{dialogOpen.name}</h6>
         {#if dialogOpen.title}
           <p class="fs-small c-d-secondary m-t-xs m-b-s">{dialogOpen.title}</p>
         {/if}
         <div class="gg-read-format c-d-secondary">
-          {#if dialogOpen.longBio}
-            <p>{@html dialogOpen.longBio}</p>
+          {#if dialogOpen.bio}
+            <p>{@html dialogOpen.bio}</p>
           {/if}
         </div>
       </div>

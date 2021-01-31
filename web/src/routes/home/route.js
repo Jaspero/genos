@@ -6,12 +6,23 @@ module.exports = {
     const [publications, projects, news, members, services] = await Promise.all ([
       fs.collection('publications')
         .where('featured', '==', true)
+        .orderBy('createdOn', 'desc')
         .limit(5)
         .get(),
-      fs.collection('projects').limit(4).get(),
-      fs.collection('news').limit(4).get(),
-      fs.collection('members').get(),
-      fs.collection('services').get(),
+      fs.collection('projects')
+        .orderBy('createdOn', 'desc')
+        .limit(4)
+        .get(),
+      fs.collection('news')
+        .orderBy('createdOn', 'desc')
+        .limit(4)
+        .get(),
+      fs.collection('members')
+        .orderBy('order', 'asc')
+        .get(),
+      fs.collection('services')
+        .orderBy('createdOn', 'desc')
+        .get(),
     ]);
 
     return {

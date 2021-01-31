@@ -1,3 +1,4 @@
+import {CONTACTS_MODULE} from './contacts.module';
 import {MEMBERS_MODULE} from './members.module';
 import {NEWS_MODULE} from './news.module';
 import {PROJECT_CATEGORIES_MODULE} from './project-categories.module';
@@ -21,5 +22,6 @@ export const MODULES = [
   PROJECT_CATEGORIES_MODULE,
   PUBLICATIONS_MODULE,
   SERVICES_MODULE,
-  SERVICE_CATEGORIES_MODULE
+  SERVICE_CATEGORIES_MODULE,
+  CONTACTS_MODULE
 ];
