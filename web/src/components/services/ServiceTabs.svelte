@@ -20,9 +20,11 @@
         </div>
         <div class="gg-tabs-content">
           <div class="grid">
-            <div class="col-12 gg-read-format">
-              {@html services[tab].content}
-            </div>
+            {#if services[tab]}
+              <div class="col-12 gg-read-format">
+                {@html services[tab].content}
+              </div>
+            {/if}
           </div>
         </div>
       </div>
