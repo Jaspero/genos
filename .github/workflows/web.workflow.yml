@@ -1,0 +1,34 @@
+name: Deploy Web
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'web/**/*'
+      - '.github/workflows/web.workflow.yml'
+      - 'firebase.json'
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Install Dependencies
+        run: |
+          npm ci
+          npm --prefix web ci
+      - name: Build
+        run: |
+          echo $SV > web/key.json
+          npm run build:web
+        env:
+          SV: ${{ secrets.SERVICE_ACCOUNT }}
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting:web
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_ID: genos-ec52a

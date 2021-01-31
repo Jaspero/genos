@@ -4,10 +4,12 @@
   "license": "MIT",
   "scripts": {
     "start:cms": "npm --prefix cms run start",
+    "start:web": "npm --prefix web run start",
     "start:functions": "npm --prefix functions run serve",
     "start:setup": "npm --prefix setup start",
-    "build:cms": "npm --prefix client run build",
+    "build:cms": "npm --prefix cms run build",
     "build:functions": "npm --prefix functions run build",
+    "build:web": "npm --prefix web run build",
     "build": "npm run build:cms && npm run build:functions",
     "firebase": "firebase",
     "deploy": "firebase deploy --only storage,firestore,functions:cms,hosting",

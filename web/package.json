@@ -2,10 +2,9 @@
   "name": "web",
   "scripts": {
     "start": "npm run build:rollup && npm run dev:server",
-    "build": "node ./src/cleanPublic.js && npm run build:rollup && npm run build:html && cp -r public/ ../public/website",
+    "build": "node ./src/cleanPublic.js && npm run build:rollup && npm run build:html && cp -r public/ ../public/web",
     "build:rollup": "rollup -c",
     "build:html": "node ./src/build.js",
-    "build:html:incremental": "npm run build:html -- incremental && cp -r public/ ../public/website",
     "dev:rollup": "rollup  -c -w --no-watch.clearScreen",
     "dev:server": "nodemon",
     "eslint": "eslint --ext .js .",

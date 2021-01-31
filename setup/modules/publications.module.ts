@@ -15,19 +15,11 @@ export const PUBLICATIONS_MODULE = {
       segments: [
         {
           title: 'Sustav',
-          fields: [
-            '/id',
-            '/createdOn'
-          ]
+          fields: ['/id', '/createdOn', '/featured']
         },
         {
           title: 'Informacije',
-          fields: [
-            '/title',
-            '/authors',
-            '/link',
-            '/description',
-          ]
+          fields: ['/title', '/authors', '/link', '/description']
         }
       ]
     },
@@ -39,18 +31,20 @@ export const PUBLICATIONS_MODULE = {
           label: 'Naslov'
         },
         {
+          key: '/featured',
+          label: 'Istaknuta',
+          control: true
+        },
+        {
           key: '/authors',
           label: 'Autori'
         },
         {
           key: '/link',
           label: 'Link',
-          pipe: [
-            'custom',
-            'sanitize'
-          ],
+          pipe: ['custom', 'sanitize'],
           pipeArguments: {
-            0: '(value) => \`<a class="link" href="\${value}" target="_blank">\${value}</a>\`'
+            0: '(value) => `<a class="link" href="${value}" target="_blank">${value}</a>`'
           }
         }
       ]
@@ -65,17 +59,16 @@ export const PUBLICATIONS_MODULE = {
       description: {type: 'string'},
       ...CREATED_ON.property
     },
-    required: [
-      'title'
-    ]
+    required: ['title']
   },
   definitions: {
     id: {
       label: 'URL',
       hint: 'URL se kreira iz naslova ako je ostavljen prazan',
       formatOnSave: FORMAT_SEARCH(),
-      disableOn: 'edit',
+      disableOn: 'edit'
     },
+    featured: {label: 'Istaknuta'},
     title: {label: 'Naslov'},
     authors: {label: 'Autori'},
     link: {label: 'Link'},
@@ -85,6 +78,6 @@ export const PUBLICATIONS_MODULE = {
         type: 'textarea'
       }
     },
-    ...CREATED_ON.definition(),
+    ...CREATED_ON.definition()
   }
 };

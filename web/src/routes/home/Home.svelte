@@ -1,7 +1,9 @@
 <script>
+  import OurTeam from '../../components/home/OurTeam.svelte';
+
   export let data;
 
-  const {members, testimonials} = data;
+  const {publications, projects, news, members, services} = data;
 </script>
 
 <!--Intro-->
@@ -56,6 +58,118 @@
   </div>
 </section>
 
+<!--Featured publications-->
+<section class="bg-l-secondary p-y-l">
+  <div class="grid">
+    <div class="col-12">
+      <h4 class="gg-title">Featured publications<span class="gg-icon" aria-hidden="true"><img src="/images/icon-publication.svg" /></span></h4>
+    </div>
+    <div class="col-12">
+      <table class="gg-publications-table">
+        <thead>
+        <tr>
+          <th>Year</th>
+          <th>Title</th>
+          <th>Reference</th>
+          <th>Authors</th>
+        </tr>
+        </thead>
+        <tbody>
+        {#each publications as publication}
+          <tr>
+            <td data-label="Year">{new Date(publication.createdOn).getFullYear()}</td>
+            <td data-label="Title">{publication.title}</td>
+            <td data-label="Reference">
+              {#if publication.link}
+                <a class="link" href={publication.link} rel="noopener" target="_blank">{publication.description}</a>
+              {:else}
+                {publication.description}
+              {/if}
+            </td>
+            <td data-label="Authors">{publication.authors}</td>
+          </tr>
+        {/each}
+        </tbody>
+      </table>
+    </div>
+    <div class="col-12">
+      <div class="p-y-s ta-center">
+        <a class="link c-primary" href="publikacije">View all publications</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--Services-->
+<section class="gg-section-services bg-d-primary c-l-secondary p-y-l">
+  <div class="grid">
+    <div class="col-12">
+      <h4 class="gg-title c-l-primary">Services<span class="gg-icon" aria-hidden="true"><img src="/images/icon-service.svg" /></span></h4>
+    </div>
+    <div class="col-12">
+      <ul>
+        {#each services as service}
+          <li>{service}</li>
+        {/each}
+      </ul>
+    </div>
+    <div class="col-12">
+      <div class="p-y-xs p-l-m">
+        <a class="link c-l-primary" href="usluge">Learn more about our services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--Recent projects-->
+<section class="bg-l-gradient p-y-l">
+  <div class="grid">
+    <div class="col-12">
+      <h4 class="gg-title">Recent projects<span class="gg-icon" aria-hidden="true"><img src="/images/icon-project.svg" /></span></h4>
+    </div>
+    {#each projects as project}
+      <div class="col-6 col-s-12">
+        <a class="gg-card" rel="prefetch" href="/projects/{project.id}">
+          <p class="m-b-s fw-bold">{project.title}</p>
+          <p class="m-b-s">{project.excerpt}</p>
+        </a>
+      </div>
+    {/each}
+    <div class="col-12">
+      <div class="p-y-s ta-center">
+        <a class="link c-primary" href="projekti">View all projects</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--Our team-->
+<OurTeam hydrate-client={{members}} />
+
+<section class="bg-l-gradient p-y-l">
+  <div class="grid">
+    <div class="col-12">
+      <h4 class="gg-title">Recent news<span class="gg-icon" aria-hidden="true"><img src="/images/icon-news.svg" /></span></h4>
+    </div>
+    {#each news as item}
+      <div class="col-6 col-s-12">
+        <a class="gg-card" rel="prefetch" href="/news/{item.id}">
+          <p class="fs-small m-b-xs m-t-s">{new Date(item.createdOn).toLocaleDateString('en-GB')}</p>
+          <p class="m-b-s fw-bold">{item.title}</p>
+          <p class="m-b-s">{item.subTitle}</p>
+        </a>
+      </div>
+    {/each}
+    <div class="col-12">
+      <div class="p-y-s ta-center">
+        <a class="link c-primary" href="novosti">Learn more about glycans</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
 <style>
   .gg-section-intro {
     padding: 200px 0 120px;
@@ -95,121 +209,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-  }
-
-  .gg-member-card {
-    position: relative;
-    text-align: center;
-    padding: 20px;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    cursor: pointer;
-    user-select: none;
-    transition: .2s;
-  }
-
-  .gg-member-card:after {
-    content: url("/images/icon-search.svg");
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    opacity: 0;
-    transition: .2s;
-  }
-
-  .gg-member-card:hover {
-    box-shadow: 0 4px 10px 0 rgba(0,0,0,.28);
-    background: white;
-    border: 1px solid rgba(0,0,0,.12);
-  }
-
-  .gg-member-card:hover::after {
-    opacity: 1;
-  }
-
-  .gg-member-avatar {
-    display: inline-block;
-    border: 1px solid rgba(0,0,0,.12);
-    border-radius: 50%;
-    padding: 5px;
-  }
-
-  .gg-member-avatar img {
-    border-radius: 50%;
-    width: 150px;
-    min-width: 150px;
-    height: 150px;
-    min-height: 150px;
-  }
-
-  .gg-single-member-dialog {
-    position: fixed;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    background: rgba(0, 0, 0, 0.75);
-  }
-
-  .gg-single-member {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: white;
-    max-width: 80vw;
-    max-height: 80vh;
-    overflow: auto;
-    margin: auto;
-    display: flex;
-    border-radius: 8px; }
-  @media (max-width: 1200px) {
-    .gg-single-member {
-      flex-direction: column;
-      max-width: 96vw;
-      max-height: 96vh; } }
-
-  .gg-single-member-avatar {
-    display: inline-block;
-    border-radius: 50%;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    padding: 5px;
-    margin-top: 70px; }
-  @media (max-width: 1200px) {
-    .gg-single-member-avatar {
-      margin-top: 0; } }
-
-  .gg-single-member-avatar > img {
-    border-radius: 50%;
-    width: 150px;
-    height: 150px;
-    min-width: 150px;
-    min-height: 150px; }
-
-  .gg-single-member-close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
-
-
-  .item {
-    display: none;
-  }
-
-  .item.active {
-    display: block;
-  }
-  .team {
-    height: 600px;
-  }
-  .arrow {
-    cursor: pointer;
-    height: 30px;
   }
 </style>
 

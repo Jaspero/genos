@@ -2,6 +2,9 @@
   "targets": {
     "genos-ec52a": {
       "hosting": {
+        "web": [
+          "genos-ec52a"
+        ],
         "cms": [
           "genos-ec52a-cms"
         ]
