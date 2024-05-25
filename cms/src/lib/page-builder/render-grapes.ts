@@ -86,20 +86,6 @@ export function renderGrapes(
 
   let assetManager: any;
 
-  grapesInstance.on('load', function () {
-    let styleManager = grapesInstance.StyleManager;
-    let fontProperty = styleManager.getProperty('typography', 'font-family');
-    fontProperty.setOptions([{ value: "'Sen', sans-serif", name: 'Sen' }]);
-
-    grapesInstance.on('component:create', (model) => {
-      if (!model.getStyle().hasOwnProperty('font-family')) {
-        model.addStyle({ 'font-family': "'Sen', sans-serif" });
-      }
-    });
-
-    styleManager.render();
-  });
-
   grapesInstance.on(
     'asset:custom',
     (props: {
@@ -152,12 +138,6 @@ export function renderGrapes(
         ...overides
       });
     });
-
-    // grapesInstance.on('component:create', (model) => {
-    //   if (!model.getStyle().hasOwnProperty('font-family')) {
-    //     model.addStyle({ 'font-family': "'Sen', sans-serif" });
-    //   }
-    // });
 
     styleManager.render();
   });

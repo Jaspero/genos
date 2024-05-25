@@ -169,6 +169,18 @@ export const TYPES = (forms: PageBuilderForm[]) => [
    * Common
    */
   {
+    id: 'header',
+    extends: 'text',
+    isComponent: (el: HTMLHeadingElement) => el.tagName === 'HEADER',
+    model: {
+      defaults: {
+        type: 'header',
+        tagName: 'header',
+        classes: ['header']
+      }
+    }
+  },
+  {
     id: 'page-link',
     extend: 'link',
     isComponent: (el: HTMLAnchorElement) => el?.dataset?.pblink,
@@ -184,6 +196,37 @@ export const TYPES = (forms: PageBuilderForm[]) => [
           {
             label: 'Link',
             name: 'href'
+          }
+        ]
+      }
+    }
+  },
+  {
+    id: 'anchor-link',
+    extend: 'link',
+    isComponent: (el: HTMLAnchorElement) => el?.dataset?.pbanchor,
+    model: {
+      defaults: {
+        type: 'anchor-link',
+        draggable: true,
+        content: 'Link',
+        attributes: {
+          'data-pbanchor': true
+        },
+        traits: [
+          {
+            label: 'Target',
+            name: 'href'
+          },
+          {
+            type: 'select',
+            label: 'Animation',
+            name: 'animation',
+            default: 'instanct',
+            options: [
+              { value: 'instant', name: 'instant' },
+              { value: 'smooth', name: 'smooth' }
+            ]
           }
         ]
       }

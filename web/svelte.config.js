@@ -10,6 +10,7 @@ const config = {
       strict: false
     }),
     prerender: {
+      crawl: true,
       entries: [
         '/sitemap'
       ]

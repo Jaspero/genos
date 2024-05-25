@@ -248,6 +248,13 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
       content: typeMap['page-link']
     },
     {
+      id: 'anchor-link',
+      label: 'Anchor Link',
+      media: `<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" style="width: 100%; height: 48px"><path d="M440-280H280q-83 0-141.5-58.5T80-480q0-83 58.5-141.5T280-680h160v80H280q-50 0-85 35t-35 85q0 50 35 85t85 35h160v80ZM320-440v-80h320v80H320Zm200 160v-80h160q50 0 85-35t35-85q0-50-35-85t-85-35H520v-80h160q83 0 141.5 58.5T880-480q0 83-58.5 141.5T680-280H520Z"/></svg>`,
+      category: 'Content',
+      content: typeMap['anchor-link']
+    },
+    {
       id: 'link',
       label: 'Link',
       media: `<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" style="width: 100%; height: 48px"><path d="M440-280H280q-83 0-141.5-58.5T80-480q0-83 58.5-141.5T280-680h160v80H280q-50 0-85 35t-35 85q0 50 35 85t85 35h160v80ZM320-440v-80h320v80H320Zm200 160v-80h160q50 0 85-35t35-85q0-50-35-85t-85-35H520v-80h160q83 0 141.5 58.5T880-480q0 83-58.5 141.5T680-280H520Z"/></svg>`,
@@ -433,6 +440,13 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
           overflow: 'hidden'
         }
       }
+    },
+    {
+      id: 'header',
+      label: 'Header',
+      category: 'Layout',
+      media: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M240-560h360v-120H240v120Zm-40 440q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>`,
+      content: typeMap.header
     },
     {
       id: 'image',
