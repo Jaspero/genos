@@ -21,6 +21,7 @@
   import { renderAlert } from '@jaspero/web-components/dist/render-alert.js';
   import { onMount } from 'svelte';
   import Loader from '$lib/Loader.svelte';
+  import {CONFIG} from '../lib/consts/config.const';
 
   const redirectLink = '/dashboard';
 
@@ -172,7 +173,7 @@
       {#if showCodeInput}
         <GridCol span="12" spanxl="6">
           <form on:submit|preventDefault={confirm}>
-            <Button variant="outlined" color="warning" href="/" on:click={back}
+            <Button variant="outlined" color="warn" href="/" on:click={back}
               >Back to login</Button
             >
             <div class="mt-12 mb-24 w-full">
@@ -192,7 +193,7 @@
           </form>
         </GridCol>
       {:else}
-        <GridCol span="12" spanxl={showCodeInput ? '3' : '8'}>
+        <GridCol span="12" spanxl="8">
           <div class="flex flex-col gap-4">
             <SectionTitle>Login</SectionTitle>
             <form class="flex flex-col gap-4 border-b pb-8" on:submit={login}>
@@ -253,7 +254,6 @@
                       </svg>
                     </div>
                     <span class="gsi-material-button-contents">Sign in with Google</span>
-                    <span style="display: none;">Sign in with Google</span>
                   </div>
                 </button>
               </div>
@@ -293,7 +293,7 @@
 </Dialog>
 
 <svelte:head>
-  <title>Login - Jaspero</title>
+  <title>Login - {CONFIG.title}</title>
 </svelte:head>
 
 <style>

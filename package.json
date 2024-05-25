@@ -8,10 +8,7 @@
     "write:indexes": "firebase firestore:indexes > firestore.indexes.json"
   },
   "devDependencies": {
-    "prettier": "2.8.0",
-    "prettier-plugin-svelte": "2.10.1"
-  },
-  "dependencies": {
-    "@jaspero/web-components": "1.82.14"
+    "prettier": "3.2.5",
+    "prettier-plugin-svelte": "3.2.3"
   }
 }
