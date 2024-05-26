@@ -11,8 +11,12 @@ const config = {
     }),
     prerender: {
       crawl: true,
+      handleMissingId: 'warn',
       entries: [
-        '/sitemap'
+        /**
+         * Contains links to all other pages
+         */
+        '/sitemap-hidden'
       ]
     }
   },
