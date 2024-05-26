@@ -181,6 +181,66 @@ export const TYPES = (forms: PageBuilderForm[]) => [
     }
   },
   {
+    id: 'nav',
+    extends: 'text',
+    isComponent: (el: HTMLDivElement) => el.tagName === 'NAV',
+    model: {
+      defaults: {
+        type: 'nav',
+        tagName: 'nav',
+        classes: ['nav']
+      }
+    }
+  },
+  {
+    id: 'section',
+    extends: 'text',
+    isComponent: (el: HTMLDivElement) => el.tagName === 'SECTION',
+    model: {
+      defaults: {
+        type: 'section',
+        tagName: 'section',
+        classes: ['section']
+      }
+    }
+  },
+  {
+    id: 'article',
+    extends: 'text',
+    isComponent: (el: HTMLDivElement) => el.tagName === 'ARTICLE',
+    model: {
+      defaults: {
+        type: 'article',
+        tagName: 'article',
+        classes: ['article']
+      }
+    }
+  },
+  {
+    id: 'aside',
+    extends: 'text',
+    isComponent: (el: HTMLDivElement) => el.tagName === 'ASIDE',
+    model: {
+      defaults: {
+        type: 'aside',
+        tagName: 'aside',
+        classes: ['aside']
+      }
+    }
+  },
+  {
+    id: 'footer',
+    extends: 'text',
+    isComponent: (el: HTMLDivElement) => el.tagName === 'FOOTER',
+    model: {
+      defaults: {
+        type: 'footer',
+        tagName: 'footer',
+        classes: ['footer']
+      }
+    }
+  },
+  {
     id: 'page-link',
     extend: 'link',
     isComponent: (el: HTMLAnchorElement) => el?.dataset?.pblink,

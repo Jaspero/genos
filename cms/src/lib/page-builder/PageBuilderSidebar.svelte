@@ -159,11 +159,6 @@
           ]
         : []),
       {
-        id: 'layers',
-        title: 'Layers',
-        icon: 'stacks'
-      },
-      {
         id: 'styles',
         title: 'Styles',
         icon: 'style'
@@ -172,6 +167,11 @@
         id: 'traits',
         title: 'Traits',
         icon: 'dataset'
+      },
+      {
+        id: 'layers',
+        title: 'Layers',
+        icon: 'stacks'
       },
       ...(metaItems
         ? [

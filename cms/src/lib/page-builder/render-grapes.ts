@@ -181,16 +181,12 @@ export function renderGrapes(
   grapesInstance.DomComponents.getWrapper()!.set({badgable: false, selectable: false});
 
   grapesInstance.on('component:update:traits', (component: any) => {
-    if (
-      component.changed.attributes?.fontSize &&
-      component.get('traits').where({name: 'fontSize'}).length
-    ) {
-      component.addStyle({'font-size': component.changed.attributes.fontSize});
-      return;
-    }
-
     for (const key in component.changed) {
       switch (key) {
+        case 'tagName': {
+          component.setClass([component.changed.tagName]);
+          break;
+        }
         case 'column-span-desktop': {
           let cls = component.getAttributes().class;
           let regex = /gc-\d{0,2}/;

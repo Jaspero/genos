@@ -201,6 +201,7 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
         type: 'text',
         tagName: 'h2',
         content: 'This is a heading',
+        classes: ['h2'],
         traits: [
           {
             type: 'select',
@@ -214,19 +215,6 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
               { value: 'h4', name: 'Heading 4' },
               { value: 'h5', name: 'Heading 5' },
               { value: 'h6', name: 'Heading 6' }
-            ]
-          },
-          {
-            type: 'select',
-            name: 'fontSize',
-            label: 'Size',
-            options: [
-              { value: '0.75rem', label: '12px' },
-              { value: '1rem', label: '16px' },
-              { value: '1.25rem', label: '20px' },
-              { value: '1.5rem', label: '24px' },
-              { value: '2rem', label: '32px' },
-              { value: '3rem', label: '48px' }
             ]
           }
         ]
@@ -343,8 +331,43 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
       id: 'header',
       label: 'Header',
       category: 'Layout',
-      media: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M240-560h360v-120H240v120Zm-40 440q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>`,
+      media: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed" style="width: 100%; height: 48px;"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-520h560v-120H200v120Zm560 80H200v360h560v-360Zm-560-80v80-80Zm0 0v-120 120Zm0 80v360-360Z"/></svg>`,
       content: typeMap.header
+    },
+    {
+      id: 'nav',
+      label: 'Nav',
+      category: 'Layout',
+      media: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed" width="24" style="width: 100%; height: 48px;"><path d="M240-560h360v-120H240v120Zm-40 440q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>`,
+      content: typeMap.nav
+    },
+    {
+      id: 'section',
+      label: 'Section',
+      category: 'Layout',
+      media: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed" style="width: 100%; height: 48px;"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm560-200H200v120h560v-120Zm-100-80h100v-360H660v360Zm-460 0h100v-360H200v360Zm180 0h200v-360H380v360Z"/></svg>`,
+      content: typeMap.section
+    },
+    {
+      id: 'article',
+      label: 'Article',
+      category: 'Layout',
+      media: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed" style="width: 100%; height: 48px;"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>`,
+      content: typeMap.article
+    },
+    {
+      id: 'aside',
+      label: 'Aside',
+      category: 'Layout',
+      media: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed" style="width: 100%; height: 48px;"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm280-80h280v-560H480v560Z"/></svg>`,
+      content: typeMap.aside
+    },
+    {
+      id: 'footer',
+      label: 'Footer',
+      category: 'Layout',
+      media: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed" style="width: 100%; height: 48px;"><path d="M240-240h480v-80H240v80Zm-40 120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>`,
+      content: typeMap.footer
     },
     {
       id: 'image',
