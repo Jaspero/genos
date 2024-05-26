@@ -34,7 +34,8 @@ export function renderGrapes(
   grapesInstance = grapesjs.init({
     canvas: {
       styles: [
-        'https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap'
+        'https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap',
+        'vendor/modern-normalize.css'
       ]
     },
     container: pageBuilderEl,

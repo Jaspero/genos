@@ -27,7 +27,8 @@ async function exec() {
   } catch {}
 
   const toExec = [
-    writeFile(`./src/lib/utils/env-config.ts`, envConfig)
+    writeFile(`./src/lib/utils/env-config.ts`, envConfig),
+    writeFile(`./static/vendor/modern-normalize.css`, (await readFile(`./node_modules/modern-normalize/modern-normalize.css`)).toString())
   ];
 
   if (env) {
