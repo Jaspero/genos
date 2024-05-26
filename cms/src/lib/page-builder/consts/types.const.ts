@@ -1,4 +1,4 @@
-import type { PageBuilderForm } from './page-builder-form.interface';
+import type { PageBuilderForm } from '../page-builder-form.interface';
 
 const createOption = (value: string, content: string) => ({
   type: 'option',
@@ -23,13 +23,13 @@ export const TYPES = (forms: PageBuilderForm[]) => [
   {
     id: 'column',
     extend: 'div',
-    isComponent: (el: HTMLInputElement) => el.tagName == 'DIV' && el.dataset?.type == 'column',
+    isComponent: (el: HTMLInputElement) => el.tagName === 'COLUMN' && el.dataset?.type == 'column',
     model: {
       defaults: {
         tagName: 'column',
         draggable: true,
+        classes: ['gc-6'],
         attributes: {
-          class: 'gc-6',
           dataset: {
             type: 'column'
           }
@@ -247,10 +247,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
         draggable: 'form, form *',
         droppable: (_: any, target: any) => !target.view.$el['0'].children.length,
         content: 'Label',
-        style: {
-          display: 'flex',
-          'flex-direction': 'column-reverse'
-        }
+        classes: ['label']
       }
     }
   },
@@ -264,15 +261,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
         draggable: 'label, label *',
         droppable: false,
         highlightable: false,
-        style: {
-          width: '100%',
-          height: '3rem',
-          border: '1px solid #c4d8ce',
-          'border-radius': '4px',
-          padding: '0 16px',
-          'margin-top': '4px',
-          'font-size': '16px'
-        },
+        classes: ['input'],
         attributes: {
           type: 'text'
         },
@@ -308,15 +297,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
         draggable: 'label, label *',
         droppable: false,
         highlightable: false,
-        style: {
-          width: '100%',
-          height: '3rem',
-          border: '1px solid #c4d8ce',
-          'border-radius': '4px',
-          padding: '0 16px',
-          'margin-top': '4px',
-          'font-size': '16px'
-        },
+        classes: ['input'],
         attributes: {
           type: 'number'
         },
@@ -352,15 +333,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
         draggable: 'label, label *',
         droppable: false,
         highlightable: false,
-        style: {
-          width: '100%',
-          height: '3rem',
-          border: '1px solid #c4d8ce',
-          'border-radius': '4px',
-          padding: '0 16px',
-          'margin-top': '4px',
-          'font-size': '16px'
-        },
+        classes: ['input'],
         attributes: {
           rows: 10
         },

@@ -1,11 +1,11 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import FormModule from '../FormModule.svelte';
-  import { BLOCKS } from './blocks.conts';
-  import type { Template, TemplateSection } from './template.interface';
+  import { BLOCKS } from './consts/blocks.conts';
+  import type { Template, TemplateSection } from './types/template.interface';
   import { random } from '@jaspero/utils';
   import { slide } from 'svelte/transition';
-  import type { Popup } from './popup.interface';
+  import type { Popup } from './types/popup.interface';
   import type { PageBuilderForm } from './page-builder-form.interface';
 
   export let templates: Template[] | undefined;

@@ -1,10 +1,10 @@
 <script lang="ts">
+  import 'modern-normalize/modern-normalize.css';
+  import '@jaspero/web-components/dist/index.css';
   import { cartState } from '$lib/cart/cart-state';
   import Meta from '$lib/meta/Meta.svelte';
   import Notification from '$lib/notification/Notification.svelte';
-  import '../app.pcss';
-  import '../helpers.pcss';
-  import '../typography.pcss';
+  import '../normalize.pcss';
   import '@jaspero/web-components/dist/alert.wc';
   import '@jaspero/web-components/dist/confirm.wc';
   import { db, user } from '$lib/utils/firebase';

@@ -1,4 +1,4 @@
-import {CONFIG} from '../consts/config.const';
+import {CONFIG} from '../../consts/config.const';
 
 export const STATIC_ASSETS = [
 	{

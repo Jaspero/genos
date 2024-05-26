@@ -2,15 +2,9 @@
  * This file contains various configurations
  * for running apps locally for development
  */
-const { readFile, writeFile, rmdir } = require('fs/promises');
+const { readFile, writeFile } = require('fs/promises');
 
 const environment = process.argv[2];
-
-async function safeRemove(file) {
-  try {
-    await rmdir(file);
-  } catch (e) {}
-}
 
 async function exec() {
   const fileMap = {
@@ -32,7 +26,9 @@ async function exec() {
     env = (await readFile(files.env)).toString();
   } catch {}
 
-  const toExec = [writeFile(`./src/lib/utils/env-config.ts`, envConfig)];
+  const toExec = [
+    writeFile(`./src/lib/utils/env-config.ts`, envConfig)
+  ];
 
   if (env) {
     toExec.push(writeFile(`./key.json`, env));

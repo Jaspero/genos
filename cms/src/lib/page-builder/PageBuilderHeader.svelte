@@ -1,6 +1,6 @@
 <script lang="ts">
   import { confirmation } from '../utils/confirmation';
-  import { DEVICES } from './devices.const';
+  import { DEVICES } from './consts/devices.const';
 
   export let grapesInstance: any;
   export let activeDevice = DEVICES[0].id;

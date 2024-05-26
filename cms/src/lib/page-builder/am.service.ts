@@ -14,7 +14,7 @@ import {
 } from 'firebase/storage';
 import {writable} from 'svelte/store';
 import {storage} from '../utils/firebase';
-import {STATIC_ASSETS} from './static-assets.const';
+import {STATIC_ASSETS} from './consts/static-assets.const';
 
 export class AMService implements AssetManagerService {
   async getDownloadUrl(r: StorageReference) {

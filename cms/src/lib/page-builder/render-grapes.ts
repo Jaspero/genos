@@ -3,12 +3,13 @@ import grapesjs from 'grapesjs';
 import styleGradientPlugin from 'grapesjs-style-gradient';
 import 'grapesjs/dist/css/grapes.min.css';
 import 'grapick/dist/grapick.min.css';
-import { AMService } from './am.service';
-import { DEVICES } from './devices.const';
-import type { Popup } from './popup.interface';
-import { TYPES } from './types.const';
-import type { PageBuilderForm } from './page-builder-form.interface';
-import {STYLE_OVERRIDES} from './style-overrides.const';
+import {AMService} from './am.service';
+import {DEVICES} from './consts/devices.const';
+import {GLOBAL_STYLES} from './consts/global-styles.const';
+import {STYLE_OVERRIDES} from './consts/style-overrides.const';
+import {TYPES} from './consts/types.const';
+import type {PageBuilderForm} from './page-builder-form.interface';
+import type {Popup} from './types/popup.interface';
 
 export function renderGrapes(
   pageBuilderEl: HTMLDivElement,
@@ -32,10 +33,12 @@ export function renderGrapes(
 
   grapesInstance = grapesjs.init({
     canvas: {
-      styles: ['https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap']
+      styles: [
+        'https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap'
+      ]
     },
     container: pageBuilderEl,
-    panels: { defaults: [] },
+    panels: {defaults: []},
     plugins: [styleGradientPlugin],
     pluginsOpts: {
       'grapesjs-style-gradient': {}
@@ -48,10 +51,11 @@ export function renderGrapes(
     },
     assetManager: {
       custom: true
-    }
+    },
+    style: GLOBAL_STYLES
   });
 
-  TYPES(forms!).forEach(({ id, ...data }) => grapesInstance.DomComponents.addType(id, data));
+  TYPES(forms!).forEach(({id, ...data}) => grapesInstance.DomComponents.addType(id, data));
 
   if (popups) {
     grapesInstance.DomComponents.addType(`pb-popup`, {
@@ -118,7 +122,7 @@ export function renderGrapes(
           assetManager.removeEventListener('selected', assetManagerListener);
         }
 
-        assetManagerListener = function (event: { detail: { url: string } }) {
+        assetManagerListener = function (event: {detail: {url: string}}) {
           props.select(event.detail.url, true);
         };
 
@@ -166,21 +170,21 @@ export function renderGrapes(
     property: 'overflow',
     default: 'auto',
     options: [
-      { id: 'visible', label: 'Visible' },
-      { id: 'hidden', label: 'Hidden' },
-      { id: 'auto', label: 'Auto' }
+      {id: 'visible', label: 'Visible'},
+      {id: 'hidden', label: 'Hidden'},
+      {id: 'auto', label: 'Auto'}
     ]
   });
 
   grapesInstance.runCommand('core:component-outline');
-  grapesInstance.DomComponents.getWrapper()!.set({ badgable: false, selectable: false });
+  grapesInstance.DomComponents.getWrapper()!.set({badgable: false, selectable: false});
 
   grapesInstance.on('component:update:traits', (component: any) => {
     if (
       component.changed.attributes?.fontSize &&
-      component.get('traits').where({ name: 'fontSize' }).length
+      component.get('traits').where({name: 'fontSize'}).length
     ) {
-      component.addStyle({ 'font-size': component.changed.attributes.fontSize });
+      component.addStyle({'font-size': component.changed.attributes.fontSize});
       return;
     }
 
