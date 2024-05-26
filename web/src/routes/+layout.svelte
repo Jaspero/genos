@@ -1,5 +1,4 @@
 <script lang="ts">
-  import 'modern-normalize/modern-normalize.css';
   import '@jaspero/web-components/dist/index.css';
   import { cartState } from '$lib/cart/cart-state';
   import Meta from '$lib/meta/Meta.svelte';
