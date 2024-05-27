@@ -1,4 +1,4 @@
-import type { PageBuilderForm } from '../page-builder-form.interface';
+import type { PageBuilderForm } from '../types/page-builder-form.interface';
 
 const createOption = (value: string, content: string) => ({
   type: 'option',

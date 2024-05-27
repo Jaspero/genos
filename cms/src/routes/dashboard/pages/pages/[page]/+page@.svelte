@@ -14,12 +14,12 @@
   import { random } from '@jaspero/utils';
   import { DocumentSnapshot, deleteDoc, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
   import { onMount } from 'svelte';
-  import type { Template } from '$lib/page-builder/template.interface';
+  import type { Template } from '$lib/page-builder/types/template.interface';
   import PageSelect from '../../_shared/PageSelect.svelte';
   import type { ModularView, ModuleRender } from '@jaspero/modular';
   import { renderAlert } from '@jaspero/web-components/dist/render-alert.js';
-  import type { Popup } from '$lib/page-builder/popup.interface';
-  import type { PageBuilderForm } from '$lib/page-builder/page-builder-form.interface';
+  import type { Popup } from '$lib/page-builder/types/popup.interface';
+  import type { PageBuilderForm } from '$lib/page-builder/types/page-builder-form.interface';
   import { CONFIG } from '$lib/consts/config.const';
 
   export let data: {

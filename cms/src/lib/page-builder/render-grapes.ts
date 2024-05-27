@@ -1,14 +1,17 @@
 import '@jaspero/web-components/dist/asset-manager.wc';
 import grapesjs from 'grapesjs';
+import parserPostCSS from 'grapesjs-parser-postcss';
 import styleGradientPlugin from 'grapesjs-style-gradient';
+import componentCodeEditor from 'grapesjs-component-code-editor';
 import 'grapesjs/dist/css/grapes.min.css';
 import 'grapick/dist/grapick.min.css';
+import 'grapesjs-component-code-editor/dist/grapesjs-component-code-editor.min.css';
 import {AMService} from './am.service';
 import {DEVICES} from './consts/devices.const';
 import {GLOBAL_STYLES} from './consts/global-styles.const';
 import {STYLE_OVERRIDES} from './consts/style-overrides.const';
 import {TYPES} from './consts/types.const';
-import type {PageBuilderForm} from './page-builder-form.interface';
+import type {PageBuilderForm} from './types/page-builder-form.interface';
 import type {Popup} from './types/popup.interface';
 
 export function renderGrapes(
@@ -40,12 +43,26 @@ export function renderGrapes(
     },
     container: pageBuilderEl,
     panels: {defaults: []},
-    plugins: [styleGradientPlugin],
+    plugins: [
+      styleGradientPlugin,
+      parserPostCSS,
+      editor => componentCodeEditor(
+        editor,
+        {
+          preserveWidth: true,
+          appendTo: '#component-wrapper'
+        }
+      )
+    ],
     pluginsOpts: {
       'grapesjs-style-gradient': {}
     },
     height: '100%',
     storageManager: false,
+    selectorManager: {
+      componentFirst: true,
+      custom: true
+    },
     deviceManager: {
       default: DEVICES[0].id,
       devices: DEVICES as any

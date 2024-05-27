@@ -1,4 +1,4 @@
-import type { PageBuilderForm } from '../page-builder-form.interface';
+import type { PageBuilderForm } from '../types/page-builder-form.interface';
 import type { Popup } from '../popup.interface';
 import { TYPES } from './types.const';
 

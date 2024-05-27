@@ -6,7 +6,7 @@
   import { CONFIG } from '$lib/consts/config.const';
   import PageBuilderHeader from '$lib/page-builder/PageBuilderHeader.svelte';
   import PageBuilderSidebar from '$lib/page-builder/PageBuilderSidebar.svelte';
-  import type { PageBuilderForm } from '$lib/page-builder/page-builder-form.interface';
+  import type { PageBuilderForm } from '$lib/page-builder/types/page-builder-form.interface';
   import { renderGrapes } from '$lib/page-builder/render-grapes';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
   import { confirmation } from '$lib/utils/confirmation';
