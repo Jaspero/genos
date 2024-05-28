@@ -142,6 +142,10 @@
     @apply w-10;
   }
 
+  .loading {
+    @apply pointer-events-none bg-secondary;
+  }
+
   /* Button - Filled */
   .button.variant-filled.color-primary {
     background-color: var(--primary-color);

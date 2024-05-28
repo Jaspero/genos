@@ -374,4 +374,9 @@
   .material-symbols-outlined.active {
     @apply bg-primary/[8%] text-secondary;
   }
+
+  #component-wrapper {
+    height: calc(100% - 41px);
+    overflow-y: auto;
+  }
 </style>
