@@ -3,12 +3,12 @@
   import { page } from '$app/stores';
   import Button from '$lib/Button.svelte';
   import Field from '$lib/Field.svelte';
-  import { notification, notificationWrapper } from '$lib/notification/notification';
+  import { alertWrapper } from '$lib/utils/alert-wrapper';
   import { auth } from '$lib/utils/firebase';
   import { formatEmail } from '$lib/utils/format-emails';
   import {
-    createUserWithEmailAndPassword,
     GoogleAuthProvider,
+    createUserWithEmailAndPassword,
     signInWithPopup
   } from 'firebase/auth';
 
@@ -24,13 +24,13 @@
   async function signUp() {
     email = formatEmail(email);
     if (password !== passwordConfirm) {
-      notification.set({ content: 'passwords do not match', type: 'error' });
+      // notification.set({ content: 'passwords do not match', type: 'error' });
       password = '';
       passwordConfirm = '';
       return;
     }
     if (password.length < 6) {
-      notification.set({ content: 'Password must be at least 6 characters long.', type: 'error' });
+      // notification.set({ content: 'Password must be at least 6 characters long.', type: 'error' });
       password = '';
       passwordConfirm = '';
       return;
@@ -39,7 +39,7 @@
     loading = true;
 
     try {
-      await notificationWrapper(createUserWithEmailAndPassword(auth, email, password));
+      await alertWrapper(createUserWithEmailAndPassword(auth, email, password));
       navigate();
     } catch {
       password = '';
@@ -54,7 +54,7 @@
     email = formatEmail(email);
     loading = true;
 
-    await notificationWrapper(
+    await alertWrapper(
       signInWithPopup(auth, new GoogleAuthProvider()),
       'Login successful',
       () => (loading = false)

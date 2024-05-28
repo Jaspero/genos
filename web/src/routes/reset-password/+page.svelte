@@ -1,12 +1,12 @@
 <script lang="ts">
-  import Field from '$lib/Field.svelte';
-  import Button from '$lib/Button.svelte';
   import { goto } from '$app/navigation';
-  import { notification, notificationWrapper } from '$lib/notification/notification';
-  import { confirmPasswordReset, verifyPasswordResetCode } from 'firebase/auth';
   import { page } from '$app/stores';
-  import { onMount } from 'svelte';
+  import Button from '$lib/Button.svelte';
+  import Field from '$lib/Field.svelte';
+  import { alertWrapper } from '$lib/utils/alert-wrapper';
   import { auth } from '$lib/utils/firebase';
+  import { confirmPasswordReset, verifyPasswordResetCode } from 'firebase/auth';
+  import { onMount } from 'svelte';
 
   const form = {
     password: '',
@@ -28,10 +28,10 @@
 
   async function submit() {
     if (form.password !== form.repeatPassword) {
-      return notification.set({
-        content: 'Passwords do not match!',
-        type: 'error'
-      });
+      // return notification.set({
+      //   content: 'Passwords do not match!',
+      //   type: 'error'
+      // });
     }
 
     loading = true;
@@ -43,14 +43,14 @@
       return;
     }
 
-    await notificationWrapper(
+    await alertWrapper(
       verifyPasswordResetCode(auth, code),
       '',
       'Your reset code is invalid or expired. Please visit the login page and request password reset again.',
       () => (loading = false)
     );
 
-    await notificationWrapper(
+    await alertWrapper(
       confirmPasswordReset(auth, code, form.password),
       'Password reset was successful. You are now signed in.',
       '',

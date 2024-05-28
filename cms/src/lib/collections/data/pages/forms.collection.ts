@@ -1,6 +1,6 @@
-import { actionsPipe } from '../../../column-pipes/actions.pipe';
-import { indexPipe } from '../../../column-pipes/index.pipe';
-import { collections } from '../../collections';
+import {actionsPipe} from '../../../column-pipes/actions.pipe';
+import {indexPipe} from '../../../column-pipes/index.pipe';
+import {collections} from '../../collections';
 
 collections.addCollection('forms', {
   name: 'Forms',
@@ -24,8 +24,54 @@ collections.addCollection('forms', {
     {
       key: '/id',
       label: '',
-      pipes: [actionsPipe()]
+      pipes: [
+        actionsPipe((id) => ({
+          actions: ['duplicate', 'delete'],
+          links: [
+            {
+              label: 'Edit',
+              href: `forms/${id}`,
+              icon: 'edit'
+            },
+            {
+              label: 'Results',
+              href: `forms/${id}/results`,
+              icon: 'forum'
+            },
+            {
+              label: 'Reporting',
+              href: `forms/${id}/reporting`,
+              icon: 'monitoring'
+            }
+          ]
+        }))
+      ]
     }
   ],
-  initialSort: { key: 'name', direction: 'asc' }
+  initialSort: {key: 'name', direction: 'asc'},
+  editKey: 'name',
+  form: async () => [
+    {
+      component: 'jp-input',
+      field: '/name',
+      options: {
+        label: 'Name',
+        name: 'name',
+        required: true
+      }
+    },
+    {
+      component: 'jp-textarea',
+      field: '/description',
+      options: {
+        label: 'Description',
+        name: 'description'
+      }
+    },
+    {
+      component: 'landing-page-form-properties',
+      field: '/properties'
+    }
+  ],
+  idPrefix: 'pf'
 });

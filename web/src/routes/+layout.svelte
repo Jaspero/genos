@@ -1,14 +1,13 @@
 <script lang="ts">
-  import '@jaspero/web-components/dist/index.css';
   import { cartState } from '$lib/cart/cart-state';
   import Meta from '$lib/meta/Meta.svelte';
-  import Notification from '$lib/notification/Notification.svelte';
-  import '../normalize.pcss';
+  import { db, user } from '$lib/utils/firebase';
   import '@jaspero/web-components/dist/alert.wc';
   import '@jaspero/web-components/dist/confirm.wc';
-  import { db, user } from '$lib/utils/firebase';
+  import '@jaspero/web-components/dist/index.css';
   import { doc, getDoc } from 'firebase/firestore';
   import { onMount } from 'svelte';
+  import '../../../shared/styles/index.pcss';
 
   onMount(async () => {
     const userDoc: any = $user;
@@ -57,4 +56,3 @@
 <slot />
 
 <Meta />
-<Notification />

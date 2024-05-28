@@ -3,6 +3,7 @@
  * for running apps locally for development
  */
 const { readFile, writeFile } = require('fs/promises');
+const postcss = require('postcss');
 
 const environment = process.argv[2];
 
@@ -19,6 +20,7 @@ async function exec() {
   };
   const files = fileMap[environment];
   const envConfig = (await readFile(files.envConfig)).toString();
+  const sharedCss = '../shared/styles/index.pcss';
 
   let env;
 
@@ -27,7 +29,10 @@ async function exec() {
   } catch {}
 
   const toExec = [
-    writeFile(`./src/lib/utils/env-config.ts`, envConfig)
+    writeFile(`./src/lib/utils/env-config.ts`, envConfig),
+    readFile(sharedCss)
+      .then(file => postcss().process(file, {from: sharedCss}))
+      .then(({css}) => writeFile(`./static/css/shared.css`, css))
   ];
 
   if (env) {

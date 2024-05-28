@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Dialog from '$lib/Dialog.svelte';
+  import { auth } from '$lib/utils/firebase';
   import {
     deleteUser,
     EmailAuthProvider,
@@ -7,11 +9,8 @@
     updateEmail,
     updatePassword
   } from 'firebase/auth';
-  import { notificationWrapper } from '$lib/notification/notification.ts';
-  import { auth } from '$lib/utils/firebase';
-  import Dialog from '$lib/Dialog.svelte';
-
   import { goto } from '$app/navigation';
+  import { alertWrapper } from '$lib/utils/alert-wrapper';
 
   let newPassword = '';
   let email = '';
@@ -24,7 +23,7 @@
   const handleUpdatePassword = async () => {
     try {
       if (auth.currentUser) {
-        await notificationWrapper(
+        await alertWrapper(
           updatePassword(auth.currentUser, newPassword),
           'Password updated successfully.'
         );
@@ -41,14 +40,11 @@
   const handleUpdateEmail = async () => {
     try {
       if (auth.currentUser) {
-        await notificationWrapper(
-          updateEmail(auth.currentUser, email),
-          'Email updated successfully.'
-        );
+        await alertWrapper(updateEmail(auth.currentUser, email), 'Email updated successfully.');
       }
     } catch (error) {
       if (error.code === 'auth/operation-not-allowed') {
-        await notificationWrapper(
+        await alertWrapper(
           sendEmailVerification(auth.currentUser),
           'Email verification sent. Please check your email.'
         );
@@ -65,7 +61,7 @@
     isConfirmationVisible = false;
     try {
       if (auth.currentUser) {
-        await notificationWrapper(deleteUser(auth.currentUser), 'Account deleted successfully.');
+        await alertWrapper(deleteUser(auth.currentUser), 'Account deleted successfully.');
       }
     } catch (error) {
       console.error(error);
@@ -79,7 +75,7 @@
     try {
       const credential = EmailAuthProvider.credential(emailForRelog, relogPassword);
 
-      await notificationWrapper(
+      await alertWrapper(
         reauthenticateWithCredential(auth.currentUser, credential),
         'You have reloged successfully.'
       );

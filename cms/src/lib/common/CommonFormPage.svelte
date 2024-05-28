@@ -83,7 +83,7 @@
 </script>
 
 <div class="save-menu">
-  {#if data instanceof CommonNewFormPageData}
+  {#if data instanceof CommonEditFormPageData}
     <Button type="button" color="warn" on:click={deleteItem}>Delete</Button>
   {/if}
   <div class="flex-1" />

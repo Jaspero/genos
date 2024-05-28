@@ -12,7 +12,7 @@
   export let sections: Template[] | undefined;
   export let popups: Popup[] | undefined;
   export let activeSidebar = 'page-settings';
-  export let items: Array<any> | undefined;
+  export let items: Array<any> | undefined; 
   export let metaItems: Array<any> | undefined;
   export let value: any;
   export let grapesInstance: any;

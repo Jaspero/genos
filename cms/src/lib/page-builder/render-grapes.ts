@@ -43,7 +43,7 @@ export function renderGrapes(
     canvas: {
       styles: [
         'https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap',
-        '/css/normalize.css'
+        '/css/shared.css'
       ]
     },
     container: pageBuilderEl,

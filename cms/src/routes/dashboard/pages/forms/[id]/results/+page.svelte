@@ -5,6 +5,8 @@
   import { indexPipe } from '$lib/column-pipes/index.pipe';
   import { CONFIG } from '$lib/consts/config.const';
   import type { Sort } from '$lib/interfaces/sort.interface';
+  import Grid from '$lib/Grid.svelte';
+  import GridCol from '$lib/GridCol.svelte';
 
   export let data: {
     properties: Array<{ key: string; label: string }>;
@@ -29,12 +31,16 @@
   const initialSort: Sort = { key: 'createdOn', direction: 'desc' };
 </script>
 
-<DataTable
-  col={'forms/' + $page.params.id + '/form-responses'}
-  {headers}
-  {initialSort}
-  baseLink="/"
-/>
+<Grid>
+  <GridCol span="12">
+    <DataTable
+      col={'forms/' + $page.params.id + '/form-responses'}
+      {headers}
+      {initialSort}
+      baseLink="/"
+    />
+  </GridCol>
+</Grid>
 
 <svelte:head>
   <title>Form Results - {CONFIG.title}</title>

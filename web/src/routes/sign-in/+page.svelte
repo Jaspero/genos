@@ -2,24 +2,24 @@
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
   import Button from '$lib/Button.svelte';
+  import Dialog from '$lib/Dialog.svelte';
   import Field from '$lib/Field.svelte';
-  import { auth } from '$lib/utils/firebase';
   import Recaptcha from '$lib/Recaptcha.svelte';
-  import { notificationWrapper } from '$lib/notification/notification';
+  import { CONFIG } from '$lib/consts/config.const';
+  import { alertWrapper } from '$lib/utils/alert-wrapper';
+  import { auth } from '$lib/utils/firebase';
+  import { formatEmail } from '$lib/utils/format-emails';
   import {
-    RecaptchaVerifier,
-    sendPasswordResetEmail,
-    signInWithEmailAndPassword,
-    getMultiFactorResolver,
+    GoogleAuthProvider,
     PhoneAuthProvider,
     PhoneMultiFactorGenerator,
-    signInWithPopup,
-    GoogleAuthProvider
+    RecaptchaVerifier,
+    getMultiFactorResolver,
+    sendPasswordResetEmail,
+    signInWithEmailAndPassword,
+    signInWithPopup
   } from 'firebase/auth';
-  import Dialog from '$lib/Dialog.svelte';
   import { onMount } from 'svelte';
-  import { formatEmail } from '$lib/utils/format-emails';
-  import { CONFIG } from '../../lib/consts/config.const';
 
   let email = '';
   let password = '';
@@ -52,7 +52,7 @@
     try {
       await recaptchaVerify();
 
-      await notificationWrapper(
+      await alertWrapper(
         signInWithEmailAndPassword(auth, email, password),
         'Login successful',
         (e) => {
@@ -102,7 +102,7 @@
 
     loading = true;
 
-    await notificationWrapper(
+    await alertWrapper(
       signInWithPopup(auth, new GoogleAuthProvider()),
       'Login successful',
       (e) => {
@@ -151,7 +151,7 @@
     try {
       await recaptchaVerify();
 
-      await notificationWrapper(
+      await alertWrapper(
         sendPasswordResetEmail(auth, rEmail, { url: `${location.origin}/reset-password` }),
         'A password reset link has been sent to your email.'
       );
@@ -179,7 +179,7 @@
 
     const multiFactorAssertion = PhoneMultiFactorGenerator.assertion(cred);
 
-    await notificationWrapper(
+    await alertWrapper(
       resolver.resolveSignIn(multiFactorAssertion),
       'Login successful',
       '',

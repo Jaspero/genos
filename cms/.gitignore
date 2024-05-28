@@ -5,4 +5,4 @@ dev.json
 key.json
 src/lib/utils/env-config.ts
 public
-static/vendor
+static/css/shared.css
