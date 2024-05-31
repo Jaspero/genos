@@ -1,17 +1,19 @@
 <script lang="ts">
-  import { collection, getCountFromServer, getDocs } from 'firebase/firestore';
+  import { collection, getCountFromServer } from 'firebase/firestore';
   import { db } from '$lib/utils/firebase';
-  import { DateTime } from 'luxon';
   import { base64UrlEncode } from '@jaspero/utils';
-  import Grid from '$lib/Grid.svelte';
-  import GridCol from '$lib/GridCol.svelte';
-  import Card from '$lib/Card.svelte';
-  import { onMount } from 'svelte';
   import DataTable from '$lib/DataTable.svelte';
   import { reviewStarsPipe } from '$lib/column-pipes/review-stars.pipe';
   import { datePipe } from '$lib/column-pipes/date.pipe';
+  import { CONFIG } from '$lib/consts/config.const';
+  import { indexPipe } from '$lib/column-pipes/index.pipe';
 
   const headers = [
+    {
+      key: '/id',
+      label: 'Number',
+      pipes: [indexPipe]
+    },
     {
       key: '/createdOn',
       label: 'Created On',
@@ -40,7 +42,7 @@
 </script>
 
 <svelte:head>
-  <title>Review Product - Shop - Jaspero</title>
+  <title>Product Reviews - Shop - {CONFIG.title}</title>
 </svelte:head>
 
 <div class="flex flex-col max-w-7xl mx-auto p-6">

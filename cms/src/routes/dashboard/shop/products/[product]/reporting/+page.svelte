@@ -6,6 +6,7 @@
   import Grid from '$lib/Grid.svelte';
   import GridCol from '$lib/GridCol.svelte';
   import Card from '$lib/Card.svelte';
+  import { CONFIG } from '$lib/consts/config.const';
 
   export let data: any;
 
@@ -71,7 +72,7 @@
 </Grid>
 
 <svelte:head>
-  <title>Product Information - Shop - Jaspero</title>
+  <title>Product Information - Shop - {CONFIG.title}</title>
 </svelte:head>
 
 <style lang="postcss">

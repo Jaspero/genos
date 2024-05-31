@@ -10,13 +10,13 @@ export async function load({params, parent}) {
   await parent();
 
   const {page} = params;
-  const col = 'pages';
+  const col = 'products';
 
   const imageService = new BucketImageService();
   (imageService.prefix = col + '/'),
     (imageService.metadata = [
       {
-        folder: 'pages/',
+        folder: 'products/',
         width: 1080
       }
     ]);
@@ -82,13 +82,13 @@ export async function load({params, parent}) {
       getDocs(
         query(
           collection(db, 'sections'),
-          where('tags', 'array-contains-any', ['Any', 'Products'])
+          where('tags', 'array-contains-any', ['Any', 'Pages'])
         )
       ),
       getDocs(
         query(
           collection(db, 'templates'),
-          where('tags', 'array-contains-any', ['Any', 'Products'])
+          where('tags', 'array-contains-any', ['Any', 'Pages'])
         )
       ),
       getDocs(collection(db, 'popups')),

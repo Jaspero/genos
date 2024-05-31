@@ -19,3 +19,12 @@ import './data/pages/popups.collection.ts';
 import './data/pages/sections.collection.ts';
 import './data/pages/templates.collection.ts';
 import './data/pages/layouts.collection.ts';
+
+/**
+ * Shop
+ */
+import './data/shop/coupons.collection.ts';
+import './data/shop/categories.collection.ts';
+import './data/shop/discounts.collection.ts';
+import './data/shop/tags.collection.ts';
+import './data/shop/products.collection.ts';
