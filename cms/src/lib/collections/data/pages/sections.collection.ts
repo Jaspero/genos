@@ -22,6 +22,10 @@ collections.addCollection('sections', {
       label: 'Category'
     },
     {
+      key: '/tags',
+      label: 'Tags'
+    },
+    {
       key: '/id',
       label: '',
       pipes: [actionsPipe()]

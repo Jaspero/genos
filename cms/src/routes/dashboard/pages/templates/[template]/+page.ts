@@ -39,6 +39,14 @@ export async function load({ params, parent }) {
       }
     },
     {
+      component: 'jp-chips',
+      field: '/tags',
+      options: {
+        label: 'Tags',
+        name: 'tags'
+      }
+    },
+    {
       component: 'jp-file-upload',
       field: '/image',
       options: {

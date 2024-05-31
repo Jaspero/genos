@@ -1,15 +1,15 @@
-import { db } from '$lib/utils/firebase';
-import { redirect } from '@sveltejs/kit';
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
-import { META_FORM_FIELDS } from '$lib/consts/meta.form-fields.js';
-import { BucketImageService } from '$lib/services/image.service.js';
-import type { PageBuilderForm } from '$lib/page-builder/page-builder-form.interface';
-import { getOptions } from '../../../../../lib/utils/get-options';
+import {db} from '$lib/utils/firebase';
+import {redirect} from '@sveltejs/kit';
+import {collection, doc, getDoc, getDocs, query, where} from 'firebase/firestore';
+import {META_FORM_FIELDS} from '$lib/consts/meta.form-fields.js';
+import {BucketImageService} from '$lib/services/image.service.js';
+import type {PageBuilderForm} from '$lib/page-builder/page-builder-form.interface';
+import {getOptions} from '$lib/utils/get-options';
 
-export async function load({ params, parent }) {
+export async function load({params, parent}) {
   await parent();
 
-  const { page } = params;
+  const {page} = params;
   const col = 'pages';
 
   const imageService = new BucketImageService();
@@ -20,7 +20,7 @@ export async function load({ params, parent }) {
         width: 1080
       }
     ]);
-  const layouts: Array<{ label: string; value: string }> = [];
+  const layouts: Array<{label: string; value: string}> = [];
 
   const items = [
     {
@@ -79,8 +79,18 @@ export async function load({ params, parent }) {
   const [pagesSnap, sectionsSnap, templatesSnap, popupsSnap, formsSnap, layoutData] =
     await Promise.all([
       getDocs(collection(db, 'pages')),
-      getDocs(collection(db, 'sections')),
-      getDocs(collection(db, 'templates')),
+      getDocs(
+        query(
+          collection(db, 'sections'),
+          where('tags', 'array-contains-any', ['Any', 'Pages'])
+        )
+      ),
+      getDocs(
+        query(
+          collection(db, 'templates'),
+          where('tags', 'array-contains-any', ['Any', 'Pages'])
+        )
+      ),
       getDocs(collection(db, 'popups')),
       getDocs(collection(db, 'forms')),
       getOptions('layouts', 'name')
@@ -105,7 +115,7 @@ export async function load({ params, parent }) {
       })
     )
   ).reduce((acc: any[], cur) => {
-    const { category, ...data } = cur;
+    const {category, ...data} = cur;
     const idx = acc.findIndex((it) => it.category === category);
 
     if (idx === -1) {
@@ -137,7 +147,7 @@ export async function load({ params, parent }) {
       })
     )
   ).reduce((acc: any[], cur) => {
-    const { category, ...data } = cur;
+    const {category, ...data} = cur;
     const idx = acc.findIndex((it) => it.category === category);
 
     if (idx === -1) {
@@ -212,7 +222,7 @@ export async function load({ params, parent }) {
     throw redirect(303, '/404');
   }
 
-  const value = { id: snap.id, ...(snap.data() as any) };
+  const value = {id: snap.id, ...(snap.data() as any)};
 
   return {
     snap,

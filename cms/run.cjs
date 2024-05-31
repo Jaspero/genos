@@ -4,6 +4,7 @@
  */
 const { readFile, writeFile } = require('fs/promises');
 const postcss = require('postcss');
+const atImport = require('postcss-import');
 
 const environment = process.argv[2];
 
@@ -31,7 +32,7 @@ async function exec() {
   const toExec = [
     writeFile(`./src/lib/utils/env-config.ts`, envConfig),
     readFile(sharedCss)
-      .then(file => postcss().process(file, {from: sharedCss}))
+      .then(file => postcss(atImport()).process(file, {from: sharedCss}))
       .then(({css}) => writeFile(`./static/css/shared.css`, css))
   ];
 
