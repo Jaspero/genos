@@ -9,26 +9,36 @@ import {getOptions} from '$lib/utils/get-options';
 export async function load({params, parent}) {
   await parent();
 
-  const {page} = params;
-  const col = 'products';
-
-  const imageService = new BucketImageService();
-  (imageService.prefix = col + '/'),
-    (imageService.metadata = [
-      {
-        folder: 'products/',
-        width: 1080
-      }
-    ]);
+  const {product} = params;
+  const categories: Array<{ label: string; value: string }> = [];
+  const tags: Array<{ label: string; value: string }> = [];
   const layouts: Array<{label: string; value: string}> = [];
+  const col = 'products';
+  const imageService = new BucketImageService();
+
+  imageService.prefix = 'products/';
+  imageService.metadata = [
+    {
+      height: 1000,
+      width: 1000,
+      filePrefix: 'thumb_m_',
+      folder: '/products/generated'
+    },
+    {
+      filePrefix: 'thumb_s_',
+      width: 500,
+      height: 500,
+      folder: '/products/generated'
+    }
+  ];
 
   const items = [
     {
       component: 'jp-input',
-      field: '/title',
+      field: '/name',
       options: {
-        label: 'Title',
-        name: 'title',
+        label: 'Name',
+        name: 'name',
         required: true
       }
     },
@@ -42,11 +52,29 @@ export async function load({params, parent}) {
       }
     },
     {
-      component: 'jp-datepicker',
-      field: '/publicationDate',
+      component: 'jp-select',
+      field: '/category',
       options: {
-        label: 'Publication Date',
-        returnFormat: 'unix'
+        label: 'Category',
+        name: 'category',
+        options: categories
+      }
+    },
+    {
+      component: 'jp-multiselect',
+      field: '/tags',
+      options: {
+        label: 'Tags',
+        name: 'tags',
+        options: tags
+      }
+    },
+    {
+      component: 'jp-textarea',
+      field: '/description',
+      options: {
+        label: 'Description',
+        name: 'description'
       }
     },
     {
@@ -76,24 +104,25 @@ export async function load({params, parent}) {
     }
   ];
 
-  const [pagesSnap, sectionsSnap, templatesSnap, popupsSnap, formsSnap, layoutData] =
+  const [sectionsSnap, templatesSnap, popupsSnap, formsSnap, layoutData, categorieOptions, tagOptions] =
     await Promise.all([
-      getDocs(collection(db, 'pages')),
       getDocs(
         query(
           collection(db, 'sections'),
-          where('tags', 'array-contains-any', ['Any', 'Pages'])
+          where('tags', 'array-contains-any', ['Any', 'Products'])
         )
       ),
       getDocs(
         query(
           collection(db, 'templates'),
-          where('tags', 'array-contains-any', ['Any', 'Pages'])
+          where('tags', 'array-contains-any', ['Any', 'Products'])
         )
       ),
       getDocs(collection(db, 'popups')),
       getDocs(collection(db, 'forms')),
-      getOptions('layouts', 'name')
+      getOptions('layouts', 'name', [{key: 'tags', operation: 'array-contains-any', value: ['Any', 'Products']}]),
+      getOptions('categories', 'name'),
+      getOptions('tags', 'name')
     ]);
 
   layouts.push(...layoutData);
@@ -185,25 +214,15 @@ export async function load({params, parent}) {
     ...doc.data()
   })) as PageBuilderForm[];
 
-  let pages = pagesSnap.docs
-    .map((it) => {
-      const dt = it.data();
+  categories.push(...categorieOptions);
+  tags.push(...tagOptions);
 
-      return {
-        id: it.id,
-        title: dt.title,
-        active: dt.active
-      };
-    })
-    .sort((a, b) => a.title.localeCompare(b.title));
-
-  if (page === 'new') {
+  if (product === 'new') {
     return {
       col,
       items,
       metaItems: META_FORM_FIELDS(col),
       value: {},
-      pages,
       sections,
       templates,
       popups,
@@ -211,11 +230,9 @@ export async function load({params, parent}) {
     };
   }
 
-  pages = pages.filter((p) => p.id !== page);
-
   const [snap, jsonSnap] = await Promise.all([
-    getDoc(doc(db, col, page)),
-    getDoc(doc(db, col, page, 'content', 'json'))
+    getDoc(doc(db, col, product)),
+    getDoc(doc(db, col, product, 'content', 'json'))
   ]);
 
   if (!snap.exists) {
@@ -231,7 +248,6 @@ export async function load({params, parent}) {
     metaItems: META_FORM_FIELDS(col),
     value,
     json: jsonSnap?.data(),
-    pages,
     sections,
     templates,
     popups,

@@ -150,7 +150,9 @@
 </script>
 
 <PageBuilderHeader {grapesInstance}>
-  <a title="Back" class="material-symbols-outlined" href={back}>arrow_back</a>
+  <div class="flex items-center">
+    <a title="Back" class="material-symbols-outlined" href={back}>arrow_back</a>
+  </div>
 </PageBuilderHeader>
 
 <section>

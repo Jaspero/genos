@@ -93,7 +93,7 @@ export async function load({params, parent}) {
       ),
       getDocs(collection(db, 'popups')),
       getDocs(collection(db, 'forms')),
-      getOptions('layouts', 'name')
+      getOptions('layouts', 'name', [{key: 'tags', operation: 'array-contains-any', value: ['Any', 'Pages']}])
     ]);
 
   layouts.push(...layoutData);

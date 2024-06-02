@@ -236,18 +236,24 @@
 </script>
 
 <PageBuilderHeader {grapesInstance}>
-  <a title="Back" class="material-symbols-outlined" href={back}>arrow_back</a>
+  <div class="flex items-center">
+    <a title="Back" class="material-symbols-outlined" href={back}>arrow_back</a>
+  </div>
   <PageSelect
     pages={data.pages}
     selected={data.snap ? data.value.title : 'New Page'}
     on:new={newPage}
     on:select={changePage}
   />
-  <Button
-    variant={showingLayout ? 'filled' : 'ghost'}
-    loading={layoutLoading}
-    on:click={toggleLayout}>Toggle Layout</Button
-  >
+  <svelte:fragment slot="right">
+    <button
+      title="Toggle Layout"
+      class="material-symbols-outlined"
+      class:active={showingLayout}
+      on:click={toggleLayout}
+      >splitscreen_portrait
+    </button>
+  </svelte:fragment>
 </PageBuilderHeader>
 
 <section>
@@ -306,6 +312,10 @@
   .material-symbols-outlined {
     @apply hover:bg-primary/[8%] duration-200;
     padding: 0.2rem;
+  }
+
+  .material-symbols-outlined.active {
+    @apply bg-primary/[8%] text-secondary;
   }
 
   main {

@@ -18,6 +18,10 @@ collections.addCollection('layouts', {
       sortable: true
     },
     {
+      key: '/tags',
+      label: 'Tags'
+    },
+    {
       key: '/id',
       label: '',
       pipes: [actionsPipe()]

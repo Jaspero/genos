@@ -4,7 +4,6 @@
   import Button from '$lib/Button.svelte';
   import type FormModule from '$lib/FormModule.svelte';
   import PageBuilderHeader from '$lib/page-builder/PageBuilderHeader.svelte';
-  import PageBuilderSidebar from '$lib/page-builder/PageBuilderSidebar.svelte';
   import { renderGrapes } from '$lib/page-builder/render-grapes';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
   import { confirmation } from '$lib/utils/confirmation';
@@ -20,6 +19,7 @@
   import type { Popup } from '$lib/page-builder/types/popup.interface';
   import type { PageBuilderForm } from '$lib/page-builder/types/page-builder-form.interface';
   import { CONFIG } from '$lib/consts/config.const';
+  import ProductSidebar from '../ProductSidebar.svelte';
 
   export let data: {
     col: string;
@@ -139,11 +139,11 @@
 
     const lastUpdatedOn = new Date().toISOString();
 
-    data.value.url = data.value.url || generateSlug(data.value.title);
+    data.value.url = data.value.url || generateSlug(data.value.name);
     data.value.lastUpdatedOn = lastUpdatedOn;
 
     if (!id) {
-      id = `lp-${random.string(24)}`;
+      id = `pr-${random.string(24)}`;
       data.value.publicationDate = data.value.publicationDate || lastUpdatedOn;
     }
 
@@ -208,17 +208,6 @@
     navigate = 'new';
   }
 
-  /**
-   * TODO:
-   * Add confirm before changing in case
-   * there are pending changes
-   */
-  async function changePage(event: { detail: string }) {
-    activeSidebar = '';
-    await goto('/dashboard/pages/pages/' + event.detail);
-    navigate = event.detail;
-  }
-
   function render() {
     grapesInstance = renderGrapes(
       pageBuilderEl,
@@ -235,22 +224,22 @@
 </script>
 
 <PageBuilderHeader {grapesInstance}>
-  <a title="Back" class="material-symbols-outlined" href={back}>arrow_back</a>
-  <PageSelect
-    pages={data.pages}
-    selected={data.snap ? data.value.title : 'New Page'}
-    on:new={newPage}
-    on:select={changePage}
-  />
-  <Button
-    variant={showingLayout ? 'filled' : 'ghost'}
-    loading={layoutLoading}
-    on:click={toggleLayout}>Toggle Layout</Button
-  >
+  <div class="flex items-center">
+    <a title="Back" class="material-symbols-outlined" href={back}>arrow_back</a>
+  </div>
+  <svelte:fragment slot="right">
+    <button
+      title="Toggle Layout"
+      class="material-symbols-outlined"
+      class:active={showingLayout}
+      on:click={toggleLayout}
+      >splitscreen_portrait
+    </button>
+  </svelte:fragment>
 </PageBuilderHeader>
 
 <section>
-  <PageBuilderSidebar
+  <ProductSidebar
     {grapesInstance}
     templates={data.templates}
     sections={data.sections}
@@ -293,7 +282,7 @@
 </footer>
 
 <svelte:head>
-  <title>Page - {CONFIG.title}</title>
+  <title>Product - Shop - {CONFIG.title}</title>
 </svelte:head>
 
 <style lang="postcss">
@@ -305,6 +294,10 @@
   .material-symbols-outlined {
     @apply hover:bg-primary/[8%] duration-200;
     padding: 0.2rem;
+  }
+
+  .material-symbols-outlined.active {
+    @apply bg-primary/[8%] text-secondary;
   }
 
   main {

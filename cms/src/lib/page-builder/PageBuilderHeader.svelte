@@ -33,11 +33,10 @@
 </script>
 
 <header>
-  <div>
+  <div class="flex justify-start w-full gap-1">
     <slot />
   </div>
-  <div />
-  <div>
+  <div class="flex justify-between w-full">
     <div>
       {#each DEVICES as device}
         <button
@@ -49,6 +48,7 @@
       {/each}
     </div>
     <div>
+      <slot name="right" />
       <button
         title="Toggle Grid"
         class="material-symbols-outlined"
@@ -85,12 +85,6 @@
     align-items: center;
     width: 100%;
     padding: 0 1rem;
-  }
-
-  header > div {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
   }
 
   .material-symbols-outlined {

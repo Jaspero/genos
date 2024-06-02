@@ -28,7 +28,15 @@ export async function load({ params, parent }) {
         name: 'name',
         required: true
       }
-    }
+    },
+    {
+      component: 'jp-chips',
+      field: '/tags',
+      options: {
+        label: 'Tags',
+        name: 'tags'
+      }
+    },
   ];
 
   const [pagesSnap, popupsSnap, formsSnap] = await Promise.all([
