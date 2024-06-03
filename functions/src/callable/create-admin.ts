@@ -12,7 +12,7 @@ interface RequestData {
   password?: string;
 }
 
-export const createadmin = onCall<RequestData>(
+export const createAdmin = onCall<RequestData>(
   {maxInstances: 1, region: REGION},
   async (request) => {
     hasRole(request, ['admin']);

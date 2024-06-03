@@ -1,6 +1,10 @@
 import {onDocumentDeleted} from 'firebase-functions/v2/firestore';
+import {REGION} from '../shared/consts/region.const';
 
-export const popupDeleted = onDocumentDeleted('popups/{popupId}', async event => {
+export const popupDeleted = onDocumentDeleted({
+	region: REGION,
+	document: 'popups/{popupId}'
+}, async event => {
 
 	if (!event.data) {
 		return;

@@ -1,15 +1,18 @@
 import {initializeApp} from 'firebase-admin/app';
-import {processCheckout} from './callable/process-checkout';
-import {usercreated} from './triggers/user-created';
-import {productCreated} from './triggers/product-created';
-import {stripeIntegration} from './rest/stripe-webhooks';
 
 initializeApp();
 
 /**
+ * Callable
+ */
+export {processCheckout} from './callable/process-checkout';
+
+/**
  * Triggers
  */
-export {adminupdated} from './triggers/admin-updated';
+export {adminUpdated} from './triggers/admin-updated';
+export {userCreated} from './triggers/user-created';
+export {productCreated} from './triggers/product-created';
 
 // Pages cleanup
 export {pageDeleted} from './triggers/page-deleted';
@@ -21,13 +24,5 @@ export {templateDeleted} from './triggers/template-deleted';
 /**
  * Rest
  */
-export {actioncontroller} from './rest/action-controller';
-
-export const cms = {
-  stripeIntegration,
-  // Callable
-  processCheckout,
-
-  usercreated,
-  productCreated,
-};
+export {actionController} from './rest/action-controller';
+export {stripeWebhook} from './rest/stripe-webhook';

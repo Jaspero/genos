@@ -1,7 +1,11 @@
 import {getAuth} from 'firebase-admin/auth';
 import {onDocumentUpdated} from 'firebase-functions/v2/firestore';
+import {REGION} from '../shared/consts/region.const';
 
-export const adminupdated = onDocumentUpdated('admins/{adminId}', async (event) => {
+export const adminUpdated = onDocumentUpdated({
+  region: REGION,
+  document: 'admins/{adminId}'
+}, async (event) => {
   const newValue = event.data!.after.data();
   const oldValue = event.data!.before.data();
 

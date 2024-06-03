@@ -53,7 +53,7 @@
     </Button>
   </div>
   <a href="/dashboard" class="flex items-center gap-2">
-    <img src="/brand/logo.svg" alt="GlycanAge Logo" class="h-10" />
+    <img src="/brand/logo.svg" alt="Logo" class="h-10" />
 
     {#if label}
       <p>{label}</p>

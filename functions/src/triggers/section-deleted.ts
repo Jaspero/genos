@@ -1,6 +1,10 @@
 import {onDocumentDeleted} from 'firebase-functions/v2/firestore';
+import {REGION} from '../shared/consts/region.const';
 
-export const sectionDeleted = onDocumentDeleted('sections/{sectionId}', async event => {
+export const sectionDeleted = onDocumentDeleted({
+	region: REGION,
+	document: 'sections/{sectionId}'
+}, async event => {
 
 	if (!event.data) {
 		return;

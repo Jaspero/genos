@@ -2,7 +2,7 @@ import {firestore} from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import {REGION} from '../shared/consts/region.const';
 
-export const usercreated = functions
+export const userCreated = functions
   .region(REGION)
   .auth.user()
   .onCreate(async (user) => {

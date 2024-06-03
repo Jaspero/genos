@@ -1,17 +1,17 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
-import {STATIC_CONFIG} from '../shared/consts/static-config.const';
 import {stripeInstance} from '../shared/consts/stripeInstance.const';
 import {FirestoreCollections} from '../shared/enums/firestore-collections.enum';
 import {toStripeFormat} from '../shared/utils/to-stripe-format';
 import {random} from '@jaspero/utils';
+import {REGION} from '../shared/consts/region.const';
 
 export const processCheckout = functions
   .runWith({
     memory: '512MB',
     timeoutSeconds: 540,
   })
-  .region(STATIC_CONFIG.cloudRegion)
+  .region(REGION)
   .https.onCall(async (data) => {
     const fs = admin.firestore();
 
