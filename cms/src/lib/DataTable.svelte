@@ -144,18 +144,18 @@
   }
 
   async function clearFilters() {
-    filterDialogOpen = false;
     filtersValue = {};
 
     $page.url.searchParams.delete('filters');
 
+    await instance.getData();
+
     goto($page.url.toString());
 
-    await instance.getData();
+    filterDialogOpen = false;
   }
 
   async function applyFilters() {
-    filterDialogOpen = false;
     filtersValue = Object.keys(filtersValue).reduce((acc: any, cur) => {
       if (filtersValue[cur] || filtersValue[cur] === false) {
         acc[cur] = filtersValue[cur];
@@ -165,9 +165,11 @@
 
     $page.url.searchParams.set('filters', base64UrlEncode(filtersValue));
 
+    await instance.getData();
+
     goto($page.url.toString());
 
-    await instance.getData();
+    filterDialogOpen = false;
   }
 
   async function exportData() {
@@ -205,7 +207,6 @@
 
   onMount(async () => {
     let lastPage = '';
-    let instance: any = null;
 
     pageSubscription = page.subscribe(async ({ url }) => {
       if (lastPage === url.pathname) {
@@ -288,13 +289,13 @@
 <Dialog bind:open={filterDialogOpen} removePadding>
   <svelte:fragment slot="title">Filters</svelte:fragment>
 
-  <form name="filters" on:submit|preventDefault={applyFilters}>
+  <form id="filters" on:submit|preventDefault={applyFilters}>
     <FormModule items={filterItems} bind:value={filtersValue} />
   </form>
 
   <slot slot="actions">
-    <Button variant="filled" color="primary" type="submit" form="filters" on:click={applyFilters}
-      >Apply filters
+    <Button variant="filled" color="primary" type="submit" form="filters">
+      Apply filters
     </Button>
   </slot>
 </Dialog>
