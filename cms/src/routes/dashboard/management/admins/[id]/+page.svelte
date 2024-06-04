@@ -10,6 +10,7 @@
   import Card from '$lib/Card.svelte';
   import Grid from '$lib/Grid.svelte';
   import GridCol from '$lib/GridCol.svelte';
+  import { CONFIG } from '$lib/consts/config.const';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
   import { confirmation } from '$lib/utils/confirmation';
   import { urlSegments } from '$lib/utils/url-segments';
@@ -43,14 +44,14 @@
     if (data.snap) {
       await alertWrapper(
         updateDoc(data.snap.ref, data.value),
-        'Document updated successfully',
+        'Admin updated successfully',
         undefined,
         () => (saveLoading = false)
       );
     } else {
       await alertWrapper(
-        httpsCallable(functions, 'createadmin')(data.value),
-        'Document created successfully',
+        httpsCallable(functions, 'createAdmin')(data.value),
+        'Admin created successfully',
         undefined,
         () => (saveLoading = false)
       );
@@ -67,7 +68,7 @@
         return;
       }
 
-      await alertWrapper(deleteDoc(doc(db, data.col, data.value.id)), `Item deleted successfully`);
+      await alertWrapper(deleteDoc(doc(db, data.col, data.value.id)), `Admin deleted successfully`);
 
       goto(back);
     });
@@ -102,5 +103,5 @@
 </form>
 
 <svelte:head>
-  <title>Admins - Shop CMS</title>
+  <title>Admins - {CONFIG.title}</title>
 </svelte:head>
