@@ -278,62 +278,66 @@
   <h2 class="px-2 pt-2">Variants</h2>
 
   <table class="variants-table">
-    <tr>
-      <th class="px-2 text-left">Variant</th>
-      <th class="px-2 text-left">Price</th>
-      <th class="px-2 text-left">Available Quantity</th>
-      <th class="px-2 text-left">SKU</th>
-      <th class="px-2 text-left">Barcode</th>
-      <th />
-    </tr>
-    {#each variants as variant}
+    <thead>
       <tr>
-        <td class="p-2 break-words">{variant.label}</td>
-        <td class="p-2">
-          <div>
-            <jp-input
-              placeholder="Price"
-              value={variant.price}
-              type="number"
-              on:value={(event) => (variant.price = event.detail.value)}
-            />
-          </div>
-        </td>
-        <td class="p-2">
-          <div>
-            <jp-input
-              placeholder="Quantity"
-              value={variant.quantity}
-              type="number"
-              on:value={(event) => (variant.quantity = event.detail.value)}
-            />
-          </div>
-        </td>
-        <td class="p-2">
-          <div>
-            <jp-input
-              placeholder="SKU"
-              value={variant.sku}
-              on:value={(event) => (variant.sku = event.detail.value)}
-            />
-          </div>
-        </td>
-        <td class="p-2">
-          <div>
-            <jp-input
-              placeholder="Barcode"
-              value={variant.barcode}
-              on:value={(event) => (variant.sku = event.detail.value)}
-            />
-          </div>
-        </td>
-        <td class="p-2">
-          <Button variant="outlined" type="button" on:click={() => openVariantDialog(variant)}
-            >Edit</Button
-          >
-        </td>
+        <th class="px-2 text-left">Variant</th>
+        <th class="px-2 text-left">Price</th>
+        <th class="px-2 text-left">Available Quantity</th>
+        <th class="px-2 text-left">SKU</th>
+        <th class="px-2 text-left">Barcode</th>
+        <th></th>
       </tr>
-    {/each}
+    </thead>
+    <tbody>
+      {#each variants as variant}
+        <tr>
+          <td class="p-2 break-words">{variant.label}</td>
+          <td class="p-2">
+            <div>
+              <jp-input
+                placeholder="Price"
+                value={variant.price}
+                type="number"
+                on:value={(event) => (variant.price = event.detail.value)}
+              />
+            </div>
+          </td>
+          <td class="p-2">
+            <div>
+              <jp-input
+                placeholder="Quantity"
+                value={variant.quantity}
+                type="number"
+                on:value={(event) => (variant.quantity = event.detail.value)}
+              />
+            </div>
+          </td>
+          <td class="p-2">
+            <div>
+              <jp-input
+                placeholder="SKU"
+                value={variant.sku}
+                on:value={(event) => (variant.sku = event.detail.value)}
+              />
+            </div>
+          </td>
+          <td class="p-2">
+            <div>
+              <jp-input
+                placeholder="Barcode"
+                value={variant.barcode}
+                on:value={(event) => (variant.sku = event.detail.value)}
+              />
+            </div>
+          </td>
+          <td class="p-2">
+            <Button variant="outlined" type="button" on:click={() => openVariantDialog(variant)}
+              >Edit</Button
+            >
+          </td>
+        </tr>
+      {/each}
+    </tbody>
   </table>
 </div>
 
