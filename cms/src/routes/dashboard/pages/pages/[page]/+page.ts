@@ -108,7 +108,7 @@ export async function load({params, parent}) {
         return {
           id: d.id,
           title: data.title,
-          json: jsonSnap?.data(),
+          json: JSON.parse(jsonSnap!.data()!.content),
           category: data.category,
           image: data.image
         };
@@ -140,7 +140,7 @@ export async function load({params, parent}) {
         return {
           id: d.id,
           title: data.title,
-          json: jsonSnap?.data(),
+          json: JSON.parse(jsonSnap!.data()!.content),
           category: data.category,
           image: data.image
         };
@@ -230,7 +230,7 @@ export async function load({params, parent}) {
     items,
     metaItems: META_FORM_FIELDS(col),
     value,
-    json: jsonSnap?.data(),
+    json: JSON.parse(jsonSnap!.data()!.content),
     pages,
     sections,
     templates,

@@ -92,7 +92,7 @@ export async function load({ params, parent }) {
         return {
           id: d.id,
           title: data.title,
-          json: jsonSnap?.data(),
+          json: JSON.parse(jsonSnap!.data()!.content),
           category: data.category,
           image: data.image
         };
@@ -161,7 +161,7 @@ export async function load({ params, parent }) {
     col,
     items,
     value,
-    json: jsonSnap?.data(),
+    json: JSON.parse(jsonSnap!.data()!.content),
     pages,
     sections,
     popups,

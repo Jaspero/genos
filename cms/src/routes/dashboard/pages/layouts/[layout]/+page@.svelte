@@ -95,7 +95,7 @@
     const html = grapesInstance.getHtml();
     const css = grapesInstance.getCss();
     const toUpdate = [
-      setDoc(doc(db, data.col, id, 'content', 'json'), json),
+      setDoc(doc(db, data.col, id, 'content', 'json'), {content: JSON.stringify(json)}),
       setDoc(doc(db, data.col, id, 'content', 'html'), {
         content: html,
         lastUpdatedOn

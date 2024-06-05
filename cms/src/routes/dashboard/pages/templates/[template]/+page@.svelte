@@ -95,7 +95,7 @@
     }
 
     const json = grapesInstance.getProjectData();
-    const toUpdate = [setDoc(doc(db, data.col, id, 'content', 'json'), json)];
+    const toUpdate = [setDoc(doc(db, data.col, id, 'content', 'json'), {content: JSON.parse(json)})];
 
     if (data.snap) {
       delete data.value.id;
