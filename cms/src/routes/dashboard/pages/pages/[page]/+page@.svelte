@@ -21,6 +21,7 @@
   import type { Popup } from '$lib/page-builder/types/popup.interface';
   import type { PageBuilderForm } from '$lib/page-builder/types/page-builder-form.interface';
   import { CONFIG } from '$lib/consts/config.const';
+  import { styleEscape } from '$lib/utils/style-escape';
 
   export let data: {
     col: string;
@@ -79,7 +80,7 @@
         getDoc(doc(db, 'layouts', id, 'content', 'css'))
       ]);
 
-      return `${htmlSnap.data()?.content || ''}`;
+      return (htmlSnap.data()?.content || '') + styleEscape(cssSnap.data()?.content || '');
     }
 
     if (!showingLayout) {

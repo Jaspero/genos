@@ -26,11 +26,11 @@
     {#if description}
       <p>{description}</p>
     {/if}
-    <div class="flex-1 flex items-end justify-between gap-x-4 gap-x-2">
+    <div class="flex-1 flex items-end justify-between gap-x-2">
       <span class="link-to-article">Read full article</span>
       {#if author}
         <span class="opacity-75">
-          By <a class="article-author" href={authorLink}>{author.name}</a>
+          By {author.name}
         </span>
       {/if}
     </div>
