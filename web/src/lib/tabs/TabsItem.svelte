@@ -19,8 +19,8 @@
   }
 
   a.active {
-    background-color: var(--primary);
-    color: var(--primary-contrast);
-    border-color: var(--primary);
+    background-color: var(--primary-color);
+    color: var(--primary-contrast-color);
+    border-color: var(--primary-color);
   }
 </style>
