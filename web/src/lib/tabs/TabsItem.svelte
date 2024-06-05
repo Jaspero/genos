@@ -13,9 +13,9 @@
   }
 
   a:hover {
-    background-color: var(--secondary);
-    color: var(--secondary-contrast);
-    border-color: var(--secondary);
+    background-color: var(--secondary-color);
+    color: var(--secondary-contrast-color);
+    border-color: var(--secondary-color);
   }
 
   a.active {
