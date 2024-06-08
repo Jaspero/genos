@@ -524,6 +524,35 @@ export const TYPES = (forms: PageBuilderForm[]) => [
       }
     }
   },
+  {
+    id: 'pb-featured-products',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-FEATURED-PRODUCTS',
+    model: {
+      defaults: {
+        tagName: 'pb-featured-products',
+        traits: [
+          {
+            type: 'text',
+            label: 'Sort Property',
+            name: 'property',
+            options: [
+              {id: 'price', label: 'Price'},
+              {id: 'name', label: 'Name'},
+            ]
+          },
+          {
+            type: 'select',
+            label: 'Sort Direction',
+            name: 'direction',
+            options: [
+              {id: 'asc', label: 'Ascending'}, 
+              {id: 'desc', label: 'Descending'}
+            ]
+          }
+        ]
+      }
+    }
+  },
 
   /**
    * Aside Image Slider
