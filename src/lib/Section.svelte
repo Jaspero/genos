@@ -34,7 +34,7 @@
     }
 
     .title {
-        @apply px-24 pt-60 text-xl sm:text-2xl lg:text-3xl font-bold leading-tight max-w-[24ch] sm:max-w-[100%];
+        @apply px-24 pt-40 text-xl sm:text-2xl lg:text-3xl font-bold leading-tight max-w-[24ch] sm:max-w-[100%];
     }
 
     .content {
