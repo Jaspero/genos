@@ -7,12 +7,14 @@
 
 <section>
   <img class="bg" src={bg} alt={bgAlt} aria-hidden="true">
-  {#if decoration}
-    <img class="decoration" src={decoration} alt={decorationAlt} aria-hidden="true">
-  {/if}
 
-  <div class="title">
-    <slot name="title" />
+  <div class="title-container">
+    <div class="title">
+      <slot name="title" />
+    </div>
+    {#if decoration}
+      <img class="decoration" src={decoration} alt={decorationAlt} aria-hidden="true">
+    {/if}
   </div>
 
   <div class="content">
@@ -26,11 +28,15 @@
     }
 
     .bg {
-        @apply absolute top-0 left-0 -z-[1] w-1/2 sm:w-[unset];
+        @apply absolute top-0 left-0 -z-[1] w-1/2 sm:w-[unset] max-w-[50%];
     }
 
     .decoration {
-        @apply -z-[1] absolute top-24 sm:top-4 right-20 w-1/4 max-w-[400px];
+        @apply -z-[1] absolute bottom-0 right-20 w-1/4 max-w-[400px];
+    }
+
+    .title-container {
+        @apply relative flex justify-between gap-24;
     }
 
     .title {
@@ -38,6 +44,6 @@
     }
 
     .content {
-        @apply px-16 sm:px-24 md:px-40;
+        @apply px-16 sm:px-24 md:px-40 mt-40;
     }
 </style>

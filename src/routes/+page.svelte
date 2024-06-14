@@ -57,7 +57,7 @@
   <p class="text-base text-center mt-48 max-w-[28ch]">We are the world’s leading glycomic lab, with <b>over 20 years</b> of experience in glycomics. Our team of highly qualified experts can help bring your ideas to life.</p>
 
   <div class="relative mt-80">
-    <h2 class="text-3xl leading-tight text-center font-bold">
+    <h2 class="text-xl sm:text-2xl md:text-3xl leading-tight text-center font-bold">
       We offer bespoke
       <span class="text-[#40BFBF]">scientific solutions</span>
     </h2>
@@ -68,48 +68,48 @@
     <a href="/services#sample-preparation" class="solution hover:bg-[#9FCADF]">
       <span class="solution-line" />
       <span class="solution-text">
-        <span class="text-2xl">Sample preparation</span>
-        <span class="text-base text-[#4095BF]">01</span>
+        <span class="text-base sm:text-xl md:text-2xl">Sample preparation</span>
+        <span class="text-sm sm:text-base text-[#4095BF]">01</span>
       </span>
       <img class="h-48" src="/images/home/sample-preparation.png" alt="sample preparation illustration" aria-hidden="true">
     </a>
     <a href="/services#biomarker-discovery" class="solution hover:bg-[#9FDFDF]">
       <span class="solution-line" />
       <span class="solution-text">
-        <span class="text-2xl">Biomarker discovery</span>
-        <span class="text-base text-[#40BFBF]">02</span>
+        <span class="text-base sm:text-xl md:text-2xl">Biomarker discovery</span>
+        <span class="text-sm sm:text-base text-[#40BFBF]">02</span>
       </span>
       <img class="h-48" src="/images/home/biomarker-discovery.png" alt="biomarker discovery illustration" aria-hidden="true">
     </a>
     <a href="/services#in-depth-glycoprofiling" class="solution hover:bg-[#BFDF9F]">
       <span class="solution-line" />
       <span class="solution-text">
-        <span class="text-2xl">In-depth glycoprofiling</span>
-        <span class="text-base text-[#80BF40]">03</span>
+        <span class="text-base sm:text-xl md:text-2xl">In-depth glycoprofiling</span>
+        <span class="text-sm sm:text-base text-[#80BF40]">03</span>
       </span>
       <img class="h-48" src="/images/home/in-depth-glycoprofiling.png" alt="in-depth glycoprofiling illustration" aria-hidden="true">
     </a>
     <a href="/services#high-throughput-analysis" class="solution hover:bg-[#FCDF82]">
       <span class="solution-line" />
       <span class="solution-text">
-        <span class="text-2xl">High-throughput analysis</span>
-        <span class="text-base text-[#F9C006]">04</span>
+        <span class="text-base sm:text-xl md:text-2xl">High-throughput analysis</span>
+        <span class="text-sm sm:text-base text-[#F9C006]">04</span>
       </span>
       <img class="h-48" src="/images/home/high-throughput-analysis.png" alt="high-throughput analysis illustration" aria-hidden="true">
     </a>
     <a href="/services#data-analysis" class="solution hover:bg-[#FFBF80]">
       <span class="solution-line" />
       <span class="solution-text">
-        <span class="text-2xl">Data analysis</span>
-        <span class="text-base text-[#FF8000]">05</span>
+        <span class="text-base sm:text-xl md:text-2xl">Data analysis</span>
+        <span class="text-sm sm:text-base text-[#FF8000]">05</span>
       </span>
       <img class="h-48" src="/images/home/data-analysis.png" alt="data analysis illustration" aria-hidden="true">
     </a>
     <a href="/services#joint-project-development" class="solution hover:bg-[#9FCADF]">
       <span class="solution-line" />
       <span class="solution-text">
-        <span class="text-2xl">Joint project development</span>
-        <span class="text-base text-[#4095BE]">06</span>
+        <span class="text-base sm:text-xl md:text-2xl">Joint project development</span>
+        <span class="text-sm sm:text-base text-[#4095BE]">06</span>
       </span>
       <img class="h-48" src="/images/home/joint-project-development.png" alt="joint project development illustration" aria-hidden="true">
     </a>
@@ -125,7 +125,7 @@
     <span class="material-symbols-outlined text-base text-[#B2E5E5] hidden sm:block">
           arrow_forward
         </span>
-    <a href="/services" class="text-base text-[#178282] mx-6 hover:underline">Our services in details</a>
+    <a href="/services" class="text-base text-[#178282] mx-6 underline sm:no-underline hover:underline">Our services in details</a>
     <span class="material-symbols-outlined text-base text-[#B2E5E5] hidden sm:block">
           arrow_back
         </span>
@@ -139,18 +139,20 @@
 </div>
 
 <div class="mt-60">
-  <Section bg="/images/home/filled-rectangle.svg">
+  <Section bg="/images/home/filled-rectangle.svg" bgAlt="filled rectangle in background"
+           decoration="/images/home/outlined-rectangles.svg" decorationAlt="outlined rectangles in background">
     <slot slot="title">Success through <span class="text-[#80BF40]">collaboration</span></slot>
 
-    <p class="text-base leading-normal">With over 20 large collaborative projects conducted with scientific teams from different research centers from <b>around the world</b>, we have the expertise to design studies and bring them to a successful conclusion.</p>
+    <p class="text-sm leading-normal mt-40 max-w-[34ch] ml-auto">With over 20 large collaborative projects conducted with scientific teams from different research centers from <b>around the world</b>, we have the expertise to design studies and bring them to a successful conclusion.</p>
   </Section>
 </div>
 
 <div class="mt-60">
-  <Section bg="/images/home/half-circle.svg" bgAlt="filled half-circle in background" decoration="/images/home/question-marks.svg">
+  <Section bg="/images/home/half-circle.svg" bgAlt="filled half-circle in background"
+           decoration="/images/home/question-marks.svg" decorationAlt="question marks in background">
     <slot slot="title">Common <br> <span class="text-[#4095BF]">Questions</span></slot>
 
-    <p class="text-base leading-normal">With over 20 large collaborative projects conducted with scientific teams from different research centers from <b>around the world</b>, we have the expertise to design studies and bring them to a successful conclusion.</p>
+    <p class="text-sm leading-normal max-w-[34ch] ml-auto">With over 20 large collaborative projects conducted with scientific teams from different research centers from <b>around the world</b>, we have the expertise to design studies and bring them to a successful conclusion.</p>
   </Section>
 </div>
 
@@ -160,7 +162,7 @@
     }
 
     .solution {
-        @apply relative flex justify-center items-center gap-24 px-24 sm:px-40 py-16 duration-500;
+        @apply relative flex justify-center items-center gap-24 px-16 sm:px-24 md:px-40 py-16 duration-500;
     }
 
     .solution-text {
