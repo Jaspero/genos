@@ -64,6 +64,29 @@
   </div>
 </Section>
 
+<div class="grid grid-cols-12 gap-8 sm:gap-16 mt-24">
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/about/gordan.png" alt="A portrait of Gordan Lauc">
+    <h3 class="text-sm font-bold leading-tight mt-4">Prof. Gordan Lauc</h3>
+    <h4 class="text-xs leading-tight">Founder & CEO</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/about/gordan.png" alt="A portrait of Gordan Lauc">
+    <h3 class="text-sm font-bold leading-tight mt-4">Prof. Gordan Lauc</h3>
+    <h4 class="text-xs leading-tight">Founder & CEO</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/about/gordan.png" alt="A portrait of Gordan Lauc">
+    <h3 class="text-sm font-bold leading-tight mt-4">Prof. Gordan Lauc</h3>
+    <h4 class="text-xs leading-tight">Founder & CEO</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/about/gordan.png" alt="A portrait of Gordan Lauc">
+    <h3 class="text-sm font-bold leading-tight mt-4">Prof. Gordan Lauc</h3>
+    <h4 class="text-xs leading-tight">Founder & CEO</h4>
+  </div>
+</div>
+
 <div class="mt-24 sm:mt-40">
   <Section bg="/images/about/filled-half-circle.svg">
     <slot slot="title">We’re passionate about <span class="text-[#E58D19]">glycans</span></slot>
