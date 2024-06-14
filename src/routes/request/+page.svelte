@@ -15,14 +15,14 @@
   Fill out the form below. We’ll get back to you to schedule a meeting to discuss your request in further details.
 </p>
 
-<form class="mt-8 flex flex-col gap-8" id="form">
+<form class="mt-8 flex flex-col gap-8" id="form" on:submit={submit}>
   <label>
     <span class="label" class:move={email}>Enter your email address</span>
-    <input type="email" bind:value={email}>
+    <input type="email" bind:value={email} required>
   </label>
   <label>
     <span class="label" class:move={message}>What is your request?</span>
-    <textarea bind:value={message}></textarea>
+    <textarea bind:value={message} required></textarea>
   </label>
 </form>
 
@@ -34,7 +34,7 @@
     </div>
   {/if}
   <div class="finger finger-left"></div>
-  <button form="form" class="submit-button" on:click={submit} class:pressed={submitted}>
+  <button type="submit" form="form" class="submit-button" class:pressed={submitted}>
     Submit
   </button>
   <div class="finger finger-right"></div>
