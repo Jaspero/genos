@@ -89,7 +89,7 @@
           <a class="menu-primary-link" href="/publications" class:active={$page.url.pathname === '/publications'} on:click={() => menu = false}>Publications</a>
         </div>
       </div>
-      <a class="cta" href="/request">
+      <a class="cta" href="/request" on:click={() => menu = false}>
         Submit free request
       </a>
     </div>
