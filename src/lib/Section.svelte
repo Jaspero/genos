@@ -8,7 +8,7 @@
 <section>
   <img class="bg" src={bg} alt={bgAlt} aria-hidden="true">
   {#if decoration}
-    <img class="decoration" src={decoration} alt={decorationAlt}>
+    <img class="decoration" src={decoration} alt={decorationAlt} aria-hidden="true">
   {/if}
 
   <div class="title">
@@ -22,7 +22,7 @@
 
 <style lang="postcss">
     section {
-        @apply relative -mx-24 sm:-mx-40;
+        @apply relative -mx-16 sm:-mx-24 md:-mx-40;
     }
 
     .bg {
@@ -30,7 +30,7 @@
     }
 
     .decoration {
-        @apply absolute right-20 -z-[1];
+        @apply -z-[1] absolute top-24 sm:top-4 right-20 w-1/4 max-w-[400px];
     }
 
     .title {

@@ -3,7 +3,8 @@
   import Cta from '$lib/Cta.svelte';
 </script>
 
-<Section>
+<Section bg="/images/projects/filled-rectangle.svg" bgAlt="filled rectangle in background"
+         decoration="/images/projects/outlined-rectangles.svg" decorationAlt="outlined rectangles in background">
   <slot slot="title">
     <h1>GENOS <br> <span class="text-[#4095BF]">projects</span></h1>
   </slot>
@@ -13,66 +14,72 @@
   </p>
 </Section>
 
-<div class="grid grid-cols-12 gap-16">
-  <div class="col-span-4 project-container">
-    <div class="project">
+<div class="grid grid-cols-10 sm:grid-cols-12 gap-16 mt-16 sm:mt-24 md:mt-40">
+  <div class="project-container">
+    <a href="/" class="project">
       <div class="project-date">Jul 2020 — Jan 2022</div>
       <h2 class="project-title">GlycoCOVID</h2>
       <p class="project-description">Glycans as biomarkers and functional effectors of severe COVID-19</p>
       <div class="flex-1"></div>
-      <span>Download project details • PDF</span>
-    </div>
+      <span class="text-[1.25rem] underline">Download project details • PDF</span>
+    </a>
   </div>
-  <div class="col-span-4 project-container">
-    <div class="project">
+  <div class="project-container">
+    <a href="/" class="project">
       <div class="project-date">Jul 2020 — Jan 2022</div>
       <h2 class="project-title">GlycoCOVID</h2>
       <p class="project-description">Glycans as biomarkers and functional effectors of severe COVID-19</p>
       <div class="flex-1"></div>
-      <span>Download project details • PDF</span>
-    </div>
+      <span class="text-[1.25rem] underline">Download project details • PDF</span>
+    </a>
   </div>
-  <div class="col-span-4 project-container">
-    <div class="project">
+  <div class="project-container">
+    <a href="/" class="project">
       <div class="project-date">Jul 2020 — Jan 2022</div>
       <h2 class="project-title">GlycoCOVID</h2>
       <p class="project-description">Glycans as biomarkers and functional effectors of severe COVID-19</p>
       <div class="flex-1"></div>
-      <span>Download project details • PDF</span>
-    </div>
+      <span class="text-[1.25rem] underline">Download project details • PDF</span>
+    </a>
   </div>
-  <div class="col-span-4 project-container">
-    <div class="project">
+  <div class="project-container">
+    <a href="/" class="project">
       <div class="project-date">Jul 2020 — Jan 2022</div>
       <h2 class="project-title">GlycoCOVID</h2>
       <p class="project-description">Glycans as biomarkers and functional effectors of severe COVID-19</p>
       <div class="flex-1"></div>
-      <span>Download project details • PDF</span>
-    </div>
+      <span class="text-[1.25rem] underline">Download project details • PDF</span>
+    </a>
   </div>
-  <div class="col-span-4 project-container">
-    <div class="project">
+  <div class="project-container">
+    <a href="/" class="project">
       <div class="project-date">Jul 2020 — Jan 2022</div>
       <h2 class="project-title">GlycoCOVID</h2>
       <p class="project-description">Glycans as biomarkers and functional effectors of severe COVID-19</p>
       <div class="flex-1"></div>
-      <span>Download project details • PDF</span>
-    </div>
+      <span class="text-[1.25rem] underline">Download project details • PDF</span>
+    </a>
   </div>
-  <div class="col-span-4 project-container">
-    <div class="project">
+  <div class="project-container">
+    <a href="/" class="project">
       <div class="project-date">Jul 2020 — Jan 2022</div>
       <h2 class="project-title">GlycoCOVID</h2>
       <p class="project-description">Glycans as biomarkers and functional effectors of severe COVID-19</p>
       <div class="flex-1"></div>
-      <span>Download project details • PDF</span>
-    </div>
+      <span class="text-[1.25rem] underline">Download project details • PDF</span>
+    </a>
   </div>
 </div>
 
-<Cta />
+<div class="mt-16 sm:mt-40">
+  <Cta />
+</div>
 
 <style lang="postcss">
+    .project-container {
+        @apply col-span-10 sm:col-span-3 md:col-span-4;
+    }
+
   .project {
       @apply relative flex flex-col items-start border-4 p-6 min-h-[25rem];
   }
@@ -87,15 +94,15 @@
   }
 
   .project-date {
-      @apply bg-black text-white px-3 py-2;
+      @apply bg-black text-white px-3 py-2 text-[1.5rem];
   }
 
   .project-title {
-      @apply font-bold text-2xs mt-4;
+      @apply font-bold mt-4 text-[1.75rem];
   }
 
   .project-description {
-      @apply mt-2;
+      @apply mt-2 text-[1.25rem];
   }
 
   .project-container:first-child .project,
