@@ -46,7 +46,7 @@
       <div class="bubble">
         Glycosylation is the ultimate layer of molecular complexity, but exactly because of this complexity many researchers are still avoiding including glycans in their studies.
 
-        <img src="/images/about/bubble-arrow.svg" alt="" class="bubble-arrow">
+        <img src="/images/about/bubble-arrow.svg" alt="bubble arrow" class="bubble-arrow">
       </div>
     </div>
 

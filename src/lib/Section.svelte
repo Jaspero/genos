@@ -40,10 +40,10 @@
     }
 
     .title {
-        @apply px-24 pt-40 text-xl sm:text-2xl lg:text-3xl font-bold leading-tight max-w-[24ch] sm:max-w-[100%];
+        @apply px-16 sm:px-24 pt-40 text-xl sm:text-2xl lg:text-3xl font-bold leading-tight max-w-[24ch] sm:max-w-[100%];
     }
 
     .content {
-        @apply px-16 sm:px-24 md:px-40 mt-40;
+        @apply px-16 sm:px-24 md:px-40 mt-16 sm:mt-24 md:mt-40;
     }
 </style>

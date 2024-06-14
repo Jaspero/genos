@@ -15,7 +15,7 @@
 </Section>
 
 <div class="w-full max-w-7xl ml-auto mt-40">
-  <div class="flex flex-col border-l-4 border-l-[#032130] pl-16 gap-12">
+  <div class="relative flex flex-col border-l-4 border-l-[#032130] pl-16 gap-12">
     <a href="/" class="publication border-4 group">
       <h2 class="publication-title">Systems Glycobiology: Immunoglobulin G Glycans as Biomarkers and Functional Effectors in Aging and Diseases</h2>
       <span class="fake-link">View reference</span>

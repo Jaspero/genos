@@ -1,5 +1,24 @@
 <script>
   import Section from '$lib/Section.svelte';
+  import Cta from '$lib/Cta.svelte';
+
+  let questions = [
+    {
+      question: `What's the <b>benefit</b> of using our services?`,
+      answer: 'Lorem ipsum dolor sit amet',
+      open: false
+    },
+    {
+      question: `What's the <b>capacity</b> of Genos laboratory?`,
+      answer: 'Lorem ipsum dolor sit amet',
+      open: false
+    },
+    {
+      question: `How to set up a project <b>collaboration</b> with us?`,
+      answer: 'Lorem ipsum dolor sit amet',
+      open: false
+    }
+  ]
 </script>
 
 <div class="flex flex-col items-center">
@@ -57,7 +76,7 @@
   <p class="text-base text-center mt-48 max-w-[28ch]">We are the world’s leading glycomic lab, with <b>over 20 years</b> of experience in glycomics. Our team of highly qualified experts can help bring your ideas to life.</p>
 
   <div class="relative mt-80">
-    <h2 class="text-xl sm:text-2xl md:text-3xl leading-tight text-center font-bold">
+    <h2 class="text-xl lg:text-2xl xl:text-3xl max-w-[16ch] leading-tight text-center font-bold">
       We offer bespoke
       <span class="text-[#40BFBF]">scientific solutions</span>
     </h2>
@@ -143,7 +162,7 @@
            decoration="/images/home/outlined-rectangles.svg" decorationAlt="outlined rectangles in background">
     <slot slot="title">Success through <span class="text-[#80BF40]">collaboration</span></slot>
 
-    <p class="text-sm leading-normal mt-40 max-w-[34ch] ml-auto">With over 20 large collaborative projects conducted with scientific teams from different research centers from <b>around the world</b>, we have the expertise to design studies and bring them to a successful conclusion.</p>
+    <p class="text-sm leading-normal mt-16 sm:mt-24 md:mt-40 max-w-[34ch] ml-auto">With over 20 large collaborative projects conducted with scientific teams from different research centers from <b>around the world</b>, we have the expertise to design studies and bring them to a successful conclusion.</p>
   </Section>
 </div>
 
@@ -154,6 +173,45 @@
 
     <p class="text-sm leading-normal max-w-[34ch] ml-auto">With over 20 large collaborative projects conducted with scientific teams from different research centers from <b>around the world</b>, we have the expertise to design studies and bring them to a successful conclusion.</p>
   </Section>
+
+  <div class="flex flex-col gap-16 mt-16 sm:mt-24 md:mt-32">
+    {#each questions as item}
+      <div class="flex justify-center flex-wrap">
+        <div class="flex justify-center items-center">
+          <span class="material-symbols-outlined text-base text-[#D9EAF2]">
+            arrow_forward
+          </span>
+          <span class="material-symbols-outlined text-base text-[#D9EAF2] hidden sm:block">
+            arrow_forward
+          </span>
+          <span class="material-symbols-outlined text-base text-[#D9EAF2] hidden sm:block">
+            arrow_forward
+          </span>
+          <button class="text-base text-[#175E82] mx-6 underline sm:no-underline hover:underline max-w-[18ch]"
+                  on:click={() => {item.open = !item.open}}>
+            {@html item.question}
+          </button>
+          <span class="material-symbols-outlined text-base text-[#D9EAF2] hidden sm:block">
+            arrow_back
+          </span>
+          <span class="material-symbols-outlined text-base text-[#D9EAF2] hidden sm:block">
+            arrow_back
+          </span>
+          <span class="material-symbols-outlined text-base text-[#D9EAF2]">
+            arrow_back
+          </span>
+        </div>
+
+        {#if item.open}
+          <p class="w-full text-center text-sm mt-4">{item.answer}</p>
+        {/if}
+      </div>
+    {/each}
+  </div>
+</div>
+
+<div class="mt-24">
+  <Cta />
 </div>
 
 <style lang="postcss">
