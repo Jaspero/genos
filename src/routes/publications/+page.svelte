@@ -35,6 +35,17 @@
   <Cta />
 </div>
 
+<svelte:head>
+  <title>Scientific Publications | Genos</title>
+  <meta name="title" content="Scientific Publications | Genos">
+  <meta property="og:title" content="Scientific Publications | Genos">
+  <meta name="description"
+        content="Explore Genos Glyco's scientific publications in glycomics, showcasing groundbreaking research and latest advancements.">
+  <meta property="og:description"
+        content="Explore Genos Glyco's scientific publications in glycomics, showcasing groundbreaking research and latest advancements.">
+  <meta property="og:url" content="https://genos.hr/publications" />
+</svelte:head>
+
 <style lang="postcss">
   .publication {
       @apply p-12;

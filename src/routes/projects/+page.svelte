@@ -75,6 +75,17 @@
   <Cta />
 </div>
 
+<svelte:head>
+  <title>Research Projects | Genos</title>
+  <meta name="title" content="Research Projects | Genos">
+  <meta property="og:title" content="Research Projects | Genos">
+  <meta name="description"
+        content="Explore Genos Glyco's latest research projects advancing glycomics. Discover our collaborative efforts and cutting-edge contributions to scientific knowledge in glycobiology.">
+  <meta property="og:description"
+        content="Explore Genos Glyco's latest research projects advancing glycomics. Discover our collaborative efforts and cutting-edge contributions to scientific knowledge in glycobiology.">
+  <meta property="og:url" content="https://genos.hr/projects" />
+</svelte:head>
+
 <style lang="postcss">
     .project-container {
         @apply col-span-10 sm:col-span-3 md:col-span-4;

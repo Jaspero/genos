@@ -69,7 +69,7 @@
     <div class="flex flex-col gap-16 flex-1 pt-24 sm:pt-36">
       <div class="flex justify-center">
         <div class="flex flex-col gap-8 text-white pt-5 pr-8 sm:pr-16 w-1/2 text-right">
-          <a class="menu-link" href="mailto:info@genos-glyco.com">info@genos-glyco.com</a>
+          <a class="menu-link" href="mailto:info@genos.hr">info@genos.hr</a>
           <div class="flex flex-col">
             <a class="menu-link" href="tel:+38516471181">+385 1 647 1181</a>
             <a class="menu-link" href="tel:+38516471182">+385 1 647 1182</a>
@@ -95,7 +95,7 @@
     </div>
     <div class="p-4 pb-12 pt-24 sm:pt-36 sm:p-10 border-l border-l-white h-full flex items-end">
       <div class="social">
-        <a href="">Twitter</a>
+        <a href="https://twitter.com/gglycoscience" target="_blank" rel="noreferrer noopener">Twitter</a>
         <span>—</span>
         <a href="https://www.linkedin.com/company/genos-ltd/mycompany/" target="_blank" rel="noreferrer noopener">LinkedIn</a>
       </div>

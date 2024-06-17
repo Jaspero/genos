@@ -389,6 +389,17 @@
   <Cta />
 </div>
 
+<svelte:head>
+  <title>About - Leaders in Glycomics Research | Genos</title>
+  <meta name="title" content="About - Leaders in Glycomics Research | Genos">
+  <meta property="og:title" content="About - Leaders in Glycomics Research | Genos">
+  <meta name="description"
+        content="Learn about Genos Glyco, a leader in glycomics research with over 20 years of expertise. Discover our mission, team, and commitment to advancing scientific knowledge in glycobiology.">
+  <meta property="og:description"
+        content="Learn about Genos Glyco, a leader in glycomics research with over 20 years of expertise. Discover our mission, team, and commitment to advancing scientific knowledge in glycobiology.">
+  <meta property="og:url" content="https://genos.hr/about" />
+</svelte:head>
+
 <style lang="postcss">
     .bubble {
         @apply relative bg-[#FFD400] ml-auto py-12 pl-16 pr-12 text-[2rem] font-bold max-w-[26ch] rounded-[2rem];

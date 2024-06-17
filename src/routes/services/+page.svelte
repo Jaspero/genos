@@ -341,6 +341,17 @@
   <Cta />
 </div>
 
+<svelte:head>
+  <title>Expert Glycan Analysis Services - Your Partner in Advanced Glycomics | Genos</title>
+  <meta name="title" content="Expert Glycan Analysis Services - Your Partner in Advanced Glycomics | Genos">
+  <meta property="og:title" content="Expert Glycan Analysis Services - Your Partner in Advanced Glycomics | Genos">
+  <meta name="description"
+        content="Explore Genos Glyco's bespoke scientific services in glycan analysis. From sample preparation to high-throughput analysis, discover our expertise and flexible solutions tailored to your research or commercial needs.">
+  <meta property="og:description"
+        content="Explore Genos Glyco's bespoke scientific services in glycan analysis. From sample preparation to high-throughput analysis, discover our expertise and flexible solutions tailored to your research or commercial needs.">
+  <meta property="og:url" content="https://genos.hr/services" />
+</svelte:head>
+
 <style lang="postcss">
   .sticky-nav {
       @apply sticky w-screen duration-500 delay-200 flex;

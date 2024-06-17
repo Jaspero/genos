@@ -216,6 +216,17 @@
   <Cta />
 </div>
 
+<svelte:head>
+  <title>Advancing Glycan Analysis and Research | Genos</title>
+  <meta name="title" content="Advancing Glycan Analysis and Research | Genos">
+  <meta property="og:title" content="Advancing Glycan Analysis and Research | Genos">
+  <meta name="description"
+        content="Explore Genos Glyco's leadership in advanced glycan analysis and research, driving scientific discovery with innovative solutions.">
+  <meta property="og:description"
+        content="Explore Genos Glyco's leadership in advanced glycan analysis and research, driving scientific discovery with innovative solutions.">
+  <meta property="og:url" content="https://genos.hr" />
+</svelte:head>
+
 <style lang="postcss">
     .cta {
         @apply underline underline-offset-[12px] text-base sm:text-xl bg-[#4095BF] block text-white opacity-80 hover:opacity-100 duration-300 text-center font-bold py-12 sm:py-16;

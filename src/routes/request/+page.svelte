@@ -40,6 +40,17 @@
   <div class="finger finger-right"></div>
 </div>
 
+<svelte:head>
+  <title>Request a Service | Genos</title>
+  <meta name="title" content="Request a Service | Genos">
+  <meta property="og:title" content="Request a Service | Genos">
+  <meta name="description"
+        content="Submit a service request to Genos Glyco for advanced glycan analysis and research solutions. Discover how our expertise in glycomics can support your scientific or commercial needs.">
+  <meta property="og:description"
+        content="Submit a service request to Genos Glyco for advanced glycan analysis and research solutions. Discover how our expertise in glycomics can support your scientific or commercial needs.">
+  <meta property="og:url" content="https://genos.hr/request" />
+</svelte:head>
+
 <style lang="postcss">
     label {
         @apply relative block pb-4 pt-16 bg-[#D9EAF2] border-b-8 border-b-[#4095BF];
