@@ -66,24 +66,209 @@
 
 <div class="grid grid-cols-12 gap-8 sm:gap-16 mt-24">
   <div class="col-span-6 sm:col-span-4 md:col-span-3">
-    <img src="/images/about/gordan.png" alt="A portrait of Gordan Lauc">
-    <h3 class="text-sm font-bold leading-tight mt-4">Prof. Gordan Lauc</h3>
-    <h4 class="text-xs leading-tight">Founder & CEO</h4>
+    <img src="/images/team/s-busic.png" alt="portrait of genos employee" aria-hidden="true">
+    <h3 class="text-xs font-bold leading-tight mt-4">MSc. Svjetlana Bušić</h3>
+    <h4 class="text-2xs leading-tight">Director of EU Funds and Finance</h4>
   </div>
   <div class="col-span-6 sm:col-span-4 md:col-span-3">
-    <img src="/images/about/gordan.png" alt="A portrait of Gordan Lauc">
-    <h3 class="text-sm font-bold leading-tight mt-4">Prof. Gordan Lauc</h3>
-    <h4 class="text-xs leading-tight">Founder & CEO</h4>
+    <img src="/images/team/v-juras.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Vesna Juras</h3>
+    <h4 class="text-2xs leading-tight">Head of Project Management Office</h4>
   </div>
   <div class="col-span-6 sm:col-span-4 md:col-span-3">
-    <img src="/images/about/gordan.png" alt="A portrait of Gordan Lauc">
-    <h3 class="text-sm font-bold leading-tight mt-4">Prof. Gordan Lauc</h3>
-    <h4 class="text-xs leading-tight">Founder & CEO</h4>
+    <img src="/images/team/f-sostaric.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Filip Šoštarić</h3>
+    <h4 class="text-2xs leading-tight">Project Implementation and Public Procurement Specialist</h4>
   </div>
   <div class="col-span-6 sm:col-span-4 md:col-span-3">
-    <img src="/images/about/gordan.png" alt="A portrait of Gordan Lauc">
-    <h3 class="text-sm font-bold leading-tight mt-4">Prof. Gordan Lauc</h3>
-    <h4 class="text-xs leading-tight">Founder & CEO</h4>
+    <img src="/images/team/f-slipcevic.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Filip Slipčević</h3>
+    <h4 class="text-2xs leading-tight">Project Manager</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/d-peic.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Dijana Peić</h3>
+    <h4 class="text-2xs leading-tight">Head of Finance and Accounting</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/p-ruzic.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Petra Ružić</h3>
+    <h4 class="text-2xs leading-tight">Administrative Assistant and HR</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/i-trbojevic-akmacic.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Dr.sc. Irena Trbojević Akmačić</h3>
+    <h4 class="text-2xs leading-tight">Head of Laboratory for high-throughput glycomics</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/t-pribic.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Tea Pribić</h3>
+    <h4 class="text-2xs leading-tight">Head of UPLC lab</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/m-hanic.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Maja Hanić</h3>
+    <h4 class="text-2xs leading-tight">Head of CGE lab</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/j-simunovic.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Jelena Šimunović</h3>
+    <h4 class="text-2xs leading-tight">PhD Student</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/j-antolkovic.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Jelena Antolković</h3>
+    <h4 class="text-2xs leading-tight">Laboratory analyst</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/a-baletic.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Dr. sc. Baletić Anđelo</h3>
+    <h4 class="text-2xs leading-tight">Laboratory analyst</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/n-mraz.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Nikol Mraz</h3>
+    <h4 class="text-2xs leading-tight">Laboratory Analyst</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/m-vinicki.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Martina Vinicki</h3>
+    <h4 class="text-2xs leading-tight">Laboratory Analyst</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/i-petric.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Ivan Petrić</h3>
+    <h4 class="text-2xs leading-tight">Laboratory Analyst</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/g-josipovic.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Dr. Goran Josipović</h3>
+    <h4 class="text-2xs leading-tight">Senior Researcher</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/m-novokmet.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Dr.sc. Mislav Novokmet</h3>
+    <h4 class="text-2xs leading-tight">Head of MS Laboratory</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/j-stambuk.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Dr. Jerko Štambuk</h3>
+    <h4 class="text-2xs leading-tight">Senior researcher</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/s-habazin.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Siniša Habazin</h3>
+    <h4 class="text-2xs leading-tight">Researcher</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/f-klicek.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Filip Kliček</h3>
+    <h4 class="text-2xs leading-tight">Research PhD Student</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/f-vuckovic.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Dr. Frano Vučković</h3>
+    <h4 class="text-2xs leading-tight">Head of Data analysis</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/a-frkatovic-hodzic.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Dr. Azra Frkatović-Hodžić</h3>
+    <h4 class="text-2xs leading-tight">Data Analyst</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/m-pucic-bakovic.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Dr. Maja Pučić Baković</h3>
+    <h4 class="text-2xs leading-tight">Head of Glycoprofiling</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/i-gudelj.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Dr. sc. Ivan Gudelj</h3>
+    <h4 class="text-2xs leading-tight">Senior researcher</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/t-klaric.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Dr. sc. Thomas Klarić</h3>
+    <h4 class="text-2xs leading-tight">Senior Researcher</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/am-patenaude.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Anne-Marie Patenaude, MSc</h3>
+    <h4 class="text-2xs leading-tight">Laboratory Analyst</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/a-cindric.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Ana Cindrić</h3>
+    <h4 class="text-2xs leading-tight">PhD Student</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/h-deris.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Helena Deriš</h3>
+    <h4 class="text-2xs leading-tight">PhD Student</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/d-j-petrovic.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Dražen Juraj Petrović</h3>
+    <h4 class="text-2xs leading-tight">PhD student</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/j-kristic.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Jasminka Krištić, Ph.D.</h3>
+    <h4 class="text-2xs leading-tight">Head of industrial development and innovation unit</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/t-stambuk.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Tamara Štambuk</h3>
+    <h4 class="text-2xs leading-tight">Head of industrial development and innovation unit</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/a-skelin.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Andrea Skelin, Ph.D.</h3>
+    <h4 class="text-2xs leading-tight">Research manager</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/n-nakic-bedekovic.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Dr. Natali Nakić Bedeković</h3>
+    <h4 class="text-2xs leading-tight">Senior researcher</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/i-duvnjak-oreskovic.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Ivana Duvnjak Orešković</h3>
+    <h4 class="text-2xs leading-tight">DNA Analyst</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/d-hmura.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Dajana Hmura</h3>
+    <h4 class="text-2xs leading-tight">DNA analyst</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/m-fancovic.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Matko Fančović</h3>
+    <h4 class="text-2xs leading-tight">Laboratory Analyst and Automation Specialist</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/i-gulisija-radic.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Ivana Gulišija Radić</h3>
+    <h4 class="text-2xs leading-tight">Scientist & Project Manager</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/a-mijakovac.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Dr. Anika Mijakovac</h3>
+    <h4 class="text-2xs leading-tight">Researcher</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/g-razdorov.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">MSc. Genadij Razdorov</h3>
+    <h4 class="text-2xs leading-tight">Senior Mass Spectrometry Specialist and Glycobiology Researcher</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/o-zaitseva.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Dr. Olga Zaitseva</h3>
+    <h4 class="text-2xs leading-tight">Glycan Analysis Specialist</h4>
+  </div>
+  <div class="col-span-6 sm:col-span-4 md:col-span-3">
+    <img src="/images/team/m-martinic-kavur.png" alt="A portrait of a Genos employee">
+    <h3 class="text-xs font-bold leading-tight mt-4">Dr. Marina Martinić Kavur</h3>
+    <h4 class="text-2xs leading-tight">Head of Corporate Communications</h4>
   </div>
 </div>
 
