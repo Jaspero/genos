@@ -164,6 +164,8 @@
 
     <p class="text-sm leading-normal mt-16 sm:mt-24 md:mt-40 max-w-[34ch] ml-auto">With over 20 large collaborative projects conducted with scientific teams from different research centers from <b>around the world</b>, we have the expertise to design studies and bring them to a successful conclusion.</p>
   </Section>
+
+  <img src="/images/home/collaboration.png" alt="" class="w-full mt-16 sm:mt-24 md:mt-40">
 </div>
 
 <div class="mt-60">
