@@ -9,13 +9,14 @@
   import { doc, updateDoc } from 'firebase/firestore';
   import { onMount } from 'svelte';
   import { db } from '../utils/firebase';
+  import type { SelectOptions } from '../interfaces/select-options.interface';
 
   export let value: string;
   export let collection: string;
   export let id: string;
   export let key: string;
 
-  let options: Array<{ value: string; label: string }> = [];
+  let options: SelectOptions = [];
 
   async function change(event: Event) {
 		value = (event.target as HTMLSelectElement).value;

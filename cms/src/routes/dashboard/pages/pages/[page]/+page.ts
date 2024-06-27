@@ -5,6 +5,7 @@ import {META_FORM_FIELDS} from '$lib/consts/meta.form-fields.js';
 import {BucketImageService} from '$lib/services/image.service.js';
 import type {PageBuilderForm} from '$lib/page-builder/types/page-builder-form.interface';
 import {getOptions} from '$lib/utils/get-options';
+import type {SelectOptions} from '$lib/interfaces/select-options.interface.js';
 
 export async function load({params, parent}) {
   await parent();
@@ -20,7 +21,7 @@ export async function load({params, parent}) {
         width: 1080
       }
     ]);
-  const layouts: Array<{label: string; value: string}> = [];
+  const layouts: SelectOptions = [];
 
   const items = [
     {

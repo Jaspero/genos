@@ -1,4 +1,6 @@
-export function selectPipe(collection: string, key: string, options: Array<{value: string; label: string}>) {
+import type {SelectOptions} from '../interfaces/select-options.interface';
+
+export function selectPipe(collection: string, key: string, options: SelectOptions) {
   return (id: string, row: any) => {
 
 		if (!window.columnSelects) {

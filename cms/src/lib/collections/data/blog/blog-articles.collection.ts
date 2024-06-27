@@ -7,6 +7,7 @@ import { releaseStatusPipe } from '../../../column-pipes/release-status.pipe';
 import { yesNoPipe } from '../../../column-pipes/yes-no.pipe';
 import { META_FORM_FIELDS } from '../../../consts/meta.form-fields';
 import { quillFiled } from '../../../form-fields/quill.field';
+import type { SelectOptions } from '../../../interfaces/select-options.interface';
 import { BucketImageService } from '../../../services/image.service';
 import { generateSlug } from '../../../utils/generate-slug';
 import { getOptions } from '../../../utils/get-options';
@@ -92,8 +93,8 @@ collections.addCollection('blog-articles', {
     }
   },
   filterOptions: async () => {
-    const authors: Array<{ label: string; value: string }> = [{ label: 'Any', value: '' }];
-    const categories: Array<{ label: string; value: string }> = [{ label: 'Any', value: '' }];
+    const authors: SelectOptions = [{ label: 'Any', value: '' }];
+    const categories: SelectOptions = [{ label: 'Any', value: '' }];
 
     const items = [
       {
@@ -144,8 +145,8 @@ collections.addCollection('blog-articles', {
   },
   editKey: 'title',
   form: async () => {
-    const authors: Array<{ label: string; value: string }> = [];
-    const categories: Array<{ label: string; value: string }> = [];
+    const authors: SelectOptions = [];
+    const categories: SelectOptions = [];
     const col = 'blog-articles';
     const imageService = new BucketImageService();
 

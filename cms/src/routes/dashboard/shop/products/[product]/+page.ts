@@ -5,14 +5,15 @@ import {META_FORM_FIELDS} from '$lib/consts/meta.form-fields.js';
 import {BucketImageService} from '$lib/services/image.service.js';
 import type {PageBuilderForm} from '$lib/page-builder/types/page-builder-form.interface';
 import {getOptions} from '$lib/utils/get-options';
+import type {SelectOptions} from '$lib/interfaces/select-options.interface.js';
 
 export async function load({params, parent}) {
   await parent();
 
   const {product} = params;
-  const categories: Array<{ label: string; value: string }> = [];
-  const tags: Array<{ label: string; value: string }> = [];
-  const layouts: Array<{label: string; value: string}> = [];
+  const categories: SelectOptions = [];
+  const tags: SelectOptions = [];
+  const layouts: SelectOptions = [];
   const col = 'products';
   const imageService = new BucketImageService();
 
