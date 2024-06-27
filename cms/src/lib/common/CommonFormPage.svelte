@@ -111,7 +111,11 @@
         </slot>
 
         <div class="flex flex-col gap-6">
-          <FormModule bind:this={formModule} items={data.form} bind:value={data.value} />
+          {#if data.form.views}
+            <FormModule bind:this={formModule} views={data.form.views} initialValue={data instanceof CommonNewFormPageData ? data.initialValue : null} bind:value={data.value} />
+          {:else}
+            <FormModule bind:this={formModule} initialValue={data instanceof CommonNewFormPageData ? data.initialValue : null} items={data.form} bind:value={data.value} />
+          {/if}
         </div>
       </Card>
     </GridCol>

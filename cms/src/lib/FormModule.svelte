@@ -21,6 +21,8 @@
   import './form-elements/form-elements.ts';
 
   export let items: any[] = [];
+  export let views: any[] | null = null;
+  export let initialValue: any | null;
   export let value: any = {};
   export let render: any = null;
   export let id = '';
@@ -30,12 +32,19 @@
 
   onMount(() => {
     const schema = new ModularSchema({});
+
+    if (initialValue) {
+      for (const key in initialValue) {
+        value[key] = initialValue[key];
+      }
+    }
+
     const instance = schema.createInstance(value);
 
     const view = new ModularView({
       componentPrefix: '',
       schema,
-      views: [
+      views: views ? views : [
         {
           ...(container && { container }),
           ...(id && { id }),

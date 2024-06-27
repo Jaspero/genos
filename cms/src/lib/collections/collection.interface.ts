@@ -22,6 +22,16 @@ export interface Collection {
   editKey?: string;
 
   /**
+   * Applicable only on new document creation
+   */
+  formInitialValue?: any,
+
+  /**
+   * Runs before rendering the form
+   */
+  formatPreRender?: (value: any) => any;
+
+  /**
    * Provide either an idPrefix or createId.
    * An idPrefix will produce `${idPrefix}-${random.string(24)}` and
    * createId allows for providing a custom method.
