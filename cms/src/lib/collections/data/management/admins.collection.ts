@@ -1,8 +1,8 @@
 import { capitalize } from '@jaspero/utils';
-import { datePipe } from '../../column-pipes/date.pipe';
-import { indexPipe } from '../../column-pipes/index.pipe';
-import { collections } from '../collections';
-import { actionsPipe } from '../../column-pipes/actions.pipe';
+import { datePipe } from '../../../column-pipes/date.pipe';
+import { indexPipe } from '../../../column-pipes/index.pipe';
+import { collections } from '../../collections';
+import { actionsPipe } from '../../../column-pipes/actions.pipe';
 
 collections.addCollection('admins', {
   name: 'Admins',
