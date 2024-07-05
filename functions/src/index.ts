@@ -6,6 +6,7 @@ initializeApp();
  * Callable
  */
 export {processCheckout} from './callable/process-checkout';
+export {createAdmin} from './callable/create-admin';
 
 /**
  * Triggers
