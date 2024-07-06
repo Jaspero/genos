@@ -6,6 +6,7 @@
   export let open: boolean;
   export let removePadding = false;
   export let fixed = false;
+  export let onClose: () => void;
 
   function closeOnEscape(event: KeyboardEvent) {
     if (event.key === 'Escape') {
@@ -17,6 +18,9 @@
     if (fixed) {
       return;
     }
+
+
+    onClose && onClose();
     open = false;
   }
 

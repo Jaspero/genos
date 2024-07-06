@@ -18,6 +18,7 @@
   export let duplicateSubCollections: string | null = null;
 
   let links: ColumnActionsConfigLink[];
+  let buttons: ColumnActionsConfigButton[];
 
   $: shownActions = actions.split(',');
   $: link = prefix ? [prefix, id].join('/') : id;
@@ -74,6 +75,7 @@
   onMount(() => {
     if (window.columnActions?.[id]) {
       links = window.columnActions[id].links || [];
+      buttons = window.columnActions[id].buttons || [];
     }
   });
 </script>
@@ -85,6 +87,14 @@
         <span class="material-symbols-outlined">{link.icon || 'link'}</span>
       </slot>
       {link.label}
+    </DropdownMenuButton>
+  {/each}
+  {#each buttons as button}
+    <DropdownMenuButton on:click={button.action}>
+      <slot slot="icon">
+        <span class="material-symbols-outlined">{button.icon || 'link'}</span>
+      </slot>
+      {button.label}
     </DropdownMenuButton>
   {/each}
   {#each shownActions as action}

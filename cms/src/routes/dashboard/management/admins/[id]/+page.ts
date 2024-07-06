@@ -23,9 +23,22 @@ export async function load({ params, parent }) {
       options: {
         label: 'Email',
         name: 'email',
-        type: 'email'
+        type: 'email',
+        disabled: id !== 'new'
       }
     },
+    ...id === 'new' ? [
+      {
+        component: 'jp-input',
+        field: '/password',
+        options: {
+          label: 'Password',
+          name: 'password',
+          type: 'password',
+          hint: `You can leave this empty if the user will sign in with google.`
+        }
+      }
+    ] : [],
     {
       component: 'jp-select',
       field: '/role',

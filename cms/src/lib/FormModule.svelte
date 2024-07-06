@@ -4,6 +4,7 @@
   import '@jaspero/web-components/dist/input.wc';
   import '@jaspero/web-components/dist/select.wc';
   import '@jaspero/web-components/dist/multiselect.wc';
+  import '@jaspero/web-components/dist/multisearch.wc';
   import '@jaspero/web-components/dist/datepicker.wc';
   import '@jaspero/web-components/dist/ckeditor.wc';
   import '@jaspero/web-components/dist/textarea.wc';

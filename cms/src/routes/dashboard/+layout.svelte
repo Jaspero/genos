@@ -1,12 +1,15 @@
 <script lang="ts">
   import Nav from '$lib/Nav.svelte';
   import Sidebar from '$lib/Sidebar.svelte';
-  import { CONFIG } from '$lib/consts/config.const';
+  import { CONFIG, type PageConfiguration } from '$lib/consts/config.const';
+  import { page } from '$app/stores';
 
   // Needs to be imported so the components register
   import '$lib/column-elements/column-elements';
 
   const links = CONFIG.links;
+
+  $: pageConfiguration = (CONFIG.pageConfigurations as any)[$page.url.pathname] as PageConfiguration;
 </script>
 
 <div class="flex flex-col h-screen max-h-screen">
@@ -20,3 +23,9 @@
     </div>
   </main>
 </div>
+
+{#if pageConfiguration?.dynamicComponents}
+  {#each pageConfiguration.dynamicComponents as component}
+    <svelte:component this={component} />
+  {/each}
+{/if}

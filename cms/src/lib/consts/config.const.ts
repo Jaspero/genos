@@ -1,3 +1,5 @@
+import ChangePasswordDialog from '../change-password/ChangePasswordDialog.svelte';
+
 export const CONFIG = {
   title: 'Shop CMS',
   label: 'Webshop Template',
@@ -62,5 +64,33 @@ export const CONFIG = {
         { label: 'Email Templates', href: '/dashboard/management/email-templates' }
       ]
     }
-  ]
+  ],
+  pageConfigurations: {
+    '/dashboard/management/admins': {
+      dynamicComponents: [ChangePasswordDialog]
+    }
+  }
+};
+
+export interface PageConfiguration {
+  dynamicComponents?: any[];
+};
+
+export interface Config {
+  title: string;
+  label: string;
+  webUrl: string;
+  links: {
+    label: string;
+    href: string;
+    icon?: string;
+    exactMatch?: boolean;
+    links?: {
+      label: string;
+      href: string;
+    }[];
+  }[];
+  pageConfigurations: {
+    [key: string]: PageConfiguration
+  }
 };

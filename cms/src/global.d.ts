@@ -4,8 +4,15 @@ declare interface ColumnActionsConfigLink {
   icon?: string;
 }
 
+declare interface ColumnActionsConfigButton {
+  icon?: string;
+  label: string;
+  action: (value: any) => void;
+}
+
 declare interface ColumnActionsConfig {
   actions?: Array<'edit' | 'duplicate' | 'delete'>;
+  buttons?: ColumnActionsConfigButton[];
   links?: ColumnActionsConfigLink[];
 }
 
