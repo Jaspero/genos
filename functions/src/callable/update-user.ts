@@ -16,7 +16,7 @@ export const updateUser = onCall(
     await auth.updateUser(request.data.id, data);
 
     if (collection && data.email) {
-      await fs.collection(collection).doc(request.data.id).set({
+      await fs.collection(collection).doc(request.data.id).update({
         email: data.email
       });
     }
