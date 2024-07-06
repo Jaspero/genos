@@ -1,3 +1,4 @@
+import ChangeEmailDialog from '../change-email/ChangeEmailDialog.svelte';
 import ChangePasswordDialog from '../change-password/ChangePasswordDialog.svelte';
 
 export const CONFIG = {
@@ -67,7 +68,7 @@ export const CONFIG = {
   ],
   pageConfigurations: {
     '/dashboard/management/admins': {
-      dynamicComponents: [ChangePasswordDialog]
+      dynamicComponents: [ChangePasswordDialog, ChangeEmailDialog]
     }
   }
 };

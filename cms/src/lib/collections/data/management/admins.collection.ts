@@ -5,6 +5,7 @@ import { collections } from '../../collections';
 import { actionsPipe } from '../../../column-pipes/actions.pipe';
 import { mailtoPipe } from '../../../column-pipes/mailto.pipe';
 import { changePassword } from '../../../change-password/change-password.store';
+import { changeEmail } from '../../../change-email/change-email.store';
 
 collections.addCollection('admins', {
   name: 'Admins',
@@ -44,11 +45,18 @@ collections.addCollection('admins', {
       pipes: [
         actionsPipe(() => ({
           actions: ['edit', 'delete'],
-          buttons: [{
-            label: 'Change Password',
-            icon: 'lock',
-            action: changePassword.set
-          }],
+          buttons: [
+            {
+              label: 'Change Email',
+              icon: 'email',
+              action: (id) => changeEmail.set({id, collection: 'admins'})
+            },
+            {
+              label: 'Change Password',
+              icon: 'lock',
+              action: changePassword.set
+            }
+          ],
           links: []
         }))
       ]
