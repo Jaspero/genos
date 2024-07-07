@@ -12,6 +12,8 @@ export interface CommonDataTablePageData {
   filterOperators?: FilterOperators;
   filterOptions?: () => Promise<any[]>;
   initialSort?: Sort;
+  collection?: string;
+  module?: string;
 }
 
 export async function commonDataTablePage({ params, parent }: any) {
@@ -19,7 +21,7 @@ export async function commonDataTablePage({ params, parent }: any) {
 
   const { collection, module } = params;
 
-  const data = collections.getCollection(collection);
+  const data = params.collectionData ? params.collectionData : collections.getCollection(collection);
 
   if (!data) {
     error(404, 'Collection not found');
@@ -30,6 +32,8 @@ export async function commonDataTablePage({ params, parent }: any) {
   }
 
   return {
+    collection,
+    module,
     name: data.name,
     headers: data.tableHeaders,
     add: data.add,

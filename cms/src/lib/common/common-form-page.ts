@@ -53,7 +53,7 @@ export async function commonFormPage({ params, parent }: any) {
 
   const { collection, module, id } = params;
 
-  const data = collections.getCollection(collection);
+  const data = params.collectionData ? params.collectionData : collections.getCollection(collection);
 
   if (!data) {
     error(404, 'Collection not found');

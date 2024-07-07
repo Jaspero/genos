@@ -9,7 +9,7 @@
 
   export let data: CommonDataTablePageData;
 
-  $: baseLink = ['/dashboard', $page.params.module, $page.params.collection]
+  $: baseLink = ['/dashboard', $page.params.module || data.module, $page.params.collection || data.collection]
     .filter(Boolean)
     .join('/');
 </script>
@@ -17,7 +17,7 @@
 <Grid>
   <GridCol span="12">
     <DataTable
-      col={$page.params.collection}
+      col={$page.params.collection || data.collection}
       headers={data.headers}
       initialSort={data.initialSort}
       filterOptions={data.filterOptions}
