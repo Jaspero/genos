@@ -3,6 +3,7 @@ import { error } from '@sveltejs/kit';
 import type TableHeader from '../TableHeader.svelte';
 import type { FilterOperators } from '../interfaces/filter-operators.interface';
 import type { Sort } from '../interfaces/sort.interface';
+import type {Collection} from '../collections/collection.interface';
 
 export interface CommonDataTablePageData {
   name: string;
@@ -10,6 +11,10 @@ export interface CommonDataTablePageData {
   add: boolean;
   singularName: string;
   filterOperators?: FilterOperators;
+  showArrangingColumns?: boolean;
+  allowArrangeColumns?: boolean;
+  showImport?: boolean;
+  showExport?: boolean;
   filterOptions?: () => Promise<any[]>;
   initialSort?: Sort;
   collection?: string;
@@ -21,7 +26,7 @@ export async function commonDataTablePage({ params, parent }: any) {
 
   const { collection, module } = params;
 
-  const data = params.collectionData ? params.collectionData : collections.getCollection(collection);
+  const data: Collection = params.collectionData ? params.collectionData : collections.getCollection(collection);
 
   if (!data) {
     error(404, 'Collection not found');
@@ -40,6 +45,10 @@ export async function commonDataTablePage({ params, parent }: any) {
     singularName: data.singularName || data.name,
     filterOperators: data.filterOperators,
     filterOptions: data.filterOptions,
-    initialSort: data.initialSort
+    initialSort: data.initialSort,
+    showImport: data.showImport,
+    showExport: data.showExport,
+    showArrangingColumns: data.showArrangingColumns,
+    allowArrangeColumns: data.allowArrangeColumns
   };
 }

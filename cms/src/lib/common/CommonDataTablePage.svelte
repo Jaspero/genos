@@ -12,16 +12,22 @@
   $: baseLink = ['/dashboard', $page.params.module || data.module, $page.params.collection || data.collection]
     .filter(Boolean)
     .join('/');
+  $: col = ($page.params.collection || data.collection) as string;
 </script>
 
 <Grid>
   <GridCol span="12">
     <DataTable
-      col={$page.params.collection || data.collection}
+      {col}
+      id={$page.url.pathname}
       headers={data.headers}
       initialSort={data.initialSort}
       filterOptions={data.filterOptions}
       filterOperators={data.filterOperators}
+      showArrangingColumns={data.showArrangingColumns}
+      allowArrangeColumns={data.allowArrangeColumns}
+      showImport={data.showImport}
+      showExport={data.showExport}
       {baseLink}
     >
       <slot slot="header">

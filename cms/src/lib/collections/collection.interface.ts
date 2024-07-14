@@ -13,6 +13,14 @@ export interface Collection {
   name: string;
   module?: string;
   tableHeaders: TableHeader[];
+  // @default true
+  showArrangingColumns?: boolean;
+  // @default true
+  allowArrangeColumns?: boolean;
+  // @default false
+  showImport?: boolean;
+  // @default true
+  showExport?: boolean;
   initialSort?: Sort;
   filterOperators?: FilterOperators;
   filterOptions?: () => Promise<any[]>;

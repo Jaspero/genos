@@ -20,6 +20,7 @@
   export let pageSize = 10;
   export let pageSizes = [10, 25, 50, 100];
   export let baseLink: string;
+  export let id: string;
   export let initialSort: {
     key: string;
     direction: 'asc' | 'desc';
@@ -29,6 +30,10 @@
   export let defaultFilters: Filter[] = [];
   export let filtersValue: any = {};
   export let rawClick = false;
+  export let showImport = false;
+  export let showExport = true;
+  export let showArrangingColumns = true;
+  export let allowArrangeColumns = true;
 
   let el: HTMLDivElement;
   let ref: QueryDocumentSnapshot<any> | null = null;
@@ -172,6 +177,10 @@
     filterDialogOpen = false;
   }
 
+  async function importData(file: File) {
+
+  }
+
   async function exportData() {
     const queries: any[] = [
       collection(db, col),
@@ -239,12 +248,25 @@
 
       instance = document.createElement('jp-async-table') as any;
 
-      instance.service = { get, loadMore, adjustPageSize, adjustSort, export: exportData };
+      instance.service = { 
+        get,
+        loadMore,
+        adjustPageSize,
+        adjustSort,
+        export: exportData,
+        import: importData,
+        arrangeColumns: (id: string, headers: string[]) => clientStorage.saveHeaders(id, headers),
+        getColumnOrder: (id: string) => clientStorage.getHeaders(id)
+      };
       instance.headers = headers;
       instance.pageSizes = pageSizes;
       instance.pageSize = pageSize;
-      instance.showArrangingColumns = false;
-      instance.rowClickable = true;
+      instance.showArrangingColumns = showArrangingColumns;
+      instance.allowArrangeColumns = allowArrangeColumns; 
+      instance.showImport = showImport;
+      instance.showExport = showExport;
+      instance.rowClickable = rawClick;
+      instance.id = id;
 
       if (initialSort) {
         instance.sort = initialSort;
