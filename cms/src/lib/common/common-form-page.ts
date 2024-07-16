@@ -1,6 +1,6 @@
 import { db } from '$lib/utils/firebase';
 import { error, redirect } from '@sveltejs/kit';
-import { DocumentSnapshot, doc, getDoc } from 'firebase/firestore';
+import { DocumentReference, DocumentSnapshot, doc, getDoc } from 'firebase/firestore';
 import { collections } from '../collections/collections';
 import { random } from '@jaspero/utils';
 
@@ -25,7 +25,8 @@ export class CommonNewFormPageData {
     public idPrefix?: string,
     public createId?: () => string,
     public preSubmit?: (id: string, value: any) => Promise<void>,
-    public preCreate?: (id: string, value: any) => Promise<void>
+    public preCreate?: (id: string, value: any) => Promise<void>,
+    public submit?: (collection: string, id: string, value: any) => Promise<void>
   ) {}
 }
 
@@ -44,7 +45,8 @@ export class CommonEditFormPageData {
     public snap: DocumentSnapshot,
     public editKey: string,
     public preSubmit?: (id: string, value: any) => Promise<void>,
-    public preEdit?: (id: string, value: any) => Promise<void>
+    public preEdit?: (id: string, value: any) => Promise<void>,
+    public submit?: (ref: DocumentReference, value: any) => Promise<void>
   ) {}
 }
 
@@ -75,7 +77,8 @@ export async function commonFormPage({ params, parent }: any) {
         data.idPrefix,
         data.createId,
         data.preSubmit,
-        data.preCreate
+        data.preCreate,
+        data.createMethod
       )
     };
   }
@@ -99,7 +102,8 @@ export async function commonFormPage({ params, parent }: any) {
       snap,
       data.editKey || 'id',
       data.preSubmit,
-      data.preEdit
+      data.preEdit,
+      data.editMethod
     )
   };
 }

@@ -1,3 +1,4 @@
+import type {DocumentReference} from 'firebase/firestore';
 import type { FilterOperators } from '../interfaces/filter-operators.interface';
 import type { Sort } from '../interfaces/sort.interface';
 
@@ -54,4 +55,6 @@ export interface Collection {
   preSubmit?: (id: string, value: any) => Promise<void>;
   preCreate?: (id: string, value: any) => Promise<void>;
   preEdit?: (id: string, value: any) => Promise<void>;
+  createMethod?: (collection: string, id: string, value: any) => Promise<void>;
+  editMethod?: (ref: DocumentReference, value: any) => Promise<void>;
 }

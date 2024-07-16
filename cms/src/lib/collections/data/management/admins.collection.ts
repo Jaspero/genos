@@ -1,4 +1,3 @@
-import { capitalize } from '@jaspero/utils';
 import { datePipe } from '../../../column-pipes/date.pipe';
 import { indexPipe } from '../../../column-pipes/index.pipe';
 import { collections } from '../../collections';
@@ -6,6 +5,8 @@ import { actionsPipe } from '../../../column-pipes/actions.pipe';
 import { mailtoPipe } from '../../../column-pipes/mailto.pipe';
 import { changePassword } from '../../../change-password/change-password.store';
 import { changeEmail } from '../../../change-email/change-email.store';
+import {httpsCallable} from 'firebase/functions';
+import {functions} from '../../../utils/firebase';
 
 collections.addCollection('admins', {
   name: 'Admins',
@@ -24,8 +25,13 @@ collections.addCollection('admins', {
       sortable: true
     },
     {
-      key: '/name',
-      label: 'Name',
+      key: '/firstName',
+      label: 'First Name',
+      sortable: true
+    },
+    {
+      key: '/lastName',
+      label: 'Last Name',
       sortable: true
     },
     {
@@ -35,9 +41,8 @@ collections.addCollection('admins', {
       pipes: [mailtoPipe()]
     },
     {
-      key: '/role',
-      label: 'Role',
-      pipes: [capitalize]
+      key: '/phoneNumber',
+      label: 'Phone Number'
     },
     {
       key: 'id',
@@ -62,5 +67,61 @@ collections.addCollection('admins', {
       ]
     }
   ],
-  initialSort: { key: 'createdOn', direction: 'desc' }
+  initialSort: { key: 'createdOn', direction: 'desc' },
+  editKey: 'name',
+  preSubmit: async (id, value) => {
+    value.lastUpdatedOn = new Date().toISOString();
+    value.name = value.firstName + ' ' + value.lastName;
+  },
+  preCreate: async (id, value) => {
+    value.createdOn = new Date().toISOString();
+  },
+  createMethod: async (collection, id, value) => {
+    await httpsCallable(functions, 'createAdmin')(value)
+  },
+  form: async (id?: string) => {
+    return [
+      {
+        component: 'jp-input',
+        field: '/name',
+        options: {
+          label: 'Name',
+          name: 'name',
+          required: true
+        }
+      },
+      {
+        component: 'jp-input',
+        field: '/email',
+        options: {
+          label: 'Email',
+          name: 'email',
+          type: 'email',
+          disabled: id !== 'new'
+        }
+      },
+      {
+        component: 'jp-input',
+        field: '/phoneNumber',
+        options: {
+          label: 'Phone Number',
+          name: 'phoneNumber',
+          type: 'tel',
+          required: true
+        }
+      },
+      ...id === 'new' ? [
+        {
+          component: 'jp-input',
+          field: '/password',
+          options: {
+            label: 'Password',
+            name: 'password',
+            type: 'password',
+            hint: `You can leave this empty if the user will sign in with google.`
+          }
+        }
+      ] : [],
+    ]
+  }
 });

@@ -34,7 +34,7 @@
       }
 
       await alertWrapper(
-        updateDoc(data.snap.ref, data.value),
+        data.submit ? data.submit(data.snap.ref, data.value) : updateDoc(data.snap.ref, data.value),
         'Document updated successfully',
         undefined,
         () => (saveLoading = false)
@@ -47,7 +47,7 @@
       delete data.value.id;
 
       await alertWrapper(
-        setDoc(doc(db, data.collection, id), data.value),
+        data.submit ? data.submit(data.collection, data.id, data.value) : setDoc(doc(db, data.collection, id), data.value),
         'Document created successfully',
         undefined,
         () => (saveLoading = false)
