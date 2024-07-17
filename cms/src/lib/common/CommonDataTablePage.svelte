@@ -28,6 +28,7 @@
       allowArrangeColumns={data.allowArrangeColumns}
       showImport={data.showImport}
       showExport={data.showExport}
+      importMethod={data.importMethod}
       {baseLink}
     >
       <slot slot="header">

@@ -19,6 +19,7 @@ export interface CommonDataTablePageData {
   initialSort?: Sort;
   collection?: string;
   module?: string;
+  importMethod?: (file: File) => Promise<any>;
 }
 
 export async function commonDataTablePage({ params, parent }: any) {
@@ -49,6 +50,7 @@ export async function commonDataTablePage({ params, parent }: any) {
     showImport: data.showImport,
     showExport: data.showExport,
     showArrangingColumns: data.showArrangingColumns,
-    allowArrangeColumns: data.allowArrangeColumns
+    allowArrangeColumns: data.allowArrangeColumns,
+    importMethod: data.importMethod
   };
 }

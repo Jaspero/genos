@@ -34,6 +34,7 @@
   export let showExport = true;
   export let showArrangingColumns = true;
   export let allowArrangeColumns = true;
+  export let importMethod: ((file: File) => Promise<any>) | null = null;
 
   let el: HTMLDivElement;
   let ref: QueryDocumentSnapshot<any> | null = null;
@@ -178,7 +179,9 @@
   }
 
   async function importData(file: File) {
-
+    if (importMethod) {
+      return await importMethod(file);
+    }
   }
 
   async function exportData() {
