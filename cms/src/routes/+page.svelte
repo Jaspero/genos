@@ -159,7 +159,7 @@
   });
 </script>
 
-<div id="recaptcha-container-id" />
+<div id="recaptcha-container-id"></div>
 <div class="flex items-center">
   <img
     src="/images/patternmidtext.svg"
@@ -181,7 +181,7 @@
               <b>{resolver.hints[0].phoneNumber}</b>
             </div>
             <Field required label="2FA Verification Code:" type="text" bind:value={codeInput} />
-            <div class="m-5" />
+            <div class="m-5"></div>
             <Button variant="filled" color="primary" type="submit">
               {#if confirmLoader}
                 <Loader />
@@ -189,7 +189,7 @@
                 Confirm and sign in
               {/if}
             </Button>
-            <div style="margin-bottom: 340px;" />
+            <div style="margin-bottom: 340px;"></div>
           </form>
         </GridCol>
       {:else}
@@ -224,7 +224,7 @@
               <div class="flex items-center gap-4">
                 <Button variant="filled" color="secondary" type="submit" {loading}>Log in</Button>
                 <button class="gsi-material-button" type="button" on:click={loginGoogle}>
-                  <div class="gsi-material-button-state" />
+                  <div class="gsi-material-button-state"></div>
                   <div class="gsi-material-button-content-wrapper">
                     <div class="gsi-material-button-icon">
                       <svg
@@ -298,10 +298,7 @@
 
 <style>
   .gsi-material-button {
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    -webkit-appearance: none;
+    user-select: none;
     background-color: WHITE;
     background-image: none;
     border: 1px solid #747775;

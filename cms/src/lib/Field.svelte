@@ -29,6 +29,7 @@
     | 'button'
     | 'image'
     | 'hidden'
+    | 'chip'
     | 'search' = 'text';
 </script>
 
@@ -79,7 +80,7 @@
   {:else if type === 'hidden'}
     <input type="hidden" {required} {placeholder} {disabled} {name} bind:value />
   {:else if type === 'chip'}
-    <jp-chips label="" {name} />
+    <jp-chips label="" {name}></jp-chips>
   {:else if type === 'search'}
     <input type="search" {required} {placeholder} {disabled} {name} bind:value />
   {/if}

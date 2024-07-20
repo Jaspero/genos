@@ -18,7 +18,7 @@
 
 {#if loading}
   <div class="loader">
-    <div class="loader-inner" />
+    <div class="loader-inner"></div>
   </div>
 {/if}
 
