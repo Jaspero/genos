@@ -195,7 +195,7 @@
               <button
                 slot="hint"
                 type="button"
-                class="show-password"
+                class="underline"
                 on:click={() => (showPassword = !showPassword)}
               >
                 Hide password
@@ -206,7 +206,7 @@
               <button
                 slot="hint"
                 type="button"
-                class="show-password"
+                class="underline"
                 on:click={() => (showPassword = !showPassword)}
               >
                 Show password
@@ -220,7 +220,7 @@
         </form>
         <div class="mt-4">
           <p class="mb-2">Forgot your password?</p>
-          <button type="button" class="show-password" on:click={() => (resetPasswordDialog = true)}
+          <button type="button" class="underline" on:click={() => (resetPasswordDialog = true)}
             >Reset password
           </button>
         </div>
@@ -248,10 +248,3 @@
 <svelte:head>
   <title>Log in - {CONFIG.title}</title>
 </svelte:head>
-
-<style>
-  .show-password {
-    font-weight: 300;
-    text-decoration: underline;
-  }
-</style>
