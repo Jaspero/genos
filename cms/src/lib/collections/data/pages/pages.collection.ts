@@ -46,7 +46,9 @@ collections.addCollection('pages', {
     {
       key: 'id',
       label: '',
-      pipes: [actionsPipe()]
+      pipes: [actionsPipe(id => ({
+        duplicateSubCollections: ['content']
+      }))]
     }
   ],
   initialSort: { key: 'publicationDate', direction: 'desc' }

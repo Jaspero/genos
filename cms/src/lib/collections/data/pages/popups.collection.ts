@@ -24,7 +24,9 @@ collections.addCollection('popups', {
     {
       key: '/id',
       label: '',
-      pipes: [actionsPipe()]
+      pipes: [actionsPipe(id => ({
+        duplicateSubCollections: ['content']
+      }))]
     }
   ],
   initialSort: { key: 'title', direction: 'asc' }

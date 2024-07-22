@@ -43,7 +43,7 @@
 
     await alertWrapper(
       signInWithEmailAndPassword(auth, email, password),
-      'Log in successful',
+      '',
       (e: any) => {
         if (e.code == 'auth/multi-factor-auth-required') {
           resolver = getMultiFactorResolver(auth, e);
@@ -100,7 +100,7 @@
   async function logInGoogle() {
     await alertWrapper(
       signInWithPopup(auth, new GoogleAuthProvider()),
-      'Log in successful',
+      '',
       (e: any) => {
         if (e.code == 'auth/multi-factor-auth-required') {
           resolver = getMultiFactorResolver(auth, e);
@@ -136,7 +136,7 @@
 
     await alertWrapper(
       resolver.resolveSignIn(multiFactorAssertion),
-      'Log in successful',
+      '',
       '',
       () => (confirmLoader = false)
     );

@@ -12,8 +12,10 @@ export function actionsPipe(config?: (id: string) => ColumnActionsConfig) {
 
     window.columnActions[id] = internalConfig;
 
-    return `<column-actions id="${id}" actions="${(internalConfig.actions || []).join(
-      ','
-    )}"></column-actions>`;
+    return `<column-actions
+      id="${id}"
+      actions="${(internalConfig.actions || []).join(',')}"
+      duplicateSubCollections="${(internalConfig.duplicateSubCollections || []).join(',')}">
+    </column-actions>`;
   };
 }

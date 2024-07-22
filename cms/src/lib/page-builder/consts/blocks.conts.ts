@@ -250,6 +250,7 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
       content: {
         type: 'link',
         content: 'Call to action',
+        style: {},
         droppable: true,
       }
     },
