@@ -10,13 +10,14 @@
   import { renderGrapes } from '$lib/page-builder/render-grapes';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
   import { confirmation } from '$lib/utils/confirmation';
-  import { db } from '$lib/utils/firebase';
+  import { db, storage } from '$lib/utils/firebase';
   import { urlSegments } from '$lib/utils/url-segments';
   import type { ModularView, ModuleRender } from '@jaspero/modular';
   import { random } from '@jaspero/utils';
   import { renderAlert } from '@jaspero/web-components/dist/render-alert.js';
   import { DocumentSnapshot, deleteDoc, doc, setDoc, updateDoc } from 'firebase/firestore';
   import { onMount } from 'svelte';
+  import { uploadString, ref } from 'firebase/storage';
 
   export let data: {
     col: string;
@@ -94,12 +95,18 @@
     const css = grapesInstance.getCss();
 
     const toUpdate = [
-      setDoc(doc(db, data.col, id, 'content', 'json'), {content: JSON.stringify(json)}),
-      setDoc(doc(db, data.col, id, 'content', 'html'), {
-        content: html.replace('<body>', '').replace('</body>', ''),
-        lastUpdatedOn
-      }),
-      setDoc(doc(db, data.col, id, 'content', 'css'), { content: css, lastUpdatedOn })
+      uploadString(
+        ref(storage, `page-configurations/${data.col}/${id}/content.json`),
+        JSON.stringify(json)
+      ),
+      uploadString(
+        ref(storage, `page-configurations/${data.col}/${id}/content.html`),
+        html.replace('<body>', '').replace('</body>', '')
+      ),
+      uploadString(
+        ref(storage, `page-configurations/${data.col}/${id}/content.css`),
+        css
+      )
     ];
 
     if (data.snap) {
@@ -164,7 +171,7 @@
     bind:formModule
   />
   <main>
-    <div bind:this={pageBuilderEl} />
+    <div bind:this={pageBuilderEl}></div>
   </main>
 </section>
 
@@ -173,7 +180,7 @@
     {#if data.snap}
       <Button type="button" color="warn" on:click={deleteItem}>Delete</Button>
     {/if}
-    <div class="flex-1" />
+    <div class="flex-1"></div>
     <Button href={back} variant="outlined" color="secondary">Cancel</Button>
     &nbsp;
     <Button

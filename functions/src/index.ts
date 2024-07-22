@@ -5,7 +5,7 @@ initializeApp();
 /**
  * Callable
  */
-export {processCheckout} from './callable/process-checkout';
+// export {processCheckout} from './callable/process-checkout';
 export {createAdmin} from './callable/create-admin';
 export {updateUser} from './callable/update-user';
 
@@ -27,4 +27,4 @@ export {templateDeleted} from './triggers/template-deleted';
  * Rest
  */
 export {actionController} from './rest/action-controller';
-export {stripeWebhook} from './rest/stripe-webhook';
+// export {stripeWebhook} from './rest/stripe-webhook';

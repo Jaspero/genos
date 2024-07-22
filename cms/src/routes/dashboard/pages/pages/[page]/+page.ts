@@ -1,11 +1,13 @@
-import {db} from '$lib/utils/firebase';
+import {META_FORM_FIELDS} from '$lib/consts/meta.form-fields.js';
+import type {SelectOptions} from '$lib/interfaces/select-options.interface.js';
+import type {PageBuilderForm} from '$lib/page-builder/types/page-builder-form.interface';
+import {fromStorage} from '$lib/page-builder/utils/from-storage';
+import {BucketImageService} from '$lib/services/image.service.js';
+import {db, storage} from '$lib/utils/firebase';
+import {getOptions} from '$lib/utils/get-options';
 import {redirect} from '@sveltejs/kit';
 import {collection, doc, getDoc, getDocs, query, where} from 'firebase/firestore';
-import {META_FORM_FIELDS} from '$lib/consts/meta.form-fields.js';
-import {BucketImageService} from '$lib/services/image.service.js';
-import type {PageBuilderForm} from '$lib/page-builder/types/page-builder-form.interface';
-import {getOptions} from '$lib/utils/get-options';
-import type {SelectOptions} from '$lib/interfaces/select-options.interface.js';
+import {getBlob, ref} from 'firebase/storage';
 
 export async function load({params, parent}) {
   await parent();
@@ -104,12 +106,12 @@ export async function load({params, parent}) {
       sectionsSnap.docs.map(async (d) => {
         const data = d.data();
 
-        const jsonSnap = await getDoc(doc(db, 'sections', d.id, 'content', 'json'));
+        const jsonSnap = await fromStorage(`page-configurations/sections/${d.id}/content.json`);
 
         return {
           id: d.id,
           title: data.title,
-          json: JSON.parse(jsonSnap!.data()!.content),
+          json: JSON.parse(jsonSnap),
           category: data.category,
           image: data.image
         };
@@ -136,12 +138,12 @@ export async function load({params, parent}) {
       templatesSnap.docs.map(async (d) => {
         const data = d.data();
 
-        const jsonSnap = await getDoc(doc(db, 'templates', d.id, 'content', 'json'));
+        const jsonSnap = await fromStorage(`page-configurations/templates/${d.id}/content.json`);
 
         return {
           id: d.id,
           title: data.title,
-          json: JSON.parse(jsonSnap!.data()!.content),
+          json: JSON.parse(jsonSnap),
           category: data.category,
           image: data.image
         };
@@ -167,14 +169,11 @@ export async function load({params, parent}) {
     popupsSnap.docs.map(async (d) => {
       const data = d.data();
 
-      const htmlSnap = await getDoc(doc(db, 'page-popups', d.id, 'content', 'html'));
-      const styleSnap = await getDoc(doc(db, 'page-popups', d.id, 'content', 'css'));
-
       return {
         id: d.id,
         title: data.title,
-        html: htmlSnap?.data(),
-        style: styleSnap?.data(),
+        html: await fromStorage(`page-configurations/popups/${d.id}/content.html`),
+        style: await fromStorage(`page-configurations/popups/${d.id}/content.css`),
         description: data.description,
         image: data.image
       };
@@ -216,7 +215,7 @@ export async function load({params, parent}) {
 
   const [snap, jsonSnap] = await Promise.all([
     getDoc(doc(db, col, page)),
-    getDoc(doc(db, col, page, 'content', 'json'))
+    getBlob(ref(storage, `page-configurations/${col}/${page}/content.json`))
   ]);
 
   if (!snap.exists) {
@@ -231,7 +230,7 @@ export async function load({params, parent}) {
     items,
     metaItems: META_FORM_FIELDS(col),
     value,
-    json: JSON.parse(jsonSnap!.data()!.content),
+    json: JSON.parse(await jsonSnap.text()),
     pages,
     sections,
     templates,

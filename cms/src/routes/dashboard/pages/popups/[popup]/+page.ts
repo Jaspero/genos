@@ -1,9 +1,10 @@
-import { db } from '$lib/utils/firebase';
+import { db, storage } from '$lib/utils/firebase';
 import { redirect } from '@sveltejs/kit';
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { META_FORM_FIELDS } from '$lib/consts/meta.form-fields.js';
 import { BucketImageService } from '$lib/services/image.service.js';
 import type { PageBuilderForm } from '$lib/page-builder/page-builder-form.interface.js';
+import { getBlob, ref } from 'firebase/storage';
 
 export async function load({ params, parent }) {
   await parent();
@@ -86,7 +87,7 @@ export async function load({ params, parent }) {
 
   const [snap, jsonSnap] = await Promise.all([
     getDoc(doc(db, col, popup)),
-    getDoc(doc(db, col, popup, 'content', 'json'))
+    getBlob(ref(storage, `page-configurations/${col}/${popup}/content.json`))
   ]);
 
   if (!snap.exists) {
@@ -101,7 +102,7 @@ export async function load({ params, parent }) {
     items,
     metaItems: META_FORM_FIELDS(col),
     value,
-    json: JSON.parse(jsonSnap!.data()!.content),
+    json: JSON.parse(await jsonSnap.text()),
     pages
   };
 }

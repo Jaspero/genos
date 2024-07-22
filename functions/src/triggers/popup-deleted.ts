@@ -1,5 +1,6 @@
 import {onDocumentDeleted} from 'firebase-functions/v2/firestore';
 import {REGION} from '../shared/consts/region.const';
+import {deleteFilesInFolder} from '../shared/utils/delete-files-in-folder';
 
 export const popupDeleted = onDocumentDeleted({
 	region: REGION,
@@ -10,9 +11,5 @@ export const popupDeleted = onDocumentDeleted({
 		return;
 	}
 
-	const {docs} = await event.data.ref.collection('content').get();
-
-	await Promise.all(
-		docs.map(doc => doc.ref.delete())
-	);
+	await deleteFilesInFolder(`page-configurations/popups/${event.data.id}`);
 });

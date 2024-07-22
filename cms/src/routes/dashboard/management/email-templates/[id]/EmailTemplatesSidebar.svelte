@@ -206,5 +206,6 @@
   #component-wrapper {
     height: calc(100% - 41px);
     overflow-y: auto;
+    position: relative;
   }
 </style>

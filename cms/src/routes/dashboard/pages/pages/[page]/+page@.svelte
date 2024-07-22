@@ -8,7 +8,7 @@
   import { renderGrapes } from '$lib/page-builder/render-grapes';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
   import { confirmation } from '$lib/utils/confirmation';
-  import { db } from '$lib/utils/firebase';
+  import { db, storage } from '$lib/utils/firebase';
   import { generateSlug } from '$lib/utils/generate-slug';
   import { urlSegments } from '$lib/utils/url-segments';
   import { random } from '@jaspero/utils';
@@ -22,6 +22,7 @@
   import type { PageBuilderForm } from '$lib/page-builder/types/page-builder-form.interface';
   import { CONFIG } from '$lib/consts/config.const';
   import { styleEscape } from '$lib/utils/style-escape';
+  import { uploadString, ref } from 'firebase/storage';
 
   export let data: {
     col: string;
@@ -154,12 +155,18 @@
     const css = grapesInstance.getCss();
 
     const toUpdate = [
-      setDoc(doc(db, data.col, id, 'content', 'json'), {content: JSON.stringify(json)}),
-      setDoc(doc(db, data.col, id, 'content', 'html'), {
-        content: html,
-        lastUpdatedOn
-      }),
-      setDoc(doc(db, data.col, id, 'content', 'css'), { content: css, lastUpdatedOn })
+      uploadString(
+        ref(storage, `page-configurations/${data.col}/${id}/content.json`),
+        JSON.stringify(json)
+      ),
+      uploadString(
+        ref(storage, `page-configurations/${data.col}/${id}/content.html`),
+        html.replace('<body>', '').replace('</body>', '')
+      ),
+      uploadString(
+        ref(storage, `page-configurations/${data.col}/${id}/content.css`),
+        css
+      )
     ];
 
     if (data.snap) {
@@ -274,7 +281,7 @@
     {#if showingLayout && header}
       {@html header.content}
     {/if}
-    <div bind:this={pageBuilderEl} />
+    <div bind:this={pageBuilderEl}></div>
     {#if showingLayout && footer}
       {@html footer.content}
     {/if}
@@ -286,7 +293,7 @@
     {#if data.snap}
       <Button type="button" color="warn" on:click={deleteItem}>Delete</Button>
     {/if}
-    <div class="flex-1" />
+    <div class="flex-1"></div>
     <Button href={back} variant="outlined" color="secondary">Cancel</Button>
     &nbsp;
     <Button

@@ -12,13 +12,14 @@
   import type { Template } from '$lib/page-builder/types/template.interface';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
   import { confirmation } from '$lib/utils/confirmation';
-  import { db } from '$lib/utils/firebase';
+  import { db, storage } from '$lib/utils/firebase';
   import { urlSegments } from '$lib/utils/url-segments';
   import type { ModularView, ModuleRender } from '@jaspero/modular';
   import { random } from '@jaspero/utils';
   import { renderAlert } from '@jaspero/web-components/dist/render-alert.js';
   import { DocumentSnapshot, deleteDoc, doc, setDoc, updateDoc } from 'firebase/firestore';
   import { onMount } from 'svelte';
+  import { uploadString, ref } from 'firebase/storage';
 
   export let data: {
     col: string;
@@ -27,7 +28,6 @@
     value: any;
     snap?: DocumentSnapshot;
     json?: any;
-    pages: Array<{ id: string; title: string }>;
     popups: Popup[];
     sections: Template[];
     forms: PageBuilderForm[];
@@ -95,7 +95,12 @@
     }
 
     const json = grapesInstance.getProjectData();
-    const toUpdate = [setDoc(doc(db, data.col, id, 'content', 'json'), {content: JSON.parse(json)})];
+    const toUpdate = [
+      uploadString(
+        ref(storage, `page-configurations/${data.col}/${id}/content.json`),
+        JSON.stringify(json)
+      )
+    ];
 
     if (data.snap) {
       delete data.value.id;
@@ -167,7 +172,7 @@
     bind:formModule
   />
   <main>
-    <div bind:this={pageBuilderEl} />
+    <div bind:this={pageBuilderEl}></div>
   </main>
 </section>
 
@@ -176,7 +181,7 @@
     {#if data.snap}
       <Button type="button" color="warn" on:click={deleteItem}>Delete</Button>
     {/if}
-    <div class="flex-1" />
+    <div class="flex-1"></div>
     <Button href={back} variant="outlined" color="secondary">Cancel</Button>
     &nbsp;
     <Button

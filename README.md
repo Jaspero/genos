@@ -1,6 +1,6 @@
 # Webshop Template
 
-[![Prod | Deploy Webshop](https://github.com/Jaspero/webshop-template/actions/workflows/webshop.yml/badge.svg)](https://github.com/Jaspero/webshop-template/actions/workflows/webshop.yml)
+[![Prod | Deploy Web](https://github.com/Jaspero/webshop-template/actions/workflows/webshop.yml/badge.svg)](https://github.com/Jaspero/webshop-template/actions/workflows/webshop.yml)
 
 [![Prod | Deploy CMS](https://github.com/Jaspero/webshop-template/actions/workflows/cms.yml/badge.svg)](https://github.com/Jaspero/webshop-template/actions/workflows/cms.yml)
 
@@ -12,9 +12,9 @@
 
 [![Prod | Deploy Storage Rules](https://github.com/Jaspero/webshop-template/actions/workflows/storage.yml/badge.svg)](https://github.com/Jaspero/webshop-template/actions/workflows/storage.yml)
 
-- [Webshop](https://wonkawave.web.app/)
+- [Web](https://wonkawave.web.app/)
 - [CMS](https://wonkawave-cms.web.app/)
-- [figma wireframe] (https://www.figma.com/file/Pb7saI2I3K9cUzVTPDdwkK/shopify-wireframe?type=design&node-id=0-1&mode=design&t=zCZIj2pcwiuDl1BE-0)
+- [Figma Wireframe](https://www.figma.com/file/Pb7saI2I3K9cUzVTPDdwkK/shopify-wireframe?type=design&node-id=0-1&mode=design&t=zCZIj2pcwiuDl1BE-0)
 
 ## Getting Started
 

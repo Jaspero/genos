@@ -8,12 +8,12 @@
   import type { Popup } from './types/popup.interface';
   import type { PageBuilderForm } from './types/page-builder-form.interface';
 
-  export let templates: Template[] | undefined;
-  export let sections: Template[] | undefined;
-  export let popups: Popup[] | undefined;
+  export let templates: Template[] | undefined = undefined;
+  export let sections: Template[] | undefined = undefined;
+  export let popups: Popup[] | undefined = undefined;
   export let activeSidebar = 'page-settings';
-  export let items: Array<any> | undefined; 
-  export let metaItems: Array<any> | undefined;
+  export let items: Array<any> | undefined = undefined; 
+  export let metaItems: Array<any> | undefined = undefined;
   export let value: any;
   export let grapesInstance: any;
   export let formModule: FormModule;
@@ -376,5 +376,6 @@
   #component-wrapper {
     height: calc(100% - 41px);
     overflow-y: auto;
+    position: relative;
   }
 </style>
