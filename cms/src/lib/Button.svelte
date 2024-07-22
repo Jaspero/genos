@@ -121,6 +121,9 @@
       bind:this={bindingElement}
     >
       <slot />
+      <div class="spin-wrapper">
+        <span class="spinner"></span>
+      </div>
     </button>
   {/if}
 </div>
@@ -142,18 +145,61 @@
     @apply w-10;
   }
 
+  .spinner {
+    display: none;
+    width: 18px;
+    height: 18px;
+    border: 3px solid #fff;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotate 1s linear infinite;
+  }
+
+  .spin-wrapper {
+    display: none;
+  }
+
   .loading {
     @apply pointer-events-none bg-secondary;
+  }
+
+  .loading {
+    .spin-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: inherit;
+      z-index: 0;
+    }
+    .spinner {
+      display: block;
+      z-index: 1;
+    }
   }
 
   /* Button - Filled */
   .button.variant-filled.color-primary {
     background-color: var(--primary-color);
     color: var(--primary-contrast-color);
+    transition: background-color ease-in 0.2s;
+    &:hover {
+      background-color: var(--hover-color);
+    }
   }
   .button.variant-filled.color-secondary {
     background-color: var(--secondary-color);
     color: var(--secondary-contrast-color);
+    transition: background-color ease-in 0.2s;
+    &:hover {
+      background-color: #3a56bb;
+    }
   }
   .button.variant-filled.color-warn {
     background-color: var(--warn-color);
@@ -169,6 +215,11 @@
     box-shadow: inset 0 0 0 var(--border-width) var(--primary-color);
     border-color: var(--primary-color);
     color: var(--primary-color);
+    transition: background-color ease-in 0.2s;
+    &:hover {
+      background-color: var(--hover-color);
+      color: var(--primary-contrast-color);
+    }
   }
   .button.variant-outlined.color-secondary {
     box-shadow: inset 0 0 0 var(--border-width) var(--secondary-color);
