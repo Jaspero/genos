@@ -249,35 +249,8 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
       category: 'Content',
       content: {
         type: 'link',
-        style: {
-          'font-family': '"Sen", sans-serif',
-          display: 'inline-flex',
-          'align-items': 'center',
-          height: '46px',
-          'background-color': '#E66439',
-          color: 'white',
-          'font-weight': 'bold',
-          'border-radius': '4px',
-          border: 'none',
-          padding: '0 16px'
-        },
-        components: [
-          {
-            type: 'text',
-            content: 'Call to action'
-          },
-          {
-            content: `<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="currentColor"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg>`,
-            style: {
-              display: 'flex',
-              'justify-content': 'center',
-              'align-items': 'center',
-              width: '36px',
-              height: '36px',
-              'margin-right': '-8px'
-            }
-          }
-        ]
+        content: 'Call to action',
+        droppable: true,
       }
     },
     {

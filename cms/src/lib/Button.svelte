@@ -13,7 +13,7 @@
   /* Button */
   export let disabled = false;
   export let loading = false;
-  export let form: string | null = null;
+  export let form: string | null = null;  
   export let type: 'button' | 'submit' | 'reset' = 'button';
 
   /* Other */

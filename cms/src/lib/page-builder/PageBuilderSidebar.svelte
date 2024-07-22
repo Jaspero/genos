@@ -258,7 +258,7 @@
     <FormModule id="page-settings" bind:this={formModule} {items} bind:value />
   {:else if activeSidebar === 'blocks'}
     <p class="p-4 border-b">Blocks</p>
-    <div bind:this={blocksEl} />
+    <div bind:this={blocksEl}></div>
   {:else if activeSidebar === 'sections'}
     {#if sections}
       <p class="p-4 border-b">Sections</p>
@@ -266,13 +266,12 @@
         {#each sections as category}
           <button
             class="flex justify-between items-center w-full px-4 py-2 hover:bg-black/10 transition"
-            on:click={toggleCategory(category.category)}
+            on:click={() => toggleCategory(category.category)}
           >
             <p>{category.category}</p>
             <i
               class="fa fa-caret-down transition duration-300"
-              class:-rotate-180={activeCategory === category.category}
-            />
+              class:-rotate-180={activeCategory === category.category}></i>
           </button>
 
           {#if activeCategory === category.category}
@@ -301,13 +300,12 @@
         {#each templates as category}
           <button
             class="flex justify-between items-center w-full px-4 py-2 hover:bg-black/10 transition"
-            on:click={toggleCategory(category.category)}
+            on:click={() => toggleCategory(category.category)}
           >
             <p>{category.category}</p>
             <i
               class="fa fa-caret-down transition duration-300"
-              class:-rotate-180={activeCategory === category.category}
-            />
+              class:-rotate-180={activeCategory === category.category}></i>
           </button>
 
           {#if activeCategory === category.category}
@@ -340,7 +338,7 @@
         </button>
       {/each}
     </div>
-    <div id="component-wrapper" bind:this={componentEl} />
+    <div id="component-wrapper" bind:this={componentEl}></div>
   {:else if activeSidebar === 'seo'}
     <p class="p-4 border-b">SEO</p>
     <FormModule id="seo" bind:this={formModule} items={metaItems} bind:value />
