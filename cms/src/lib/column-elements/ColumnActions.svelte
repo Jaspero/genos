@@ -90,7 +90,7 @@
     </DropdownMenuButton>
   {/each}
   {#each buttons as button}
-    <DropdownMenuButton on:click={button.action}>
+    <DropdownMenuButton on:click={() => button.action(id)}>
       <slot slot="icon">
         <span class="material-symbols-outlined">{button.icon || 'link'}</span>
       </slot>

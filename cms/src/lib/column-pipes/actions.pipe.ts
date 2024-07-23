@@ -1,9 +1,10 @@
-export function actionsPipe(config?: (id: string) => ColumnActionsConfig) {
-  return (id: string) => {
+export function actionsPipe(config?: (id: string, rowData?: any) => ColumnActionsConfig) {
+  return (id: string, rowData: any) => {
     const internalConfig: ColumnActionsConfig = {
       links: [],
       actions: ['edit', 'duplicate', 'delete'],
-      ...(config ? config(id) : {})
+      rowData,
+      ...(config ? config(id, rowData) : {})
     };
 
     if (!window.columnActions) {
