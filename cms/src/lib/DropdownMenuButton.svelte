@@ -86,6 +86,8 @@
   .content-label {
     height: 24px;
     line-height: 24px;
+    display: flex;
+    gap: .5rem;
   }
 
   button:disabled {

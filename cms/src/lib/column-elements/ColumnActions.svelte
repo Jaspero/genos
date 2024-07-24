@@ -83,40 +83,32 @@
 <DropdownButton variant="icon">
   {#each links as link}
     <DropdownMenuButton href={link.href}>
-      <slot slot="icon">
-        <span class="material-symbols-outlined">{link.icon || 'link'}</span>
-      </slot>
+      <span class="material-symbols-outlined">{link.icon || 'link'}</span>
       {link.label}
     </DropdownMenuButton>
   {/each}
   {#each buttons as button}
     <DropdownMenuButton on:click={() => button.action(id)}>
-      <slot slot="icon">
+      {#if button.icon}
         <span class="material-symbols-outlined">{button.icon || 'link'}</span>
-      </slot>
+      {/if}
       {button.label}
     </DropdownMenuButton>
   {/each}
   {#each shownActions as action}
     {#if action === 'edit'}
       <DropdownMenuButton href={link}>
-        <slot slot="icon">
-          <span class="material-symbols-outlined">edit</span>
-        </slot>
+        <span class="material-symbols-outlined">edit</span>
         Edit
       </DropdownMenuButton>
     {:else if action === 'duplicate'}
       <DropdownMenuButton on:click={duplicate}>
-        <slot slot="icon">
-          <span class="material-symbols-outlined">content_copy</span>
-        </slot>
+        <span class="material-symbols-outlined">content_copy</span>
         Duplicate
       </DropdownMenuButton>
     {:else if action === 'delete'}
       <DropdownMenuButton on:click={deleteItem}>
-        <slot slot="icon">
-          <span class="material-symbols-outlined">delete</span>
-        </slot>
+        <span class="material-symbols-outlined">delete</span>
         Delete
       </DropdownMenuButton>
     {/if}
