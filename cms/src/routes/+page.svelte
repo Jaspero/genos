@@ -188,7 +188,7 @@
     {:else}
       <div class="flex flex-col gap-4 w-[400px] max-w-full">
         <SectionTitle>Log in</SectionTitle>
-        <form class="flex flex-col gap-4 border-b pb-8" on:submit={login}>
+        <form class="flex flex-col gap-4 border-b pb-8" on:submit|preventDefault={login}>
           <Field required label="Email" type="email" bind:value={email} />
           {#if showPassword}
             <Field required label="Password" type="text" bind:value={password}>
