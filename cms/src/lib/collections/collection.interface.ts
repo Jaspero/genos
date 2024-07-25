@@ -14,6 +14,10 @@ export interface Collection {
   name: string;
   module?: string;
   tableHeaders: TableHeader[];
+  // @default false
+  freezeFirstColumn?: boolean;
+  // @default false
+  freezeLastColumn?: boolean;
   // @default true
   showArrangingColumns?: boolean;
   // @default true

@@ -24,6 +24,8 @@
       initialSort={data.initialSort}
       filterOptions={data.filterOptions}
       filterOperators={data.filterOperators}
+      freezeFirstColumn={data.freezeFirstColumn}
+      freezeLastColumn={data.freezeLastColumn}
       showArrangingColumns={data.showArrangingColumns}
       allowArrangeColumns={data.allowArrangeColumns}
       showImport={data.showImport}

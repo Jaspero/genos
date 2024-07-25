@@ -11,6 +11,8 @@ export interface CommonDataTablePageData {
   add: boolean;
   singularName: string;
   filterOperators?: FilterOperators;
+  freezeFirstColumn?: boolean;
+  freezeLastColumn?: boolean;
   showArrangingColumns?: boolean;
   allowArrangeColumns?: boolean;
   showImport?: boolean;
@@ -45,6 +47,8 @@ export async function commonDataTablePage({ params, parent }: any) {
     add: data.add,
     singularName: data.singularName || data.name,
     filterOperators: data.filterOperators,
+    freezeFirstColumn: data.freezeFirstColumn,
+    freezeLastColumn: data.freezeLastColumn,
     filterOptions: data.filterOptions,
     initialSort: data.initialSort,
     showImport: data.showImport,

@@ -30,6 +30,8 @@
   export let defaultFilters: Filter[] = [];
   export let filtersValue: any = {};
   export let rawClick = false;
+  export let freezeFirstColumn = false;
+  export let freezeLastColumn = false;
   export let showImport = false;
   export let showExport = true;
   export let showArrangingColumns = true;
@@ -269,6 +271,8 @@
       instance.showImport = showImport;
       instance.showExport = showExport;
       instance.rowClickable = rawClick;
+      instance.freezeFirstColumn = freezeFirstColumn;
+      instance.freezeLastColumn = freezeLastColumn;
       instance.id = id;
 
       if (initialSort) {
