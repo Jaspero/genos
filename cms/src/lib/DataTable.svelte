@@ -30,8 +30,8 @@
   export let defaultFilters: Filter[] = [];
   export let filtersValue: any = {};
   export let rawClick = false;
-  export let freezeFirstColumn = false;
-  export let freezeLastColumn = false;
+  export let freezeFirstColumn = true;
+  export let freezeLastColumn = true;
   export let showImport = false;
   export let showExport = true;
   export let showArrangingColumns = true;
