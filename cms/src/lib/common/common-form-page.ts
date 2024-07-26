@@ -26,7 +26,8 @@ export class CommonNewFormPageData {
     public createId?: () => string,
     public preSubmit?: (id: string, value: any) => Promise<void>,
     public preCreate?: (id: string, value: any) => Promise<void>,
-    public submit?: (collection: string, id: string, value: any) => Promise<void>
+    public submit?: (collection: string, id: string, value: any) => Promise<void>,
+    public onValueChange?: (value: any, elements?: any) => void
   ) {}
 }
 
@@ -46,7 +47,8 @@ export class CommonEditFormPageData {
     public editKey: string,
     public preSubmit?: (id: string, value: any) => Promise<void>,
     public preEdit?: (id: string, value: any) => Promise<void>,
-    public submit?: (ref: DocumentReference, value: any) => Promise<void>
+    public submit?: (ref: DocumentReference, value: any) => Promise<void>,
+    public onValueChange?: (value: any, elements?: any) => void
   ) {}
 }
 
@@ -78,7 +80,8 @@ export async function commonFormPage({ params, parent }: any) {
         data.createId,
         data.preSubmit,
         data.preCreate,
-        data.createMethod
+        data.createMethod,
+        data.formOnValueChange
       )
     };
   }
@@ -103,7 +106,8 @@ export async function commonFormPage({ params, parent }: any) {
       data.editKey || 'id',
       data.preSubmit,
       data.preEdit,
-      data.editMethod
+      data.editMethod,
+      data.formOnValueChange
     )
   };
 }

@@ -112,9 +112,9 @@
 
         <div class="flex flex-col gap-6">
           {#if data.form.views}
-            <FormModule bind:this={formModule} views={data.form.views} initialValue={data instanceof CommonNewFormPageData ? data.initialValue : null} bind:value={data.value} />
+            <FormModule bind:this={formModule} onValueChange={data.onValueChange} views={data.form.views} initialValue={data instanceof CommonNewFormPageData ? data.initialValue : null} bind:value={data.value} />
           {:else}
-            <FormModule bind:this={formModule} initialValue={data instanceof CommonNewFormPageData ? data.initialValue : null} items={data.form} bind:value={data.value} />
+            <FormModule bind:this={formModule} onValueChange={data.onValueChange} initialValue={data instanceof CommonNewFormPageData ? data.initialValue : null} items={data.form} bind:value={data.value} />
           {/if}
         </div>
       </Card>

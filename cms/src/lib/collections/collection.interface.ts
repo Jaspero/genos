@@ -30,6 +30,7 @@ export interface Collection {
   filterOperators?: FilterOperators;
   filterOptions?: () => Promise<any[]>;
   form?: (id: string) => any;
+  formOnValueChange?: (value: any, elements?: any) => void;
   singularName?: string;
   add?: boolean;
   editKey?: string;

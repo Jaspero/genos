@@ -23,11 +23,12 @@
 
   export let items: any[] = [];
   export let views: any[] | null = null;
-  export let initialValue: any | null = null;
+  export let initialValue: any | null;
   export let value: any = {};
   export let render: any = null;
   export let id = '';
   export let container: string | null = null;
+  export let onValueChange: ((value: any, elements: any) => void) | null = null;
 
   let containerElement: HTMLDivElement;
 
@@ -59,10 +60,14 @@
       instance
     });
 
-    render.addEventListener('change', (change) => {
+    render.addEventListener('change', (change: any, elements: any) => {
+      if (onValueChange) {
+        onValueChange(change, elements);
+      }
+
       value = change;
     });
   });
 </script>
 
-<div bind:this={containerElement} />
+<div bind:this={containerElement}></div>
