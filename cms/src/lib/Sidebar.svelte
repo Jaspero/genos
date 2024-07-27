@@ -89,7 +89,7 @@
                       class:active={pathname.startsWith(inner.href)}
                       on:click={closeSidebar}
                     >
-                      <span class="w-6 h-6" />
+                      <span class="w-6 h-6"></span>
                       {inner.label}
                     </a>
                   {/each}

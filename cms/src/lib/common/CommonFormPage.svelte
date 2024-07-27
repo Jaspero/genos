@@ -86,7 +86,7 @@
   {#if data instanceof CommonEditFormPageData}
     <Button type="button" color="warn" on:click={deleteItem}>Delete</Button>
   {/if}
-  <div class="flex-1" />
+  <div class="flex-1"></div>
   <Button variant="ghost" href={back}>Cancel</Button>
   <Button type="submit" form="form" variant="filled" loading={saveLoading}>Save</Button>
 </div>

@@ -167,7 +167,7 @@
     {#if data.snap}
       <Button type="button" color="warn" on:click={deleteItem}>Delete</Button>
     {/if}
-    <div class="flex-1" />
+    <div class="flex-1"></div>
     <Button href={back} variant="outlined" color="secondary">Cancel</Button>
     &nbsp;
     <Button

@@ -157,7 +157,7 @@
     <FormModule id="page-settings" bind:this={formModule} {items} bind:value />
   {:else if activeSidebar === 'blocks'}
     <p class="p-4 border-b">Blocks</p>
-    <div bind:this={blocksEl} />
+    <div bind:this={blocksEl}></div>
   {:else if activeSidebar === 'component'}
     <div class="flex justify-around border-b">
       {#each componentTabs as element}
@@ -171,7 +171,7 @@
         </button>
       {/each}
     </div>
-    <div id="component-wrapper" bind:this={componentEl} />
+    <div id="component-wrapper" bind:this={componentEl}></div>
   {/if}
 </section>
 

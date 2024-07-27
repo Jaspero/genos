@@ -56,7 +56,7 @@
     <p>{description}</p>
   {/if}
 
-  <div bind:this={containerElement} />
+  <div bind:this={containerElement}></div>
 </div>
 
 <style lang="postcss">

@@ -6,7 +6,7 @@
   </div>
   <div
     class="w-6 h-full border-t-[2rem] border-t-transparent border-b-[2rem] border-b-transparent border-l-[1.5rem] border-l-blue-500"
-  />
+ ></div>
 
   <div class="flex items-center">
     <div class="px-4 flex-1 line-clamp-2">

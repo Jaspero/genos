@@ -61,7 +61,7 @@
         href="/dashboard/sales/orders?filters={base64UrlEncode({ category: data.id })}"
         class="text-blue-500 mb-8">View reviews</a
       >
-      <jp-review-star-rating value={data.averageRating} />
+      <jp-review-star-rating value={data.averageRating}></jp-review-star-rating>
     </div>
 
     <div class="w-4/5">

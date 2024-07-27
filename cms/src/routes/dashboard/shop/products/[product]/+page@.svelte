@@ -255,7 +255,7 @@
     {#if showingLayout && header}
       {@html header.content}
     {/if}
-    <div bind:this={pageBuilderEl} />
+    <div bind:this={pageBuilderEl}></div>
     {#if showingLayout && footer}
       {@html footer.content}
     {/if}
@@ -267,7 +267,7 @@
     {#if data.snap}
       <Button type="button" color="warn" on:click={deleteItem}>Delete</Button>
     {/if}
-    <div class="flex-1" />
+    <div class="flex-1"></div>
     <Button href={back} variant="outlined" color="secondary">Cancel</Button>
     &nbsp;
     <Button

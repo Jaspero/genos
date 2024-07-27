@@ -68,7 +68,7 @@
 
 <div class="save-menu">
   <Button type="button" color="warn" on:click={deleteItem}>Delete</Button>
-  <div class="flex-1" />
+  <div class="flex-1"></div>
   <Button variant="ghost" href={back}>Cancel</Button>
   <Button type="submit" form="form" variant="filled" loading={saveLoading}>Save</Button>
 </div>

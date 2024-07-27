@@ -30,7 +30,7 @@
 </script>
 
 <div>
-  <span class="status" style:background {title} />
+  <span class="status" style:background {title}></span>
   {date}
 </div>
 

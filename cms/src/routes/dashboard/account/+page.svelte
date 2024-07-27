@@ -185,9 +185,9 @@
           </div>
         {:else}
           <Field label="Phone Number" placeholder="+123456789123" bind:value={phoneNumber} />
-          <div class="mb-4" />
+          <div class="mb-4"></div>
           <p>2FA is <b>disabled</b>, it is recommended to enable this feature.</p>
-          <div class="mb-4" />
+          <div class="mb-4"></div>
           <Button variant="filled" color="primary" disabled={disableBtn} on:click={openMfa}>
             {#if connectLoader}
               <Loader />
@@ -201,7 +201,7 @@
   </Grid>
 {/if}
 
-<div id="recaptcha-container-id" />
+<div id="recaptcha-container-id"></div>
 
 <Dialog bind:open={openMfaComponent} fixed>
   <form on:submit|preventDefault={verifyPhone}>

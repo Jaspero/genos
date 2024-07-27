@@ -258,7 +258,7 @@
     <FormModule id="page-settings" bind:this={formModule} {items} bind:value />
   {:else if activeSidebar === 'blocks'}
     <p class="p-4 border-b">Blocks</p>
-    <div bind:this={blocksEl} />
+    <div bind:this={blocksEl}></div>
   {:else if activeSidebar === 'sections'}
     {#if sections}
       <p class="p-4 border-b">Sections</p>
@@ -272,7 +272,7 @@
             <i
               class="fa fa-caret-down transition duration-300"
               class:-rotate-180={activeCategory === category.category}
-            />
+           ></i>
           </button>
 
           {#if activeCategory === category.category}
@@ -307,7 +307,7 @@
             <i
               class="fa fa-caret-down transition duration-300"
               class:-rotate-180={activeCategory === category.category}
-            />
+           ></i>
           </button>
 
           {#if activeCategory === category.category}
@@ -340,7 +340,7 @@
         </button>
       {/each}
     </div>
-    <div id="component-wrapper" bind:this={componentEl} />
+    <div id="component-wrapper" bind:this={componentEl}></div>
   {:else if activeSidebar === 'seo'}
     <p class="p-4 border-b">SEO</p>
     <FormModule id="seo" bind:this={formModule} items={metaItems} bind:value />

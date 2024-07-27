@@ -252,14 +252,14 @@
               label="Name"
               value={os.label}
               on:value={(event) => (os.label = event.detail.value)}
-            />
+           ></jp-input>
           </div>
           <div class="flex-1">
             <jp-chips
               label="Options"
               value={os.options.join(',')}
               on:value={(event) => (os.options = event.detail)}
-            />
+           ></jp-chips>
           </div>
           <Button type="button" on:click={() => removeOptionSet(index)}>Remove</Button>
         </div>
@@ -299,7 +299,7 @@
                 value={variant.price}
                 type="number"
                 on:value={(event) => (variant.price = event.detail.value)}
-              />
+             ></jp-input>
             </div>
           </td>
           <td class="p-2">
@@ -309,7 +309,7 @@
                 value={variant.quantity}
                 type="number"
                 on:value={(event) => (variant.quantity = event.detail.value)}
-              />
+             ></jp-input>
             </div>
           </td>
           <td class="p-2">
@@ -318,7 +318,7 @@
                 placeholder="SKU"
                 value={variant.sku}
                 on:value={(event) => (variant.sku = event.detail.value)}
-              />
+             ></jp-input>
             </div>
           </td>
           <td class="p-2">
@@ -327,7 +327,7 @@
                 placeholder="Barcode"
                 value={variant.barcode}
                 on:value={(event) => (variant.sku = event.detail.value)}
-              />
+             ></jp-input>
             </div>
           </td>
           <td class="p-2">

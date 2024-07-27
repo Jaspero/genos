@@ -313,7 +313,7 @@
   </div>
 </div>
 
-<div bind:this={el} />
+<div bind:this={el}></div>
 
 <Dialog bind:open={filterDialogOpen} removePadding>
   <svelte:fragment slot="title">Filters</svelte:fragment>
