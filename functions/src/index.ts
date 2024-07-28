@@ -27,4 +27,5 @@ export {templateDeleted} from './triggers/template-deleted';
  * Rest
  */
 export {actionController} from './rest/action-controller';
+export {emailTracking} from './rest/email-tracking';
 // export {stripeWebhook} from './rest/stripe-webhook';
