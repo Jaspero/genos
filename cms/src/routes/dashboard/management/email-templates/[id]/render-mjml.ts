@@ -78,6 +78,27 @@ export function renderMjMl(
 		}
 	});
 
+  /**
+   * Extend the image type to allow for directly editing the source
+   */
+	grapesInstance.DomComponents.addType('image', {
+		extends: 'image',
+		model: {
+			defaults: {
+				traits: [
+					{
+						label: 'Source',
+						name: 'src'
+					},
+					{
+						label: 'Alt',
+						name: 'alt'
+					}
+				]
+			}
+		}
+	});
+
 	grapesInstance.on(
 		'asset:custom',
 		(props: {

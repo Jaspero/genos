@@ -241,6 +241,24 @@ export const TYPES = (forms: PageBuilderForm[]) => [
     }
   },
   {
+    id: 'image',
+    extends: 'image',
+    model: {
+      defaults: {
+        traits: [
+          {
+            label: 'Source',
+            name: 'src'
+          },
+          {
+            label: 'Alt',
+            name: 'alt'
+          }
+        ]
+      }
+    }
+  },
+  {
     id: 'page-link',
     extend: 'link',
     isComponent: (el: HTMLAnchorElement) => el?.dataset?.pblink,
