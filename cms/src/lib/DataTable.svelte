@@ -253,7 +253,7 @@
 
       instance = document.createElement('jp-async-table') as any;
 
-      instance.service = { 
+      instance.service = {
         get,
         loadMore,
         adjustPageSize,
@@ -267,7 +267,7 @@
       instance.pageSizes = pageSizes;
       instance.pageSize = pageSize;
       instance.showArrangingColumns = showArrangingColumns;
-      instance.allowArrangeColumns = allowArrangeColumns; 
+      instance.allowArrangeColumns = allowArrangeColumns;
       instance.showImport = showImport;
       instance.showExport = showExport;
       instance.rowClickable = rawClick;
@@ -323,9 +323,7 @@
   </form>
 
   <slot slot="actions">
-    <Button variant="filled" color="primary" type="submit" form="filters">
-      Apply filters
-    </Button>
+    <Button variant="filled" color="primary" type="submit" form="filters">Apply filters</Button>
   </slot>
 </Dialog>
 

@@ -5,9 +5,9 @@
   import Field from '$lib/Field.svelte';
   import Grid from '$lib/Grid.svelte';
   import GridCol from '$lib/GridCol.svelte';
-  import Loader from '$lib/Loader.svelte';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
   import { auth, authenticated, user } from '$lib/utils/firebase';
+  import { renderAlert } from '@jaspero/web-components/dist/render-alert.js';
   import {
     PhoneAuthProvider,
     PhoneMultiFactorGenerator,
@@ -26,7 +26,6 @@
     passwordConfirm: ''
   };
   let showPassword = false;
-  let noMatch = false;
 
   let recaptchaVerifier: RecaptchaVerifier;
   let openRemoveMfaDialog = false;
@@ -37,6 +36,8 @@
   let openMfaComponent = false;
   let connectLoader = false;
   let confirmLoader = false;
+  let disableLoader = false;
+  let passwordLoader = false;
   let userEnrolled = false;
   let enrolledFactors: any;
   let getMethods = true;
@@ -55,32 +56,40 @@
   }
 
   async function changePassword() {
-    if (newPass.password === '' || newPass.passwordConfirm === '') {
+    if (newPass.password !== newPass.passwordConfirm) {
+      renderAlert({
+        title: 'Error',
+        state: 'error',
+        message: `Provided passwords don't match.`
+      });
       return;
     }
 
-    if (newPass.password !== newPass.passwordConfirm) {
-      noMatch = true;
-      return;
-    } else {
-      noMatch = false;
-    }
+    passwordLoader = true;
 
     try {
       await alertWrapper(
         updatePassword(auth.currentUser as User, newPass.password),
         'Password changed successfully',
         'Error',
-        () => console.log('Error')
-      ).then(() => {
-        passwordDialog = false;
-      });
+        () => {
+          console.log('Error');
+          passwordLoader = false;
+        }
+      );
+
+      passwordLoader = false;
+      passwordDialog = false;
     } catch (e) {
       console.error(e);
     }
   }
 
-  async function disableMfa() {
+  async function disableMfa(event: MouseEvent) {
+    event.preventDefault();
+
+    disableLoader = true;
+
     const user = auth.currentUser as User;
 
     if (user) {
@@ -88,10 +97,14 @@
         multiFactor(user).unenroll(enrolledFactors[0]),
         '2FA disabled successfully',
         'Error',
-        () => console.log('error')
+        () => {
+          console.log('error');
+          disableLoader = false;
+        }
       );
       userEnrolled = false;
       openRemoveMfaDialog = false;
+      disableLoader = false;
     }
   }
 
@@ -188,12 +201,14 @@
           <div class="mb-4"></div>
           <p>2FA is <b>disabled</b>, it is recommended to enable this feature.</p>
           <div class="mb-4"></div>
-          <Button variant="filled" color="primary" disabled={disableBtn} on:click={openMfa}>
-            {#if connectLoader}
-              <Loader />
-            {:else}
-              Connect 2FA
-            {/if}
+          <Button
+            variant="filled"
+            color="primary"
+            disabled={disableBtn}
+            on:click={openMfa}
+            loading={connectLoader}
+          >
+            Connect 2FA
           </Button>
         {/if}
       </Card>
@@ -208,12 +223,8 @@
     <p class="mb-4">We have sent you a 6-digit verification code to your phone number.</p>
     <Field label="2FA Verification Code:" bind:value={phoneCode} />
     <div id="confirm-button">
-      <Button variant="filled" color="primary" type="submit">
-        {#if confirmLoader}
-          <Loader />
-        {:else}
-          Confirm
-        {/if}
+      <Button variant="filled" color="primary" type="submit" loading={confirmLoader}>
+        Confirm
       </Button>
     </div>
   </form>
@@ -225,15 +236,8 @@
   <div>Removing 2FA will make your account less secure.</div>
 
   <slot slot="actions">
-    <Button
-      on:click={(e) => {
-        e.preventDefault();
-        disableMfa();
-      }}
-      variant="filled"
-      color="warn"
-      type="submit"
-      >Confirm
+    <Button on:click={disableMfa} variant="filled" color="warn" loading={disableLoader}>
+      Confirm
     </Button>
   </slot>
 </Dialog>
@@ -262,11 +266,16 @@
         >{showPassword ? 'Hide' : 'Show'} password
       </Button>
     </div>
-    <div style="color: red; display: {noMatch ? 'block' : 'none'}">Passwords are not matching.</div>
   </form>
 
   <slot slot="actions">
-    <Button variant="filled" color="secondary" type="submit" form="password_form">Save</Button>
+    <Button
+      variant="filled"
+      color="secondary"
+      type="submit"
+      form="password_form"
+      loading={passwordLoader}>Save</Button
+    >
   </slot>
 </Dialog>
 

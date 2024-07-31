@@ -554,8 +554,8 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             label: 'Sort Property',
             name: 'property',
             options: [
-              {id: 'price', label: 'Price'},
-              {id: 'name', label: 'Name'},
+              { id: 'price', label: 'Price' },
+              { id: 'name', label: 'Name' }
             ]
           },
           {
@@ -563,8 +563,8 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             label: 'Sort Direction',
             name: 'direction',
             options: [
-              {id: 'asc', label: 'Ascending'}, 
-              {id: 'desc', label: 'Descending'}
+              { id: 'asc', label: 'Ascending' },
+              { id: 'desc', label: 'Descending' }
             ]
           }
         ]
@@ -582,9 +582,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
     model: {
       defaults: {
         tagName: 'aside-image-slider',
-        script: function () {
-
-        }
+        script: function () {}
       },
       style: {
         height: '60vh',

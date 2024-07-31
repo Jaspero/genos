@@ -28,9 +28,11 @@ collections.addCollection('templates', {
     {
       key: '/id',
       label: '',
-      pipes: [actionsPipe(id => ({
-        duplicateSubCollections: ['content']
-      }))]
+      pipes: [
+        actionsPipe((id) => ({
+          duplicateSubCollections: ['content']
+        }))
+      ]
     }
   ],
   initialSort: { key: 'title', direction: 'asc' }

@@ -87,7 +87,7 @@
     height: 24px;
     line-height: 24px;
     display: flex;
-    gap: .5rem;
+    gap: 0.5rem;
   }
 
   button:disabled {

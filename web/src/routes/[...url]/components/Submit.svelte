@@ -62,14 +62,14 @@
   }
 </script>
 
-<button type="submit" bind:this={button} class:loading={loading}>{label}</button>
+<button type="submit" bind:this={button} class:loading>{label}</button>
 
 <style>
   button {
     background-color: var(--primary-color);
     color: var(--primary-contrast-color);
     border-radius: var(--border-radius);
-    padding: .5rem 1rem;
+    padding: 0.5rem 1rem;
     font-size: 1.2rem;
   }
 

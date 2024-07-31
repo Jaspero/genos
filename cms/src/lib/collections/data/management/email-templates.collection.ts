@@ -23,7 +23,7 @@ collections.addCollection('email-templates', {
     {
       key: '/lastUpdatedOn',
       label: 'Last Updated On',
-      pipes: [datePipe],
+      pipes: [datePipe]
     },
     {
       key: '/title',

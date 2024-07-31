@@ -9,7 +9,9 @@
 
   const links = CONFIG.links;
 
-  $: pageConfiguration = (CONFIG.pageConfigurations as any)[$page.url.pathname] as PageConfiguration;
+  $: pageConfiguration = (CONFIG.pageConfigurations as any)[
+    $page.url.pathname
+  ] as PageConfiguration;
 </script>
 
 <div class="flex flex-col h-screen max-h-screen">

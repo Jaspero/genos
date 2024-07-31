@@ -24,9 +24,11 @@ collections.addCollection('layouts', {
     {
       key: '/id',
       label: '',
-      pipes: [actionsPipe(id => ({
-        duplicateSubCollections: ['content']
-      }))]
+      pipes: [
+        actionsPipe((id) => ({
+          duplicateSubCollections: ['content']
+        }))
+      ]
     }
   ],
   initialSort: { key: 'name', direction: 'asc' }

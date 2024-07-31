@@ -32,8 +32,8 @@ async function exec() {
   const toExec = [
     writeFile(`./src/lib/utils/env-config.ts`, envConfig),
     readFile(sharedCss)
-      .then(file => postcss(atImport()).process(file, {from: sharedCss}))
-      .then(({css}) => writeFile(`./static/css/shared.css`, css))
+      .then((file) => postcss(atImport()).process(file, { from: sharedCss }))
+      .then(({ css }) => writeFile(`./static/css/shared.css`, css))
   ];
 
   if (env) {

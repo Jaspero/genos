@@ -46,13 +46,15 @@
     const view = new ModularView({
       componentPrefix: '',
       schema,
-      views: views ? views : [
-        {
-          ...(container && { container }),
-          ...(id && { id }),
-          items
-        }
-      ]
+      views: views
+        ? views
+        : [
+            {
+              ...(container && { container }),
+              ...(id && { id }),
+              items
+            }
+          ]
     });
 
     render = view.render({

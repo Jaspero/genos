@@ -38,8 +38,8 @@
       }
     );
 
-		loading = false;
-		open = false;
+    loading = false;
+    open = false;
   }
 </script>
 

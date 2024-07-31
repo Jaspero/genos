@@ -75,7 +75,7 @@ export const CONFIG = {
 
 export interface PageConfiguration {
   dynamicComponents?: any[];
-};
+}
 
 export interface Config {
   title: string;
@@ -92,6 +92,6 @@ export interface Config {
     }[];
   }[];
   pageConfigurations: {
-    [key: string]: PageConfiguration
-  }
-};
+    [key: string]: PageConfiguration;
+  };
+}

@@ -1,4 +1,4 @@
-import type {DocumentReference} from 'firebase/firestore';
+import type { DocumentReference } from 'firebase/firestore';
 import type { FilterOperators } from '../interfaces/filter-operators.interface';
 import type { Sort } from '../interfaces/sort.interface';
 
@@ -38,7 +38,7 @@ export interface Collection {
   /**
    * Applicable only on new document creation
    */
-  formInitialValue?: any,
+  formInitialValue?: any;
 
   /**
    * Runs before rendering the form

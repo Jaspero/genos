@@ -9,7 +9,7 @@
   export let ids: string;
   export let property: string;
   export let direction: 'desc' | 'asc';
-	export let limit: string;
+  export let limit: string;
 
   let products: Product[] = [];
 
@@ -24,31 +24,24 @@
           );
 
           products = docs
-						.filter((d) => d.exists)
-						.map(d => ({id: d.id, ...d.data()}) as Product);
+            .filter((d) => d.exists)
+            .map((d) => ({ id: d.id, ...d.data() }) as Product);
         } else {
-					products = [];
+          products = [];
         }
 
         break;
       }
       case 'dynamic': {
-				if (property && direction) {
-					const {docs} = await getDocs(
-						query(
-							collection(
-								db,
-								'products'
-							),
-							orderBy(property, direction),
-							l(parseInt(limit, 10))
-						)
-					);
+        if (property && direction) {
+          const { docs } = await getDocs(
+            query(collection(db, 'products'), orderBy(property, direction), l(parseInt(limit, 10)))
+          );
 
-					products = docs.map(doc => ({id: doc.id, ...doc.data()}) as Product);
-				} else {
-					products = [];
-				}
+          products = docs.map((doc) => ({ id: doc.id, ...doc.data() }) as Product);
+        } else {
+          products = [];
+        }
 
         break;
       }
@@ -57,11 +50,11 @@
 </script>
 
 <div class="products">
-	{#each products as product}
-		<div class="product">
-			<img src={product.image} alt={product.name} />
-			<h4>{product.name}</h4>
-			<p>{product.description}</p>
-		</div>
-	{/each}
+  {#each products as product}
+    <div class="product">
+      <img src={product.image} alt={product.name} />
+      <h4>{product.name}</h4>
+      <p>{product.description}</p>
+    </div>
+  {/each}
 </div>

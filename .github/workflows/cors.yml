@@ -2,7 +2,7 @@ name: Prod | Deploy CORS
 on:
   workflow_dispatch:
 
-env: 
+env:
   project: 'wonkawave'
   bucket: 'gs://wonkawave.appspot.com'
 
@@ -22,7 +22,7 @@ jobs:
 
       - name: Set up Cloud SDK
         uses: 'google-github-actions/setup-gcloud@v1'
-                 
+
       - name: Deploy Rules
         run: gsutil cors set firebase-cors.json $BUCKET
         env:

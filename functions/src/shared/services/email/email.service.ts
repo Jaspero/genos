@@ -30,31 +30,27 @@ export class EmailService {
     tracking = true,
     clickTracking = true
   ) {
-
     const fs = firestore();
     const id = `sm-${random.string(32)}`;
-    const messageSnap = await fs
-      .doc(`email-templates/${templateId}`)
-      .get();
+    const messageSnap = await fs.doc(`email-templates/${templateId}`).get();
     const message: EmailTemplate = messageSnap.data() as any;
 
     if (!message?.active) {
-      logger.log(`Email doesn't exist or is not active`, templateId);
+      logger.log('Email doesn\'t exist or is not active', templateId);
       return;
     }
 
-		const [htmlDoc, cssDoc] = await Promise.all([
-			messageSnap.ref.collection('content').doc('html').get(),
-			messageSnap.ref.collection('content').doc('css').get()
-		]);
+    const [htmlDoc, cssDoc] = await Promise.all([
+      messageSnap.ref.collection('content').doc('html').get(),
+      messageSnap.ref.collection('content').doc('css').get(),
+    ]);
 
-		const style = cssDoc.data()!.content || '';
+    const style = cssDoc.data()!.content || '';
 
-		let content = htmlDoc.data()!.content || '';
+    let content = htmlDoc.data()!.content || '';
 
     if (tracking) {
-      content = content
-        .replace(`/email/images/logo.png`, `/email/images/logo.png?t=${id}`);
+      content = content.replace('/email/images/logo.png', `/email/images/logo.png?t=${id}`);
     }
 
     const template = compile(
@@ -65,25 +61,27 @@ export class EmailService {
           <link rel="preconnect" href="https://fonts.googleapis.com">
           <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
           <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700&display=swap" rel="stylesheet">
-          <title>${message.subject}</title>${(style ? `<style>${style}</style>` : '')}
+          <title>${message.subject}</title>${style ? `<style>${style}</style>` : ''}
         </head>
         <body style="background: #F1F5F3; padding: 16px;">${content}</body></html>`
     );
-    
-    let html = template({...context, global})
-      .replace(/&amp;/g, '&');
+
+    let html = template({...context, global}).replace(/&amp;/g, '&');
 
     if (clickTracking) {
       const matcher = /href="(.*?)"/g;
       const matches = html.matchAll(matcher);
 
       for (const match of matches) {
-        if (match[0] === `'href=""'` || match[1].includes('mailto')) {
+        if (match[0] === '\'href=""\'' || match[1].includes('mailto')) {
           continue;
         }
 
         const baseUrl = EMAIL_CONFIG.trackingUrl;
-        html = html.replace(match[0], `href="${baseUrl}?t=${id}&d=${encodeURIComponent(match[1])}"`);
+        html = html.replace(
+          match[0],
+          `href="${baseUrl}?t=${id}&d=${encodeURIComponent(match[1])}"`
+        );
       }
     }
 
@@ -104,25 +102,28 @@ export class EmailService {
     }
 
     try {
-      await firestore().collection('sent-emails').doc(id).set({
-        createdOn: new Date().toISOString(),
-        to,
-        html,
-        subject,
-        templateId,
-        ...res === true ? {status: true} : {status: false, error: res},
-        ...source && {source},
-        context,
-      });
+      await firestore()
+        .collection('sent-emails')
+        .doc(id)
+        .set({
+          createdOn: new Date().toISOString(),
+          to,
+          html,
+          subject,
+          templateId,
+          ...(res === true ? {status: true} : {status: false, error: res}),
+          ...(source && {source}),
+          context,
+        });
     } catch (e) {
-      logger.error(`Failed to insert record of sent-email`, e);
+      logger.error('Failed to insert record of sent-email', e);
     }
   }
 
   async sendEmail(data: any) {
     if (!data.to) {
       logger.error('No receiving email provided.', data);
-      return 'No receiver email provided.'
+      return 'No receiver email provided.';
     }
 
     try {
@@ -132,9 +133,9 @@ export class EmailService {
         reply_to: data.reply_to || EMAIL_CONFIG.fromEmail,
         tracking_settings: {
           click_tracking: {
-            enable: false
-          }
-        }
+            enable: false,
+          },
+        },
       });
     } catch (e: any) {
       logger.error('Failed sending email', e.toString());

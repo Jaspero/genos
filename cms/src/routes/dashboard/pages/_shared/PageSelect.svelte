@@ -216,9 +216,15 @@
     -webkit-transition: -webkit-transform 0.3s;
     transition: -webkit-transform 0.3s;
     -o-transition: -o-transform 0.3s;
-    -moz-transition: transform 0.3s, -moz-transform 0.3s;
+    -moz-transition:
+      transform 0.3s,
+      -moz-transform 0.3s;
     transition: transform 0.3s;
-    transition: transform 0.3s, -webkit-transform 0.3s, -moz-transform 0.3s, -o-transform 0.3s;
+    transition:
+      transform 0.3s,
+      -webkit-transform 0.3s,
+      -moz-transform 0.3s,
+      -o-transform 0.3s;
   }
 
   .select-arrow.rotate {
@@ -278,10 +284,22 @@
     padding: 0.75rem;
     text-align: left;
     outline: none;
-    -webkit-transition: background-color 0.3s, color 0.3s, fill 0.3s;
-    -o-transition: background-color 0.3s, color 0.3s, fill 0.3s;
-    -moz-transition: background-color 0.3s, color 0.3s, fill 0.3s;
-    transition: background-color 0.3s, color 0.3s, fill 0.3s;
+    -webkit-transition:
+      background-color 0.3s,
+      color 0.3s,
+      fill 0.3s;
+    -o-transition:
+      background-color 0.3s,
+      color 0.3s,
+      fill 0.3s;
+    -moz-transition:
+      background-color 0.3s,
+      color 0.3s,
+      fill 0.3s;
+    transition:
+      background-color 0.3s,
+      color 0.3s,
+      fill 0.3s;
   }
 
   .menu-button:disabled {

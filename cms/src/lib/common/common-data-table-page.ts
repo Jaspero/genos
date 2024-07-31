@@ -3,7 +3,7 @@ import { error } from '@sveltejs/kit';
 import type TableHeader from '../TableHeader.svelte';
 import type { FilterOperators } from '../interfaces/filter-operators.interface';
 import type { Sort } from '../interfaces/sort.interface';
-import type {Collection} from '../collections/collection.interface';
+import type { Collection } from '../collections/collection.interface';
 
 export interface CommonDataTablePageData {
   name: string;
@@ -29,7 +29,9 @@ export async function commonDataTablePage({ params, parent }: any) {
 
   const { collection, module } = params;
 
-  const data: Collection = params.collectionData ? params.collectionData : collections.getCollection(collection);
+  const data: Collection = params.collectionData
+    ? params.collectionData
+    : collections.getCollection(collection);
 
   if (!data) {
     error(404, 'Collection not found');

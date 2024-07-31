@@ -1,3 +1,3 @@
-import {writable} from 'svelte/store';
+import { writable } from 'svelte/store';
 
-export const changeEmail = writable<null | {id: string; collection?: string;}>(null);
+export const changeEmail = writable<null | { id: string; collection?: string }>(null);

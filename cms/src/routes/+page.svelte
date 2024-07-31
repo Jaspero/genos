@@ -98,30 +98,26 @@
   }
 
   async function logInGoogle() {
-    await alertWrapper(
-      signInWithPopup(auth, new GoogleAuthProvider()),
-      '',
-      (e: any) => {
-        if (e.code == 'auth/multi-factor-auth-required') {
-          resolver = getMultiFactorResolver(auth, e);
+    await alertWrapper(signInWithPopup(auth, new GoogleAuthProvider()), '', (e: any) => {
+      if (e.code == 'auth/multi-factor-auth-required') {
+        resolver = getMultiFactorResolver(auth, e);
 
-          if (resolver.hints) {
-            const phoneInfoOptions = {
-              multiFactorHint: resolver.hints[0],
-              session: resolver.session
-            };
-            const phoneAuthProvider = new PhoneAuthProvider(auth);
-            phoneAuthProvider
-              .verifyPhoneNumber(phoneInfoOptions, recaptchaVerifier)
-              .then((verificationId) => {
-                verId = verificationId;
-                showCodeInput = true;
-                loading = false;
-              });
-          }
+        if (resolver.hints) {
+          const phoneInfoOptions = {
+            multiFactorHint: resolver.hints[0],
+            session: resolver.session
+          };
+          const phoneAuthProvider = new PhoneAuthProvider(auth);
+          phoneAuthProvider
+            .verifyPhoneNumber(phoneInfoOptions, recaptchaVerifier)
+            .then((verificationId) => {
+              verId = verificationId;
+              showCodeInput = true;
+              loading = false;
+            });
         }
       }
-    );
+    });
 
     setTimeout(() => {
       goto(redirectLink);

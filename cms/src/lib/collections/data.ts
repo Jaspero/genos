@@ -2,7 +2,7 @@
  * Management
  */
 import './data/management/admins.collection.ts';
-import './data/management/email-templates.collection.ts'
+import './data/management/email-templates.collection.ts';
 
 /**
  * Blog

@@ -19,7 +19,6 @@
       return;
     }
 
-
     onClose && onClose();
     open = false;
   }

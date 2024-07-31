@@ -27,7 +27,6 @@
   }
 
   function addProperty() {
-
     const item = { key: '', label: '' };
 
     internalValue = [...internalValue, item];

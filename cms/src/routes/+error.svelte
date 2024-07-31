@@ -1,6 +1,6 @@
 <script lang="ts">
   import Button from '$lib/Button.svelte';
-  import {CONFIG} from '$lib/consts/config.const';
+  import { CONFIG } from '$lib/consts/config.const';
 </script>
 
 <div class="w-screen h-screen flex flex-col justify-center items-center">

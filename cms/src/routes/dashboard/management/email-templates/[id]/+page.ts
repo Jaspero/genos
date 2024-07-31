@@ -1,16 +1,16 @@
-import {db} from '$lib/utils/firebase';
-import {redirect} from '@sveltejs/kit';
-import {collection, doc, getDoc, getDocs, query, where} from 'firebase/firestore';
-import {META_FORM_FIELDS} from '$lib/consts/meta.form-fields.js';
-import {BucketImageService} from '$lib/services/image.service.js';
-import type {PageBuilderForm} from '$lib/page-builder/types/page-builder-form.interface';
-import {getOptions} from '$lib/utils/get-options';
-import type {SelectOptions} from '$lib/interfaces/select-options.interface.js';
+import { db } from '$lib/utils/firebase';
+import { redirect } from '@sveltejs/kit';
+import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
+import { META_FORM_FIELDS } from '$lib/consts/meta.form-fields.js';
+import { BucketImageService } from '$lib/services/image.service.js';
+import type { PageBuilderForm } from '$lib/page-builder/types/page-builder-form.interface';
+import { getOptions } from '$lib/utils/get-options';
+import type { SelectOptions } from '$lib/interfaces/select-options.interface.js';
 
-export async function load({params, parent}) {
+export async function load({ params, parent }) {
   await parent();
 
-  const {id} = params;
+  const { id } = params;
   const col = 'email-templates';
 
   const items = [
@@ -47,7 +47,7 @@ export async function load({params, parent}) {
     return {
       col,
       items,
-      value: {},
+      value: {}
     };
   }
 
@@ -60,7 +60,7 @@ export async function load({params, parent}) {
     throw redirect(303, '/404');
   }
 
-  const value = {id: snap.id, ...(snap.data() as any)};
+  const value = { id: snap.id, ...(snap.data() as any) };
 
   return {
     snap,

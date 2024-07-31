@@ -3,7 +3,7 @@
   import FormModule from '$lib/FormModule.svelte';
 
   export let activeSidebar = 'email-settings';
-  export let items: Array<any> | undefined; 
+  export let items: Array<any> | undefined;
   export let value: any;
   export let grapesInstance: any;
   export let formModule: FormModule;

@@ -85,7 +85,7 @@
     const css = grapesInstance.getCss();
 
     const toUpdate = [
-      setDoc(doc(db, data.col, id, 'content', 'json'), {content: JSON.stringify(json)}),
+      setDoc(doc(db, data.col, id, 'content', 'json'), { content: JSON.stringify(json) }),
       setDoc(doc(db, data.col, id, 'content', 'html'), {
         content: html,
         lastUpdatedOn
@@ -131,11 +131,7 @@
   }
 
   function render() {
-    grapesInstance = renderMjMl(
-      pageBuilderEl,
-      grapesInstance,
-      data.json
-    );
+    grapesInstance = renderMjMl(pageBuilderEl, grapesInstance, data.json);
   }
 
   onMount(() => {

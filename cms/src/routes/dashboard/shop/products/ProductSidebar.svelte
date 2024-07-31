@@ -4,15 +4,15 @@
   import { random } from '@jaspero/utils';
   import { slide } from 'svelte/transition';
   import FormModule from '$lib/FormModule.svelte';
-  import {BLOCKS} from '$lib/page-builder/consts/blocks.conts';
-  import type {PageBuilderForm} from '$lib/page-builder/types/page-builder-form.interface';
-  import type {Popup} from '$lib/page-builder/types/popup.interface';
+  import { BLOCKS } from '$lib/page-builder/consts/blocks.conts';
+  import type { PageBuilderForm } from '$lib/page-builder/types/page-builder-form.interface';
+  import type { Popup } from '$lib/page-builder/types/popup.interface';
 
   export let templates: Template[] | undefined;
   export let sections: Template[] | undefined;
   export let popups: Popup[] | undefined;
   export let activeSidebar = 'page-settings';
-  export let items: Array<any> | undefined; 
+  export let items: Array<any> | undefined;
   export let metaItems: Array<any> | undefined;
   export let value: any;
   export let grapesInstance: any;
@@ -272,7 +272,7 @@
             <i
               class="fa fa-caret-down transition duration-300"
               class:-rotate-180={activeCategory === category.category}
-           ></i>
+            ></i>
           </button>
 
           {#if activeCategory === category.category}
@@ -307,7 +307,7 @@
             <i
               class="fa fa-caret-down transition duration-300"
               class:-rotate-180={activeCategory === category.category}
-           ></i>
+            ></i>
           </button>
 
           {#if activeCategory === category.category}

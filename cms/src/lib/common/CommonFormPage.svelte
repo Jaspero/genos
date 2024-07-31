@@ -47,7 +47,9 @@
       delete data.value.id;
 
       await alertWrapper(
-        data.submit ? data.submit(data.collection, data.id, data.value) : setDoc(doc(db, data.collection, id), data.value),
+        data.submit
+          ? data.submit(data.collection, data.id, data.value)
+          : setDoc(doc(db, data.collection, id), data.value),
         'Document created successfully',
         undefined,
         () => (saveLoading = false)
@@ -112,9 +114,21 @@
 
         <div class="flex flex-col gap-6">
           {#if data.form.views}
-            <FormModule bind:this={formModule} onValueChange={data.onValueChange} views={data.form.views} initialValue={data instanceof CommonNewFormPageData ? data.initialValue : null} bind:value={data.value} />
+            <FormModule
+              bind:this={formModule}
+              onValueChange={data.onValueChange}
+              views={data.form.views}
+              initialValue={data instanceof CommonNewFormPageData ? data.initialValue : null}
+              bind:value={data.value}
+            />
           {:else}
-            <FormModule bind:this={formModule} onValueChange={data.onValueChange} initialValue={data instanceof CommonNewFormPageData ? data.initialValue : null} items={data.form} bind:value={data.value} />
+            <FormModule
+              bind:this={formModule}
+              onValueChange={data.onValueChange}
+              initialValue={data instanceof CommonNewFormPageData ? data.initialValue : null}
+              items={data.form}
+              bind:value={data.value}
+            />
           {/if}
         </div>
       </Card>

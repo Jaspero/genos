@@ -10,8 +10,7 @@ const app = express();
 
 app.get(
   '/et',
-  asyncWrapper(async (req: express.Request, res: express.Response) => {
-
+  asyncWrapper(async (req: express.Request) => {
     const fs = getFirestore();
 
     /**
@@ -19,8 +18,7 @@ app.get(
      */
     let {d, t} = req.query;
 
-    d = decodeURIComponent(d as string)
-      .replace(/&#x3D;/g, '=');
+    d = decodeURIComponent(d as string).replace(/&#x3D;/g, '=');
 
     if (t) {
       try {
@@ -30,17 +28,17 @@ app.get(
         await Promise.all([
           emailRef.update({
             clicks: firestore.FieldValue.increment(1),
-            lastClick: createdOn
+            lastClick: createdOn,
           }),
           emailRef.collection('email-interactions').add({
             url: d,
             createdOn,
             type: 'click',
-            headers: req.headers
-          })
+            headers: req.headers,
+          }),
         ]);
       } catch (error: any) {
-        logger.error(`Failed to store email click`, {destination: d, error});
+        logger.error('Failed to store email click', {destination: d, error});
       }
     }
 
@@ -48,7 +46,10 @@ app.get(
   }, 'redirect')
 );
 
-export const emailTracking = onRequest({
-  region: REGION,
-  maxInstances: 10
-}, app);
+export const emailTracking = onRequest(
+  {
+    region: REGION,
+    maxInstances: 10,
+  },
+  app
+);

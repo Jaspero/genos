@@ -1,18 +1,18 @@
-import {META_FORM_FIELDS} from '$lib/consts/meta.form-fields.js';
-import type {SelectOptions} from '$lib/interfaces/select-options.interface.js';
-import type {PageBuilderForm} from '$lib/page-builder/types/page-builder-form.interface';
-import {fromStorage} from '$lib/page-builder/utils/from-storage';
-import {BucketImageService} from '$lib/services/image.service.js';
-import {db, storage} from '$lib/utils/firebase';
-import {getOptions} from '$lib/utils/get-options';
-import {redirect} from '@sveltejs/kit';
-import {collection, doc, getDoc, getDocs, query, where} from 'firebase/firestore';
-import {getBlob, ref} from 'firebase/storage';
+import { META_FORM_FIELDS } from '$lib/consts/meta.form-fields.js';
+import type { SelectOptions } from '$lib/interfaces/select-options.interface.js';
+import type { PageBuilderForm } from '$lib/page-builder/types/page-builder-form.interface';
+import { fromStorage } from '$lib/page-builder/utils/from-storage';
+import { BucketImageService } from '$lib/services/image.service.js';
+import { db, storage } from '$lib/utils/firebase';
+import { getOptions } from '$lib/utils/get-options';
+import { redirect } from '@sveltejs/kit';
+import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
+import { getBlob, ref } from 'firebase/storage';
 
-export async function load({params, parent}) {
+export async function load({ params, parent }) {
   await parent();
 
-  const {page} = params;
+  const { page } = params;
   const col = 'pages';
 
   const imageService = new BucketImageService();
@@ -83,20 +83,16 @@ export async function load({params, parent}) {
     await Promise.all([
       getDocs(collection(db, 'pages')),
       getDocs(
-        query(
-          collection(db, 'sections'),
-          where('tags', 'array-contains-any', ['Any', 'Products'])
-        )
+        query(collection(db, 'sections'), where('tags', 'array-contains-any', ['Any', 'Products']))
       ),
       getDocs(
-        query(
-          collection(db, 'templates'),
-          where('tags', 'array-contains-any', ['Any', 'Products'])
-        )
+        query(collection(db, 'templates'), where('tags', 'array-contains-any', ['Any', 'Products']))
       ),
       getDocs(collection(db, 'popups')),
       getDocs(collection(db, 'forms')),
-      getOptions('layouts', 'name', [{key: 'tags', operation: 'array-contains-any', value: ['Any', 'Pages']}])
+      getOptions('layouts', 'name', [
+        { key: 'tags', operation: 'array-contains-any', value: ['Any', 'Pages'] }
+      ])
     ]);
 
   layouts.push(...layoutData);
@@ -118,7 +114,7 @@ export async function load({params, parent}) {
       })
     )
   ).reduce((acc: any[], cur) => {
-    const {category, ...data} = cur;
+    const { category, ...data } = cur;
     const idx = acc.findIndex((it) => it.category === category);
 
     if (idx === -1) {
@@ -150,7 +146,7 @@ export async function load({params, parent}) {
       })
     )
   ).reduce((acc: any[], cur) => {
-    const {category, ...data} = cur;
+    const { category, ...data } = cur;
     const idx = acc.findIndex((it) => it.category === category);
 
     if (idx === -1) {
@@ -222,7 +218,7 @@ export async function load({params, parent}) {
     throw redirect(303, '/404');
   }
 
-  const value = {id: snap.id, ...(snap.data() as any)};
+  const value = { id: snap.id, ...(snap.data() as any) };
 
   return {
     snap,

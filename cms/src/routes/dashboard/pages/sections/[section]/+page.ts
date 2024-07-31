@@ -1,15 +1,15 @@
-import type {PageBuilderForm} from '$lib/page-builder/page-builder-form.interface';
-import {fromStorage} from '$lib/page-builder/utils/from-storage';
-import {BucketImageService} from '$lib/services/image.service.js';
-import {db, storage} from '$lib/utils/firebase';
-import {redirect} from '@sveltejs/kit';
-import {collection, doc, getDoc, getDocs} from 'firebase/firestore';
-import {getBlob, ref} from 'firebase/storage';
+import type { PageBuilderForm } from '$lib/page-builder/page-builder-form.interface';
+import { fromStorage } from '$lib/page-builder/utils/from-storage';
+import { BucketImageService } from '$lib/services/image.service.js';
+import { db, storage } from '$lib/utils/firebase';
+import { redirect } from '@sveltejs/kit';
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
+import { getBlob, ref } from 'firebase/storage';
 
-export async function load({params, parent}) {
+export async function load({ params, parent }) {
   await parent();
 
-  const {section} = params;
+  const { section } = params;
   const col = 'sections';
 
   const imageService = new BucketImageService();
@@ -102,7 +102,7 @@ export async function load({params, parent}) {
     throw redirect(303, '/404');
   }
 
-  const value = {id: snap.id, ...(snap.data() as any)};
+  const value = { id: snap.id, ...(snap.data() as any) };
 
   return {
     snap,

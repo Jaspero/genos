@@ -23,6 +23,6 @@ declare interface Window {
     [key: string]: ColumnActionsConfig;
   };
   columnSelects?: {
-    [key: string]: Array<{value: string; label: string}>;
-  }
+    [key: string]: Array<{ value: string; label: string }>;
+  };
 }

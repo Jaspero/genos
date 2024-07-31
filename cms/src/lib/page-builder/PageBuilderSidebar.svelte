@@ -12,7 +12,7 @@
   export let sections: Template[] | undefined = undefined;
   export let popups: Popup[] | undefined = undefined;
   export let activeSidebar = 'page-settings';
-  export let items: Array<any> | undefined = undefined; 
+  export let items: Array<any> | undefined = undefined;
   export let metaItems: Array<any> | undefined = undefined;
   export let value: any;
   export let grapesInstance: any;
@@ -271,7 +271,8 @@
             <p>{category.category}</p>
             <i
               class="fa fa-caret-down transition duration-300"
-              class:-rotate-180={activeCategory === category.category}></i>
+              class:-rotate-180={activeCategory === category.category}
+            ></i>
           </button>
 
           {#if activeCategory === category.category}
@@ -305,7 +306,8 @@
             <p>{category.category}</p>
             <i
               class="fa fa-caret-down transition duration-300"
-              class:-rotate-180={activeCategory === category.category}></i>
+              class:-rotate-180={activeCategory === category.category}
+            ></i>
           </button>
 
           {#if activeCategory === category.category}

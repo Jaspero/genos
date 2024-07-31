@@ -1,12 +1,12 @@
+import { httpsCallable } from 'firebase/functions';
+import { changeEmail } from '../../../change-email/change-email.store';
+import { changePassword } from '../../../change-password/change-password.store';
+import { actionsPipe } from '../../../column-pipes/actions.pipe';
 import { datePipe } from '../../../column-pipes/date.pipe';
 import { indexPipe } from '../../../column-pipes/index.pipe';
-import { collections } from '../../collections';
-import { actionsPipe } from '../../../column-pipes/actions.pipe';
 import { mailtoPipe } from '../../../column-pipes/mailto.pipe';
-import { changePassword } from '../../../change-password/change-password.store';
-import { changeEmail } from '../../../change-email/change-email.store';
-import {httpsCallable} from 'firebase/functions';
-import {functions} from '../../../utils/firebase';
+import { functions } from '../../../utils/firebase';
+import { collections } from '../../collections';
 
 collections.addCollection('admins', {
   name: 'Admins',
@@ -54,7 +54,7 @@ collections.addCollection('admins', {
             {
               label: 'Change Email',
               icon: 'email',
-              action: (id) => changeEmail.set({id, collection: 'admins'})
+              action: (id) => changeEmail.set({ id, collection: 'admins' })
             },
             {
               label: 'Change Password',
@@ -77,7 +77,7 @@ collections.addCollection('admins', {
     value.createdOn = new Date().toISOString();
   },
   createMethod: async (collection, id, value) => {
-    await httpsCallable(functions, 'createAdmin')(value)
+    await httpsCallable(functions, 'createAdmin')(value);
   },
   form: async (id?: string) => {
     return [
@@ -110,18 +110,20 @@ collections.addCollection('admins', {
           required: true
         }
       },
-      ...id === 'new' ? [
-        {
-          component: 'jp-input',
-          field: '/password',
-          options: {
-            label: 'Password',
-            name: 'password',
-            type: 'password',
-            hint: `You can leave this empty if the user will sign in with google.`
-          }
-        }
-      ] : [],
-    ]
+      ...(id === 'new'
+        ? [
+            {
+              component: 'jp-input',
+              field: '/password',
+              options: {
+                label: 'Password',
+                name: 'password',
+                type: 'password',
+                hint: `You can leave this empty if the user will sign in with google.`
+              }
+            }
+          ]
+        : [])
+    ];
   }
 });

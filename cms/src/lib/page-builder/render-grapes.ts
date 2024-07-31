@@ -5,14 +5,14 @@ import styleGradientPlugin from 'grapesjs-style-gradient';
 import componentCodeEditor from './plugins/component-code-editor/component-code-editor';
 import 'grapesjs/dist/css/grapes.min.css';
 import 'grapick/dist/grapick.min.css';
-import './plugins/component-code-editor/component-code-editor.css'
-import {AMService} from './am.service';
-import {DEVICES} from './consts/devices.const';
-import {GLOBAL_STYLES} from './consts/global-styles.const';
-import {STYLE_OVERRIDES} from './consts/style-overrides.const';
-import {TYPES} from './consts/types.const';
-import type {PageBuilderForm} from './types/page-builder-form.interface';
-import type {Popup} from './types/popup.interface';
+import './plugins/component-code-editor/component-code-editor.css';
+import { AMService } from './am.service';
+import { DEVICES } from './consts/devices.const';
+import { GLOBAL_STYLES } from './consts/global-styles.const';
+import { STYLE_OVERRIDES } from './consts/style-overrides.const';
+import { TYPES } from './consts/types.const';
+import type { PageBuilderForm } from './types/page-builder-form.interface';
+import type { Popup } from './types/popup.interface';
 
 /**
  * Registers all custom components
@@ -47,17 +47,15 @@ export function renderGrapes(
       ]
     },
     container: pageBuilderEl,
-    panels: {defaults: []},
+    panels: { defaults: [] },
     plugins: [
       styleGradientPlugin,
       parserPostCSS,
-      editor => componentCodeEditor(
-        editor,
-        {
+      (editor) =>
+        componentCodeEditor(editor, {
           preserveWidth: true,
           appendTo: '#component-wrapper'
-        }
-      )
+        })
     ],
     pluginsOpts: {
       'grapesjs-style-gradient': {}
@@ -78,7 +76,7 @@ export function renderGrapes(
     style: GLOBAL_STYLES
   });
 
-  TYPES(forms!).forEach(({id, ...data}) => grapesInstance.DomComponents.addType(id, data));
+  TYPES(forms!).forEach(({ id, ...data }) => grapesInstance.DomComponents.addType(id, data));
 
   if (popups) {
     grapesInstance.DomComponents.addType(`pb-popup`, {
@@ -145,7 +143,7 @@ export function renderGrapes(
           assetManager.removeEventListener('selected', assetManagerListener);
         }
 
-        assetManagerListener = function (event: {detail: {url: string}}) {
+        assetManagerListener = function (event: { detail: { url: string } }) {
           props.select(event.detail.url, true);
         };
 
@@ -157,7 +155,7 @@ export function renderGrapes(
   grapesInstance.on('load', function () {
     const styleManager = grapesInstance.StyleManager;
 
-    STYLE_OVERRIDES.forEach(({id, property, ...overides}) => {
+    STYLE_OVERRIDES.forEach(({ id, property, ...overides }) => {
       styleManager.removeProperty(id, property);
 
       styleManager.addProperty(id, {
@@ -193,14 +191,14 @@ export function renderGrapes(
     property: 'overflow',
     default: 'auto',
     options: [
-      {id: 'visible', label: 'Visible'},
-      {id: 'hidden', label: 'Hidden'},
-      {id: 'auto', label: 'Auto'}
+      { id: 'visible', label: 'Visible' },
+      { id: 'hidden', label: 'Hidden' },
+      { id: 'auto', label: 'Auto' }
     ]
   });
 
   grapesInstance.runCommand('core:component-outline');
-  grapesInstance.DomComponents.getWrapper()!.set({badgable: false, selectable: false});
+  grapesInstance.DomComponents.getWrapper()!.set({ badgable: false, selectable: false });
 
   grapesInstance.on('component:update:traits', (component: any) => {
     for (const key in component.changed) {

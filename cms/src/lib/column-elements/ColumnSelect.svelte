@@ -19,7 +19,7 @@
   let options: SelectOptions = [];
 
   async function change(event: Event) {
-		value = (event.target as HTMLSelectElement).value;
+    value = (event.target as HTMLSelectElement).value;
     await updateDoc(doc(db, collection, id), { [key]: value });
   }
 

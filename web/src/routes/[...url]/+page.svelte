@@ -29,12 +29,11 @@
   if (browser) {
     pageSetup();
   }
-  
+
   function pageSetup() {
     let first = true;
 
     page.subscribe((page) => {
-      
       /**
        * Page Links
        */
@@ -50,15 +49,17 @@
       });
 
       /**
-       * Anchor Lunks 
+       * Anchor Lunks
        */
       document.querySelectorAll<HTMLAnchorElement>('[data-pbanchor]').forEach((e) => {
         e.addEventListener('click', (event) => {
           event.preventDefault();
           const target = document.querySelector(e.getAttribute('href') as string);
-          
+
           if (target) {
-            target?.scrollIntoView({ behavior: e.getAttribute('animation') as 'smooth' | 'instant' });
+            target?.scrollIntoView({
+              behavior: e.getAttribute('animation') as 'smooth' | 'instant'
+            });
           }
         });
       });

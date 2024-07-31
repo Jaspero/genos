@@ -23,7 +23,11 @@
 {/if}
 
 <style>
-	h2, h3, h4, h5, h6 {
-		font-weight: bold;
-	}
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: bold;
+  }
 </style>

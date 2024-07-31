@@ -1,6 +1,6 @@
-import {actionsPipe} from '../../../column-pipes/actions.pipe';
-import {indexPipe} from '../../../column-pipes/index.pipe';
-import {collections} from '../../collections';
+import { actionsPipe } from '../../../column-pipes/actions.pipe';
+import { indexPipe } from '../../../column-pipes/index.pipe';
+import { collections } from '../../collections';
 
 collections.addCollection('forms', {
   name: 'Forms',
@@ -48,7 +48,7 @@ collections.addCollection('forms', {
       ]
     }
   ],
-  initialSort: {key: 'name', direction: 'asc'},
+  initialSort: { key: 'name', direction: 'asc' },
   editKey: 'name',
   form: async () => [
     {

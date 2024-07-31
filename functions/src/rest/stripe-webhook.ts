@@ -31,11 +31,11 @@ app.post('/webhook', (req, res) => {
     logger.log(object);
 
     switch (event.type) {
-      case 'invoice.paid':
-        break;
-      case 'invoice.voided':
-      case 'invoice.payment_failed':
-        break;
+    case 'invoice.paid':
+      break;
+    case 'invoice.voided':
+    case 'invoice.payment_failed':
+      break;
     }
   }
 
@@ -44,8 +44,11 @@ app.post('/webhook', (req, res) => {
     .catch(() => res.sendStatus(constants.HTTP_STATUS_OK));
 });
 
-export const stripeWebhook = onRequest({
-  region: REGION,
-  maxInstances: 10,
-  secrets: ['STRIPE_WEBHOOK_SECRET', 'STRIPE_SECRET_KEY'],
-}, app);
+export const stripeWebhook = onRequest(
+  {
+    region: REGION,
+    maxInstances: 10,
+    secrets: ['STRIPE_WEBHOOK_SECRET', 'STRIPE_SECRET_KEY'],
+  },
+  app
+);

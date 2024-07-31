@@ -1,10 +1,10 @@
-import {checkboxPipe} from '../../../column-pipes/checkbox.pipe';
-import {indexPipe} from '../../../column-pipes/index.pipe';
-import {populateArrayPipe} from '../../../column-pipes/populate-array.pipe';
-import {populatePipe} from '../../../column-pipes/populate.pipe';
-import {releaseStatusPipe} from '../../../column-pipes/release-status.pipe';
-import {reviewStarsPipe} from '../../../column-pipes/review-stars.pipe';
-import {collections} from '../../collections';
+import { checkboxPipe } from '../../../column-pipes/checkbox.pipe';
+import { indexPipe } from '../../../column-pipes/index.pipe';
+import { populateArrayPipe } from '../../../column-pipes/populate-array.pipe';
+import { populatePipe } from '../../../column-pipes/populate.pipe';
+import { releaseStatusPipe } from '../../../column-pipes/release-status.pipe';
+import { reviewStarsPipe } from '../../../column-pipes/review-stars.pipe';
+import { collections } from '../../collections';
 
 collections.addCollection('products', {
   name: 'Products',
@@ -46,7 +46,7 @@ collections.addCollection('products', {
       pipes: [reviewStarsPipe()]
     }
   ],
-  initialSort: {key: 'name', direction: 'asc'},
+  initialSort: { key: 'name', direction: 'asc' },
   editKey: 'name',
   idPrefix: 'pr'
 });

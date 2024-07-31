@@ -19,9 +19,7 @@
       getDoc(doc(db, 'landing-page-popups', popup, 'content', 'html')),
       getDoc(doc(db, 'landing-page-popups', popup, 'content', 'css'))
     ])
-      .then((res) => 
-        content = res[0].data()!.content + styleEscape(res[1].data()!.content)
-      )
+      .then((res) => (content = res[0].data()!.content + styleEscape(res[1].data()!.content)))
       .catch(console.error);
   }
 </script>

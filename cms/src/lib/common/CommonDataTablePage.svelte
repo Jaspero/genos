@@ -9,7 +9,11 @@
 
   export let data: CommonDataTablePageData;
 
-  $: baseLink = ['/dashboard', $page.params.module || data.module, $page.params.collection || data.collection]
+  $: baseLink = [
+    '/dashboard',
+    $page.params.module || data.module,
+    $page.params.collection || data.collection
+  ]
     .filter(Boolean)
     .join('/');
   $: col = ($page.params.collection || data.collection) as string;

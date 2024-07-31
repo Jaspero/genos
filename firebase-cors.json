@@ -1,6 +1,10 @@
 [
   {
-    "origin": ["http://localhost:5173", "https://wonkawave-cms.web.app", "https://wonkawave.web.app"],
+    "origin": [
+      "http://localhost:5173",
+      "https://wonkawave-cms.web.app",
+      "https://wonkawave.web.app"
+    ],
     "method": ["GET", "HEAD"],
     "maxAgeSeconds": 3600
   }
