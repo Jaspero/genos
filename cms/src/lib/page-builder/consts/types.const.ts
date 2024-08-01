@@ -411,7 +411,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
         draggable: 'label, label *',
         droppable: false,
         highlightable: false,
-        classes: ['input'],
+        classes: ['textarea'],
         attributes: {
           rows: 10
         },
@@ -453,6 +453,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
         draggable: 'label, label *',
         droppable: false,
         highlightable: false,
+        classes: ['select'],
         components: [createOption('opt1', 'Option 1'), createOption('opt2', 'Option 2')],
         traits: [
           nameTrait,

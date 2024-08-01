@@ -9,4 +9,9 @@
   function submit() {}
 </script>
 
-<button type="submit" on:click|preventDefault={submit}>{label}</button>
+<button type="submit" class="button" {id} on:click|preventDefault={submit}>
+  {label}
+  <div class="spin-wrapper">
+    <span class="spinner"></span>
+  </div>
+</button>

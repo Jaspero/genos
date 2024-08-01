@@ -6,7 +6,7 @@
   import { goto } from '$app/navigation';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
 
-  export let id: string;
+  export let id: string | null = null;
   export let label: string;
   export let form: string;
   export let redirect = '';
@@ -62,18 +62,9 @@
   }
 </script>
 
-<button type="submit" bind:this={button} class:loading>{label}</button>
-
-<style>
-  button {
-    background-color: var(--primary-color);
-    color: var(--primary-contrast-color);
-    border-radius: var(--border-radius);
-    padding: 0.5rem 1rem;
-    font-size: 1.2rem;
-  }
-
-  .loading {
-    pointer-events: none;
-  }
-</style>
+<button class="button" type="submit" bind:this={button} {id} class:loading={loading}>
+  {label}
+  <div class="spin-wrapper">
+    <span class="spinner"></span>
+  </div>
+</button>

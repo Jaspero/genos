@@ -72,11 +72,65 @@ export function renderGrapes(
     },
     assetManager: {
       custom: true
-    },
-    style: GLOBAL_STYLES
+    }
   });
 
   TYPES(forms!).forEach(({ id, ...data }) => grapesInstance.DomComponents.addType(id, data));
+
+  grapesInstance.TraitManager.addType('select-options', {
+    events: {
+      'keyup': 'onChange',
+    },
+
+    onValueChange: function () {
+      const optionsStr = this.model.get('value').trim();
+      const options = optionsStr.split('\n');
+      const optComps = [];
+
+      for (var i = 0; i < options.length; i++) {
+        const optionStr = options[i];
+        const option = optionStr.split('::');
+        const opt: any = {
+          tagName: 'option',
+          attributes: {}
+        };
+        if(option[1]) {
+          opt.content = option[1];
+          opt.attributes.value = option[0];
+        } else {
+          opt.content = option[0];
+          opt.attributes.value = option[0];
+        }
+        optComps.push(opt);
+      }
+
+      const comps = this.target.get('components');
+      comps.reset(optComps);
+      this.target.view.render();
+    },
+
+    getInputEl: function() {
+      console.log(this);
+      if (!this.$input) {
+        const md = this.model;
+        const trg = this.target;
+        const options = trg.get('components');
+
+        let optionsStr = '';
+
+        for (var i = 0; i < options.length; i++) {
+          const option = options.models[i];
+          const optAttr = option.get('attributes');
+          const optValue = optAttr.value || '';
+          optionsStr += `${optValue}::${option.get('content')}\n`;
+        }
+
+        this.$input = document.createElement('textarea');
+        this.$input.value = optionsStr;
+      }
+      return this.$input;
+    },
+  });
 
   if (popups) {
     grapesInstance.DomComponents.addType(`pb-popup`, {

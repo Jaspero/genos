@@ -65,3 +65,107 @@
     0.16
   ); /* Color for shadows to ensure consistent depth cues across UI */
 }
+
+.header {
+	padding-top: 16px;
+	padding-right: 16px;
+	padding-bottom: 16px;
+	padding-left: 16px;
+}
+
+.nav {
+	padding-top: 16px;
+	padding-right: 16px;
+	padding-bottom: 16px;
+	padding-left: 16px;
+}
+
+.footer {
+	padding-top: 16px;
+	padding-right: 16px;
+	padding-bottom: 16px;
+	padding-left: 16px;
+}
+
+.section {
+	padding-top: 16px;
+	padding-right: 16px;
+	padding-bottom: 16px;
+	padding-left: 16px;
+}
+
+.article {
+	padding-top: 16px;
+	padding-right: 16px;
+	padding-bottom: 16px;
+	padding-left: 16px;
+}
+
+.aside {
+	padding-top: 16px;
+	padding-right: 16px;
+	padding-bottom: 16px;
+	padding-left: 16px;
+}
+
+.button {
+  position: relative;
+  cursor: pointer;
+  background-color: var(--secondary-color);
+  color: var(--secondary-contrast-color);
+  padding: .2rem 1rem;
+  font-size: 0.875rem;
+  font-weight: bold;
+  line-height: 2.5rem;
+  border-radius: var(--border-radius);
+  border: none;
+  transition: background .2s ease-in-out;
+
+  .spinner {
+    display: none;
+    width: 18px;
+    height: 18px;
+    border: 3px solid #fff;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotate 1s linear infinite;
+  }
+
+  .spin-wrapper {
+    display: none;
+  }
+
+  &.loading {
+    pointer-events: none;
+
+    .spin-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: inherit;
+      z-index: 0;
+    }
+
+    .spinner {
+      display: block;
+      z-index: 1;
+    }
+  }
+
+  &:hover {
+    background-color: var(--primary-color);
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(1turn);
+  }
+}
