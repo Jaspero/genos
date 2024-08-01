@@ -110,7 +110,6 @@ export function renderGrapes(
     },
 
     getInputEl: function() {
-      console.log(this);
       if (!this.$input) {
         const md = this.model;
         const trg = this.target;
