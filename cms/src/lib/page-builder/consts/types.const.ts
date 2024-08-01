@@ -573,6 +573,24 @@ export const TYPES = (forms: PageBuilderForm[]) => [
   },
 
   /**
+   * Blog
+   */
+  {
+    id: 'pb-blog',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-BLOG',
+    model: {
+      defaults: {
+        tagName: 'pb-blog',
+        traits: [
+          {
+            
+          }
+        ]
+      }
+    }
+  },
+
+  /**
    * Aside Image Slider
    */
   {

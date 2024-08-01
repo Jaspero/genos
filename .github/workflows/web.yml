@@ -19,6 +19,11 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
+      - name: Create key
+        run: |
+          echo $SV > web/key.json
+        env:
+          SV: ${{ env.SERVICE_ACCOUNT }}           
       - name: Build
         run: npm ci --prefix web --legacy-peer-deps && npm run build --prefix web
       - name: Deploy
