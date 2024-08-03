@@ -25,13 +25,8 @@ collections.addCollection('admins', {
       sortable: true
     },
     {
-      key: '/firstName',
-      label: 'First Name',
-      sortable: true
-    },
-    {
-      key: '/lastName',
-      label: 'Last Name',
+      key: '/name',
+      label: 'Name',
       sortable: true
     },
     {
@@ -39,10 +34,6 @@ collections.addCollection('admins', {
       label: 'Email',
       sortable: true,
       pipes: [mailtoPipe()]
-    },
-    {
-      key: '/phoneNumber',
-      label: 'Phone Number'
     },
     {
       key: 'id',
@@ -98,16 +89,6 @@ collections.addCollection('admins', {
           name: 'email',
           type: 'email',
           disabled: id !== 'new'
-        }
-      },
-      {
-        component: 'jp-input',
-        field: '/phoneNumber',
-        options: {
-          label: 'Phone Number',
-          name: 'phoneNumber',
-          type: 'tel',
-          required: true
         }
       },
       ...(id === 'new'

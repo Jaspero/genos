@@ -23,7 +23,7 @@ jobs:
         run: |
           echo $SV > web/key.json
         env:
-          SV: ${{ env.SERVICE_ACCOUNT }}           
+          SV: ${{ env.SERVICE_ACCOUNT }}
       - name: Build
         run: npm ci --prefix web --legacy-peer-deps && npm run build --prefix web
       - name: Deploy

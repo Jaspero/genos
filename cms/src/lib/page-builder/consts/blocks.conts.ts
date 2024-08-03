@@ -494,21 +494,23 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
       content: typeMap['pb-submit']
     },
     {
-      id: 'svg',
-      label: 'Arrow Right',
-      media: `<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" style="width: 100%; height: 48px"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg>`,
-      category: 'Vectors',
-      select: true,
-      content: `<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg>`
-    },
-
-    {
       id: 'featured-products',
       label: 'Featured Products',
       category: 'Shop',
       media:
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 100%; height: 48px;"><path d="M200-80q-33 0-56.5-23.5T120-160v-451q-18-11-29-28.5T80-680v-120q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v120q0 23-11 40.5T840-611v451q0 33-23.5 56.5T760-80H200Zm0-520v440h560v-440H200Zm-40-80h640v-120H160v120Zm200 280h240v-80H360v80Zm120 20Z"/></svg>',
       content: typeMap['pb-featured-products']
+    },
+
+    /**
+     * Blog
+     */
+    {
+      id: 'blog',
+      label: 'Blog Segment',
+      category: 'Blog',
+      media: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000" style="width: 100%; height: 48px;"><path d="M200-120q-33 0-56.5-23.5T120-200q0-33 23.5-56.5T200-280q33 0 56.5 23.5T280-200q0 33-23.5 56.5T200-120Zm480 0q0-117-44-218.5T516-516q-76-76-177.5-120T120-680v-120q142 0 265 53t216 146q93 93 146 216t53 265H680Zm-240 0q0-67-25-124.5T346-346q-44-44-101.5-69T120-440v-120q92 0 171.5 34.5T431-431q60 60 94.5 139.5T560-120H440Z"/></svg>`,
+      content: typeMap['pb-blog']
     },
 
     ...STEPPER(typeMap),

@@ -584,7 +584,26 @@ export const TYPES = (forms: PageBuilderForm[]) => [
         tagName: 'pb-blog',
         traits: [
           {
-            
+            type: 'document-lookup',
+            name: 'category',
+            collection: 'blog-categories',
+            label: 'Category'
+          },
+          {
+            type: 'document-lookup',
+            name: 'author',
+            collection: 'blog-authors',
+            label: 'Author'
+          },
+          {
+            type: 'text',
+            name: 'pageSize',
+            label: 'Page Size'
+          },
+          {
+            type: 'text',
+            name: 'singleArticleLink',
+            label: 'Link Prefix'
           }
         ]
       }

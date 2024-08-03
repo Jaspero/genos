@@ -62,7 +62,7 @@
   }
 </script>
 
-<button class="button" type="submit" bind:this={button} {id} class:loading={loading}>
+<button class="button" type="submit" bind:this={button} {id} class:loading>
   {label}
   <div class="spin-wrapper">
     <span class="spinner"></span>

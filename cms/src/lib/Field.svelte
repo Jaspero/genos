@@ -102,6 +102,6 @@
   }
 
   input {
-    @apply border rounded px-4 py-3 font-normal hover:border-black/50 focus:border-secondary focus:outline-2 focus:outline-secondary focus:outline-offset-4 focus:outline-dashed;
+    @apply border rounded px-4 py-3 font-normal hover:border-black/50 focus:outline-2 focus:outline-secondary;
   }
 </style>

@@ -8,7 +8,6 @@ import 'grapick/dist/grapick.min.css';
 import './plugins/component-code-editor/component-code-editor.css';
 import { AMService } from './am.service';
 import { DEVICES } from './consts/devices.const';
-import { GLOBAL_STYLES } from './consts/global-styles.const';
 import { STYLE_OVERRIDES } from './consts/style-overrides.const';
 import { TYPES } from './consts/types.const';
 import type { PageBuilderForm } from './types/page-builder-form.interface';
@@ -18,6 +17,7 @@ import type { Popup } from './types/popup.interface';
  * Registers all custom components
  */
 import './custom-components/custom-component';
+import { CUSTOM_TRAITS } from './consts/custom-traits.const';
 
 export function renderGrapes(
   pageBuilderEl: HTMLDivElement,
@@ -76,60 +76,7 @@ export function renderGrapes(
   });
 
   TYPES(forms!).forEach(({ id, ...data }) => grapesInstance.DomComponents.addType(id, data));
-
-  grapesInstance.TraitManager.addType('select-options', {
-    events: {
-      'keyup': 'onChange',
-    },
-
-    onValueChange: function () {
-      const optionsStr = this.model.get('value').trim();
-      const options = optionsStr.split('\n');
-      const optComps = [];
-
-      for (var i = 0; i < options.length; i++) {
-        const optionStr = options[i];
-        const option = optionStr.split('::');
-        const opt: any = {
-          tagName: 'option',
-          attributes: {}
-        };
-        if(option[1]) {
-          opt.content = option[1];
-          opt.attributes.value = option[0];
-        } else {
-          opt.content = option[0];
-          opt.attributes.value = option[0];
-        }
-        optComps.push(opt);
-      }
-
-      const comps = this.target.get('components');
-      comps.reset(optComps);
-      this.target.view.render();
-    },
-
-    getInputEl: function() {
-      if (!this.$input) {
-        const md = this.model;
-        const trg = this.target;
-        const options = trg.get('components');
-
-        let optionsStr = '';
-
-        for (var i = 0; i < options.length; i++) {
-          const option = options.models[i];
-          const optAttr = option.get('attributes');
-          const optValue = optAttr.value || '';
-          optionsStr += `${optValue}::${option.get('content')}\n`;
-        }
-
-        this.$input = document.createElement('textarea');
-        this.$input.value = optionsStr;
-      }
-      return this.$input;
-    },
-  });
+  CUSTOM_TRAITS.forEach(({ id, ...data }) => grapesInstance.TraitManager.addType(id, data));
 
   if (popups) {
     grapesInstance.DomComponents.addType(`pb-popup`, {

@@ -31,6 +31,11 @@
     }
   }
 
+  async function signOut() {
+    await auth.signOut();
+    goto('/');
+  }
+
   onMount(() => {
     onSnapshot(doc(db, 'settings', 'status'), (doc) => {
       const { lastPublished } = doc.data() || {};
@@ -118,9 +123,7 @@
     <footer class="border-t border-t-black/10">
       <button
         class="flex gap-2 w-full px-4 py-3 font-bold hover:bg-black/5 transition-all"
-        on:click={() => {
-          dropdown = true;
-        }}
+        on:click={() => (dropdown = true)}
       >
         <span class="material-symbols-outlined">account_circle</span>
         <span class="flex-1 text-left">Account</span>
@@ -143,10 +146,7 @@
           >
           <button
             class="px-4 py-3 text-sm hover:bg-black/5 transition-colors cursor-pointer"
-            on:click={() => {
-              auth.signOut();
-              goto('/');
-            }}>Sign out</button
+            on:click={signOut}>Sign out</button
           >
         </div>
       {/if}

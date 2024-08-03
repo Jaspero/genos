@@ -17,8 +17,8 @@
 </script>
 
 {#if loading}
-  <div class="loader">
-    <div class="loader-inner"></div>
+  <div class="loader bg-secondary">
+    <div class="loader-inner bg-secondary/5"></div>
   </div>
 {/if}
 
@@ -50,7 +50,6 @@
     width: 100%;
     opacity: 0;
     height: 4px;
-    background-color: #e1ebe6;
     z-index: 21;
     animation-delay: 5s;
     animation: delay 0.3s linear;
@@ -61,7 +60,6 @@
     position: absolute;
     width: 30%;
     height: 100%;
-    background: #09371f;
     animation: rotating 2s linear infinite;
   }
 </style>

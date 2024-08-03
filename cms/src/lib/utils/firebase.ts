@@ -25,7 +25,7 @@ onAuthStateChanged(auth, async (authUser) => {
     });
 
     try {
-      const userRef = doc(db, 'users', authUser.uid);
+      const userRef = doc(db, 'admins', authUser.uid);
       const docSnap = await getDoc(userRef);
 
       if (docSnap.exists()) {

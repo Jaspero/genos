@@ -31,7 +31,7 @@
   }
 
   select {
-    @apply border rounded pl-4 pr-6 py-3 font-normal hover:border-black/50 focus:outline-2 focus:outline-offset-4 focus:outline-dashed;
+    @apply border rounded pl-4 pr-6 py-3 font-normal hover:border-black/50 focus:outline-2;
     -moz-appearance: none; /* Firefox */
     -webkit-appearance: none; /* Safari and Chrome */
     appearance: none;

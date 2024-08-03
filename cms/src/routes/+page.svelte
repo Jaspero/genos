@@ -93,6 +93,7 @@
 
         rEmail = '';
         resetLoading = false;
+        resetPasswordDialog = false;
       }
     );
   }
@@ -157,8 +158,8 @@
 <div id="recaptcha-container-id"></div>
 <div class="flex items-center h-screen">
   <img
-    src="/images/patternmidtext.svg"
-    alt=""
+    src="/images/login-bg.png"
+    alt="Login"
     class="hidden lg:block h-screen max-w-md object-cover"
   />
 
@@ -227,15 +228,17 @@
 
 <Dialog bind:open={resetPasswordDialog}>
   <slot slot="title">Forgotten your password?</slot>
-  <Field label="Email" type="email" placeholder="your@email.com" required bind:value={rEmail} />
+  <form id="reset-password" on:submit|preventDefault={resetPassword}>
+    <Field label="Email" type="email" placeholder="your@email.com" required bind:value={rEmail} />
+  </form>
 
   <slot slot="actions">
     <Button
       variant="filled"
       color="secondary"
       type="submit"
+      form="reset-password"
       loading={resetLoading}
-      on:click={resetPassword}
       >Reset password
     </Button>
   </slot>
