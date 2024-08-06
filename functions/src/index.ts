@@ -13,6 +13,7 @@ export {updateUser} from './callable/update-user';
  * Triggers
  */
 export {adminUpdated} from './triggers/admin-updated';
+export {adminDeleted} from './triggers/admin-deleted';
 export {userCreated} from './triggers/user-created';
 export {productCreated} from './triggers/product-created';
 
