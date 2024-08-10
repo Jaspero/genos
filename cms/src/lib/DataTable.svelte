@@ -279,6 +279,13 @@
         instance.sort = initialSort;
       }
 
+      const {y} = el.getBoundingClientRect();
+      const headerHeight = 68;
+      const footerHeight = 80;
+      const bottomPadding = 40;
+
+      instance.height = `calc(100vh - ${y + headerHeight + footerHeight + bottomPadding}px)`;
+
       const rowClickHandler = (e: any) => {
         if (!rawClick) {
           return;
