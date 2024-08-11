@@ -25,7 +25,7 @@ export class CommonNewFormPageData {
     public idPrefix?: string,
     public createId?: () => string,
     public preSubmit?: (id: string, value: any) => Promise<void>,
-    public preCreate?: (id: string, value: any) => Promise<void>,
+    public preCreate?: (id: string, value: any) => Promise<string | void>,
     public submit?: (collection: string, id: string, value: any) => Promise<void>,
     public onValueChange?: (value: any, elements?: any) => void
   ) {}

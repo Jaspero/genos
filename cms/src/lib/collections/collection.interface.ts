@@ -58,7 +58,7 @@ export interface Collection {
    * needs to invoke only before creates or edits.
    */
   preSubmit?: (id: string, value: any) => Promise<void>;
-  preCreate?: (id: string, value: any) => Promise<void>;
+  preCreate?: (id: string, value: any) => Promise<string | void>;
   preEdit?: (id: string, value: any) => Promise<void>;
   createMethod?: (collection: string, id: string, value: any) => Promise<void>;
   editMethod?: (ref: DocumentReference, value: any) => Promise<void>;

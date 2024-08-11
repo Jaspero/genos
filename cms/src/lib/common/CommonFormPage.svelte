@@ -13,14 +13,14 @@
   import { alertWrapper } from '$lib/utils/alert-wrapper';
   import { confirmation } from '$lib/utils/confirmation';
   import { urlSegments } from '$lib/utils/url-segments';
-  import { CommonEditFormPageData, CommonNewFormPageData } from './common-form-page';
   import { CONFIG } from '../consts/config.const';
+  import { CommonEditFormPageData, CommonNewFormPageData } from './common-form-page';
 
   export let data: CommonNewFormPageData | CommonEditFormPageData;
   export let submit = async () => {
     saveLoading = true;
 
-    const id = data.id;
+    let id = data.id;
 
     await formModule.render.save(id);
 
@@ -41,7 +41,7 @@
       );
     } else {
       if (data.preCreate) {
-        await data.preCreate(id, data.value);
+        id = (await data.preCreate(id, data.value)) || id;
       }
 
       delete data.value.id;
