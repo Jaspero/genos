@@ -12,6 +12,7 @@ interface Return {
 
 export function clickOutside(node: HTMLElement): ActionReturn<{}, Return> {
   function dispatch() {
+    // @ts-ignore
     node.dispatchEvent(new CustomEvent('click_outside', node));
   }
 
