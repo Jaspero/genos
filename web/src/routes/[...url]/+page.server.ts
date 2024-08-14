@@ -1,4 +1,6 @@
+import { storage } from '$lib/utils/firebase';
 import { firestore } from '$lib/utils/firebase-admin';
+import { getBlob, ref } from 'firebase/storage';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params }) => {
@@ -18,37 +20,34 @@ export const load: PageServerLoad = async ({ params }) => {
   }
 
   const toLoad: any[] = [
-    doc.ref.collection('content').doc('html').get(),
-    doc.ref.collection('content').doc('css').get()
+    getBlob(ref(storage, `page-configurations/pages/${doc.id}/content.html`)),
+    getBlob(ref(storage, `page-configurations/pages/${doc.id}/content.css`))
   ];
 
   const data = doc.data();
 
   if (data.header) {
     toLoad.push(
-      firestore.collection('layouts').doc(data.header).collection('content').doc('html').get(),
-      firestore.collection('layouts').doc(data.header).collection('content').doc('css').get()
+      getBlob(ref(storage, `page-configurations/layouts/${data.header}/content.html`)),
+      getBlob(ref(storage, `page-configurations/layouts/${data.header}/content.css`))
     );
   }
 
   if (data.footer) {
     toLoad.push(
-      firestore.collection('layouts').doc(data.footer).collection('content').doc('html').get(),
-      firestore.collection('layouts').doc(data.footer).collection('content').doc('css').get()
+      getBlob(ref(storage, `page-configurations/layouts/${data.footer}/content.html`)),
+      getBlob(ref(storage, `page-configurations/layouts/${data.footer}/content.css`))
     );
   }
 
   const [htmlRef, styleRef, ...layoutRefs] = await Promise.all(toLoad);
-  const content = [layoutRefs[0], htmlRef, layoutRefs[2]].reduce((acc, cur) => {
-    if (cur?.exists) {
-      acc += cur.data()!.content || '';
-    }
+
+  const content = [htmlRef, layoutRefs[0], layoutRefs[2]].reduce((acc, cur) => {
+    acc += cur.toString();
     return acc;
   }, '');
-  const style = [layoutRefs[1], styleRef, layoutRefs[3]].reduce((acc, cur) => {
-    if (cur?.exists) {
-      acc += cur.data()!.content || '';
-    }
+  const style = [styleRef, layoutRefs[1], layoutRefs[3]].reduce((acc, cur) => {
+    acc += cur.toString();
     return acc;
   }, '');
 

@@ -279,7 +279,7 @@
         instance.sort = initialSort;
       }
 
-      const {y} = el.getBoundingClientRect();
+      const { y } = el.getBoundingClientRect();
       const headerHeight = 68;
       const footerHeight = 80;
       const bottomPadding = 40;

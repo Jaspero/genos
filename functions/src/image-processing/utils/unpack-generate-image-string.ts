@@ -1,3 +1,5 @@
+import {logger} from 'firebase-functions/v2';
+
 export function unpackGenerateImageString(data: string) {
   return data.split('----').reduce(
     (acc, cur) => {
@@ -15,7 +17,9 @@ export function unpackGenerateImageString(data: string) {
 
         try {
           parsed = parseInt(value, 10);
-        } catch (e) {}
+        } catch (e) {
+          logger.info(`Failed to parse ${key}`, e);
+        }
 
         if (parsed) {
           acc[key] = parsed;

@@ -3,6 +3,7 @@ import {basename, dirname, join} from 'path';
 import {REGION} from '../shared/consts/region.const';
 import {unpackGenerateImageString} from './utils/unpack-generate-image-string';
 import {getStorage} from 'firebase-admin/storage';
+import {logger} from 'firebase-functions/v2';
 
 export const fileDeleted = onObjectDeleted(
   {cpu: 2, concurrency: 1, region: REGION},
@@ -31,15 +32,25 @@ export const fileDeleted = onObjectDeleted(
         const {filePrefix, webpVersion, height, width} = unpackGenerateImageString(metadata[key]);
 
         if (filePrefix || width || height) {
+
+          const path = lookUpName(filePrefix);
+
           try {
-            await storage.file(lookUpName(filePrefix)).delete();
-          } catch (e) {}
+            await storage.file(path).delete();
+          } catch (e) {
+            logger.info(`Failed to delete file`, path, e);
+          }
         }
 
         if (webpVersion) {
+
+          const path = webpLookUp(filePrefix);
+
           try {
-            await storage.file(webpLookUp(filePrefix)).delete();
-          } catch (e) {}
+            await storage.file(path).delete();
+          } catch (e) {
+            logger.info(`Failed to delete file`, path, e);
+          }
         }
       }
     }
