@@ -50,7 +50,7 @@ collections.addCollection('admins', {
             {
               label: 'Change Password',
               icon: 'lock',
-              action: changePassword.set
+              action: id => changePassword.set({id, collection: 'admins'})
             }
           ],
           links: []

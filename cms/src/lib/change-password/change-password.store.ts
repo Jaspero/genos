@@ -1,3 +1,3 @@
 import { writable } from 'svelte/store';
 
-export const changePassword = writable<null | string>(null);
+export const changePassword = writable<null | { id: string; collection?: string }>(null);

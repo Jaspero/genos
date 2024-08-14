@@ -10,12 +10,15 @@
 
   let password: string;
   let repeatPassword: string;
+  let id: string;
+  let collection: string | undefined;
   let open = false;
   let loading = false;
   let passwordType: 'password' | 'text' = 'password';
 
-  $: id = $changePassword;
-  $: if (id) {
+  $: if ($changePassword) {
+    id = $changePassword.id;
+    collection = $changePassword.collection;
     password = '';
     repeatPassword = '';
     open = true;
@@ -38,7 +41,7 @@
         'updateUser'
       )({
         id,
-        data: { password }
+        data: { password, collection }
       }),
       'Password updated successfully',
       undefined,
