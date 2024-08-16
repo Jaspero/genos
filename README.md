@@ -29,3 +29,4 @@
 - Change the .firebaserc targets
 - Change the action URL in authenticaiton templates to `https://europe-west1-[project].cloudfunctions.net/actioncontroller`
 - Download a service account and store it in `webshop/key.json`
+- Set SERVICE_ACCOUNT and FIREBASE_TOKEN secrets on GitHub
