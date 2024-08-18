@@ -45,7 +45,7 @@
 </button>
 
 {#if dropdown}
-  <div class="z-10 fixed top-0 left-0 w-screen h-screen bg-transparent" />
+  <div class="z-10 fixed top-0 left-0 w-screen h-screen bg-transparent"></div>
   <div
     class="z-20 fixed flex flex-col bg-white shadow"
     style="top: {y}px; {clickedOnRight ? 'right' : 'left'}: {Math.abs(x)}px;"

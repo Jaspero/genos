@@ -83,13 +83,13 @@
   }
 </script>
 
-<div bind:this={el} />
+<div bind:this={el}></div>
 
 {#if isModalOpen}
   <div class="modal-overlay">
     <div class="modal-content">
       <h2>Enter your comment</h2>
-      <textarea bind:value={comment} rows="4" placeholder="Optional comment" />
+      <textarea bind:value={comment} rows="4" placeholder="Optional comment"></textarea>
       <div class="flex justify-center">
         <Button on:click={saveReview} {loading}>Save</Button>
         <Button on:click={closeModal} color="secondary">Cancel</Button>

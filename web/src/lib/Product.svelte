@@ -4,7 +4,6 @@
   import { doc, updateDoc, arrayRemove, arrayUnion } from 'firebase/firestore';
   import { onMount } from 'svelte';
   import { writable } from 'svelte/store';
-  import { notification } from '$lib/notification/notification';
   import { cartState } from './cart/cart-state';
   import '@jaspero/web-components/dist/review-stars.wc.js';
 
@@ -59,10 +58,10 @@
       await updateDoc(userRef, {
         favorites: arrayRemove(product.id)
       });
-      notification.set({
-        type: 'error',
-        content: `${product.name} has been removed from favorites.`
-      });
+      // notification.set({
+      //   type: 'error',
+      //   content: `${product.name} has been removed from favorites.`
+      // });
       const index = ($user.favorites || []).findIndex((item) => item === product.id);
       if (index !== -1) {
         $user.favorites.splice(index, 1);
@@ -73,10 +72,10 @@
         favorites: arrayUnion(product.id)
       });
       $user.favorites = [...($user.favorites || []), product.id];
-      notification.set({
-        type: 'success',
-        content: `${product.name} has been added to favorites.`
-      });
+      // notification.set({
+      //   type: 'success',
+      //   content: `${product.name} has been added to favorites.`
+      // });
     }
     isFavoriteStore.set(!isFavorite);
   }
@@ -91,10 +90,7 @@
     }
     const updatedValue = [...currentCart, { ...product, selectedVariant }];
     cartState.set(updatedValue);
-    notification.set({
-      type: 'success',
-      content: `${product.name} has been added to cart.`
-    });
+    // P
     updateDoc(userRef, {
       cartItems: arrayUnion(product.id),
       cartUpdate: Date.now()
@@ -146,7 +142,7 @@
       <img class="w-full h-[200px] rounded-t-lg" src="/images/dummy-img.jpg" alt="default image" />
     {/if}
     <div class="w-full z-10 relative">
-      <jp-review-stars value={product.averageRating} />
+      <jp-review-stars value={product.averageRating}></jp-review-stars>
     </div>
   </a>
   <div class="px-5 pb-5">

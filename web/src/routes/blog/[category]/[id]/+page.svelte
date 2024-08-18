@@ -221,7 +221,7 @@
 <Dialog bind:showing={commentDialog}>
   {#if $authenticated}
     <form on:submit|preventDefault={saveComment}>
-      <textarea bind:value={comment} rows="5" required placeholder="Add a comment" />
+      <textarea bind:value={comment} rows="5" required placeholder="Add a comment"></textarea>
       <Button type="submit" {loading} label="Save" />
     </form>
   {:else}

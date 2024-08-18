@@ -10,14 +10,14 @@
 <div class="max-w-[1400px] mx-auto flex flex-wrap py-[80px]">
   <div class="w-3/6 gallery-container h-[400px]">
     {#if data.gallery && data.gallery.length > 0}
-      <jp-carousel images={JSON.stringify(data.gallery.map((src) => ({ src })))} sliderBar="true" />
+      <jp-carousel images={JSON.stringify(data.gallery.map((src) => ({ src })))} sliderBar="true"></jp-carousel>
     {:else}
       <img class="w-full h-[200px] rounded-t-lg" src="/images/dummy-img.jpg" alt="default image" />
     {/if}
   </div>
   <div class="w-3/6">
     <div class="product-info">
-      <jp-review-stars value={data.averageRating} rating={data.enableStarsInput} />
+      <jp-review-stars value={data.averageRating} rating={data.enableStarsInput}></jp-review-stars>
       <h1>{data.name}</h1>
       <p class="text-[30px]">Price: <span class="font-600">{data.price}€</span></p>
     </div>

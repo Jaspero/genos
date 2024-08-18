@@ -38,7 +38,7 @@
 
 {#if showing}
   {#if !fullScreen}
-    <div class="blurred-bg" transition:fade={{ duration: 200 }} />
+    <div class="blurred-bg" transition:fade={{ duration: 200 }}></div>
   {/if}
   <div
     class="dialog"

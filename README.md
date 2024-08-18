@@ -28,5 +28,7 @@
 - Change the env-config files throughout the project
 - Change the .firebaserc targets
 - Change the action URL in authenticaiton templates to `https://europe-west1-[project].cloudfunctions.net/actioncontroller`
-- Download a service account and store it in `webshop/key.json`
-- Set SERVICE_ACCOUNT and FIREBASE_TOKEN secrets on GitHub
+- Download a service account and store it in `web/key.json`
+- Add the service account to GitHub secrets with the name SERVICE_ACCOUNT
+- To enable website releases you'll need to generate a github token and add it to GCE-s secret manager under the name `GITHUB_TOKEN`
+- Look for any `TODO(Project Specific)` references in the codebase and update them accordingly

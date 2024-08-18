@@ -35,4 +35,4 @@
   });
 </script>
 
-<div id="recaptcha" />
+<div id="recaptcha"></div>

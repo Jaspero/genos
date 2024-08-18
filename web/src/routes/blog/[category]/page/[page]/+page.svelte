@@ -11,7 +11,7 @@
   export let data: { categories: BlogCategory[]; page: BlogArticle[]; pageSize: number };
 
   $: activeCat = data.categories.find((it) => it.id === $page.params.category)!;
-  $: if (activeCat && activeCat.meta) {
+  $: if (activeCat?.meta) {
     meta.set(activeCat.meta);
   }
 </script>
@@ -21,7 +21,7 @@
     <Tabs>
       <TabsItem href="/blog">All posts</TabsItem>
       {#each data.categories as category}
-        <TabsItem href="/blog/{category.id}" active={activeCat.id === category.id}
+        <TabsItem href="/blog/{category.id}" active={activeCat?.id === category.id}
           >{category.name}</TabsItem
         >
       {/each}

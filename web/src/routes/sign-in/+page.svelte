@@ -200,7 +200,7 @@
 </script>
 
 <div class="max-w-7xl mx-auto p-12 flex justify-center items-center">
-  <div id="recaptcha-container-id" />
+  <div id="recaptcha-container-id"></div>
 
   {#if showCodeInput}
     <div>

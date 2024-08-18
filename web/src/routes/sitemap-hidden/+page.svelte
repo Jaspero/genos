@@ -87,3 +87,12 @@
     {/each}
   </ul>
 {/each}
+
+<h5>Static Pages</h5>
+
+<ul>
+  <li><a href="/checkout">Checkout</a></li>
+  <li><a href="/reset-password">Reset Password</a></li>
+  <li><a href="/sign-in">Sign In</a></li>
+  <li><a href="/sign-up">Sign Up</a></li>
+</ul>
