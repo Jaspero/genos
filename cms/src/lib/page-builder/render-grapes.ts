@@ -158,10 +158,12 @@ export function renderGrapes(
     STYLE_OVERRIDES.forEach(({ id, property, ...overides }) => {
       styleManager.removeProperty(id, property);
 
-      styleManager.addProperty(id, {
-        property,
-        ...overides
-      });
+      if (Object.keys(overides).length) {
+        styleManager.addProperty(id, {
+          property,
+          ...overides
+        });
+      }
     });
 
     styleManager.render();

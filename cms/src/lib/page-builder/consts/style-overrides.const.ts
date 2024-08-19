@@ -48,5 +48,39 @@ export const STYLE_OVERRIDES = [
     property: 'gap',
     type: 'number',
     units: ['px', 'em', 'rem']
+  },
+  {
+    id: 'decorations',
+    property: 'border'
+  },
+  {
+    id: 'decorations',
+    property: 'border-width',
+    name: 'Border Width',
+    type: 'number',
+    units: ['px', 'em', 'rem']
+  },
+  {
+    id: 'decorations',
+    property: 'border-style',
+    name: 'Border Style',
+    type: 'select',
+    options: [
+      {value: 'none'},
+      {value: 'solid'},
+      {value: 'dotted'},
+      {value: 'dashed'},
+      {value: 'double'},
+      {value: 'groove'},
+      {value: 'ridge'},
+      {value: 'inset'},
+      {value: 'outset'}
+    ]
+  },
+  {
+    id: 'decorations',
+    property: 'border-color',
+    name: 'Border Color',
+    type: 'color'
   }
 ];
