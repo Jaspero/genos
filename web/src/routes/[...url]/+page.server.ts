@@ -1,6 +1,5 @@
 import { storage } from '$lib/utils/firebase';
-import { firestore } from '$lib/utils/firebase-admin';
-import { getBlob, ref } from 'firebase/storage';
+import { firestore, bucket } from '$lib/utils/firebase-admin';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params }) => {
@@ -20,34 +19,38 @@ export const load: PageServerLoad = async ({ params }) => {
   }
 
   const toLoad: any[] = [
-    getBlob(ref(storage, `page-configurations/pages/${doc.id}/content.html`)),
-    getBlob(ref(storage, `page-configurations/pages/${doc.id}/content.css`))
+     bucket.file(`page-configurations/pages/${doc.id}/content.html`).download(),
+     bucket.file(`page-configurations/pages/${doc.id}/content.css`).download()
   ];
 
   const data = doc.data();
 
   if (data.header) {
     toLoad.push(
-      getBlob(ref(storage, `page-configurations/layouts/${data.header}/content.html`)),
-      getBlob(ref(storage, `page-configurations/layouts/${data.header}/content.css`))
+       bucket.file(`page-configurations/layouts/${data.header}/content.html`).download(),
+       bucket.file(`page-configurations/layouts/${data.header}/content.css`).download()
     );
   }
 
   if (data.footer) {
     toLoad.push(
-      getBlob(ref(storage, `page-configurations/layouts/${data.footer}/content.html`)),
-      getBlob(ref(storage, `page-configurations/layouts/${data.footer}/content.css`))
+       bucket.file(`page-configurations/layouts/${data.footer}/content.html`).download(),
+       bucket.file(`page-configurations/layouts/${data.footer}/content.css`).download()
     );
   }
 
   const [htmlRef, styleRef, ...layoutRefs] = await Promise.all(toLoad);
 
   const content = [htmlRef, layoutRefs[0], layoutRefs[2]].reduce((acc, cur) => {
-    acc += cur.toString();
+    if (cur) {
+      acc += cur.toString();
+    }
     return acc;
   }, '');
   const style = [styleRef, layoutRefs[1], layoutRefs[3]].reduce((acc, cur) => {
-    acc += cur.toString();
+    if (cur) {
+      acc += cur.toString();
+    }
     return acc;
   }, '');
 
