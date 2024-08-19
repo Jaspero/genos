@@ -367,11 +367,7 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
       select: true,
       activate: true,
       content: {
-        type: 'image',
-        style: {
-          'max-width': '100%',
-          height: '100%'
-        }
+        type: 'image'
       }
     },
     {
@@ -382,11 +378,7 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
       select: true,
       activate: true,
       content: {
-        type: 'video',
-        style: {
-          'max-width': '100%',
-          height: '100%'
-        }
+        type: 'video'
       }
     },
     {
