@@ -67,10 +67,7 @@
       <GridCol span="12" spanxl="8">
         <div class="flex flex-col gap-4">
           <SectionTitle>Reset password</SectionTitle>
-          <p>
-            Please provide your email address below, and we'll promptly send you an email containing
-            detailed instructions on how to reset your password.
-          </p>
+          <p>Please provide a new password.</p>
           <form class="flex flex-col gap-4 border-b pb-8" on:submit|preventDefault={changePassword}>
             <Field required label="Password" type="password" minlength={6} bind:value={password} />
             <Field required label="Repeat Password" type="password" bind:value={repeatPassword} />
