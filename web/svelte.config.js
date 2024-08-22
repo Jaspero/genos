@@ -16,8 +16,7 @@ const config = {
         /**
          * Contains links to all other pages
          */
-        '/sitemap-hidden',
-        // '/checkout'
+        '/sitemap-hidden'
       ]
     }
   },

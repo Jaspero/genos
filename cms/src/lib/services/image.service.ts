@@ -15,7 +15,7 @@ export class BucketImageService implements ImageService {
       [
         this.prefix || '',
         (id || '') + '/',
-        `img-${random.string()}.` + file.name.split('.').pop()
+        `${random.string()}.` + file.name.split('.').pop()
       ].join('')
     );
     await uploadBytes(src, file, {
