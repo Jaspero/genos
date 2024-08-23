@@ -12,6 +12,7 @@
   $: structured = ldJson($meta.structured);
 </script>
 
+<!-- svelte-ignore component_name_lowercase -->
 <svelte:head>
   <title>{title}</title>
   <meta property="og:url" content={url} />

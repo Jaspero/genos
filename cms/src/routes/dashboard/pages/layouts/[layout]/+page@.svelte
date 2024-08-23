@@ -93,10 +93,21 @@
     }
 
     const json = grapesInstance.getProjectData();
+    const html = grapesInstance.getHtml();
+    const css = grapesInstance.getCss();
+
     const toUpdate = [
       uploadString(
         ref(storage, `page-configurations/${data.col}/${id}/content.json`),
         JSON.stringify(json)
+      ),
+      uploadString(
+        ref(storage, `page-configurations/${data.col}/${id}/content.html`),
+        html.replace('<body>', '').replace('</body>', '')
+      ),
+      uploadString(
+        ref(storage, `page-configurations/${data.col}/${id}/content.css`),
+        css
       )
     ];
 
