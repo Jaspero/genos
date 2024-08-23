@@ -81,60 +81,8 @@ video {
   padding: 16px;
 }
 
-.button {
-  position: relative;
-  cursor: pointer;
-  background-color: var(--secondary-color);
-  color: var(--secondary-contrast-color);
-  padding: 0.2rem 1rem;
-  font-size: 0.875rem;
-  font-weight: bold;
-  line-height: 2.5rem;
-  border-radius: var(--border-radius);
-  border: none;
-  transition: background 0.2s ease-in-out;
-
-  .spinner {
-    display: none;
-    width: 18px;
-    height: 18px;
-    border: 3px solid #fff;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    animation: rotate 1s linear infinite;
-  }
-
-  .spin-wrapper {
-    display: none;
-  }
-
-  &.loading {
-    pointer-events: none;
-
-    .spin-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      background: inherit;
-      z-index: 0;
-    }
-
-    .spinner {
-      display: block;
-      z-index: 1;
-    }
-  }
-
-  &:hover {
-    background-color: var(--primary-color);
-  }
+column {
+  min-height: 32px;
 }
 
 @keyframes rotate {
