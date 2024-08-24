@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Close from 'svelte-material-icons/Close.svelte';
   import { clickOutside } from '$lib/utils/click-outside.ts';
   import { fade } from 'svelte/transition';
   import { createEventDispatcher } from 'svelte';
@@ -56,7 +55,7 @@
       <slot />
     </div>
     <button type="button" class="dialog-close" on:click={close}>
-      <Close size="24" />
+      <!-- <Close size="24" /> -->
     </button>
   </div>
 {/if}
