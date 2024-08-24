@@ -66,15 +66,15 @@ export const STYLE_OVERRIDES = [
     name: 'Border Style',
     type: 'select',
     options: [
-      {value: 'none'},
-      {value: 'solid'},
-      {value: 'dotted'},
-      {value: 'dashed'},
-      {value: 'double'},
-      {value: 'groove'},
-      {value: 'ridge'},
-      {value: 'inset'},
-      {value: 'outset'}
+      { value: 'none' },
+      { value: 'solid' },
+      { value: 'dotted' },
+      { value: 'dashed' },
+      { value: 'double' },
+      { value: 'groove' },
+      { value: 'ridge' },
+      { value: 'inset' },
+      { value: 'outset' }
     ]
   },
   {

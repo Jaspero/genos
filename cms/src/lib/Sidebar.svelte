@@ -1,9 +1,7 @@
 <script lang="ts">
-  import { db, auth } from '$lib/utils/firebase';
+  import { auth } from '$lib/utils/firebase';
   import { slide } from 'svelte/transition';
-  import { doc, onSnapshot } from 'firebase/firestore';
   import { onMount } from 'svelte';
-  import { lastPublishedOn } from './stores/last-published-on.store';
   import { clickOutside } from './utils/click-outside';
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
@@ -37,14 +35,6 @@
   }
 
   onMount(() => {
-    onSnapshot(doc(db, 'settings', 'status'), (doc) => {
-      const { lastPublished } = doc.data() || {};
-
-      if (lastPublished) {
-        lastPublishedOn.set(lastPublished);
-      }
-    });
-
     links = links.map((link) => {
       if (link.links) {
         return {

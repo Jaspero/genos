@@ -3,7 +3,7 @@
   import BlogAuthor from '$lib/blog/BlogAuthor.svelte';
   import type { BlogArticle } from '$lib/types/blog/blog-article.interface';
   import type { BlogCategory } from '$lib/types/blog/blog-category.interface';
-  import {CONFIG} from '$lib/consts/config.const';
+  import { CONFIG } from '$lib/consts/config.const';
 
   export let data: {
     pages: Array<{ url: string; title: string }>;

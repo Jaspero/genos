@@ -1,6 +1,4 @@
 {
-	"clearBuild": true,
-	"pages": [
-		"/sitemap-hidden"
-	]
+  "clearBuild": true,
+  "pages": ["/sitemap-hidden"]
 }

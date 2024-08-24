@@ -20,12 +20,21 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
       - name: Create key
+        working-directory: web
         run: |
-          echo $SV > web/key.json
+          echo $SV > key.json
         env:
           SV: ${{ env.SERVICE_ACCOUNT }}
+      - name: Install Dependencies
+        working-directory: web
+        run: npm ci
+      - name: Configure Release
+        id: config
+        working-directory: web
+        run: echo ::set-output name=VERSION::$(node configure-release.cjs start)
       - name: Build
-        run: npm ci --prefix web --legacy-peer-deps && npm run build --prefix web
+        working-directory: web
+        run: npm run build
       - name: Deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -54,3 +63,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: 'build'
           force: true
+      - name: Update Release Status
+        working-directory: web
+        run: node configure-release.cjs finish ${{ steps.config.outputs.VERSION }}

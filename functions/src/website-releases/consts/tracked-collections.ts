@@ -4,6 +4,6 @@
  * a website release should be added here
  */
 export const TRACKED_COLLECTIONS = [
-	{collection: 'blog-articles', titleKey: 'name', urlKey: 'url', prefix: '/blog'},
-	{collection: 'pages', titleKey: 'name', urlKey: 'url'}
+  {collection: 'blog-articles', titleKey: 'name', urlKey: 'url', prefix: '/blog'},
+  {collection: 'pages', titleKey: 'name', urlKey: 'url'},
 ];

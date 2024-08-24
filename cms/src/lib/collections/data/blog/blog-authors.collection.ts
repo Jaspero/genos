@@ -6,6 +6,7 @@ import { releaseStatusPipe } from '../../../column-pipes/release-status.pipe';
 import { META_FORM_FIELDS } from '../../../consts/meta.form-fields';
 import { quillFiled } from '../../../form-fields/quill.field';
 import { BucketImageService } from '../../../services/image.service';
+import { generateSlug } from '../../../utils/generate-slug';
 import { collections } from '../../collections';
 
 collections.addCollection('blog-authors', {
@@ -85,11 +86,11 @@ collections.addCollection('blog-authors', {
       },
       {
         component: 'jp-input',
-        field: '/id',
+        field: '/url',
         options: {
           label: 'Url',
           name: 'url',
-          hint: 'Generated from title if left empty.',
+          hint: 'Generated from Name if left empty.',
           pattern: '[a-zA-Z0-9\\-_]+',
           minlength: 3,
           patternValidationMessage: `Only letters, numbers, '-' and '_' are valid in the URL.`
@@ -109,6 +110,7 @@ collections.addCollection('blog-authors', {
     ];
   },
   preSubmit: async (id, value) => {
+    value.url = value.url || generateSlug(value.name);
     value.lastUpdatedOn = new Date().toISOString();
   },
   idPrefix: 'bau'

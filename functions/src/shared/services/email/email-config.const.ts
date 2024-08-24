@@ -1,7 +1,7 @@
 export const EMAIL_CONFIG = {
   /**
    * TODO(Project Specific)
-   * This is URL of the emailTracking cloud functions, you'll 
+   * This is URL of the emailTracking cloud functions, you'll
    * be able to retrieve it from GCE once you deploy functions.
    */
   trackingUrl: 'https://emailtracking-cp6basztla-ew.a.run.app/et',

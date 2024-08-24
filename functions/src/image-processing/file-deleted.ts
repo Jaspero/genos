@@ -32,24 +32,22 @@ export const fileDeleted = onObjectDeleted(
         const {filePrefix, webpVersion, height, width} = unpackGenerateImageString(metadata[key]);
 
         if (filePrefix || width || height) {
-
           const path = lookUpName(filePrefix);
 
           try {
             await storage.file(path).delete();
           } catch (e) {
-            logger.info(`Failed to delete file`, path, e);
+            logger.info('Failed to delete file', path, e);
           }
         }
 
         if (webpVersion) {
-
           const path = webpLookUp(filePrefix);
 
           try {
             await storage.file(path).delete();
           } catch (e) {
-            logger.info(`Failed to delete file`, path, e);
+            logger.info('Failed to delete file', path, e);
           }
         }
       }

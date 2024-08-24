@@ -56,6 +56,10 @@
       );
     }
 
+    if (data.postSubmit) {
+      await data.postSubmit(id, data.value);
+    }
+
     saveLoading = false;
 
     goto(back);

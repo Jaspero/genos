@@ -63,4 +63,5 @@ export interface Collection {
   createMethod?: (collection: string, id: string, value: any) => Promise<void>;
   editMethod?: (ref: DocumentReference, value: any) => Promise<void>;
   importMethod?: (file: File) => Promise<any>;
+  postSubmit?: (id: string, value: any) => Promise<void>;
 }

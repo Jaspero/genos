@@ -1,10 +1,10 @@
-import {firestore, bucket} from '$lib/utils/firebase-admin';
-import type {PageServerLoad} from './$types';
+import { firestore, bucket } from '$lib/utils/firebase-admin';
+import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({params}) => {
+export const load: PageServerLoad = async ({ params }) => {
   const url = params.url.trim();
 
-  const {docs} = await firestore
+  const { docs } = await firestore
     .collection('pages')
     .where('url', '==', '/' + url)
     .where('active', '==', true)
@@ -40,28 +40,18 @@ export const load: PageServerLoad = async ({params}) => {
 
   const [htmlRef, styleRef, ...layoutRefs] = await Promise.all(toLoad);
 
-  const content = [
-    layoutRefs[0],
-    htmlRef,
-    layoutRefs[2]
-  ]
-    .reduce((acc, cur) => {
-      if (cur) {
-        acc += cur.toString();
-      }
-      return acc;
-    }, '');
-  const style = [
-    layoutRefs[1],
-    styleRef,
-    layoutRefs[3]
-  ]
-    .reduce((acc, cur) => {
-      if (cur) {
-        acc += cur.toString();
-      }
-      return acc;
-    }, '');
+  const content = [layoutRefs[0], htmlRef, layoutRefs[2]].reduce((acc, cur) => {
+    if (cur) {
+      acc += cur.toString();
+    }
+    return acc;
+  }, '');
+  const style = [layoutRefs[1], styleRef, layoutRefs[3]].reduce((acc, cur) => {
+    if (cur) {
+      acc += cur.toString();
+    }
+    return acc;
+  }, '');
 
   return {
     ...data,

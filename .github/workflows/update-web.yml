@@ -1,9 +1,15 @@
-name: Update Web
+name: Prod | Update Web
 on:
   workflow_dispatch:
     inputs:
-      description:
-        description: 'Release description'
+      type:
+        description: 'Release Type'
+        required: true
+        default: 'full'
+        type: choice
+        options:
+          - full
+          - partial
 env:
   PROJECT: wonkawave
   SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
@@ -15,11 +21,16 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
+      - name: Configure Release
+        id: config
+        working-directory: web
+        run: echo ::set-output name=VERSION::$(node configure-release.cjs start ${{ inputs.type }})
       - name: Build
         if: contains(github.ref, 'build')
+        working-directory: web
         run: |
-          echo $SV > web/key.json
-          npm run build --prefix web
+          echo $SV > key.json
+          npm run build
         env:
           SV: ${{ env.SERVICE_ACCOUNT }}
       - name: Deploy
@@ -33,6 +44,5 @@ jobs:
           target: ${{ env.TARGET }}
       - name: Update Firestore
         if: contains(github.ref, 'build')
-        run: |
-          cd web
-          node update-release.cjs
+        working-directory: web
+        run: node configure-release.cjs finish ${{ steps.config.outputs.VERSION }}

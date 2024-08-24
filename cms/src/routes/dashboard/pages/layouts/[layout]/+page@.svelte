@@ -105,10 +105,7 @@
         ref(storage, `page-configurations/${data.col}/${id}/content.html`),
         html.replace('<body>', '').replace('</body>', '')
       ),
-      uploadString(
-        ref(storage, `page-configurations/${data.col}/${id}/content.css`),
-        css
-      )
+      uploadString(ref(storage, `page-configurations/${data.col}/${id}/content.css`), css)
     ];
 
     if (data.snap) {
