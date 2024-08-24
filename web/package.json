@@ -35,7 +35,6 @@
     "@jaspero/utils": "1.15.3",
     "@jaspero/web-components": "1.152.0",
     "firebase": "10.13.0",
-    "firebase-admin": "12.4.0",
-    "iconify-icon": "2.1.0"
+    "firebase-admin": "12.4.0"
   }
 }

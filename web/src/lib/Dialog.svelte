@@ -55,7 +55,7 @@
       <slot />
     </div>
     <button type="button" class="dialog-close" on:click={close}>
-      <!-- <Close size="24" /> -->
+      <span class="material-symbols-outlined">close</span>
     </button>
   </div>
 {/if}
