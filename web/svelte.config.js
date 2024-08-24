@@ -1,5 +1,8 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from './adapter.js';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import { readFileSync } from 'fs';
+
+const buildConfig = JSON.parse(readFileSync('build-config.json'));
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -7,17 +10,13 @@ const config = {
     adapter: adapter({
       pages: '../public/web',
       fallback: 'index.html',
-      strict: false
+      strict: false,
+      clearBuild: buildConfig.clearBuild
     }),
     prerender: {
       crawl: true,
       handleMissingId: 'warn',
-      entries: [
-        /**
-         * Contains links to all other pages
-         */
-        '/sitemap-hidden'
-      ]
+      entries: buildConfig.pages
     }
   },
   preprocess: vitePreprocess(),

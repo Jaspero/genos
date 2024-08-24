@@ -22,13 +22,19 @@ export default function (options) {
 				assets = pages,
 				fallback,
 				precompress
-			} = options ?? platform?.defaults ?? /** @type {import('./index.js').AdapterOptions} */ ({});
+			} = options;
 
-			builder.rimraf(assets);
-			builder.rimraf(pages);
+			if (options.clearBuild) {
+				builder.rimraf(assets);
+				builder.rimraf(pages);
+			}
 
 			builder.generateEnvModule();
-			builder.writeClient(assets);
+			
+			if (options.clearBuild) {
+				builder.writeClient(assets);
+			}
+
 			builder.writePrerendered(pages);
 
 			if (fallback) {
@@ -49,8 +55,6 @@ export default function (options) {
 			} else {
 				builder.log(`Wrote pages to "${pages}" and assets to "${assets}"`);
 			}
-
-			if (!options) platform?.done(builder);
 		}
 	};
 }
