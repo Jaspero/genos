@@ -18,6 +18,10 @@ export interface Collection {
   freezeFirstColumn?: boolean;
   // @default false
   freezeLastColumn?: boolean;
+  // @default 10
+  pageSize?: number;
+  // @default [10, 25, 50, 100]
+  pageSizes?: number[];
   // @default true
   showArrangingColumns?: boolean;
   // @default true
