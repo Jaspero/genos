@@ -7,6 +7,7 @@
   import { changePassword } from './change-password.store';
   import { functions } from '../utils/firebase';
   import { renderAlert } from '@jaspero/web-components/dist/render-alert.js';
+  import { onDestroy } from 'svelte';
 
   let password: string;
   let repeatPassword: string;
@@ -35,6 +36,8 @@
       return;
     }
 
+    loading = true;
+
     await alertWrapper(
       httpsCallable(
         functions,
@@ -52,7 +55,14 @@
 
     loading = false;
     open = false;
+    changePassword.set(null);
   }
+
+  onDestroy(() => {
+    if ($changePassword) {
+      changePassword.set(null);
+    }
+  })
 </script>
 
 <Dialog bind:open onClose={() => changePassword.set(null)}>

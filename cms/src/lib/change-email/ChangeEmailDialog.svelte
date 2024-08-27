@@ -6,6 +6,7 @@
   import { alertWrapper } from '../utils/alert-wrapper';
   import { functions } from '../utils/firebase';
   import { changeEmail } from './change-email.store';
+  import { onDestroy } from 'svelte';
 
   let id: string;
   let email: string;
@@ -40,7 +41,14 @@
 
     loading = false;
     open = false;
+    changeEmail.set(null);
   }
+
+  onDestroy(() => {
+    if ($changeEmail) {
+      changeEmail.set(null);
+    }
+  })
 </script>
 
 <Dialog bind:open onClose={() => changeEmail.set(null)}>
