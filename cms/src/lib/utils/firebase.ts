@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import type { User } from 'firebase/auth';
+import type { IdTokenResult, User } from 'firebase/auth';
 import { getFirestore, getDoc, doc } from 'firebase/firestore';
 import { getFunctions } from 'firebase/functions';
 import { writable } from 'svelte/store';
@@ -16,13 +16,11 @@ export const functions = getFunctions(firebaseApp, ENV_CONFIG.region);
 
 export const authenticated = writable<null | false | User>(null);
 export const user = writable<null | FirestoreUser>(null);
-export const token = writable<null | any>(null);
+export const token = writable<null | IdTokenResult>(null);
 
 onAuthStateChanged(auth, async (authUser) => {
   if (authUser) {
-    authUser.getIdToken().then((result) => {
-      token.set(result);
-    });
+    authUser.getIdTokenResult().then((result) => token.set(result));
 
     try {
       const userRef = doc(db, 'admins', authUser.uid);

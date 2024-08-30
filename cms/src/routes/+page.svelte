@@ -69,9 +69,7 @@
       () => (loading = false)
     );
 
-    setTimeout(() => {
-      goto(redirectLink);
-    }, 500);
+    await processLogin();
   }
 
   async function resetPassword() {
@@ -119,6 +117,22 @@
         }
       }
     });
+
+    await processLogin();
+  }
+
+  async function processLogin() {
+    const token = await auth.currentUser!.getIdTokenResult();
+
+    if (!token.claims.role || !ALLOWED_ROLES.includes(token.claims.role as string)) {
+      loading = false;
+      renderAlert({
+        title: 'Error',
+        message: `You don't have access to the back-office.`,
+        state: 'error'
+      });
+      return;
+    }
 
     setTimeout(() => {
       goto(redirectLink);
