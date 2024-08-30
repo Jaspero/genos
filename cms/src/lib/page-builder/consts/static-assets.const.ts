@@ -1,5 +1,3 @@
-import { CONFIG } from '../../consts/config.const';
-
 export const STATIC_ASSETS = [
   {
     id: 'brand/logo.svg',
@@ -7,6 +5,6 @@ export const STATIC_ASSETS = [
     name: 'logo.svg',
     type: 'asset',
     size: 14400,
-    url: `${CONFIG.webUrl}/brand/logo.svg`
+    url: `/brand/logo.svg`
   }
 ];
