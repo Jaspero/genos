@@ -46,6 +46,8 @@
   let filterDialogOpen = false;
   let pageSubscription: any;
 
+  $: filterOptions && (filterItems = null);
+
   async function get(sort: null | Sort, size: number) {
     const queries: any[] = [
       collection(db, col),

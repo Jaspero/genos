@@ -23,7 +23,7 @@
 
   export let items: any[] = [];
   export let views: any[] | null = null;
-  export let initialValue: any | null;
+  export let initialValue: any | null = null;
   export let value: any = {};
   export let render: any = null;
   export let id = '';

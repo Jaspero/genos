@@ -9,14 +9,14 @@
 
   export let data: CommonDataTablePageData;
 
+  $: col = ($page.params.collection || data.collection) as string;
   $: baseLink = [
     '/dashboard',
     $page.params.module || data.module,
-    $page.params.collection || data.collection
+    col
   ]
     .filter(Boolean)
     .join('/');
-  $: col = ($page.params.collection || data.collection) as string;
 </script>
 
 <Grid>
