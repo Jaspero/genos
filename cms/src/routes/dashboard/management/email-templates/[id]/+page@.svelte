@@ -178,7 +178,7 @@
 </footer>
 
 <svelte:head>
-  <title>Page - {CONFIG.title}</title>
+  <title>Email Template - {CONFIG.title}</title>
 </svelte:head>
 
 <style lang="postcss">

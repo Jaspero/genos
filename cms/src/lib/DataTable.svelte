@@ -42,7 +42,7 @@
   let ref: QueryDocumentSnapshot<any> | null = null;
   let instance: any;
   let filtersLoading = false;
-  let filterItems: any[];
+  let filterItems: any[] | null;
   let filterDialogOpen = false;
   let pageSubscription: any;
 

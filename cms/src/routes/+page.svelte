@@ -19,8 +19,8 @@
   import { renderAlert } from '@jaspero/web-components/dist/render-alert.js';
   import { onMount } from 'svelte';
   import Loader from '$lib/Loader.svelte';
-  import { CONFIG } from '../lib/consts/config.const';
-  import GoogleButton from '../lib/GoogleButton.svelte';
+  import { CONFIG } from '$lib/consts/config.const';
+  import GoogleButton from '$lib/GoogleButton.svelte';
 
   const redirectLink = '/dashboard';
 
@@ -30,7 +30,7 @@
   let resetLoading = false;
   let rEmail = '';
   let showPassword = false;
-  let resetPasswordDialog: boolean = false;
+  let resetPasswordDialog = false;
   let recaptchaVerifier: any;
   let showCodeInput = false;
   let confirmLoader = false;

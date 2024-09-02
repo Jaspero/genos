@@ -245,7 +245,7 @@
 <Dialog bind:open={passwordDialog}>
   <slot slot="title">Editing password</slot>
 
-  <form class="flex flex-col gap-4" on:submit|preventDefault={changePassword}>
+  <form class="flex flex-col gap-4" id="password_form" on:submit|preventDefault={changePassword}>
     {#if showPassword}
       <Field required label="Password" type="text" bind:value={newPass.password} />
     {:else}
