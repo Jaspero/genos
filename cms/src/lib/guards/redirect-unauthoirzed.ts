@@ -26,7 +26,6 @@ export async function redirectUnauthorized(path = '/') {
   });
 
   if (!user) {
-    console.log(222, path);
     throw redirect(301, path);
   }
 
