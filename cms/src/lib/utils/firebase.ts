@@ -16,7 +16,7 @@ export const functions = getFunctions(firebaseApp, ENV_CONFIG.region);
 
 export const authenticated = writable<null | false | User>(null);
 export const user = writable<null | FirestoreUser>(null);
-export const token = writable<null | IdTokenResult>(null);
+export const token = writable<null | IdTokenResult>(undefined);
 
 onAuthStateChanged(auth, async (authUser) => {
   if (authUser) {
@@ -37,6 +37,7 @@ onAuthStateChanged(auth, async (authUser) => {
     }
   } else {
     user.set(null);
+    token.set(null);
   }
 
   authenticated.set(authUser ? authUser : false);
