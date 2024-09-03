@@ -18,6 +18,11 @@
     renderLayout?: boolean;
   };
 
+  let scrolls: Array<{el: any, className: string; height: number}> = [];
+  let y = 0;
+
+  $: scrolled(y);
+
   const classes: string[] = [];
 
   meta.set({ title: data.title, ...data.meta });
@@ -29,6 +34,16 @@
   if (browser) {
     pageSetup();
   }
+
+  function scrolled(top: number) {
+		scrolls.forEach(scroll => {
+      if (top > scroll.height) {
+        scroll.el.classList.add(scroll.className);
+      } else if (scroll.el.classList.contains(scroll.className)) {
+        scroll.el.classList.remove(scroll.className);
+      }
+    })
+	}
 
   function pageSetup() {
     let first = true;
@@ -68,6 +83,17 @@
         meta.set({ title: data.title, ...data.meta });
       }
 
+      /**
+       * Scroll Listeners 
+       */
+      scrolls = [];
+
+      document.querySelectorAll('[data-scroll-tracker-class]').forEach((el) => {
+        const className = el.getAttribute('data-scroll-tracker-class') as string;
+        const height = parseInt(el.getAttribute('data-scroll-tracker-height') as string, 10) || 100;
+        scrolls.push({el, className, height});
+      })
+
       first = false;
     });
   }
@@ -76,3 +102,5 @@
 {@html data.content}
 
 <svelte:body use:classList={classes} />
+
+<svelte:window bind:scrollY={y} />

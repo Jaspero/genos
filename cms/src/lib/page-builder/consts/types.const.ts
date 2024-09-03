@@ -14,7 +14,8 @@ const valueTrait = { name: 'value' };
 const checkedTrait = { type: 'checkbox', name: 'checked' };
 const minLengthTrait = { name: 'minlength', label: 'Min Length', type: 'number' };
 const maxLengthTrait = { name: 'maxlength', label: 'Max Length', type: 'number' };
-const patternTrait = { name: 'pattern', label: 'Pattern', type: 'text' };
+const patternTrait = { name: 'pattern', label: 'Pattern', type: 'text', changeProp: 1 };
+const directiveSelectTrait = {name: 'directives', label: 'Directives', type: 'directives-select'};
 
 export const TYPES = (forms: PageBuilderForm[]) => [
   /**
@@ -176,7 +177,8 @@ export const TYPES = (forms: PageBuilderForm[]) => [
       defaults: {
         type: 'header',
         tagName: 'header',
-        classes: ['header']
+        classes: ['header'],
+        traits: [directiveSelectTrait]
       }
     }
   },
@@ -188,7 +190,8 @@ export const TYPES = (forms: PageBuilderForm[]) => [
       defaults: {
         type: 'nav',
         tagName: 'nav',
-        classes: ['nav']
+        classes: ['nav'],
+        traits: [directiveSelectTrait]
       }
     }
   },
@@ -200,7 +203,8 @@ export const TYPES = (forms: PageBuilderForm[]) => [
       defaults: {
         type: 'section',
         tagName: 'section',
-        classes: ['section']
+        classes: ['section'],
+        traits: [directiveSelectTrait]
       }
     }
   },
@@ -212,7 +216,8 @@ export const TYPES = (forms: PageBuilderForm[]) => [
       defaults: {
         type: 'article',
         tagName: 'article',
-        classes: ['article']
+        classes: ['article'],
+        traits: [directiveSelectTrait]
       }
     }
   },
@@ -224,7 +229,8 @@ export const TYPES = (forms: PageBuilderForm[]) => [
       defaults: {
         type: 'aside',
         tagName: 'aside',
-        classes: ['aside']
+        classes: ['aside'],
+        traits: [directiveSelectTrait]
       }
     }
   },
@@ -236,7 +242,8 @@ export const TYPES = (forms: PageBuilderForm[]) => [
       defaults: {
         type: 'footer',
         tagName: 'footer',
-        classes: ['footer']
+        classes: ['footer'],
+        traits: [directiveSelectTrait]
       }
     }
   },
@@ -606,82 +613,6 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             label: 'Link Prefix'
           }
         ]
-      }
-    }
-  },
-
-  /**
-   * Aside Image Slider
-   */
-  {
-    id: 'aside-image-slider',
-    extend: 'div',
-    isComponent: (el: HTMLInputElement) => el.tagName == 'ASIDE-IMAGE-SLIDER',
-    model: {
-      defaults: {
-        tagName: 'aside-image-slider',
-        script: function () {}
-      },
-      style: {
-        height: '60vh',
-        'max-height': '650px',
-        'background-image': 'linear-gradient(118deg, #082e58 0%, #0e4d92 37%, #21d4fd 100%)',
-        'background-size': '100% auto',
-        'background-position': 'center',
-        'background-repeat': 'no-repeat'
-      }
-    }
-  },
-
-  /**
-   * Stepper
-   */
-  {
-    id: 'stepper-container',
-    extend: 'div',
-    isComponent: (el: HTMLInputElement) => el.tagName == 'STEPPER-CONTAINER',
-    model: {
-      defaults: {
-        tagName: 'stepper-container',
-        script: function () {
-          const stepperButtonEls = this.querySelectorAll('stepper-buttons');
-          const scrollerEl = this.querySelector('stepper-scroller');
-          const scrollerFirstChildEl = scrollerEl?.children[0];
-
-          let index = 0;
-
-          for (const el of stepperButtonEls) {
-            const [leftButtonEl, rightButtonEl] = el.querySelectorAll('button');
-
-            if (scrollerFirstChildEl) {
-              leftButtonEl.addEventListener('click', () => {
-                index = index > 0 ? index - 1 : 0;
-                scrollerEl.style.transform = `translateX(-${
-                  index * scrollerFirstChildEl.getBoundingClientRect().width
-                }px)`;
-              });
-
-              rightButtonEl.addEventListener('click', () => {
-                index =
-                  index < scrollerEl.children.length - 1
-                    ? index + 1
-                    : scrollerEl.children.length - 1;
-                scrollerEl.style.transform = `translateX(-${
-                  index * scrollerFirstChildEl.getBoundingClientRect().width
-                }px)`;
-              });
-            }
-          }
-        },
-        style: {
-          display: 'grid',
-          'max-width': '1400px',
-          margin: '0 auto',
-          'grid-template-columns': 'repeat(12, minmax(0, 1fr))',
-          'align-items': 'center',
-          padding: '16px',
-          'grid-gap': '12px'
-        }
       }
     }
   }

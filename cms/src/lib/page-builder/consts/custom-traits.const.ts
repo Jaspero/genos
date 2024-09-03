@@ -2,6 +2,41 @@ import { SearchService } from '../../services/search.service';
 
 export const CUSTOM_TRAITS: any[] = [
   {
+    id: 'directives-select',
+    noLabel: true,
+    templateInput: '',
+    eventCapture: ['input'],
+    createInput({trait}: any) {
+      const el = document.createElement('directives-select') as any;
+
+      el.name = trait.get('name');
+      el.value = trait?.target?.attributes?.attributes?.directives || {};
+
+      return el;
+    },
+    onUpdate({ elInput, component }) {
+      if (component?.attributes?.attributes?.directives) {
+        elInput.value = component?.attributes?.attributes?.directives;
+      }
+    },
+    onEvent({elInput, component}) {
+      const toAdd: {[key: string]: string} = {
+        [elInput.name]: elInput.value
+      };
+
+      for (const key in elInput.value) {
+
+        if (key === 'directives') {
+          continue;
+        }
+
+        toAdd[`data-${key}`] = elInput.value[key];
+      }
+
+      component.addAttributes(toAdd);
+    }
+  },
+  {
     id: 'document-lookup',
     noLabel: true,
     templateInput: '',

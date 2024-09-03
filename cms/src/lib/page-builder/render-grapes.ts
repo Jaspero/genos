@@ -17,6 +17,7 @@ import type { Popup } from './types/popup.interface';
  * Registers all custom components
  */
 import './custom-components/custom-component';
+import './trait-components/trait-components';
 import { CUSTOM_TRAITS } from './consts/custom-traits.const';
 
 export function renderGrapes(

@@ -1,181 +1,6 @@
 import type { PageBuilderForm } from '../types/page-builder-form.interface';
-import type { Popup } from '../popup.interface';
+import type { Popup } from '../types/popup.interface';
 import { TYPES } from './types.const';
-
-const STEPPER = (typeMap: any) => [
-  {
-    id: 'stepper-container',
-    label: 'Stepper Container',
-    media: `<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" style="width: 100%; height: 48px;"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Z"/></svg>`,
-    category: 'Stepper',
-    content: typeMap['stepper-container']
-  },
-  {
-    id: 'stepper-scroller',
-    label: 'Stepper Scroller',
-    media: `<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" style="width: 100%; height: 48px;"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Z"/></svg>`,
-    category: 'Stepper',
-    content: {
-      draggable: 'stepper-card-container',
-      droppable: 'stepper-card',
-      tagName: 'stepper-scroller',
-      styles: `
-        stepper-scroller:has(stepper-card) {
-          min-width: unset;
-        }
-      `,
-      style: {
-        display: 'flex',
-        'min-width': '350px',
-        'min-height': '464px',
-        transition: '.2s ease-in-out'
-      }
-    }
-  },
-  {
-    id: 'stepper-card-container',
-    label: 'Stepper Card Container',
-    media: `<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" style="width: 100%; height: 48px;"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Z"/></svg>`,
-    category: 'Stepper',
-    content: {
-      droppable: 'stepper-scroller',
-      dragabble: 'stepper-container',
-      tagName: 'stepper-card-container',
-      style: {
-        display: 'flex',
-        'min-height': '32px',
-        width: '100%',
-        overflow: 'hidden'
-      }
-    }
-  },
-  {
-    id: 'stepper-card',
-    label: 'Stepper Card',
-    media: `<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" style="width: 100%; height: 48px;"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Z"/></svg>`,
-    category: 'Stepper',
-    content: {
-      draggable: 'stepper-scroller',
-      droppable: false,
-      tagName: 'stepper-card',
-      components: [
-        {
-          type: 'text',
-          tagName: 'h3',
-          content: 'Lorem ipsum',
-          style: {
-            'font-size': '16px',
-            'line-height': '140%',
-            'font-weight': 'bold',
-            margin: '0 0 auto 0'
-          }
-        },
-        {
-          type: 'text',
-          tagName: 'h4',
-          content: 'Dolor sit amet',
-          style: {
-            'font-size': '24px',
-            'line-height': '120%',
-            'font-weight': 'normal',
-            margin: '0'
-          }
-        },
-        {
-          type: 'text',
-          tagName: 'p',
-          content:
-            'Duis aute irure dolor in reprehenderit in volup tate velit esse cillum dolore eu.',
-          style: {
-            'font-size': '20px',
-            'line-height': '130%',
-            'max-width': '28ch',
-            margin: '0',
-            opacity: '80%'
-          }
-        }
-      ],
-      styles: `
-        stepper-card {
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          gap: 16px;
-          font-family: 'Sen', sans-serif;
-          width: 350px;
-          height: 464px;
-          margin-right: 20px;
-          padding: 16px;
-          flex-shrink: 0;
-          background-color: #4C7862;
-          color: #FFFFFF;
-          border-radius: .5rem;
-        }
-        stepper-card.inactive {
-          background-color: #F2F6F4;
-          color: #09341F;
-        }
-        stepper-card.inactive::after {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, rgba(255, 255, 255, 0.25) 0%, #FFF 100%);
-        }
-      `
-    }
-  },
-  {
-    id: 'stepper-buttons',
-    label: 'Stepper Buttons',
-    media: `<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" style="width: 100%; height: 48px;"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Z"/></svg>`,
-    category: 'Stepper',
-    content: {
-      dragabble: 'stepper-container',
-      tagName: 'stepper-buttons',
-      components: [
-        {
-          type: 'button',
-          tagName: 'button',
-          content: `<svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.41393 11.0508L10.4839 18.2384C10.6873 18.4452 10.7877 18.6871 10.7851 18.9643C10.7825 19.2415 10.6751 19.488 10.4629 19.7037C10.2507 19.9051 10.0105 20.0094 9.74224 20.0165C9.47396 20.0236 9.23375 19.9194 9.02159 19.7037L0.349825 10.8878C0.221831 10.7576 0.131528 10.6204 0.0789166 10.476C0.0263055 10.3316 0 10.1756 0 10.0081C0 9.84048 0.0263055 9.68451 0.0789166 9.54014C0.131528 9.39574 0.221831 9.25848 0.349825 9.12836L9.02159 0.312458C9.21095 0.119929 9.44547 0.0214393 9.72514 0.0169899C10.0048 0.0125405 10.2507 0.11103 10.4629 0.312458C10.6751 0.528138 10.7811 0.775914 10.7811 1.05579C10.7811 1.33566 10.6751 1.58344 10.4629 1.79912L3.41393 8.96526H18.9742C19.2653 8.96526 19.509 9.06508 19.7054 9.26473C19.9018 9.46437 20 9.71215 20 10.0081C20 10.304 19.9018 10.5517 19.7054 10.7514C19.509 10.951 19.2653 11.0508 18.9742 11.0508H3.41393Z" fill="#E66439"/></svg>`
-        },
-        {
-          type: 'button',
-          tagName: 'button',
-          content: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5861 11.0516H1.02578C0.734709 11.0516 0.490984 10.9518 0.294604 10.7521C0.0982012 10.5525 0 10.3047 0 10.0088C0 9.71288 0.0982012 9.4651 0.294604 9.26546C0.490984 9.06582 0.734709 8.96599 1.02578 8.96599H16.5861L9.51605 1.77847C9.31265 1.57169 9.21228 1.32971 9.21492 1.05252C9.21754 0.775315 9.32494 0.528872 9.53712 0.313192C9.74927 0.111763 9.98949 0.00748051 10.2578 0.000342925C10.526 -0.00679466 10.7663 0.0974882 10.9784 0.313192L19.6502 9.12909C19.7782 9.25921 19.8685 9.39647 19.9211 9.54087C19.9737 9.68525 20 9.84122 20 10.0088C20 10.1764 19.9737 10.3323 19.9211 10.4767C19.8685 10.6211 19.7782 10.7584 19.6502 10.8885L10.9784 19.7044C10.789 19.8969 10.5545 19.9954 10.2749 19.9999C9.99518 20.0043 9.74927 19.9058 9.53712 19.7044C9.32494 19.4887 9.21885 19.2409 9.21885 18.9611C9.21885 18.6812 9.32494 18.4334 9.53712 18.2177L16.5861 11.0516Z" fill="#E66439"/></svg>`
-        }
-      ],
-      styles: `
-        button {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 64px;
-          height: 64px;
-          border-radius: 50%;
-          background: transparent;
-          border: 2px solid #E66439;
-        }
-      `,
-      style: {
-        display: 'flex',
-        gap: '12px'
-      }
-    }
-  }
-];
-
-const ASIDE_IMAGE_SLIDER = (typeMap: any) => [
-  {
-    id: 'aside-image-slider',
-    label: 'Container',
-    media: `<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" style="width: 100%; height: 48px;"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Z"/></svg>`,
-    category: 'Aside Image Slider',
-    content: typeMap['aside-image-slider']
-  }
-];
 
 export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
   const typeMap = TYPES(forms).reduce((acc: any, { id, ...dt }) => {
@@ -502,15 +327,13 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
       content: typeMap['pb-blog']
     },
 
-    ...STEPPER(typeMap),
-    ...ASIDE_IMAGE_SLIDER(typeMap),
-
     ...(popups
       ? [
           {
             id: 'popup-trigger',
             label: 'Popup Trigger',
             category: 'Misc',
+            media: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#000" style="width: 100%; height: 48px;"><path d="M240-120h480v-80H520v-288l64 64 56-56-160-160-160 160 56 56 64-64v288H240v80Zm240-360ZM160-320q-33 0-56.5-23.5T80-400v-360q0-33 23.5-56.5T160-840h640q33 0 56.5 23.5T880-760v360q0 33-23.5 56.5T800-320H600v-80h200v-360H160v360h200v80H160Z"/></svg>`,
             content: {
               type: `pb-popup`,
               traits: [
