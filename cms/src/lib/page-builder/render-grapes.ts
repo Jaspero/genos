@@ -118,10 +118,14 @@ export function renderGrapes(
       open: boolean;
       container: HTMLDivElement;
       types: string[];
+      options: any;
       select: (asset: string, final: boolean) => void;
     }) => {
+
+      const types = props.options.target.tagName === 'video' ? ['video'] : props.types;
+
       if (assetManager) {
-        assetManager.shownFiles = props.types;
+        assetManager.shownFiles = types;
       }
 
       if (props.open) {
@@ -133,8 +137,7 @@ export function renderGrapes(
           assetManager = document.createElement('jp-asset-manager') as any;
           assetManager.service = new AMService();
           assetManager.rootPath = 'pages';
-          assetManager.shownFiles = props.types;
-
+          assetManager.shownFiles = types;
           assetManager.selectable = 'single';
 
           props.container.appendChild(assetManager);
