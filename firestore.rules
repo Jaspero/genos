@@ -59,7 +59,8 @@ service cloud.firestore {
     }
 
     match /blog-articles/{document} {
-      allow read, write: if admin();
+      allow read: if true;
+      allow write: if admin();
 
       match /blog-comments/{comment} {
         allow list: if true || admin();
@@ -80,11 +81,13 @@ service cloud.firestore {
     }
 
     match /blog-categories/{document} {
-      allow read, write: if admin();
+      allow read: if true;
+      allow write: if admin();
     }
 
     match /blog-authors/{document} {
-      allow read, write: if admin();
+      allow read: if true;
+      allow write: if admin();
     }
 
     match /email-templates/{document} {
