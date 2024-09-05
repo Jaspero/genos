@@ -98,6 +98,7 @@ collections.addCollection('blog-categories', {
   preCreate: async (id, value) => {
     value.url = value.url || generateSlug(value.name);
     value.publicationDate = value.publicationDate || new Date().toISOString();
+    value.createdOn = new Date().toISOString();
   },
   idPrefix: 'bc'
 });

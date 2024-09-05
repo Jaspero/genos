@@ -265,6 +265,7 @@ collections.addCollection('blog-articles', {
   preCreate: async (id, value) => {
     value.url = value.url || generateSlug(value.title);
     value.publicationDate = value.publicationDate || new Date().toISOString();
+    value.createdOn = new Date().toISOString();
   },
   idPrefix: 'bar'
 });

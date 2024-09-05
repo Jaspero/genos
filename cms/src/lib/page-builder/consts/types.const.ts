@@ -604,13 +604,24 @@ export const TYPES = (forms: PageBuilderForm[]) => [
           },
           {
             type: 'text',
-            name: 'pageSize',
-            label: 'Page Size'
+            name: 'pagesize',
+            label: 'Page Size',
+            default: '10'
           },
           {
             type: 'text',
-            name: 'singleArticleLink',
+            name: 'singlearticlelink',
             label: 'Link Prefix'
+          },
+          {
+            type: 'select',
+            name: 'showcategoryfilters',
+            label: 'Show Category Filters',
+            options: [
+              { id: 'Yes', label: 'Yes'},
+              { id: 'No', label: 'No'},
+            ],
+            default: 'Yes'
           }
         ]
       }

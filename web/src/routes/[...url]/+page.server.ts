@@ -1,4 +1,5 @@
 import { firestore, bucket } from '$lib/utils/firebase-admin';
+import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params }) => {
@@ -14,7 +15,7 @@ export const load: PageServerLoad = async ({ params }) => {
   const [doc] = docs;
 
   if (!doc) {
-    return {};
+    return redirect(303, '/404');
   }
 
   const toLoad: any[] = [

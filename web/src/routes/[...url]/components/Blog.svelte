@@ -12,9 +12,9 @@
     QueryDocumentSnapshot,
     startAt
   } from 'firebase/firestore';
-  import { db } from '../../utils/firebase';
-  import type { BlogArticleSnippet } from '../../interfaces/blog-article-snippet.interface';
   import { onMount } from 'svelte';
+  import type { BlogArticleSnippet } from '$lib/types/blog/blog-article-snippet.interface';
+  import { db } from '$lib/utils/firebase';
 
   type MapItem = {
     [key: string]: { id: string; name: string };

@@ -56,7 +56,7 @@ export const CUSTOM_TRAITS: any[] = [
       return el;
     },
     onEvent({ elInput, component }) {
-      component.addAttribute({ [elInput.name]: elInput.value });
+      setTimeout(() => component.addAttributes({[elInput.name]: elInput.getValue()}), 500);
     }
   },
   {

@@ -90,7 +90,7 @@ collections.addCollection('blog-authors', {
         options: {
           label: 'Url',
           name: 'url',
-          hint: 'Generated from Name if left empty.',
+          hint: 'Generated from name if left empty.',
           pattern: '[a-zA-Z0-9\\-_]+',
           minlength: 3,
           patternValidationMessage: `Only letters, numbers, '-' and '_' are valid in the URL.`
@@ -112,6 +112,9 @@ collections.addCollection('blog-authors', {
   preSubmit: async (id, value) => {
     value.url = value.url || generateSlug(value.name);
     value.lastUpdatedOn = new Date().toISOString();
+  },
+  preCreate: async (id, value) => {
+    value.createdOn = new Date().toISOString();
   },
   idPrefix: 'bau'
 });

@@ -3,6 +3,7 @@ import type { BlogAuthor } from './blog-author.interface';
 
 export interface BlogArticle {
   id: string;
+  url: string;
   categoryId: string;
   category: string;
   title: string;

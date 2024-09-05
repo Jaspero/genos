@@ -11,14 +11,24 @@ service firebase.storage {
       return authenticated() && request.auth.token.role == 'admin';
     }
 
+    match /blog-authors/{item=**} {
+      allow read: if true;
+      allow write: if admin();
+    }
+
+    match /blog-articles/{item=**} {
+      allow read: if true;
+      allow write: if admin();
+    }
+
     match /pages/{item=**} {
       allow read: if true;
-      allow write: if editor() || admin();
+      allow write: if admin();
     }
 
     match /page-configurations/{item=**} {
       allow read: if true;
-      allow write: if editor() || admin();
+      allow write: if admin();
     }
 
     match /{allPaths=**} {
