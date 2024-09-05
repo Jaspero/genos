@@ -9,7 +9,7 @@ collections.addCollection('sections', {
   tableHeaders: [
     {
       key: '/id',
-      label: 'Number',
+      label: '#',
       pipes: [indexPipe]
     },
     {

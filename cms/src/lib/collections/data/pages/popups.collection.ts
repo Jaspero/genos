@@ -9,7 +9,7 @@ collections.addCollection('popups', {
   tableHeaders: [
     {
       key: '/id',
-      label: 'Number',
+      label: '#',
       pipes: [indexPipe]
     },
     {

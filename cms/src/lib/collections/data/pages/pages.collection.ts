@@ -13,7 +13,7 @@ collections.addCollection('pages', {
   tableHeaders: [
     {
       key: '/id',
-      label: 'Number',
+      label: '#',
       pipes: [indexPipe]
     },
     {

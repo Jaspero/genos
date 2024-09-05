@@ -15,7 +15,7 @@
   const headers = [
     {
       key: '/id',
-      label: 'Number',
+      label: '#',
       pipes: [indexPipe]
     },
     {
@@ -34,6 +34,7 @@
 <Grid>
   <GridCol span="12">
     <DataTable
+      id="form-responses"
       col={'forms/' + $page.params.id + '/form-responses'}
       {headers}
       {initialSort}

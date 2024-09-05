@@ -9,7 +9,7 @@ collections.addCollection('forms', {
   tableHeaders: [
     {
       key: '/id',
-      label: 'Number',
+      label: '#',
       pipes: [indexPipe]
     },
     {
