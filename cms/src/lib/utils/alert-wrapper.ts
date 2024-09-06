@@ -37,13 +37,17 @@ export async function alertWrapper(
   } catch (e: any) {
     if ((errorMessage as any) !== false) {
       const content = {
-        title: 'Something went wrong',
+        title: 'Error',
         state: 'error',
         message: typeof errorMessage === 'function' ? errorMessage(e) : errorMessage || e.toString()
       };
 
       if (e instanceof FirebaseError) {
-        content.message = firebaseErrors[e.code] || '';
+        if (e.code === 'functions/internal') {
+          content.message = e.toString().replace('FirebaseError: ', '');
+        } else {
+          content.message = firebaseErrors[e.code] || '';
+        }
       }
 
       if (e.code !== 'auth/multi-factor-auth-required' && e.code !== 'auth/unverified-email') {
