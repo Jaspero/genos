@@ -19,7 +19,8 @@ export const createAdmin = onCall<RequestData>(
 
     const auth = getAuth();
     const firestore = getFirestore();
-    const {role, name, password = random.string(32)} = request.data;
+    const {role, name} = request.data;
+    const password = request.data.password || random.string(32);
 
     if (!role || !name || !request.data.email) {
       throw new HttpsError('invalid-argument', 'Missing required fields');
