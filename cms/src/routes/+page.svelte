@@ -21,6 +21,7 @@
   import Loader from '$lib/Loader.svelte';
   import { CONFIG } from '$lib/consts/config.const';
   import GoogleButton from '$lib/GoogleButton.svelte';
+  import { ALLOWED_ROLES } from '$lib/consts/allowed-roles.const';
 
   const redirectLink = '/dashboard';
 
