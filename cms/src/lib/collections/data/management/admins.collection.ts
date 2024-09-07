@@ -62,7 +62,6 @@ collections.addCollection('admins', {
   editKey: 'name',
   preSubmit: async (id, value) => {
     value.lastUpdatedOn = new Date().toISOString();
-    value.name = value.firstName + ' ' + value.lastName;
   },
   preCreate: async (id, value) => {
     value.createdOn = new Date().toISOString();
