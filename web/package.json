@@ -33,8 +33,8 @@
   "type": "module",
   "dependencies": {
     "@jaspero/utils": "1.15.3",
-    "@jaspero/web-components": "1.152.0",
-    "firebase": "10.13.0",
+    "@jaspero/web-components": "1.153.2",
+    "firebase": "10.13.1",
     "firebase-admin": "12.4.0"
   }
 }

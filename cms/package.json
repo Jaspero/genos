@@ -45,10 +45,10 @@
   "dependencies": {
     "@jaspero/modular": "1.28.0",
     "@jaspero/utils": "1.15.3",
-    "@jaspero/web-components": "1.152.0",
+    "@jaspero/web-components": "1.153.2",
     "deepcopy": "2.1.0",
     "dexie": "4.0.8",
-    "firebase": "10.13.0",
+    "firebase": "10.13.1",
     "grapesjs": "0.21.12",
     "grapesjs-parser-postcss": "1.0.3",
     "grapesjs-preset-newsletter": "1.0.2",
