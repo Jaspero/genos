@@ -273,6 +273,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
       defaults: {
         type: 'page-link',
         draggable: true,
+        droppable: true,
         content: 'Link',
         attributes: {
           'data-pblink': true
@@ -294,6 +295,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
       defaults: {
         type: 'anchor-link',
         draggable: true,
+        droppable: true,
         content: 'Link',
         attributes: {
           'data-pbanchor': true

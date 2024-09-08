@@ -48,9 +48,9 @@
 </script>
 
 {#if $sidebarStore}
-  <aside>
+  <aside class="flex flex-col w-[256px] h-full bg-white gap-1 overflow-y-auto border-r z-[100]">
     {#if links}
-      <nav>
+      <nav class="flex-1 overflow-y-auto">
         {#each links as link}
           <div
             class="border-t border-t-black/10 first:border-t-0 last:border-b last:border-b-black/10"
@@ -110,7 +110,7 @@
       </nav>
     {/if}
 
-    <footer class="border-t border-t-black/10">
+    <footer class="sticky bottom-0 border-t border-t-black/10">
       <button
         class="flex gap-2 w-full px-4 py-3 font-bold hover:bg-black/5 transition-all"
         on:click={() => (dropdown = true)}
@@ -145,43 +145,15 @@
 {/if}
 
 <style lang="postcss">
-  aside {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -moz-box-orient: vertical;
-    -moz-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    gap: 0.5rem;
-    width: 256px;
-    height: 100%;
-    background-color: white;
-    overflow-y: auto;
-    border-right: 1px solid rgba(0, 0, 0, 0.16);
-  }
 
   @media (max-width: 767px) {
     aside {
-      z-index: 100;
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
     }
-  }
-
-  nav {
-    @apply flex-1 overflow-y-auto;
-  }
-  footer {
-    @apply sticky bottom-0;
   }
 
   .sidebar-link.active,
