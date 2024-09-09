@@ -1,5 +1,4 @@
 import { blogData } from '$lib/server/blog';
-import { paginateArray } from '$lib/utils/paginate-array';
 import { firestore } from '$lib/utils/firebase-admin';
 import type { PageServerLoad } from './$types';
 

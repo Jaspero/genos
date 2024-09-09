@@ -1,21 +1,16 @@
 <script lang="ts">
   import { meta } from '$lib/meta/meta.store';
-  import BlogAuthor from '$lib/blog/BlogAuthor.svelte';
   import type { BlogArticle } from '$lib/types/blog/blog-article.interface';
-  import type { BlogCategory } from '$lib/types/blog/blog-category.interface';
   import { CONFIG } from '$lib/consts/config.const';
 
   export let data: {
     pages: Array<{ url: string; title: string }>;
     blog: {
       articles: BlogArticle[];
-      categories: BlogCategory[];
-      authors: BlogAuthor[];
-      pages: Array<{
-        category: BlogCategory;
-        pages: number[];
+      authors: Array<{
+        id: string;
+        name: string;
       }>;
-      allPages: number[];
     };
   };
 
@@ -58,3 +53,8 @@
   <li><a href="/sign-in">Sign In</a></li>
   <li><a href="/sign-up">Sign Up</a></li>
 </ul>
+
+<svelte:head>
+  <title>Hidden Sitemap - {CONFIG.title}</title>
+  <meta name="robots" content="noindex, nofollow" />
+</svelte:head>
