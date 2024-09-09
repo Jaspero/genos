@@ -21,7 +21,7 @@
   // Needs to be imported so the components register
   import './form-elements/form-elements.ts';
 
-  export let items: any[] = [];
+  export let items: any[] | null = [];
   export let views: any[] | null = null;
   export let initialValue: any | null = null;
   export let value: any = {};
