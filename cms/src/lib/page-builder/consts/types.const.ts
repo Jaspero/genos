@@ -236,7 +236,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
     }
   },
   {
-    id: 'default',
+    id: 'div',
     extends: 'default',
     isComponent: (el: HTMLDivElement) => el.tagName === 'DIV',
     model: {
