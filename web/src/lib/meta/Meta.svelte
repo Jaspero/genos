@@ -4,7 +4,7 @@
   import { CONFIG } from '../consts/config.const';
   import { META_SUFFIX, meta } from './meta.store';
 
-  $: title = $meta.title + META_SUFFIX;
+  $: title = $meta.title ? ($meta.title + META_SUFFIX) : META_SUFFIX.replace(' | ', '').replace(' - ', '');
   $: url = CONFIG.websiteUrl + $page.url.pathname;
   $: ogTitle = ($meta.og?.title || $meta.title) + META_SUFFIX;
   $: ogDescription = $meta.og?.description || $meta.description;
