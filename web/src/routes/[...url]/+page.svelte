@@ -18,7 +18,7 @@
     renderLayout?: boolean;
   };
 
-  let scrolls: Array<{el: any, className: string; height: number}> = [];
+  let scrolls: Array<{ el: any; className: string; height: number }> = [];
   let y = 0;
 
   $: scrolled(y);
@@ -36,14 +36,14 @@
   }
 
   function scrolled(top: number) {
-		scrolls.forEach(scroll => {
+    scrolls.forEach((scroll) => {
       if (top > scroll.height) {
         scroll.el.classList.add(scroll.className);
       } else if (scroll.el.classList.contains(scroll.className)) {
         scroll.el.classList.remove(scroll.className);
       }
-    })
-	}
+    });
+  }
 
   function pageSetup() {
     let first = true;
@@ -84,15 +84,49 @@
       }
 
       /**
-       * Scroll Listeners 
+       * Scroll Listeners
        */
       scrolls = [];
 
       document.querySelectorAll('[data-scroll-tracker-class]').forEach((el) => {
         const className = el.getAttribute('data-scroll-tracker-class') as string;
         const height = parseInt(el.getAttribute('data-scroll-tracker-height') as string, 10) || 100;
-        scrolls.push({el, className, height});
-      })
+        scrolls.push({ el, className, height });
+      });
+
+      /**
+       * Scroll to Selector
+       */
+      document.querySelectorAll('[data-scroll-to-selector]').forEach((el) => {
+        const selector = el.getAttribute('data-scroll-to-selector') as string;
+
+        el.addEventListener('click', () => {
+          const target = document.querySelector(selector);
+
+          if (target) {
+            target.scrollIntoView({
+              behavior: (el.getAttribute('data-scroll-to-behavior') as ScrollBehavior) || 'smooth'
+            });
+          }
+        });
+      });
+
+      /**
+       * Toggle Class
+       */
+      document.querySelectorAll('[data-toggle-class-class]').forEach((el) => {
+        const className = el.getAttribute('data-toggle-class-class') as string;
+
+        el.addEventListener('click', () => {
+          const hasClass = el.classList.contains(className);
+
+          if (hasClass) {
+            el.classList.remove(className);
+          } else {
+            el.classList.add(className);
+          }
+        });
+      });
 
       first = false;
     });

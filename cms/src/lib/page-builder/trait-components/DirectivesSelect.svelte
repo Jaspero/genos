@@ -24,6 +24,40 @@
         },
         { label: 'Class', value: 'class', type: 'jp-input', default: 'scrolled' }
       ]
+    },
+    'scroll-to': {
+      label: 'Scroll To',
+      options: [
+        {
+          label: 'Target Selector',
+          value: 'selector',
+          type: 'jp-input'
+        },
+        {
+          label: 'Behavior',
+          value: 'behavior',
+          type: 'jp-select',
+          default: 'smooth',
+          options: {
+            options: [
+              { label: 'Smooth', value: 'smooth' },
+              { label: 'Instant', value: 'instant' },
+              { label: 'Auto', value: 'auto' },
+            ]
+          }
+        }
+      ]
+    },
+    'toggle-class': {
+      label: 'Toggle Class',
+      options: [
+        {
+          label: 'Class',
+          value: 'class',
+          type: 'jp-input',
+          default: 'active'
+        }
+      ]
     }
   };
 

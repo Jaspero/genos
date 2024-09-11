@@ -10,6 +10,7 @@ const nameTrait = { name: 'name' };
 const placeholderTrait = { name: 'placeholder' };
 const requiredTrait = { type: 'checkbox', name: 'required' };
 const idTrait = { name: 'id' };
+const titleTrait = { name: 'title', label: 'Title', type: 'text' };
 const valueTrait = { name: 'value' };
 const checkedTrait = { type: 'checkbox', name: 'checked' };
 const minLengthTrait = { name: 'minlength', label: 'Min Length', type: 'number' };
@@ -231,6 +232,22 @@ export const TYPES = (forms: PageBuilderForm[]) => [
         tagName: 'aside',
         classes: ['aside'],
         traits: [directiveSelectTrait]
+      }
+    }
+  },
+  {
+    id: 'default',
+    extends: 'default',
+    isComponent: (el: HTMLDivElement) => el.tagName === 'DIV',
+    model: {
+      defaults: {
+        type: 'div',
+        tagName: 'div',
+        traits: [
+          idTrait,
+          titleTrait,
+          directiveSelectTrait
+        ]
       }
     }
   },
