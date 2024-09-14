@@ -153,6 +153,7 @@
     const json = grapesInstance.getProjectData();
     const html = grapesInstance.getHtml();
     const css = grapesInstance.getCss();
+    const js = grapesInstance.getJs();
 
     const toUpdate = [
       uploadString(
@@ -163,7 +164,8 @@
         ref(storage, `page-configurations/${data.col}/${id}/content.html`),
         html.replace('<body>', '').replace('</body>', '')
       ),
-      uploadString(ref(storage, `page-configurations/${data.col}/${id}/content.css`), css)
+      uploadString(ref(storage, `page-configurations/${data.col}/${id}/content.css`), css),
+      uploadString(ref(storage, `page-configurations/${data.col}/${id}/content.js`), js),
     ];
 
     if (data.snap) {

@@ -17,6 +17,7 @@
       structured: string;
       title?: string;
     };
+    scripts: string;
     renderLayout?: boolean;
   };
 
