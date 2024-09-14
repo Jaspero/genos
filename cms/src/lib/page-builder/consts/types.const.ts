@@ -523,6 +523,29 @@ export const TYPES = (forms: PageBuilderForm[]) => [
    * Custom Components
    */
   {
+    id: 'pb-mobile-menu',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-MOBILE-MENU',
+    model: {
+      defaults: {
+        tagName: 'pb-mobile-menu',
+        draggable: true,
+        droppable: false,
+        traits: [
+          {
+            type: 'text',
+            label: 'Labels',
+            name: 'labels'
+          },
+          {
+            type: 'text',
+            label: 'Links',
+            name: 'links'
+          },
+        ]
+      }
+    }
+  },
+  {
     id: 'pb-submit',
     isComponent: (el: HTMLElement) => el.tagName === 'PB-SUBMIT',
     model: {
