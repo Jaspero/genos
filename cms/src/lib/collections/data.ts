@@ -3,7 +3,7 @@
  */
 import './data/management/admins.collection.ts';
 import './data/management/email-templates.collection.ts';
-import './data/management/release-history.collection.ts';
+import './data/management/releases.collection.ts';
 
 /**
  * Blog

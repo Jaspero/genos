@@ -37,7 +37,7 @@
       }
 
       if (release) {
-        const releaseDoc = await getDoc(doc(db, 'releases', release));
+        const releaseDoc = await getDoc(doc(db, 'releases', release.toString()));
         const releaseData = releaseDoc.data() || {};
 
         const changes = Object.entries(releaseData.changes || {}).map(([key, value]) => ({
@@ -82,7 +82,7 @@
       >
       <a
         class="px-4 py-3 text-sm hover:bg-black/5 transition-colors cursor-pointer"
-        href="/dashboard/management/release-history"
+        href="/dashboard/management/releases"
         on:click={() => (dropdown = false)}>Release History</a
       >
     </div>

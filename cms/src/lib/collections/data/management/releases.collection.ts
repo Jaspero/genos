@@ -1,9 +1,9 @@
 import { capitalize } from '@jaspero/utils';
-import { datePipe } from '../../../column-pipes/date.pipe';
 import { indexPipe } from '../../../column-pipes/index.pipe';
 import { collections } from '../../collections';
+import { dateTimePipe } from '../../../column-pipes/date-time.pipe';
 
-collections.addCollection('release-history', {
+collections.addCollection('releases', {
   name: 'Release History',
   singularName: 'release history',
   module: 'management',
@@ -16,7 +16,7 @@ collections.addCollection('release-history', {
     {
       key: '/createdOn',
       label: 'Created On',
-      pipes: [datePipe],
+      pipes: [dateTimePipe],
       sortable: true
     },
     {
@@ -27,7 +27,7 @@ collections.addCollection('release-history', {
     {
       key: '/releasedOn',
       label: 'Released On',
-      pipes: [datePipe],
+      pipes: [dateTimePipe],
       sortable: true
     }
   ],
