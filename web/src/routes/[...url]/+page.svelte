@@ -4,8 +4,9 @@
   import { browser, dev } from '$app/environment';
   import { meta } from '$lib/meta/meta.store';
   import './components';
-  import { onMount } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
   import type { Page } from '@sveltejs/kit';
+  import type { Unsubscriber } from 'svelte/store';
 
   export let data: {
     content: string;
@@ -23,6 +24,7 @@
 
   let scrolls: Array<{ el: any; className: string; height: number }> = [];
   let y = 0;
+  let unsubscribe: Unsubscriber;
 
   $: scrolled(y);
 
@@ -128,7 +130,7 @@
   }
 
   function pageSetup() {
-    page.subscribe((page) => {
+    unsubscribe = page.subscribe((page) => {
       pageChange(page);
     });
   }
@@ -136,6 +138,12 @@
   onMount(() => {
     if (!dev) {
       pageChange($page);
+    }
+  });
+
+  onDestroy(() => {
+    if (unsubscribe) {
+      unsubscribe();
     }
   });
 </script>
