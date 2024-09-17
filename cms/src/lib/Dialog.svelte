@@ -67,8 +67,7 @@
   }
 
   .dialog {
-    min-width: 540px;
-    @apply bg-white border rounded-xl overflow-hidden divide-y shadow-2xl;
+    @apply bg-white border rounded-xl overflow-hidden divide-y shadow-2xl lg:min-w-[540px];
   }
 
   .dialog-header {
