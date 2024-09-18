@@ -1,14 +1,9 @@
-name: Prod | Deploy Web
+name: Prod | Deploy Web Dev
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - 'web/**/*'
+  workflow_dispatch: # This trigger allows the workflow to be run manually
 env:
-  PROJECT: wonkawave
-  SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
+  PROJECT: wonkawave-dev
+  SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT_DEV }}
   TARGET: web
 jobs:
   build_and_deploy:
@@ -34,7 +29,7 @@ jobs:
         run: echo ::set-output name=VERSION::$(node configure-release.cjs start)
       - name: Build
         working-directory: web
-        run: npm run build:prod
+        run: npm run build:dev
       - name: Deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:

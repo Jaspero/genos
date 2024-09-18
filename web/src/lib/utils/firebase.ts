@@ -4,7 +4,7 @@ import type { User as DbUser } from '../types/user.interface';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 import { writable } from 'svelte/store';
-import { ENV_CONFIG } from '../consts/env-config';
+import { ENV_CONFIG } from './env-config';
 import { getFunctions } from 'firebase/functions';
 
 export const firebaseApp = initializeApp(ENV_CONFIG.firebase);
