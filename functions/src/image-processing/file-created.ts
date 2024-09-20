@@ -8,7 +8,7 @@ import {REGION} from '../shared/consts/region.const';
 import {unpackGenerateImageString} from './utils/unpack-generate-image-string';
 
 export const fileCreated = onObjectFinalized(
-  {cpu: 2, concurrency: 1, region: REGION},
+  {cpu: 2, concurrency: 1, region: REGION, memory: '4GiB', timeoutSeconds: 540},
   async (event) => {
     const {bucket, name, contentType, metadata} = event.data;
 
