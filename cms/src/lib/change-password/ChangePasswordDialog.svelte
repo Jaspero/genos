@@ -1,13 +1,13 @@
 <script lang="ts">
+  import { renderAlert } from '@jaspero/web-components/dist/render-alert';
   import { httpsCallable } from 'firebase/functions';
+  import { onDestroy } from 'svelte';
   import Button from '../Button.svelte';
   import Dialog from '../Dialog.svelte';
   import Field from '../Field.svelte';
   import { alertWrapper } from '../utils/alert-wrapper';
-  import { changePassword } from './change-password.store';
   import { functions } from '../utils/firebase';
-  import { renderAlert } from '@jaspero/web-components/dist/render-alert.js';
-  import { onDestroy } from 'svelte';
+  import { changePassword } from './change-password.store';
 
   let password: string;
   let repeatPassword: string;
@@ -62,7 +62,7 @@
     if ($changePassword) {
       changePassword.set(null);
     }
-  })
+  });
 </script>
 
 <Dialog bind:open onClose={() => changePassword.set(null)}>

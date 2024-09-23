@@ -11,7 +11,7 @@
   import { DocumentSnapshot, deleteDoc, doc, setDoc, updateDoc } from 'firebase/firestore';
   import { onMount } from 'svelte';
   import type { ModularView, ModuleRender } from '@jaspero/modular';
-  import { renderAlert } from '@jaspero/web-components/dist/render-alert.js';
+  import { renderAlert } from '@jaspero/web-components/dist/render-alert';
   import { CONFIG } from '$lib/consts/config.const';
   import EmailTemplatesSidebar from './EmailTemplatesSidebar.svelte';
   import { renderMjMl } from './render-mjml';

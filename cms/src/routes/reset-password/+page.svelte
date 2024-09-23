@@ -11,7 +11,7 @@
   import { alertWrapper } from '$lib/utils/alert-wrapper';
   import { confirmPasswordReset } from 'firebase/auth';
   import { auth } from '$lib/utils/firebase';
-  import { renderAlert } from '@jaspero/web-components/dist/render-alert.js';
+  import { renderAlert } from '@jaspero/web-components/dist/render-alert';
 
   let password = '';
   let repeatPassword = '';

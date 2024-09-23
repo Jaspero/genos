@@ -15,7 +15,7 @@
   import { onMount } from 'svelte';
   import type { Template } from '$lib/page-builder/types/template.interface';
   import type { ModularView, ModuleRender } from '@jaspero/modular';
-  import { renderAlert } from '@jaspero/web-components/dist/render-alert.js';
+  import { renderAlert } from '@jaspero/web-components/dist/render-alert';
   import type { Popup } from '$lib/page-builder/types/popup.interface';
   import type { PageBuilderForm } from '$lib/page-builder/types/page-builder-form.interface';
   import { CONFIG } from '$lib/consts/config.const';

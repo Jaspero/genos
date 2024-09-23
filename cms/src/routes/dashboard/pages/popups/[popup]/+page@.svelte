@@ -14,7 +14,7 @@
   import { urlSegments } from '$lib/utils/url-segments';
   import type { ModularView, ModuleRender } from '@jaspero/modular';
   import { random } from '@jaspero/utils';
-  import { renderAlert } from '@jaspero/web-components/dist/render-alert.js';
+  import { renderAlert } from '@jaspero/web-components/dist/render-alert';
   import { DocumentSnapshot, deleteDoc, doc, setDoc, updateDoc } from 'firebase/firestore';
   import { onMount } from 'svelte';
   import { uploadString, ref } from 'firebase/storage';

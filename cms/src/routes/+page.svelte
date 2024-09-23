@@ -16,7 +16,7 @@
   } from 'firebase/auth';
   import { auth } from '$lib/utils/firebase';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
-  import { renderAlert } from '@jaspero/web-components/dist/render-alert.js';
+  import { renderAlert } from '@jaspero/web-components/dist/render-alert';
   import { onMount } from 'svelte';
   import Loader from '$lib/Loader.svelte';
   import { CONFIG } from '$lib/consts/config.const';

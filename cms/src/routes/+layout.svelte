@@ -4,6 +4,7 @@
   import '$lib/utils/firebase';
   import '@jaspero/web-components/dist/alert.wc';
   import '@jaspero/web-components/dist/confirm.wc';
+  import '@jaspero/web-components/dist/input.wc';
 
   let loading = false;
 

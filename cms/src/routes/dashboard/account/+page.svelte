@@ -7,7 +7,7 @@
   import GridCol from '$lib/GridCol.svelte';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
   import { auth, authenticated, user } from '$lib/utils/firebase';
-  import { renderAlert } from '@jaspero/web-components/dist/render-alert.js';
+  import { renderAlert } from '@jaspero/web-components/dist/render-alert';
   import {
     PhoneAuthProvider,
     PhoneMultiFactorGenerator,
