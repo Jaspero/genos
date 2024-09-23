@@ -49,7 +49,6 @@ export async function alertWrapper(
         if (e.code === 'functions/internal') {
           content.message = e.toString().replace('FirebaseError: ', '');
         } else {
-          console.log(e.code);
           content.message = firebaseErrors[e.code] || '';
         }
       }

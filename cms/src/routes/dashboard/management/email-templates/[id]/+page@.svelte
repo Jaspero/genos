@@ -21,7 +21,7 @@
     items: any[];
     value: any;
     snap?: DocumentSnapshot;
-    sections: Array<{
+    layouts: Array<{
       id: string;
       title: string;
       json: any;
@@ -155,7 +155,7 @@
     {grapesInstance}
     value={data.value}
     items={data.items}
-    sections={data.sections}
+    sections={data.layouts}
     bind:activeSidebar
     bind:formModule
   />

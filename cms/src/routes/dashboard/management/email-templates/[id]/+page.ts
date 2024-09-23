@@ -33,7 +33,8 @@ export async function load({ params, parent }) {
       options: {
         label: 'ID',
         name: 'id',
-        pattern: '[a-z\\-]+'
+        pattern: '[a-z\\-]+',
+        required: true
       }
     }
   ];
@@ -51,7 +52,7 @@ export async function load({ params, parent }) {
       return {
         id: d.id,
         title: data.title,
-        json: jsonSnap.data()!.content || {}
+        json: JSON.parse(jsonSnap.data()?.content || '{}')
       };
     })
   );
