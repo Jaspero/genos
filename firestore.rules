@@ -90,11 +90,11 @@ service cloud.firestore {
       allow write: if admin();
     }
 
-    match /email-templates/{document} {
+    match /email-templates/{document=**} {
       allow read, write: if admin();
     }
 
-    match /email-template-layouts/{document} {
+    match /email-template-layouts/{document=**} {
       allow read, write: if admin();
     }
 

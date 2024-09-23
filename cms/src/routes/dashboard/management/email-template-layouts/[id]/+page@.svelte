@@ -15,6 +15,7 @@
   import { CONFIG } from '$lib/consts/config.const';
   import { renderMjMl } from '../../email-templates/[id]/render-mjml';
   import EmailTemplatesSidebar from '../../email-templates/[id]/EmailTemplatesSidebar.svelte';
+  import {random} from '@jaspero/utils';
 
   export let data: {
     col: string;
@@ -53,7 +54,7 @@
   async function submit() {
     saveLoading = true;
 
-    let id = data.snap?.id || data.value.id;
+    let id = data.snap?.id || data.value.id || `etl-${random.string(24)}`;
 
     for (const key in renderedFormModules) {
       if (!renderedFormModules[key].render.isValid()) {
@@ -81,16 +82,9 @@
     }
 
     const json = grapesInstance.getProjectData();
-    const html = grapesInstance.getHtml();
-    const css = grapesInstance.getCss();
 
     const toUpdate = [
-      setDoc(doc(db, data.col, id, 'content', 'json'), { content: JSON.stringify(json) }),
-      setDoc(doc(db, data.col, id, 'content', 'html'), {
-        content: html,
-        lastUpdatedOn
-      }),
-      setDoc(doc(db, data.col, id, 'content', 'css'), { content: css, lastUpdatedOn })
+      setDoc(doc(db, data.col, id, 'content', 'json'), { content: JSON.stringify(json) })
     ];
 
     if (data.snap) {

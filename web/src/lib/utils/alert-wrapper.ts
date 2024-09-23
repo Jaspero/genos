@@ -2,6 +2,7 @@ import { renderAlert } from '@jaspero/web-components/dist/render-alert.js';
 import { FirebaseError } from 'firebase/app';
 
 const firebaseErrors: { [key: string]: string } = {
+  'auth/invalid-credential': 'The email and password you entered did not match our records. Please double-check and try again.',
   'auth/wrong-password':
     'The email and password you entered did not match our records. Please double-check and try again.',
   'auth/too-many-requests':
@@ -18,7 +19,8 @@ const firebaseErrors: { [key: string]: string } = {
   'auth/invalid-phone-number': 'Please enter a valid phone number.',
   'auth/unverified-email': 'Please verify your email first.',
   'auth/requires-recent-login': 'This action requires you to login again.',
-  'auth/email-already-in-use': 'Email is already in use. Please use a different email.'
+  'auth/email-already-in-use': 'Email is already in use. Please use a different email.',
+  'permission-denied': `You don't have permission to perform this action.`
 };
 
 export async function alertWrapper(

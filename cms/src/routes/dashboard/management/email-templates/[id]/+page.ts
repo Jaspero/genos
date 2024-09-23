@@ -51,7 +51,7 @@ export async function load({ params, parent }) {
       return {
         id: d.id,
         title: data.title,
-        json: jsonSnap.data()
+        json: jsonSnap.data()!.content || {}
       };
     })
   );

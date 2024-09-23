@@ -20,7 +20,8 @@ const firebaseErrors: {[key: string]: string} = {
   'auth/invalid-phone-number': 'Please enter a valid phone number.',
   'auth/unverified-email': 'Please verify your email first.',
   'auth/requires-recent-login': 'This action requires you to login again.',
-  'auth/email-already-in-use': 'Email is already in use. Please use a different email.'
+  'auth/email-already-in-use': 'Email is already in use. Please use a different email.',
+  'permission-denied': `You don't have permission to perform this action.`
 };
 
 export async function alertWrapper(
@@ -48,6 +49,7 @@ export async function alertWrapper(
         if (e.code === 'functions/internal') {
           content.message = e.toString().replace('FirebaseError: ', '');
         } else {
+          console.log(e.code);
           content.message = firebaseErrors[e.code] || '';
         }
       }
