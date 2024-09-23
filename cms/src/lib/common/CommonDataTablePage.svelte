@@ -38,6 +38,9 @@
       {baseLink}
     >
       <slot slot="header">
+        {#if data.headerSlot}
+          {@html data.headerSlot}
+        {/if}
         {#if data.add}
           <Button href="{baseLink}/new">Add new {data.singularName}</Button>
         {/if}

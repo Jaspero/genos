@@ -94,6 +94,10 @@ service cloud.firestore {
       allow read, write: if admin();
     }
 
+    match /email-template-layouts/{document} {
+      allow read, write: if admin();
+    }
+
     match /tags/{document} {
       allow read: if true;
       allow write: if admin();

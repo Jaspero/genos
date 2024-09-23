@@ -8,6 +8,7 @@ import type { Collection } from '../collections/collection.interface';
 export interface CommonDataTablePageData {
   name: string;
   headers: TableHeader[];
+  headerSlot?: string;
   add: boolean;
   singularName: string;
   filterOperators?: FilterOperators;
@@ -49,6 +50,7 @@ export async function commonDataTablePage({ params, parent }: any) {
     name: data.name,
     headers: data.tableHeaders,
     add: data.add,
+    headerSlot: data.headerSlot,
     singularName: data.singularName || data.name,
     filterOperators: data.filterOperators,
     freezeFirstColumn: data.freezeFirstColumn,

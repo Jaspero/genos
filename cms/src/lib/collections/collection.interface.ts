@@ -14,6 +14,11 @@ export interface Collection {
   name: string;
   module?: string;
   tableHeaders: TableHeader[];
+  /**
+   * Allows for providing an html snippet that is injected
+   * in the header slot of the overview page
+   */
+  headerSlot?: string;
   // @default false
   freezeFirstColumn?: boolean;
   // @default false

@@ -13,19 +13,14 @@
   import type { ModularView, ModuleRender } from '@jaspero/modular';
   import { renderAlert } from '@jaspero/web-components/dist/render-alert';
   import { CONFIG } from '$lib/consts/config.const';
-  import EmailTemplatesSidebar from './EmailTemplatesSidebar.svelte';
-  import { renderMjMl } from './render-mjml';
+  import { renderMjMl } from '../../email-templates/[id]/render-mjml';
+  import EmailTemplatesSidebar from '../../email-templates/[id]/EmailTemplatesSidebar.svelte';
 
   export let data: {
     col: string;
     items: any[];
     value: any;
     snap?: DocumentSnapshot;
-    sections: Array<{
-      id: string;
-      title: string;
-      json: any;
-    }>;
     json?: any;
   };
 
@@ -155,7 +150,6 @@
     {grapesInstance}
     value={data.value}
     items={data.items}
-    sections={data.sections}
     bind:activeSidebar
     bind:formModule
   />

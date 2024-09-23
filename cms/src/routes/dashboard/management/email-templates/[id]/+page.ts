@@ -1,6 +1,6 @@
 import { db } from '$lib/utils/firebase';
 import { redirect } from '@sveltejs/kit';
-import { doc, getDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 
 export async function load({ params, parent }) {
   await parent();
@@ -38,10 +38,29 @@ export async function load({ params, parent }) {
     }
   ];
 
+  const layoutSnap = await getDocs(
+    collection(db, 'email-template-layouts')
+  );
+
+  const layouts = await Promise.all(
+    layoutSnap.docs.map(async (d) => {
+      const data = d.data();
+
+      const jsonSnap = await getDoc(doc(db, 'email-template-layouts', d.id, 'content', 'json'));
+
+      return {
+        id: d.id,
+        title: data.title,
+        json: jsonSnap.data()
+      };
+    })
+  );
+
   if (id === 'new') {
     return {
       col,
       items,
+      layouts,
       value: {}
     };
   }
@@ -62,6 +81,7 @@ export async function load({ params, parent }) {
     col,
     items,
     value,
+    layouts,
     json: JSON.parse(jsonSnap!.data()!.content)
   };
 }

@@ -317,7 +317,7 @@
       {/if}
     {/if}
   </div>
-  <div>
+  <div class="flex gap-2 items-center">
     <slot name="header" />
   </div>
 </div>

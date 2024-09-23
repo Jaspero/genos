@@ -1,12 +1,18 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import FormModule from '$lib/FormModule.svelte';
+  import { random } from '@jaspero/utils';
 
   export let activeSidebar = 'email-settings';
   export let items: Array<any> | undefined;
   export let value: any;
   export let grapesInstance: any;
   export let formModule: FormModule;
+  export let sections: Array<{
+    id: string;
+    title: string;
+    json: any;
+  }> | null = null;
 
   let sidebarElements: Array<{
     id: string;
@@ -118,6 +124,51 @@
     listenersConnected = true;
   }
 
+  function adjustIds(components: any[], styles: any[]) {
+    for (const component of components) {
+      if (component.attributes?.id) {
+        const newId = random.string(16);
+
+        const s = styles.find((style) => style.selectors.includes('#' + component.attributes.id));
+
+        if (s) {
+          s.selectors = s.selectors.map((selector: string) => {
+            if (selector === '#' + component.attributes.id) {
+              return '#' + newId;
+            }
+
+            return selector;
+          });
+        }
+
+        component.attributes.id = newId;
+      }
+
+      if (component.components) {
+        adjustIds(component.components, styles);
+      }
+    }
+  }
+
+  function addSection(section: {json: any}) {
+    const json = grapesInstance.getProjectData();
+
+    const lastFrame = json.pages[0].frames[json.pages[0].frames.length - 1];
+    const lastSectionFrame = section.json.pages[0].frames[section.json.pages[0].frames.length - 1];
+
+    if (!lastFrame.component.components) {
+      lastFrame.component.components = [];
+    }
+
+    adjustIds(lastSectionFrame.component.components, section.json.styles);
+
+    json.styles.push(...section.json.styles);
+
+    lastFrame.component.components.push(...lastSectionFrame.component.components);
+
+    grapesInstance.loadProjectData(json);
+  }
+
   onMount(() => {
     sidebarElements = [
       {
@@ -130,6 +181,15 @@
         title: 'Blocks',
         icon: 'add_box'
       },
+      ...(sections
+        ? [
+            {
+              id: 'sections',
+              title: 'Sections',
+              icon: 'library_add'
+            }
+          ]
+        : []),
       {
         id: 'component',
         title: 'Component',
@@ -158,6 +218,21 @@
   {:else if activeSidebar === 'blocks'}
     <p class="p-4 border-b">Blocks</p>
     <div bind:this={blocksEl}></div>
+  {:else if activeSidebar === 'sections'}
+    {#if sections}
+      <p class="p-4 border-b">Sections</p>
+      <div class="divide-y">
+        {#each sections as section}
+          <button
+            class="w-full text-left px-4 py-2 hover:bg-black/10 transition"
+            type="button"
+            on:click={() => addSection(section)}
+          >
+            <span>{section.title}</span>
+          </button>
+        {/each}
+      </div>
+    {/if}
   {:else if activeSidebar === 'component'}
     <div class="flex justify-around border-b">
       {#each componentTabs as element}
