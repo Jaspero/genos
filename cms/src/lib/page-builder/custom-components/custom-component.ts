@@ -11,3 +11,4 @@ export * from './FeaturedProducts.svelte';
  * Blog
  */
 export * from './Blog.svelte';
+export * from './FeaturedBlogArticles.svelte';

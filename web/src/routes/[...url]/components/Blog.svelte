@@ -25,6 +25,10 @@
   export let pagesize = '10';
   export let singlearticlelink: string;
   export let showcategoryfilters: 'Yes' | 'No';
+  export let collectionPrefx: string;
+  export let loadMoreLabel: string;
+  export let dateLabel: string;
+  export let allCategoriesLabel: string;
 
   let articles: BlogArticleSnippet[] = [];
   let lastRef: QueryDocumentSnapshot | null = null;
@@ -54,7 +58,7 @@
 
     const { docs } = await getDocs(
       query(
-        collection(db, 'blog-articles'),
+        collection(db, 'blog-articles' + (collectionPrefx || '')),
         ...([
           category ? where('category', '==', category) : null,
           author ? where('author', '==', author) : null
@@ -79,7 +83,7 @@
   async function loadMore() {
     const { docs } = await getDocs(
       query(
-        collection(db, 'blog-articles'),
+        collection(db, 'blog-articles' + (collectionPrefx || '')),
         ...([
           category ? where('category', '==', category) : null,
           author ? where('author', '==', author) : null
@@ -102,11 +106,11 @@
 
   onMount(async () => {
     const data = await Promise.all([
-      getDocs(collection(db, 'blog-categories')),
-      getDocs(collection(db, 'blog-authors'))
+      getDocs(collection(db, 'blog-categories' + (collectionPrefx || ''))),
+      getDocs(collection(db, 'blog-authors' + (collectionPrefx || '')))
     ]);
 
-    categories = data[0].docs.map((doc) => ({ name: doc.data().name, id: doc.id }));
+    categories = data[0].docs.map((doc) => ({ name: doc.data()?.name || '', id: doc.id }));
     categoryMap = data[0].docs.reduce((acc: MapItem, doc) => {
       acc[doc.id] = doc.data() as any;
       return acc;
@@ -119,38 +123,57 @@
   });
 </script>
 
-{#if showCategoryFilters}
-  {#each categories as cat}
+<div class="container categories-container">
+  {#if showCategoryFilters}
     <button
+      class="cat-btn"
       type="button"
-      class:active={category === cat.id}
+      class:active={category === ''}
       on:click={() => {
-        category = cat.id;
+        category = '';
         typeChanges(pageSize, category, author, authorMap);
-      }}>{cat.name}</button
+      }}>{allCategoriesLabel}</button
     >
-  {/each}
-{/if}
-
-<div class="articles">
-  {#each articles as article}
-    <div class="article">
-      <img src={article.image} alt={article.imageAlt || article.title} />
-      <h4>{article.title}</h4>
-      {#if article.description}
-        <p>{article.description}</p>
-      {/if}
-      <a href={singleArticleLink + '/' + article.url}>Read More</a>
-    </div>
-  {/each}
-
-  {#if lastRef}
-    <button type="button" disabled={loading || resetLoading} on:click={loadMore}>Load More</button>
+    {#each categories as cat}
+      <button
+        type="button"
+        class="cat-btn"
+        class:active={category === cat.id}
+        on:click={() => {
+          category = cat.id;
+          typeChanges(pageSize, category, author, authorMap);
+        }}>{cat.name}</button
+      >
+    {/each}
   {/if}
 </div>
 
-<style>
-  .articles {
-    padding: 1rem;
-  }
-</style>
+<div class="container blog-container">
+  {#each articles as article}
+    <a class="post-card" href={singleArticleLink + '/' + article.url}>
+      <img src={article.image} alt={article.imageAlt || article.title} class="news-img" />
+      <div class="post-content-wrapper">
+        {#if article.category}
+          <div class="post-category-wrapper">
+            <span class="news-category">{categoryMap[article.category]?.name || ''}</span>
+          </div>
+        {/if}
+        <div class="post-content">
+          <h3 class="h3">{article.title}</h3>
+          {#if article.publicationDate}
+            <p class="post-date">
+              {dateLabel}: {new Date(article.publicationDate).toLocaleDateString()}
+            </p>
+          {/if}
+          <p class="p">{article.description}</p>
+        </div>
+      </div>
+    </a>
+  {/each}
+</div>
+
+{#if lastRef}
+  <button type="button" disabled={loading || resetLoading} on:click={loadMore}
+    >{loadMoreLabel}</button
+  >
+{/if}

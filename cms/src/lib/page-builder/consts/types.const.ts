@@ -664,6 +664,52 @@ export const TYPES = (forms: PageBuilderForm[]) => [
               { id: 'No', label: 'No'},
             ],
             default: 'Yes'
+          },
+          {
+            type: 'text',
+            name: 'loadMoreLabel',
+            label: 'Load More Label',
+          },
+          {
+            type: 'text',
+            name: 'dateLabel',
+            label: 'Date Label'
+          },
+          {
+            type: 'text',
+            name: 'allCategoriesLabel',
+            label: 'All Categories Label'
+          },
+          {
+            type: 'text',
+            name: 'collectionPrefx',
+            label: 'Collection Prefix'
+          }
+        ]
+      }
+    }
+  },
+  {
+    id: 'pb-featured-blog-articles',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-FEATURED-BLOG-ARTICLES',
+    model: {
+      defaults: {
+        tagName: 'pb-featured-blog-articles',
+        traits: [
+          {
+            type: 'text',
+            name: 'singlearticlelink',
+            label: 'Link Prefix'
+          },
+          {
+            type: 'text',
+            name: 'linkLabel',
+            label: 'Link Label'
+          },
+          {
+            type: 'text',
+            name: 'collectionPrefx',
+            label: 'Collection Prefix'
           }
         ]
       }
