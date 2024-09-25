@@ -14,8 +14,22 @@ export class SearchService {
   mapEntry(snap: QueryDocumentSnapshot | DocumentSnapshot) {
     const data = {id: snap.id, ...snap.data()} as any;
 
+    const getKeyValue = (obj: any, path: string) => {
+      const keys = path.split('.')
+      while (keys.length) {
+        let loc = keys.shift()!;
+        if (obj.hasOwnProperty(loc)) {
+          obj = obj[loc]
+        } else {
+          obj = undefined
+          break
+        }
+      }
+      return obj
+    }
+
     return {
-      label: data.hasOwnProperty(this.displayKey) ? data[this.displayKey] : data[this.valueKey],
+      label: getKeyValue(data, this.displayKey) || getKeyValue(data, this.searchKey),
       value: data[this.valueKey]
     }
   }
@@ -32,7 +46,7 @@ export class SearchService {
       query(
         collection(db, this.collection),
         where(this.searchKey, '>=', value),
-        where(this.displayKey, '<', value.replace(/.$/, c => String.fromCharCode(c.charCodeAt(0) + 1))),
+        where(this.searchKey, '<', value.replace(/.$/, c => String.fromCharCode(c.charCodeAt(0) + 1))),
         limit(this.limit)
       )
     );
