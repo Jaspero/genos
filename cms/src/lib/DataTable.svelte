@@ -4,6 +4,7 @@
   import { onDestroy, onMount } from 'svelte';
   import { db } from './utils/firebase';
   import '@jaspero/web-components/dist/async-table.wc';
+  import '@jaspero/web-components/dist/async-table.css';
   import { goto } from '$app/navigation';
   import type { Filter } from './interfaces/filter.interface';
   import Button from './Button.svelte';
