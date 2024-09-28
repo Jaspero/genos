@@ -1,4 +1,4 @@
-name: Prod | Deploy Web Dev
+name: DEV | Deploy Web
 on:
   workflow_dispatch: # This trigger allows the workflow to be run manually
 env:
@@ -51,12 +51,12 @@ jobs:
         uses: dawidd6/action-delete-branch@v3
         with:
           github_token: ${{ github.token }}
-          branches: build
+          branches: build-dev
       - name: Push
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: 'build'
+          branch: 'build-dev'
           force: true
       - name: Update Release Status
         working-directory: web

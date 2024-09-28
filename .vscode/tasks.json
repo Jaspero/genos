@@ -9,17 +9,31 @@
       "problemMatcher": []
     },
     {
-      "label": "Run Web",
+      "label": "DEV | Run Web",
       "detail": "Run the web application.",
       "type": "shell",
       "command": "npm run start:dev --prefix web",
       "problemMatcher": []
     },
     {
-      "label": "Run CMS",
+      "label": "PROD | Run Web",
+      "detail": "Run the web application.",
+      "type": "shell",
+      "command": "npm run start:prod --prefix web",
+      "problemMatcher": []
+    },
+    {
+      "label": "DEV | Run CMS",
       "detail": "Run the CMS application.",
       "type": "shell",
       "command": "npm run start:dev --prefix cms",
+      "problemMatcher": []
+    },
+    {
+      "label": "PROD | Run CMS",
+      "detail": "Run the CMS application.",
+      "type": "shell",
+      "command": "npm run start:prod --prefix cms",
       "problemMatcher": []
     },
     {
