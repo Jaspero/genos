@@ -621,6 +621,75 @@ export const TYPES = (forms: PageBuilderForm[]) => [
       }
     }
   },
+  {
+    id: 'pb-products',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-PRODUCTS',
+    model: {
+      defaults: {
+        tagName: 'pb-products',
+        traits: [
+          {
+            type: 'number',
+            label: 'Limit',
+            name: 'limit'
+          },
+          {
+            type: 'number',
+            label: 'Min Price',
+            name: 'minPrice'
+          },
+          {
+            type: 'number',
+            label: 'Max Price',
+            name: 'maxPrice'
+          },
+          {
+            type: 'select',
+            label: 'Sort Property',
+            name: 'property',
+            options: [
+              { id: 'price', label: 'Price' },
+              { id: 'name', label: 'Name' }
+            ]
+          },
+          {
+            type: 'select',
+            label: 'Sort Direction',
+            name: 'direction',
+            options: [
+              { id: 'asc', label: 'Ascending' },
+              { id: 'desc', label: 'Descending' }
+            ]
+          },
+          {
+            type: 'checkbox',
+            label: 'Show Price Range Filter',
+            name: 'showPriceRangeFilter'
+          },
+          {
+            type: 'checkbox',
+            label: 'Show Categories Filter',
+            name: 'showCategoriesFilter'
+          },
+          {
+            type: 'checkbox',
+            label: 'Show Tags Filter',
+            name: 'showTagsFilter'
+          },
+          {
+            type: 'document-lookup',
+            label: 'Categories',
+            name: 'categories'
+          },
+          {
+            type: 'document-lookup',
+            label: 'Tags',
+            name: 'tags'
+          }
+        ]
+      }
+    }
+  },
 
   /**
    * Blog
