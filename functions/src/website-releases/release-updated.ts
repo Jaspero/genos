@@ -2,7 +2,7 @@ import {onDocumentUpdated} from 'firebase-functions/v2/firestore';
 import {REGION} from '../shared/consts/region.const';
 import {GITHUB_REPO} from './consts/github-repo.const';
 
-export const popupDeleted = onDocumentUpdated(
+export const releaseUpdated = onDocumentUpdated(
   {
     region: REGION,
     document: 'releases/{release}',
