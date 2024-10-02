@@ -60,6 +60,29 @@ export const CUSTOM_TRAITS: any[] = [
     }
   },
   {
+    id: 'documents-lookup',
+    noLabel: true,
+    templateInput: '',
+    createInput({ trait }: any) {
+      const el = document.createElement('jp-multisearch') as any;
+
+      el.label = trait.get('label');
+      el.singleSelect = false;
+      el.name = trait.get('name');
+      el.service = new SearchService(
+        trait.get('collection'),
+        trait.get('searchKey') || 'name',
+        trait.get('displayKey') || 'name',
+        trait.get('valueKey') || 'id'
+      );
+
+      return el;
+    },
+    onEvent({ elInput, component }) {
+      setTimeout(() => component.addAttributes({[elInput.name]: elInput.getValue()}), 500);
+    }
+  },
+  {
     id: 'select-options',
     events: {
       keyup: 'onChange'

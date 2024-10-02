@@ -677,14 +677,16 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             name: 'showTagsFilter'
           },
           {
-            type: 'document-lookup',
+            type: 'documents-lookup',
             label: 'Categories',
-            name: 'categories'
+            name: 'categories',
+            collection: 'categories'
           },
           {
-            type: 'document-lookup',
+            type: 'documents-lookup',
             label: 'Tags',
-            name: 'tags'
+            name: 'tags',
+            collection: 'tags'
           }
         ]
       }
