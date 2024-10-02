@@ -30,9 +30,12 @@ jobs:
         working-directory: web
         run: |
           echo $SV > key.json
-          npm run build
+          npm run build:prod
         env:
           SV: ${{ env.SERVICE_ACCOUNT }}
+      - name: Configure Collection Indexes
+        working-directory: web
+        run: echo ::set-output name=VERSION::$(node collection-indexes.cjs ${{ inputs.release }}))
       - name: Deploy
         if: contains(github.ref, 'build')
         uses: FirebaseExtended/action-hosting-deploy@v0

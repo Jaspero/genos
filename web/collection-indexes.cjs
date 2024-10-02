@@ -2,46 +2,110 @@
  * Intended for updating release status from firestore
  */
 const admin = require('firebase-admin');
-const { writeFile } = require('fs/promises');
+const { writeFile, readFile } = require('fs/promises');
 
 admin.initializeApp({
   credential: admin.credential.cert(require('./key.json'))
 });
 
-const release = process.argv[2];
-
-const COLLECTION_CONFIG = {
-  products: {
-    generateIndex: true,
-    keys: ['name', 'category', 'tags']
-  },
-  categories: {
-    generateIndex: true,
-    keys: ['name']
-  },
-  tags: {
-    generateIndex: true,
-    name: ['name']
-  }
-}
+let release = process.argv[2];
 
 async function exec() {
   const fs = admin.firestore();
 
-  const document = (config) => config.keys.reduce((acc, key) => {
-    let shortKey = key[0];
-    let count = 1;
+  if (!release) {
+    const releaseStatus = (
+      await fs.doc('releases/status').get()
+    )
+      .data();
 
-    while (acc[shortKey]) {
-      shortKey = key[0] + count;
-      count++;
+    release = releaseStatus.release;
+  }
+
+  /**
+   * @type {{changes: {data: any; collection: string; id: string}[]}}
+   */
+  const releaseData = (
+    await fs.doc(`releases/${release}`).get()
+  )
+    .data();
+
+  /**
+   * @type {{[collection: string]: {[id: string]: any}}}
+   */
+  const changes = releaseData.changes.reduce((acc, change) => {
+    if (!acc[change.collection]) {
+      acc[change.collection] = {};
     }
 
-    acc[shortKey] = newValue[key];
+    acc[change.collection][change.id] = change.data;
+
     return acc;
+  }, {});
+
+  /**
+   * Get json data
+   */
+  const keys = Object.keys(changes);
+  /**
+   * @type {Promise<{<{[key: string]: any}[]>[]>}
+   */
+  const collectionsJsonData = await Promise.all(
+    keys.map(collection =>
+      readFile('../public/web/data/' + collection + '.json')
+        .then(data => JSON.parse(data.toString()))
+        .catch(() => [])
+    )
+  );
+
+  /**
+   * Update json file
+   * @type {<{[key: string]: any}[]>[]}
+   */
+  const updatedCollectionsJsonData = collectionsJsonData.map((collectionData, i) => {
+    const collection = keys[i];
+    const collectionChanges = changes[collection];
+
+    return collectionData.reduce((acc, item) => {
+      const id = item.id;
+      const change = collectionChanges[id];
+
+      /**
+       * If change exists, update the item
+       */
+      if (change) {
+        /**
+         * If data exists, update the item
+         * If data does not exist, item will be removed
+         */
+        if (change.data) {
+          acc.push({
+            ...item,
+            ...change.data
+          });
+        }
+      } else {
+        /**
+         * If change does not exist, keep the item
+         */
+        acc.push(item);
+      }
+
+      return acc;
+    }, []);
   });
 
-  // todo: update collection indexes json
+  /**
+   * Write the updated json data
+   */
+  await Promise.all(
+    keys.map((collection, i) =>
+      writeFile(
+        '../public/web/data/' + collection + '.json',
+        JSON.stringify(updatedCollectionsJsonData[i])
+      )
+    )
+  );
 }
 
 exec()

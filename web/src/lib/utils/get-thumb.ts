@@ -1,8 +1,8 @@
-import { ENV_CONFIG } from '../consts/env-config';
+import { CONFIG } from '../consts/config.const';
 
 export function getThumb(url: string, thumb: string) {
   const temp = url.split('%2F');
-  const baseUrl = `https://firebasestorage.googleapis.com/v0/b/${ENV_CONFIG.firebase.storageBucket}/o/`;
+  const baseUrl = `https://firebasestorage.googleapis.com/v0/b/${CONFIG.storageBucketName}/o/`;
 
   return (
     baseUrl +

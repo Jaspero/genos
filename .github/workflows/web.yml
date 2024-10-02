@@ -34,7 +34,7 @@ jobs:
         run: echo ::set-output name=VERSION::$(node configure-release.cjs start)
       - name: Configure Collection Indexes
         working-directory: web
-        run: echo ::set-output name=VERSION::$(node collection-indexes.cjs )
+        run: echo ::set-output name=VERSION::$(node collection-indexes.cjs)
       - name: Build
         working-directory: web
         run: npm run build:prod
