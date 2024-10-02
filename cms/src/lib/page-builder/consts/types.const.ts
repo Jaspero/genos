@@ -649,7 +649,8 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             name: 'property',
             options: [
               { id: 'price', label: 'Price' },
-              { id: 'name', label: 'Name' }
+              { id: 'name', label: 'Name' },
+              { id: 'createdOn', label: 'Created On' }
             ]
           },
           {
@@ -660,6 +661,20 @@ export const TYPES = (forms: PageBuilderForm[]) => [
               { id: 'asc', label: 'Ascending' },
               { id: 'desc', label: 'Descending' }
             ]
+          },
+          {
+            type: 'document-lookup',
+            label: 'Categories',
+            name: 'initialCategories',
+            collection: 'categories',
+            singleSelect: false
+          },
+          {
+            type: 'document-lookup',
+            label: 'Tags',
+            name: 'initialTags',
+            collection: 'tags',
+            singleSelect: false
           },
           {
             type: 'checkbox',
@@ -677,16 +692,9 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             name: 'showTagsFilter'
           },
           {
-            type: 'documents-lookup',
-            label: 'Categories',
-            name: 'categories',
-            collection: 'categories'
-          },
-          {
-            type: 'documents-lookup',
-            label: 'Tags',
-            name: 'tags',
-            collection: 'tags'
+            type: 'checkbox',
+            label: 'Show Search',
+            name: 'showSearch'
           }
         ]
       }

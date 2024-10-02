@@ -44,30 +44,7 @@ export const CUSTOM_TRAITS: any[] = [
       const el = document.createElement('jp-multisearch') as any;
 
       el.label = trait.get('label');
-      el.singleSelect = true;
-      el.name = trait.get('name');
-      el.service = new SearchService(
-        trait.get('collection'),
-        trait.get('searchKey') || 'name',
-        trait.get('displayKey') || 'name',
-        trait.get('valueKey') || 'id'
-      );
-
-      return el;
-    },
-    onEvent({ elInput, component }) {
-      setTimeout(() => component.addAttributes({[elInput.name]: elInput.getValue()}), 500);
-    }
-  },
-  {
-    id: 'documents-lookup',
-    noLabel: true,
-    templateInput: '',
-    createInput({ trait }: any) {
-      const el = document.createElement('jp-multisearch') as any;
-
-      el.label = trait.get('label');
-      el.singleSelect = false;
+      el.singleSelect = trait.get('singleSelect') ?? true;
       el.name = trait.get('name');
       el.service = new SearchService(
         trait.get('collection'),
@@ -87,7 +64,6 @@ export const CUSTOM_TRAITS: any[] = [
     events: {
       keyup: 'onChange'
     },
-
     onValueChange: function () {
       const optionsStr = this.model.get('value').trim();
       const options = optionsStr.split('\n');

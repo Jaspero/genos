@@ -65,7 +65,6 @@ for (const track of TRACKED_COLLECTIONS) {
       }
     }
   );
-  
 }
 
 export const tracking = functions;

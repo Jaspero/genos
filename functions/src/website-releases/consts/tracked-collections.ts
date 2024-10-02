@@ -9,5 +9,7 @@ export const TRACKED_COLLECTIONS = [
   /**
    * todo: replace urlKey with slug property
    */
-  {collection: 'products', titleKey: 'name', urlKey: 'url', prefix: '/products', keysToTrack: ['id', 'name', 'price', 'description', 'tags', 'categories']},
+  {collection: 'products', titleKey: 'name', urlKey: 'url', prefix: '/products', keysToTrack: ['id', 'name', 'price', 'description', 'tags', 'categories', 'createdOn', 'image']},
+  {collection: 'tags', titleKey: 'name', urlKey: 'url', prefix: '/tags', keysToTrack: ['id', 'name']},
+  {collection: 'categories', titleKey: 'name', urlKey: 'url', prefix: '/categories', keysToTrack: ['id', 'name']},
 ];
