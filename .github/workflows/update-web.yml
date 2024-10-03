@@ -24,7 +24,7 @@ jobs:
       - name: Configure Release
         id: config
         working-directory: web
-        run: echo ::set-output name=VERSION::$(node configure-release.cjs start ${{ inputs.type }})
+        run: echo ::set-output name=VERSION::$(node configure-release.cjs start ${{ inputs.type }} ${{ inputs.release }})
       - name: Build
         if: contains(github.ref, 'build')
         working-directory: web
@@ -33,9 +33,6 @@ jobs:
           npm run build:prod
         env:
           SV: ${{ env.SERVICE_ACCOUNT }}
-      - name: Configure Collection Indexes
-        working-directory: web
-        run: echo ::set-output name=VERSION::$(node collection-indexes.cjs ${{ inputs.release }}))
       - name: Deploy
         if: contains(github.ref, 'build')
         uses: FirebaseExtended/action-hosting-deploy@v0
