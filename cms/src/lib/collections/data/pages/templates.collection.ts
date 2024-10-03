@@ -30,7 +30,7 @@ collections.addCollection('templates', {
       label: '',
       pipes: [
         actionsPipe((id) => ({
-          duplicateSubCollections: ['content']
+          duplicateStorage: [`page-configurations/templates/${id}/`]
         }))
       ]
     }

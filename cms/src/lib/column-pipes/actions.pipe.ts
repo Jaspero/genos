@@ -16,6 +16,7 @@ export function actionsPipe(config?: (id: string, rowData?: any) => ColumnAction
     return `<column-actions
       id="${id}"
       actions="${(internalConfig.actions || []).join(',')}"
+      duplicateStorage="${(internalConfig.duplicateStorage || []).join(',')}"
       duplicateSubCollections="${(internalConfig.duplicateSubCollections || []).join(',')}">
     </column-actions>`;
   };

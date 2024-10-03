@@ -15,6 +15,7 @@ declare interface ColumnActionsConfig {
   buttons?: ColumnActionsConfigButton[];
   links?: ColumnActionsConfigLink[];
   rowData?: any;
+  duplicateStorage?: string[];
   duplicateSubCollections?: string[];
 }
 
