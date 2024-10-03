@@ -33,9 +33,9 @@
 
   onMount(async () => {
     [tags, categories, products] = await Promise.all([
-      fetch(CONFIG.webUrl + '/data/tags.json').then(response => response.json()).catch(() => []),
-      fetch(CONFIG.webUrl + '/data/categories.json').then(response => response.json()).catch(() => []),
-      fetch(CONFIG.webUrl + '/data/products.json').then(response => response.json()).catch(() => [])
+      fetch(CONFIG.websiteUrl + '/data/tags.json').then(response => response.json()).catch(() => []),
+      fetch(CONFIG.websiteUrl + '/data/categories.json').then(response => response.json()).catch(() => []),
+      fetch(CONFIG.websiteUrl + '/data/products.json').then(response => response.json()).catch(() => [])
     ]);
 
     applyFilters();

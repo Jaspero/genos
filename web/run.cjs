@@ -3,6 +3,7 @@
  * for running apps locally for development
  */
 const { readFile, writeFile } = require('fs/promises');
+const fs = require('fs');
 const environment = process.argv[2];
 
 async function exec() {
@@ -34,6 +35,13 @@ async function exec() {
   if (env) {
     toExec.push(writeFile(`./key.json`, env));
   }
+
+  const constFiles = await fs.readdir('../shared/consts');
+  toExec.push(
+    ...constFiles.map(file => {
+      return fs.copyFile('../shared/consts/' + file, './src/lib/consts/' + file, () => {});
+    })
+  );
 
   await Promise.all(toExec);
 }
