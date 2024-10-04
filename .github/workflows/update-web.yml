@@ -21,6 +21,12 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
+      - name: Create key
+        working-directory: web
+        run: |
+          echo $SV > key.json
+        env:
+          SV: ${{ env.SERVICE_ACCOUNT }}
       - name: Install Dependencies
         working-directory: web
         run: npm ci
