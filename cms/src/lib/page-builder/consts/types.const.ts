@@ -700,6 +700,23 @@ export const TYPES = (forms: PageBuilderForm[]) => [
       }
     }
   },
+  {
+    id: 'pb-product-card',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-PRODUCT-CARD',
+    model: {
+      defaults: {
+        tagName: 'pb-product-card',
+        traits: [
+          {
+            type: 'document-lookup',
+            label: 'Product',
+            name: 'id',
+            collection: 'products'
+          }
+        ]
+      }
+    }
+  },
 
   /**
    * Blog
