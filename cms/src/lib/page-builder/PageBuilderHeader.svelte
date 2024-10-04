@@ -1,10 +1,13 @@
 <script lang="ts">
+  import type { Editor } from 'grapesjs';
   import { confirmation } from '../utils/confirmation';
   import { DEVICES } from './consts/devices.const';
 
-  export let grapesInstance: any;
+  export let grapesInstance: Editor;
   export let activeDevice = DEVICES[0].id;
   export let gridVisible = true;
+
+  let fileEl: HTMLInputElement;
 
   function setDevice(device: string) {
     grapesInstance.setDevice(device);
@@ -19,6 +22,19 @@
     }
 
     gridVisible = !gridVisible;
+  }
+
+  function importHtml(event: any) {
+    if (!event.target.files || !event.target.files[0]) {
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.readAsText(event.target.files[0], 'UTF-8');
+    reader.onload = (evt) => {
+      grapesInstance.setComponents(evt.target!.result as string);
+    }
   }
 
   function clearPage() {
@@ -70,12 +86,19 @@
         class="material-symbols-outlined"
         on:click={() => grapesInstance.runCommand('export-template')}>code</button
       >
+      <button
+        title="Import HTML"
+        class="material-symbols-outlined"
+        on:click={() => fileEl.click()}>html</button
+      >
       <button title="Clear Page" class="material-symbols-outlined" on:click={clearPage}>
         delete
       </button>
     </div>
   </div>
 </header>
+
+<input type="file" bind:this={fileEl} on:change={importHtml} hidden />
 
 <style lang="postcss">
   header {
