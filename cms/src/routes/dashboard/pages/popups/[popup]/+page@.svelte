@@ -18,6 +18,8 @@
   import { DocumentSnapshot, deleteDoc, doc, setDoc, updateDoc } from 'firebase/firestore';
   import { onMount } from 'svelte';
   import { uploadString, ref } from 'firebase/storage';
+  import type { Editor } from 'grapesjs';
+  import { getHtml } from '$lib/page-builder/utils/get-html';
 
   export let data: {
     col: string;
@@ -32,7 +34,7 @@
   let saveLoading = false;
   let formModule: FormModule;
   let pageBuilderEl: HTMLDivElement;
-  let grapesInstance: any;
+  let grapesInstance: Editor;
   let navigate = $page.params.id;
   let activeSidebar = 'page-settings';
   let renderedFormModules: {
@@ -91,7 +93,7 @@
     }
 
     const json = grapesInstance.getProjectData();
-    const html = grapesInstance.getHtml();
+    const html = getHtml(grapesInstance);
     const css = grapesInstance.getCss();
 
     const toUpdate = [

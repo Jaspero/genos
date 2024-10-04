@@ -87,7 +87,9 @@ export async function load({ params, parent }) {
     return {
       col,
       items,
-      value: {},
+      value: {
+        tags: ['Any', 'Pages']
+      },
       popups,
       forms
     };

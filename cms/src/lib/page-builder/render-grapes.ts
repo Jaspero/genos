@@ -1,5 +1,5 @@
 import '@jaspero/web-components/dist/asset-manager.wc';
-import grapesjs from 'grapesjs';
+import grapesjs, { type Editor } from 'grapesjs';
 import parserPostCSS from 'grapesjs-parser-postcss';
 import styleGradientPlugin from 'grapesjs-style-gradient';
 import componentCodeEditor from './plugins/component-code-editor/component-code-editor';
@@ -22,7 +22,7 @@ import { CUSTOM_TRAITS } from './consts/custom-traits.const';
 
 export function renderGrapes(
   pageBuilderEl: HTMLDivElement,
-  grapesInstance: any,
+  grapesInstance: Editor,
   json?: any,
   popups?: Popup[],
   forms?: PageBuilderForm[]
@@ -34,7 +34,7 @@ export function renderGrapes(
       grapesInstance.runCommand('core:canvas-clear');
     }
 
-    return;
+    return grapesInstance;
   }
 
   let assetManagerRendered = false;
