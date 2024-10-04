@@ -111,7 +111,7 @@ export async function load({ params, parent }) {
     popupsSnap,
     formsSnap,
     layoutData,
-    categorieOptions,
+    categoryOptions,
     tagOptions
   ] = await Promise.all([
     getDocs(
@@ -218,7 +218,7 @@ export async function load({ params, parent }) {
     ...doc.data()
   })) as PageBuilderForm[];
 
-  categories.push(...categorieOptions);
+  categories.push(...categoryOptions);
   tags.push(...tagOptions);
 
   if (product === 'new') {

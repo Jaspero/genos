@@ -5,9 +5,21 @@
   import { CONFIG } from '$lib/consts/config.const';
   import { COLLECTION_KEYS_MAP } from '$lib/consts/tracked-collection.const';
 
+  interface FilterParams {
+   initialCategories: string[];
+   initialTags: string[];
+   initialMinPrice: number;
+   initialMaxPrice: number;
+   search: string;
+   limit: string;
+   direction: string;
+   property: string;
+  }
+
   export let limit: string;
   export let property: string;
   export let direction: 'desc' | 'asc';
+  export let showSort: boolean;
 
   /**
    * Filters
@@ -38,10 +50,10 @@
       fetch(CONFIG.webUrl + '/data/products.json').then(response => response.json()).catch(() => [])
     ]);
 
-    applyFilters({ initialCategories, initialTags, initialMinPrice, initialMaxPrice, search, limit, direction });
+    applyFilters({ initialCategories, initialTags, initialMinPrice, initialMaxPrice, search, limit, direction, property });
   });
 
-  function applyFilters(data: { initialCategories: string[]; initialTags: string[]; initialMinPrice: number; initialMaxPrice: number; search: string; limit: string, direction: string }) {
+  function applyFilters(data: FilterParams) {
     // Reduce to filter, sort, and limit in one pass
     products = products.reduce((acc, product) => {
       let valid = false;
@@ -85,13 +97,15 @@
         acc.push(product);
 
         // Sort the accumulator by the property after pushing the product
-        acc.sort((a, b) => {
-          if (data.direction === 'asc') {
-            return a[COLLECTION_KEYS_MAP.products[property]] > b[COLLECTION_KEYS_MAP.products[property]] ? 1 : -1;
-          } else {
-            return a[COLLECTION_KEYS_MAP.products[property]] < b[COLLECTION_KEYS_MAP.products[property]] ? 1 : -1;
-          }
-        });
+        if (data.direction && data.property) {
+          acc.sort((a, b) => {
+            if (data.direction === 'asc') {
+              return a[COLLECTION_KEYS_MAP.products[property]] > b[COLLECTION_KEYS_MAP.products[property]] ? 1 : -1;
+            } else {
+              return a[COLLECTION_KEYS_MAP.products[property]] < b[COLLECTION_KEYS_MAP.products[property]] ? 1 : -1;
+            }
+          });
+        }
       }
 
       return acc;
@@ -105,11 +119,23 @@
     }, 300);
   }
 
-  $: applyFilters({ initialCategories, initialTags, initialMinPrice, initialMaxPrice, search, limit, direction });
+  $: applyFilters({ initialCategories, initialTags, initialMinPrice, initialMaxPrice, search, limit, direction, property });
 </script>
 
 <div class="products">
   <div class="filters">
+    {#if showSort}
+      <h4>Sort</h4>
+      <select bind:value={property}>
+        <option value={COLLECTION_KEYS_MAP.products.name}>Name</option>
+        <option value={COLLECTION_KEYS_MAP.products.price}>Price</option>
+        <option value={COLLECTION_KEYS_MAP.products.createdOn}>Created On</option>
+      </select>
+      <select bind:value={direction}>
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+    {/if}
     {#if showCategoriesFilter && categories.length}
       <h4>Categories</h4>
       <select bind:value={initialCategories}>

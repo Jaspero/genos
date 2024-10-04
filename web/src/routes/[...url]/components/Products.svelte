@@ -5,9 +5,21 @@
   import { CONFIG } from '$lib/consts/config.const';
   import { COLLECTION_KEYS_MAP } from '$lib/consts/tracked-collection.const';
 
+  interface FilterParams {
+    initialCategories: string[];
+    initialTags: string[];
+    initialMinPrice: number;
+    initialMaxPrice: number;
+    search: string;
+    limit: string;
+    direction: string;
+    property: string;
+  }
+
   export let limit: string;
   export let property: string;
   export let direction: 'desc' | 'asc';
+  export let showSort: boolean;
 
   /**
    * Filters
@@ -38,60 +50,62 @@
       fetch(CONFIG.websiteUrl + '/data/products.json').then(response => response.json()).catch(() => [])
     ]);
 
-    applyFilters();
+    applyFilters({ initialCategories, initialTags, initialMinPrice, initialMaxPrice, search, limit, direction, property });
   });
 
-  function applyFilters() {
+  function applyFilters(data: FilterParams) {
     // Reduce to filter, sort, and limit in one pass
     products = products.reduce((acc, product) => {
-      let valid = true;
+      let valid = false;
 
       /**
        * Check if the product belongs to the selected category
        */
-      if (initialCategories) {
-        valid = initialCategories.includes(product[COLLECTION_KEYS_MAP.products.category]);
+      if (data.initialCategories) {
+        valid = data.initialCategories.includes(product[COLLECTION_KEYS_MAP.products.category]);
       }
       /**
        * Check if the product has at least one of the selected tags
        */
-      if (valid && initialTags) {
-        valid = product[COLLECTION_KEYS_MAP.products.tags].some((tag: string) => initialTags.includes(tag));
+      if (valid && data.initialTags) {
+        valid = product[COLLECTION_KEYS_MAP.products.tags].some((tag: string) => data.initialTags.includes(tag));
       }
 
       /**
        * Check if the product price is within the selected range
        */
-      if (valid && (initialMinPrice || initialMinPrice === 0)) {
-        valid = product[COLLECTION_KEYS_MAP.products.price] >= initialMinPrice;
+      if (valid && (data.initialMinPrice || data.initialMinPrice === 0)) {
+        valid = product[COLLECTION_KEYS_MAP.products.price] >= data.initialMinPrice;
       }
 
       /**
        * Check if the product price is within the selected range
        */
-      if (valid && initialMaxPrice) {
-        valid = product[COLLECTION_KEYS_MAP.products.price] <= initialMaxPrice;
+      if (valid && data.initialMaxPrice) {
+        valid = product[COLLECTION_KEYS_MAP.products.price] <= data.initialMaxPrice;
       }
 
       /**
        * Search
        */
-      if (valid && search) {
-        valid = product[COLLECTION_KEYS_MAP.products.name].toLowerCase().split(' ').includes(search.toLowerCase());
+      if (valid && data.search) {
+        valid = product[COLLECTION_KEYS_MAP.products.name].toLowerCase().split(' ').includes(data.search.toLowerCase());
       }
 
       // Only push if valid and we haven't exceeded the limit and limit is set
-      if (valid && (!limit || acc.length < parseInt(limit, 10))) {
+      if (valid && (!data.limit || acc.length < parseInt(data.limit, 10))) {
         acc.push(product);
 
         // Sort the accumulator by the property after pushing the product
-        acc.sort((a, b) => {
-          if (direction === 'asc') {
-            return a[COLLECTION_KEYS_MAP.products[property]] > b[COLLECTION_KEYS_MAP.products[property]] ? 1 : -1;
-          } else {
-            return a[COLLECTION_KEYS_MAP.products[property]] < b[COLLECTION_KEYS_MAP.products[property]] ? 1 : -1;
-          }
-        });
+        if (data.direction && data.property) {
+          acc.sort((a, b) => {
+            if (data.direction === 'asc') {
+              return a[COLLECTION_KEYS_MAP.products[property]] > b[COLLECTION_KEYS_MAP.products[property]] ? 1 : -1;
+            } else {
+              return a[COLLECTION_KEYS_MAP.products[property]] < b[COLLECTION_KEYS_MAP.products[property]] ? 1 : -1;
+            }
+          });
+        }
       }
 
       return acc;
@@ -105,11 +119,23 @@
     }, 300);
   }
 
-  $: applyFilters();
+  $: applyFilters({ initialCategories, initialTags, initialMinPrice, initialMaxPrice, search, limit, direction, property });
 </script>
 
 <div class="products">
   <div class="filters">
+    {#if showSort}
+      <h4>Sort</h4>
+      <select bind:value={property}>
+        <option value={COLLECTION_KEYS_MAP.products.name}>Name</option>
+        <option value={COLLECTION_KEYS_MAP.products.price}>Price</option>
+        <option value={COLLECTION_KEYS_MAP.products.createdOn}>Created On</option>
+      </select>
+      <select bind:value={direction}>
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+    {/if}
     {#if showCategoriesFilter && categories.length}
       <h4>Categories</h4>
       <select bind:value={initialCategories}>

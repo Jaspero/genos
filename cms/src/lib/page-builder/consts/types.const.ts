@@ -693,6 +693,11 @@ export const TYPES = (forms: PageBuilderForm[]) => [
           },
           {
             type: 'checkbox',
+            label: 'Show Sort',
+            name: 'showSort'
+          },
+          {
+            type: 'checkbox',
             label: 'Show Search',
             name: 'showSearch'
           }
