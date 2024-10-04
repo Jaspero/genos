@@ -21,6 +21,9 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
+      - name: Install Dependencies
+        working-directory: web
+        run: npm ci
       - name: Configure Release
         id: config
         working-directory: web
