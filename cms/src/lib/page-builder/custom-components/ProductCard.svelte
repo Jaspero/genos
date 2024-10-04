@@ -11,19 +11,18 @@
   let product: Product;
 
   onMount(async () => {
-    await getProduct();
+    await getProduct(id);
   });
 
-  async function getProduct() {
-    console.log('getProduct', id);
-    const docSnap = await getDoc(doc(db, 'products', id));
+  async function getProduct(productId: string) {
+    const docSnap = await getDoc(doc(db, 'products', productId));
 
     if (docSnap.exists()) {
       product = docSnap.data() as Product;
     }
   }
 
-  $: getProduct();
+  $: getProduct(id);
 </script>
 
 {#if product}
