@@ -36,10 +36,10 @@ async function exec() {
     toExec.push(writeFile(`./key.json`, env));
   }
 
-  const constFiles = await fs.readdir('../shared/consts');
+  const constFiles = await fs.promises.readdir('../shared/consts');
   toExec.push(
     ...constFiles.map(file => {
-      return fs.copyFile('../shared/consts/' + file, './src/lib/consts/' + file, () => {});
+      return fs.promises.copyFile('../shared/consts/' + file, './src/lib/consts/' + file);
     })
   );
 
