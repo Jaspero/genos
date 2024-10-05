@@ -11,6 +11,7 @@ declare interface ColumnActionsConfigButton {
 }
 
 declare interface ColumnActionsConfig {
+  collection?: string;
   actions?: Array<'edit' | 'duplicate' | 'delete'>;
   buttons?: ColumnActionsConfigButton[];
   links?: ColumnActionsConfigLink[];
@@ -20,6 +21,7 @@ declare interface ColumnActionsConfig {
 }
 
 declare interface Window {
+  Swiper: any;
   columnActions?: {
     [key: string]: ColumnActionsConfig;
   };

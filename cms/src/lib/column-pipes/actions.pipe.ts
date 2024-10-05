@@ -14,6 +14,7 @@ export function actionsPipe(config?: (id: string, rowData?: any) => ColumnAction
     window.columnActions[id] = internalConfig;
 
     return `<column-actions
+      ${internalConfig.collection ? `collection=${internalConfig.collection}` : ''}
       id="${id}"
       actions="${(internalConfig.actions || []).join(',')}"
       duplicateStorage="${(internalConfig.duplicateStorage || []).join(',')}"
