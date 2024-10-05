@@ -7,8 +7,8 @@ export async function getHtml(grapesInstance: Editor) {
 		.replace('</body>', '')
 		.replaceAll(/directives\=\"\[object Object\]\"/g, '')
 		.replaceAll(/dataset\=\"\[object Object\]\"/g, '')
-		.replaceAll(/data\-metadata\=\"\<\!\-\-\(figmeta\).*\"/g, '')
-		.replaceAll(/data\-buffer\=\"\<\!\-\-\(figmeta\).*\"/g, '');
+		.replaceAll(/data\-metadata\=\"\<\!\-\-\(figmeta\)[^"]*\"/g, '')
+		.replaceAll(/data\-buffer\=\"\<\!\-\-\(figmeta\)[^"]*\"/g, '');
 
 	const minified = await minify(cleaned, {
 		caseSensitive: true,
