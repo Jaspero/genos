@@ -1,4 +1,4 @@
-name: DEV | Deploy Web
+name: Dev | Deploy Web
 on:
   workflow_dispatch: # This trigger allows the workflow to be run manually
 env:
@@ -9,6 +9,10 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Use Node.js 20.9.0
+        uses: actions/setup-node@v1
+        with:
+          node-version: 20.9.0      
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
