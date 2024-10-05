@@ -86,7 +86,7 @@
     }
 
     const json = grapesInstance.getProjectData();
-    const html = grapesInstance.getHtml();
+    const html = await grapesInstance.getHtml();
     const css = grapesInstance.getCss();
 
     const toUpdate = [

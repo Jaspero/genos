@@ -20,6 +20,7 @@
   import { uploadString, ref } from 'firebase/storage';
   import type { Editor } from 'grapesjs';
   import { getHtml } from '$lib/page-builder/utils/get-html';
+  import { getCss } from '$lib/page-builder/utils/get-css';
 
   export let data: {
     col: string;
@@ -93,8 +94,8 @@
     }
 
     const json = grapesInstance.getProjectData();
-    const html = getHtml(grapesInstance);
-    const css = grapesInstance.getCss();
+    const html = await getHtml(grapesInstance);
+    const css = getCss(grapesInstance);
 
     const toUpdate = [
       uploadString(
@@ -103,7 +104,7 @@
       ),
       uploadString(
         ref(storage, `page-configurations/${data.col}/${id}/content.html`),
-        html.replace('<body>', '').replace('</body>', '')
+        html
       ),
       uploadString(ref(storage, `page-configurations/${data.col}/${id}/content.css`), css)
     ];

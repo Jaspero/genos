@@ -19,7 +19,7 @@
       background = '#bcaaa4';
       title = 'Not published';
       // @ts-ignore
-    } else if ($lastPublishedOn > (date as Date).getTime()) {
+    } else if ($lastPublishedOn > new Date(d).getTime()) {
       background = '#4caf50';
       title = 'Published';
     } else {

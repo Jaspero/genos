@@ -4,7 +4,6 @@
   import { db, user } from '$lib/utils/firebase';
   import '@jaspero/web-components/dist/alert.wc';
   import '@jaspero/web-components/dist/confirm.wc';
-  import '@jaspero/web-components/dist/index.css';
   import { doc, getDoc } from 'firebase/firestore';
   import { onMount } from 'svelte';
   import '../../../shared/styles/index.pcss';

@@ -107,10 +107,6 @@
     transform: translate(0);
   }
 
-  .fullscreen.dialog-content {
-    margin: 0 auto;
-  }
-
   .dialog-content {
     width: 100%;
     padding: 3rem;
