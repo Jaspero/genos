@@ -2,7 +2,8 @@ import { renderAlert } from '@jaspero/web-components/dist/render-alert.js';
 import { FirebaseError } from 'firebase/app';
 
 const firebaseErrors: { [key: string]: string } = {
-  'auth/invalid-credential': 'The email and password you entered did not match our records. Please double-check and try again.',
+  'auth/invalid-credential':
+    'The email and password you entered did not match our records. Please double-check and try again.',
   'auth/wrong-password':
     'The email and password you entered did not match our records. Please double-check and try again.',
   'auth/too-many-requests':

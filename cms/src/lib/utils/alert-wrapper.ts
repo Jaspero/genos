@@ -1,9 +1,9 @@
+import { renderAlert } from '@jaspero/web-components/dist/render-alert';
+import { FirebaseError } from 'firebase/app';
 
-import {renderAlert} from '@jaspero/web-components/dist/render-alert';
-import {FirebaseError} from 'firebase/app';
-
-const firebaseErrors: {[key: string]: string} = {
-  'auth/invalid-credential': 'The email and password you entered did not match our records. Please double-check and try again.',
+const firebaseErrors: { [key: string]: string } = {
+  'auth/invalid-credential':
+    'The email and password you entered did not match our records. Please double-check and try again.',
   'auth/wrong-password':
     'The email and password you entered did not match our records. Please double-check and try again.',
   'auth/too-many-requests':
@@ -35,7 +35,7 @@ export async function alertWrapper(
   try {
     resp = await request;
     if (successMessage) {
-      renderAlert({title: 'Success', message: successMessage, state: 'success'});
+      renderAlert({ title: 'Success', message: successMessage, state: 'success' });
     }
   } catch (e: any) {
     if ((errorMessage as any) !== false) {

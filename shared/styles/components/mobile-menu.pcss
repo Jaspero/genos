@@ -1,6 +1,6 @@
 pb-mobile-menu {
   display: none;
-  @media(max-width: 1220px) {
+  @media (max-width: 1220px) {
     display: flex;
     flex-direction: column;
   }
@@ -14,9 +14,9 @@ pb-mobile-menu {
     background-color: #ffff;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    transition: all ease-in-out .3s;
+    transition: all ease-in-out 0.3s;
     transform-origin: right;
-    @media(max-width: 740px) {
+    @media (max-width: 740px) {
       width: calc(100% + 40px);
       right: -120%;
       border-radius: 0;
@@ -35,14 +35,15 @@ pb-mobile-menu {
       padding: 10px 25px;
       color: var(--text-primary);
       font-size: 20px;
-      font-family: "Irish Grover", system-ui;
+      font-family: 'Irish Grover', system-ui;
       background: none;
       border: none;
       display: flex;
       width: 100%;
       text-decoration: none;
       cursor: pointer;
-      &:hover, &:focus &.active {
+      &:hover,
+      &:focus &.active {
         background: var(--background-primary);
       }
     }

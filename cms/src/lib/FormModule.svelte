@@ -2,17 +2,27 @@
 
 <script lang="ts">
   import '@jaspero/web-components/dist/input.wc';
+  import '@jaspero/web-components/dist/input.css';
   import '@jaspero/web-components/dist/select.wc';
+  import '@jaspero/web-components/dist/select.css';
   import '@jaspero/web-components/dist/multiselect.wc';
+  import '@jaspero/web-components/dist/multiselect.css';
   import '@jaspero/web-components/dist/multisearch.wc';
+  import '@jaspero/web-components/dist/multisearch.css';
   import '@jaspero/web-components/dist/datepicker.wc';
   import '@jaspero/web-components/dist/ckeditor.wc';
+  import '@jaspero/web-components/dist/ckeditor.css';
   import '@jaspero/web-components/dist/textarea.wc';
+  import '@jaspero/web-components/dist/textarea.css';
   import '@jaspero/web-components/dist/checkbox.wc';
+  import '@jaspero/web-components/dist/checkbox.css';
+  import '@jaspero/web-components/dist/radio.wc';
+  import '@jaspero/web-components/dist/radio.css';
   import '@jaspero/web-components/dist/file-upload.wc';
   import '@jaspero/web-components/dist/file-list.wc';
   import '@jaspero/web-components/dist/toggle.wc';
   import '@jaspero/web-components/dist/chips.wc';
+  import '@jaspero/web-components/dist/chips.css';
   import '@jaspero/web-components/dist/review-stars.wc';
 
   import { ModularSchema, ModularView } from '@jaspero/modular';

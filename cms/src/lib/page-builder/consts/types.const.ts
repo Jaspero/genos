@@ -16,7 +16,7 @@ const minLengthTrait = { name: 'minlength', label: 'Min Length', type: 'number' 
 const maxLengthTrait = { name: 'maxlength', label: 'Max Length', type: 'number' };
 const patternTrait = { name: 'pattern', label: 'Pattern', type: 'text', changeProp: 1 };
 const titleTrait = { name: 'title', label: 'Title', type: 'text' };
-const directiveSelectTrait = {name: 'directives', label: 'Directives', type: 'directives-select'};
+const directiveSelectTrait = { name: 'directives', label: 'Directives', type: 'directives-select' };
 
 export const TYPES = (forms: PageBuilderForm[]) => [
   /**
@@ -243,11 +243,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
       defaults: {
         type: 'div',
         tagName: 'div',
-        traits: [
-          idTrait,
-          titleTrait,
-          directiveSelectTrait
-        ]
+        traits: [idTrait, titleTrait, directiveSelectTrait]
       }
     }
   },
@@ -544,7 +540,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             type: 'text',
             label: 'Links',
             name: 'links'
-          },
+          }
         ]
       }
     }
@@ -664,15 +660,15 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             name: 'showcategoryfilters',
             label: 'Show Category Filters',
             options: [
-              { id: 'Yes', label: 'Yes'},
-              { id: 'No', label: 'No'},
+              { id: 'Yes', label: 'Yes' },
+              { id: 'No', label: 'No' }
             ],
             default: 'Yes'
           },
           {
             type: 'text',
             name: 'loadMoreLabel',
-            label: 'Load More Label',
+            label: 'Load More Label'
           },
           {
             type: 'text',

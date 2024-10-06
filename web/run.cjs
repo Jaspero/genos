@@ -27,9 +27,7 @@ async function exec() {
     console.log(e);
   }
 
-  const toExec = [
-    writeFile(`./src/lib/utils/env-config.ts`, envConfig),
-  ];
+  const toExec = [writeFile(`./src/lib/utils/env-config.ts`, envConfig)];
 
   if (env) {
     toExec.push(writeFile(`./key.json`, env));

@@ -1,14 +1,14 @@
-import {onObjectDeleted} from 'firebase-functions/v2/storage';
-import {basename, dirname, join} from 'path';
-import {REGION} from '../shared/consts/region.const';
-import {unpackGenerateImageString} from './utils/unpack-generate-image-string';
-import {getStorage} from 'firebase-admin/storage';
-import {logger} from 'firebase-functions/v2';
+import { onObjectDeleted } from 'firebase-functions/v2/storage';
+import { basename, dirname, join } from 'path';
+import { REGION } from '../shared/consts/region.const';
+import { unpackGenerateImageString } from './utils/unpack-generate-image-string';
+import { getStorage } from 'firebase-admin/storage';
+import { logger } from 'firebase-functions/v2';
 
 export const fileDeleted = onObjectDeleted(
-  {cpu: 2, concurrency: 1, region: REGION},
+  { cpu: 2, concurrency: 1, region: REGION },
   async (event) => {
-    const {bucket, name, contentType, metadata} = event.data;
+    const { bucket, name, contentType, metadata } = event.data;
 
     if (
       !contentType ||
@@ -29,7 +29,7 @@ export const fileDeleted = onObjectDeleted(
 
     for (const key in metadata) {
       if (key.includes('generate_')) {
-        const {filePrefix, webpVersion, height, width} = unpackGenerateImageString(metadata[key]);
+        const { filePrefix, webpVersion, height, width } = unpackGenerateImageString(metadata[key]);
 
         if (filePrefix || width || height) {
           const path = lookUpName(filePrefix);

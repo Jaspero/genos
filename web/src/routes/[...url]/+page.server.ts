@@ -21,7 +21,7 @@ export const load: PageServerLoad = async ({ params }) => {
   const toLoad: any[] = [
     bucket.file(`page-configurations/pages/${doc.id}/content.html`).download(),
     bucket.file(`page-configurations/pages/${doc.id}/content.css`).download(),
-    bucket.file(`page-configurations/pages/${doc.id}/content.js`).download(),
+    bucket.file(`page-configurations/pages/${doc.id}/content.js`).download()
   ];
 
   const data = doc.data();
@@ -58,6 +58,6 @@ export const load: PageServerLoad = async ({ params }) => {
   return {
     ...data,
     content: `${content}<style>${style}</style>`,
-    scripts: await scriptRef.toString(),
+    scripts: await scriptRef.toString()
   };
 };

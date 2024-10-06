@@ -1,15 +1,15 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
-import {stripeInstance} from '../shared/consts/stripeInstance.const';
-import {FirestoreCollections} from '../shared/enums/firestore-collections.enum';
-import {toStripeFormat} from '../shared/utils/to-stripe-format';
-import {random} from '@jaspero/utils';
-import {REGION} from '../shared/consts/region.const';
+import { stripeInstance } from '../shared/consts/stripeInstance.const';
+import { FirestoreCollections } from '../shared/enums/firestore-collections.enum';
+import { toStripeFormat } from '../shared/utils/to-stripe-format';
+import { random } from '@jaspero/utils';
+import { REGION } from '../shared/consts/region.const';
 
 export const processCheckout = functions
   .runWith({
     memory: '512MB',
-    timeoutSeconds: 540,
+    timeoutSeconds: 540
   })
   .region(REGION)
   .https.onCall(async (data) => {
@@ -44,7 +44,7 @@ export const processCheckout = functions
         const lookupKey = JSON.stringify(product.id + stripePriceFormat + currency);
         const prices = await stripeInstance.prices.list({
           lookup_keys: [lookupKey],
-          expand: ['data.product'],
+          expand: ['data.product']
         });
 
         let findPrice = prices.data.find((x) => x.unit_amount === stripePriceFormat);
@@ -54,7 +54,7 @@ export const processCheckout = functions
             unit_amount: stripePriceFormat,
             lookup_key: lookupKey,
             currency,
-            product: stripeProduct.id,
+            product: stripeProduct.id
           });
         }
 
@@ -64,7 +64,7 @@ export const processCheckout = functions
           variant,
           id: product.id,
           stripeProduct,
-          findPrice,
+          findPrice
         });
       }
     }
@@ -78,7 +78,7 @@ export const processCheckout = functions
       if (customerData) {
         fs.collection(FirestoreCollections.Customers).doc(data.customerId).set({
           created: Date.now(),
-          email: data.email,
+          email: data.email
         });
       }
     } catch (e) {
@@ -90,25 +90,25 @@ export const processCheckout = functions
       products,
       customer: data.customerId,
       email: data.email,
-      paid: false,
+      paid: false
     };
     const orderId = random.string(12);
     fs.collection(FirestoreCollections.Orders).doc(orderId).create(processData).then();
 
     const session = await stripeInstance.checkout.sessions.create({
-      line_items: products.map((x) => ({price: x.findPrice.id, quantity: x.quantity})),
+      line_items: products.map((x) => ({ price: x.findPrice.id, quantity: x.quantity })),
       mode: 'payment',
       customer_email: data.email,
       success_url: `https://some-url${orderNumber}`,
       cancel_url: 'https://some-url/checkout',
       subscription_data: {
         metadata: {
-          orderId,
-        },
-      },
+          orderId
+        }
+      }
     });
 
     return {
-      url: session.url,
+      url: session.url
     };
   });

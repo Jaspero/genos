@@ -56,10 +56,12 @@
         ? Promise.all(
             storageDuplicates.map(async (sub) => {
               const { items } = await listAll(storageRef(storage, sub));
-              const final = await Promise.all(items.map(async (item) => ({
-                path: item.fullPath,
-                content: await fromStorage(item.fullPath)
-              })));
+              const final = await Promise.all(
+                items.map(async (item) => ({
+                  path: item.fullPath,
+                  content: await fromStorage(item.fullPath)
+                }))
+              );
 
               return final;
             })
@@ -81,9 +83,7 @@
     if (storageRefs.length) {
       storageRefs.forEach((ref) =>
         ref.forEach((d) =>
-          toExec.push(
-            uploadString(storageRef(storage, d.path.replace(id, newId)), d.content)
-          )
+          toExec.push(uploadString(storageRef(storage, d.path.replace(id, newId)), d.content))
         )
       );
     }

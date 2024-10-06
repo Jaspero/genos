@@ -1,7 +1,6 @@
 <svelte:options customElement={{ tag: 'pb-mobile-menu', shadow: 'none' }} />
 
 <script lang="ts">
-
   export let links: string;
   export let labels: string;
 

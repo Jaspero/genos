@@ -163,12 +163,9 @@
         ref(storage, `page-configurations/${data.col}/${id}/content.json`),
         JSON.stringify(json)
       ),
-      uploadString(
-        ref(storage, `page-configurations/${data.col}/${id}/content.html`),
-        html
-      ),
+      uploadString(ref(storage, `page-configurations/${data.col}/${id}/content.html`), html),
       uploadString(ref(storage, `page-configurations/${data.col}/${id}/content.css`), css),
-      uploadString(ref(storage, `page-configurations/${data.col}/${id}/content.js`), js),
+      uploadString(ref(storage, `page-configurations/${data.col}/${id}/content.js`), js)
     ];
 
     if (data.snap) {

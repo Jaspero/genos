@@ -39,9 +39,7 @@ export async function load({ params, parent }) {
     }
   ];
 
-  const layoutSnap = await getDocs(
-    collection(db, 'email-template-layouts')
-  );
+  const layoutSnap = await getDocs(collection(db, 'email-template-layouts'));
 
   const layouts = await Promise.all(
     layoutSnap.docs.map(async (d) => {

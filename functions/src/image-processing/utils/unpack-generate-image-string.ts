@@ -1,4 +1,4 @@
-import {logger} from 'firebase-functions/v2';
+import { logger } from 'firebase-functions/v2';
 
 export function unpackGenerateImageString(data: string) {
   return data.split('----').reduce(
@@ -6,34 +6,34 @@ export function unpackGenerateImageString(data: string) {
       const [key, value] = cur.split(':');
 
       switch (key) {
-      case 'filePrefix':
-      case 'folder': {
-        acc[key] = value;
-        break;
-      }
-      case 'height':
-      case 'width': {
-        let parsed = 0;
-
-        try {
-          parsed = parseInt(value, 10);
-        } catch (e) {
-          logger.info(`Failed to parse ${key}`, e);
+        case 'filePrefix':
+        case 'folder': {
+          acc[key] = value;
+          break;
         }
+        case 'height':
+        case 'width': {
+          let parsed = 0;
 
-        if (parsed) {
-          acc[key] = parsed;
+          try {
+            parsed = parseInt(value, 10);
+          } catch (e) {
+            logger.info(`Failed to parse ${key}`, e);
+          }
+
+          if (parsed) {
+            acc[key] = parsed;
+          }
+
+          break;
         }
-
-        break;
-      }
-      case 'webpVersion': {
-        acc[key] = value === 'true';
-        break;
-      }
-      default: {
-        break;
-      }
+        case 'webpVersion': {
+          acc[key] = value === 'true';
+          break;
+        }
+        default: {
+          break;
+        }
       }
 
       return acc;
@@ -43,7 +43,7 @@ export function unpackGenerateImageString(data: string) {
       folder: '',
       height: 0,
       width: 0,
-      webpVersion: false,
+      webpVersion: false
     }
   );
 }

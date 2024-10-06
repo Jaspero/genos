@@ -12,5 +12,5 @@ export const CONFIG = {
   singleBlogAuthorUrlPrefix: '/authors/',
   singleProductUrlPrefix: '/products/',
   singleHeader: '',
-  singleFooter: '',
+  singleFooter: ''
 };

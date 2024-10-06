@@ -15,7 +15,7 @@
   import { CONFIG } from '$lib/consts/config.const';
   import { renderMjMl } from '../../email-templates/[id]/render-mjml';
   import EmailTemplatesSidebar from '../../email-templates/[id]/EmailTemplatesSidebar.svelte';
-  import {random} from '@jaspero/utils';
+  import { random } from '@jaspero/utils';
 
   export let data: {
     col: string;

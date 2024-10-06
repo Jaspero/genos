@@ -10,13 +10,7 @@
   export let data: CommonDataTablePageData;
 
   $: col = ($page.params.collection || data.collection) as string;
-  $: baseLink = [
-    '/dashboard',
-    $page.params.module || data.module,
-    col
-  ]
-    .filter(Boolean)
-    .join('/');
+  $: baseLink = ['/dashboard', $page.params.module || data.module, col].filter(Boolean).join('/');
 </script>
 
 <Grid>

@@ -5,7 +5,6 @@
   import { createEventDispatcher } from 'svelte';
 
   export let value: { [key: string]: any };
-  export let name: string;
 
   let parentEl: HTMLDivElement;
 
@@ -42,7 +41,7 @@
             options: [
               { label: 'Smooth', value: 'smooth' },
               { label: 'Instant', value: 'instant' },
-              { label: 'Auto', value: 'auto' },
+              { label: 'Auto', value: 'auto' }
             ]
           }
         }
@@ -58,6 +57,23 @@
           default: 'active'
         }
       ]
+    },
+    'is-in-view': {
+      label: 'Is in View',
+      options: [
+        {
+          label: 'Classes To Add',
+          value: 'classesToAdd',
+          type: 'jp-chips',
+          default: ''
+        },
+        {
+          label: 'Classes To Remove',
+          value: 'classesToRemove',
+          type: 'jp-chips',
+          default: ''
+        }
+      ]
     }
   };
 
@@ -71,29 +87,33 @@
       value: key,
       label: value.label
     }));
-		
-		if (value.directives?.length) {
-			el.value = value.directives;
-		}
 
-		function render(directives: string[]) {
+    if (value.directives?.length) {
+      el.value = value.directives;
+    }
+
+    function render(directives: string[]) {
       for (const item of directives) {
         const it = optionsMap[item];
 
         for (const option of it.options) {
           const itemEl = document.createElement(option.type);
+          const optionKey = `${item}-${option.value
+            .split(/(?=[A-Z])/)
+            .join('-')
+            .toLowerCase()}`;
 
           itemEl.name = option.value;
           itemEl.label = it.label + ' - ' + option.label;
 
           itemEl.classList.add('mt-2', 'block');
 
-          if (option.default && !value.hasOwnProperty(`${item}-${option.value}`)) {
+          if (option.default && !value.hasOwnProperty(optionKey)) {
             itemEl.value = option.default;
-            value[`${item}-${option.value}`] = option.default;
+            value[optionKey] = option.default;
             dispatch('input', value);
-          } else if (value.hasOwnProperty(`${item}-${option.value}`)) {
-            itemEl.value = value[`${item}-${option.value}`];
+          } else if (value.hasOwnProperty(optionKey)) {
+            itemEl.value = value[optionKey];
           }
 
           if (option.options) {
@@ -103,14 +123,15 @@
           }
 
           itemEl.addEventListener('value', (i: { detail: any }) => {
-            value[item + '-' + option.value] = i.detail.value;
+            const v = Array.isArray(i.detail.value) ? i.detail.value.join(',') : i.detail.value;
+            value[optionKey] = v;
             dispatch('input', value);
           });
 
           innerEl.appendChild(itemEl);
         }
       }
-		}
+    }
 
     el.addEventListener('value', (e: { detail: string[] }) => {
       innerEl.innerHTML = '';

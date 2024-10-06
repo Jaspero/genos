@@ -34,7 +34,7 @@
     reader.readAsText(event.target.files[0], 'UTF-8');
     reader.onload = (evt) => {
       grapesInstance.setComponents(evt.target!.result as string);
-    }
+    };
   }
 
   function clearPage() {
@@ -86,10 +86,8 @@
         class="material-symbols-outlined"
         on:click={() => grapesInstance.runCommand('export-template')}>code</button
       >
-      <button
-        title="Import HTML"
-        class="material-symbols-outlined"
-        on:click={() => fileEl.click()}>html</button
+      <button title="Import HTML" class="material-symbols-outlined" on:click={() => fileEl.click()}
+        >html</button
       >
       <button title="Clear Page" class="material-symbols-outlined" on:click={clearPage}>
         delete

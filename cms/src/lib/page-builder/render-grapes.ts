@@ -121,7 +121,6 @@ export function renderGrapes(
       options: any;
       select: (asset: string, final: boolean) => void;
     }) => {
-
       const types = props.options.target.tagName === 'video' ? ['video'] : props.types;
 
       if (assetManager) {
