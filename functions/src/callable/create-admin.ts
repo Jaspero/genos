@@ -29,13 +29,13 @@ export const createAdmin = onCall<RequestData>(
     const email = request.data.email.replace(/ /g, '').toLowerCase();
 
     const adminsRef = await firestore
-      .collection('admins')
+      .collection(role + 's')
       .where('email', '==', email)
       .limit(1)
       .get();
 
     if (!adminsRef.empty) {
-      throw new HttpsError('already-exists', 'Admin already exists');
+      throw new HttpsError('already-exists', role + ' already exists');
     }
 
     let user: UserRecord | null = null;
@@ -54,7 +54,7 @@ export const createAdmin = onCall<RequestData>(
 
     await Promise.all([
       auth.setCustomUserClaims(user.uid, { role }),
-      firestore.collection('admins').doc(user.uid).set({
+      firestore.collection(role + 's').doc(user.uid).set({
         createdOn: new Date().toISOString(),
         email,
         name,
