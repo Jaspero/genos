@@ -49,8 +49,6 @@
       fetch(CONFIG.websiteUrl + '/data/categories.json').then(response => response.json()).catch(() => []),
       fetch(CONFIG.websiteUrl + '/data/products.json').then(response => response.json()).catch(() => [])
     ]);
-
-    applyFilters({ initialCategories, initialTags, initialMinPrice, initialMaxPrice, search, limit, direction, property });
   });
 
   function applyFilters(data: FilterParams) {
@@ -173,10 +171,10 @@
   {/if}
 
   {#each products as product}
-    <div class="product">
+    <a href={`/product/${product[COLLECTION_KEYS_MAP.products.id]}`} class="product">
       <img src={product[COLLECTION_KEYS_MAP.products.image]} alt={product[COLLECTION_KEYS_MAP.products.name]} />
       <h4>{product[COLLECTION_KEYS_MAP.products.name]}</h4>
       <p>{product[COLLECTION_KEYS_MAP.products.description]}</p>
-    </div>
+    </a>
   {/each}
 </div>

@@ -3,16 +3,11 @@
 <script lang="ts">
   import { doc, getDoc } from 'firebase/firestore';
   import { db } from '$lib/utils/firebase';
-  import { onMount } from 'svelte';
   import type { Product } from '$lib/interfaces/product.interface';
 
   export let id: string;
 
   let product: Product;
-
-  onMount(async () => {
-    await getProduct(id);
-  });
 
   async function getProduct(productId: string) {
     const docSnap = await getDoc(doc(db, 'products', productId));

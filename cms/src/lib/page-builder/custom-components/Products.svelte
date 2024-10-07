@@ -49,8 +49,6 @@
       fetch(CONFIG.webUrl + '/data/categories.json').then(response => response.json()).catch(() => []),
       fetch(CONFIG.webUrl + '/data/products.json').then(response => response.json()).catch(() => [])
     ]);
-
-    applyFilters({ initialCategories, initialTags, initialMinPrice, initialMaxPrice, search, limit, direction, property });
   });
 
   function applyFilters(data: FilterParams) {
