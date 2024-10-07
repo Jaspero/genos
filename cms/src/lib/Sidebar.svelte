@@ -145,7 +145,6 @@
 {/if}
 
 <style lang="postcss">
-
   @media (max-width: 767px) {
     aside {
       position: absolute;

@@ -67,7 +67,7 @@ collections.addCollection('admins', {
     value.createdOn = new Date().toISOString();
   },
   createMethod: async (collection, id, value) => {
-    await httpsCallable(functions, 'createAdmin')({...value, role: 'admin'});
+    await httpsCallable(functions, 'createAdmin')({ ...value, role: 'admin' });
   },
   form: async (id?: string) => {
     return [

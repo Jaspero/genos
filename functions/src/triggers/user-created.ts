@@ -1,6 +1,6 @@
-import {firestore} from 'firebase-admin';
+import { firestore } from 'firebase-admin';
 import * as functions from 'firebase-functions';
-import {REGION} from '../shared/consts/region.const';
+import { REGION } from '../shared/consts/region.const';
 
 export const userCreated = functions
   .region(REGION)
@@ -17,7 +17,7 @@ export const userCreated = functions
     if (!userDoc.exists) {
       await fs.collection('customers').doc(user.uid).set({
         createdOn: user.metadata.creationTime,
-        email: user.email,
+        email: user.email
       });
     }
   });

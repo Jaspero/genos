@@ -23,6 +23,9 @@
   import { CONFIG } from '$lib/consts/config.const';
   import { styleEscape } from '$lib/utils/style-escape';
   import { uploadString, ref } from 'firebase/storage';
+  import type { Editor } from 'grapesjs';
+  import { getHtml } from '$lib/page-builder/utils/get-html';
+  import { getCss } from '$lib/page-builder/utils/get-css';
 
   export let data: {
     col: string;
@@ -41,7 +44,7 @@
   let saveLoading = false;
   let formModule: FormModule;
   let pageBuilderEl: HTMLDivElement;
-  let grapesInstance: any;
+  let grapesInstance: Editor;
   let navigate = $page.params.id;
   let activeSidebar = 'page-settings';
   let renderedFormModules: {
@@ -151,8 +154,8 @@
     }
 
     const json = grapesInstance.getProjectData();
-    const html = grapesInstance.getHtml();
-    const css = grapesInstance.getCss();
+    const html = await getHtml(grapesInstance);
+    const css = getCss(grapesInstance);
     const js = grapesInstance.getJs();
 
     const toUpdate = [
@@ -160,12 +163,9 @@
         ref(storage, `page-configurations/${data.col}/${id}/content.json`),
         JSON.stringify(json)
       ),
-      uploadString(
-        ref(storage, `page-configurations/${data.col}/${id}/content.html`),
-        html.replace('<body>', '').replace('</body>', '')
-      ),
+      uploadString(ref(storage, `page-configurations/${data.col}/${id}/content.html`), html),
       uploadString(ref(storage, `page-configurations/${data.col}/${id}/content.css`), css),
-      uploadString(ref(storage, `page-configurations/${data.col}/${id}/content.js`), js),
+      uploadString(ref(storage, `page-configurations/${data.col}/${id}/content.js`), js)
     ];
 
     if (data.snap) {

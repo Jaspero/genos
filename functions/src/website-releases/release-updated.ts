@@ -1,12 +1,12 @@
-import {onDocumentUpdated} from 'firebase-functions/v2/firestore';
-import {REGION} from '../shared/consts/region.const';
-import {GITHUB_REPO} from './consts/github-repo.const';
+import { onDocumentUpdated } from 'firebase-functions/v2/firestore';
+import { REGION } from '../shared/consts/region.const';
+import { GITHUB_REPO } from './consts/github-repo.const';
 
 export const releaseUpdated = onDocumentUpdated(
   {
     region: REGION,
     document: 'releases/{release}',
-    secrets: ['GITHUB_TOKEN'],
+    secrets: ['GITHUB_TOKEN']
   },
   async (event) => {
     const newValue = event.data!.after.data();
@@ -19,15 +19,15 @@ export const releaseUpdated = onDocumentUpdated(
           method: 'POST',
           headers: {
             accept: 'application/vnd.github.v3+json',
-            authorization: `bearer ${process.env.GITHUB_TOKEN}`,
+            authorization: `bearer ${process.env.GITHUB_TOKEN}`
           },
           body: JSON.stringify({
             ref: 'build',
             inputs: {
               release: event.data!.after.id,
-              type: newValue.type,
-            },
-          }),
+              type: newValue.type
+            }
+          })
         }
       );
     }

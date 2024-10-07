@@ -48,7 +48,7 @@ collections.addCollection('pages', {
       label: '',
       pipes: [
         actionsPipe((id) => ({
-          duplicateSubCollections: ['content']
+          duplicateStorage: [`page-configurations/pages/${id}/`]
         }))
       ]
     }

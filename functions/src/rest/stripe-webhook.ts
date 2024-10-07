@@ -1,9 +1,9 @@
 import * as express from 'express';
-import {logger} from 'firebase-functions';
-import {onRequest} from 'firebase-functions/v2/https';
-import {constants} from 'http2';
-import {REGION} from '../shared/consts/region.const';
-import {stripeInstance} from '../shared/consts/stripeInstance.const';
+import { logger } from 'firebase-functions';
+import { onRequest } from 'firebase-functions/v2/https';
+import { constants } from 'http2';
+import { REGION } from '../shared/consts/region.const';
+import { stripeInstance } from '../shared/consts/stripeInstance.const';
 
 const app = express();
 
@@ -26,16 +26,16 @@ app.post('/webhook', (req, res) => {
       return;
     }
 
-    const {object}: any = event.data;
+    const { object }: any = event.data;
 
     logger.log(object);
 
     switch (event.type) {
-    case 'invoice.paid':
-      break;
-    case 'invoice.voided':
-    case 'invoice.payment_failed':
-      break;
+      case 'invoice.paid':
+        break;
+      case 'invoice.voided':
+      case 'invoice.payment_failed':
+        break;
     }
   }
 
@@ -48,7 +48,7 @@ export const stripeWebhook = onRequest(
   {
     region: REGION,
     maxInstances: 10,
-    secrets: ['STRIPE_WEBHOOK_SECRET', 'STRIPE_SECRET_KEY'],
+    secrets: ['STRIPE_WEBHOOK_SECRET', 'STRIPE_SECRET_KEY']
   },
   app
 );

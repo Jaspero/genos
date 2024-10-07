@@ -6,7 +6,7 @@ export const CUSTOM_TRAITS: any[] = [
     noLabel: true,
     templateInput: '',
     eventCapture: ['input'],
-    createInput({trait}: any) {
+    createInput({ trait }: any) {
       const el = document.createElement('directives-select') as any;
 
       el.name = trait.get('name');
@@ -19,13 +19,12 @@ export const CUSTOM_TRAITS: any[] = [
         elInput.value = component?.attributes?.attributes?.directives;
       }
     },
-    onEvent({elInput, component}) {
-      const toAdd: {[key: string]: string} = {
+    onEvent({ elInput, component }) {
+      const toAdd: { [key: string]: string } = {
         [elInput.name]: elInput.value
       };
 
       for (const key in elInput.value) {
-
         if (key === 'directives') {
           continue;
         }
@@ -56,7 +55,7 @@ export const CUSTOM_TRAITS: any[] = [
       return el;
     },
     onEvent({ elInput, component }) {
-      setTimeout(() => component.addAttributes({[elInput.name]: elInput.getValue()}), 500);
+      setTimeout(() => component.addAttributes({ [elInput.name]: elInput.getValue() }), 500);
     }
   },
   {

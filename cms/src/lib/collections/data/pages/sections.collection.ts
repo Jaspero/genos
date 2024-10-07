@@ -30,7 +30,7 @@ collections.addCollection('sections', {
       label: '',
       pipes: [
         actionsPipe((id) => ({
-          duplicateSubCollections: ['content']
+          duplicateStorage: [`page-configurations/sections/${id}/`]
         }))
       ]
     }

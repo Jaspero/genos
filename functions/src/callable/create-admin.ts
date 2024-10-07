@@ -1,9 +1,9 @@
-import {HttpsError, onCall} from 'firebase-functions/v2/https';
-import {hasRole} from '../shared/utils/authenticate';
-import {getAuth, UserRecord} from 'firebase-admin/auth';
-import {random} from '@jaspero/utils';
-import {getFirestore} from 'firebase-admin/firestore';
-import {REGION} from '../shared/consts/region.const';
+import { HttpsError, onCall } from 'firebase-functions/v2/https';
+import { hasRole } from '../shared/utils/authenticate';
+import { getAuth, UserRecord } from 'firebase-admin/auth';
+import { random } from '@jaspero/utils';
+import { getFirestore } from 'firebase-admin/firestore';
+import { REGION } from '../shared/consts/region.const';
 
 interface RequestData {
   email: string;
@@ -13,13 +13,13 @@ interface RequestData {
 }
 
 export const createAdmin = onCall<RequestData>(
-  {maxInstances: 1, region: REGION},
+  { maxInstances: 1, region: REGION },
   async (request) => {
     hasRole(request, ['admin']);
 
     const auth = getAuth();
     const firestore = getFirestore();
-    const {role, name} = request.data;
+    const { role, name } = request.data;
     const password = request.data.password || random.string(32);
 
     if (!role || !name || !request.data.email) {
@@ -46,20 +46,20 @@ export const createAdmin = onCall<RequestData>(
 
     if (!user) {
       try {
-        user = await auth.createUser({email, password});
+        user = await auth.createUser({ email, password });
       } catch (e: any) {
         throw new HttpsError('internal', e.message);
       }
     }
 
     await Promise.all([
-      auth.setCustomUserClaims(user.uid, {role}),
+      auth.setCustomUserClaims(user.uid, { role }),
       firestore.collection('admins').doc(user.uid).set({
         createdOn: new Date().toISOString(),
         email,
         name,
-        role,
-      }),
+        role
+      })
     ]);
   }
 );

@@ -1,10 +1,10 @@
 import * as sgMail from '@sendgrid/mail';
-import {firestore} from 'firebase-admin';
-import {compile} from 'handlebars';
-import {random} from '@jaspero/utils';
-import {logger} from 'firebase-functions/v2';
-import {EMAIL_CONFIG} from './email-config.const';
-import {EmailTemplate} from './email-template.interface';
+import { firestore } from 'firebase-admin';
+import { compile } from 'handlebars';
+import { random } from '@jaspero/utils';
+import { logger } from 'firebase-functions/v2';
+import { EMAIL_CONFIG } from './email-config.const';
+import { EmailTemplate } from './email-template.interface';
 
 /**
  * SendGrid docs
@@ -36,13 +36,13 @@ export class EmailService {
     const message: EmailTemplate = messageSnap.data() as any;
 
     if (!message?.active) {
-      logger.log('Email doesn\'t exist or is not active', templateId);
+      logger.log("Email doesn't exist or is not active", templateId);
       return;
     }
 
     const [htmlDoc, cssDoc] = await Promise.all([
       messageSnap.ref.collection('content').doc('html').get(),
-      messageSnap.ref.collection('content').doc('css').get(),
+      messageSnap.ref.collection('content').doc('css').get()
     ]);
 
     const style = cssDoc.data()!.content || '';
@@ -66,7 +66,7 @@ export class EmailService {
         <body style="background: #F1F5F3; padding: 16px;">${content}</body></html>`
     );
 
-    let html = template({...context, global}).replace(/&amp;/g, '&');
+    let html = template({ ...context, global }).replace(/&amp;/g, '&');
 
     if (clickTracking) {
       const matcher = /href="(.*?)"/g;
@@ -86,9 +86,9 @@ export class EmailService {
     }
 
     const to = receiver ? receiver : EMAIL_CONFIG.adminEmail;
-    const subject = compile(message.subject)({...context, global});
+    const subject = compile(message.subject)({ ...context, global });
 
-    const res = await this.sendEmail({to, subject, html, ...additional});
+    const res = await this.sendEmail({ to, subject, html, ...additional });
 
     /**
      * Cleanup context for inserts always work
@@ -111,9 +111,9 @@ export class EmailService {
           html,
           subject,
           templateId,
-          ...(res === true ? {status: true} : {status: false, error: res}),
-          ...(source && {source}),
-          context,
+          ...(res === true ? { status: true } : { status: false, error: res }),
+          ...(source && { source }),
+          context
         });
     } catch (e) {
       logger.error('Failed to insert record of sent-email', e);
@@ -133,9 +133,9 @@ export class EmailService {
         reply_to: data.reply_to || EMAIL_CONFIG.fromEmail,
         tracking_settings: {
           click_tracking: {
-            enable: false,
-          },
-        },
+            enable: false
+          }
+        }
       });
     } catch (e: any) {
       logger.error('Failed sending email', e.toString());

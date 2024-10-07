@@ -23,6 +23,11 @@
   };
 
   let scrolls: Array<{ el: any; className: string; height: number }> = [];
+  let scrollTrackers: Array<{
+    el: HTMLElement;
+    classesToAdd: string[];
+    classesToRemove: string[];
+  }> = [];
   let y = 0;
   let unsubscribe: Unsubscriber;
 
@@ -51,6 +56,8 @@
   }
 
   function pageChange(page: Page) {
+    scrollTrackers = [];
+
     /**
      * Page Links
      */
@@ -127,12 +134,55 @@
         }
       });
     });
+
+    /**
+     * Is in view
+     */
+    scrollTrackers = [
+      ...document.querySelectorAll(
+        '[data-is-in-view-classes-to-add], [data-is-in-view-classes-to-remove]'
+      )
+    ].map((el) => {
+      const classesToAdd = el.getAttribute('data-is-in-view-classes-to-add')?.split(',') || [];
+      const classesToRemove =
+        el.getAttribute('data-is-in-view-classes-to-remove')?.split(',') || [];
+
+      return {
+        el: el as HTMLElement,
+        classesToAdd,
+        classesToRemove
+      };
+    });
   }
 
   function pageSetup() {
     unsubscribe = page.subscribe((page) => {
       pageChange(page);
     });
+  }
+
+  function scroll() {
+    for (let i = scrollTrackers.length - 1; i >= 0; i--) {
+      const { el, classesToAdd, classesToRemove } = scrollTrackers[i];
+      const rect = el.getBoundingClientRect();
+
+      if (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= window.innerHeight &&
+        rect.right <= window.innerWidth
+      ) {
+        if (classesToAdd?.length) {
+          el.classList.add(...classesToAdd);
+        }
+
+        if (classesToRemove?.length) {
+          el.classList.remove(...classesToRemove);
+        }
+
+        scrollTrackers.splice(i, 1);
+      }
+    }
   }
 
   onMount(() => {
@@ -152,4 +202,9 @@
 
 <svelte:body use:classList={classes} />
 
-<svelte:window bind:scrollY={y} />
+<svelte:window
+  bind:scrollY={y}
+  on:scroll|passive={scroll}
+  on:resize|passive={scroll}
+  on:load={scroll}
+/>

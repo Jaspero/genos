@@ -1,21 +1,24 @@
 <svelte:options customElement={{ tag: 'column-actions', shadow: 'none' }} />
 
 <script lang="ts">
+  import { page } from '$app/stores';
   import { random } from '@jaspero/utils';
   import { collection as col, deleteDoc, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
+  import { listAll, ref as storageRef, uploadString } from 'firebase/storage';
+  import { onMount } from 'svelte';
   import DropdownButton from '../DropdownButton.svelte';
   import DropdownMenuButton from '../DropdownMenuButton.svelte';
+  import { fromStorage } from '../page-builder/utils/from-storage';
   import { alertWrapper } from '../utils/alert-wrapper';
   import { confirmation } from '../utils/confirmation';
-  import { db } from '../utils/firebase';
-  import { page } from '$app/stores';
-  import { onMount } from 'svelte';
+  import { db, storage } from '../utils/firebase';
 
   export let id: string;
   export let collection: string = $page.params.collection;
   export let prefix: string = $page.params.collection;
   export let actions = 'edit,duplicate,delete';
   export let duplicateSubCollections: string | null = null;
+  export let duplicateStorage: string | null = null;
 
   let links: ColumnActionsConfigLink[];
   let buttons: ColumnActionsConfigButton[];
@@ -42,19 +45,45 @@
 
   async function duplicate() {
     const subCollections = (duplicateSubCollections && duplicateSubCollections.split(',')) || [];
+    const storageDuplicates = (duplicateStorage && duplicateStorage.split(',')) || [];
 
-    const [ref, ...contentRefs] = await Promise.all([
+    const [ref, contentRefs, storageRefs] = await Promise.all([
       getDoc(doc(db, collection, id)),
-      ...subCollections.map((sub) => getDocs(col(db, collection, id, sub)))
+      subCollections.length
+        ? Promise.all(subCollections.map((sub) => getDocs(col(db, collection, id, sub))))
+        : Promise.resolve([]),
+      storageDuplicates.length
+        ? Promise.all(
+            storageDuplicates.map(async (sub) => {
+              const { items } = await listAll(storageRef(storage, sub));
+              const final = await Promise.all(
+                items.map(async (item) => ({
+                  path: item.fullPath,
+                  content: await fromStorage(item.fullPath)
+                }))
+              );
+
+              return final;
+            })
+          )
+        : Promise.resolve([])
     ]);
 
     const newId = id.split('-')[0] + '-' + random.string(24);
-    const toExec = [setDoc(doc(db, collection, newId), ref.data())];
+    const toExec: Promise<any>[] = [setDoc(doc(db, collection, newId), ref.data())];
 
     if (contentRefs.length) {
       contentRefs.forEach((ref, index) =>
         ref.docs.forEach((d) =>
           toExec.push(setDoc(doc(db, collection, newId, subCollections[index], d.id), d.data()))
+        )
+      );
+    }
+
+    if (storageRefs.length) {
+      storageRefs.forEach((ref) =>
+        ref.forEach((d) =>
+          toExec.push(uploadString(storageRef(storage, d.path.replace(id, newId)), d.content))
         )
       );
     }

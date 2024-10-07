@@ -10,13 +10,13 @@ const nameTrait = { name: 'name' };
 const placeholderTrait = { name: 'placeholder' };
 const requiredTrait = { type: 'checkbox', name: 'required' };
 const idTrait = { name: 'id' };
-const titleTrait = { name: 'title', label: 'Title', type: 'text' };
 const valueTrait = { name: 'value' };
 const checkedTrait = { type: 'checkbox', name: 'checked' };
 const minLengthTrait = { name: 'minlength', label: 'Min Length', type: 'number' };
 const maxLengthTrait = { name: 'maxlength', label: 'Max Length', type: 'number' };
 const patternTrait = { name: 'pattern', label: 'Pattern', type: 'text', changeProp: 1 };
-const directiveSelectTrait = {name: 'directives', label: 'Directives', type: 'directives-select'};
+const titleTrait = { name: 'title', label: 'Title', type: 'text' };
+const directiveSelectTrait = { name: 'directives', label: 'Directives', type: 'directives-select' };
 
 export const TYPES = (forms: PageBuilderForm[]) => [
   /**
@@ -243,11 +243,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
       defaults: {
         type: 'div',
         tagName: 'div',
-        traits: [
-          idTrait,
-          titleTrait,
-          directiveSelectTrait
-        ]
+        traits: [idTrait, titleTrait, directiveSelectTrait]
       }
     }
   },
@@ -277,7 +273,8 @@ export const TYPES = (forms: PageBuilderForm[]) => [
           {
             label: 'Alt',
             name: 'alt'
-          }
+          },
+          directiveSelectTrait
         ]
       }
     }
@@ -472,7 +469,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
   },
   {
     id: 'select',
-    isComponent: (el: HTMLElement) => el.tagName == 'SELECT',
+    isComponent: (el: HTMLElement) => el.tagName === 'SELECT',
     model: {
       defaults: {
         tagName: 'select',
@@ -494,13 +491,14 @@ export const TYPES = (forms: PageBuilderForm[]) => [
   },
   {
     id: 'checkbox',
-    extend: 'input',
-    isComponent: (el: HTMLInputElement) => el.tagName == 'INPUT' && el.type == 'checkbox',
+    isComponent: (el: HTMLInputElement) => el.tagName === 'INPUT' && el.type == 'checkbox',
     model: {
       defaults: {
+        type: 'checkbox',
         tagName: 'input',
         draggable: 'form, form *',
         copyable: false,
+        classes: ['checkbox'],
         attributes: { type: 'checkbox' },
         traits: [idTrait, nameTrait, valueTrait, requiredTrait, checkedTrait]
       }
@@ -508,13 +506,15 @@ export const TYPES = (forms: PageBuilderForm[]) => [
   },
   {
     id: 'radio',
-    extend: 'checkbox',
-    isComponent: (el: HTMLInputElement) => el.tagName == 'INPUT' && el.type == 'radio',
+    isComponent: (el: HTMLInputElement) => el.tagName === 'INPUT' && el.type == 'radio',
     model: {
       defaults: {
+        type: 'radio',
         tagName: 'input',
         draggable: 'form, form *',
-        attributes: { type: 'radio' }
+        classes: ['radio'],
+        attributes: { type: 'radio' },
+        traits: [idTrait, nameTrait, valueTrait, requiredTrait, checkedTrait]
       }
     }
   },
@@ -540,7 +540,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             type: 'text',
             label: 'Links',
             name: 'links'
-          },
+          }
         ]
       }
     }
@@ -761,15 +761,15 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             name: 'showcategoryfilters',
             label: 'Show Category Filters',
             options: [
-              { id: 'Yes', label: 'Yes'},
-              { id: 'No', label: 'No'},
+              { id: 'Yes', label: 'Yes' },
+              { id: 'No', label: 'No' }
             ],
             default: 'Yes'
           },
           {
             type: 'text',
             name: 'loadMoreLabel',
-            label: 'Load More Label',
+            label: 'Load More Label'
           },
           {
             type: 'text',

@@ -150,7 +150,7 @@
     }
   }
 
-  function addSection(section: {json: any}) {
+  function addSection(section: { json: any }) {
     const json = grapesInstance.getProjectData();
 
     const lastFrame = json.pages[0].frames[json.pages[0].frames.length - 1];

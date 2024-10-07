@@ -2,7 +2,7 @@ import { CONFIG } from '../consts/config.const';
 
 export function getThumb(url: string, thumb: string) {
   const temp = url.split('%2F');
-  const baseUrl = `https://firebasestorage.googleapis.com/v0/b/${CONFIG.storageBucketName}/o/`;
+  const baseUrl = `https://firebasestorage.googleapis.com/v0/b/${CONFIG.storageBucketName}.appspot.com/o/`;
 
   return (
     baseUrl +

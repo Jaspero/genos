@@ -26,7 +26,7 @@ collections.addCollection('layouts', {
       label: '',
       pipes: [
         actionsPipe((id) => ({
-          duplicateSubCollections: ['content']
+          duplicateStorage: [`page-configurations/layouts/${id}/`]
         }))
       ]
     }

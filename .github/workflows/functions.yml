@@ -9,10 +9,10 @@ jobs:
     name: Build And Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Use Node.js 18.12.1
+      - name: Use Node.js 20.9.0
         uses: actions/setup-node@v1
         with:
-          node-version: 18.12.1
+          node-version: 20.9.0
       - name: Checkout Repo
         uses: actions/checkout@v3
       - name: Install Dependencies

@@ -20,6 +20,8 @@
   import type { PageBuilderForm } from '$lib/page-builder/types/page-builder-form.interface';
   import { CONFIG } from '$lib/consts/config.const';
   import ProductSidebar from '../ProductSidebar.svelte';
+  import { getHtml } from '$lib/page-builder/utils/get-html';
+  import { getCss } from '$lib/page-builder/utils/get-css';
 
   export let data: {
     col: string;
@@ -148,8 +150,8 @@
     }
 
     const json = grapesInstance.getProjectData();
-    const html = grapesInstance.getHtml();
-    const css = grapesInstance.getCss();
+    const html = await getHtml(grapesInstance);
+    const css = getCss(grapesInstance);
 
     const toUpdate = [
       setDoc(doc(db, data.col, id, 'content', 'json'), json),

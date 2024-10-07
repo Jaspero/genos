@@ -20,6 +20,6 @@ export const EMAIL_CONFIG = {
    */
   fromEmail: {
     email: 'info@jaspero.co',
-    name: 'Jaspero',
-  },
+    name: 'Jaspero'
+  }
 };

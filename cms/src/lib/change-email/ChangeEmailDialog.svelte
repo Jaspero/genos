@@ -48,7 +48,7 @@
     if ($changeEmail) {
       changeEmail.set(null);
     }
-  })
+  });
 </script>
 
 <Dialog bind:open onClose={() => changeEmail.set(null)}>
