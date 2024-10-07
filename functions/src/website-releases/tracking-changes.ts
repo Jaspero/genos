@@ -68,7 +68,10 @@ for (const track of TRACKED_COLLECTIONS) {
               newValue,
               (value: any, key: string | number) => oldValue && !_.isEqual(value, oldValue[key])
             ),
-            ..._.mapValues(deletedFields, () => null)
+            /**
+             * HC value for deleted fields
+             */
+            ..._.mapValues(deletedFields, () => 'deleted_property')
           };
 
           if (!_.isEmpty(allChanges)) {

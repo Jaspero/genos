@@ -122,10 +122,23 @@ async function exec() {
              * If data does not exist, item will be removed
              */
             if (change.data) {
-              acc.push({
+              const dataToPush = {
                 ...item,
                 ...change.data
-              });
+              };
+
+              /**
+               * If any property from change.data object has value 'deleted_key' we need to delete the key from the item
+               */
+              if (Object.values(change.data).some((v) => v === 'deleted_key')) {
+                Object.keys(change.data).forEach((key) => {
+                  if (change.data[key] === 'deleted_key') {
+                    delete dataToPush[key];
+                  }
+                });
+              }
+
+              acc.push(dataToPush);
             }
           } else {
             /**
