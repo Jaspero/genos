@@ -25,16 +25,25 @@ jobs:
           node-version: 20.9.0
       - name: Checkout Repo
         uses: actions/checkout@v3
+      - name: Create key
+        working-directory: web
+        run: |
+          echo $SV > key.json
+        env:
+          SV: ${{ env.SERVICE_ACCOUNT }}
+      - name: Install Dependencies
+        working-directory: web
+        run: npm ci
       - name: Configure Release
         id: config
         working-directory: web
-        run: echo ::set-output name=VERSION::$(node configure-release.cjs start ${{ inputs.type }})
+        run: echo ::set-output name=VERSION::$(node configure-release.cjs start ${{ inputs.type }} ${{ inputs.release }})
       - name: Build
         if: contains(github.ref, 'build')
         working-directory: web
         run: |
           echo $SV > key.json
-          npm run build
+          npm run build:prod
         env:
           SV: ${{ env.SERVICE_ACCOUNT }}
       - name: Deploy

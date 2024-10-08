@@ -6,6 +6,8 @@ export * from './MobileMenu.svelte';
  * Shop
  */
 export * from './FeaturedProducts.svelte';
+export * from './Products.svelte';
+export * from './ProductCard.svelte';
 
 /**
  * Blog
