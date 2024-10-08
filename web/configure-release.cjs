@@ -56,8 +56,6 @@ async function exec() {
         );
       }
 
-      console.log(vr);
-
       /**
        * Collection indexes
        */
@@ -169,7 +167,7 @@ async function exec() {
       break;
     }
     case 'finish': {
-      release = parseInt(release, 10);
+      release = parseInt(release, 10) || 0;
 
       const date = new Date().toISOString();
 

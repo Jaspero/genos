@@ -72,7 +72,7 @@
         class="px-4 py-3 text-sm hover:bg-black/5 transition-colors cursor-pointer"
         class:disabled={publishDisabled || publishLoading || !$activeRelease?.changes?.length}
         href="/dashboard/management/release-history"
-        on:click={publish}>Release Website</a
+        on:click={publish}>Release Website {publishDisabled} {publishLoading} {!$activeRelease?.changes?.length}</a
       >
       <a
         class="px-4 py-3 text-sm hover:bg-black/5 transition-colors cursor-pointer"
