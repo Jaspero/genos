@@ -1,5 +1,4 @@
 import { initializeApp } from 'firebase-admin/app';
-import { tracking } from './website-releases/tracking-changes';
 import { releaseUpdated } from './website-releases/release-updated';
 
 initializeApp();
@@ -33,7 +32,6 @@ export { actionController } from './rest/action-controller';
 export { emailTracking } from './rest/email-tracking';
 // export {stripeWebhook} from './rest/stripe-webhook';
 
-export const websiteReleaseTracking = tracking;
 export const websiteReleases = {
   releaseUpdated
 };

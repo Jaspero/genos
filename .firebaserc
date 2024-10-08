@@ -9,7 +9,7 @@
           "wonkawave-cms"
         ]
       }
-    }
+    },
     "wonkawave-dev": {
       "hosting": {
         "web": [
