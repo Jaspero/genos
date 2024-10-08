@@ -168,7 +168,7 @@ async function exec() {
     }
     case 'finish': {
       const doc = await fs.doc('releases/status').get();
-      release = parseInt(release, 10) || doc?.data()?.release || 0;
+      release = parseInt(release, 10) || (doc.exists ? doc.data().release : 0);
 
       const date = new Date().toISOString();
 
