@@ -1,5 +1,5 @@
-import {onDocumentWritten} from 'firebase-functions/v2/firestore';
-import {REGION} from '../shared/consts/region.const';
+import { onDocumentWritten } from 'firebase-functions/v2/firestore';
+import { REGION } from '../shared/consts/region.const';
 import * as admin from 'firebase-admin';
 import { WEBSITE_URL } from './consts/website-url';
 import * as _ from 'lodash';
@@ -10,7 +10,7 @@ const functions: any = {};
 /**
  * Creates a document object that will be stored in the release history
  */
-const document = (item: any, id: string, data: any): {name: string; url: string; data: {[key: string]: any}, collection: string, id: string} => ({
+const document = (item: any, id: string, data: any): { name: string; url: string; data: { [key: string]: any }, collection: string, id: string } => ({
   data: item.keysToTrack.reduce((acc: any, key: string) => {
     let shortKey = key[0];
     let count = 1;
@@ -39,9 +39,11 @@ for (const track of TRACKED_COLLECTIONS) {
       const fs = admin.firestore();
       const newValue = event.data?.after.exists ? event.data?.after.data() : null;
       const oldValue = event.data?.before.exists ? event.data?.before.data() : null;
-      const status: {release: string} = await fs.collection('releases').doc('status').get().then((doc) => doc.data()) as {release: string};
 
-      if (status) {
+      const statusDoc = await fs.collection('releases').doc('status').get();
+      const status = statusDoc.exists ? (statusDoc.data() as { release: string }) : null;
+
+      if (status && status.release) {
         const ref = fs.collection('releases').doc(status.release);
 
         if (!event.data?.before.exists) {
