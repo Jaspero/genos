@@ -18,7 +18,6 @@
     if (!$lastPublishedOn || !date) {
       background = '#bcaaa4';
       title = 'Not published';
-      // @ts-ignore
     } else if ($lastPublishedOn > new Date(d).getTime()) {
       background = '#4caf50';
       title = 'Published';

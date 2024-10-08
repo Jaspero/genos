@@ -20,7 +20,10 @@ const document = (item: any, id: string, data: any): { name: string; url: string
       count++;
     }
 
-    acc[shortKey] = data[key];
+    if (data[key] !== undefined) {
+      acc[shortKey] = data[key];
+    }
+
     return acc;
   }, {}),
   collection: item.collection,
@@ -44,7 +47,7 @@ for (const track of TRACKED_COLLECTIONS) {
       const status = statusDoc.exists ? (statusDoc.data() as { release: string }) : null;
 
       if (status && status.release) {
-        const ref = fs.collection('releases').doc(status.release);
+        const ref = fs.collection('releases').doc(status.release.toString());
 
         if (!event.data?.before.exists) {
           /**

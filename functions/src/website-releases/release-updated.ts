@@ -12,7 +12,7 @@ export const releaseUpdated = onDocumentUpdated(
     const newValue = event.data!.after.data();
     const oldValue = event.data!.before.data();
 
-    if (newValue.releaseStart && oldValue.releaseStart) {
+    if (newValue.publishStart && !oldValue.publishStart) {
       await fetch(
         `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/update-web.workflow.yml/dispatches`,
         {

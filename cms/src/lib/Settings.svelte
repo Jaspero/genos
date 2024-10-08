@@ -33,7 +33,7 @@
       const { lastPublished, release } = d.data() || {};
 
       if (lastPublished) {
-        lastPublishedOn.set(lastPublished);
+        lastPublishedOn.set(new Date(lastPublished).getTime());
       }
 
       if (release) {
@@ -62,23 +62,19 @@
   </button>
 
   {#if dropdown}
+    <!--todo: add red dot if there is any notification/release change pending-->
     <div
       class="absolute right-0 bg-white shadow flex flex-col whitespace-nowrap divide-y"
       use:clickOutside
       on:click_outside={() => (dropdown = false)}
       transition:slide
     >
+      <!--todo: add confirmation dialog and list of all changes in table view-->
       <a
         class="px-4 py-3 text-sm hover:bg-black/5 transition-colors cursor-pointer"
         class:disabled={publishDisabled || publishLoading || !$activeRelease?.changes?.length}
-        href="/dashboard/management/release-history"
+        href="/dashboard/management/releases"
         on:click={publish}>Release Website</a
-      >
-      <a
-        class="px-4 py-3 text-sm hover:bg-black/5 transition-colors cursor-pointer"
-        class:disabled={!$activeRelease?.changes?.length}
-        href="/dashboard/management/release-history"
-        on:click={() => (dropdown = false)}>Pending Changes</a
       >
       <a
         class="px-4 py-3 text-sm hover:bg-black/5 transition-colors cursor-pointer"
