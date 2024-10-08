@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'cms/**/*'
+      - 'shared/**/*'
 env:
   PROJECT: wonkawave
   SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
