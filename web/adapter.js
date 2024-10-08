@@ -1,4 +1,7 @@
 import path from 'node:path';
+import minifyHtml from '@minify-html/node';
+import { join } from 'path';
+import { readFile, writeFile } from 'node:fs/promises';
 
 /** @type {import('./index.js').default} */
 export default function (options) {
@@ -43,6 +46,21 @@ export default function (options) {
         } else {
           await Promise.all([builder.compress(assets), builder.compress(pages)]);
         }
+      }
+
+      for (const page of builder.prerendered.pages) {
+        const htmlPath = join(pages, ...page.slice(1).map(p => typeof p === 'string' ? p : p.file));
+
+        const buffer = await readFile(htmlPath);
+        const minified = minifyHtml.minify(buffer, {
+          do_not_minify_doctype: true,
+          ensure_spec_compliant_unquoted_attribute_values: true,
+          keep_spaces_between_attributes: true,
+          minify_css: true,
+          minify_js: true
+        });
+
+        await writeFile(htmlPath, minified);
       }
 
       if (pages === assets) {
