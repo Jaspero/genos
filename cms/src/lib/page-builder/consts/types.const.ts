@@ -621,6 +621,107 @@ export const TYPES = (forms: PageBuilderForm[]) => [
       }
     }
   },
+  {
+    id: 'pb-products',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-PRODUCTS',
+    model: {
+      defaults: {
+        tagName: 'pb-products',
+        traits: [
+          {
+            type: 'number',
+            label: 'Limit',
+            name: 'limit'
+          },
+          {
+            type: 'number',
+            label: 'Min Price',
+            name: 'minPrice'
+          },
+          {
+            type: 'number',
+            label: 'Max Price',
+            name: 'maxPrice'
+          },
+          {
+            type: 'select',
+            label: 'Sort Property',
+            name: 'property',
+            options: [
+              { id: 'price', label: 'Price' },
+              { id: 'name', label: 'Name' },
+              { id: 'createdOn', label: 'Created On' }
+            ]
+          },
+          {
+            type: 'select',
+            label: 'Sort Direction',
+            name: 'direction',
+            options: [
+              { id: 'asc', label: 'Ascending' },
+              { id: 'desc', label: 'Descending' }
+            ]
+          },
+          {
+            type: 'document-lookup',
+            label: 'Categories',
+            name: 'initialCategories',
+            collection: 'categories',
+            singleSelect: false
+          },
+          {
+            type: 'document-lookup',
+            label: 'Tags',
+            name: 'initialTags',
+            collection: 'tags',
+            singleSelect: false
+          },
+          {
+            type: 'checkbox',
+            label: 'Show Price Range Filter',
+            name: 'showPriceRangeFilter'
+          },
+          {
+            type: 'checkbox',
+            label: 'Show Categories Filter',
+            name: 'showCategoriesFilter'
+          },
+          {
+            type: 'checkbox',
+            label: 'Show Tags Filter',
+            name: 'showTagsFilter'
+          },
+          {
+            type: 'checkbox',
+            label: 'Show Sort',
+            name: 'showSort'
+          },
+          {
+            type: 'checkbox',
+            label: 'Show Search',
+            name: 'showSearch'
+          }
+        ]
+      }
+    }
+  },
+  {
+    id: 'pb-product-card',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-PRODUCT-CARD',
+    model: {
+      defaults: {
+        tagName: 'pb-product-card',
+        traits: [
+          {
+            type: 'document-lookup',
+            label: 'Product',
+            name: 'id',
+            collection: 'products'
+          }
+        ]
+      }
+    }
+  },
 
   /**
    * Blog

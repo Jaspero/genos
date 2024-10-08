@@ -6,3 +6,4 @@ key.json
 src/lib/utils/env-config.ts
 public
 static/css/shared.css
+src/lib/consts/tracked-collection.const.ts

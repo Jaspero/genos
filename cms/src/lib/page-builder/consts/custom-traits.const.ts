@@ -43,7 +43,7 @@ export const CUSTOM_TRAITS: any[] = [
       const el = document.createElement('jp-multisearch') as any;
 
       el.label = trait.get('label');
-      el.singleSelect = true;
+      el.singleSelect = trait.get('singleSelect') ?? true;
       el.name = trait.get('name');
       el.service = new SearchService(
         trait.get('collection'),
@@ -63,7 +63,6 @@ export const CUSTOM_TRAITS: any[] = [
     events: {
       keyup: 'onChange'
     },
-
     onValueChange: function () {
       const optionsStr = this.model.get('value').trim();
       const options = optionsStr.split('\n');

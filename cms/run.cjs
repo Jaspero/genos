@@ -6,6 +6,7 @@ const { readFile, writeFile } = require('fs/promises');
 const postcss = require('postcss');
 const atImport = require('postcss-import');
 const autoprefixer = require('autoprefixer');
+const fs = require('fs');
 
 const environment = process.argv[2];
 
@@ -36,6 +37,13 @@ async function exec() {
       .then((file) => postcss(atImport(), autoprefixer()).process(file, { from: sharedCss }))
       .then(({ css }) => writeFile(`./static/css/shared.css`, css))
   ];
+
+  const constFiles = await fs.promises.readdir('../shared/consts');
+  toExec.push(
+    ...constFiles.map(file => {
+      return fs.promises.copyFile('../shared/consts/' + file, './src/lib/consts/' + file);
+    })
+  );
 
   if (env) {
     toExec.push(writeFile(`./key.json`, env));
