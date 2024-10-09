@@ -3,11 +3,10 @@ import type { SelectOptions } from '$lib/interfaces/select-options.interface.js'
 import type { PageBuilderForm } from '$lib/page-builder/types/page-builder-form.interface';
 import { fromStorage } from '$lib/page-builder/utils/from-storage';
 import { BucketImageService } from '$lib/services/image.service.js';
-import { db, storage } from '$lib/utils/firebase';
+import { db } from '$lib/utils/firebase';
 import { getOptions } from '$lib/utils/get-options';
 import { redirect } from '@sveltejs/kit';
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
-import { getBlob, ref } from 'firebase/storage';
 
 export async function load({ params, parent }) {
   await parent();
@@ -211,7 +210,7 @@ export async function load({ params, parent }) {
 
   const [snap, jsonSnap] = await Promise.all([
     getDoc(doc(db, col, page)),
-    getBlob(ref(storage, `page-configurations/${col}/${page}/content.json`))
+    fromStorage(`page-configurations/${col}/${page}/content.json`)
   ]);
 
   if (!snap.exists) {
@@ -226,7 +225,7 @@ export async function load({ params, parent }) {
     items,
     metaItems: META_FORM_FIELDS(col),
     value,
-    json: JSON.parse(await jsonSnap.text()),
+    json: JSON.parse(jsonSnap),
     pages,
     sections,
     templates,
