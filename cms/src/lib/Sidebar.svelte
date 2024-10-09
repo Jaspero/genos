@@ -48,7 +48,7 @@
 </script>
 
 {#if $sidebarStore}
-  <aside class="flex flex-col w-[256px] h-full bg-white gap-1 overflow-y-auto border-r z-[100]">
+  <aside class="flex flex-col w-[256px] h-full bg-white gap-1 overflow-y-auto border-r z-[1]">
     {#if links}
       <nav class="flex-1 overflow-y-auto">
         {#each links as link}

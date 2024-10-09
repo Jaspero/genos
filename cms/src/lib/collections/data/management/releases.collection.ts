@@ -31,6 +31,6 @@ collections.addCollection('releases', {
       sortable: true
     }
   ],
-  initialSort: { key: 'createdOn', direction: 'asc' },
+  initialSort: { key: 'createdOn', direction: 'desc' },
   add: false
 });

@@ -62,7 +62,8 @@ export const CONFIG = {
       href: '/dashboard/management',
       links: [
         { label: 'Admins', href: '/dashboard/management/admins' },
-        { label: 'Email Templates', href: '/dashboard/management/email-templates' }
+        { label: 'Email Templates', href: '/dashboard/management/email-templates' },
+        { label: 'Releases', href: '/dashboard/management/releases' }
       ]
     }
   ],

@@ -8,6 +8,7 @@ export interface TableHeader {
   pipes?: Array<(value: any, row: any, index: number) => any>;
   exportPipes?: Array<(value: any, row: any, index: number) => any>;
   sortable?: boolean;
+  disabled?: boolean;
 }
 
 export interface Collection {

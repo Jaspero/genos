@@ -176,7 +176,8 @@ async function exec() {
         fs.doc('releases/status').set(
           {
             lastPublished: date,
-            release: release + 1
+            release: release + 1,
+            publishStart: null
           },
           { merge: true }
         ),
