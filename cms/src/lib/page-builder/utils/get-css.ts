@@ -1,7 +1,11 @@
 import type { Editor } from 'grapesjs';
 
 export function getCss(grapesInstance: Editor) {
-  return (grapesInstance.getCss() || '')
-    .replaceAll(/\* {((.|\n)*)}/g, '')
-    .replaceAll(/body {((.|\n)*)}/g, '');
+  const cleanded = (grapesInstance.getCss() || '')
+    .replaceAll(/(?<=(\* \{)).*?(?=\})/g, '')
+    .replaceAll(/(?<=(body \{)).*?(?=\})/g, '')
+    .replace('* {}', '')
+    .replace('body {}', '');
+
+  return cleanded;
 }
