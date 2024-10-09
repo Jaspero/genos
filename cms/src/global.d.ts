@@ -14,6 +14,7 @@ declare interface ColumnActionsConfig {
   collection?: string;
   actions?: Array<'edit' | 'duplicate' | 'delete'>;
   buttons?: ColumnActionsConfigButton[];
+  prefix?: string;
   links?: ColumnActionsConfigLink[];
   rowData?: any;
   duplicateStorage?: string[];
