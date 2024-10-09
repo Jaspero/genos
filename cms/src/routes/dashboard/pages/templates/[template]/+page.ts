@@ -145,7 +145,7 @@ export async function load({ params, parent }) {
     col,
     items,
     value,
-    json: JSON.parse(await jsonSnap.text()),
+    json: JSON.parse(jsonSnap),
     sections,
     popups,
     forms
