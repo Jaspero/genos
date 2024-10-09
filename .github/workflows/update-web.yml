@@ -28,6 +28,9 @@ jobs:
           node-version: 20.9.0
       - name: Checkout Repo
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
       - name: Create key
         working-directory: web
         run: |
@@ -44,11 +47,7 @@ jobs:
       - name: Build
         if: contains(github.ref, 'build')
         working-directory: web
-        run: |
-          echo $SV > key.json
-          npm run build:prod
-        env:
-          SV: ${{ env.SERVICE_ACCOUNT }}
+        run: npm run build:prod
       - name: Deploy
         if: contains(github.ref, 'build')
         uses: FirebaseExtended/action-hosting-deploy@v0

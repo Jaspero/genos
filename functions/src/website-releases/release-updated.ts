@@ -14,7 +14,7 @@ export const releaseUpdated = onDocumentUpdated(
 
     if (newValue.publishStart !== oldValue.publishStart) {
       await fetch(
-        `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/update-web.workflow.yml/dispatches`,
+        `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/update-web.yml/dispatches`,
         {
           method: 'POST',
           headers: {
@@ -24,7 +24,7 @@ export const releaseUpdated = onDocumentUpdated(
           body: JSON.stringify({
             ref: 'build',
             inputs: {
-              release: event.data!.after.id,
+              release: event.data!.after.id.toString(),
               type: newValue.type
             }
           })
