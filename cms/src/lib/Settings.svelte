@@ -29,6 +29,7 @@
 
     publishLoading = false;
     dropdown = false;
+    showConfirmation = false;
   }
 
   function openConfirmation() {
