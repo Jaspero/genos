@@ -67,7 +67,7 @@ async function exec() {
        * @type {{changes: {data: any; collection: string; id: string}[]}}
        */
       const releaseData = (
-        await fs.doc(`releases/${release}`).get()
+        await fs.doc(`releases/${release.toString()}`).get()
       )
         .data();
 
@@ -180,14 +180,14 @@ async function exec() {
           },
           { merge: true }
         ),
-        fs.doc(`releases/${release}`).set(
+        fs.doc(`releases/${release.toString()}`).set(
           {
             status: 'released',
             releasedOn: date
           },
           { merge: true }
         ),
-        fs.doc(`releases/${release + 1}`).set({
+        fs.doc(`releases/${(release + 1).toString()}`).set({
           release: release + 1,
           createdOn: date,
           status: 'pending',
