@@ -1,9 +1,10 @@
 type TrackedCollection = {
-  collection: 'products' | 'tags' | 'categories';
+  collection: 'products' | 'tags' | 'categories' | 'pages';
   titleKey: string;
   urlKey: string;
   prefix: string;
   keysToTrack: string[];
+  skipGenerateJsonFile?: boolean;
 };
 
 export const TRACKED_COLLECTIONS: TrackedCollection[] = [
@@ -16,6 +17,7 @@ export const TRACKED_COLLECTIONS: TrackedCollection[] = [
   },
   { collection: 'tags', titleKey: 'name', urlKey: 'url', prefix: '/products', keysToTrack: ['id', 'name'] },
   { collection: 'categories', titleKey: 'name', urlKey: 'url', prefix: '/products', keysToTrack: ['id', 'name'] },
+  { collection: 'pages', titleKey: 'name', urlKey: 'url', prefix: '/pages', keysToTrack: ['id', 'name'], skipGenerateJsonFile: true }
 ];
 
 type CollectionNames = typeof TRACKED_COLLECTIONS[number]['collection'];

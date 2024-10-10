@@ -30,7 +30,7 @@ async function exec() {
 
           if (type === 'partial') {
             const changesDoc = await fs.doc(`releases/${version}`).get();
-            const changes = changesDoc?.data()?.changes || [];
+            const changes = (changesDoc?.data()?.changes || []).filter(c => c.collection === 'pages');
 
             if (changes.length) {
               await writeFile(
