@@ -13,7 +13,7 @@ env:
   TARGET: web
 jobs:
   build_and_deploy:
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     steps:
       - name: Use Node.js 20.9.0
         uses: actions/setup-node@v1
