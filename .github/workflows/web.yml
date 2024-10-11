@@ -30,8 +30,8 @@ jobs:
           echo $SV > key.json
         env:
           SV: ${{ env.SERVICE_ACCOUNT }}
-      - name: Install Workflow Dependencies
-        run: npm i
+      - name: Install ts-node
+        run: npm install -g ts-node
       - name: Install Dependencies
         working-directory: web
         run: npm ci
