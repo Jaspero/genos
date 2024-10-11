@@ -1,11 +1,16 @@
 /**
  * Intended for updating release status from firestore
  */
-const admin = require('firebase-admin');
-const { writeFile, readFile } = require('fs/promises');
+import admin from 'firebase-admin';
+import { document, TRACKED_COLLECTIONS } from '../shared/consts/tracked-collection.const';
+import { CONFIG } from './src/lib/consts/config.const';
+import { writeFile, readFile } from 'fs/promises';
+import {existsSync, mkdirSync} from 'fs';
+// @ts-ignore
+import credential from './key.json';
 
 admin.initializeApp({
-  credential: admin.credential.cert(require('./key.json'))
+  credential: admin.credential.cert(credential)
 });
 
 const job = process.argv[2];
@@ -75,6 +80,10 @@ async function exec() {
        * @type {{[collection: string]: {[id: string]: any}}}
        */
       const changes = releaseData.changes.reduce((acc, change) => {
+        if (change.skipGenerateJsonFile) {
+          return acc;
+        }
+
         if (!acc[change.collection]) {
           acc[change.collection] = {};
         }
@@ -93,7 +102,7 @@ async function exec() {
        */
       const collectionsJsonData = await Promise.all(
         keys.map(collection =>
-          readFile('../public/web/data/' + collection + '.json')
+          readFile('../public/web/' + collection + '.json')
             .then(data => JSON.parse(data.toString()))
             .catch(() => [])
         )
@@ -150,6 +159,13 @@ async function exec() {
       });
 
       /**
+       * Create dir if not exists
+       */
+      if (!existsSync('../public/web/data')) {
+        mkdirSync('../public/web/data');
+      }
+
+      /**
        * Write the updated json data
        */
       await Promise.all(
@@ -160,6 +176,28 @@ async function exec() {
           )
         )
       );
+
+      /**
+       * Create first json file if it does not exist
+       */
+      for (const data of TRACKED_COLLECTIONS) {
+        if (data.skipGenerateJsonFile) {
+          continue;
+        }
+
+        if (!existsSync('../public/web/data/' + data.collection + '.json')) {
+          const collectionData = await fs.collection(data.collection).get();
+
+          await writeFile(
+            '../public/web/data/' + data.collection + '.json',
+            JSON.stringify(collectionData.docs.map((doc) => {
+              const d = doc.data();
+              d.id = doc.id;
+              return document(data, doc.id, doc.data(), CONFIG.websiteUrl);
+            }))
+          );
+        }
+      }
       /**
        * End collection indexes
        */

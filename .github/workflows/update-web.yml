@@ -47,7 +47,7 @@ jobs:
       - name: Configure Release
         id: config
         working-directory: web
-        run: echo ::set-output name=VERSION::$(node configure-release.cjs start ${{ inputs.type }} ${{ inputs.release }})
+        run: echo ::set-output name=VERSION::$(ts-node configure-release.ts start ${{ inputs.type }} ${{ inputs.release }})
       - name: Commit
         run: |
           git config --local user.email "action@github.com"
@@ -67,4 +67,4 @@ jobs:
       - name: Update Firestore
         if: contains(github.ref, 'build')
         working-directory: web
-        run: node configure-release.cjs finish ${{ steps.config.outputs.VERSION }}
+        run: ts-node configure-release.ts finish ${{ steps.config.outputs.VERSION }}

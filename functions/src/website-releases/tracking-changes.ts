@@ -1,38 +1,11 @@
 import { onDocumentWritten } from 'firebase-functions/v2/firestore';
 import { REGION } from '../shared/consts/region.const';
 import * as admin from 'firebase-admin';
-import { WEBSITE_URL } from './consts/website-url';
 import * as _ from 'lodash';
-import { TRACKED_COLLECTIONS } from '../shared/consts/tracked-collection.const';
+import { document, TRACKED_COLLECTIONS } from '../shared/consts/tracked-collection.const';
+import { WEBSITE_URL } from './consts/website-url';
 
 const functions: any = {};
-
-/**
- * Creates a document object that will be stored in the release history
- */
-const document = (item: any, id: string, data: any): { skipGenerateJsonFile: boolean; name: string; url: string; updatedAt: string; data: { [key: string]: any }, collection: string, id: string } => ({
-  data: item.keysToTrack.reduce((acc: any, key: string) => {
-    let shortKey = key[0];
-    let count = 1;
-
-    while (acc.hasOwnProperty(shortKey)) {
-      shortKey = key[0] + count;
-      count++;
-    }
-
-    if (data[key] !== undefined) {
-      acc[shortKey] = data[key];
-    }
-
-    return acc;
-  }, {}),
-  collection: item.collection,
-  name: data[item.titleKey],
-  url: WEBSITE_URL + item.prefix + '/' + data[item.urlKey],
-  updatedAt: new Date().toISOString(),
-  skipGenerateJsonFile: item.skipGenerateJsonFile,
-  id
-});
 
 for (const track of TRACKED_COLLECTIONS) {
   functions[track.collection] = onDocumentWritten(
@@ -55,12 +28,12 @@ for (const track of TRACKED_COLLECTIONS) {
           /**
            * New document
            */
-          await ref.update({changes: admin.firestore.FieldValue.arrayUnion(document(track, event.data?.after.id as string, newValue))});
+          await ref.update({changes: admin.firestore.FieldValue.arrayUnion(document(track, event.data?.after.id as string, newValue, WEBSITE_URL))});
         } else if (!event.data?.after.exists) {
           /**
            * Deleted document
            */
-          await ref.update({changes: admin.firestore.FieldValue.arrayUnion(document(track, event.data?.before.id, null))});
+          await ref.update({changes: admin.firestore.FieldValue.arrayUnion(document(track, event.data?.before.id, null, WEBSITE_URL))});
         } else {
           /**
            * Updated document
@@ -83,7 +56,7 @@ for (const track of TRACKED_COLLECTIONS) {
 
           if (!_.isEmpty(allChanges)) {
             await ref.update({
-              changes: admin.firestore.FieldValue.arrayUnion(document(track, event.data?.after.id as string, allChanges))
+              changes: admin.firestore.FieldValue.arrayUnion(document(track, event.data?.after.id as string, allChanges, WEBSITE_URL))
             });
           }
         }

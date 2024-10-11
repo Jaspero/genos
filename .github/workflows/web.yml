@@ -30,6 +30,8 @@ jobs:
           echo $SV > key.json
         env:
           SV: ${{ env.SERVICE_ACCOUNT }}
+      - name: Install Workflow Dependencies
+        run: npm i
       - name: Install Dependencies
         working-directory: web
         run: npm ci
@@ -39,7 +41,7 @@ jobs:
       - name: Configure Release
         id: config
         working-directory: web
-        run: echo ::set-output name=VERSION::$(node configure-release.cjs start)
+        run: echo ::set-output name=VERSION::$(ts-node configure-release.ts start)
       - name: Deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -71,4 +73,4 @@ jobs:
           force: true
       - name: Update Release Status
         working-directory: web
-        run: node configure-release.cjs finish ${{ steps.config.outputs.VERSION }}
+        run: ts-node configure-release.ts finish ${{ steps.config.outputs.VERSION }}
