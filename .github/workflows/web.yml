@@ -31,6 +31,8 @@ jobs:
         env:
           SV: ${{ env.SERVICE_ACCOUNT }}
       - name: Install Dependencies
+        run: npm ci
+      - name: Install Dependencies
         working-directory: web
         run: npm ci
       - name: Build
@@ -38,7 +40,6 @@ jobs:
         run: npm run build:prod
       - name: Configure Release
         id: config
-        working-directory: web
         run: echo ::set-output name=VERSION::$(npm run configure-release -- start)
       - name: Deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
@@ -70,5 +71,4 @@ jobs:
           branch: 'build'
           force: true
       - name: Update Release Status
-        working-directory: web
         run: npm run configure-release -- finish ${{ steps.config.outputs.VERSION }}

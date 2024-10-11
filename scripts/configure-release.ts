@@ -3,11 +3,11 @@
  */
 import admin from 'firebase-admin';
 import { document, TRACKED_COLLECTIONS } from '../shared/consts/tracked-collection.const';
-import { CONFIG } from './src/lib/consts/config.const';
 import { writeFile, readFile } from 'fs/promises';
 import {existsSync, mkdirSync} from 'fs';
 // @ts-ignore
-import credential from './key.json';
+import credential from '../web/key.json';
+import { CONFIG } from '../web/src/lib/consts/config.const';
 
 admin.initializeApp({
   credential: admin.credential.cert(credential)
