@@ -25,12 +25,13 @@ jobs:
         env:
           SV: ${{ env.SERVICE_ACCOUNT }}
       - name: Install Dependencies
+        run: npm ci
+      - name: Install Dependencies
         working-directory: web
         run: npm ci
       - name: Configure Release
         id: config
-        working-directory: web
-        run: echo ::set-output name=VERSION::$(node configure-release.cjs start)
+        run: JOB=start VERSION=partial npm run configure-release
       - name: Build
         working-directory: web
         run: npm run build:dev
@@ -63,5 +64,4 @@ jobs:
           branch: 'build-dev'
           force: true
       - name: Update Release Status
-        working-directory: web
-        run: node configure-release.cjs finish ${{ steps.config.outputs.VERSION }}
+        run: JOB=finish npm run configure-release
