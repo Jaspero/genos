@@ -41,7 +41,7 @@ jobs:
       - name: Configure Release
         id: config
         working-directory: web
-        run: echo ::set-output name=VERSION::$(node configure-release.ts start)
+        run: echo ::set-output name=VERSION::$(npm run configure-release -- start)
       - name: Deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -73,4 +73,4 @@ jobs:
           force: true
       - name: Update Release Status
         working-directory: web
-        run: node configure-release.ts finish ${{ steps.config.outputs.VERSION }}
+        run: npm run configure-release -- finish ${{ steps.config.outputs.VERSION }}
