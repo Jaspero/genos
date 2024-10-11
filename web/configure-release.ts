@@ -28,21 +28,21 @@ async function exec() {
       const doc = await fs.doc('releases/status').get();
 
       if (doc.exists) {
-        const version = doc.data().release;
+        const version = doc.data()?.release;
 
         if (version) {
           vr = version;
 
           if (type === 'partial') {
             const changesDoc = await fs.doc(`releases/${version}`).get();
-            const changes = (changesDoc?.data()?.changes || []).filter(c => c.collection === 'pages');
+            const changes = (changesDoc?.data()?.changes || []).filter((c: any) => c.collection === 'pages');
 
             if (changes.length) {
               await writeFile(
                 'build-config.json',
                 JSON.stringify({
                   clearBuild: false,
-                  pages: changes.map((c) => c.page)
+                  pages: changes.map((c: any) => c.page)
                 })
               );
               changesConfigured = true;
@@ -65,7 +65,7 @@ async function exec() {
        * Collection indexes
        */
       if (!release) {
-        release = doc?.data().release || 1;
+        release = doc?.data()?.release || 1;
       }
 
       /**
@@ -74,12 +74,12 @@ async function exec() {
       const releaseData = (
         await fs.doc(`releases/${release.toString()}`).get()
       )
-        .data();
+        .data() as any;
 
       /**
        * @type {{[collection: string]: {[id: string]: any}}}
        */
-      const changes = releaseData.changes.reduce((acc, change) => {
+      const changes = releaseData.changes.reduce((acc: any, change: any) => {
         if (change.skipGenerateJsonFile) {
           return acc;
         }
@@ -116,7 +116,7 @@ async function exec() {
         const collection = keys[i];
         const collectionChanges = changes[collection];
 
-        return collectionData.reduce((acc, item) => {
+        return collectionData.reduce((acc: any, item: any) => {
           const id = item.id;
           const change = collectionChanges[id];
 
@@ -206,7 +206,7 @@ async function exec() {
     }
     case 'finish': {
       const doc = await fs.doc('releases/status').get();
-      release = parseInt(release, 10) || (doc.exists ? doc.data().release : 0);
+      release = parseInt(release, 10) || (doc.exists ? doc?.data()?.release : 0);
 
       const date = new Date().toISOString();
 
