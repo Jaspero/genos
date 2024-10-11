@@ -39,7 +39,7 @@ export interface Collection {
   initialSort?: Sort;
   filterOperators?: FilterOperators;
   filterOptions?: () => Promise<any[]>;
-  form?: (id: string) => any;
+  form?: (id: string, entryData?: any) => any;
   formOnValueChange?: (value: any, elements?: any) => void;
   singularName?: string;
   add?: boolean;
