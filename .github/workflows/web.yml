@@ -54,7 +54,7 @@ jobs:
           git config --local user.name "GitHub Action"
           git add -f --all web/.svelte-kit
           git add -f --all web/node_modules
-          git add -f --all web/public
+          git add -f --all public
           git commit -m "BOT - Connected build branch"
       # Remove the build branch in case it already exists
       # this ensures clean code
