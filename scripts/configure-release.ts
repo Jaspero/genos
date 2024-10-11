@@ -105,7 +105,7 @@ async function exec() {
        */
       const collectionsJsonData = await Promise.all(
         keys.map(collection =>
-          readFile('../public/web/' + collection + '.json')
+          readFile('./public/web/' + collection + '.json')
             .then(data => JSON.parse(data.toString()))
             .catch(() => [])
         )
@@ -167,9 +167,9 @@ async function exec() {
        * Create dir if not exists
        */
       console.log(1);
-      if (!existsSync('../public/web/data')) {
+      if (!existsSync('./public/web/data')) {
         console.log(2);
-        mkdirSync('../public/web/data');
+        mkdirSync('./public/web/data');
       }
       console.log(3);
 
@@ -179,7 +179,7 @@ async function exec() {
       await Promise.all(
         keys.map((collection, i) =>
           writeFile(
-            '../public/web/data/' + collection + '.json',
+            './public/web/data/' + collection + '.json',
             JSON.stringify(updatedCollectionsJsonData[i])
           )
         )
@@ -193,11 +193,11 @@ async function exec() {
           continue;
         }
 
-        if (!existsSync('../public/web/data/' + data.collection + '.json')) {
+        if (!existsSync('./public/web/data/' + data.collection + '.json')) {
           const collectionData = await fs.collection(data.collection).get();
 
           await writeFile(
-            '../public/web/data/' + data.collection + '.json',
+            './public/web/data/' + data.collection + '.json',
             JSON.stringify(collectionData.docs.map((doc) => {
               const d = doc.data();
               d.id = doc.id;

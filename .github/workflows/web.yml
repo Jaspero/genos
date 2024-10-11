@@ -40,7 +40,7 @@ jobs:
         run: npm run build:prod
       - name: Configure Release
         id: config
-        run: echo ::set-output name=VERSION::$(JOB=start npm run configure-release)
+        run: JOB=start npm run configure-release
       - name: Deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -71,5 +71,4 @@ jobs:
           branch: 'build'
           force: true
       - name: Update Release Status
-        run: |
-          JOB=finish VERSION=${{ steps.config.outputs.VERSION }} npm run configure-release
+        run: JOB=finish npm run configure-release
