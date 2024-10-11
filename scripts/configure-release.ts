@@ -13,11 +13,14 @@ admin.initializeApp({
   credential: admin.credential.cert(credential)
 });
 
-const job = process.argv[2];
-const type = (process.argv[3] || '').trim();
-let release = process.argv[4];
+const job = process.env.JOB;
+const type = (process.env.VERSION || '').trim();
+let release = process.env.RELEASE;
+
+console.log(0);
 
 async function exec() {
+  console.log(1, job);
   const fs = admin.firestore();
 
   switch (job) {
@@ -158,12 +161,17 @@ async function exec() {
         }, []);
       });
 
+      console.log(111);
+
       /**
        * Create dir if not exists
        */
+      console.log(1);
       if (!existsSync('../public/web/data')) {
+        console.log(2);
         mkdirSync('../public/web/data');
       }
+      console.log(3);
 
       /**
        * Write the updated json data
