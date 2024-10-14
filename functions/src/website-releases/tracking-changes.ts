@@ -15,8 +15,8 @@ for (const track of TRACKED_COLLECTIONS) {
     },
     async (event) => {
       const fs = admin.firestore();
-      const newValue = event.data?.after.exists ? event.data?.after.data() : null;
-      const oldValue = event.data?.before.exists ? event.data?.before.data() : null;
+      const newValue = event.data?.after.exists ? { ...event.data.after.data(), id: event.data.after.id} : null;
+      const oldValue = event.data?.before.exists ? { ...event.data.before.data(), id: event.data.before.id} : null;
 
       const statusDoc = await fs.collection('releases').doc('status').get();
       const status = statusDoc.exists ? (statusDoc.data() as { release: string }) : null;
@@ -46,6 +46,7 @@ for (const track of TRACKED_COLLECTIONS) {
           const allChanges = {
             ..._.pickBy(
               newValue,
+              // @ts-ignore
               (value: any, key: string | number) => oldValue && !_.isEqual(value, oldValue[key])
             ),
             /**

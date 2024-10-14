@@ -66,6 +66,6 @@ export const document = (item: any, id: string, data: any, websiteUrl: string): 
   name: data[item.titleKey],
   url: websiteUrl + item.prefix + '/' + data[item.urlKey],
   updatedAt: new Date().toISOString(),
-  skipGenerateJsonFile: item.skipGenerateJsonFile,
+  skipGenerateJsonFile: !!item.skipGenerateJsonFile,
   id
 });
