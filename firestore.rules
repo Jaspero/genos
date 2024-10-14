@@ -151,7 +151,17 @@ service cloud.firestore {
     match /layouts/{id=**} {
       allow read: if true;
       allow write: if admin();
-    }    
+    }
+
+    match /notification-channels/{id=**} {
+      allow read: if true;
+      allow write: if admin();
+    }
+
+    match /notifications/{id=**} {
+      allow read: if true;
+      allow write: if admin();
+    }
 
     match /forms/{form} {
       allow read, write: if admin();

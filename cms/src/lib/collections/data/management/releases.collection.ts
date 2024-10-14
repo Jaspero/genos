@@ -16,8 +16,7 @@ collections.addCollection('releases', {
     {
       key: '/createdOn',
       label: 'Created On',
-      pipes: [dateTimePipe],
-      sortable: true
+      pipes: [dateTimePipe]
     },
     {
       key: '/status',
@@ -27,8 +26,7 @@ collections.addCollection('releases', {
     {
       key: '/releasedOn',
       label: 'Released On',
-      pipes: [dateTimePipe],
-      sortable: true
+      pipes: [dateTimePipe]
     }
   ],
   initialSort: { key: 'createdOn', direction: 'desc' },
