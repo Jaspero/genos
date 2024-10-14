@@ -21,6 +21,7 @@
   import { onMount } from 'svelte';
   import { uploadString, ref } from 'firebase/storage';
   import type { Editor } from 'grapesjs';
+  import { DateTime } from 'luxon';
 
   export let data: {
     col: string;
@@ -87,7 +88,7 @@
       await renderedFormModules[key].render.getValue();
     }
 
-    const lastUpdatedOn = new Date().toISOString();
+    const lastUpdatedOn = DateTime.now().toUTC().toISO();
 
     data.value.lastUpdatedOn = lastUpdatedOn;
 

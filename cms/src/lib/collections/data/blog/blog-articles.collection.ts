@@ -12,6 +12,7 @@ import { BucketImageService } from '../../../services/image.service';
 import { generateSlug } from '../../../utils/generate-slug';
 import { getOptions } from '../../../utils/get-options';
 import { collections } from '../../collections';
+import { DateTime } from 'luxon';
 
 collections.addCollection('blog-articles', {
   name: 'Articles',
@@ -260,12 +261,12 @@ collections.addCollection('blog-articles', {
     return items;
   },
   preSubmit: async (id, value) => {
-    value.lastUpdatedOn = new Date().toISOString();
+    value.lastUpdatedOn = DateTime.now().toUTC().toISO();
   },
   preCreate: async (id, value) => {
     value.url = value.url || generateSlug(value.title);
-    value.publicationDate = value.publicationDate || new Date().toISOString();
-    value.createdOn = new Date().toISOString();
+    value.publicationDate = value.publicationDate || DateTime.now().toUTC().toISO();
+    value.createdOn = DateTime.now().toUTC().toISO();
   },
   idPrefix: 'bar'
 });

@@ -5,6 +5,7 @@ import { random } from '@jaspero/utils';
 import { logger } from 'firebase-functions/v2';
 import { EMAIL_CONFIG } from './email-config.const';
 import { EmailTemplate } from './email-template.interface';
+import { DateTime } from 'luxon';
 
 /**
  * SendGrid docs
@@ -106,7 +107,7 @@ export class EmailService {
         .collection('sent-emails')
         .doc(id)
         .set({
-          createdOn: new Date().toISOString(),
+          createdOn: DateTime.now().toUTC().toISO(),
           to,
           html,
           subject,

@@ -20,6 +20,7 @@
     "@playwright/test": "1.46.1",
     "@sveltejs/kit": "2.6.3",
     "@sveltejs/vite-plugin-svelte": "3.1.2",
+    "@types/luxon": "3.4.2",
     "@typescript-eslint/eslint-plugin": "8.2.0",
     "@typescript-eslint/parser": "8.2.0",
     "autoprefixer": "10.4.20",
@@ -41,6 +42,7 @@
     "@jaspero/web-components": "1.162.3",
     "@minify-html/node": "0.15.0",
     "firebase": "10.13.1",
-    "firebase-admin": "12.4.0"
+    "firebase-admin": "12.4.0",
+    "luxon": "3.5.0"
   }
 }

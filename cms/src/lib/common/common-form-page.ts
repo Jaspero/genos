@@ -105,7 +105,7 @@ export async function commonFormPage({ params, parent }: any) {
       module,
       data.name,
       data.singularName || data.name,
-      data.form ? await data.form(id) : {},
+      data.form ? await data.form(id, value) : {},
       data.formatPreRender ? data.formatPreRender(value) : value,
       snap,
       data.editKey || 'id',

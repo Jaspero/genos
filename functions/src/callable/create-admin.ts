@@ -4,6 +4,7 @@ import { getAuth, UserRecord } from 'firebase-admin/auth';
 import { random } from '@jaspero/utils';
 import { getFirestore } from 'firebase-admin/firestore';
 import { REGION } from '../shared/consts/region.const';
+import { DateTime } from 'luxon';
 
 interface RequestData {
   email: string;
@@ -55,7 +56,7 @@ export const createAdmin = onCall<RequestData>(
     await Promise.all([
       auth.setCustomUserClaims(user.uid, { role }),
       firestore.collection(role + 's').doc(user.uid).set({
-        createdOn: new Date().toISOString(),
+        createdOn: DateTime.now().toUTC().toISO(),
         email,
         name,
         role

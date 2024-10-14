@@ -20,6 +20,7 @@
   import { onMount } from 'svelte';
   import { ref, uploadString } from 'firebase/storage';
   import type { Editor } from 'grapesjs';
+  import { DateTime } from 'luxon';
 
   export let data: {
     col: string;
@@ -85,7 +86,7 @@
       await renderedFormModules[key].render.getValue();
     }
 
-    data.value.lastUpdatedOn = new Date().toISOString();
+    data.value.lastUpdatedOn = DateTime.now().toUTC().toISO();
 
     if (!id) {
       id = `lps-${random.string(24)}`;
