@@ -46,7 +46,6 @@ jobs:
         run: npm run build:prod
       - name: Configure Release
         id: config
-        working-directory: web
         run: JOB=start VERSION=partial npm run configure-release
       - name: Commit
         run: |
@@ -66,5 +65,4 @@ jobs:
           target: ${{ env.TARGET }}
       - name: Update Firestore
         if: contains(github.ref, 'build')
-        working-directory: web
         run: JOB=finish npm run configure-release
