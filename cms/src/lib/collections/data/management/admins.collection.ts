@@ -61,10 +61,10 @@ collections.addCollection('admins', {
   initialSort: { key: 'createdOn', direction: 'desc' },
   editKey: 'name',
   preSubmit: async (id, value) => {
-    value.lastUpdatedOn = new Date().toISOString();
+    value.lastUpdatedOn = new Date().toUTCString();
   },
   preCreate: async (id, value) => {
-    value.createdOn = new Date().toISOString();
+    value.createdOn = new Date().toUTCString();
   },
   createMethod: async (collection, id, value) => {
     await httpsCallable(functions, 'createAdmin')({ ...value, role: 'admin' });

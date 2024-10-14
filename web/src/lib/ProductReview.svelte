@@ -55,7 +55,7 @@
       customer,
       rating,
       comment,
-      createdOn: new Date().toISOString()
+      createdOn: new Date().toUTCString()
     };
 
     await alertWrapper(

@@ -106,7 +106,7 @@ export class EmailService {
         .collection('sent-emails')
         .doc(id)
         .set({
-          createdOn: new Date().toISOString(),
+          createdOn: new Date().toUTCString(),
           to,
           html,
           subject,

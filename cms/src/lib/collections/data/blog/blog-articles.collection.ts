@@ -260,12 +260,12 @@ collections.addCollection('blog-articles', {
     return items;
   },
   preSubmit: async (id, value) => {
-    value.lastUpdatedOn = new Date().toISOString();
+    value.lastUpdatedOn = new Date().toUTCString();
   },
   preCreate: async (id, value) => {
     value.url = value.url || generateSlug(value.title);
-    value.publicationDate = value.publicationDate || new Date().toISOString();
-    value.createdOn = new Date().toISOString();
+    value.publicationDate = value.publicationDate || new Date().toUTCString();
+    value.createdOn = new Date().toUTCString();
   },
   idPrefix: 'bar'
 });

@@ -85,7 +85,7 @@
       await renderedFormModules[key].render.getValue();
     }
 
-    data.value.lastUpdatedOn = new Date().toISOString();
+    data.value.lastUpdatedOn = new Date().toUTCString();
 
     if (!id) {
       id = `lps-${random.string(24)}`;

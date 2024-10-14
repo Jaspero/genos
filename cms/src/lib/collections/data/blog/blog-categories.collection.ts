@@ -93,12 +93,12 @@ collections.addCollection('blog-categories', {
   ],
 
   preSubmit: async (id, value) => {
-    value.lastUpdatedOn = new Date().toISOString();
+    value.lastUpdatedOn = new Date().toUTCString();
   },
   preCreate: async (id, value) => {
     value.url = value.url || generateSlug(value.name);
-    value.publicationDate = value.publicationDate || new Date().toISOString();
-    value.createdOn = new Date().toISOString();
+    value.publicationDate = value.publicationDate || new Date().toUTCString();
+    value.createdOn = new Date().toUTCString();
   },
   idPrefix: 'bc'
 });

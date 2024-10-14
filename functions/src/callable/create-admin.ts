@@ -55,7 +55,7 @@ export const createAdmin = onCall<RequestData>(
     await Promise.all([
       auth.setCustomUserClaims(user.uid, { role }),
       firestore.collection(role + 's').doc(user.uid).set({
-        createdOn: new Date().toISOString(),
+        createdOn: new Date().toUTCString(),
         email,
         name,
         role

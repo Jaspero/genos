@@ -40,7 +40,7 @@
 
       await alertWrapper(
         addDoc(collection(db, 'forms', form, 'form-responses'), {
-          createdOn: new Date().toISOString(),
+          createdOn: new Date().toUTCString(),
           ...data
         }),
         success,

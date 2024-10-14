@@ -87,7 +87,7 @@
       await renderedFormModules[key].render.getValue();
     }
 
-    const lastUpdatedOn = new Date().toISOString();
+    const lastUpdatedOn = new Date().toUTCString();
 
     data.value.lastUpdatedOn = lastUpdatedOn;
 

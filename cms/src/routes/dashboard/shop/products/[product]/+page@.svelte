@@ -139,7 +139,7 @@
       await renderedFormModules[key].render.getValue();
     }
 
-    const lastUpdatedOn = new Date().toISOString();
+    const lastUpdatedOn = new Date().toUTCString();
 
     data.value.url = data.value.url || generateSlug(data.value.name);
     data.value.lastUpdatedOn = lastUpdatedOn;

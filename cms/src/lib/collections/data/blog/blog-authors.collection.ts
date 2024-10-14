@@ -111,10 +111,10 @@ collections.addCollection('blog-authors', {
   },
   preSubmit: async (id, value) => {
     value.url = value.url || generateSlug(value.name);
-    value.lastUpdatedOn = new Date().toISOString();
+    value.lastUpdatedOn = new Date().toUTCString();
   },
   preCreate: async (id, value) => {
-    value.createdOn = new Date().toISOString();
+    value.createdOn = new Date().toUTCString();
   },
   idPrefix: 'bau'
 });
