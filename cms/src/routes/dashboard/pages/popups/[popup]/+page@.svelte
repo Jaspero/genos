@@ -21,6 +21,7 @@
   import type { Editor } from 'grapesjs';
   import { getHtml } from '$lib/page-builder/utils/get-html';
   import { getCss } from '$lib/page-builder/utils/get-css';
+  import { DateTime } from 'luxon';
 
   export let data: {
     col: string;
@@ -85,7 +86,7 @@
       await renderedFormModules[key].render.getValue();
     }
 
-    const lastUpdatedOn = new Date().toUTCString();
+    const lastUpdatedOn = DateTime.now().toUTC().toISO();
 
     data.value.lastUpdatedOn = lastUpdatedOn;
 

@@ -22,6 +22,7 @@
   import ProductSidebar from '../ProductSidebar.svelte';
   import { getHtml } from '$lib/page-builder/utils/get-html';
   import { getCss } from '$lib/page-builder/utils/get-css';
+  import { DateTime } from 'luxon';
 
   export let data: {
     col: string;
@@ -139,7 +140,7 @@
       await renderedFormModules[key].render.getValue();
     }
 
-    const lastUpdatedOn = new Date().toUTCString();
+    const lastUpdatedOn = DateTime.now().toUTC().toISO();
 
     data.value.url = data.value.url || generateSlug(data.value.name);
     data.value.lastUpdatedOn = lastUpdatedOn;

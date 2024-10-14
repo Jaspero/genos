@@ -7,8 +7,8 @@
   import Recaptcha from '$lib/Recaptcha.svelte';
   import type { User } from 'firebase/auth';
   import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
-  import type { ProductInfo } from '$lib/types/product/product-info.interface';
-  import type { ProductReviews } from '$lib/types/product/product-reviews.interface';
+  import { DateTime } from 'luxon';
+
   let instance: any;
   let el: HTMLDivElement;
   let isModalOpen = false;
@@ -55,7 +55,7 @@
       customer,
       rating,
       comment,
-      createdOn: new Date().toUTCString()
+      createdOn: DateTime.now().toUTC().toISO()
     };
 
     await alertWrapper(

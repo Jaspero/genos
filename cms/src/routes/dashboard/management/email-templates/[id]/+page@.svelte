@@ -15,6 +15,7 @@
   import { CONFIG } from '$lib/consts/config.const';
   import EmailTemplatesSidebar from './EmailTemplatesSidebar.svelte';
   import { renderMjMl } from './render-mjml';
+  import { DateTime } from 'luxon';
 
   export let data: {
     col: string;
@@ -77,7 +78,7 @@
       await renderedFormModules[key].render.getValue();
     }
 
-    const lastUpdatedOn = new Date().toUTCString();
+    const lastUpdatedOn = DateTime.now().toUTC().toISO();
 
     data.value.lastUpdatedOn = lastUpdatedOn;
 

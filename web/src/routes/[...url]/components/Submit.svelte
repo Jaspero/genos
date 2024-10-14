@@ -5,6 +5,7 @@
   import { db } from '$lib/utils/firebase';
   import { goto } from '$app/navigation';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
+  import { DateTime } from 'luxon';
 
   export let id: string | null = null;
   export let label: string;
@@ -40,7 +41,7 @@
 
       await alertWrapper(
         addDoc(collection(db, 'forms', form, 'form-responses'), {
-          createdOn: new Date().toUTCString(),
+          createdOn: DateTime.now().toUTC().toISO(),
           ...data
         }),
         success,

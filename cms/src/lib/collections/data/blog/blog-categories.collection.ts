@@ -5,6 +5,7 @@ import { releaseStatusPipe } from '../../../column-pipes/release-status.pipe';
 import { META_FORM_FIELDS } from '../../../consts/meta.form-fields';
 import { generateSlug } from '../../../utils/generate-slug';
 import { collections } from '../../collections';
+import { DateTime } from 'luxon';
 
 collections.addCollection('blog-categories', {
   name: 'Categories',
@@ -93,12 +94,12 @@ collections.addCollection('blog-categories', {
   ],
 
   preSubmit: async (id, value) => {
-    value.lastUpdatedOn = new Date().toUTCString();
+    value.lastUpdatedOn = DateTime.now().toUTC().toISO();
   },
   preCreate: async (id, value) => {
     value.url = value.url || generateSlug(value.name);
-    value.publicationDate = value.publicationDate || new Date().toUTCString();
-    value.createdOn = new Date().toUTCString();
+    value.publicationDate = value.publicationDate || DateTime.now().toUTC().toISO();
+    value.createdOn = DateTime.now().toUTC().toISO();
   },
   idPrefix: 'bc'
 });

@@ -8,6 +8,7 @@ import {existsSync, mkdirSync} from 'fs';
 // @ts-ignore
 import credential from '../web/key.json';
 import { CONFIG } from '../web/src/lib/consts/config.const';
+import { DateTime } from 'luxon';
 
 admin.initializeApp({
   credential: admin.credential.cert(credential)
@@ -207,7 +208,7 @@ async function exec() {
       const doc = await fs.doc('releases/status').get();
       release = parseInt(release, 10) || (doc.exists ? doc?.data()?.release : 0);
 
-      const date = new Date().toUTCString();
+      const date = DateTime.now().toUTC().toISO();
 
       await Promise.all([
         fs.doc('releases/status').set(

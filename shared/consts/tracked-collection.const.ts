@@ -1,3 +1,5 @@
+import { DateTime } from 'luxon';
+
 type TrackedCollection = {
   collection: 'products' | 'tags' | 'categories' | 'pages';
   titleKey: string;
@@ -65,7 +67,7 @@ export const document = (item: any, id: string, data: any, websiteUrl: string): 
   collection: item.collection,
   name: data[item.titleKey],
   url: data[item.urlKey] ? websiteUrl + item.prefix + '/' + data[item.urlKey] : '',
-  updatedAt: new Date().toUTCString(),
+  updatedAt: DateTime.now().toUTC().toISO(),
   skipGenerateJsonFile: !!item.skipGenerateJsonFile,
   id
 });

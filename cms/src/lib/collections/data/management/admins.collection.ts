@@ -7,6 +7,7 @@ import { indexPipe } from '../../../column-pipes/index.pipe';
 import { mailtoPipe } from '../../../column-pipes/mailto.pipe';
 import { functions } from '../../../utils/firebase';
 import { collections } from '../../collections';
+import { DateTime } from 'luxon';
 
 collections.addCollection('admins', {
   name: 'Admins',
@@ -61,10 +62,10 @@ collections.addCollection('admins', {
   initialSort: { key: 'createdOn', direction: 'desc' },
   editKey: 'name',
   preSubmit: async (id, value) => {
-    value.lastUpdatedOn = new Date().toUTCString();
+    value.lastUpdatedOn = DateTime.now().toUTC().toISO();
   },
   preCreate: async (id, value) => {
-    value.createdOn = new Date().toUTCString();
+    value.createdOn = DateTime.now().toUTC().toISO();
   },
   createMethod: async (collection, id, value) => {
     await httpsCallable(functions, 'createAdmin')({ ...value, role: 'admin' });

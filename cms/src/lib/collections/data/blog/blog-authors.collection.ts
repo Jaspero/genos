@@ -8,6 +8,7 @@ import { quillFiled } from '../../../form-fields/quill.field';
 import { BucketImageService } from '../../../services/image.service';
 import { generateSlug } from '../../../utils/generate-slug';
 import { collections } from '../../collections';
+import { DateTime } from 'luxon';
 
 collections.addCollection('blog-authors', {
   name: 'Authors',
@@ -111,10 +112,10 @@ collections.addCollection('blog-authors', {
   },
   preSubmit: async (id, value) => {
     value.url = value.url || generateSlug(value.name);
-    value.lastUpdatedOn = new Date().toUTCString();
+    value.lastUpdatedOn = DateTime.now().toUTC().toISO();
   },
   preCreate: async (id, value) => {
-    value.createdOn = new Date().toUTCString();
+    value.createdOn = DateTime.now().toUTC().toISO();
   },
   idPrefix: 'bau'
 });

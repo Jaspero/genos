@@ -16,6 +16,7 @@
   import { renderMjMl } from '../../email-templates/[id]/render-mjml';
   import EmailTemplatesSidebar from '../../email-templates/[id]/EmailTemplatesSidebar.svelte';
   import { random } from '@jaspero/utils';
+  import { DateTime } from 'luxon';
 
   export let data: {
     col: string;
@@ -73,7 +74,7 @@
       await renderedFormModules[key].render.getValue();
     }
 
-    const lastUpdatedOn = new Date().toUTCString();
+    const lastUpdatedOn = DateTime.now().toUTC().toISO();
 
     data.value.lastUpdatedOn = lastUpdatedOn;
 
