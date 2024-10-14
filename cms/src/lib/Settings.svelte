@@ -4,6 +4,7 @@
   import { slide } from 'svelte/transition';
   import { activeRelease } from './stores/active-release.store';
   import { lastPublishedOn } from './stores/last-published-on.store';
+  import { publishStartOn } from './stores/publish-start.store';
   import { alertWrapper } from './utils/alert-wrapper';
   import { clickOutside } from './utils/click-outside';
   import { db } from './utils/firebase';
@@ -16,7 +17,10 @@
   let changes: TrackedCollectionChange[] = [];
   let showConfirmation = false;
 
-  $: publishDisabled = !!(publishStart && (!$lastPublishedOn || $lastPublishedOn < publishStart));
+  /**
+   * Publish is disabled if last published time is less than the publish start time and the publish start time is less than 5 minutes ago.
+   */
+  $: publishDisabled = !!(publishStart && (!$lastPublishedOn || $lastPublishedOn < publishStart) || ($publishStartOn && (Date.now() - $publishStartOn) <= (5 * 60 * 1000)));
 
   async function publish() {
     publishLoading = true;
@@ -43,10 +47,14 @@
     const statusRef = doc(db, 'releases', 'status');
 
     const unsubscribeStatus = onSnapshot(statusRef, async (d) => {
-      const { lastPublished, release } = d.data() || {};
+      const { lastPublished, release, publishStart } = d.data() || {};
 
       if (lastPublished) {
         lastPublishedOn.set(new Date(lastPublished).getTime());
+      }
+
+      if (publishStart) {
+        publishStartOn.set(publishStart);
       }
 
       if (release) {
