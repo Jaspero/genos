@@ -62,11 +62,11 @@ collections.addCollection('forms', {
       }
     },
     {
-      component: 'jp-select',
-      field: '/notification',
+      component: 'jp-multiselect',
+      field: '/notifications',
       options: {
-        name: 'notification',
-        label: 'Notification',
+        name: 'notifications',
+        label: 'Notifications',
         options: await getOptions('notifications', 'name')
       }
     },

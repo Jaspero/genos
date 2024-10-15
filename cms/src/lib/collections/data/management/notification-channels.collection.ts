@@ -2,6 +2,7 @@ import { capitalize } from '@jaspero/utils';
 import { indexPipe } from '../../../column-pipes/index.pipe';
 import { collections } from '../../collections';
 import { actionsPipe } from '$lib/column-pipes/actions.pipe';
+import { ALLOWED_ROLES } from '$lib/consts/allowed-roles.const';
 
 collections.addCollection('notification-channels', {
   name: 'Notification Channels',
@@ -24,13 +25,11 @@ collections.addCollection('notification-channels', {
     },
     {
       key: '/emails',
-      label: 'Emails',
-      pipes: [(data) => data.join(', ')]
+      label: 'Emails'
     },
     {
       key: '/roles',
-      label: 'Roles',
-      pipes: [(data) => data.join(', ')]
+      label: 'Roles'
     },
     {
       key: 'id',
@@ -79,9 +78,7 @@ collections.addCollection('notification-channels', {
       options: {
         label: 'Roles',
         name: 'roles',
-        options: [
-          { label: 'Admin', value: 'admin' }
-        ]
+        options: ALLOWED_ROLES.map(role => ({ label: capitalize(role), value: role }))
       },
       hidden: {
         deps: ['/type'],

@@ -1,6 +1,8 @@
 import { indexPipe } from '../../../column-pipes/index.pipe';
 import { collections } from '../../collections';
 import { getOptions } from '$lib/utils/get-options';
+import { populateArrayPipe } from '$lib/column-pipes/populate-array.pipe';
+import { quillFiled } from '$lib/form-fields/quill.field';
 
 collections.addCollection('notifications', {
   name: 'Notifications',
@@ -15,6 +17,11 @@ collections.addCollection('notifications', {
     {
       key: '/name',
       label: 'Name'
+    },
+    {
+      key: '/channels',
+      label: 'Channels',
+      pipes: [populateArrayPipe('notification-channels', 'name')]
     }
   ],
   form: async () => [
@@ -27,15 +34,7 @@ collections.addCollection('notifications', {
         required: true
       }
     },
-    {
-      component: 'jp-ckeditor',
-      field: '/content',
-      options: {
-        name: 'content',
-        label: 'Content',
-        required: true
-      }
-    },
+    quillFiled('notifications', 'content', 'Content'),
     {
       component: 'jp-multiselect',
       field: '/channels',

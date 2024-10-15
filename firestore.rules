@@ -154,12 +154,12 @@ service cloud.firestore {
     }
 
     match /notification-channels/{id=**} {
-      allow read: if true;
+      allow read: if admin();
       allow write: if admin();
     }
 
     match /notifications/{id=**} {
-      allow read: if true;
+      allow read: if admin();
       allow write: if admin();
     }
 
