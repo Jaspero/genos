@@ -11,5 +11,8 @@ export enum FirestoreCollections {
   Products = 'products',
   Refunds = 'refunds',
   Settings = 'settings',
-  Tags = 'tags'
+  Tags = 'tags',
+  Forms = 'forms',
+  NotificationChannels = 'notification-channels',
+  Notifications = 'notifications'
 }

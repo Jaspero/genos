@@ -1,6 +1,8 @@
 import type { DocumentReference } from 'firebase/firestore';
 import type { FilterOperators } from '../interfaces/filter-operators.interface';
 import type { Sort } from '../interfaces/sort.interface';
+import type { FirestoreUser } from '$lib/interfaces/firestore-user.interface';
+import type { IdTokenResult } from 'firebase/auth';
 
 export interface TableHeader {
   key: string;
@@ -38,7 +40,7 @@ export interface Collection {
   showExport?: boolean;
   initialSort?: Sort;
   filterOperators?: FilterOperators;
-  filterOptions?: () => Promise<any[]>;
+  filterOptions?: (context: {user?: FirestoreUser, token?: IdTokenResult}) => Promise<any[]>;
   form?: (id: string, entryData?: any) => any;
   formOnValueChange?: (value: any, elements?: any) => void;
   singularName?: string;

@@ -32,7 +32,7 @@ collections.addCollection('notification-channels', {
       label: 'Roles'
     },
     {
-      key: 'id',
+      key: '/id',
       label: '',
       pipes: [
         actionsPipe()

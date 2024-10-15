@@ -6,6 +6,7 @@ import './data/management/email-templates.collection.ts';
 import './data/management/email-template-layouts.collection.ts';
 import './data/management/releases.collection.ts';
 import './data/management/notifications.collection.ts';
+import './data/management/cms-notifications.collection.ts';
 import './data/management/notification-channels.collection.ts';
 
 /**

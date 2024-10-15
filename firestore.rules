@@ -158,6 +158,11 @@ service cloud.firestore {
       allow write: if admin();
     }
 
+    match /cms-notifications/{id=**} {
+      allow read: if admin();
+      allow write: if admin();
+    }
+
     match /notifications/{id=**} {
       allow read: if admin();
       allow write: if admin();

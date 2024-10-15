@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { doc, onSnapshot, setDoc } from 'firebase/firestore';
+  import { collection, doc, limit, onSnapshot, query, setDoc, where } from 'firebase/firestore';
   import { onMount } from 'svelte';
   import { slide } from 'svelte/transition';
   import { activeRelease } from './stores/active-release.store';
@@ -7,7 +7,7 @@
   import { publishStartOn } from './stores/publish-start.store';
   import { alertWrapper } from './utils/alert-wrapper';
   import { clickOutside } from './utils/click-outside';
-  import { db } from './utils/firebase';
+  import { db, user } from './utils/firebase';
   import type { TrackedCollectionChange } from '$lib/interfaces/tracked-collection-change.interface';
 
   let publishLoading = false;
@@ -16,6 +16,7 @@
   let dropdown = false;
   let changes: TrackedCollectionChange[] = [];
   let showConfirmation = false;
+  let hasNotification = false;
 
   /**
    * Publish is disabled if last published time is less than the publish start time and the publish start time is less than 5 minutes ago.
@@ -78,7 +79,18 @@
       }
     });
 
-    return () => unsubscribeStatus();
+    // todo(filip): $user?.id is undefined on mount, remove setTimeout
+    let unsubscribeNotifications: () => void;
+    setTimeout(() => {
+      unsubscribeNotifications = onSnapshot(query(collection(db, 'notifications'), where('userId', '==', $user?.id), where('seen', '==', false), limit(1)), snapshot => {
+        hasNotification = !snapshot.empty;
+      });
+    }, 1000);
+
+    return () => {
+      unsubscribeStatus();
+      unsubscribeNotifications();
+    }
   });
 </script>
 
@@ -90,7 +102,7 @@
   >
     <span class="material-symbols-outlined">settings</span>
     <span>Settings</span>
-    {#if $activeRelease?.changes?.length}
+    {#if $activeRelease?.changes?.length || hasNotification}
       <span class="red-dot"></span>
     {/if}
   </button>
@@ -111,6 +123,11 @@
         class="px-4 py-3 text-sm hover:bg-black/5 transition-colors cursor-pointer"
         href="/dashboard/management/releases"
         on:click={() => (dropdown = false)}>Release History</a
+      >
+      <a
+        class="px-4 py-3 text-sm hover:bg-black/5 transition-colors cursor-pointer"
+        href="/dashboard/management/cms-notifications"
+        on:click={() => (dropdown = false)}>Notifications</a
       >
     </div>
   {/if}

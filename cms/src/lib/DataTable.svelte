@@ -14,19 +14,20 @@
   import { page } from '$app/stores';
   import { base64UrlDecode, base64UrlEncode } from '@jaspero/utils';
   import { clientStorage } from './services/client-storage.service';
+  import { user, token } from '$lib/utils/firebase';
   import type { Sort } from './interfaces/sort.interface';
 
   export let col: string;
   export let headers: any[];
   export let pageSize = 10;
   export let pageSizes = [10, 25, 50, 100];
-  export let baseLink: string;
+  export let baseLink: string | null = null;
   export let id: string;
   export let initialSort: {
     key: string;
     direction: 'asc' | 'desc';
   } | null = null;
-  export let filterOptions: (() => Promise<any[]>) | null = null;
+  export let filterOptions: ((data: any) => Promise<any[]>) | null = null;
   export let filterOperators: FilterOperators = {};
   export let defaultFilters: Filter[] = [];
   export let filtersValue: any = {};
@@ -139,7 +140,7 @@
     filtersLoading = true;
 
     if (!filterItems) {
-      filterItems = await filterOptions!();
+      filterItems = await filterOptions!({user: $user, token: $token});
     }
 
     filterDialogOpen = true;
@@ -294,7 +295,7 @@
           return;
         }
         const { row } = e.detail;
-        goto(baseLink + row.id);
+        goto(baseLink! + row.id);
       };
 
       instance.addEventListener('rowClick', rowClickHandler);
