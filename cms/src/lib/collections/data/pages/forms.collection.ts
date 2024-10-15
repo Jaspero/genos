@@ -1,6 +1,7 @@
 import { actionsPipe } from '../../../column-pipes/actions.pipe';
 import { indexPipe } from '../../../column-pipes/index.pipe';
 import { collections } from '../../collections';
+import { getOptions } from '$lib/utils/get-options';
 
 collections.addCollection('forms', {
   name: 'Forms',
@@ -58,6 +59,15 @@ collections.addCollection('forms', {
         label: 'Name',
         name: 'name',
         required: true
+      }
+    },
+    {
+      component: 'jp-select',
+      field: '/notification',
+      options: {
+        name: 'notification',
+        label: 'Notification',
+        options: await getOptions('notifications', 'name')
       }
     },
     {
