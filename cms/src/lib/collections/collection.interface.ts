@@ -41,6 +41,7 @@ export interface Collection {
   initialSort?: Sort;
   filterOperators?: FilterOperators;
   filterOptions?: (context: {user?: FirestoreUser, token?: IdTokenResult}) => Promise<any[]>;
+  hideFilters?: boolean;
   form?: (id: string, entryData?: any) => any;
   formOnValueChange?: (value: any, elements?: any) => void;
   singularName?: string;

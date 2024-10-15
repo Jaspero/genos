@@ -28,6 +28,7 @@
     direction: 'asc' | 'desc';
   } | null = null;
   export let filterOptions: ((data: any) => Promise<any[]>) | null = null;
+  export let hideFilters = false;
   export let filterOperators: FilterOperators = {};
   export let defaultFilters: Filter[] = [];
   export let filtersValue: any = {};
@@ -312,7 +313,7 @@
 
 <div class="header">
   <div class="flex">
-    {#if filterOptions}
+    {#if filterOptions && !hideFilters}
       <Button on:click={openFilters} loading={filtersLoading}>Filters</Button>
       {#if Object.keys(filtersValue).length}
         <Button variant="outlined" color="warn" on:click={clearFilters}>Clear</Button>

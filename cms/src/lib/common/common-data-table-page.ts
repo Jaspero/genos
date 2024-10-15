@@ -24,6 +24,7 @@ export interface CommonDataTablePageData {
   initialSort?: Sort;
   collection?: string;
   module?: string;
+  hideFilters?: boolean;
   importMethod?: (file: File) => Promise<any>;
 }
 
@@ -51,6 +52,7 @@ export async function commonDataTablePage({ params, parent }: any) {
     headers: data.tableHeaders,
     add: data.add,
     headerSlot: data.headerSlot,
+    hideFilters: data.hideFilters,
     singularName: data.singularName || data.name,
     filterOperators: data.filterOperators,
     freezeFirstColumn: data.freezeFirstColumn,

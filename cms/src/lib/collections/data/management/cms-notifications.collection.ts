@@ -21,6 +21,7 @@ collections.addCollection('cms-notifications', {
     }
   ],
   add: false,
+  hideFilters: true,
   filterOptions: async (data) => {
     return [
       {
