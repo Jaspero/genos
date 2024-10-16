@@ -3,6 +3,7 @@ import { collections } from '../../collections';
 import { getOptions } from '$lib/utils/get-options';
 import { populateArrayPipe } from '$lib/column-pipes/populate-array.pipe';
 import { quillFiled } from '$lib/form-fields/quill.field';
+import {actionsPipe} from '../../../column-pipes/actions.pipe';
 
 collections.addCollection('notifications', {
   name: 'Notifications',
@@ -22,6 +23,11 @@ collections.addCollection('notifications', {
       key: '/channels',
       label: 'Channels',
       pipes: [populateArrayPipe('notification-channels', 'name')]
+    },
+    {
+      key: '/id',
+      label: '',
+      pipes: [actionsPipe()]
     }
   ],
   form: async () => [
