@@ -3,9 +3,10 @@ import { EMAIL_CONFIG } from '../email/email-config.const';
 import * as admin from 'firebase-admin';
 import { DateTime } from 'luxon';
 import { logger } from 'firebase-functions/v2';
+import { compile } from 'handlebars';
 
 export class NotificationService {
-  static async sendNotifications(notifications: string[]) {
+  static async sendNotifications(context: any, notifications: string[]) {
     const fs = admin.firestore();
     const emailService = new EmailService();
 
@@ -39,6 +40,8 @@ export class NotificationService {
           type: string;
         };
 
+        const content = compile(notificationData.content)(context);
+
         switch (channelData.type) {
           case 'email':
             if (!channelData.emails.length) {
@@ -49,7 +52,7 @@ export class NotificationService {
               subject: notificationData.name,
               to: EMAIL_CONFIG.fromEmail,
               bcc: channelData.emails,
-              html: notificationData.content
+              html: content
             });
             break;
           case 'cms':
@@ -75,7 +78,7 @@ export class NotificationService {
             users.forEach(userId => {
               batch.set(fs.collection('cms-notifications').doc(), {
                 name: notificationData.name,
-                content: notificationData.content,
+                content,
                 userId: userId,
                 createdOn: DateTime.now().toUTC().toISO()
               });
