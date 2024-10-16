@@ -19,7 +19,7 @@ export const TRACKED_COLLECTIONS: TrackedCollection[] = [
   // },
   // { collection: 'tags', titleKey: 'name', urlKey: 'url', prefix: '/products', keysToTrack: ['id', 'name'] },
   // { collection: 'categories', titleKey: 'name', urlKey: 'url', prefix: '/products', keysToTrack: ['id', 'name'] },
-  { collection: 'pages', titleKey: 'name', urlKey: 'url', prefix: '/pages', keysToTrack: ['id', 'name', 'lastUpdatedOn'], skipGenerateJsonFile: true }
+  { collection: 'pages', titleKey: 'title', urlKey: 'url', prefix: '/pages', keysToTrack: ['id', 'title', 'lastUpdatedOn'], skipGenerateJsonFile: true }
 ];
 
 type CollectionNames = typeof TRACKED_COLLECTIONS[number]['collection'];
