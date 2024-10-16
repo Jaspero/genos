@@ -24,6 +24,6 @@ export const formResponsesCreated = onDocumentCreated(
       return;
     }
 
-    await NotificationService.sendNotifications(formData.notifications);
+    await NotificationService.sendNotifications(event.data?.data(), formData.notifications);
   }
 );

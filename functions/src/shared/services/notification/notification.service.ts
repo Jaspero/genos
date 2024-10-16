@@ -3,9 +3,10 @@ import { EMAIL_CONFIG } from '../email/email-config.const';
 import * as admin from 'firebase-admin';
 import { DateTime } from 'luxon';
 import { logger } from 'firebase-functions/v2';
+import { compile } from 'handlebars';
 
 export class NotificationService {
-  static async sendNotifications(notifications: string[]) {
+  static async sendNotifications(context: any, notifications: string[]) {
     const fs = admin.firestore();
     const emailService = new EmailService();
 
@@ -45,11 +46,13 @@ export class NotificationService {
               throw new Error(`Notification with id ${id} is missing emails for channel with id ${channel}.`);
             }
 
+            const template = compile(notificationData.content);
+
             await emailService.sendEmail({
               subject: notificationData.name,
               to: EMAIL_CONFIG.fromEmail,
               bcc: channelData.emails,
-              html: notificationData.content
+              html: template(context)
             });
             break;
           case 'cms':
