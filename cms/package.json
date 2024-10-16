@@ -50,7 +50,7 @@
     "deepcopy": "2.1.0",
     "dexie": "4.0.8",
     "firebase": "10.13.1",
-    "grapesjs": "0.21.12",
+    "grapesjs": "0.21.13",
     "grapesjs-parser-postcss": "1.0.3",
     "grapesjs-preset-newsletter": "1.0.2",
     "grapesjs-style-gradient": "3.0.3",
