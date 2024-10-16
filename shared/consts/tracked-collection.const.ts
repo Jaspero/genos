@@ -10,16 +10,16 @@ type TrackedCollection = {
 };
 
 export const TRACKED_COLLECTIONS: TrackedCollection[] = [
-  {
-    collection: 'products',
-    titleKey: 'name',
-    urlKey: 'url',
-    prefix: '/products',
-    keysToTrack: ['id', 'name', 'price', 'description', 'tags', 'categories', 'createdOn', 'image'],
-  },
-  { collection: 'tags', titleKey: 'name', urlKey: 'url', prefix: '/products', keysToTrack: ['id', 'name'] },
-  { collection: 'categories', titleKey: 'name', urlKey: 'url', prefix: '/products', keysToTrack: ['id', 'name'] },
-  { collection: 'pages', titleKey: 'name', urlKey: 'url', prefix: '/pages', keysToTrack: ['id', 'name'], skipGenerateJsonFile: true }
+  // {
+  //   collection: 'products',
+  //   titleKey: 'name',
+  //   urlKey: 'url',
+  //   prefix: '/products',
+  //   keysToTrack: ['id', 'name', 'price', 'description', 'tags', 'categories', 'createdOn', 'image'],
+  // },
+  // { collection: 'tags', titleKey: 'name', urlKey: 'url', prefix: '/products', keysToTrack: ['id', 'name'] },
+  // { collection: 'categories', titleKey: 'name', urlKey: 'url', prefix: '/products', keysToTrack: ['id', 'name'] },
+  { collection: 'pages', titleKey: 'name', urlKey: 'url', prefix: '/pages', keysToTrack: ['id', 'name', 'lastUpdatedOn'], skipGenerateJsonFile: true }
 ];
 
 type CollectionNames = typeof TRACKED_COLLECTIONS[number]['collection'];
