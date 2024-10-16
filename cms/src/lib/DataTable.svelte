@@ -6,7 +6,6 @@
   import '@jaspero/web-components/dist/async-table.wc';
   import '@jaspero/web-components/dist/async-table.css';
   import { goto } from '$app/navigation';
-  import type { Filter } from './interfaces/filter.interface';
   import Button from './Button.svelte';
   import Dialog from './Dialog.svelte';
   import FormModule from './FormModule.svelte';
@@ -28,9 +27,9 @@
     direction: 'asc' | 'desc';
   } | null = null;
   export let filterOptions: ((data: any) => Promise<any[]>) | null = null;
-  export let hideFilters = false;
+  export let defaultFilters: ((data: any) => Promise<any[]>) | null = null;
+  export let onTableLoad: ((data: any) => Promise<any>) | null = null;
   export let filterOperators: FilterOperators = {};
-  export let defaultFilters: Filter[] = [];
   export let filtersValue: any = {};
   export let rawClick = false;
   export let freezeFirstColumn = true;
@@ -54,7 +53,7 @@
   async function get(sort: null | Sort, size: number) {
     const queries: any[] = [
       collection(db, col),
-      ...defaultFilters.map((filter) => where(filter.key, filter.operation, filter.value))
+      ...(defaultFilters ? ((await defaultFilters!({user: $user, token: $token})).map(filter => where(filter.key, filter.operator, filter.value))) : [])
     ];
 
     if (sort) {
@@ -95,7 +94,7 @@
   async function loadMore(sort: null | Sort, size: number) {
     const queries: any[] = [
       collection(db, col),
-      ...defaultFilters.map((filter) => where(filter.key, filter.operation, filter.value))
+      ...(defaultFilters ? (await defaultFilters!({user: $user, token: $token})).map(filter => where(filter.key, filter.operator, filter.value)) : [])
     ];
 
     if (sort) {
@@ -194,7 +193,7 @@
   async function exportData() {
     const queries: any[] = [
       collection(db, col),
-      ...defaultFilters.map((filter) => where(filter.key, filter.operation, filter.value))
+      ...(defaultFilters ? (await defaultFilters!({user: $user, token: $token})).map((filter) => where(filter.key, filter.operator, filter.value)) : [])
     ];
 
     if (Object.keys(filtersValue).length) {
@@ -230,6 +229,10 @@
     pageSubscription = page.subscribe(async ({ url }) => {
       if (lastPage === url.pathname) {
         return;
+      }
+
+      if (onTableLoad) {
+        await onTableLoad!({user: $user, token: $token});
       }
 
       lastPage = url.pathname;
@@ -313,7 +316,7 @@
 
 <div class="header">
   <div class="flex">
-    {#if filterOptions && !hideFilters}
+    {#if filterOptions}
       <Button on:click={openFilters} loading={filtersLoading}>Filters</Button>
       {#if Object.keys(filtersValue).length}
         <Button variant="outlined" color="warn" on:click={clearFilters}>Clear</Button>

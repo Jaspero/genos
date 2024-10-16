@@ -14,5 +14,6 @@ export enum FirestoreCollections {
   Tags = 'tags',
   Forms = 'forms',
   NotificationChannels = 'notification-channels',
-  Notifications = 'notifications'
+  Notifications = 'notifications',
+  CmsNotifications = 'cms-notifications'
 }

@@ -3,6 +3,7 @@ import type { FilterOperators } from '../interfaces/filter-operators.interface';
 import type { Sort } from '../interfaces/sort.interface';
 import type { FirestoreUser } from '$lib/interfaces/firestore-user.interface';
 import type { IdTokenResult } from 'firebase/auth';
+import type { Filter } from '$lib/interfaces/filter.interface';
 
 export interface TableHeader {
   key: string;
@@ -41,7 +42,8 @@ export interface Collection {
   initialSort?: Sort;
   filterOperators?: FilterOperators;
   filterOptions?: (context: {user?: FirestoreUser, token?: IdTokenResult}) => Promise<any[]>;
-  hideFilters?: boolean;
+  defaultFilters?: (context: {user?: FirestoreUser, token?: IdTokenResult}) => Promise<any[]>;
+  onTableLoad?: (context: {user?: FirestoreUser, token?: IdTokenResult}) => Promise<any>;
   form?: (id: string, entryData?: any) => any;
   formOnValueChange?: (value: any, elements?: any) => void;
   singularName?: string;

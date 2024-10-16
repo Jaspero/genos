@@ -4,6 +4,8 @@ import type TableHeader from '../TableHeader.svelte';
 import type { FilterOperators } from '../interfaces/filter-operators.interface';
 import type { Sort } from '../interfaces/sort.interface';
 import type { Collection } from '../collections/collection.interface';
+import type { FirestoreUser } from '$lib/interfaces/firestore-user.interface';
+import type { IdTokenResult } from 'firebase/auth';
 
 export interface CommonDataTablePageData {
   name: string;
@@ -20,11 +22,12 @@ export interface CommonDataTablePageData {
   allowArrangeColumns?: boolean;
   showImport?: boolean;
   showExport?: boolean;
-  filterOptions?: () => Promise<any[]>;
+  filterOptions?: (context: {user?: FirestoreUser, token?: IdTokenResult}) => Promise<any[]>;
+  defaultFilters?: (context: {user?: FirestoreUser, token?: IdTokenResult}) => Promise<any[]>;
+  onTableLoad?: (context: {user?: FirestoreUser, token?: IdTokenResult}) => Promise<any>;
   initialSort?: Sort;
   collection?: string;
   module?: string;
-  hideFilters?: boolean;
   importMethod?: (file: File) => Promise<any>;
 }
 
@@ -52,7 +55,8 @@ export async function commonDataTablePage({ params, parent }: any) {
     headers: data.tableHeaders,
     add: data.add,
     headerSlot: data.headerSlot,
-    hideFilters: data.hideFilters,
+    defaultFilters: data.defaultFilters,
+    onTableLoad: data.onTableLoad,
     singularName: data.singularName || data.name,
     filterOperators: data.filterOperators,
     freezeFirstColumn: data.freezeFirstColumn,
