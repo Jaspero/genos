@@ -13,5 +13,5 @@ export interface FirestoreUser {
   lastName?: string;
   gender?: string;
   dateOfBirth?: string;
-  lastSeen?: number;
+  lastSeen?: string;
 }

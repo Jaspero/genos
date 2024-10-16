@@ -16,7 +16,7 @@
   let dropdown = false;
   let changes: TrackedCollectionChange[] = [];
   let showConfirmation = false;
-  let notificationCount = 0;
+  let hasNotification = true;
 
   /**
    * Publish is disabled if last published time is less than the publish start time and the publish start time is less than 5 minutes ago.
@@ -81,9 +81,9 @@
 
     let unsubscribeNotifications = onSnapshot(
       query(
-        collection(db, 'notifications'), where('userId', '==', $user?.id), where('createdOn', '>=', $user?.lastSeen)
+        collection(db, 'notifications'), where('userId', '==', $user?.id), where('createdOn', '>=', $user?.lastSeen), limit(1)
       ), snapshot => {
-        notificationCount = snapshot.docs.length;
+        hasNotification = !snapshot.empty;
       }
     );
 
@@ -102,7 +102,7 @@
   >
     <span class="material-symbols-outlined">settings</span>
     <span>Settings</span>
-    {#if $activeRelease?.changes?.length || notificationCount}
+    {#if $activeRelease?.changes?.length || hasNotification}
       <span class="red-dot"></span>
     {/if}
   </button>
@@ -129,8 +129,8 @@
         on:click={() => (dropdown = false)}
       >
         Notifications
-        {#if notificationCount}
-          <span class="notification-bubble">{notificationCount}</span>
+        {#if hasNotification}
+          <span class="red-dot"></span>
         {/if}
       </a>
     </div>

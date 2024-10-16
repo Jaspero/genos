@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { QueryDocumentSnapshot } from 'firebase/firestore';
-  import { collection, getDocs, query, orderBy, limit, startAt, where } from 'firebase/firestore';
+  import { collection, getDocs, limit, orderBy, query, startAt, where } from 'firebase/firestore';
   import { onDestroy, onMount } from 'svelte';
   import { db } from './utils/firebase';
   import '@jaspero/web-components/dist/async-table.wc';
@@ -13,8 +13,9 @@
   import { page } from '$app/stores';
   import { base64UrlDecode, base64UrlEncode } from '@jaspero/utils';
   import { clientStorage } from './services/client-storage.service';
-  import { user, token } from '$lib/utils/firebase';
+  import { token, user } from '$lib/utils/firebase';
   import type { Sort } from './interfaces/sort.interface';
+  import type { CommonDataContext } from '$lib/interfaces/common-data-context.interface';
 
   export let col: string;
   export let headers: any[];
@@ -26,9 +27,9 @@
     key: string;
     direction: 'asc' | 'desc';
   } | null = null;
-  export let filterOptions: ((data: any) => Promise<any[]>) | null = null;
-  export let defaultFilters: ((data: any) => Promise<any[]>) | null = null;
-  export let onTableLoad: ((data: any) => Promise<any>) | null = null;
+  export let filterOptions: ((context: CommonDataContext) => Promise<any[]>) | null = null;
+  export let defaultFilters: ((context: CommonDataContext) => Promise<any[]>) | null = null;
+  export let onTableLoad: ((context: CommonDataContext) => Promise<void>) | null = null;
   export let filterOperators: FilterOperators = {};
   export let filtersValue: any = {};
   export let rawClick = false;
@@ -45,15 +46,21 @@
   let instance: any;
   let filtersLoading = false;
   let filterItems: any[] | null;
+  let defaultFilterItems: any[] | null;
   let filterDialogOpen = false;
   let pageSubscription: any;
 
   $: filterOptions && (filterItems = null);
+  $: (defaultFilters || defaultFilters === undefined) && (defaultFilterItems = null);
 
   async function get(sort: null | Sort, size: number) {
+    if (!defaultFilterItems && defaultFilters) {
+      defaultFilterItems = (await defaultFilters!({user: $user, token: $token})).map(filter => where(filter.key, filter.operator, filter.value));
+    }
+
     const queries: any[] = [
       collection(db, col),
-      ...(defaultFilters ? ((await defaultFilters!({user: $user, token: $token})).map(filter => where(filter.key, filter.operator, filter.value))) : [])
+      ...(defaultFilterItems || [])
     ];
 
     if (sort) {
@@ -94,7 +101,7 @@
   async function loadMore(sort: null | Sort, size: number) {
     const queries: any[] = [
       collection(db, col),
-      ...(defaultFilters ? (await defaultFilters!({user: $user, token: $token})).map(filter => where(filter.key, filter.operator, filter.value)) : [])
+      ...(defaultFilterItems || [])
     ];
 
     if (sort) {
@@ -193,7 +200,7 @@
   async function exportData() {
     const queries: any[] = [
       collection(db, col),
-      ...(defaultFilters ? (await defaultFilters!({user: $user, token: $token})).map((filter) => where(filter.key, filter.operator, filter.value)) : [])
+      ...(defaultFilterItems || [])
     ];
 
     if (Object.keys(filtersValue).length) {

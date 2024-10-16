@@ -2,81 +2,98 @@ import { EmailService } from '../email/email.service';
 import { EMAIL_CONFIG } from '../email/email-config.const';
 import * as admin from 'firebase-admin';
 import { DateTime } from 'luxon';
+import { logger } from 'firebase-functions/v2';
 
 export class NotificationService {
   static async sendNotifications(notifications: string[]) {
     const fs = admin.firestore();
     const emailService = new EmailService();
 
-    const notificationsData = await Promise.all(
-      notifications.map(
-        async (notificationId) =>
-          (
-            await fs.collection('notifications').doc(notificationId).get()
-          ).data() as {
-            channels: string[];
-            content: string;
-            name: string;
-          }
-      )
-    );
+    const results = await Promise.allSettled(notifications.map(async id => {
+      const notificationRef =  await fs.collection('notifications').doc(id).get();
 
-    for (const notification of notificationsData) {
-      const channelsData = await Promise.all(
-        notification.channels.map(
-          async (channelId) =>
-            (
-              await fs.collection('notification-channels').doc(channelId).get()
-            ).data() as {
-              emails: string[];
-              roles: string[];
-              type: string;
+      if (!notificationRef.exists) {
+        throw new Error(`Notification with id ${id} not found`);
+      }
+
+      const notificationData = notificationRef.data() as {
+        channels: string[];
+        content: string;
+        name: string;
+      };
+
+      if (!notificationData.channels?.length) {
+        return;
+      }
+
+      for (const channel of notificationData.channels) {
+        const channelRef = await fs.collection('notification-channels').doc(channel).get();
+
+        if (!channelRef.exists) {
+          throw new Error(`Notification with id ${id} is missing the channel with id ${channel}.`);
+        }
+
+        const channelData = channelRef.data() as {
+          emails: string[];
+          roles: string[];
+          type: string;
+        };
+
+        switch (channelData.type) {
+          case 'email':
+            if (!channelData.emails.length) {
+              throw new Error(`Notification with id ${id} is missing emails for channel with id ${channel}.`);
             }
-        )
-      );
 
-      for (const channel of channelsData) {
-        if (channel.type === 'email') {
-          if (!channel.emails.length) {
-            return;
-          }
+            await emailService.sendEmail({
+              subject: notificationData.name,
+              to: EMAIL_CONFIG.fromEmail,
+              bcc: channelData.emails,
+              html: notificationData.content
+            });
+            break;
+          case 'cms':
+            if (!channelData.roles.length) {
+              return;
+            }
 
-          await emailService.sendEmail({
-            subject: notification.name,
-            to: EMAIL_CONFIG.fromEmail,
-            bcc: channel.emails,
-            html: notification.content
-          });
-        } else {
-          if (!channel.roles.length) {
-            return;
-          }
+            const users = await Promise.all(
+              channelData.roles.map(role => fs.collection(role + 's').get())
+            ).then((querySnapshots) => {
+              return querySnapshots.reduce((acc: string[], querySnapshot) => {
+                acc.push(...querySnapshot.docs.map((doc) => doc.id));
+                return acc;
+              }, [])
+            });
 
-          const users = await Promise.all(
-            channel.roles.map(role => fs.collection(role + 's').get())
-          ).then((querySnapshots) => {
-            return querySnapshots.reduce((acc: string[], querySnapshot) => {
-              acc.push(...querySnapshot.docs.map((doc) => doc.id));
-              return acc;
-            }, [])
-          });
+            if (!users.length) {
+              return;
+            }
 
-          if (!users.length) {
-            return;
-          }
+            const batch = fs.batch();
 
-          await Promise.all(
-            users.map(userId =>
-              fs.collection('cms-notifications').add({
-                name: notification.name,
-                content: notification.content,
+            users.forEach(userId => {
+              batch.set(fs.collection('cms-notifications').doc(), {
+                name: notificationData.name,
+                content: notificationData.content,
                 userId: userId,
                 createdOn: DateTime.now().toUTC().toISO()
-              })
-            )
-          );
+              });
+            });
+
+            await batch.commit();
+
+            break;
+          default:
+            throw new Error(`Notification with id ${id} has an invalid channel type: ${channelData.type}.`);
         }
       }
+    }));
+
+    const errors = results.filter(result => result.status === 'rejected');
+
+    if (errors.length) {
+      logger.error('Error sending notifications', errors);
     }
   }
 }

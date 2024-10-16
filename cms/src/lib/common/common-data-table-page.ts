@@ -4,8 +4,7 @@ import type TableHeader from '../TableHeader.svelte';
 import type { FilterOperators } from '../interfaces/filter-operators.interface';
 import type { Sort } from '../interfaces/sort.interface';
 import type { Collection } from '../collections/collection.interface';
-import type { FirestoreUser } from '$lib/interfaces/firestore-user.interface';
-import type { IdTokenResult } from 'firebase/auth';
+import type { CommonDataContext } from '$lib/interfaces/common-data-context.interface';
 
 export interface CommonDataTablePageData {
   name: string;
@@ -22,9 +21,9 @@ export interface CommonDataTablePageData {
   allowArrangeColumns?: boolean;
   showImport?: boolean;
   showExport?: boolean;
-  filterOptions?: (context: {user?: FirestoreUser, token?: IdTokenResult}) => Promise<any[]>;
-  defaultFilters?: (context: {user?: FirestoreUser, token?: IdTokenResult}) => Promise<any[]>;
-  onTableLoad?: (context: {user?: FirestoreUser, token?: IdTokenResult}) => Promise<any>;
+  filterOptions?: (context: CommonDataContext) => Promise<any[]>;
+  defaultFilters?: (context: CommonDataContext) => Promise<any[]>;
+  onTableLoad?: (context: CommonDataContext) => Promise<any>;
   initialSort?: Sort;
   collection?: string;
   module?: string;
