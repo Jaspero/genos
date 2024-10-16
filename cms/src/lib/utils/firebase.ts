@@ -20,8 +20,6 @@ export const token = writable<null | IdTokenResult>(undefined);
 
 onAuthStateChanged(auth, async (authUser) => {
   if (authUser) {
-    authUser.getIdTokenResult().then((result) => token.set(result));
-
     try {
       const userRef = doc(db, 'admins', authUser.uid);
       const docSnap = await getDoc(userRef);
@@ -35,6 +33,8 @@ onAuthStateChanged(auth, async (authUser) => {
     } catch (error) {
       console.error('Error getting document:', error);
     }
+
+    authUser.getIdTokenResult().then((result) => token.set(result));
   } else {
     user.set(null);
     token.set(null);
