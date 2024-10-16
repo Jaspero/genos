@@ -31,6 +31,8 @@
       showImport={data.showImport}
       showExport={data.showExport}
       importMethod={data.importMethod}
+      pageSize={data.pageSize}
+      pageSizes={data.pageSizes}
       {baseLink}
     >
       <slot slot="header">
