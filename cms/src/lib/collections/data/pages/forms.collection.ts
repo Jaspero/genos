@@ -1,6 +1,8 @@
-import { actionsPipe } from '../../../column-pipes/actions.pipe';
-import { indexPipe } from '../../../column-pipes/index.pipe';
+import { actionsPipe } from '$lib/column-pipes/actions.pipe';
+import { indexPipe } from '$lib/column-pipes/index.pipe';
 import { collections } from '../../collections';
+import { getOptions } from '$lib/utils/get-options';
+import { numberPipe } from '$lib/column-pipes/number.pipe';
 
 collections.addCollection('forms', {
   name: 'Forms',
@@ -20,6 +22,11 @@ collections.addCollection('forms', {
     {
       key: '/description',
       label: 'Description'
+    },
+    {
+      key: '/responses',
+      label: 'Responses',
+      pipes: [numberPipe]
     },
     {
       key: '/id',
@@ -58,6 +65,15 @@ collections.addCollection('forms', {
         label: 'Name',
         name: 'name',
         required: true
+      }
+    },
+    {
+      component: 'jp-multiselect',
+      field: '/notifications',
+      options: {
+        name: 'notifications',
+        label: 'Notifications',
+        options: await getOptions('notifications', 'name')
       }
     },
     {

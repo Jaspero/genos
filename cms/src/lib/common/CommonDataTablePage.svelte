@@ -21,6 +21,8 @@
       headers={data.headers}
       initialSort={data.initialSort}
       filterOptions={data.filterOptions}
+      defaultFilters={data.defaultFilters}
+      onTableLoad={data.onTableLoad}
       filterOperators={data.filterOperators}
       freezeFirstColumn={data.freezeFirstColumn}
       freezeLastColumn={data.freezeLastColumn}

@@ -1,6 +1,7 @@
 import type { DocumentReference } from 'firebase/firestore';
 import type { FilterOperators } from '../interfaces/filter-operators.interface';
 import type { Sort } from '../interfaces/sort.interface';
+import type { CommonDataContext } from '$lib/interfaces/common-data-context.interface';
 
 export interface TableHeader {
   key: string;
@@ -38,7 +39,9 @@ export interface Collection {
   showExport?: boolean;
   initialSort?: Sort;
   filterOperators?: FilterOperators;
-  filterOptions?: () => Promise<any[]>;
+  filterOptions?: (context: CommonDataContext) => Promise<any[]>;
+  defaultFilters?: (context: CommonDataContext) => Promise<any[]>;
+  onTableLoad?: (context: CommonDataContext) => Promise<any>;
   form?: (id: string, entryData?: any) => any;
   formOnValueChange?: (value: any, elements?: any) => void;
   singularName?: string;
