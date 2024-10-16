@@ -79,9 +79,13 @@
       }
     });
 
+    /**
+     * Check if there are any notifications for the user.
+     * Notifications are considered new if they were created after the user's last seen time or 1 year ago.
+     */
     let unsubscribeNotifications = onSnapshot(
       query(
-        collection(db, 'notifications'), where('userId', '==', $user?.id), where('createdOn', '>=', $user?.lastSeen), limit(1)
+        collection(db, 'notifications'), where('userId', '==', $user?.id), where('createdOn', '>=', $user?.lastSeen || (Date.now() - 3.154e+10)), limit(1)
       ), snapshot => {
         hasNotification = !snapshot.empty;
       }
