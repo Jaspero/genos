@@ -38,7 +38,7 @@
   }
 
   function openConfirmation() {
-    if ($activeRelease?.changes?.length) {
+    if (!publishDisabled && !publishLoading && $activeRelease?.changes?.length) {
       changes = $activeRelease.changes;
       showConfirmation = true;
     }
