@@ -5,7 +5,7 @@
   "scripts": {
     "copy:dev": "node run.cjs dev",
     "copy:prod": "node run.cjs prod",
-    "watch:shared": "postcss ../shared/styles/index.pcss --output static/css/shared.css --watch --poll -u postcss-import autoprefixer --no-map",
+    "watch:shared": "postcss ../shared/styles/index.pcss --output static/css/shared.css --watch --poll --no-map --config web-config",
     "start:dev": "concurrently \"npm run copy:dev && vite dev\" \"npm run watch:shared\"",
     "start:prod": "concurrently \"npm run copy:prod && vite dev\" \"npm run watch:shared\"",
     "build:dev": "npm run copy:dev && vite build",

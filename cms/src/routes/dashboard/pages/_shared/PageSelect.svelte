@@ -142,55 +142,30 @@
   .select {
     font-family: inherit;
     position: relative;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -moz-box-pack: justify;
-    -ms-flex-pack: justify;
     justify-content: space-between;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -moz-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
     text-align: left;
     width: 100%;
     height: 40px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
     padding: 0 0.75rem;
     gap: 0.75rem;
     background-color: transparent;
     border: 1px solid var(--border-primary);
-    -webkit-border-radius: 0.25rem;
-    -moz-border-radius: 0.25rem;
     border-radius: 0.25rem;
   }
 
   .select:focus {
     outline: none;
     border-color: var(--primary-color);
-    -webkit-box-shadow: inset 0 0 0 1px var(--primary-color);
-    -moz-box-shadow: inset 0 0 0 1px var(--primary-color);
     box-shadow: inset 0 0 0 1px var(--primary-color);
   }
 
   .select.toggled {
-    -webkit-border-bottom-left-radius: 0;
-    -moz-border-radius-bottomleft: 0;
     border-bottom-left-radius: 0;
-    -webkit-border-bottom-right-radius: 0;
-    -moz-border-radius-bottomright: 0;
     border-bottom-right-radius: 0;
     border-bottom-color: var(--primary-color);
-    -webkit-box-shadow: inset 0 -2px 1px -1px var(--primary-color);
-    -moz-box-shadow: inset 0 -2px 1px -1px var(--primary-color);
     box-shadow: inset 0 -2px 1px -1px var(--primary-color);
   }
 
@@ -198,104 +173,42 @@
     opacity: 0.5;
   }
 
-  .select-label {
-  }
-
-  input:required + .select .select-label::after {
-    content: ' *';
-  }
-
   .select-arrow {
     width: 1rem;
     height: 1rem;
     min-width: 1rem;
     min-height: 1rem;
-    -webkit-transition: transform 0.3s;
-    -o-transition: transform 0.3s;
-    -moz-transition: transform 0.3s;
-    -webkit-transition: -webkit-transform 0.3s;
     transition: -webkit-transform 0.3s;
-    -o-transition: -o-transform 0.3s;
-    -moz-transition:
-      transform 0.3s,
-      -moz-transform 0.3s;
     transition: transform 0.3s;
     transition:
-      transform 0.3s,
-      -webkit-transform 0.3s,
-      -moz-transform 0.3s,
-      -o-transform 0.3s;
+      transform 0.3s;
   }
 
   .select-arrow.rotate {
-    -webkit-transform: rotate(-180deg);
-    -moz-transform: rotate(-180deg);
-    -ms-transform: rotate(-180deg);
-    -o-transform: rotate(-180deg);
     transform: rotate(-180deg);
   }
 
   /* Menu */
   .menu {
     position: absolute;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -moz-box-orient: vertical;
-    -moz-box-direction: normal;
-    -ms-flex-direction: column;
     flex-direction: column;
     max-height: 300px;
     overflow-y: auto;
-    -webkit-border-bottom-left-radius: 0.25rem;
-    -moz-border-radius-bottomleft: 0.25rem;
     border-bottom-left-radius: 0.25rem;
-    -webkit-border-bottom-right-radius: 0.25rem;
-    -moz-border-radius-bottomright: 0.25rem;
     border-bottom-right-radius: 0.25rem;
-    -webkit-box-shadow: 0 6px 9px rgba(0, 0, 0, 0.16);
-    -moz-box-shadow: 0 6px 9px rgba(0, 0, 0, 0.16);
     box-shadow: 0 6px 9px rgba(0, 0, 0, 0.16);
     background-color: var(--background-primary);
   }
 
   .menu-button {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -moz-box-pack: justify;
-    -ms-flex-pack: justify;
     justify-content: space-between;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -moz-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
     gap: 0.75rem;
     padding: 0.75rem;
     text-align: left;
     outline: none;
-    -webkit-transition:
-      background-color 0.3s,
-      color 0.3s,
-      fill 0.3s;
-    -o-transition:
-      background-color 0.3s,
-      color 0.3s,
-      fill 0.3s;
-    -moz-transition:
-      background-color 0.3s,
-      color 0.3s,
-      fill 0.3s;
     transition:
       background-color 0.3s,
       color 0.3s,
@@ -323,9 +236,6 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-  }
-
-  .page-search span {
   }
 
   .page-search input {
