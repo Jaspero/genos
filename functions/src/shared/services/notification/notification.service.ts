@@ -1,5 +1,4 @@
 import { EmailService } from '../email/email.service';
-import { EMAIL_CONFIG } from '../email/email-config.const';
 import * as admin from 'firebase-admin';
 import { DateTime } from 'luxon';
 import { logger } from 'firebase-functions/v2';
@@ -48,12 +47,12 @@ export class NotificationService {
               throw new Error(`Notification with id ${id} is missing emails for channel with id ${channel}.`);
             }
 
-            await emailService.sendEmail({
+            await Promise.all(channelData.emails.map(email => emailService.sendEmail({
               subject: notificationData.name,
-              to: EMAIL_CONFIG.fromEmail,
-              bcc: channelData.emails,
+              to: email,
               html: content
-            });
+            })));
+
             break;
           case 'cms':
             if (!channelData.roles.length) {
