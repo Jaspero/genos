@@ -6,7 +6,8 @@ export const formResponsesCreated = onDocumentCreated(
   {
     document: `forms/{formId}/form-responses/{responseId}`,
     memory: '512MiB',
-    timeoutSeconds: 540
+    timeoutSeconds: 540,
+    secrets: ['SENDGRID_API_KEY']
   },
   async (event) => {
     const fs = admin.firestore();
@@ -14,7 +15,7 @@ export const formResponsesCreated = onDocumentCreated(
     const ref = fs.collection('forms').doc(formId);
     const formData = (
       await ref.get()
-    ).data() as { notifications: string[] };
+    ).data() as { notifications: string[], name: string };
 
     await ref.update({
       responses: admin.firestore.FieldValue.increment(1)
@@ -24,6 +25,6 @@ export const formResponsesCreated = onDocumentCreated(
       return;
     }
 
-    await NotificationService.sendNotifications(event.data?.data(), formData.notifications);
+    await NotificationService.sendNotifications({...event.data?.data(), formName: formData.name}, formData.notifications);
   }
 );

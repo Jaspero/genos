@@ -19,6 +19,7 @@ export { adminDeleted } from './triggers/admin-deleted';
 export { userCreated } from './triggers/user-created';
 export { productCreated } from './triggers/product-created';
 export { formResponsesCreated } from './triggers/form-responses-created';
+export { formResponsesDeleted } from './triggers/form-responses-deleted';
 
 // Pages cleanup
 export { pageDeleted } from './triggers/page-deleted';
