@@ -12,8 +12,9 @@
     const rect = bindingElement.getBoundingClientRect();
     const availableSpaceBelow = window.innerHeight - rect.bottom;
     const availableSpaceAbove = rect.top;
-    const availableSpaceRight = window.innerWidth - rect.right;
-    const dropdownWidth = 400;
+    const sidebarWidth = 255;
+    const availableSpaceLeft = rect.left - sidebarWidth;
+    const dropdownWidth = 200;
     const menuHeight = 300;
 
     let style = '';
@@ -26,10 +27,10 @@
       style += `max-height: ${availableSpaceAbove}px;`;
     }
 
-    if (availableSpaceRight < dropdownWidth) {
+    if (availableSpaceLeft > dropdownWidth) {
       style += `right: ${window.innerWidth - rect.left + 20}px;`;
     } else {
-      style += `left: ${rect.left}px;`;
+      style += `left: ${rect.right + 20}px;`;
     }
 
     menuStyle = style;
@@ -88,24 +89,10 @@
 
   .menu {
     position: absolute;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -moz-box-orient: vertical;
-    -moz-box-direction: normal;
-    -ms-flex-direction: column;
     flex-direction: column;
     overflow-y: auto;
-    -webkit-border-radius: 0.5rem;
-    -moz-border-radius: 0.5rem;
     border-radius: 0.5rem;
-    -webkit-box-shadow: 0 3px 12px 3px rgba(0, 0, 0, 0.16);
-    -moz-box-shadow: 0 3px 12px 3px rgba(0, 0, 0, 0.16);
     box-shadow: 0 3px 12px 3px rgba(0, 0, 0, 0.16);
     background-color: white;
   }
