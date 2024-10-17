@@ -28,12 +28,12 @@ for (const track of TRACKED_COLLECTIONS) {
           /**
            * New document
            */
-          await ref.update({changes: admin.firestore.FieldValue.arrayUnion(document(track, event.data?.after.id as string, newValue, WEBSITE_URL))});
+          await ref.update({changes: admin.firestore.FieldValue.arrayUnion(document(track, newValue, newValue, WEBSITE_URL))});
         } else if (!event.data?.after.exists) {
           /**
            * Deleted document
            */
-          await ref.update({changes: admin.firestore.FieldValue.arrayUnion(document(track, event.data?.before.id, null, WEBSITE_URL))});
+          await ref.update({changes: admin.firestore.FieldValue.arrayUnion(document(track, null, oldValue, WEBSITE_URL))});
         } else {
           /**
            * Updated document
@@ -57,7 +57,7 @@ for (const track of TRACKED_COLLECTIONS) {
 
           if (!_.isEmpty(allChanges)) {
             await ref.update({
-              changes: admin.firestore.FieldValue.arrayUnion(document(track, event.data?.after.id as string, allChanges, WEBSITE_URL))
+              changes: admin.firestore.FieldValue.arrayUnion(document(track, allChanges, newValue, WEBSITE_URL))
             });
           }
         }

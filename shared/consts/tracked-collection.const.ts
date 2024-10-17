@@ -45,11 +45,20 @@ export const COLLECTION_KEYS_MAP: CollectionKeysMap = TRACKED_COLLECTIONS.reduce
   return acc;
 }, {} as CollectionKeysMap);
 
+interface ItemConfig {
+  collection: string;
+  titleKey: string;
+  urlKey: string;
+  prefix: string;
+  keysToTrack: string[];
+  skipGenerateJsonFile?: boolean;
+}
+
 /**
  * Creates a document object that will be stored in the release history
  */
-export const document = (item: any, id: string, data: any, websiteUrl: string): { skipGenerateJsonFile: boolean; name: string; url: string; updatedAt: string; data: { [key: string]: any }, collection: string, id: string } => ({
-  data: item.keysToTrack.reduce((acc: any, key: string) => {
+export const document = (itemConfig: ItemConfig, changedDataset: any, item: any, websiteUrl: string): { skipGenerateJsonFile: boolean; name: string; url: string; updatedAt: string; data: { [key: string]: any }, collection: string, id: string } => ({
+  data: itemConfig.keysToTrack.reduce((acc: any, key: string) => {
     let shortKey = key[0];
     let count = 1;
 
@@ -58,16 +67,16 @@ export const document = (item: any, id: string, data: any, websiteUrl: string): 
       count++;
     }
 
-    if (data[key] !== undefined) {
-      acc[shortKey] = data[key];
+    if (changedDataset[key] !== undefined) {
+      acc[shortKey] = changedDataset[key];
     }
 
     return acc;
   }, {}),
-  collection: item.collection,
-  name: data[item.titleKey],
-  url: data[item.urlKey] ? websiteUrl + item.prefix + '/' + data[item.urlKey] : '',
+  collection: itemConfig.collection,
+  name: item[itemConfig.titleKey] || '',
+  url: item[itemConfig.urlKey] ? websiteUrl + itemConfig.prefix + '/' + item[itemConfig.urlKey] : '',
   updatedAt: DateTime.now().toUTC().toISO(),
-  skipGenerateJsonFile: !!item.skipGenerateJsonFile,
-  id
+  skipGenerateJsonFile: !!itemConfig.skipGenerateJsonFile,
+  id: item.id
 });

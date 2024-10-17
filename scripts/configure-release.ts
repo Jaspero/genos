@@ -188,12 +188,17 @@ async function exec() {
         if (!existsSync('./public/web/data/' + data.collection + '.json')) {
           const collectionData = await fs.collection(data.collection).get();
 
+          const dataset = {
+            ...doc.data(),
+            id: doc.id
+          };
+
           await writeFile(
             './public/web/data/' + data.collection + '.json',
             JSON.stringify(collectionData.docs.map((doc) => {
               const d = doc.data();
               d.id = doc.id;
-              return document(data, doc.id, doc.data(), CONFIG.websiteUrl);
+              return document(data, dataset, dataset, CONFIG.websiteUrl);
             }))
           );
         }
