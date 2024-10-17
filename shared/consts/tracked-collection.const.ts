@@ -75,7 +75,7 @@ export const document = (itemConfig: ItemConfig, changedDataset: any, item: any,
   }, {}),
   collection: itemConfig.collection,
   name: item[itemConfig.titleKey] || '',
-  url: item[itemConfig.urlKey] ? websiteUrl + itemConfig.prefix + '/' + item[itemConfig.urlKey] : '',
+  url: item[itemConfig.urlKey] ? websiteUrl + itemConfig.prefix + item[itemConfig.urlKey] : '',
   updatedAt: DateTime.now().toUTC().toISO(),
   skipGenerateJsonFile: !!itemConfig.skipGenerateJsonFile,
   id: item.id
