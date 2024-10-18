@@ -77,12 +77,7 @@
   };
 
   $: segments = urlSegments($page.url.pathname);
-  $: back =
-    '/' +
-    segments
-      .slice(0, segments.length - 1)
-      .map((it) => it.value)
-      .join('/');
+  $: back = $page.url.pathname.split('/').slice(0, -1).join('/');
 
   let saveLoading = false;
   let formModule: FormModule;

@@ -15,7 +15,6 @@
 
   export let id: string;
   export let collection: string = $page.params.collection;
-  export let prefix: string = $page.params.collection;
   export let actions = 'edit,duplicate,delete';
   export let index: string;
   export let duplicateSubCollections: string | null = null;
@@ -25,7 +24,7 @@
   let buttons: ColumnActionsConfigButton[];
 
   $: shownActions = actions.split(',');
-  $: link = prefix ? [prefix, id].join('/') : id;
+  $: link = [$page.url.pathname, id].join('/');
 
   async function deleteItem() {
     confirmation(async ({ confirmed }) => {

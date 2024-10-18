@@ -46,7 +46,7 @@
 
 <Grid>
   <GridCol span="12">
-    <DataTable id="form-responses" {col} {headers} {initialSort} baseLink="/" />
+    <DataTable id="form-responses" {col} {headers} {initialSort} />
   </GridCol>
 </Grid>
 
