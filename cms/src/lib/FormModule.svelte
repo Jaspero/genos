@@ -19,6 +19,7 @@
   import '@jaspero/web-components/dist/radio.wc';
   import '@jaspero/web-components/dist/radio.css';
   import '@jaspero/web-components/dist/file-upload.wc';
+  import '@jaspero/web-components/dist/file-upload.css';
   import '@jaspero/web-components/dist/file-list.wc';
   import '@jaspero/web-components/dist/toggle.wc';
   import '@jaspero/web-components/dist/chips.wc';
