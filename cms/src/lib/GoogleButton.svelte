@@ -43,9 +43,7 @@
     background-color: WHITE;
     background-image: none;
     border: 1px solid #747775;
-    -webkit-border-radius: 4px;
     border-radius: 4px;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     color: #1f1f1f;
     cursor: pointer;
@@ -58,10 +56,6 @@
     padding: 0 12px;
     position: relative;
     text-align: center;
-    -webkit-transition:
-      background-color 0.218s,
-      border-color 0.218s,
-      box-shadow 0.218s;
     transition:
       background-color 0.218s,
       border-color 0.218s,
@@ -81,12 +75,9 @@
   }
 
   .gsi-material-button .gsi-material-button-content-wrapper {
-    -webkit-align-items: center;
     align-items: center;
     display: flex;
-    -webkit-flex-direction: row;
     flex-direction: row;
-    -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     height: 100%;
     justify-content: space-between;
@@ -95,7 +86,6 @@
   }
 
   .gsi-material-button .gsi-material-button-contents {
-    -webkit-flex-grow: 1;
     flex-grow: 1;
     font-family: 'Roboto', arial, sans-serif;
     font-weight: 500;
@@ -105,7 +95,6 @@
   }
 
   .gsi-material-button .gsi-material-button-state {
-    -webkit-transition: opacity 0.218s;
     transition: opacity 0.218s;
     bottom: 0;
     left: 0;
@@ -136,9 +125,6 @@
   }
 
   .gsi-material-button:not(:disabled):hover {
-    -webkit-box-shadow:
-      0 1px 2px 0 rgba(60, 64, 67, 0.3),
-      0 1px 3px 1px rgba(60, 64, 67, 0.15);
     box-shadow:
       0 1px 2px 0 rgba(60, 64, 67, 0.3),
       0 1px 3px 1px rgba(60, 64, 67, 0.15);

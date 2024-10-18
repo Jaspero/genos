@@ -178,8 +178,6 @@
     height: 1rem;
     min-width: 1rem;
     min-height: 1rem;
-    transition: -webkit-transform 0.3s;
-    transition: transform 0.3s;
     transition:
       transform 0.3s;
   }
@@ -200,7 +198,6 @@
     box-shadow: 0 6px 9px rgba(0, 0, 0, 0.16);
     background-color: var(--background-primary);
   }
-
   .menu-button {
     display: flex;
     justify-content: space-between;
@@ -214,16 +211,13 @@
       color 0.3s,
       fill 0.3s;
   }
-
   .menu-button:disabled {
     opacity: 0.33;
   }
-
   .menu-button:not(:disabled):hover,
   .menu-button:focus {
     background-color: var(--background-secondary);
   }
-
   .menu-header {
     position: sticky;
     top: 0;
@@ -231,19 +225,16 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     background-color: white;
   }
-
   .page-search {
     display: flex;
     align-items: center;
     gap: 0.75rem;
   }
-
   .page-search input {
     flex: 1 1 0;
     padding: 0.25rem 0.5rem;
     border: 1px solid var(--border-secondary);
   }
-
   .no-results {
     padding: 0.5rem;
   }
