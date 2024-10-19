@@ -3,7 +3,7 @@ import * as admin from 'firebase-admin';
 
 export const formResponsesDeleted = onDocumentDeleted(
   {
-    document: `forms/{formId}/form-responses/{responseId}`
+    document: 'forms/{formId}/form-responses/{responseId}'
   },
   async (event) => {
     const fs = admin.firestore();

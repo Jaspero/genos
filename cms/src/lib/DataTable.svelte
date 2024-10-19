@@ -55,13 +55,12 @@
 
   async function get(sort: null | Sort, size: number) {
     if (!defaultFilterItems && defaultFilters) {
-      defaultFilterItems = (await defaultFilters!({user: $user, token: $token})).map(filter => where(filter.key, filter.operator, filter.value));
+      defaultFilterItems = (await defaultFilters!({ user: $user, token: $token })).map((filter) =>
+        where(filter.key, filter.operator, filter.value)
+      );
     }
 
-    const queries: any[] = [
-      collection(db, col),
-      ...(defaultFilterItems || [])
-    ];
+    const queries: any[] = [collection(db, col), ...(defaultFilterItems || [])];
 
     if (sort) {
       queries.push(orderBy(sort.key.replace('/', ''), sort.direction));
@@ -99,10 +98,7 @@
   }
 
   async function loadMore(sort: null | Sort, size: number) {
-    const queries: any[] = [
-      collection(db, col),
-      ...(defaultFilterItems || [])
-    ];
+    const queries: any[] = [collection(db, col), ...(defaultFilterItems || [])];
 
     if (sort) {
       queries.push(orderBy(sort.key.replace('/', ''), sort.direction));
@@ -147,7 +143,7 @@
     filtersLoading = true;
 
     if (!filterItems) {
-      filterItems = await filterOptions!({user: $user, token: $token});
+      filterItems = await filterOptions!({ user: $user, token: $token });
     }
 
     filterDialogOpen = true;
@@ -198,10 +194,7 @@
   }
 
   async function exportData() {
-    const queries: any[] = [
-      collection(db, col),
-      ...(defaultFilterItems || [])
-    ];
+    const queries: any[] = [collection(db, col), ...(defaultFilterItems || [])];
 
     if (Object.keys(filtersValue).length) {
       queries.push(
@@ -239,7 +232,7 @@
       }
 
       if (onTableLoad) {
-        await onTableLoad!({user: $user, token: $token});
+        await onTableLoad!({ user: $user, token: $token });
       }
 
       lastPage = url.pathname;

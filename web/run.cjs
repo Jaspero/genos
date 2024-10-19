@@ -36,7 +36,7 @@ async function exec() {
 
   const constFiles = await fs.promises.readdir('../shared/consts');
   toExec.push(
-    ...constFiles.map(file => {
+    ...constFiles.map((file) => {
       return fs.promises.copyFile('../shared/consts/' + file, './src/lib/consts/' + file);
     })
   );

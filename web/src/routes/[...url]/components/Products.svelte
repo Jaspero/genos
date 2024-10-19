@@ -45,9 +45,15 @@
 
   onMount(async () => {
     [tags, categories, products] = await Promise.all([
-      fetch(CONFIG.websiteUrl + '/data/tags.json').then(response => response.json()).catch(() => []),
-      fetch(CONFIG.websiteUrl + '/data/categories.json').then(response => response.json()).catch(() => []),
-      fetch(CONFIG.websiteUrl + '/data/products.json').then(response => response.json()).catch(() => [])
+      fetch(CONFIG.websiteUrl + '/data/tags.json')
+        .then((response) => response.json())
+        .catch(() => []),
+      fetch(CONFIG.websiteUrl + '/data/categories.json')
+        .then((response) => response.json())
+        .catch(() => []),
+      fetch(CONFIG.websiteUrl + '/data/products.json')
+        .then((response) => response.json())
+        .catch(() => [])
     ]);
   });
 
@@ -66,7 +72,9 @@
        * Check if the product has at least one of the selected tags
        */
       if (valid && data.initialTags) {
-        valid = product[COLLECTION_KEYS_MAP.products.tags].some((tag: string) => data.initialTags.includes(tag));
+        valid = product[COLLECTION_KEYS_MAP.products.tags].some((tag: string) =>
+          data.initialTags.includes(tag)
+        );
       }
 
       /**
@@ -87,7 +95,10 @@
        * Search
        */
       if (valid && data.search) {
-        valid = product[COLLECTION_KEYS_MAP.products.name].toLowerCase().split(' ').includes(data.search.toLowerCase());
+        valid = product[COLLECTION_KEYS_MAP.products.name]
+          .toLowerCase()
+          .split(' ')
+          .includes(data.search.toLowerCase());
       }
 
       // Only push if valid and we haven't exceeded the limit and limit is set
@@ -98,9 +109,15 @@
         if (data.direction && data.property) {
           acc.sort((a, b) => {
             if (data.direction === 'asc') {
-              return a[COLLECTION_KEYS_MAP.products[property]] > b[COLLECTION_KEYS_MAP.products[property]] ? 1 : -1;
+              return a[COLLECTION_KEYS_MAP.products[property]] >
+                b[COLLECTION_KEYS_MAP.products[property]]
+                ? 1
+                : -1;
             } else {
-              return a[COLLECTION_KEYS_MAP.products[property]] < b[COLLECTION_KEYS_MAP.products[property]] ? 1 : -1;
+              return a[COLLECTION_KEYS_MAP.products[property]] <
+                b[COLLECTION_KEYS_MAP.products[property]]
+                ? 1
+                : -1;
             }
           });
         }
@@ -117,7 +134,16 @@
     }, 300);
   }
 
-  $: applyFilters({ initialCategories, initialTags, initialMinPrice, initialMaxPrice, search, limit, direction, property });
+  $: applyFilters({
+    initialCategories,
+    initialTags,
+    initialMinPrice,
+    initialMaxPrice,
+    search,
+    limit,
+    direction,
+    property
+  });
 </script>
 
 <div class="products">
@@ -138,7 +164,9 @@
       <h4>Categories</h4>
       <select bind:value={initialCategories}>
         {#each categories as category}
-          <option value={category[COLLECTION_KEYS_MAP.categories.id]}>{category[COLLECTION_KEYS_MAP.categories.name]}</option>
+          <option value={category[COLLECTION_KEYS_MAP.categories.id]}
+            >{category[COLLECTION_KEYS_MAP.categories.name]}</option
+          >
         {/each}
       </select>
     {/if}
@@ -147,7 +175,9 @@
       <h4>Tags</h4>
       <select bind:value={initialTags}>
         {#each tags as tag}
-          <option value={tag[COLLECTION_KEYS_MAP.tags.id]}>{tag[COLLECTION_KEYS_MAP.tags.name]}</option>
+          <option value={tag[COLLECTION_KEYS_MAP.tags.id]}
+            >{tag[COLLECTION_KEYS_MAP.tags.name]}</option
+          >
         {/each}
       </select>
     {/if}
@@ -158,11 +188,7 @@
     {/if}
 
     {#if showSearch}
-      <input
-        type="text"
-        placeholder="Search"
-        on:input={e => handleSearchInput(e)}
-      />
+      <input type="text" placeholder="Search" on:input={(e) => handleSearchInput(e)} />
     {/if}
   </div>
 
@@ -172,7 +198,10 @@
 
   {#each products as product}
     <a href={`/product/${product[COLLECTION_KEYS_MAP.products.id]}`} class="product">
-      <img src={product[COLLECTION_KEYS_MAP.products.image]} alt={product[COLLECTION_KEYS_MAP.products.name]} />
+      <img
+        src={product[COLLECTION_KEYS_MAP.products.image]}
+        alt={product[COLLECTION_KEYS_MAP.products.name]}
+      />
       <h4>{product[COLLECTION_KEYS_MAP.products.name]}</h4>
       <p>{product[COLLECTION_KEYS_MAP.products.description]}</p>
     </a>

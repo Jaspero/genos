@@ -178,8 +178,7 @@
     height: 1rem;
     min-width: 1rem;
     min-height: 1rem;
-    transition:
-      transform 0.3s;
+    transition: transform 0.3s;
   }
 
   .select-arrow.rotate {

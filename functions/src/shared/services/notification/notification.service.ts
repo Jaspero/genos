@@ -9,49 +9,58 @@ export class NotificationService {
     const fs = admin.firestore();
     const emailService = new EmailService();
 
-    const results = await Promise.allSettled(notifications.map(async id => {
-      const notificationRef =  await fs.collection('notifications').doc(id).get();
+    const results = await Promise.allSettled(
+      notifications.map(async (id) => {
+        const notificationRef = await fs.collection('notifications').doc(id).get();
 
-      if (!notificationRef.exists) {
-        throw new Error(`Notification with id ${id} not found`);
-      }
-
-      const notificationData = notificationRef.data() as {
-        channels: string[];
-        content: string;
-        name: string;
-      };
-
-      if (!notificationData.channels?.length) {
-        return;
-      }
-
-      for (const channel of notificationData.channels) {
-        const channelRef = await fs.collection('notification-channels').doc(channel).get();
-
-        if (!channelRef.exists) {
-          throw new Error(`Notification with id ${id} is missing the channel with id ${channel}.`);
+        if (!notificationRef.exists) {
+          throw new Error(`Notification with id ${id} not found`);
         }
 
-        const channelData = channelRef.data() as {
-          emails: string[];
-          roles: string[];
-          type: string;
+        const notificationData = notificationRef.data() as {
+          channels: string[];
+          content: string;
+          name: string;
         };
 
-        const content = compile(notificationData.content)(context);
+        if (!notificationData.channels?.length) {
+          return;
+        }
 
-        switch (channelData.type) {
+        for (const channel of notificationData.channels) {
+          const channelRef = await fs.collection('notification-channels').doc(channel).get();
+
+          if (!channelRef.exists) {
+            throw new Error(
+              `Notification with id ${id} is missing the channel with id ${channel}.`
+            );
+          }
+
+          const channelData = channelRef.data() as {
+            emails: string[];
+            roles: string[];
+            type: string;
+          };
+
+          const content = compile(notificationData.content)(context);
+
+          switch (channelData.type) {
           case 'email':
             if (!channelData.emails.length) {
-              throw new Error(`Notification with id ${id} is missing emails for channel with id ${channel}.`);
+              throw new Error(
+                `Notification with id ${id} is missing emails for channel with id ${channel}.`
+              );
             }
 
-            await Promise.all(channelData.emails.map(email => emailService.sendEmail({
-              subject: notificationData.name,
-              to: email,
-              html: content
-            })));
+            await Promise.all(
+              channelData.emails.map((email) =>
+                emailService.sendEmail({
+                  subject: notificationData.name,
+                  to: email,
+                  html: content
+                })
+              )
+            );
 
             break;
           case 'cms':
@@ -60,12 +69,12 @@ export class NotificationService {
             }
 
             const users = await Promise.all(
-              channelData.roles.map(role => fs.collection(role + 's').get())
+              channelData.roles.map((role) => fs.collection(role + 's').get())
             ).then((querySnapshots) => {
               return querySnapshots.reduce((acc: string[], querySnapshot) => {
                 acc.push(...querySnapshot.docs.map((doc) => doc.id));
                 return acc;
-              }, [])
+              }, []);
             });
 
             if (!users.length) {
@@ -74,7 +83,7 @@ export class NotificationService {
 
             const batch = fs.batch();
 
-            users.forEach(userId => {
+            users.forEach((userId) => {
               batch.set(fs.collection('cms-notifications').doc(), {
                 name: notificationData.name,
                 content,
@@ -87,12 +96,15 @@ export class NotificationService {
 
             break;
           default:
-            throw new Error(`Notification with id ${id} has an invalid channel type: ${channelData.type}.`);
+            throw new Error(
+              `Notification with id ${id} has an invalid channel type: ${channelData.type}.`
+            );
+          }
         }
-      }
-    }));
+      })
+    );
 
-    const errors = results.filter(result => result.status === 'rejected');
+    const errors = results.filter((result) => result.status === 'rejected');
 
     if (errors.length) {
       logger.error('Error sending notifications', errors);

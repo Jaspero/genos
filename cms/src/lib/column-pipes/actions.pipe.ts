@@ -1,4 +1,6 @@
-export function actionsPipe(config?: (id: string, rowData: any, index: number) => ColumnActionsConfig) {
+export function actionsPipe(
+  config?: (id: string, rowData: any, index: number) => ColumnActionsConfig
+) {
   return (id: string, rowData: any, index: number) => {
     const internalConfig: ColumnActionsConfig = {
       links: [],

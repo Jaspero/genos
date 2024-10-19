@@ -4,7 +4,7 @@
 import admin from 'firebase-admin';
 import { document, TRACKED_COLLECTIONS } from '../shared/consts/tracked-collection.const';
 import { writeFile, readFile } from 'fs/promises';
-import {existsSync, mkdirSync} from 'fs';
+import { existsSync, mkdirSync } from 'fs';
 // @ts-ignore
 import credential from '../web/key.json';
 import { CONFIG } from '../web/src/lib/consts/config.const';
@@ -36,7 +36,7 @@ async function exec() {
 
           if (type === 'partial') {
             const changesDoc = await fs.doc(`releases/${version}`).get();
-            const changes = (changesDoc?.data()?.changes || []);
+            const changes = changesDoc?.data()?.changes || [];
 
             if (changes.length) {
               await writeFile(
@@ -72,10 +72,7 @@ async function exec() {
       /**
        * @type {{changes: {data: any; collection: string; id: string}[]}}
        */
-      const releaseData = (
-        await fs.doc(`releases/${release.toString()}`).get()
-      )
-        .data() as any;
+      const releaseData = (await fs.doc(`releases/${release.toString()}`).get()).data() as any;
 
       /**
        * @type {{[collection: string]: {[id: string]: any}}}
@@ -102,9 +99,9 @@ async function exec() {
        * @type {Promise<{<{[key: string]: any}[]>[]>}
        */
       const collectionsJsonData = await Promise.all(
-        keys.map(collection =>
+        keys.map((collection) =>
           readFile('./public/web/' + collection + '.json')
-            .then(data => JSON.parse(data.toString()))
+            .then((data) => JSON.parse(data.toString()))
             .catch(() => [])
         )
       );
@@ -195,11 +192,13 @@ async function exec() {
 
           await writeFile(
             './public/web/data/' + data.collection + '.json',
-            JSON.stringify(collectionData.docs.map((doc) => {
-              const d = doc.data();
-              d.id = doc.id;
-              return document(data, dataset, dataset, CONFIG.websiteUrl);
-            }))
+            JSON.stringify(
+              collectionData.docs.map((doc) => {
+                const d = doc.data();
+                d.id = doc.id;
+                return document(data, dataset, dataset, CONFIG.websiteUrl);
+              })
+            )
           );
         }
       }

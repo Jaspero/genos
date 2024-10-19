@@ -19,31 +19,41 @@ export const TRACKED_COLLECTIONS: TrackedCollection[] = [
   // },
   // { collection: 'tags', titleKey: 'name', urlKey: 'url', prefix: '/products', keysToTrack: ['id', 'name'] },
   // { collection: 'categories', titleKey: 'name', urlKey: 'url', prefix: '/products', keysToTrack: ['id', 'name'] },
-  { collection: 'pages', titleKey: 'title', urlKey: 'url', prefix: '/pages', keysToTrack: ['id', 'title', 'lastUpdatedOn'], skipGenerateJsonFile: true }
+  {
+    collection: 'pages',
+    titleKey: 'title',
+    urlKey: 'url',
+    prefix: '/pages',
+    keysToTrack: ['id', 'title', 'lastUpdatedOn'],
+    skipGenerateJsonFile: true
+  }
 ];
 
-type CollectionNames = typeof TRACKED_COLLECTIONS[number]['collection'];
+type CollectionNames = (typeof TRACKED_COLLECTIONS)[number]['collection'];
 
 type CollectionKeysMap = {
   [K in CollectionNames]: { [key: string]: string };
 };
 
-export const COLLECTION_KEYS_MAP: CollectionKeysMap = TRACKED_COLLECTIONS.reduce((acc: CollectionKeysMap, { keysToTrack, collection }) => {
-  acc[collection] = keysToTrack.reduce((sAcc: { [key: string]: string }, key: string) => {
-    let shortKey = key[0];
-    let count = 1;
+export const COLLECTION_KEYS_MAP: CollectionKeysMap = TRACKED_COLLECTIONS.reduce(
+  (acc: CollectionKeysMap, { keysToTrack, collection }) => {
+    acc[collection] = keysToTrack.reduce((sAcc: { [key: string]: string }, key: string) => {
+      let shortKey = key[0];
+      let count = 1;
 
-    while (sAcc.hasOwnProperty(shortKey)) {
-      shortKey = key[0] + count;
-      count++;
-    }
+      while (sAcc.hasOwnProperty(shortKey)) {
+        shortKey = key[0] + count;
+        count++;
+      }
 
-    sAcc[key] = shortKey;
-    return sAcc;
-  }, {});
+      sAcc[key] = shortKey;
+      return sAcc;
+    }, {});
 
-  return acc;
-}, {} as CollectionKeysMap);
+    return acc;
+  },
+  {} as CollectionKeysMap
+);
 
 interface ItemConfig {
   collection: string;
@@ -57,7 +67,20 @@ interface ItemConfig {
 /**
  * Creates a document object that will be stored in the release history
  */
-export const document = (itemConfig: ItemConfig, changedDataset: any, item: any, websiteUrl: string): { skipGenerateJsonFile: boolean; name: string; url: string; updatedAt: string; data: { [key: string]: any }, collection: string, id: string } => ({
+export const document = (
+  itemConfig: ItemConfig,
+  changedDataset: any,
+  item: any,
+  websiteUrl: string
+): {
+  skipGenerateJsonFile: boolean;
+  name: string;
+  url: string;
+  updatedAt: string;
+  data: { [key: string]: any };
+  collection: string;
+  id: string;
+} => ({
   data: itemConfig.keysToTrack.reduce((acc: any, key: string) => {
     let shortKey = key[0];
     let count = 1;

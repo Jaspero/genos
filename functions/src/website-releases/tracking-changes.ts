@@ -11,12 +11,16 @@ for (const track of TRACKED_COLLECTIONS) {
   functions[track.collection] = onDocumentWritten(
     {
       region: REGION,
-      document: `${track.collection}/{release}`,
+      document: `${track.collection}/{release}`
     },
     async (event) => {
       const fs = admin.firestore();
-      const newValue = event.data?.after.exists ? { ...event.data.after.data(), id: event.data.after.id} : null;
-      const oldValue = event.data?.before.exists ? { ...event.data.before.data(), id: event.data.before.id} : null;
+      const newValue = event.data?.after.exists
+        ? { ...event.data.after.data(), id: event.data.after.id }
+        : null;
+      const oldValue = event.data?.before.exists
+        ? { ...event.data.before.data(), id: event.data.before.id }
+        : null;
 
       const statusDoc = await fs.collection('releases').doc('status').get();
       const status = statusDoc.exists ? (statusDoc.data() as { release: string }) : null;
@@ -28,12 +32,20 @@ for (const track of TRACKED_COLLECTIONS) {
           /**
            * New document
            */
-          await ref.update({changes: admin.firestore.FieldValue.arrayUnion(document(track, newValue, newValue, WEBSITE_URL))});
+          await ref.update({
+            changes: admin.firestore.FieldValue.arrayUnion(
+              document(track, newValue, newValue, WEBSITE_URL)
+            )
+          });
         } else if (!event.data?.after.exists) {
           /**
            * Deleted document
            */
-          await ref.update({changes: admin.firestore.FieldValue.arrayUnion(document(track, null, oldValue, WEBSITE_URL))});
+          await ref.update({
+            changes: admin.firestore.FieldValue.arrayUnion(
+              document(track, null, oldValue, WEBSITE_URL)
+            )
+          });
         } else {
           /**
            * Updated document
@@ -57,7 +69,9 @@ for (const track of TRACKED_COLLECTIONS) {
 
           if (!_.isEmpty(allChanges)) {
             await ref.update({
-              changes: admin.firestore.FieldValue.arrayUnion(document(track, allChanges, newValue, WEBSITE_URL))
+              changes: admin.firestore.FieldValue.arrayUnion(
+                document(track, allChanges, newValue, WEBSITE_URL)
+              )
             });
           }
         }

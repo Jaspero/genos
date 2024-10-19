@@ -17,10 +17,13 @@ export async function getMultipleOptions(
 
   return docs
     .map((doc) => {
-      const fields = keys.reduce((acc, key) => {
-        acc[key] = doc.data()[key];
-        return acc;
-      }, {} as Record<string, any>);
+      const fields = keys.reduce(
+        (acc, key) => {
+          acc[key] = doc.data()[key];
+          return acc;
+        },
+        {} as Record<string, any>
+      );
 
       const formattedLabel = typeof label === 'function' ? label(fields) : fields[label];
 

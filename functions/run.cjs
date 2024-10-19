@@ -6,7 +6,7 @@ async function exec() {
   try {
     const files = await fs.readdir('../shared/consts');
     toExec.push(
-      ...files.map(file => {
+      ...files.map((file) => {
         return fs.copyFile('../shared/consts/' + file, './src/shared/consts/' + file);
       })
     );

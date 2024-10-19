@@ -35,15 +35,21 @@ async function exec() {
   const toExec = [
     writeFile(`./src/lib/utils/env-config.ts`, envConfig),
     readFile(sharedCss)
-      .then((file) => postcss(atImport(), autoprefixer(), tailwindcss({
-        config: '../web/tailwind.config.js'
-      })).process(file, { from: sharedCss }))
+      .then((file) =>
+        postcss(
+          atImport(),
+          autoprefixer(),
+          tailwindcss({
+            config: '../web/tailwind.config.js'
+          })
+        ).process(file, { from: sharedCss })
+      )
       .then(({ css }) => writeFile(`./static/css/shared.css`, css))
   ];
 
   const constFiles = await fs.promises.readdir('../shared/consts');
   toExec.push(
-    ...constFiles.map(file => {
+    ...constFiles.map((file) => {
       return fs.promises.copyFile('../shared/consts/' + file, './src/lib/consts/' + file);
     })
   );

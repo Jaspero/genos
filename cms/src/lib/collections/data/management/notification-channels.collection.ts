@@ -34,9 +34,7 @@ collections.addCollection('notification-channels', {
     {
       key: '/id',
       label: '',
-      pipes: [
-        actionsPipe()
-      ]
+      pipes: [actionsPipe()]
     }
   ],
   form: async () => [
@@ -69,7 +67,7 @@ collections.addCollection('notification-channels', {
       },
       hidden: {
         deps: ['/type'],
-        check: (value: {type: string}) => value.type === 'email'
+        check: (value: { type: string }) => value.type === 'email'
       }
     },
     {
@@ -78,11 +76,11 @@ collections.addCollection('notification-channels', {
       options: {
         label: 'Roles',
         name: 'roles',
-        options: ALLOWED_ROLES.map(role => ({ label: capitalize(role), value: role }))
+        options: ALLOWED_ROLES.map((role) => ({ label: capitalize(role), value: role }))
       },
       hidden: {
         deps: ['/type'],
-        check: (value: {type: string}) => value.type === 'cms'
+        check: (value: { type: string }) => value.type === 'cms'
       }
     }
   ]

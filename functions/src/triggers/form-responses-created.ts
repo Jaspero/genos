@@ -4,7 +4,7 @@ import { NotificationService } from '../shared/services/notification/notificatio
 
 export const formResponsesCreated = onDocumentCreated(
   {
-    document: `forms/{formId}/form-responses/{responseId}`,
+    document: 'forms/{formId}/form-responses/{responseId}',
     memory: '512MiB',
     timeoutSeconds: 540,
     secrets: ['SENDGRID_API_KEY']
@@ -13,9 +13,7 @@ export const formResponsesCreated = onDocumentCreated(
     const fs = admin.firestore();
     const { formId } = event.params;
     const ref = fs.collection('forms').doc(formId);
-    const formData = (
-      await ref.get()
-    ).data() as { notifications: string[], name: string };
+    const formData = (await ref.get()).data() as { notifications: string[]; name: string };
 
     await ref.update({
       responses: admin.firestore.FieldValue.increment(1)
@@ -25,6 +23,9 @@ export const formResponsesCreated = onDocumentCreated(
       return;
     }
 
-    await NotificationService.sendNotifications({...event.data?.data(), formName: formData.name}, formData.notifications);
+    await NotificationService.sendNotifications(
+      { ...event.data?.data(), formName: formData.name },
+      formData.notifications
+    );
   }
 );

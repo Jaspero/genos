@@ -5,6 +5,7 @@ import { random } from '@jaspero/utils';
 import { getFirestore } from 'firebase-admin/firestore';
 import { REGION } from '../shared/consts/region.const';
 import { DateTime } from 'luxon';
+import { logger } from 'firebase-functions/v2';
 
 interface RequestData {
   email: string;
@@ -43,7 +44,9 @@ export const createAdmin = onCall<RequestData>(
 
     try {
       user = await auth.getUserByEmail(email);
-    } catch {}
+    } catch (e: any) {
+      logger.info('Fetching user failed. Creating new one instead.', e);
+    }
 
     if (!user) {
       try {
@@ -55,12 +58,15 @@ export const createAdmin = onCall<RequestData>(
 
     await Promise.all([
       auth.setCustomUserClaims(user.uid, { role }),
-      firestore.collection(role + 's').doc(user.uid).set({
-        createdOn: DateTime.now().toUTC().toISO(),
-        email,
-        name,
-        role
-      })
+      firestore
+        .collection(role + 's')
+        .doc(user.uid)
+        .set({
+          createdOn: DateTime.now().toUTC().toISO(),
+          email,
+          name,
+          role
+        })
     ]);
   }
 );

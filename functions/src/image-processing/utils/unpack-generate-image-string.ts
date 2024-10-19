@@ -6,34 +6,34 @@ export function unpackGenerateImageString(data: string) {
       const [key, value] = cur.split(':');
 
       switch (key) {
-        case 'filePrefix':
-        case 'folder': {
-          acc[key] = value;
-          break;
-        }
-        case 'height':
-        case 'width': {
-          let parsed = 0;
+      case 'filePrefix':
+      case 'folder': {
+        acc[key] = value;
+        break;
+      }
+      case 'height':
+      case 'width': {
+        let parsed = 0;
 
-          try {
-            parsed = parseInt(value, 10);
-          } catch (e) {
-            logger.info(`Failed to parse ${key}`, e);
-          }
+        try {
+          parsed = parseInt(value, 10);
+        } catch (e) {
+          logger.info(`Failed to parse ${key}`, e);
+        }
 
-          if (parsed) {
-            acc[key] = parsed;
-          }
+        if (parsed) {
+          acc[key] = parsed;
+        }
 
-          break;
-        }
-        case 'webpVersion': {
-          acc[key] = value === 'true';
-          break;
-        }
-        default: {
-          break;
-        }
+        break;
+      }
+      case 'webpVersion': {
+        acc[key] = value === 'true';
+        break;
+      }
+      default: {
+        break;
+      }
       }
 
       return acc;

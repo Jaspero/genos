@@ -49,7 +49,10 @@ export default function (options) {
       }
 
       for (const page of builder.prerendered.pages) {
-        const htmlPath = join(pages, ...page.slice(1).map(p => typeof p === 'string' ? p : p.file));
+        const htmlPath = join(
+          pages,
+          ...page.slice(1).map((p) => (typeof p === 'string' ? p : p.file))
+        );
 
         const buffer = await readFile(htmlPath);
         const minified = minifyHtml.minify(buffer, {

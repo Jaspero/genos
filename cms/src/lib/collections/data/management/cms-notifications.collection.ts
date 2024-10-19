@@ -24,7 +24,7 @@ collections.addCollection('cms-notifications', {
     }
   ],
   add: false,
-  defaultFilters: async ({user}) => [
+  defaultFilters: async ({ user }) => [
     {
       key: 'userId',
       operator: '==',
@@ -32,10 +32,8 @@ collections.addCollection('cms-notifications', {
     }
   ],
   onTableLoad: async (data) => {
-    await updateDoc(
-      doc(db, data.token?.claims.role + 's', data.user?.id as string), {
-        lastSeen: DateTime.now().toUTC().toISO()
-      }
-    );
+    await updateDoc(doc(db, data.token?.claims.role + 's', data.user?.id as string), {
+      lastSeen: DateTime.now().toUTC().toISO()
+    });
   }
 });

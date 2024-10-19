@@ -21,7 +21,10 @@
   /**
    * Publish is disabled if last published time is less than the publish start time and the publish start time is less than 5 minutes ago.
    */
-  $: publishDisabled = !!(publishStart && (!$lastPublishedOn || $lastPublishedOn < publishStart) || ($publishStartOn && (Date.now() - $publishStartOn) <= (5 * 60 * 1000)));
+  $: publishDisabled = !!(
+    (publishStart && (!$lastPublishedOn || $lastPublishedOn < publishStart)) ||
+    ($publishStartOn && Date.now() - $publishStartOn <= 5 * 60 * 1000)
+  );
 
   async function publish() {
     publishLoading = true;
@@ -63,14 +66,16 @@
 
         const unsubscribeRelease = onSnapshot(releaseDoc, (releaseSnapshot) => {
           const releaseData = releaseSnapshot.data() || {};
-          const changesData = Object.entries(releaseData.changes || {}).map(([key, value]: [string, any]) => ({
-            collection: value.collection,
-            name: value.name,
-            url: value.url,
-            data: value.data,
-            id: key,
-            updatedAt: value.updatedAt
-          }));
+          const changesData = Object.entries(releaseData.changes || {}).map(
+            ([key, value]: [string, any]) => ({
+              collection: value.collection,
+              name: value.name,
+              url: value.url,
+              data: value.data,
+              id: key,
+              updatedAt: value.updatedAt
+            })
+          );
 
           activeRelease.set({ changes: changesData, release });
         });
@@ -85,8 +90,12 @@
      */
     let unsubscribeNotifications = onSnapshot(
       query(
-        collection(db, 'notifications'), where('userId', '==', $user?.id), where('createdOn', '>=', $user?.lastSeen || (Date.now() - 3.154e+10)), limit(1)
-      ), snapshot => {
+        collection(db, 'notifications'),
+        where('userId', '==', $user?.id),
+        where('createdOn', '>=', $user?.lastSeen || Date.now() - 3.154e10),
+        limit(1)
+      ),
+      (snapshot) => {
         hasNotification = !snapshot.empty;
       }
     );
@@ -94,7 +103,7 @@
     return () => {
       unsubscribeStatus();
       unsubscribeNotifications();
-    }
+    };
   });
 </script>
 
@@ -118,15 +127,17 @@
       on:click_outside={() => (dropdown = false)}
       transition:slide
     >
-      <a
+      <button
         class="px-4 py-3 text-sm hover:bg-gray-100 transition-colors cursor-pointer"
         on:click={openConfirmation}
         class:disabled={publishDisabled || publishLoading || !$activeRelease?.changes?.length}
-      >Release Website</a>
+        >Release Website</button
+      >
       <a
         class="px-4 py-3 text-sm hover:bg-gray-100 transition-colors cursor-pointer"
         href="/dashboard/management/releases"
-        on:click={() => (dropdown = false)}>Release History</a>
+        on:click={() => (dropdown = false)}>Release History</a
+      >
       <a
         class="relative px-4 py-3 text-sm hover:bg-gray-100 transition-colors cursor-pointer"
         href="/dashboard/management/cms-notifications"
@@ -146,45 +157,56 @@
         <h2 class="text-xl font-semibold mb-4">Confirm Release</h2>
         <table class="w-full text-left border-collapse">
           <thead class="bg-gray-100">
-          <tr>
-            <th class="p-2 border">Collection</th>
-            <th class="p-2 border">Name</th>
-            <th class="p-2 border">Data</th>
-            <th class="p-2 border">Updated At</th>
-          </tr>
+            <tr>
+              <th class="p-2 border">Collection</th>
+              <th class="p-2 border">Name</th>
+              <th class="p-2 border">Data</th>
+              <th class="p-2 border">Updated At</th>
+            </tr>
           </thead>
           <tbody>
-          {#each changes as change}
-            <tr>
-              <td class="p-2 border">{change.collection}</td>
-              <td class="p-2 border">
-                <a href={change.url} target="_blank" class="text-blue-500 underline">{change.name}</a>
-              </td>
-              <td class="p-2 border">
-                <pre class="text-sm whitespace-pre-wrap">{JSON.stringify(change.data, null, 2)}</pre>
-              </td>
-              <td class="p-2 border">{new Date(change.updatedAt).toLocaleString()}</td>
-            </tr>
-          {/each}
+            {#each changes as change}
+              <tr>
+                <td class="p-2 border">{change.collection}</td>
+                <td class="p-2 border">
+                  <a href={change.url} target="_blank" class="text-blue-500 underline"
+                    >{change.name}</a
+                  >
+                </td>
+                <td class="p-2 border">
+                  <pre class="text-sm whitespace-pre-wrap">{JSON.stringify(
+                      change.data,
+                      null,
+                      2
+                    )}</pre>
+                </td>
+                <td class="p-2 border">{new Date(change.updatedAt).toLocaleString()}</td>
+              </tr>
+            {/each}
           </tbody>
         </table>
         <div class="flex justify-end gap-4 mt-4">
-          <button class="bg-gray-300 px-4 py-2 rounded" on:click={() => (showConfirmation = false)}>Cancel</button>
-          <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" on:click={publish}>Confirm</button>
+          <button class="bg-gray-300 px-4 py-2 rounded" on:click={() => (showConfirmation = false)}
+            >Cancel</button
+          >
+          <button
+            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            on:click={publish}>Confirm</button
+          >
         </div>
       </div>
     </div>
   {/if}
 </div>
 
-<style>
-    .red-dot {
-        @apply inline-block w-2 h-2 bg-red-500 rounded-full ml-1;
-    }
-    .notification-bubble {
-        @apply absolute top-1 right-1 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-0.5;
-    }
-    .disabled {
-        opacity: 50%;
-    }
+<style lang="pcss">
+  .red-dot {
+    @apply inline-block w-2 h-2 bg-red-500 rounded-full ml-1;
+  }
+  .notification-bubble {
+    @apply absolute top-1 right-1 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-0.5;
+  }
+  .disabled {
+    opacity: 50%;
+  }
 </style>
