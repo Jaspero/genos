@@ -10,6 +10,7 @@ initializeApp();
 // export {processCheckout} from './callable/process-checkout';
 export { createAdmin } from './callable/create-admin';
 export { updateUser } from './callable/update-user';
+export { sendSampleEmail } from './callable/send-sample-email';
 
 /**
  * Triggers

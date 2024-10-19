@@ -130,7 +130,7 @@
       <button
         class="px-4 py-3 text-sm hover:bg-gray-100 transition-colors cursor-pointer"
         on:click={openConfirmation}
-        class:disabled={publishDisabled || publishLoading || !$activeRelease?.changes?.length}
+        class:opacity-50={publishDisabled || publishLoading || !$activeRelease?.changes?.length}
         >Release Website</button
       >
       <a
@@ -202,11 +202,5 @@
 <style lang="pcss">
   .red-dot {
     @apply inline-block w-2 h-2 bg-red-500 rounded-full ml-1;
-  }
-  .notification-bubble {
-    @apply absolute top-1 right-1 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-0.5;
-  }
-  .disabled {
-    opacity: 50%;
   }
 </style>

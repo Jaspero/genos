@@ -25,6 +25,7 @@
   import '@jaspero/web-components/dist/chips.wc';
   import '@jaspero/web-components/dist/chips.css';
   import '@jaspero/web-components/dist/review-stars.wc';
+  import '@jaspero/web-components/dist/code-editor.wc';
 
   import { ModularSchema, ModularView } from '@jaspero/modular';
   import { onMount } from 'svelte';

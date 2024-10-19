@@ -1,5 +1,6 @@
 import ChangeEmailDialog from '../change-email/ChangeEmailDialog.svelte';
 import ChangePasswordDialog from '../change-password/ChangePasswordDialog.svelte';
+import SendSampleEmail from '../send-sample-email/SendSampleEmail.svelte';
 
 export const CONFIG = {
   title: 'Shop CMS',
@@ -72,6 +73,9 @@ export const CONFIG = {
   pageConfigurations: {
     '/dashboard/management/admins': {
       dynamicComponents: [ChangePasswordDialog, ChangeEmailDialog]
+    },
+    '/dashboard/management/email-templates': {
+      dynamicComponents: [SendSampleEmail]
     }
   }
 };

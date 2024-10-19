@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "lint": "prettier --check . && eslint .",
-    "format": "prettier --write . && npm run lint:fix --prefix functions",
+    "lint": "prettier --check .",
+    "format": "prettier --write . && npm run check --prefix cms && npm run check --prefix web && npm run lint:fix --prefix functions",
     "write:indexes": "firebase firestore:indexes > firestore.indexes.json",
     "configure-release": "tsx scripts/configure-release.ts"
   },
