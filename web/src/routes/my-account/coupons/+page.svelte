@@ -2,7 +2,12 @@
   import { db } from '$lib/utils/firebase.ts';
   import { collection, getDocs, query, where } from 'firebase/firestore';
   import { onMount } from 'svelte';
-  import { CONFIG } from '$lib/consts/config.const';
+  import { meta } from '$lib/meta/meta.store';
+
+  meta.set({
+    title: 'Coupons',
+    noIndex: true
+  });
 
   let items = [];
   let usedFilter = null;
@@ -142,9 +147,6 @@
     <p>No items found.</p>
   {/if}
 </div>
-<svelte:head>
-  <title>Coupons - {CONFIG.title}</title>
-</svelte:head>
 
 <style lang="postcss">
   .used-card {

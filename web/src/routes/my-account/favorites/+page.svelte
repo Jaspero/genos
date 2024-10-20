@@ -3,6 +3,12 @@
   import { doc, getDoc } from 'firebase/firestore';
   import { onMount } from 'svelte';
   import Product from '$lib/Product.svelte';
+  import { meta } from '$lib/meta/meta.store';
+
+  meta.set({
+    title: 'Coupons',
+    noIndex: true
+  });
 
   let favoriteProducts = [];
 

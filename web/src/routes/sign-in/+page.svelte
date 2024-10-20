@@ -5,7 +5,6 @@
   import Dialog from '$lib/Dialog.svelte';
   import Field from '$lib/Field.svelte';
   import Recaptcha from '$lib/Recaptcha.svelte';
-  import { CONFIG } from '$lib/consts/config.const';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
   import { auth } from '$lib/utils/firebase';
   import { formatEmail } from '$lib/utils/format-emails';
@@ -20,6 +19,14 @@
     signInWithPopup
   } from 'firebase/auth';
   import { onMount } from 'svelte';
+  import '@jaspero/web-components/dist/input.wc';
+  import '@jaspero/web-components/dist/input.css';
+  import { meta } from '$lib/meta/meta.store';
+  import GoogleButton from '$lib/GoogleButton.svelte';
+
+  meta.set({
+    title: 'Sign In',
+  });
 
   let email = '';
   let password = '';
@@ -88,7 +95,7 @@
       goto(
         searchParams.has('forward')
           ? decodeURIComponent(searchParams.get('forward') as string)
-          : '/'
+          : '/my-account'
       );
     } catch {
       password = '';
@@ -134,7 +141,7 @@
       goto(
         searchParams.has('forward')
           ? decodeURIComponent(searchParams.get('forward') as string)
-          : '/'
+          : '/my-account'
       );
     }, 1000);
   }
@@ -199,12 +206,12 @@
   });
 </script>
 
-<div class="max-w-7xl mx-auto p-12 flex justify-center items-center">
+<div class="w-[500px] mx-auto p-12 flex justify-center items-center">
   <div id="recaptcha-container-id"></div>
 
   {#if showCodeInput}
     <div>
-      <Button href="/login" on:click={back}>Back to login</Button>
+      <Button href="/sign in" on:click={back}>Back to sign in</Button>
       <p>
         We have sent you a 6-digit verification code to: <!--<b>{resolver.hints[0].phoneNumber}</b>-->
       </p>
@@ -214,39 +221,23 @@
       <Button loading={confirmLoader} on:click={confirm}>Confirm and sign in</Button>
     </div>
   {:else}
-    <form on:submit|preventDefault={submit} class="shadow-xl p-8 rounded">
-      <div class="flex flex-col gap-4">
-        <Field label="Email" type="email" bind:value={email} autocomplete="email" required />
-        <Field
-          label="Password"
-          {type}
-          bind:value={password}
-          autocomplete="current-password"
-          required
-        />
-        <Button variant="outlined" type="button" on:click={toggleVisible}
-          >{type === 'password' ? 'Show password' : 'Hide password'}</Button
-        >
+    <form on:submit|preventDefault={submit} class="w-full shadow-xl p-8 rounded">
+      <h2 class="text-lg font-bold mb-4">Sign In</h2>
+      <div class="flex flex-col gap-2">
+        <jp-input label="Email" type="email" value={email} required autocomplete="email" on:value={e => email = e.detail.value} />
+        <jp-input label="Password" {type} value={password} required autocomplete="current-password" on:value={e => password = e.detail.value} />
+        <div class="mt-[-0.5rem]">
+          <button type="button" class="underline" on:click={toggleVisible}>{type === 'password' ? 'Show password' : 'Hide password'}</button>
+        </div>
       </div>
 
       <div class="flex flex-wrap gap-4 mt-4">
-        <Button type="submit" {loading}>Sign in</Button>
-        <button
-          type="button"
-          on:click={loginGoogle}
-          class="googleButton"
-          name="Sign in with Google"
-        >
-          Sign in with google
-        </button>
+        <button class="button" type="button">Sign In</button>
+        <GoogleButton label="Sign in with google" onClick={loginGoogle} />
       </div>
 
       <p class="mt-8 mb-2">Forgot your password?</p>
-      <Button
-        on:click={() => {
-          rDialog = true;
-        }}>Reset password</Button
-      >
+      <button class="underline" type="button" on:click={() => (rDialog = true)}>Reset Password</button>
     </form>
   {/if}
 </div>
@@ -264,8 +255,3 @@
 </Dialog>
 
 <Recaptcha bind:verify={recaptchaVerify} />
-
-<svelte:head>
-  <title>Sign In - {CONFIG.title}</title>
-  <meta name="description" content="Enter your credentials to sign in." />
-</svelte:head>

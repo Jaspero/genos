@@ -32,3 +32,9 @@
 - Add the service account to GitHub secrets with the name SERVICE_ACCOUNT
 - To enable website releases you'll need to generate a github token and add it to GCE-s secret manager under the name `GITHUB_TOKEN`
 - Look for any `TODO(Project Specific)` references in the codebase and update them accordingly
+
+## Release Checklist
+
+- Make sure `404` page is added to the pages.
+- Theme colors are adjuste in: `cms/tailwind.config.js`, `web/tailwind.config.js`, `shared/styles/core.pcss` and `cms/src/app.pcss`
+- Make sure a favicon is added for both the CMS and the Website
