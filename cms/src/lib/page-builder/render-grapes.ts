@@ -79,6 +79,28 @@ export function renderGrapes(
   TYPES(forms!).forEach(({ id, ...data }) => grapesInstance.DomComponents.addType(id, data));
   CUSTOM_TRAITS.forEach(({ id, ...data }) => grapesInstance.TraitManager.addType(id, data));
 
+  grapesInstance.DomComponents.addType('video', {
+    extendFn: ['updateTraits'],
+    model: {
+      init() {
+        this.addMutedTrait();
+      },
+  
+      updateTraits() {
+        this.addMutedTrait();
+      },
+  
+      addMutedTrait() {
+        if (!this.getTrait('muted')) {
+          this.addTrait({
+            type: 'checkbox',
+            name: 'muted',
+          })
+        }
+      },
+    },
+  });
+
   if (popups) {
     grapesInstance.DomComponents.addType(`pb-popup`, {
       isComponent: (el: HTMLElement) => el.tagName === 'PB-POPUP',
