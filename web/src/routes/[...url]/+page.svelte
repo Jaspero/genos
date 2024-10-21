@@ -47,6 +47,11 @@
 
   function scrolled(top: number) {
     scrolls.forEach((scroll) => {
+
+      if (!scroll.el || !scroll.className) {
+        return;
+      }
+
       if (top > scroll.height) {
         scroll.el.classList.add(scroll.className);
       } else if (scroll.el.classList.contains(scroll.className)) {
