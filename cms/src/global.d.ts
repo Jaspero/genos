@@ -2,10 +2,12 @@ declare interface ColumnActionsConfigLink {
   label: string;
   href: string;
   icon?: string;
+  disabled?: boolean;
 }
 
 declare interface ColumnActionsConfigButton {
   icon?: string;
+  disabled?: boolean;
   label: string;
   action: (value: any) => void;
 }

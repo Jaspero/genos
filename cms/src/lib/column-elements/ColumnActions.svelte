@@ -111,13 +111,13 @@
 
 <DropdownButton variant="icon">
   {#each links as link}
-    <DropdownMenuButton href={link.href}>
+    <DropdownMenuButton disabled={link.disabled} href={link.href}>
       <span class="material-symbols-outlined">{link.icon || 'link'}</span>
       {link.label}
     </DropdownMenuButton>
   {/each}
   {#each buttons as button}
-    <DropdownMenuButton on:click={() => button.action(id)}>
+    <DropdownMenuButton disabled={button.disabled} on:click={() => button.action(id)}>
       {#if button.icon}
         <span class="material-symbols-outlined">{button.icon || 'link'}</span>
       {/if}
