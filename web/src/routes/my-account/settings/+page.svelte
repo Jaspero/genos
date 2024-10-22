@@ -25,9 +25,7 @@
 
   let newPassword = '';
   let repeatPassword = '';
-  let passwordLoading = false;
   let email = '';
-  let emailLoading = false;
   let deleteDialog = false;
 
   async function changePassword() {
@@ -41,8 +39,6 @@
 
       return;
     }
-
-    passwordLoading = true;
 
     await alertWrapper(
       updatePassword(auth.currentUser!, newPassword),
@@ -58,14 +54,11 @@
             goto('/sign-in');
           }
         }
-
-        passwordLoading = false;
       }
     );
 
     newPassword = '';
     repeatPassword = '';
-    passwordLoading = true;
   }
 
   async function changeEmail() {
@@ -75,8 +68,6 @@
     if (!email) {
       return;
     }
-
-    emailLoading = true;
 
     await alertWrapper(
       updateEmail(auth.currentUser!, email),
@@ -92,30 +83,27 @@
             goto('/sign-in');
           }
         }
-
-        emailLoading = false;
       }
     );
 
     email = '';
-    emailLoading = true;
-  }
-
-  async function deleteAccount() {
-
   }
 
   const confirmDelete = async () => {
-    isConfirmationVisible = false;
     try {
       if (auth.currentUser) {
-        await alertWrapper(deleteUser(auth.currentUser), 'Account deleted successfully.');
+        await alertWrapper(deleteUser(auth.currentUser), 'Account deleted successfully.', '', async (error) => {
+          if (error instanceof FirebaseError) {
+            if (error.code === 'auth/requires-recent-login') {
+              await signOut(auth);
+              renderAlert(`This action requires recent login. Please sign in again.`);
+              goto('/sign-in');
+            }
+          }
+        });
       }
     } catch (error) {
-      console.error(error);
-      if (error.code === 'auth/requires-recent-login') {
-        openReloginDialog();
-      }
+      await goto('/sign-in');
     }
   };
 </script>
