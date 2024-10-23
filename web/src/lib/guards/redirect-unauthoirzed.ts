@@ -1,5 +1,5 @@
-import { redirect } from '@sveltejs/kit';
 import { authenticated } from '../utils/firebase';
+import { goto } from '$app/navigation';
 
 export async function redirectUnauthorized(path = '/sign-in') {
   const user = await new Promise((resolve) => {
@@ -10,13 +10,14 @@ export async function redirectUnauthorized(path = '/sign-in') {
 
       try {
         unsub();
-      } catch {}
+      } catch {};
+
       resolve(data);
     });
   });
 
   if (!user) {
-    redirect(301, path);
+    goto(path);
   }
 
   return user;

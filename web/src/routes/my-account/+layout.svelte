@@ -4,6 +4,15 @@
   import { auth, user } from '$lib/utils/firebase';
   import { page } from '$app/stores';
   import { meta } from '$lib/meta/meta.store';
+  import { onMount } from 'svelte';
+  import { redirectUnauthorized } from '$lib/guards/redirect-unauthoirzed';
+
+  export let data: {
+    header: string;
+    footer: string;
+  };
+
+  let loading = true;
 
   $: pathname = $page.url.pathname;
 
@@ -26,56 +35,72 @@
     }
   ];
 
-  $: firstLetter = ($user!.name || 'A').charAt(0).toUpperCase();
-
   async function logOut() {
     await signOut(auth);
 
     goto('/');
   }
+
+  onMount(async () => {
+    const user = await redirectUnauthorized();
+
+    if (user) {
+      loading = false;
+    }
+  });
 </script>
 
-<div class="flex flex-wrap p-20">
-  <div class="flex justify-start w-full gap-4">
-    <aside class="w-[300px] flex flex-col gap-4">
-      <div class="shadow rounded p-4 flex gap-2 items-center">
-        <div class="w-10 h-10 rounded-full bg-slate-500 text-white text-center leading-10">
-          {firstLetter}
-        </div>
-        <div>
-          <div>{$user!.name}</div>
-          <div class="text-gray-400">{$user!.email}</div>
-        </div>
-      </div>
+{#if !loading}
+  {#if data.header}
+    {@html data.header}
+  {/if}
 
-      <nav class="shadow p-4 rounded flex flex-col text-lg">
-        {#each links as link}
-          <a class="p-2 transition hover:bg-slate-400 hover:text-white" class:active={pathname === link.url} href={link.url}>
-            {link.label}
-          </a>
-        {/each}
-        <div class="mt-20">
-          <button type="button" class=" p-2 hover:bg-slate-400 hover:text-white w-full text-left" on:click={logOut}>Sign Out</button>
+  <div class="flex flex-wrap p-20">
+    <div class="flex justify-start w-full gap-4">
+      <aside class="w-[300px] flex flex-col gap-4">
+        <div class="shadow rounded p-4 flex gap-2 items-center">
+          <div class="w-10 h-10 rounded-full bg-slate-500 text-white text-center leading-10">
+            {($user!.name || 'A').charAt(0).toUpperCase()}
+          </div>
+          <div>
+            <div>{$user!.name}</div>
+            <div class="text-gray-400">{$user!.email}</div>
+          </div>
         </div>
-      </nav>
-    </aside>
-    <div class="flex-1">
-      <div class="mb-4 h-[80px] flex flex-col justify-center">
-        <h2 class="text-2xl font-bold">{$meta.title}</h2>
-        <div class="text-sm">
-          <a class="text-gray-400 underline hover:text-black" href="/">Home</a>
-          <span class="text-gray-400">/</span>
-          <a class="text-gray-400 underline hover:text-black" href="/my-account">My Account</a>
-          <span class="text-gray-400">/</span>
-          <span>{$meta.title}</span>
+
+        <nav class="shadow p-4 rounded flex flex-col text-lg">
+          {#each links as link}
+            <a class="p-2 transition hover:bg-slate-400 hover:text-white" class:active={pathname === link.url} href={link.url}>
+              {link.label}
+            </a>
+          {/each}
+          <div class="mt-20">
+            <button type="button" class=" p-2 hover:bg-slate-400 hover:text-white w-full text-left" on:click={logOut}>Sign Out</button>
+          </div>
+        </nav>
+      </aside>
+      <div class="flex-1">
+        <div class="mb-4 h-[80px] flex flex-col justify-center">
+          <h2 class="text-2xl font-bold">{$meta.title}</h2>
+          <div class="text-sm">
+            <a class="text-gray-400 underline hover:text-black" href="/">Home</a>
+            <span class="text-gray-400">/</span>
+            <a class="text-gray-400 underline hover:text-black" href="/my-account">My Account</a>
+            <span class="text-gray-400">/</span>
+            <span>{$meta.title}</span>
+          </div>
         </div>
+        <slot />
       </div>
-      <slot />
     </div>
   </div>
-</div>
 
-<style>
+  {#if data.footer}
+    {@html data.footer}
+  {/if}
+{/if}
+
+<style lang="pcss">
   .active {
     @apply bg-slate-500 text-white;
   }

@@ -15,7 +15,6 @@
   let orders: Order[] = [];
 
   onMount(async () => {
-    console.log($user);
     const querySnapshot = await getDocs(
       query(collection(db, 'orders'), where('customer', '==', $user!.id), limit(sizeLimit))
     );

@@ -41,8 +41,8 @@
     "@jaspero/utils": "1.15.3",
     "@jaspero/web-components": "1.168.4",
     "@minify-html/node": "0.15.0",
-    "firebase": "10.13.1",
-    "firebase-admin": "12.4.0",
+    "firebase": "11.0.1",
+    "firebase-admin": "12.6.0",
     "luxon": "3.5.0"
   }
 }
