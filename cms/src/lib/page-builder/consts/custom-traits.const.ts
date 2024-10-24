@@ -1,4 +1,5 @@
 import { SearchService } from '../../services/search.service';
+import { AMService } from '$lib/page-builder/am.service';
 
 export const CUSTOM_TRAITS: any[] = [
   {
@@ -110,5 +111,23 @@ export const CUSTOM_TRAITS: any[] = [
       }
       return this.$input;
     }
+  },
+  {
+    id: 'image-select',
+    noLabel: true,
+    templateInput: '',
+    createInput({ trait }: any) {
+      /*console.log(trait);
+      const el = document.createElement('jp-asset-manager') as any;
+
+      el.service = new AMService()
+      el.rootPath = 'pages';
+      el.shownFiles = ['image'];
+      el.selectable = 'single';
+      return el;*/
+    },
+    // onEvent({ elInput, component }) {
+      // setTimeout(() => component.addAttributes({ [elInput.name]: elInput.getValue() }), 500);
+    // }
   }
 ];

@@ -5,3 +5,4 @@ export * from './MobileMenu.svelte';
 export * from './FeaturedBlogArticles.svelte';
 export * from './Products.svelte';
 export * from './ProductCard.svelte';
+export * from './ImageGallery.svelte';

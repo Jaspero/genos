@@ -722,6 +722,92 @@ export const TYPES = (forms: PageBuilderForm[]) => [
       }
     }
   },
+  {
+    id: 'pb-image-gallery',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-IMAGE-GALLERY',
+    model: {
+      defaults: {
+        tagName: 'pb-image-gallery',
+        traits: [
+          {
+            type: 'checkbox',
+            label: 'Enable Pagination',
+            name: 'enablePagination'
+          },
+          {
+            type: 'checkbox',
+            label: 'Slider Bar',
+            name: 'sliderBar'
+          },
+          {
+            type: 'checkbox',
+            label: 'Auto Slide',
+            name: 'autoSlide'
+          },
+          {
+            type: 'number',
+            label: 'Interval',
+            name: 'interval'
+          },
+          {
+            type: 'number',
+            label: 'Column Count',
+            name: 'columnCount'
+          },
+          {
+            type: 'number',
+            label: 'Column Count Tablet',
+            name: 'columnCountTablet'
+          },
+          {
+            type: 'number',
+            label: 'Column Count Mobile',
+            name: 'columnCountMobile'
+          },
+          {
+            type: 'number',
+            label: 'Gap X',
+            name: 'gapX'
+          },
+          {
+            type: 'number',
+            label: 'Gap Y',
+            name: 'gapY'
+          },
+          {
+            type: 'image-select'
+          }
+          /*{
+            type: 'array',
+            label: 'Images',
+            name: 'images',
+            items: [
+              {
+                type: 'object',
+                properties: [
+                  {
+                    type: 'text',
+                    label: 'Image Source',
+                    name: 'src',
+                  },
+                  {
+                    type: 'text',
+                    label: 'Alt Text',
+                    name: 'alt',
+                  },
+                ]
+              }
+            ]
+          }*/
+        ],
+        attributes: {
+          label: 'Submit',
+          success: `Form submitted successfully!`,
+          error: `There was an error submitting the form. Please try again later.`
+        }
+      }
+    }
+  },
 
   /**
    * Blog
