@@ -26,7 +26,7 @@
     }
   ];
 
-  $: firstLetter = ($user!.name || 'A').charAt(0).toUpperCase();
+  $: firstLetter = ($user?.name || 'A').charAt(0).toUpperCase();
 
   async function logOut() {
     await signOut(auth);
@@ -43,8 +43,8 @@
           {firstLetter}
         </div>
         <div>
-          <div>{$user!.name}</div>
-          <div class="text-gray-400">{$user!.email}</div>
+          <div>{$user?.name}</div>
+          <div class="text-gray-400">{$user?.email}</div>
         </div>
       </div>
 
