@@ -10,7 +10,8 @@ export async function redirectAuthorized(path = '/') {
 
       try {
         unsub();
-      } catch {}
+      } catch {};
+
       resolve(data);
     });
   });

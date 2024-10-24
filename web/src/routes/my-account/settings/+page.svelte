@@ -3,9 +3,6 @@
   import { auth } from '$lib/utils/firebase';
   import {
     deleteUser,
-    EmailAuthProvider,
-    reauthenticateWithCredential,
-    sendEmailVerification,
     updateEmail,
     updatePassword
   } from 'firebase/auth';

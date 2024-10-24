@@ -61,6 +61,13 @@
   }
 
   function pageChange(page: Page) {
+
+    if (browser && data.scripts) {
+      const script = document.createElement('script');
+      script.innerHTML = data.scripts;
+      document.body.appendChild(script);
+    }
+
     scrollTrackers = [];
 
     /**
@@ -191,9 +198,7 @@
   }
 
   onMount(() => {
-    if (!dev) {
-      pageChange($page);
-    }
+    pageChange($page);
   });
 
   onDestroy(() => {
