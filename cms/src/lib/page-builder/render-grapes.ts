@@ -92,10 +92,12 @@ export function renderGrapes(
     model: {
       init() {
         this.addMutedTrait();
+        this.addPlaysinlineTrait();
       },
 
       updateTraits() {
         this.addMutedTrait();
+        this.addPlaysinlineTrait();
       },
 
       addMutedTrait() {
@@ -106,6 +108,15 @@ export function renderGrapes(
           })
         }
       },
+
+      addPlaysinlineTrait() {
+        if (!this.getTrait('playsinline')) {
+          this.addTrait({
+            type: 'checkbox',
+            name: 'playsinline',
+          })
+        }
+      }
     },
   });
 
