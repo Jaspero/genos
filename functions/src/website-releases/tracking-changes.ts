@@ -68,11 +68,13 @@ for (const track of TRACKED_COLLECTIONS) {
           };
 
           if (!_.isEmpty(allChanges)) {
-            await ref.update({
-              changes: admin.firestore.FieldValue.arrayUnion(
-                document(track, allChanges, newValue, WEBSITE_URL)
-              )
-            });
+            const documentData = document(track, allChanges, newValue, WEBSITE_URL);
+
+            if (!_.isEmpty(documentData.data)) {
+              await ref.update({
+                changes: admin.firestore.FieldValue.arrayUnion(documentData)
+              });
+            }
           }
         }
       }
