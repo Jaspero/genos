@@ -60,7 +60,7 @@ export default function (options) {
           ensure_spec_compliant_unquoted_attribute_values: true,
           keep_spaces_between_attributes: true,
           minify_css: true,
-          minify_js: true
+          minify_js: false
         });
 
         await writeFile(htmlPath, minified);
