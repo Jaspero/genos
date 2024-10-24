@@ -19,6 +19,7 @@ import type { Popup } from './types/popup.interface';
 import './custom-components/custom-component';
 import './trait-components/trait-components';
 import { CUSTOM_TRAITS } from './consts/custom-traits.const';
+import { swiperPlugin } from './plugins/swiper/swiper.plugin';
 
 export function renderGrapes(
   pageBuilderEl: HTMLDivElement,
@@ -44,13 +45,18 @@ export function renderGrapes(
     canvas: {
       styles: [
         'https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap',
-        '/css/shared.css'
+        '/css/shared.css',
+        '/css/swiper-bundle.css'
+      ],
+      scripts: [
+        '/js/swiper-bundle.js'
       ]
     },
     container: pageBuilderEl,
     panels: { defaults: [] },
     plugins: [
       styleGradientPlugin,
+      swiperPlugin,
       parserPostCSS,
       (editor) =>
         componentCodeEditor(editor, {
@@ -76,20 +82,22 @@ export function renderGrapes(
     }
   });
 
-  TYPES(forms!).forEach(({ id, ...data }) => grapesInstance.DomComponents.addType(id, data));
-  CUSTOM_TRAITS.forEach(({ id, ...data }) => grapesInstance.TraitManager.addType(id, data));
+  const {DomComponents, TraitManager, StyleManager} = grapesInstance;
 
-  grapesInstance.DomComponents.addType('video', {
+  TYPES(forms!).forEach(({ id, ...data }) => DomComponents.addType(id, data));
+  CUSTOM_TRAITS.forEach(({ id, ...data }) => TraitManager.addType(id, data));
+
+  DomComponents.addType('video', {
     extendFn: ['updateTraits'],
     model: {
       init() {
         this.addMutedTrait();
       },
-  
+
       updateTraits() {
         this.addMutedTrait();
       },
-  
+
       addMutedTrait() {
         if (!this.getTrait('muted')) {
           this.addTrait({
@@ -102,7 +110,7 @@ export function renderGrapes(
   });
 
   if (popups) {
-    grapesInstance.DomComponents.addType(`pb-popup`, {
+    DomComponents.addType(`pb-popup`, {
       isComponent: (el: HTMLElement) => el.tagName === 'PB-POPUP',
       model: {
         defaults: {
@@ -178,41 +186,39 @@ export function renderGrapes(
   );
 
   grapesInstance.on('load', function () {
-    const styleManager = grapesInstance.StyleManager;
-
     STYLE_OVERRIDES.forEach(({ id, property, ...overides }) => {
-      styleManager.removeProperty(id, property);
+      StyleManager.removeProperty(id, property);
 
       if (Object.keys(overides).length) {
-        styleManager.addProperty(id, {
+        StyleManager.addProperty(id, {
           property,
           ...overides
         });
       }
     });
 
-    styleManager.render();
+    StyleManager.render();
   });
 
-  grapesInstance.StyleManager.addProperty('decorations', {
+  StyleManager.addProperty('decorations', {
     extend: 'background-image',
     name: 'Gradient Background'
   });
 
-  grapesInstance.StyleManager.addProperty('typography', {
+  StyleManager.addProperty('typography', {
     extend: 'max-width',
     name: 'Max Width',
     units: ['px', '%', 'ch']
   });
 
-  grapesInstance.StyleManager.addProperty('extra', {
+  StyleManager.addProperty('extra', {
     type: 'number',
     label: 'z-index',
     property: 'z-index',
     default: '0'
   });
 
-  grapesInstance.StyleManager.addProperty('extra', {
+  StyleManager.addProperty('extra', {
     type: 'select',
     label: 'Overflow',
     property: 'overflow',
@@ -225,7 +231,7 @@ export function renderGrapes(
   });
 
   grapesInstance.runCommand('core:component-outline');
-  grapesInstance.DomComponents.getWrapper()!.set({ badgable: false, selectable: false });
+  DomComponents.getWrapper()!.set({ badgable: false, selectable: false });
 
   grapesInstance.on('component:update:traits', (component: any) => {
     for (const key in component.changed) {
