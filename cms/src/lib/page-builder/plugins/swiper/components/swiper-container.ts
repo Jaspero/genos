@@ -353,7 +353,7 @@ export function swiperContainer(domComponents: any, config: any = {}) {
 							};
 						}
 
-						if ('{[ autoplay ]}') {
+						if (![''].includes('{[ autoplay ]}')) {
 							options.autoplay = {
 								delay: '{[ autoplayDelay ]}',
 								stopOnLastSlide: '{[ autoplayStopOnLastSlide ]}',
