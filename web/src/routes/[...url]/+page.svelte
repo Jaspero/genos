@@ -60,12 +60,38 @@
     });
   }
 
-  function pageChange(page: Page) {
+  async function renderSwiper() {
+    while (!window.Swiper) {
+      await new Promise((r) => setTimeout(r, 50));
+    }
 
-    if (browser && data.scripts) {
-      const script = document.createElement('script');
-      script.innerHTML = data.scripts;
-      document.body.appendChild(script);
+    if (!window.swipers) {
+      return;
+    }
+
+    if (!Object.keys(window.swipers).length) {
+      return;
+    }
+
+    for (const key in window.swipers) {
+      const { swiper, id } = window.swipers![key];
+      const el = document.getElementById(id);
+
+      if (el) {
+        swiper(el);
+      }
+    }
+  }
+
+  function pageChange(page: Page) {
+    if (browser) {
+      renderSwiper().catch();
+
+      if (data.scripts) {
+        const script = document.createElement('script');
+        script.innerHTML = data.scripts;
+        document.body.appendChild(script);
+      }
     }
 
     scrollTrackers = [];
