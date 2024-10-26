@@ -7,4 +7,4 @@ export const load: PageServerLoad = async () => {
     header: await loadLayoutItem(CONFIG.singleHeader),
     footer: await loadLayoutItem(CONFIG.singleFooter)
   };
-}
+};

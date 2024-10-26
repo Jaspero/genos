@@ -1,4 +1,4 @@
 declare interface Window {
-  swipers?: {[key: string]: any};
+  swipers?: { [key: string]: any };
   Swiper: any;
 }

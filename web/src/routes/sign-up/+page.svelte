@@ -1,185 +1,119 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
-  import Button from '$lib/Button.svelte';
-  import Field from '$lib/Field.svelte';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
   import { auth } from '$lib/utils/firebase';
-  import { formatEmail } from '$lib/utils/format-emails';
   import {
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
     signInWithPopup
   } from 'firebase/auth';
+  import Recaptcha from '$lib/Recaptcha.svelte';
+  import GoogleButton from '$lib/GoogleButton.svelte';
+  import '@jaspero/web-components/dist/input.wc';
+  import '@jaspero/web-components/dist/input.css';
+  import { renderAlert } from '@jaspero/web-components/dist/render-alert';
 
   let email = '';
   let password = '';
   let passwordConfirm = '';
   let loading = false;
-  let resolver: any;
+  let recaptchaVerify: () => Promise<string>;
+  let type = 'password';
 
-  let passwordEl: HTMLInputElement;
-  let confirmEl: HTMLInputElement;
+  function toggleVisible() {
+    type = type === 'password' ? 'text' : 'password';
+  }
 
   async function signUp() {
-    email = formatEmail(email);
     if (password !== passwordConfirm) {
-      // notification.set({ content: 'passwords do not match', type: 'error' });
-      password = '';
-      passwordConfirm = '';
-      return;
+      return renderAlert({ title: 'Error', message: 'Passwords do not match!', state: 'error' });
     }
-    if (password.length < 6) {
-      // notification.set({ content: 'Password must be at least 6 characters long.', type: 'error' });
-      password = '';
-      passwordConfirm = '';
-      return;
-    }
+
+    email = email.trim();
 
     loading = true;
 
-    try {
-      await alertWrapper(createUserWithEmailAndPassword(auth, email, password));
-      navigate();
-    } catch {
-      password = '';
-    }
+    await alertWrapper(
+      createUserWithEmailAndPassword(auth, email, password),
+      'Sign up successful',
+      '',
+      () => (loading = false)
+    );
 
     loading = false;
-    passwordConfirm = '';
+    navigate();
   }
 
   async function signupGoogle() {
-    const { searchParams } = $page.url;
-    email = formatEmail(email);
     loading = true;
 
     await alertWrapper(
       signInWithPopup(auth, new GoogleAuthProvider()),
-      'Login successful',
+      'Sign up successful',
+      '',
       () => (loading = false)
     );
-    goto(
-      searchParams.has('forward')
-        ? decodeURIComponent(searchParams.get('forward') as string)
-        : '/shop'
-    );
+
+    loading = false;
+
+    navigate();
   }
 
   function navigate() {
     const { searchParams } = $page.url;
-    goto(searchParams.has('f') ? decodeURIComponent(searchParams.get('f') as string) : '/');
-  }
-  function togglePasswordType() {
-    passwordEl.type = passwordEl.type === 'password' ? 'text' : 'password';
-    confirmEl.type = confirmEl.type === 'password' ? 'text' : 'password';
+    goto(
+      searchParams.has('forward') ? decodeURIComponent(searchParams.get('forward') as string) : '/'
+    );
   }
 </script>
 
-<section class="sign-up">
-  <div class="form-container text-center">
-    <h3 class="text-center pt-4">Sign up for Jaspero Webshop</h3>
-    <div class="py-4">
-      <span class="footnote">
-        By signing up, I agree to Jaspero's <a href="" target="_blank" class="notelink"
-          >Terms and Privacy Policy.</a
-        >
-      </span>
-    </div>
-    <div class="text-center pt-4 pb-8 flex flex-col gap-2">
-      <Button variant="outlined" color="gray" size="xl" name="Sign up with Google">
-        <div class="flex justify-center items-center">
-          <span><img src="images/google-icon.svg" alt="google icon" class="social-icon" /></span>
-          <span>Sign up with Google</span>
-        </div>
-      </Button>
-      <Button variant="outlined" color="gray" size="xl">
-        <div class="flex justify-center items-center">
-          <span><img src="images/apple.svg" alt="google icon" class="social-icon" /></span>
-          <span>Sign up with Facebook</span>
-        </div>
-      </Button>
-    </div>
-    <div
-      class="flex my-8 w-[95%] m-auto h-0 justify-center items-center border-b-[2px] border-[--gray]"
-    >
-      <span class="footnote bg-[--white] px-3">or sign up through email</span>
-    </div>
+<div class="w-[500px] mx-auto p-12 flex justify-center items-center">
+  <div id="recaptcha-container-id"></div>
 
-    <form on:submit|preventDefault={signUp} class="flex flex-col gap-4">
-      <Field label="Name" type="text" wfull={true} required />
-      <Field label="Email" type="email" bind:value={email} wfull={true} required />
-      <Field
+  <form on:submit|preventDefault={signUp} class="w-full shadow-xl p-8 rounded">
+    <h2 class="text-lg font-bold mb-4">Sign up</h2>
+
+    <div class="flex flex-col gap-2">
+      <GoogleButton onClick={signupGoogle} label="Sign up with Google" />
+
+      <p>Or sign up with email instead</p>
+
+      <jp-input
+        label="Email"
+        type="email"
+        value={email}
+        required
+        autocomplete="email"
+        on:value={(e) => (email = e.detail.value)}
+      ></jp-input>
+      <jp-input
         label="Password"
-        type="password"
-        bind:value={password}
-        bind:this={passwordEl}
-        wfull={true}
+        {type}
+        value={password}
         required
-      />
-      <Field
-        label="Confirm password"
-        type="password"
-        bind:value={passwordConfirm}
-        bind:this={confirmEl}
-        wfull={true}
+        autocomplete="new-password"
+        on:value={(e) => (password = e.detail.value)}
+      ></jp-input>
+      <jp-input
+        label="Confirm Password"
+        {type}
+        value={passwordConfirm}
         required
-      />
-      <div class="show-password">
-        <input type="checkbox" class="checkbox" on:change|preventDefault={togglePasswordType} />
-        <p>Show/hide password</p>
+        autocomplete="repeat-password"
+        on:value={(e) => (passwordConfirm = e.detail.value)}
+      ></jp-input>
+      <div class="mt-[-0.5rem]">
+        <button type="button" class="underline" on:click={toggleVisible}
+          >{type === 'password' ? 'Show password' : 'Hide password'}</button
+        >
       </div>
-      <Button type="submit" {loading}>Submit</Button>
-    </form>
-  </div>
-</section>
+    </div>
 
-<style>
-  .sign-up {
-    height: 100vh;
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    <div class="mt-4">
+      <button class="button" type="submit">Sign up</button>
+    </div>
+  </form>
+</div>
 
-  .form-container {
-    width: 500px;
-    padding: 20px;
-    background: white;
-    margin: 0 auto;
-    -webkit-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .show-password {
-    width: 100%;
-    justify-content: flex-start;
-    display: flex;
-    align-items: center;
-    color: black;
-    margin-top: 10px;
-  }
-
-  .checkbox {
-    margin-right: 10px;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-  }
-
-  .social-icon {
-    height: 24px;
-    margin-right: 12px;
-  }
-</style>
+<Recaptcha bind:verify={recaptchaVerify} />

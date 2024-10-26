@@ -19,7 +19,7 @@
       query(collection(db, 'orders'), where('customer', '==', $user!.id), limit(sizeLimit))
     );
 
-    orders = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as Order));
+    orders = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }) as Order);
   });
 </script>
 

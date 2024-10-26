@@ -1,13 +1,10 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
-  import Button from '$lib/Button.svelte';
   import Dialog from '$lib/Dialog.svelte';
-  import Field from '$lib/Field.svelte';
   import Recaptcha from '$lib/Recaptcha.svelte';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
   import { auth } from '$lib/utils/firebase';
-  import { formatEmail } from '$lib/utils/format-emails';
   import {
     GoogleAuthProvider,
     PhoneAuthProvider,
@@ -25,7 +22,7 @@
   import GoogleButton from '$lib/GoogleButton.svelte';
 
   meta.set({
-    title: 'Sign In',
+    title: 'Sign In'
   });
 
   let email = '';
@@ -48,7 +45,7 @@
   async function submit() {
     const { searchParams } = $page.url;
 
-    email = formatEmail(email);
+    email = email.trim();
 
     if (loading) {
       return;
@@ -210,46 +207,88 @@
   <div id="recaptcha-container-id"></div>
 
   {#if showCodeInput}
-    <div>
-      <Button href="/sign in" on:click={back}>Back to sign in</Button>
-      <p>
-        We have sent you a 6-digit verification code to: <!--<b>{resolver.hints[0].phoneNumber}</b>-->
-      </p>
+    <form on:submit|preventDefault={confirm} class="w-full shadow-xl p-8 rounded">
+      <h2 class="text-lg font-bold mb-4">Verification Code</h2>
 
-      <Field required label="MFA Verification Code:" type="text" bind:value={codeInput} />
+      <div class="flex flex-col gap-2">
+        <p>
+          We have sent you a 6-digit verification code to: <b>{resolver?.hints?.[0]?.phoneNumber}</b
+          >
+        </p>
+        <jp-input
+          label="Verification Code:"
+          value={codeInput}
+          required
+          on:value={(e) => (codeInput = e.detail.value)}
+        ></jp-input>
+      </div>
 
-      <Button loading={confirmLoader} on:click={confirm}>Confirm and sign in</Button>
-    </div>
+      <div class="mt-4">
+        <button type="submit" class="button">Confirm</button>
+      </div>
+
+      <p class="mt-8 mb-2">Sign in with a different account?</p>
+      <button class="underline" type="button" on:click={back}>Back to sign in</button>
+    </form>
   {:else}
     <form on:submit|preventDefault={submit} class="w-full shadow-xl p-8 rounded">
       <h2 class="text-lg font-bold mb-4">Sign In</h2>
       <div class="flex flex-col gap-2">
-        <jp-input label="Email" type="email" value={email} required autocomplete="email" on:value={e => email = e.detail.value} />
-        <jp-input label="Password" {type} value={password} required autocomplete="current-password" on:value={e => password = e.detail.value} />
+        <jp-input
+          label="Email"
+          type="email"
+          value={email}
+          required
+          autocomplete="email"
+          on:value={(e) => (email = e.detail.value)}
+        ></jp-input>
+        <jp-input
+          label="Password"
+          {type}
+          value={password}
+          required
+          autocomplete="current-password"
+          on:value={(e) => (password = e.detail.value)}
+        ></jp-input>
         <div class="mt-[-0.5rem]">
-          <button type="button" class="underline" on:click={toggleVisible}>{type === 'password' ? 'Show password' : 'Hide password'}</button>
+          <button type="button" class="underline" on:click={toggleVisible}
+            >{type === 'password' ? 'Show password' : 'Hide password'}</button
+          >
         </div>
       </div>
 
       <div class="flex flex-wrap gap-4 mt-4">
-        <button class="button" type="button">Sign In</button>
+        <button class="button" type="submit" class:loading>Sign In</button>
         <GoogleButton label="Sign in with google" onClick={loginGoogle} />
       </div>
 
       <p class="mt-8 mb-2">Forgot your password?</p>
-      <button class="underline" type="button" on:click={() => (rDialog = true)}>Reset Password</button>
+      <button class="underline" type="button" on:click={() => (rDialog = true)}
+        >Reset Password</button
+      >
     </form>
   {/if}
 </div>
 
 <Dialog bind:showing={rDialog}>
-  <h3 class="text-3xl mb-4">Forgotten your password?</h3>
+  <h3 class="text-xl md:text-lg mb-4">Forgotten your password?</h3>
+
+  <p class="text-lg md:text-base mb-4">
+    Enter your email address and we will send you a link to reset it.
+  </p>
 
   <form on:submit|preventDefault={resetPassword}>
-    <Field label="Email" type="email" placeholder="your@email.com" bind:value={rEmail} required />
+    <jp-input
+      label="Email"
+      type="email"
+      value={rEmail}
+      required
+      autocomplete="email"
+      on:value={(e) => (rEmail = e.detail.value)}
+    ></jp-input>
 
     <div class="mt-4">
-      <Button type="submit" loading={rLoading}>Reset password</Button>
+      <button type="submit" class="button" class:loading={rLoading}>Reset password</button>
     </div>
   </form>
 </Dialog>

@@ -45,60 +45,60 @@ export class NotificationService {
           const content = compile(notificationData.content)(context);
 
           switch (channelData.type) {
-          case 'email':
-            if (!channelData.emails.length) {
-              throw new Error(
-                `Notification with id ${id} is missing emails for channel with id ${channel}.`
+            case 'email':
+              if (!channelData.emails.length) {
+                throw new Error(
+                  `Notification with id ${id} is missing emails for channel with id ${channel}.`
+                );
+              }
+
+              await Promise.all(
+                channelData.emails.map((email) =>
+                  emailService.sendEmail({
+                    subject: notificationData.name,
+                    to: email,
+                    html: content
+                  })
+                )
               );
-            }
 
-            await Promise.all(
-              channelData.emails.map((email) =>
-                emailService.sendEmail({
-                  subject: notificationData.name,
-                  to: email,
-                  html: content
-                })
-              )
-            );
+              break;
+            case 'cms':
+              if (!channelData.roles.length) {
+                return;
+              }
 
-            break;
-          case 'cms':
-            if (!channelData.roles.length) {
-              return;
-            }
-
-            const users = await Promise.all(
-              channelData.roles.map((role) => fs.collection(role + 's').get())
-            ).then((querySnapshots) => {
-              return querySnapshots.reduce((acc: string[], querySnapshot) => {
-                acc.push(...querySnapshot.docs.map((doc) => doc.id));
-                return acc;
-              }, []);
-            });
-
-            if (!users.length) {
-              return;
-            }
-
-            const batch = fs.batch();
-
-            users.forEach((userId) => {
-              batch.set(fs.collection('cms-notifications').doc(), {
-                name: notificationData.name,
-                content,
-                userId: userId,
-                createdOn: DateTime.now().toUTC().toISO()
+              const users = await Promise.all(
+                channelData.roles.map((role) => fs.collection(role + 's').get())
+              ).then((querySnapshots) => {
+                return querySnapshots.reduce((acc: string[], querySnapshot) => {
+                  acc.push(...querySnapshot.docs.map((doc) => doc.id));
+                  return acc;
+                }, []);
               });
-            });
 
-            await batch.commit();
+              if (!users.length) {
+                return;
+              }
 
-            break;
-          default:
-            throw new Error(
-              `Notification with id ${id} has an invalid channel type: ${channelData.type}.`
-            );
+              const batch = fs.batch();
+
+              users.forEach((userId) => {
+                batch.set(fs.collection('cms-notifications').doc(), {
+                  name: notificationData.name,
+                  content,
+                  userId: userId,
+                  createdOn: DateTime.now().toUTC().toISO()
+                });
+              });
+
+              await batch.commit();
+
+              break;
+            default:
+              throw new Error(
+                `Notification with id ${id} has an invalid channel type: ${channelData.type}.`
+              );
           }
         }
       })

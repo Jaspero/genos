@@ -31,11 +31,11 @@ app.post('/webhook', (req, res) => {
     logger.log(object);
 
     switch (event.type) {
-    case 'invoice.paid':
-      break;
-    case 'invoice.voided':
-    case 'invoice.payment_failed':
-      break;
+      case 'invoice.paid':
+        break;
+      case 'invoice.voided':
+      case 'invoice.payment_failed':
+        break;
     }
   }
 

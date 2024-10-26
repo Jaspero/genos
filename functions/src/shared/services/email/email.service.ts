@@ -37,7 +37,7 @@ export class EmailService {
     const message: EmailTemplate = messageSnap.data() as any;
 
     if (!message?.active) {
-      logger.log('Email doesn\'t exist or is not active', templateId);
+      logger.log("Email doesn't exist or is not active", templateId);
       return;
     }
 

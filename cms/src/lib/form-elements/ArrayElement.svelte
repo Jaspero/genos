@@ -6,9 +6,9 @@
 />
 
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
-  import FormModule from "../FormModule.svelte";
-  import Button from "../Button.svelte";
+  import { createEventDispatcher } from 'svelte';
+  import FormModule from '../FormModule.svelte';
+  import Button from '../Button.svelte';
 
   export let items: any[];
   export let value: any[] = [];
@@ -33,7 +33,7 @@
   }
 
   function change() {
-    dispatch('value', {value})
+    dispatch('value', { value });
   }
 </script>
 
@@ -49,6 +49,7 @@
 {#each value as v}
   <div class="flex gap-2">
     <FormModule {items} bind:value={v} />
-    <Button variant="outlined" color="warn" on:click={() => remove(value.indexOf(v))}>Remove</Button>
+    <Button variant="outlined" color="warn" on:click={() => remove(value.indexOf(v))}>Remove</Button
+    >
   </div>
 {/each}

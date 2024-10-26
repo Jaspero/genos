@@ -74,9 +74,6 @@
     @apply p-6;
   }
 
-  .dialog-content {
-  }
-
   .dialog-actions {
     @apply p-6 flex justify-between flex-wrap gap-4;
   }

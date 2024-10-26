@@ -2,19 +2,17 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config({
   plugins: {
-    '@typescript-eslint': tseslint.plugin,
+    '@typescript-eslint': tseslint.plugin
   },
   languageOptions: {
     parser: tseslint.parser,
     parserOptions: {
       projectService: true,
-      tsconfigRootDir: import.meta.dirname,
-    },
+      tsconfigRootDir: import.meta.dirname
+    }
   },
   files: ['**/*.ts'],
-  ignores: [
-    '/lib/**/*'
-  ],
+  ignores: ['/lib/**/*'],
   rules: {
     quotes: ['error', 'single'],
     'import/no-unresolved': 0,
@@ -23,5 +21,5 @@ export default tseslint.config({
     'max-len': ['warn', 100],
     'no-empty': 'warn',
     '@typescript-eslint/no-explicit-any': 'off'
-  },
+  }
 });

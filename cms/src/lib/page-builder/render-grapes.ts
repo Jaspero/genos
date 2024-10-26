@@ -48,9 +48,7 @@ export function renderGrapes(
         '/css/shared.css',
         '/css/swiper-bundle.css'
       ],
-      scripts: [
-        '/js/swiper-bundle.js'
-      ]
+      scripts: ['/js/swiper-bundle.js']
     },
     container: pageBuilderEl,
     panels: { defaults: [] },
@@ -82,7 +80,7 @@ export function renderGrapes(
     }
   });
 
-  const {DomComponents, TraitManager, StyleManager} = grapesInstance;
+  const { DomComponents, TraitManager, StyleManager } = grapesInstance;
 
   TYPES(forms!).forEach(({ id, ...data }) => DomComponents.addType(id, data));
   CUSTOM_TRAITS.forEach(({ id, ...data }) => TraitManager.addType(id, data));
@@ -104,8 +102,8 @@ export function renderGrapes(
         if (!this.getTrait('muted')) {
           this.addTrait({
             type: 'checkbox',
-            name: 'muted',
-          })
+            name: 'muted'
+          });
         }
       },
 
@@ -113,11 +111,11 @@ export function renderGrapes(
         if (!this.getTrait('playsinline')) {
           this.addTrait({
             type: 'checkbox',
-            name: 'playsinline',
-          })
+            name: 'playsinline'
+          });
         }
       }
-    },
+    }
   });
 
   if (popups) {

@@ -47,7 +47,6 @@
 
   function scrolled(top: number) {
     scrolls.forEach((scroll) => {
-
       if (!scroll.el || !scroll.className) {
         return;
       }

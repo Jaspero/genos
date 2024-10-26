@@ -2,7 +2,7 @@ import { actionsPipe } from '../../../column-pipes/actions.pipe';
 import { checkboxPipe } from '../../../column-pipes/checkbox.pipe';
 import { datePipe } from '../../../column-pipes/date.pipe';
 import { indexPipe } from '../../../column-pipes/index.pipe';
-import {sendSampleEmail} from '../../../send-sample-email/send-sample-email.store';
+import { sendSampleEmail } from '../../../send-sample-email/send-sample-email.store';
 import { collections } from '../../collections';
 
 collections.addCollection('email-templates', {
