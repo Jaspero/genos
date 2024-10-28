@@ -152,8 +152,8 @@
   {/if}
 
   {#if showConfirmation}
-    <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-2xl overflow-auto">
+    <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 overflow-y-scroll">
+      <div class="bg-white rounded-lg shadow-lg p-8 overflow-auto h-[90vh] w-[80vw]" use:clickOutside on:click_outside={() => showConfirmation = false}>
         <h2 class="text-xl font-semibold mb-4">Confirm Release</h2>
         <table class="w-full text-left border-collapse">
           <thead class="bg-gray-100">
