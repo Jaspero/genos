@@ -87,7 +87,7 @@
     </div>
 
     <div class="mt-4">
-      <button type="submit" class="button">Submit</button>
+      <button type="submit" class="button" class:loading>Submit</button>
     </div>
 
     <p class="mt-8 mb-2">You don't need to change your password?</p>
