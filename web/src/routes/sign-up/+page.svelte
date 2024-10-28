@@ -111,7 +111,7 @@
     </div>
 
     <div class="mt-4">
-      <button class="button" type="submit">Sign up</button>
+      <button class="button" type="submit" class:loading>Sign up</button>
     </div>
   </form>
 </div>
