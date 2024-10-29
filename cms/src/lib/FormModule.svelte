@@ -22,6 +22,7 @@
   import '@jaspero/web-components/dist/file-upload.css';
   import '@jaspero/web-components/dist/file-list.wc';
   import '@jaspero/web-components/dist/toggle.wc';
+  import '@jaspero/web-components/dist/toggle.css';
   import '@jaspero/web-components/dist/chips.wc';
   import '@jaspero/web-components/dist/chips.css';
   import '@jaspero/web-components/dist/review-stars.wc';
