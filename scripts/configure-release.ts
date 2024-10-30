@@ -77,7 +77,7 @@ async function exec() {
       /**
        * @type {{[collection: string]: {[id: string]: any}}}
        */
-      const changes = releaseData.changes.reduce((acc: any, change: any) => {
+      const changes = (releaseData?.changes || []).reduce((acc: any, change: any) => {
         if (change.skipGenerateJsonFile) {
           return acc;
         }
