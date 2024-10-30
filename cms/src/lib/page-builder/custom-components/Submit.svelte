@@ -11,7 +11,4 @@
 
 <button type="submit" class="button" {id} on:click|preventDefault={submit}>
   {label}
-  <div class="spin-wrapper">
-    <span class="spinner"></span>
-  </div>
 </button>
