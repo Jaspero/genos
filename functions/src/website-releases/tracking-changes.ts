@@ -43,7 +43,7 @@ for (const track of TRACKED_COLLECTIONS) {
            */
           await ref.update({
             changes: admin.firestore.FieldValue.arrayUnion(
-              document(track, null, oldValue, WEBSITE_URL, 'update')
+              document(track, null, oldValue, WEBSITE_URL, 'delete')
             )
           });
         } else {
@@ -68,7 +68,7 @@ for (const track of TRACKED_COLLECTIONS) {
           };
 
           if (!_.isEmpty(allChanges)) {
-            const documentData = document(track, allChanges, newValue, WEBSITE_URL, 'delete');
+            const documentData = document(track, allChanges, newValue, WEBSITE_URL, 'update');
 
             if (!_.isEmpty(documentData.data)) {
               await ref.update({
