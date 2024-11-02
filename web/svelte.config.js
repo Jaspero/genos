@@ -10,7 +10,8 @@ const config = {
     adapter: adapter({
       pages: '../public/web',
       strict: false,
-      clearBuild: buildConfig.clearBuild
+      clearBuild: buildConfig.clearBuild,
+      deleted: buildConfig.deteleted || []
     }),
     prerender: {
       crawl: true,

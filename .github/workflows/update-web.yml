@@ -43,7 +43,7 @@ jobs:
         run: npm run build:prod
       - name: Configure Release
         id: config
-        run: JOB=start VERSION=partial npm run configure-release
+        run: JOB=start TYPE=partial npm run configure-release
       - name: Commit
         run: |
           git config --local user.email "action@github.com"
