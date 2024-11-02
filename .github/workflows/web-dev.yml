@@ -21,7 +21,7 @@ jobs:
       - name: Create key
         working-directory: web
         run: |
-          echo $SV > key.json
+          echo $SV > dev.json
         env:
           SV: ${{ env.SERVICE_ACCOUNT }}
       - name: Install Dependencies
