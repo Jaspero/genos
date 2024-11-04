@@ -3,6 +3,7 @@ import { indexPipe } from '$lib/column-pipes/index.pipe';
 import { collections } from '../../collections';
 import { getOptions } from '$lib/utils/get-options';
 import { numberPipe } from '$lib/column-pipes/number.pipe';
+import { DateTime } from 'luxon';
 
 collections.addCollection('forms', {
   name: 'Forms',
@@ -57,6 +58,12 @@ collections.addCollection('forms', {
   ],
   initialSort: { key: 'name', direction: 'asc' },
   editKey: 'name',
+  preSubmit: async (id, value) => {
+    value.lastUpdatedOn = DateTime.now().toUTC().toISO()
+  },
+  preCreate: async (id, value) => {
+    value.createdOn = DateTime.now().toUTC().toISO()
+  },
   form: async () => [
     {
       component: 'jp-input',

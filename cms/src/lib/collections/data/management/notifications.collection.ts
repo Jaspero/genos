@@ -1,9 +1,10 @@
-import { indexPipe } from '../../../column-pipes/index.pipe';
-import { collections } from '../../collections';
-import { getOptions } from '$lib/utils/get-options';
-import { populateArrayPipe } from '$lib/column-pipes/populate-array.pipe';
-import { quillFiled } from '$lib/form-fields/quill.field';
-import { actionsPipe } from '../../../column-pipes/actions.pipe';
+import {populateArrayPipe} from '$lib/column-pipes/populate-array.pipe';
+import {quillFiled} from '$lib/form-fields/quill.field';
+import {getOptions} from '$lib/utils/get-options';
+import {actionsPipe} from '../../../column-pipes/actions.pipe';
+import {indexPipe} from '../../../column-pipes/index.pipe';
+import {collections} from '../../collections';
+import { DateTime } from 'luxon';
 
 collections.addCollection('notifications', {
   name: 'Notifications',
@@ -30,6 +31,12 @@ collections.addCollection('notifications', {
       pipes: [actionsPipe()]
     }
   ],
+  preSubmit: async (id, value) => {
+    value.lastUpdatedOn = DateTime.now().toUTC().toISO()
+  },
+  preCreate: async (id, value) => {
+    value.createdOn = DateTime.now().toUTC().toISO()
+  },
   form: async () => [
     {
       component: 'jp-input',

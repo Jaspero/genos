@@ -2,81 +2,80 @@
  * Intended for updating release status from firestore
  */
 import admin from 'firebase-admin';
-import { document, TRACKED_COLLECTIONS } from '../shared/consts/tracked-collection.const';
+import { document, TRACKED_COLLECTIONS, type ChangeDocument } from '../shared/consts/tracked-collection.const';
 import { writeFile, readFile } from 'fs/promises';
 import { existsSync, mkdirSync } from 'fs';
 // @ts-ignore
 import credential from '../web/key.json';
 import { CONFIG } from '../web/src/lib/consts/config.const';
 import { DateTime } from 'luxon';
+import { join } from 'path';
 
 admin.initializeApp({
+  // @ts-ignore
   credential: admin.credential.cert(credential)
 });
 
 const job = process.env.JOB;
-const type = (process.env.VERSION || '').trim();
-let release = process.env.RELEASE;
+const type = (process.env.TYPE || '').trim();
+
+console.log(`Running configure release with configuration:`);
+console.log(`Job: ${job}`);
+console.log(`Type: ${type}`);
 
 async function exec() {
   const fs = admin.firestore();
 
   switch (job) {
     case 'start': {
-      let vr = 1;
-      let changesConfigured = false;
+      let release = process.env.RELEASE as string;
 
       const doc = await fs.doc('releases/status').get();
-
-      if (doc.exists) {
-        const version = doc.data()?.release;
-
-        if (version) {
-          vr = version;
-
-          if (type === 'partial') {
-            const changesDoc = await fs.doc(`releases/${version}`).get();
-            const changes = changesDoc?.data()?.changes || [];
-
-            if (changes.length) {
-              await writeFile(
-                'build-config.json',
-                JSON.stringify({
-                  clearBuild: false,
-                  pages: changes.map((c: any) => c.page)
-                })
-              );
-              changesConfigured = true;
-            }
-          }
-        }
-      }
-
-      if (!changesConfigured) {
-        await writeFile(
-          'build-config.json',
-          JSON.stringify({
-            clearBuild: true,
-            pages: ['/sitemap-hidden']
-          })
-        );
-      }
 
       /**
        * Collection indexes
        */
       if (!release) {
-        release = doc?.data()?.release || 1;
+        release = (doc?.data()?.release || 1).toString();
       }
 
-      /**
-       * @type {{changes: {data: any; collection: string; id: string}[]}}
-       */
-      const releaseData = (await fs.doc(`releases/${release.toString()}`).get()).data() as any;
+      console.log(`Release:`, release);
 
-      /**
-       * @type {{[collection: string]: {[id: string]: any}}}
-       */
+      const releaseData = (await fs.doc(`releases/${release}`).get()).data() as {changes: ChangeDocument[]};
+      const config: {
+        clearBuild: boolean;
+        pages: string[];
+        deteleted: string[];
+        crawl: boolean
+      } = {
+        clearBuild: true,
+        crawl: true,
+        pages: ['/sitemap-hidden'],
+        deteleted: []
+      };
+
+      console.log(`Changes:`, releaseData?.changes);
+
+      if (type === 'partial' && releaseData?.changes?.length) {
+        config.clearBuild = false;
+        config.crawl = false;
+        config.pages = (releaseData?.changes || [])
+          .filter(c => c.type === 'create' || c.type === 'update')
+          .map((c: any) => c.page)
+          .filter((value, index, array) => array.indexOf(value) === index);
+        config.deteleted = (releaseData?.changes || [])
+          .filter(c => c.type === 'delete')
+          .map((c: any) => c.page)
+          .filter((value, index, array) => array.indexOf(value) === index);
+      }
+
+      console.log(`Config:`, config);
+
+      await writeFile(
+        join(__dirname, '../web/build-config.json'),
+        JSON.stringify(config)
+      );
+
       const changes = (releaseData?.changes || []).reduce((acc: any, change: any) => {
         if (change.skipGenerateJsonFile) {
           return acc;
@@ -95,9 +94,7 @@ async function exec() {
        * Get json data
        */
       const keys = Object.keys(changes);
-      /**
-       * @type {Promise<{<{[key: string]: any}[]>[]>}
-       */
+
       const collectionsJsonData = await Promise.all(
         keys.map((collection) =>
           readFile('./public/web/' + collection + '.json')
@@ -210,7 +207,7 @@ async function exec() {
     }
     case 'finish': {
       const doc = await fs.doc('releases/status').get();
-      release = parseInt(release, 10) || (doc.exists ? doc?.data()?.release : 0);
+      const release = parseInt(process.env.RELEASE as string, 10) || (doc.exists ? doc?.data()?.release : 0);
 
       const date = DateTime.now().toUTC().toISO();
 

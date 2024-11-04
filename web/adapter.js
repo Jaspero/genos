@@ -20,16 +20,23 @@ export default function (options) {
         }
       }
 
-      const { pages = 'build', assets = pages, fallback, precompress } = options;
+      const { pages = 'build', assets = pages, fallback, precompress, deleted = [], clearBuild } = options;
 
-      if (options.clearBuild) {
+      if (clearBuild) {
         builder.rimraf(assets);
         builder.rimraf(pages);
       }
 
+      console.log(deleted);
+      if (deleted) {
+        await Promise.all(
+          deleted.map(file => builder.rimraf(file))
+        )
+      }
+
       builder.generateEnvModule();
 
-      if (options.clearBuild) {
+      if (clearBuild) {
         builder.writeClient(assets);
       }
 

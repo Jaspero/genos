@@ -173,7 +173,7 @@
 </div>
 
 {#if lastRef}
-  <button type="button" disabled={loading || resetLoading} on:click={loadMore}
+  <button type="button" class:loading={loading || resetLoading} on:click={loadMore}
     >{loadMoreLabel}</button
   >
 {/if}

@@ -1,10 +1,10 @@
 <script lang="ts">
   import { classList } from '$lib/actions/class-list';
   import { page } from '$app/stores';
-  import { browser, dev } from '$app/environment';
+  import { browser } from '$app/environment';
   import { meta } from '$lib/meta/meta.store';
   import './components';
-  import { onDestroy, onMount } from 'svelte';
+  import { onDestroy } from 'svelte';
   import type { Page } from '@sveltejs/kit';
   import type { Unsubscriber } from 'svelte/store';
 
@@ -64,33 +64,49 @@
       await new Promise((r) => setTimeout(r, 50));
     }
 
-    if (!window.swipers) {
-      return;
+    let attempts = 0;
+
+    while (!window.swipers && attempts < 100) {
+      await new Promise((r) => setTimeout(r, 50));
+      attempts++;
     }
 
-    if (!Object.keys(window.swipers).length) {
+    if (!window.swipers || !Object.keys(window.swipers).length) {
       return;
     }
 
     for (const key in window.swipers) {
       const { swiper, id } = window.swipers![key];
-      const el = document.getElementById(id);
+      
+      let el = document.getElementById(id);
+
+      let attempts = 0;
+
+      while (!el && attempts < 100) {
+        await new Promise((r) => setTimeout(r, 50));
+        el = document.getElementById(id);
+      }
 
       if (el) {
-        swiper(el);
+        if (!window.swiperInstances) {
+          window.swiperInstances = {};
+        }
+
+        window.swiperInstances[key] = swiper(el);
       }
     }
   }
 
   function pageChange(page: Page) {
     if (browser) {
-      renderSwiper().catch();
 
       if (data.scripts) {
         const script = document.createElement('script');
         script.innerHTML = data.scripts;
         document.body.appendChild(script);
       }
+
+      renderSwiper().catch();
     }
 
     scrollTrackers = [];
@@ -221,10 +237,6 @@
       }
     }
   }
-
-  onMount(() => {
-    pageChange($page);
-  });
 
   onDestroy(() => {
     if (unsubscribe) {
