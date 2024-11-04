@@ -10,6 +10,7 @@
   import '@jaspero/web-components/dist/multisearch.wc';
   import '@jaspero/web-components/dist/multisearch.css';
   import '@jaspero/web-components/dist/datepicker.wc';
+  import '@jaspero/web-components/dist/datepicker.css';
   import '@jaspero/web-components/dist/ckeditor.wc';
   import '@jaspero/web-components/dist/ckeditor.css';
   import '@jaspero/web-components/dist/textarea.wc';
