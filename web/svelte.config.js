@@ -14,7 +14,7 @@ const config = {
       deleted: buildConfig.deteleted || []
     }),
     prerender: {
-      crawl: true,
+      crawl: buildConfig.crawl,
       handleMissingId: 'warn',
       entries: buildConfig.pages
     }

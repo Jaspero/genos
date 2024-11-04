@@ -27,6 +27,7 @@ export default function (options) {
         builder.rimraf(pages);
       }
 
+      console.log(deleted);
       if (deleted) {
         await Promise.all(
           deleted.map(file => builder.rimraf(file))

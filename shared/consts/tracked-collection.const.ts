@@ -35,7 +35,7 @@ export const TRACKED_COLLECTIONS: TrackedCollection[] = [
     collection: 'pages',
     titleKey: 'title',
     urlKey: 'url',
-    prefix: '/pages',
+    prefix: '',
     keysToTrack: ['id', 'title', 'lastUpdatedOn'],
     skipGenerateJsonFile: true
   }
