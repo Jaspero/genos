@@ -4,7 +4,7 @@ on:
 
 env:
   project: 'genos-ec52a'
-  bucket: 'gs://genos-ec52a.appspot.com'
+  bucket: 'gs://genos-ec52a.firebasestorage.app'
 
 jobs:
   deploy:
