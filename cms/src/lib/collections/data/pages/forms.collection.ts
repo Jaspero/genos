@@ -62,6 +62,7 @@ collections.addCollection('forms', {
     value.lastUpdatedOn = DateTime.now().toUTC().toISO()
   },
   preCreate: async (id, value) => {
+    value.responses = 0;
     value.createdOn = DateTime.now().toUTC().toISO()
   },
   form: async () => [
