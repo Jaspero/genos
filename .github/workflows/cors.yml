@@ -10,7 +10,7 @@ jobs:
   deploy:
     timeout-minutes: 5
     name: Deploy
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
