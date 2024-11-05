@@ -1,0 +1,27 @@
+name: Dev | Deploy CMS
+on:
+  workflow_dispatch: # This trigger allows the workflow to be run manually
+env:
+  PROJECT: wonkawave-dev
+  SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT_DEV }}
+  TARGET: cms
+jobs:
+  build_and_deploy:
+    runs-on: [self-hosted]
+    steps:
+      - name: Use Node.js 20.9.0
+        uses: actions/setup-node@v1
+        with:
+          node-version: 20.9.0
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      - name: Build
+        run: npm ci --prefix cms --legacy-peer-deps && npm run build:dev --prefix cms
+      - name: Deploy
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: ${{ env.SERVICE_ACCOUNT }}
+          channelId: live
+          projectId: ${{ env.PROJECT }}
+          target: ${{ env.TARGET }}

@@ -1,0 +1,68 @@
+name: Dev | Deploy Web
+on:
+  workflow_dispatch:
+env:
+  PROJECT: wonkawave-dev
+  SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT_DEV }}
+  TARGET: web
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use Node.js 20.9.0
+        uses: actions/setup-node@v1
+        with:
+          node-version: 20.9.0
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Create key
+        working-directory: web
+        run: |
+          echo $SV > dev.json
+        env:
+          SV: ${{ env.SERVICE_ACCOUNT }}
+      - name: Install Dependencies
+        run: npm ci
+      - name: Install Dependencies
+        working-directory: web
+        run: npm ci
+      - name: Build
+        working-directory: web
+        run: npm run build:dev
+      - name: Configure Release
+        id: config
+        run: JOB=start npm run configure-release
+      - name: Deploy
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: ${{ env.SERVICE_ACCOUNT }}
+          channelId: live
+          projectId: ${{ env.PROJECT }}
+          target: ${{ env.TARGET }}
+      - name: Commit
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -f --all web/.svelte-kit
+          git add -f --all web/node_modules
+          git add -f --all public
+          git commit -m "BOT - Connected build branch"
+      # Remove the build branch in case it already exists
+      # this ensures clean code
+      - name: Delete build branch
+        uses: dawidd6/action-delete-branch@v3
+        with:
+          github_token: ${{ github.token }}
+          branches: build-dev
+      - name: Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: 'build-dev'
+          force: true
+      - name: Update Release Status
+        run: JOB=finish npm run configure-release

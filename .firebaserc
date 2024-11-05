@@ -1,0 +1,27 @@
+{
+  "targets": {
+    "wonkawave": {
+      "hosting": {
+        "web": [
+          "wonkawave"
+        ],
+        "cms": [
+          "wonkawave-cms"
+        ]
+      }
+    },
+    "wonkawave-dev": {
+      "hosting": {
+        "web": [
+          "wonkawave-dev"
+        ],
+        "cms": [
+          "wonkawave-dev-cms"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "wonkawave"
+  }
+}
