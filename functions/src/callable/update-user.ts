@@ -1,19 +1,21 @@
-import {auth} from 'firebase-admin';
-import * as functions from 'firebase-functions';
-import {STATIC_CONFIG} from '../consts/static-config.const';
+import { onCall } from 'firebase-functions/v2/https';
+import { REGION } from '../shared/consts/region.const';
+import { hasRole } from '../shared/utils/authenticate';
+import { getAuth } from 'firebase-admin/auth';
+import { getFirestore } from 'firebase-admin/firestore';
 
-export const updateUser = functions
-  .region(STATIC_CONFIG.cloudRegion)
-  .https
-  .onCall(async (data, context) => {
-    if (!context.auth || !context.auth.token.role) {
-      throw new functions.https.HttpsError(
-        'failed-precondition',
-        'The function must be called ' + 'while authenticated.'
-      );
-    }
+export const updateUser = onCall({ maxInstances: 1, region: REGION }, async (request) => {
+  hasRole(request, ['admin']);
 
-    const {id, ...update} = data;
+  const auth = getAuth();
+  const fs = getFirestore();
+  const { collection, ...data } = request.data.data;
 
-    await auth().updateUser(id, update);
-  });
+  await auth.updateUser(request.data.id, data);
+
+  if (collection && data.email) {
+    await fs.collection(collection).doc(request.data.id).update({
+      email: data.email
+    });
+  }
+});

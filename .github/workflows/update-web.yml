@@ -1,0 +1,65 @@
+name: Prod | Update Web
+on:
+  workflow_dispatch:
+    inputs:
+      type:
+        description: 'Release Type'
+        required: true
+        default: 'full'
+        type: choice
+        options:
+          - full
+          - partial
+      release:
+        description: 'Release Version'
+        required: false
+env:
+  PROJECT: genos-ec52a
+  SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
+  TARGET: web
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use Node.js 20.9.0
+        uses: actions/setup-node@v1
+        with:
+          node-version: 20.9.0
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Create key
+        working-directory: web
+        run: |
+          echo $SV > prod.json
+        env:
+          SV: ${{ env.SERVICE_ACCOUNT }}
+      - name: Build
+        if: contains(github.ref, 'build')
+        working-directory: web
+        run: npm run build:prod
+      - name: Configure Release
+        id: config
+        run: JOB=start TYPE=partial npm run configure-release
+      - name: Commit
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -f --all web/.svelte-kit
+          git add -f --all public
+          git commit -m "BOT - update build branch"
+      - name: Deploy
+        if: contains(github.ref, 'build')
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: ${{ env.SERVICE_ACCOUNT }}
+          channelId: live
+          projectId: ${{ env.PROJECT }}
+          target: ${{ env.TARGET }}
+      - name: Update Release Status
+        if: contains(github.ref, 'build')
+        run: JOB=finish npm run configure-release

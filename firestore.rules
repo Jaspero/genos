@@ -1,42 +1,184 @@
 rules_version = '2';
+
 service cloud.firestore {
-  function access(database, module, operation) {
-    return
-      !get(/databases/$(database)/documents/modules/$(module)).data.authorization.keys().hasAll([operation])||
-      request.auth.token.role in get(/databases/$(database)/documents/modules/$(module)).data.authorization[operation]
-  }
 
   function authenticated() {
     return request.auth.token != null;
   }
 
   function admin() {
-    return request.auth.token.role == 'admin';
+    return authenticated() && request.auth.token.role == 'admin';
   }
 
   match /databases/{database}/documents {
 
-    match /settings/user {
+    match /admins/{adminId} {
+      allow get: if adminId == request.auth.uid || admin();
+      allow list: if admin();
+      allow update: if (
+          adminId == request.auth.uid &&
+          !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'createdOn'])
+        ) || admin();
+      allow delete: if adminId == request.auth.uid || admin();
+    }
+
+    match /users/{userId} {
+      allow get: if userId == request.auth.uid || admin();
+      allow list: if admin();
+      allow update: if admin();
+      allow delete: if userId == request.auth.uid || admin();
+    }
+
+    match /releases/{releaseId} {
+      allow write, read: if admin();
+    }
+
+    match /release-history/{releaseId} {
+      allow write, read: if admin();
+    }
+
+    match /coupons/{document=**} {
+      allow read: if true;
+      allow write: if admin();
+    }
+
+    match /customers/{customer} {
+      allow read: if admin() || ((authenticated() && request.auth.uid == customer));
+      // TODO: Allow only updating of some fields
+      allow write: if admin() || ((authenticated() && request.auth.uid == customer));
+    }
+
+    match /products/{document=**} {
+      allow read: if true;
+      allow write: if admin();
+
+      match /reviews/{review} {
+      	allow read: if true;
+        allow write: if admin();
+      }
+    }
+
+    match /blog-articles/{document} {
+      allow read: if true;
+      allow write: if admin();
+
+      match /blog-comments/{comment} {
+        allow list: if true || admin();
+        allow get: if admin();
+        allow create: if admin() || (
+          authenticated() &&
+          request.resource.data.author == request.auth.uid &&
+          request.resource.data.keys().hasOnly(
+            ['author', 'authorName', 'comment', 'createdOn']
+          )
+        );
+        allow update: if admin() || (
+          request.resource.data.author == request.auth.uid &&
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['comment', 'authorName'])
+        );
+        allow delete: if admin() || (resource.data.author == request.auth.uid);
+      }
+    }
+
+    match /blog-categories/{document} {
+      allow read: if true;
+      allow write: if admin();
+    }
+
+    match /blog-authors/{document} {
+      allow read: if true;
+      allow write: if admin();
+    }
+
+    match /email-templates/{document=**} {
       allow read, write: if admin();
     }
 
-    match /settings/layout {
-      allow read: if authenticated();
+    match /email-template-layouts/{document=**} {
+      allow read, write: if admin();
+    }
+
+    match /tags/{document} {
+      allow read: if true;
       allow write: if admin();
     }
 
-    match /users/{user=**} {
-      allow read, write: if access(database, 'users', 'read') || resource.id == request.auth.uid;
-    }
-
-    match /modules/{module=**} {
-      allow read: if authenticated();
+    match /products/{document} {
+      allow read: if true;
       allow write: if admin();
     }
 
-    match /{module}/{document=**} {
-      allow read: if access(database, module, 'read');
-      allow write: if access(database, module, 'write');
+    match /coupons/{document} {
+      allow read: if admin()
+      allow write: if admin();
+    }
+
+    match /discounts/{document} {
+      allow read: if true;
+      allow write: if admin();
+    }    
+
+    match /orders/{document} {
+      allow read: if admin() || (authenticated() && request.auth.uid == resource.data.customer);
+      allow write: if admin();
+    }
+
+    match /categories/{document} {
+      allow read: if true;
+      allow write: if admin();
+    }
+
+    match /pages/{id=**} {
+      allow read: if true;
+      allow write: if admin();
+    }    
+
+    match /sections/{id=**} {
+      allow read: if true;
+      allow write: if admin();
+    }
+
+    match /templates/{id=**} {
+      allow read: if true;
+      allow write: if admin();
+    }
+
+    match /popups/{id=**} {
+      allow read: if true;
+      allow write: if admin();
+    }
+
+    match /layouts/{id=**} {
+      allow read: if true;
+      allow write: if admin();
+    }
+
+    match /notification-channels/{id=**} {
+      allow read: if admin();
+      allow write: if admin();
+    }
+
+    match /cms-notifications/{id=**} {
+      allow read: if admin();
+      allow write: if admin();
+    }
+
+    match /notifications/{id=**} {
+      allow read: if admin();
+      allow write: if admin();
+    }
+
+    match /forms/{form} {
+      allow read, write: if admin();
+
+      match /form-responses/{id} {
+        allow read: if admin();
+        allow write: if true;
+      }
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }

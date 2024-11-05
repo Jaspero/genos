@@ -1,41 +1,42 @@
-import {initializeApp} from 'firebase-admin';
-import {createUser} from './callable/create-user';
-import {getUser} from './callable/get-user';
-import {removeUser} from './callable/remove-user';
-import {triggerPasswordReset} from './callable/trigger-password-reset';
-import {updateEmail} from './callable/update-email';
-import {updateUser} from './callable/update-user';
-import {actionController} from './rest/action-controller';
-import {exportData} from './rest/export-data';
-import {importData} from './rest/import-data';
-import {documentDeleted} from './triggers/document-deleted';
-import {fileCreated} from './triggers/file-created';
-import {fileDeleted} from './triggers/file-deleted';
-import {userCreated} from './triggers/user-created';
-import {userDeleted} from './triggers/user-deleted';
-import {userDocumentUpdated} from './triggers/user-document-updated';
+import { initializeApp } from 'firebase-admin/app';
+import { tracking } from './website-releases/tracking-changes';
+import { releaseUpdated } from './website-releases/release-updated';
 
 initializeApp();
 
-export const cms = {
-  // Triggers
-  userCreated,
-  userDeleted,
-  userDocumentUpdated,
-  fileCreated,
-  fileDeleted,
-  documentDeleted,
-  triggerPasswordReset,
+/**
+ * Callable
+ */
+// export {processCheckout} from './callable/process-checkout';
+export { createAdmin } from './callable/create-admin';
+export { updateUser } from './callable/update-user';
+export { sendSampleEmail } from './callable/send-sample-email';
 
-  // Callable
-  createUser,
-  removeUser,
-  updateUser,
-  getUser,
-  updateEmail,
+/**
+ * Triggers
+ */
+export { adminUpdated } from './triggers/admin-updated';
+export { adminDeleted } from './triggers/admin-deleted';
+export { userCreated } from './triggers/user-created';
+export { productCreated } from './triggers/product-created';
+export { formResponsesCreated } from './triggers/form-responses-created';
+export { formResponsesDeleted } from './triggers/form-responses-deleted';
 
-  // Rest
-  exportData,
-  importData,
-  actionController
+// Pages cleanup
+export { pageDeleted } from './triggers/page-deleted';
+export { layoutDeleted } from './triggers/layout-deleted';
+export { popupDeleted } from './triggers/popup-deleted';
+export { sectionDeleted } from './triggers/section-deleted';
+export { templateDeleted } from './triggers/template-deleted';
+
+/**
+ * Rest
+ */
+export { actionController } from './rest/action-controller';
+export { emailTracking } from './rest/email-tracking';
+// export {stripeWebhook} from './rest/stripe-webhook';
+
+export const websiteReleaseTracking = tracking;
+export const websiteReleases = {
+  releaseUpdated
 };

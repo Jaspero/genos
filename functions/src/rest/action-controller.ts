@@ -1,19 +1,19 @@
-import * as functions from 'firebase-functions';
-import {unescape} from 'querystring';
-import {STATIC_CONFIG} from '../consts/static-config.const';
+import { onRequest } from 'firebase-functions/v2/https';
+import { REGION } from '../shared/consts/region.const';
+import { unescape } from 'querystring';
 
-/**
- * Redirects the sender to the continueUrl
- * from the query param
- */
-export const actionController = functions
-  .region(STATIC_CONFIG.cloudRegion)
-  .https
-  .onRequest((req, res) => {
-    res.redirect(
-      unescape(req.query.continueUrl as string) +
-      `?` + Object.entries(req.query)
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&')
-    )
-  });
+export const actionController = onRequest(
+  {
+    region: REGION,
+    maxInstances: 10
+  },
+  (request, response) => {
+    response.redirect(
+      unescape(request.query.continueUrl as string) +
+        '?' +
+        Object.entries(request.query)
+          .map(([key, value]) => `${key}=${value}`)
+          .join('&')
+    );
+  }
+);

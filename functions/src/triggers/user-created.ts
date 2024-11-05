@@ -1,52 +1,23 @@
-import {auth, firestore} from 'firebase-admin';
+import { firestore } from 'firebase-admin';
 import * as functions from 'firebase-functions';
-import {STATIC_CONFIG} from '../consts/static-config.const';
-import {FirestoreCollection} from '../enums/firestore-collections.enum';
+import { REGION } from '../shared/consts/region.const';
 
 export const userCreated = functions
-  .region(STATIC_CONFIG.cloudRegion)
-  .auth
-  .user()
-  .onCreate(async user => {
-    const documentRef = await firestore()
-      .doc('settings/user')
-      .get();
-    const roles: Array<{role: string; email: string}> =
-      (documentRef.data() || {}).roles || [];
-    const role = roles.find(ro => ro.email === user.email);
-
-    if (role) {
-      const customClaims = {
-        role: role.role
-      };
-
-      auth().setCustomUserClaims(user.uid, customClaims)
-        .catch(error => {
-          console.error('Setting custom claims', error);
-        });
+  .region(REGION)
+  .auth.user()
+  .onCreate(async (user) => {
+    if (!user.email || user.customClaims?.role) {
+      return;
     }
 
-    firestore()
-      .collection(FirestoreCollection.Users)
-      .doc(user.uid)
-      .set({
-        createdOn: Date.now(),
-        email: user.email,
+    const fs = firestore();
 
-        /**
-         * Assign providerData if it's an admin
-         * for easier reference
-         */
-        ...role ? {
-          providerData: user.providerData.map((it: any) => it.providerId),
-          role: role.role
-        } : {
-          role: ''
-        }
-      })
-      .catch(error => {
-        console.error('Creating user', error);
+    const userDoc = await fs.collection('customers').doc(user.uid).get();
+
+    if (!userDoc.exists) {
+      await fs.collection('customers').doc(user.uid).set({
+        createdOn: user.metadata.creationTime,
+        email: user.email
       });
-
-    return true;
+    }
   });

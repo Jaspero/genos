@@ -1,21 +1,40 @@
-![Deploy CMS](https://github.com/Jaspero/genos/workflows/Deploy%20CMS/badge.svg)
-![Deploy Functions](https://github.com/Jaspero/genos/workflows/Deploy%20Functions/badge.svg)
-![Deploy Firestore Indexes](https://github.com/Jaspero/genos/workflows/Deploy%20Firestore%20Indexes/badge.svg)
-![Deploy Storage Rules](https://github.com/Jaspero/genos/workflows/Deploy%20Storage%20Rules/badge.svg)
-![Deploy Rules](https://github.com/Jaspero/genos/workflows/Deploy%20Rules/badge.svg)
+# Webshop Template
 
-# Genos
-This is the full source code for the [Genos](https://genos.com/) website.
-Genos is built in [Svelte](https://github.com/sveltejs/sveltejs) and the database and hosting is on [Firebase](https://firebase.google.com/). 
+[![Prod | Deploy Web](https://github.com/Jaspero/webshop-template/actions/workflows/webshop.yml/badge.svg)](https://github.com/Jaspero/webshop-template/actions/workflows/webshop.yml)
 
-Content management is done through [JMS](https://github.com/Jaspero/jms) our open source content management system. 
+[![Prod | Deploy CMS](https://github.com/Jaspero/webshop-template/actions/workflows/cms.yml/badge.svg)](https://github.com/Jaspero/webshop-template/actions/workflows/cms.yml)
 
-## Why is this open source 
+[![Prod | Deploy Functions](https://github.com/Jaspero/webshop-template/actions/workflows/functions.yml/badge.svg)](https://github.com/Jaspero/webshop-template/actions/workflows/functions.yml)
 
-Jaspero benefits greatly from the open source community. This app in its entirety is made possible because of open source software. Because of this we try to open source as many of our projects as we can. 
+[![Prod | Deploy Firestore Indexes](https://github.com/Jaspero/webshop-template/actions/workflows/indexes.yml/badge.svg)](https://github.com/Jaspero/webshop-template/actions/workflows/indexes.yml)
 
-We don't have the required manpower and experties to build frameworks and tools the community could directly use in building awesome software, by open sourcing our projects we hope people can find inspiration or code snippets to speed up development. 
+[![Prod | Deploy Rules](https://github.com/Jaspero/webshop-template/actions/workflows/rules.yml/badge.svg)](https://github.com/Jaspero/webshop-template/actions/workflows/rules.yml)
 
-## License 
+[![Prod | Deploy Storage Rules](https://github.com/Jaspero/webshop-template/actions/workflows/storage.yml/badge.svg)](https://github.com/Jaspero/webshop-template/actions/workflows/storage.yml)
 
-The source code is published under MIT © [Jaspero Ltd](mailto:info@jaspero.co) and all media assets are property of [Genos Ltd](glauc@genos.hr)
+- [Web](https://genos-ec52a.web.app/)
+- [CMS](https://genos-ec52a-cms.web.app/)
+- [Figma Wireframe](https://www.figma.com/file/Pb7saI2I3K9cUzVTPDdwkK/shopify-wireframe?type=design&node-id=0-1&mode=design&t=zCZIj2pcwiuDl1BE-0)
+
+## Getting Started
+
+- Enable Blaze plan on firebase
+- Enable Firestore, Storage, Authentication (including google authentication).
+- Enable the identity platform
+- Enable Multi Factor Authentication
+- Set up an additional hosting site [project]-cms
+- On the authorized domains page add the added site as well as the main domain website if there is one
+- Change the configuration in all of the workflows
+- Change the env-config files throughout the project
+- Change the .firebaserc targets
+- Change the action URL in authenticaiton templates to `https://europe-west1-[project].cloudfunctions.net/actioncontroller`
+- Download a service account and store it in `web/key.json`
+- Add the service account to GitHub secrets with the name SERVICE_ACCOUNT
+- To enable website releases you'll need to generate a github token and add it to GCE-s secret manager under the name `GITHUB_TOKEN`
+- Look for any `TODO(Project Specific)` references in the codebase and update them accordingly
+
+## Release Checklist
+
+- Make sure `404` page is added to the pages.
+- Theme colors are adjuste in: `cms/tailwind.config.js`, `web/tailwind.config.js`, `shared/styles/core.pcss` and `cms/src/app.pcss`
+- Make sure a favicon is added for both the CMS and the Website
