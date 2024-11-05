@@ -12,8 +12,8 @@
 
 [![Prod | Deploy Storage Rules](https://github.com/Jaspero/webshop-template/actions/workflows/storage.yml/badge.svg)](https://github.com/Jaspero/webshop-template/actions/workflows/storage.yml)
 
-- [Web](https://wonkawave.web.app/)
-- [CMS](https://wonkawave-cms.web.app/)
+- [Web](https://genos-ec52a.web.app/)
+- [CMS](https://genos-ec52a-cms.web.app/)
 - [Figma Wireframe](https://www.figma.com/file/Pb7saI2I3K9cUzVTPDdwkK/shopify-wireframe?type=design&node-id=0-1&mode=design&t=zCZIj2pcwiuDl1BE-0)
 
 ## Getting Started

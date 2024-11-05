@@ -1,12 +1,12 @@
 export const ENV_CONFIG = {
   firebase: {
-    apiKey: 'AIzaSyCv9dQEwPOLoV_Cdn8NKLhNqA9bYb9Umew',
-    authDomain: 'wonkawave.firebaseapp.com',
-    projectId: 'wonkawave',
-    storageBucket: 'wonkawave.appspot.com',
-    messagingSenderId: '100370175739',
-    appId: '1:100370175739:web:9fac4ef481495e6f5b425e',
-    measurementId: 'G-JLW8F5W78G'
+    apiKey: "AIzaSyB1wW9Hh8dvPOvXpaHFahMI3p-yMQMgx4M",
+    authDomain: "genos-ec52a.firebaseapp.com",
+    projectId: "genos-ec52a",
+    storageBucket: "genos-ec52a.firebasestorage.app",
+    messagingSenderId: "544288786381",
+    appId: "1:544288786381:web:75c86003e37636bc6c2684",
+    measurementId: "G-7V96J4SS0Q"
   },
   region: 'europe-west1'
 };

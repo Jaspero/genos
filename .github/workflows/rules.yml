@@ -8,7 +8,7 @@ on:
       - 'firestore.rules'
       - '.github/workflows/rules.yml'
 env:
-  PROJECT: wonkawave
+  PROJECT: genos-ec52a
   SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
 jobs:
   deploy:

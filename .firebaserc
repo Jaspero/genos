@@ -1,27 +1,17 @@
 {
   "targets": {
-    "wonkawave": {
+    "genos-ec52a": {
       "hosting": {
         "web": [
-          "wonkawave"
+          "genos-ec52a"
         ],
         "cms": [
-          "wonkawave-cms"
-        ]
-      }
-    },
-    "wonkawave-dev": {
-      "hosting": {
-        "web": [
-          "wonkawave-dev"
-        ],
-        "cms": [
-          "wonkawave-dev-cms"
+          "genos-ec52a-cms"
         ]
       }
     }
   },
   "projects": {
-    "default": "wonkawave"
+    "default": "genos-ec52a"
   }
 }

@@ -8,7 +8,7 @@ on:
       - 'web/**/*'
       - 'shared/**/*'
 env:
-  PROJECT: wonkawave
+  PROJECT: genos-ec52a
   SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
   TARGET: web
 jobs:

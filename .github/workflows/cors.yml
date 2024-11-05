@@ -3,8 +3,8 @@ on:
   workflow_dispatch:
 
 env:
-  project: 'wonkawave'
-  bucket: 'gs://wonkawave.appspot.com'
+  project: 'genos-ec52a'
+  bucket: 'gs://genos-ec52a.appspot.com'
 
 jobs:
   deploy:
