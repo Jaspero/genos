@@ -92,13 +92,18 @@
           window.swiperInstances = {};
         }
 
-        window.swiperInstances[key] = swiper(el);
+        if (!window.swiperInstances[key]) {
+          window.swiperInstances[key] = swiper(el);
+        }
       }
     }
   }
 
   function pageChange(page: Page) {
     if (browser) {
+      if (window.swiperInstances && Object.keys(window.swiperInstances).length) {
+        window.swiperInstances = {};
+      }
 
       if (data.scripts) {
         const script = document.createElement('script');
