@@ -98,7 +98,7 @@
     switch (activeSidebar) {
       case 'blocks': {
         if (blocksEl) {
-          const el = grapesInstance.BlockManager.render(BLOCKS(forms, popups), { external: true });
+          const el = grapesInstance.BlockManager.render(BLOCKS(grapesInstance, forms, popups), { external: true });
           blocksEl.appendChild(el);
         }
         break;

@@ -1,25 +1,28 @@
 import '@jaspero/web-components/dist/asset-manager.wc';
-import grapesjs, { type Editor } from 'grapesjs';
+import '@jaspero/web-components/dist/asset-manager.css';
+import grapesjs, {type Editor} from 'grapesjs';
 import parserPostCSS from 'grapesjs-parser-postcss';
 import styleGradientPlugin from 'grapesjs-style-gradient';
 import componentCodeEditor from './plugins/component-code-editor/component-code-editor';
 import 'grapesjs/dist/css/grapes.min.css';
 import 'grapick/dist/grapick.min.css';
 import './plugins/component-code-editor/component-code-editor.css';
-import { AMService } from './am.service';
-import { DEVICES } from './consts/devices.const';
-import { STYLE_OVERRIDES } from './consts/style-overrides.const';
-import { TYPES } from './consts/types.const';
-import type { PageBuilderForm } from './types/page-builder-form.interface';
-import type { Popup } from './types/popup.interface';
+import {AMService} from './am.service';
+import {DEVICES} from './consts/devices.const';
+import {STYLE_OVERRIDES} from './consts/style-overrides.const';
+import {TYPES} from './consts/types.const';
+import type {PageBuilderForm} from './types/page-builder-form.interface';
+import type {Popup} from './types/popup.interface';
 
 /**
  * Registers all custom components
  */
 import './custom-components/custom-component';
 import './trait-components/trait-components';
-import { CUSTOM_TRAITS } from './consts/custom-traits.const';
-import { swiperPlugin } from './plugins/swiper/swiper.plugin';
+import {CUSTOM_TRAITS} from './consts/custom-traits.const';
+import {swiperPlugin} from './plugins/swiper/swiper.plugin';
+import {infoDialog} from './stores/info-dialog.store';
+import {numberPipe} from '../column-pipes/number.pipe';
 
 export function renderGrapes(
   pageBuilderEl: HTMLDivElement,
@@ -51,7 +54,7 @@ export function renderGrapes(
       scripts: ['/js/swiper-bundle.js']
     },
     container: pageBuilderEl,
-    panels: { defaults: [] },
+    panels: {defaults: []},
     plugins: [
       styleGradientPlugin,
       swiperPlugin,
@@ -80,10 +83,10 @@ export function renderGrapes(
     }
   });
 
-  const { DomComponents, TraitManager, StyleManager } = grapesInstance;
+  const {DomComponents, TraitManager, StyleManager} = grapesInstance;
 
-  TYPES(forms!).forEach(({ id, ...data }) => DomComponents.addType(id, data));
-  CUSTOM_TRAITS.forEach(({ id, ...data }) => TraitManager.addType(id, data));
+  TYPES(grapesInstance, forms!).forEach(({id, ...data}) => DomComponents.addType(id, data));
+  CUSTOM_TRAITS.forEach(({id, ...data}) => TraitManager.addType(id, data));
 
   DomComponents.addType('video', {
     extendFn: ['updateTraits'],
@@ -185,7 +188,7 @@ export function renderGrapes(
           assetManager.removeEventListener('selected', assetManagerListener);
         }
 
-        assetManagerListener = function (event: { detail: { url: string } }) {
+        assetManagerListener = function (event: {detail: {url: string}}) {
           props.select(event.detail.url, true);
         };
 
@@ -195,7 +198,7 @@ export function renderGrapes(
   );
 
   grapesInstance.on('load', function () {
-    STYLE_OVERRIDES.forEach(({ id, property, ...overides }) => {
+    STYLE_OVERRIDES.forEach(({id, property, ...overides}) => {
       StyleManager.removeProperty(id, property);
 
       if (Object.keys(overides).length) {
@@ -233,14 +236,45 @@ export function renderGrapes(
     property: 'overflow',
     default: 'auto',
     options: [
-      { id: 'visible', label: 'Visible' },
-      { id: 'hidden', label: 'Hidden' },
-      { id: 'auto', label: 'Auto' }
+      {id: 'visible', label: 'Visible'},
+      {id: 'hidden', label: 'Hidden'},
+      {id: 'auto', label: 'Auto'}
     ]
   });
 
   grapesInstance.runCommand('core:component-outline');
-  DomComponents.getWrapper()!.set({ badgable: false, selectable: false });
+  DomComponents.getWrapper()!.set({badgable: false, selectable: false});
+
+  grapesInstance.Commands.add('jp-info', () => {
+    const component = grapesInstance.getSelected();
+
+    if (component?.view?.$el?.[0]) {
+      const {width, height} = component.view.$el[0].getBoundingClientRect();
+
+      const gcd = (...arr: any) => {
+        const _gcd = (x: number, y: number) => (!y ? x : gcd(y, x % y));
+        return [...arr].reduce((a, b) => _gcd(a, b));
+      };
+
+      const gcdResult = gcd(width, height);
+      const aspectRatio = `${width / gcdResult}:${height / gcdResult}`;
+
+      infoDialog.set([
+        {
+          name: 'Width',
+          value: `${numberPipe(width)}px`
+        },
+        {
+          name: 'Height',
+          value: `${numberPipe(height)}px`
+        },
+        {
+          name: 'Aspect Ratio',
+          value: aspectRatio
+        }
+      ]);
+    }
+  });
 
   grapesInstance.on('component:update:traits', (component: any) => {
     for (const key in component.changed) {

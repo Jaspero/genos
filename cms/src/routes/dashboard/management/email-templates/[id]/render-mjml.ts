@@ -1,4 +1,5 @@
 import '@jaspero/web-components/dist/asset-manager.wc';
+import '@jaspero/web-components/dist/asset-manager.css';
 import 'grapesjs/dist/css/grapes.min.css';
 import { DEVICES } from '$lib/page-builder/consts/devices.const';
 import grapesjs from 'grapesjs';

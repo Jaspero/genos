@@ -2,7 +2,7 @@ import type {
   Asset,
   AssetManagerService,
   Folder
-} from '@jaspero/web-components/dist/Types/asset-manager.service';
+} from '@jaspero/web-components/dist/asset-manager.service';
 import {
   deleteObject,
   getDownloadURL,

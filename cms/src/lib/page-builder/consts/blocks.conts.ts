@@ -1,9 +1,10 @@
+import type {Editor} from 'grapesjs';
 import type { PageBuilderForm } from '../types/page-builder-form.interface';
 import type { Popup } from '../types/popup.interface';
 import { TYPES } from './types.const';
 
-export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
-  const typeMap = TYPES(forms).reduce((acc: any, { id, ...dt }) => {
+export const BLOCKS = (editor: Editor, forms: PageBuilderForm[], popups?: Popup[]) => {
+  const typeMap = TYPES(editor, forms).reduce((acc: any, { id, ...dt }) => {
     const { tagName, ...data } = dt.model.defaults;
 
     acc[id] = {
