@@ -4,7 +4,7 @@
   import { browser } from '$app/environment';
   import { meta } from '$lib/meta/meta.store';
   import './components';
-  import { onDestroy } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import type { Page } from '@sveltejs/kit';
   import type { Unsubscriber } from 'svelte/store';
 
@@ -39,10 +39,6 @@
 
   if (!data.renderLayout) {
     classes.push('standalone');
-  }
-
-  if (browser) {
-    pageSetup();
   }
 
   function scrolled(top: number) {
@@ -247,6 +243,10 @@
       }
     }
   }
+
+  onMount(() => {
+    pageSetup();
+  });
 
   onDestroy(() => {
     if (unsubscribe) {
