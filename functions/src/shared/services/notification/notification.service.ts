@@ -40,9 +40,8 @@ export class NotificationService {
             emails: string[];
             roles: string[];
             type: string;
+            emailTemplate?: string;
           };
-
-          const content = compile(notificationData.content)(context);
 
           switch (channelData.type) {
             case 'email':
@@ -52,14 +51,25 @@ export class NotificationService {
                 );
               }
 
+              const html = !channelData.emailTemplate && compile(notificationData.content)(context);
+
               await Promise.all(
-                channelData.emails.map((email) =>
-                  emailService.sendEmail({
+                channelData.emails.map((email) => {
+                  if (channelData.emailTemplate) {
+                    return emailService.parseEmail(
+                      channelData.emailTemplate,
+                      context,
+                      email,
+                      {subject: notificationData.name}
+                    );
+                  }
+
+                  return emailService.sendEmail({
                     subject: notificationData.name,
                     to: email,
-                    html: content
-                  })
-                )
+                    html
+                  });
+                })
               );
 
               break;
@@ -82,6 +92,7 @@ export class NotificationService {
               }
 
               const batch = fs.batch();
+              const content = compile(notificationData.content)(context);
 
               users.forEach((userId) => {
                 batch.set(fs.collection('cms-notifications').doc(), {

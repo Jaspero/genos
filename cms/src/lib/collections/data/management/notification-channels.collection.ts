@@ -3,6 +3,7 @@ import { indexPipe } from '../../../column-pipes/index.pipe';
 import { collections } from '../../collections';
 import { actionsPipe } from '$lib/column-pipes/actions.pipe';
 import { ALLOWED_ROLES } from '$lib/consts/allowed-roles.const';
+import { getOptions } from '$lib/utils/get-options';
 
 collections.addCollection('notification-channels', {
   name: 'Notification Channels',
@@ -43,7 +44,8 @@ collections.addCollection('notification-channels', {
       field: '/name',
       options: {
         label: 'Name',
-        name: 'name'
+        name: 'name',
+        required: true
       }
     },
     {
@@ -52,6 +54,7 @@ collections.addCollection('notification-channels', {
       options: {
         label: 'Type',
         name: 'type',
+        required: true,
         options: [
           { label: 'Email', value: 'email' },
           { label: 'CMS', value: 'cms' }
@@ -63,7 +66,21 @@ collections.addCollection('notification-channels', {
       field: '/emails',
       options: {
         label: 'Emails',
-        name: 'emails'
+        name: 'emails',
+        required: true
+      },
+      hidden: {
+        deps: ['/type'],
+        check: (value: { type: string }) => value.type === 'email'
+      }
+    },
+    {
+      component: 'jp-select',
+      field: '/emailTemplate',
+      options: {
+        label: 'Email Template',
+        name: 'emailTemplate',
+        options: await getOptions('email-templates')
       },
       hidden: {
         deps: ['/type'],
@@ -76,7 +93,8 @@ collections.addCollection('notification-channels', {
       options: {
         label: 'Roles',
         name: 'roles',
-        options: ALLOWED_ROLES.map((role) => ({ label: capitalize(role), value: role }))
+        options: ALLOWED_ROLES.map((role) => ({ label: capitalize(role), value: role })),
+        required: true
       },
       hidden: {
         deps: ['/type'],
