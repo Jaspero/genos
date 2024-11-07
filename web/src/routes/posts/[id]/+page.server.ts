@@ -2,8 +2,7 @@ import { blogData } from '$lib/server/blog';
 import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { CONFIG } from '$lib/consts/config.const';
-import { bucket, firestore } from '$lib/utils/firebase-admin';
-import { ENV_CONFIG } from '$lib/consts/env-config';
+import { bucket } from '$lib/utils/firebase-admin';
 
 export const load: PageServerLoad = async ({ params }) => {
   const { articles } = await blogData();
