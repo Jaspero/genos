@@ -9,6 +9,7 @@ collections.addCollection('notification-channels', {
   name: 'Notification Channels',
   singularName: 'notification channel',
   module: 'management',
+  editKey: 'name',
   tableHeaders: [
     {
       key: '/id',

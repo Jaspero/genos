@@ -10,6 +10,7 @@ collections.addCollection('notifications', {
   name: 'Notifications',
   singularName: 'notification',
   module: 'management',
+  editKey: 'name',
   tableHeaders: [
     {
       key: '/id',
