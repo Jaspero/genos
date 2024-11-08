@@ -1,22 +1,18 @@
-import { actionsPipe } from '../../../column-pipes/actions.pipe';
-import { datePipe } from '../../../column-pipes/date.pipe';
-import { indexPipe } from '../../../column-pipes/index.pipe';
-import { releaseStatusPipe } from '../../../column-pipes/release-status.pipe';
-import { META_FORM_FIELDS } from '../../../consts/meta.form-fields';
-import { generateSlug } from '../../../utils/generate-slug';
-import { collections } from '../../collections';
-import { DateTime } from 'luxon';
+import {DateTime} from 'luxon';
+import {datePipe} from '../../../column-pipes/date.pipe';
+import {releaseStatusPipe} from '../../../column-pipes/release-status.pipe';
+import {actionColumn} from '../../../columns/action.column';
+import {indexColumn} from '../../../columns/index.column';
+import {META_FORM_FIELDS} from '../../../consts/meta.form-fields';
+import {generateSlug} from '../../../utils/generate-slug';
+import {collections} from '../../collections';
 
 collections.addCollection('blog-categories', {
   name: 'Categories',
   singularName: 'category',
   module: 'blog',
   tableHeaders: [
-    {
-      key: '/id',
-      label: '#',
-      pipes: [indexPipe]
-    },
+    indexColumn(),
     {
       key: '/url',
       label: 'URL'
@@ -35,30 +31,23 @@ collections.addCollection('blog-categories', {
       pipes: [releaseStatusPipe()],
       exportPipes: [datePipe]
     },
-
-    {
-      key: 'id',
-      label: '',
-      pipes: [
-        actionsPipe((id) => ({
-          actions: ['duplicate', 'delete'],
-          links: [
-            {
-              label: 'Edit',
-              href: `blog-categories/${id}`,
-              icon: 'edit'
-            },
-            {
-              label: 'Reporting',
-              href: `blog-categories/${id}/reporting`,
-              icon: 'monitoring'
-            }
-          ]
-        }))
+    actionColumn((id) => ({
+      actions: ['duplicate', 'delete'],
+      links: [
+        {
+          label: 'Edit',
+          href: `blog-categories/${id}`,
+          icon: 'edit'
+        },
+        {
+          label: 'Reporting',
+          href: `blog-categories/${id}/reporting`,
+          icon: 'monitoring'
+        }
       ]
-    }
+    }))
   ],
-  initialSort: { key: 'name', direction: 'asc' },
+  initialSort: {key: 'name', direction: 'asc'},
   editKey: 'name',
   form: async () => [
     {

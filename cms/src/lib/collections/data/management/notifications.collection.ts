@@ -1,10 +1,10 @@
 import {populateArrayPipe} from '$lib/column-pipes/populate-array.pipe';
 import {quillFiled} from '$lib/form-fields/quill.field';
 import {getOptions} from '$lib/utils/get-options';
-import {actionsPipe} from '../../../column-pipes/actions.pipe';
-import {indexPipe} from '../../../column-pipes/index.pipe';
+import {DateTime} from 'luxon';
+import {actionColumn} from '../../../columns/action.column';
+import {indexColumn} from '../../../columns/index.column';
 import {collections} from '../../collections';
-import { DateTime } from 'luxon';
 
 collections.addCollection('notifications', {
   name: 'Notifications',
@@ -12,11 +12,7 @@ collections.addCollection('notifications', {
   module: 'management',
   editKey: 'name',
   tableHeaders: [
-    {
-      key: '/id',
-      label: 'Number',
-      pipes: [indexPipe]
-    },
+    indexColumn(),
     {
       key: '/name',
       label: 'Name'
@@ -26,11 +22,7 @@ collections.addCollection('notifications', {
       label: 'Channels',
       pipes: [populateArrayPipe('notification-channels', 'name')]
     },
-    {
-      key: '/id',
-      label: '',
-      pipes: [actionsPipe()]
-    }
+    actionColumn()
   ],
   preSubmit: async (id, value) => {
     value.lastUpdatedOn = DateTime.now().toUTC().toISO()

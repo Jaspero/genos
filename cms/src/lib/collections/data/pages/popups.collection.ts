@@ -1,17 +1,13 @@
-import { actionsPipe } from '../../../column-pipes/actions.pipe';
-import { indexPipe } from '../../../column-pipes/index.pipe';
-import { collections } from '../../collections';
+import {actionColumn} from '../../../columns/action.column';
+import {indexColumn} from '../../../columns/index.column';
+import {collections} from '../../collections';
 
 collections.addCollection('popups', {
   name: 'Popups',
   singularName: 'popup',
   module: 'pages',
   tableHeaders: [
-    {
-      key: '/id',
-      label: '#',
-      pipes: [indexPipe]
-    },
+    indexColumn(),
     {
       key: '/title',
       label: 'Title',
@@ -21,15 +17,9 @@ collections.addCollection('popups', {
       key: '/description',
       label: 'Description'
     },
-    {
-      key: '/id',
-      label: '',
-      pipes: [
-        actionsPipe((id) => ({
-          duplicateSubCollections: ['content']
-        }))
-      ]
-    }
+    actionColumn((id) => ({
+      duplicateSubCollections: ['content']
+    }))
   ],
-  initialSort: { key: 'title', direction: 'asc' }
+  initialSort: {key: 'title', direction: 'asc'}
 });

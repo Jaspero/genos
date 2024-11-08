@@ -1,20 +1,16 @@
-import { actionsPipe } from '$lib/column-pipes/actions.pipe';
-import { indexPipe } from '$lib/column-pipes/index.pipe';
-import { collections } from '../../collections';
-import { getOptions } from '$lib/utils/get-options';
-import { numberPipe } from '$lib/column-pipes/number.pipe';
-import { DateTime } from 'luxon';
+import {numberPipe} from '$lib/column-pipes/number.pipe';
+import {getOptions} from '$lib/utils/get-options';
+import {DateTime} from 'luxon';
+import {actionColumn} from '../../../columns/action.column';
+import {indexColumn} from '../../../columns/index.column';
+import {collections} from '../../collections';
 
 collections.addCollection('forms', {
   name: 'Forms',
   singularName: 'form',
   module: 'pages',
   tableHeaders: [
-    {
-      key: '/id',
-      label: '#',
-      pipes: [indexPipe]
-    },
+    indexColumn(),
     {
       key: '/name',
       label: 'Name',
@@ -29,34 +25,28 @@ collections.addCollection('forms', {
       label: 'Responses',
       pipes: [numberPipe]
     },
-    {
-      key: '/id',
-      label: '',
-      pipes: [
-        actionsPipe((id) => ({
-          actions: ['duplicate', 'delete'],
-          links: [
-            {
-              label: 'Edit',
-              href: `forms/${id}`,
-              icon: 'edit'
-            },
-            {
-              label: 'Results',
-              href: `forms/${id}/results`,
-              icon: 'forum'
-            },
-            {
-              label: 'Reporting',
-              href: `forms/${id}/reporting`,
-              icon: 'monitoring'
-            }
-          ]
-        }))
+    actionColumn((id) => ({
+      actions: ['duplicate', 'delete'],
+      links: [
+        {
+          label: 'Edit',
+          href: `forms/${id}`,
+          icon: 'edit'
+        },
+        {
+          label: 'Results',
+          href: `forms/${id}/results`,
+          icon: 'forum'
+        },
+        {
+          label: 'Reporting',
+          href: `forms/${id}/reporting`,
+          icon: 'monitoring'
+        }
       ]
-    }
+    }))
   ],
-  initialSort: { key: 'name', direction: 'asc' },
+  initialSort: {key: 'name', direction: 'asc'},
   editKey: 'name',
   preSubmit: async (id, value) => {
     value.lastUpdatedOn = DateTime.now().toUTC().toISO()

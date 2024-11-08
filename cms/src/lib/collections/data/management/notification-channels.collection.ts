@@ -4,6 +4,8 @@ import { collections } from '../../collections';
 import { actionsPipe } from '$lib/column-pipes/actions.pipe';
 import { ALLOWED_ROLES } from '$lib/consts/allowed-roles.const';
 import { getOptions } from '$lib/utils/get-options';
+import {indexColumn} from '../../../columns/index.column';
+import {actionColumn} from '../../../columns/action.column';
 
 collections.addCollection('notification-channels', {
   name: 'Notification Channels',
@@ -11,11 +13,7 @@ collections.addCollection('notification-channels', {
   module: 'management',
   editKey: 'name',
   tableHeaders: [
-    {
-      key: '/id',
-      label: 'Number',
-      pipes: [indexPipe]
-    },
+    indexColumn(),
     {
       key: '/name',
       label: 'Name'
@@ -33,11 +31,7 @@ collections.addCollection('notification-channels', {
       key: '/roles',
       label: 'Roles'
     },
-    {
-      key: '/id',
-      label: '',
-      pipes: [actionsPipe()]
-    }
+    actionColumn()
   ],
   form: async () => [
     {
