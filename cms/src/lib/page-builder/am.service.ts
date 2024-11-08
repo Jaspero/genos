@@ -24,7 +24,10 @@ export class AMService implements AssetManagerService {
 
   async fetch(path: string) {
     if (path === 'pages/static-assets') {
-      return [...STATIC_ASSETS];
+      return [...STATIC_ASSETS.map(asset => {
+        asset.preventDelete = true;
+        return asset;
+      })];
     }
 
     const data = await listAll(ref(storage, path));
