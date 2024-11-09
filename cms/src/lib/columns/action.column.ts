@@ -4,7 +4,7 @@ import {actionsPipe} from '../column-pipes/actions.pipe';
 export function actionColumn(config?: (id: string, rowData: any, index: number) => ColumnActionsConfig): TableHeader {
 	return  {
 		key: 'id',
-		label: '',
+		label: 'Actions',
 		pipes: [
 			actionsPipe(config)
 		],

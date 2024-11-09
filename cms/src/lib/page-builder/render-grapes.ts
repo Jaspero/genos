@@ -45,6 +45,7 @@ export function renderGrapes(
   let assetManagerListener: any;
 
   grapesInstance = grapesjs.init({
+    telemetry: false,
     canvas: {
       styles: [
         'https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap',
@@ -244,6 +245,14 @@ export function renderGrapes(
 
   grapesInstance.runCommand('core:component-outline');
   DomComponents.getWrapper()!.set({badgable: false, selectable: false});
+
+  grapesInstance.on('component:create', (component) => {
+
+    /**
+     * Rename the default naming convention in the layer manager
+     */
+    component.getName = () => component.attributes['custom-name'] || `${component.attributes.tagName}#${component.ccid}`;
+  });
 
   grapesInstance.Commands.add('jp-info', () => {
     const component = grapesInstance.getSelected();

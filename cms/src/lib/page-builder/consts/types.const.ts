@@ -32,6 +32,7 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
         tagName: 'column',
         draggable: true,
         classes: ['gc-6'],
+        style: {},
         attributes: {
           dataset: {
             type: 'column'
