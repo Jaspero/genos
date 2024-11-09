@@ -29,7 +29,7 @@ collections.addCollection('email-templates', {
       sortable: true
     },
     {
-      key: '/id',
+      key: '/active',
       label: 'Active',
       pipes: [checkboxPipe('pages', 'active')]
     },

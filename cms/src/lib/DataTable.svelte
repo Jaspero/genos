@@ -290,7 +290,7 @@
       }
 
       const { y } = el.getBoundingClientRect();
-      const headerHeight = 68;
+      const headerHeight = 44;
       const footerHeight = 80;
       const bottomPadding = 40;
 
