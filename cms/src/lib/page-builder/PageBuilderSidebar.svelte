@@ -7,6 +7,7 @@
   import { slide } from 'svelte/transition';
   import type { Popup } from './types/popup.interface';
   import type { PageBuilderForm } from './types/page-builder-form.interface';
+  import type { Editor } from 'grapesjs';
 
   export let templates: Template[] | undefined = undefined;
   export let sections: Template[] | undefined = undefined;
@@ -15,7 +16,7 @@
   export let items: Array<any> | undefined = undefined;
   export let metaItems: Array<any> | undefined = undefined;
   export let value: any;
-  export let grapesInstance: any;
+  export let grapesInstance: Editor;
   export let formModule: FormModule;
   export let forms: PageBuilderForm[];
 
@@ -64,6 +65,9 @@
 
     switch (activeComponent) {
       case 'layers': {
+
+        grapesInstance.LayerManager.destroy();
+
         const el = grapesInstance.LayerManager.render();
         componentEl.appendChild(el);
         break;
