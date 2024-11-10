@@ -286,7 +286,11 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
         traits: [
           {
             label: 'Source',
-            name: 'src'
+            name: 'src',
+            type: 'asset-select',
+            path: 'pages',
+            types: ['image'],
+            selectable: 'single'
           },
           {
             label: 'Alt',
@@ -546,6 +550,7 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
     model: {
       defaults: {
         tagName: 'pb-mobile-menu',
+        cName: 'Mobile Menu',
         draggable: true,
         droppable: false,
         traits: [
@@ -569,6 +574,7 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
     model: {
       defaults: {
         tagName: 'pb-submit',
+        cName: 'Submit',
         draggable: 'form',
         droppable: false,
         traits: [
@@ -616,6 +622,7 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
     model: {
       defaults: {
         tagName: 'pb-featured-products',
+        cName: 'Featured Products',
         traits: [
           {
             type: 'text',
@@ -645,6 +652,7 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
     model: {
       defaults: {
         tagName: 'pb-products',
+        cName: 'Products',
         traits: [
           {
             type: 'number',
@@ -729,6 +737,7 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
     model: {
       defaults: {
         tagName: 'pb-product-card',
+        cName: 'Product Card',
         traits: [
           {
             type: 'document-lookup',
@@ -750,6 +759,7 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
     model: {
       defaults: {
         tagName: 'pb-blog',
+        cName: 'Blog',
         traits: [
           {
             type: 'document-lookup',
@@ -814,6 +824,7 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
     model: {
       defaults: {
         tagName: 'pb-featured-blog-articles',
+        cName: 'Featured Blog',
         traits: [
           {
             type: 'text',

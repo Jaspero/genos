@@ -2,6 +2,28 @@ import { SearchService } from '../../services/search.service';
 
 export const CUSTOM_TRAITS: any[] = [
   {
+    id: 'asset-select',
+    eventCapture: ['input'],
+    createInput({ trait }: any) {
+      const el = document.createElement('asset-select') as any;
+
+      el.name = trait.get('name');
+      el.path = trait.get('path') || 'pages';
+      el.types = trait.get('types') || ['image'];
+      el.selectable = trait.get('selectable') || 'single';
+
+      return el;
+    },
+    onUpdate({ elInput, component }) {
+      if (component?.attributes?.attributes?.src) {
+        elInput.value = component?.attributes?.attributes?.src;
+      }
+    },
+    onEvent({ elInput, component }) {
+      component.addAttributes({src: elInput.value});
+    }
+  },
+  {
     id: 'directives-select',
     noLabel: true,
     templateInput: '',

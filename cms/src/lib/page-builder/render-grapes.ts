@@ -251,7 +251,7 @@ export function renderGrapes(
     /**
      * Rename the default naming convention in the layer manager
      */
-    component.getName = () => component.attributes['custom-name'] || `${component.attributes.tagName}#${component.ccid}`;
+    component.getName = () => component.attributes['custom-name'] || `${component.attributes.cName || component.attributes.tagName}#${component.ccid}`;
   });
 
   grapesInstance.Commands.add('jp-info', () => {

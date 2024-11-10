@@ -2,8 +2,9 @@
   import type { Editor } from 'grapesjs';
   import { confirmation } from '../utils/confirmation';
   import { DEVICES } from './consts/devices.const';
-  import {infoDialog} from './stores/info-dialog.store';
+  import { infoDialog } from './stores/info-dialog.store';
   import Dialog from '../Dialog.svelte';
+  import { onDestroy } from 'svelte';
 
   export let grapesInstance: Editor;
   export let activeDevice = DEVICES[0].id;
@@ -60,6 +61,12 @@
       grapesInstance.runCommand('core:canvas-clear');
     }, 'Clear the page?');
   }
+
+  onDestroy(() => {
+    if ($infoDialog) {
+      infoDialog.set(null);
+    }
+  })
 </script>
 
 <header>
