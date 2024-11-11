@@ -12,8 +12,8 @@
   export let lng;
   export let mapZoom;
 
-  $: latitude = parseFloat(lat) || latitude;
-  $: longitude = parseFloat(lng) || longitude;
+  $: latitude = parseFloat(lat) || latitude || 37.7749;
+  $: longitude = parseFloat(lng) || longitude || -122.4194;
   $: zoom = parseInt(mapZoom) || zoom;
 
   onMount(() => {
