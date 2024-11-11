@@ -23,7 +23,7 @@ collections.addCollection('pages', {
       label: 'Title',
       pipes: [
         (v: string, row: any) =>
-          `<a target="_blank" title="Open page" style="text-decoration:underline;" href="${CONFIG.webUrl}/${row.url}">${v}</a>`
+          `<a target="_blank" title="Open page" style="text-decoration:underline;" href="${CONFIG.webUrl + row.url}">${v}</a>`
       ],
       exportPipes: [],
       sortable: true
@@ -43,5 +43,5 @@ collections.addCollection('pages', {
       duplicateStorage: [`page-configurations/pages/${id}/`]
     }))
   ],
-  initialSort: {key: 'publicationDate', direction: 'desc'}
+  initialSort: {key: 'title', direction: 'asc'}
 });
