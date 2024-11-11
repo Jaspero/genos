@@ -13,3 +13,4 @@ prod.json
 dev.json
 src/lib/utils/env-config.ts
 src/lib/consts/tracked-collection.const.ts
+src/lib/consts/google-maps-api-key.conts.ts

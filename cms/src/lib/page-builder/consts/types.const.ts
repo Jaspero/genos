@@ -749,6 +749,38 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
       }
     }
   },
+  {
+    id: 'pb-google-map',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-GOOGLE-MAP',
+    model: {
+      defaults: {
+        tagName: 'pb-google-map',
+        cName: 'Google Map',
+        traits: [
+          {
+            type: 'text',
+            label: 'Address',
+            name: 'address'
+          },
+          {
+            label: 'Zoom',
+            name: 'mapZoom',
+            type: 'number'
+          },
+          {
+            label: 'Latitute',
+            name: 'lat',
+            type: 'number'
+          },
+          {
+            label: 'Longitute',
+            name: 'lng',
+            type: 'number'
+          }
+        ]
+      }
+    }
+  },
 
   /**
    * Blog

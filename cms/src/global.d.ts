@@ -25,6 +25,7 @@ declare interface ColumnActionsConfig {
 
 declare interface Window {
   Swiper: any;
+  google: any;
   columnActions?: {
     [key: string]: ColumnActionsConfig;
   };
