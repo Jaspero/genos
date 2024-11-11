@@ -758,7 +758,7 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
         cName: 'Google Map',
         traits: [
           {
-            type: 'text',
+            type: 'address-lookup',
             label: 'Address',
             name: 'address'
           },

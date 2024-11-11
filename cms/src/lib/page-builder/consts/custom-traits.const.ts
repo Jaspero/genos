@@ -1,4 +1,5 @@
 import { SearchService } from '../../services/search.service';
+import { GOOGLE_MAPS_API_KEY } from '$lib/consts/google-maps-api-key.conts';
 
 export const CUSTOM_TRAITS: any[] = [
   {
@@ -131,6 +132,53 @@ export const CUSTOM_TRAITS: any[] = [
         this.$input.value = optionsStr;
       }
       return this.$input;
+    }
+  },
+  {
+    id: 'address-lookup',
+    events: {
+      keyup: 'onInputChange',
+    },
+    createInput({ trait, component }) {
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = 'Enter address';
+
+      const debounce = (func, delay) => {
+        let debounceTimer;
+        return function (...args) {
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(() => func.apply(this, args), delay);
+        };
+      };
+
+      const searchAddress = async (event) => {
+        const value = event.target.value;
+
+        if (value) {
+          try {
+            const res = await fetch(
+              `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(value)}&key=${GOOGLE_MAPS_API_KEY}`
+            );
+            const data = await res.json();
+
+            if (data.results && data.results[0]) {
+              const { lat, lng } = data.results[0].geometry.location;
+
+              const latTrait = component.getTrait('lat');
+              const lngTrait = component.getTrait('lng');
+
+              latTrait.set('value', lat);
+              lngTrait.set('value', lng);
+            }
+          } catch (error) {
+          }
+        }
+      };
+
+      input.addEventListener('keyup', debounce(searchAddress, 1000));
+
+      return input;
     }
   }
 ];

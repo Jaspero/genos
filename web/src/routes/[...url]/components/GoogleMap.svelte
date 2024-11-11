@@ -7,9 +7,6 @@
   let mapElement;
   let map;
   let zoom = 10;
-  let marker;
-  let latitude = 37.7749;
-  let longitude = -122.4194;
 
   export let lat;
   export let lng;
@@ -41,7 +38,7 @@
         zoom: +mapZoom || zoom,
       });
 
-      marker = new window.google.maps.Marker({
+      new window.google.maps.Marker({
         map: map,
         position: { lat: latitude, lng: longitude },
       });

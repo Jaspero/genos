@@ -6,14 +6,14 @@
 
   let mapElement;
   let map;
-  let zoom = 10;
   let marker;
+  let zoom = 10;
   let latitude = 37.7749;
   let longitude = -122.4194;
 
-  export let lat;
-  export let lng;
-  export let mapZoom;
+  export let lat
+  export let lng
+  export let mapZoom
   export let address;
 
   $: if (lat) latitude = parseFloat(lat) || latitude;
@@ -21,7 +21,6 @@
   $: if (mapZoom) zoom = parseInt(mapZoom) || zoom;
 
   onMount(() => {
-    console.log(lat, lng);
     const loadGoogleMapsScript = () => {
       return new Promise((resolve, reject) => {
         if (window.google && window.google.maps) {
@@ -43,7 +42,6 @@
         zoom: zoom
       });
 
-      console.log(latitude, longitude);
       marker = new window.google.maps.Marker({
         map: map,
         position: { lat: latitude, lng: longitude },
@@ -54,35 +52,10 @@
   $: if (map) {
     map.setCenter({ lat: latitude, lng: longitude });
     map.setZoom(zoom);
-  }
 
-  $: search(address, mapZoom);
-
-  async function search(value, mapZoom) {
-    if (map) {
-      map.setZoom(mapZoom || zoom);
-    }
-
-    if (!value) {
-      return;
-    }
-
-    const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${value}&key=${GOOGLE_MAPS_API_KEY}`)
-      .then(res => res.json());
-
-    if (res.results.length) {
-      const { lat: lt, lng: lg } = res.results[0].geometry.location;
-      latitude = lt;
-      longitude = lg;
-      lat = lt;
-      lng = lg;
-
-      if (map) {
-        map.setCenter({ lat, lng });
-      }
-
-      marker.setPosition({ lat, lng });
-      marker.setTitle(res.results[0].formatted_address);
+    if (marker) {
+      marker.setPosition({ lat: latitude, lng: longitude });
+      marker.setTitle(address || "");
     }
   }
 </script>
@@ -90,7 +63,7 @@
 <style>
     #map {
         width: 100%;
-        height: 500px
+        height: 500px;
     }
 </style>
 
