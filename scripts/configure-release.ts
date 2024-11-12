@@ -4,7 +4,7 @@
 import admin from 'firebase-admin';
 import { document, TRACKED_COLLECTIONS, type ChangeDocument } from '../shared/consts/tracked-collection.const';
 import { writeFile, readFile } from 'fs/promises';
-import { existsSync, mkdirSync } from 'fs';
+import { existsSync } from 'fs';
 // @ts-ignore
 import credential from '../web/key.json';
 import { CONFIG } from '../web/src/lib/consts/config.const';
@@ -152,20 +152,14 @@ async function exec() {
           return acc;
         }, []);
       });
-
-      /**
-       * Create dir if not exists
-       */
-      if (!existsSync('./public/web/data')) {
-        mkdirSync('./public/web/data');
-      }
+      
       /**
        * Write the updated json data
        */
       await Promise.all(
         keys.map((collection, i) =>
           writeFile(
-            './public/web/data/' + collection + '.json',
+            './web/static/data/' + collection + '.json',
             JSON.stringify(updatedCollectionsJsonData[i])
           )
         )
@@ -179,7 +173,7 @@ async function exec() {
           continue;
         }
 
-        if (!existsSync('./public/web/data/' + data.collection + '.json')) {
+        if (!existsSync('./web/static/data/' + data.collection + '.json')) {
           const collectionData = await fs.collection(data.collection).get();
 
           const dataset = {
@@ -188,7 +182,7 @@ async function exec() {
           };
 
           await writeFile(
-            './public/web/data/' + data.collection + '.json',
+            './web/static/data/' + data.collection + '.json',
             JSON.stringify(
               collectionData.docs.map((doc) => {
                 const d = doc.data();

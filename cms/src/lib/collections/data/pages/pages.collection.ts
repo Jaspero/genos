@@ -1,21 +1,17 @@
-import { actionsPipe } from '../../../column-pipes/actions.pipe';
-import { checkboxPipe } from '../../../column-pipes/checkbox.pipe';
-import { datePipe } from '../../../column-pipes/date.pipe';
-import { indexPipe } from '../../../column-pipes/index.pipe';
-import { releaseStatusPipe } from '../../../column-pipes/release-status.pipe';
-import { CONFIG } from '../../../consts/config.const';
-import { collections } from '../../collections';
+import {checkboxPipe} from '../../../column-pipes/checkbox.pipe';
+import {datePipe} from '../../../column-pipes/date.pipe';
+import {releaseStatusPipe} from '../../../column-pipes/release-status.pipe';
+import {actionColumn} from '../../../columns/action.column';
+import {indexColumn} from '../../../columns/index.column';
+import {CONFIG} from '../../../consts/config.const';
+import {collections} from '../../collections';
 
 collections.addCollection('pages', {
   name: 'Pages',
   singularName: 'page',
   module: 'pages',
   tableHeaders: [
-    {
-      key: '/id',
-      label: '#',
-      pipes: [indexPipe]
-    },
+    indexColumn(),
     {
       key: '/publicationDate',
       label: 'Publication Date',
@@ -27,7 +23,7 @@ collections.addCollection('pages', {
       label: 'Title',
       pipes: [
         (v: string, row: any) =>
-          `<a target="_blank" title="Open page" style="text-decoration:underline;" href="${CONFIG.webUrl}/${row.url}">${v}</a>`
+          `<a target="_blank" title="Open page" style="text-decoration:underline;" href="${CONFIG.webUrl + row.url}">${v}</a>`
       ],
       exportPipes: [],
       sortable: true
@@ -43,15 +39,9 @@ collections.addCollection('pages', {
       exportPipes: [],
       pipes: [releaseStatusPipe()]
     },
-    {
-      key: 'id',
-      label: '',
-      pipes: [
-        actionsPipe((id) => ({
-          duplicateStorage: [`page-configurations/pages/${id}/`]
-        }))
-      ]
-    }
+    actionColumn((id) => ({
+      duplicateStorage: [`page-configurations/pages/${id}/`]
+    }))
   ],
-  initialSort: { key: 'publicationDate', direction: 'desc' }
+  initialSort: {key: 'title', direction: 'asc'}
 });

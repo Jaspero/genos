@@ -1,17 +1,13 @@
-import { actionsPipe } from '../../../column-pipes/actions.pipe';
-import { indexPipe } from '../../../column-pipes/index.pipe';
-import { collections } from '../../collections';
+import {actionColumn} from '../../../columns/action.column';
+import {indexColumn} from '../../../columns/index.column';
+import {collections} from '../../collections';
 
 collections.addCollection('layouts', {
   name: 'Layouts',
   singularName: 'layout',
   module: 'pages',
   tableHeaders: [
-    {
-      key: '/id',
-      label: '#',
-      pipes: [indexPipe]
-    },
+    indexColumn(),
     {
       key: '/name',
       label: 'Name',
@@ -21,15 +17,9 @@ collections.addCollection('layouts', {
       key: '/tags',
       label: 'Tags'
     },
-    {
-      key: '/id',
-      label: '',
-      pipes: [
-        actionsPipe((id) => ({
-          duplicateStorage: [`page-configurations/layouts/${id}/`]
-        }))
-      ]
-    }
+    actionColumn((id) => ({
+      duplicateStorage: [`page-configurations/layouts/${id}/`]
+    }))
   ],
-  initialSort: { key: 'name', direction: 'asc' }
+  initialSort: {key: 'name', direction: 'asc'}
 });

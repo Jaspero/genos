@@ -148,6 +148,8 @@
     if (!id) {
       id = `pr-${random.string(24)}`;
       data.value.publicationDate = data.value.publicationDate || lastUpdatedOn;
+      data.value.createdOn = lastUpdatedOn;
+      data.value.active = false;
     }
 
     const json = grapesInstance.getProjectData();

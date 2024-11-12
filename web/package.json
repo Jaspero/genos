@@ -39,7 +39,7 @@
   "type": "module",
   "dependencies": {
     "@jaspero/utils": "1.15.3",
-    "@jaspero/web-components": "1.168.9",
+    "@jaspero/web-components": "1.174.0",
     "@minify-html/node": "0.15.0",
     "firebase": "11.0.1",
     "swiper": "11.1.12",
