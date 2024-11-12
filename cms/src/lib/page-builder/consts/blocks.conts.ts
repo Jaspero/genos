@@ -23,6 +23,7 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
       category: 'Content',
       select: true,
       content: {
+        droppable: true,
         type: 'text',
         tagName: 'h2',
         content: 'This is a heading',
@@ -39,7 +40,7 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
               { value: 'h3', name: 'Heading 3' },
               { value: 'h4', name: 'Heading 4' },
               { value: 'h5', name: 'Heading 5' },
-              { value: 'h6', name: 'Heading 6' }
+              { value: 'h6', name: 'Heading 6' },
             ]
           }
         ]
@@ -52,6 +53,14 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
       category: 'Content',
       select: true,
       content: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ipsum dolor sit</p>`
+    },
+    {
+      id: 'span',
+      label: 'Span',
+      media: `<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" style="width: 100%; height: 48px"><path d="M120-240v-80h480v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>`,
+      category: 'Content',
+      select: true,
+      content: `<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ipsum dolor sit</span>`
     },
     {
       id: 'ordered-list',
