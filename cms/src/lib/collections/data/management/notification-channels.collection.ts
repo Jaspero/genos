@@ -1,11 +1,9 @@
 import { capitalize } from '@jaspero/utils';
-import { indexPipe } from '../../../column-pipes/index.pipe';
 import { collections } from '../../collections';
-import { actionsPipe } from '$lib/column-pipes/actions.pipe';
 import { ALLOWED_ROLES } from '$lib/consts/allowed-roles.const';
 import { getOptions } from '$lib/utils/get-options';
-import {indexColumn} from '../../../columns/index.column';
-import {actionColumn} from '../../../columns/action.column';
+import { indexColumn } from '../../../columns/index.column';
+import { actionColumn } from '../../../columns/action.column';
 
 collections.addCollection('notification-channels', {
   name: 'Notification Channels',
