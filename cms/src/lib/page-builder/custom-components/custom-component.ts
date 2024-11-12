@@ -2,6 +2,7 @@ export * from './Popup.svelte';
 export * from './Submit.svelte';
 export * from './MobileMenu.svelte';
 export * from './ImageGallery.svelte';
+export * from './GoogleMap.svelte';
 
 /**
  * Shop

@@ -10,6 +10,7 @@
   import '@jaspero/web-components/dist/multisearch.wc';
   import '@jaspero/web-components/dist/multisearch.css';
   import '@jaspero/web-components/dist/datepicker.wc';
+  import '@jaspero/web-components/dist/datepicker.css';
   import '@jaspero/web-components/dist/ckeditor.wc';
   import '@jaspero/web-components/dist/ckeditor.css';
   import '@jaspero/web-components/dist/textarea.wc';
@@ -22,6 +23,7 @@
   import '@jaspero/web-components/dist/file-upload.css';
   import '@jaspero/web-components/dist/file-list.wc';
   import '@jaspero/web-components/dist/toggle.wc';
+  import '@jaspero/web-components/dist/toggle.css';
   import '@jaspero/web-components/dist/chips.wc';
   import '@jaspero/web-components/dist/chips.css';
   import '@jaspero/web-components/dist/review-stars.wc';

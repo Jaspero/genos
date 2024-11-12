@@ -6,3 +6,4 @@ export * from './FeaturedBlogArticles.svelte';
 export * from './Products.svelte';
 export * from './ProductCard.svelte';
 export * from './ImageGallery.svelte';
+export * from './GoogleMap.svelte';

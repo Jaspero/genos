@@ -1,24 +1,20 @@
-import { httpsCallable } from 'firebase/functions';
-import { changeEmail } from '../../../change-email/change-email.store';
-import { changePassword } from '../../../change-password/change-password.store';
-import { actionsPipe } from '../../../column-pipes/actions.pipe';
-import { datePipe } from '../../../column-pipes/date.pipe';
-import { indexPipe } from '../../../column-pipes/index.pipe';
-import { mailtoPipe } from '../../../column-pipes/mailto.pipe';
-import { functions } from '../../../utils/firebase';
-import { collections } from '../../collections';
-import { DateTime } from 'luxon';
+import {httpsCallable} from 'firebase/functions';
+import {DateTime} from 'luxon';
+import {changeEmail} from '../../../change-email/change-email.store';
+import {changePassword} from '../../../change-password/change-password.store';
+import {datePipe} from '../../../column-pipes/date.pipe';
+import {mailtoPipe} from '../../../column-pipes/mailto.pipe';
+import {actionColumn} from '../../../columns/action.column';
+import {indexColumn} from '../../../columns/index.column';
+import {functions} from '../../../utils/firebase';
+import {collections} from '../../collections';
 
 collections.addCollection('admins', {
   name: 'Admins',
   singularName: 'admin',
   module: 'management',
   tableHeaders: [
-    {
-      key: '/id',
-      label: '#',
-      pipes: [indexPipe]
-    },
+    indexColumn(),
     {
       key: '/createdOn',
       label: 'Created On',
@@ -36,30 +32,24 @@ collections.addCollection('admins', {
       sortable: true,
       pipes: [mailtoPipe()]
     },
-    {
-      key: 'id',
-      label: '',
-      pipes: [
-        actionsPipe(() => ({
-          actions: ['edit', 'delete'],
-          buttons: [
-            {
-              label: 'Change Email',
-              icon: 'email',
-              action: (id) => changeEmail.set({ id, collection: 'admins' })
-            },
-            {
-              label: 'Change Password',
-              icon: 'lock',
-              action: (id) => changePassword.set({ id, collection: 'admins' })
-            }
-          ],
-          links: []
-        }))
-      ]
-    }
+    actionColumn(() => ({
+      actions: ['edit', 'delete'],
+      buttons: [
+        {
+          label: 'Change Email',
+          icon: 'email',
+          action: (id) => changeEmail.set({id, collection: 'admins'})
+        },
+        {
+          label: 'Change Password',
+          icon: 'lock',
+          action: (id) => changePassword.set({id, collection: 'admins'})
+        }
+      ],
+      links: []
+    }))
   ],
-  initialSort: { key: 'createdOn', direction: 'desc' },
+  initialSort: {key: 'createdOn', direction: 'desc'},
   editKey: 'name',
   preSubmit: async (id, value) => {
     value.lastUpdatedOn = DateTime.now().toUTC().toISO();
@@ -68,7 +58,7 @@ collections.addCollection('admins', {
     value.createdOn = DateTime.now().toUTC().toISO();
   },
   createMethod: async (collection, id, value) => {
-    await httpsCallable(functions, 'createAdmin')({ ...value, role: 'admin' });
+    await httpsCallable(functions, 'createAdmin')({...value, role: 'admin'});
   },
   form: async (id?: string) => {
     return [
@@ -93,17 +83,17 @@ collections.addCollection('admins', {
       },
       ...(id === 'new'
         ? [
-            {
-              component: 'jp-input',
-              field: '/password',
-              options: {
-                label: 'Password',
-                name: 'password',
-                type: 'password',
-                hint: `You can leave this empty if the user will sign in with google.`
-              }
+          {
+            component: 'jp-input',
+            field: '/password',
+            options: {
+              label: 'Password',
+              name: 'password',
+              type: 'password',
+              hint: `You can leave this empty if the user will sign in with google.`
             }
-          ]
+          }
+        ]
         : [])
     ];
   }

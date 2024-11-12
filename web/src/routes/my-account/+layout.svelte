@@ -70,12 +70,20 @@
 
         <nav class="shadow p-4 rounded flex flex-col text-lg">
           {#each links as link}
-            <a class="p-2 transition hover:bg-slate-400 hover:text-white" class:active={pathname === link.url} href={link.url}>
+            <a
+              class="p-2 transition hover:bg-slate-400 hover:text-white"
+              class:active={pathname === link.url}
+              href={link.url}
+            >
               {link.label}
             </a>
           {/each}
           <div class="mt-20">
-            <button type="button" class=" p-2 hover:bg-slate-400 hover:text-white w-full text-left" on:click={logOut}>Sign Out</button>
+            <button
+              type="button"
+              class=" p-2 hover:bg-slate-400 hover:text-white w-full text-left"
+              on:click={logOut}>Sign Out</button
+            >
           </div>
         </nav>
       </aside>

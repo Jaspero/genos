@@ -2,12 +2,27 @@
   import type { Editor } from 'grapesjs';
   import { confirmation } from '../utils/confirmation';
   import { DEVICES } from './consts/devices.const';
+  import { infoDialog } from './stores/info-dialog.store';
+  import Dialog from '../Dialog.svelte';
+  import { onDestroy } from 'svelte';
 
   export let grapesInstance: Editor;
   export let activeDevice = DEVICES[0].id;
   export let gridVisible = true;
 
   let fileEl: HTMLInputElement;
+  let infoOpen = false;
+  let infoProps: Array<{
+    name: string;
+    value: string;
+  }>;
+
+  $: if ($infoDialog) {
+    infoProps = $infoDialog;
+    infoOpen = true;
+  } else {
+    infoOpen = false;
+  }
 
   function setDevice(device: string) {
     grapesInstance.setDevice(device);
@@ -46,6 +61,12 @@
       grapesInstance.runCommand('core:canvas-clear');
     }, 'Clear the page?');
   }
+
+  onDestroy(() => {
+    if ($infoDialog) {
+      infoDialog.set(null);
+    }
+  })
 </script>
 
 <header>
@@ -97,6 +118,21 @@
 </header>
 
 <input type="file" bind:this={fileEl} on:change={importHtml} hidden />
+
+<Dialog bind:open={infoOpen}>
+  <svelte:fragment slot="title">Component Information</svelte:fragment>
+
+  <table class="w-full text-left border-collapse">
+    <tbody>
+      {#each infoProps as prop}
+        <tr>
+          <th class="p-2 border">{prop.name}</th>
+          <td class="p-2 border">{prop.value}</td>
+        </tr>
+      {/each}
+    </tbody>
+  </table>
+</Dialog>
 
 <style lang="postcss">
   header {

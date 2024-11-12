@@ -9,6 +9,18 @@ type TrackedCollection = {
   skipGenerateJsonFile?: boolean;
 };
 
+export interface ChangeDocument {
+  data: { [key: string]: any };
+  collection: string;
+  name: string;
+  url: string;
+  page: string;
+  updatedAt: string;
+  skipGenerateJsonFile: boolean;
+  id: string;
+  type: 'create' | 'update' | 'delete';
+}
+
 export const TRACKED_COLLECTIONS: TrackedCollection[] = [
   // {
   //   collection: 'products',
@@ -23,7 +35,7 @@ export const TRACKED_COLLECTIONS: TrackedCollection[] = [
     collection: 'pages',
     titleKey: 'title',
     urlKey: 'url',
-    prefix: '/pages',
+    prefix: '',
     keysToTrack: ['id', 'title', 'lastUpdatedOn'],
     skipGenerateJsonFile: true
   }
@@ -71,35 +83,35 @@ export const document = (
   itemConfig: ItemConfig,
   changedDataset: any,
   item: any,
-  websiteUrl: string
-): {
-  skipGenerateJsonFile: boolean;
-  name: string;
-  url: string;
-  updatedAt: string;
-  data: { [key: string]: any };
-  collection: string;
-  id: string;
-} => ({
-  data: itemConfig.keysToTrack.reduce((acc: any, key: string) => {
-    let shortKey = key[0];
-    let count = 1;
+  websiteUrl: string,
+  type: 'create' | 'update' | 'delete'
+): ChangeDocument => {
 
-    while (acc.hasOwnProperty(shortKey)) {
-      shortKey = key[0] + count;
-      count++;
-    }
+  const page = item[itemConfig.urlKey] ? itemConfig.prefix + item[itemConfig.urlKey] : ''
 
-    if (changedDataset[key] !== undefined) {
-      acc[shortKey] = changedDataset[key];
-    }
-
-    return acc;
-  }, {}),
-  collection: itemConfig.collection,
-  name: item[itemConfig.titleKey] || '',
-  url: item[itemConfig.urlKey] ? websiteUrl + itemConfig.prefix + item[itemConfig.urlKey] : '',
-  updatedAt: DateTime.now().toUTC().toISO(),
-  skipGenerateJsonFile: !!itemConfig.skipGenerateJsonFile,
-  id: item.id
-});
+  return {
+    data: itemConfig.keysToTrack.reduce((acc: any, key: string) => {
+      let shortKey = key[0];
+      let count = 1;
+  
+      while (acc.hasOwnProperty(shortKey)) {
+        shortKey = key[0] + count;
+        count++;
+      }
+  
+      if (changedDataset[key] !== undefined) {
+        acc[shortKey] = changedDataset[key];
+      }
+  
+      return acc;
+    }, {}),
+    collection: itemConfig.collection,
+    name: item[itemConfig.titleKey] || '',
+    url: websiteUrl + page,
+    page,
+    updatedAt: DateTime.now().toUTC().toISO(),
+    skipGenerateJsonFile: !!itemConfig.skipGenerateJsonFile,
+    id: item.id,
+    type
+  } as ChangeDocument;
+};

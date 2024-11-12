@@ -13,7 +13,7 @@
   $: baseLink = ['/dashboard', $page.params.module || data.module, col].filter(Boolean).join('/');
 </script>
 
-<Grid>
+<Grid classes="">
   <GridCol span="12">
     <DataTable
       {col}

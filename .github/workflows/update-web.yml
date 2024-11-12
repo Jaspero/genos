@@ -20,7 +20,7 @@ env:
 jobs:
   deploy:
     name: Deploy
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     steps:
       - name: Use Node.js 20.9.0
         uses: actions/setup-node@v1
@@ -34,16 +34,20 @@ jobs:
       - name: Create key
         working-directory: web
         run: |
-          echo $SV > key.json
+          echo $SV > prod.json
         env:
           SV: ${{ env.SERVICE_ACCOUNT }}
+      - name: Copy Build
+        id: copy
+        working-directory: web
+        run: npm run copy:prod          
+      - name: Configure Release
+        id: config
+        run: JOB=start TYPE=partial npm run configure-release          
       - name: Build
         if: contains(github.ref, 'build')
         working-directory: web
         run: npm run build:prod
-      - name: Configure Release
-        id: config
-        run: JOB=start VERSION=partial npm run configure-release
       - name: Commit
         run: |
           git config --local user.email "action@github.com"

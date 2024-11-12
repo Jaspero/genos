@@ -1,9 +1,9 @@
-import { actionsPipe } from '../../../column-pipes/actions.pipe';
-import { checkboxPipe } from '../../../column-pipes/checkbox.pipe';
-import { datePipe } from '../../../column-pipes/date.pipe';
-import { indexPipe } from '../../../column-pipes/index.pipe';
+import {checkboxPipe} from '../../../column-pipes/checkbox.pipe';
+import {datePipe} from '../../../column-pipes/date.pipe';
+import {actionColumn} from '../../../columns/action.column';
+import {indexColumn} from '../../../columns/index.column';
 import {sendSampleEmail} from '../../../send-sample-email/send-sample-email.store';
-import { collections } from '../../collections';
+import {collections} from '../../collections';
 
 collections.addCollection('email-templates', {
   name: 'Email Templates',
@@ -11,11 +11,7 @@ collections.addCollection('email-templates', {
   module: 'management',
 
   tableHeaders: [
-    {
-      key: '/id',
-      label: 'Number',
-      pipes: [indexPipe]
-    },
+    indexColumn(),
     {
       key: '/createdOn',
       label: 'Created On',
@@ -33,27 +29,21 @@ collections.addCollection('email-templates', {
       sortable: true
     },
     {
-      key: '/id',
+      key: '/active',
       label: 'Active',
       pipes: [checkboxPipe('pages', 'active')]
     },
-    {
-      key: 'id',
-      label: '',
-      pipes: [
-        actionsPipe(() => ({
-          buttons: [
-            {
-              label: 'Send Sample Email',
-              icon: 'email',
-              action: (id) => sendSampleEmail.set({ id })
-            }
-          ],
-          links: []
-        }))
-      ]
-    }
+    actionColumn(() => ({
+      buttons: [
+        {
+          label: 'Send Sample Email',
+          icon: 'email',
+          action: (id) => sendSampleEmail.set({id})
+        }
+      ],
+      links: []
+    }))
   ],
   headerSlot: `<a class="border border-primary text-sm text-primary font-bold py-2 px-3 rounded hover:bg-primary hover:text-fg transition-all" href="/dashboard/management/email-template-layouts">Manage Layouts</a>`,
-  initialSort: { key: 'createdOn', direction: 'desc' }
+  initialSort: {key: 'createdOn', direction: 'desc'}
 });

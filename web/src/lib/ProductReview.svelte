@@ -3,7 +3,6 @@
   import '@jaspero/web-components/dist/review-stars.wc';
   import { authenticated, db, user } from '$lib/utils/firebase';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
-  import Button from '$lib/Button.svelte';
   import Recaptcha from '$lib/Recaptcha.svelte';
   import type { User } from 'firebase/auth';
   import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
@@ -91,8 +90,8 @@
       <h2>Enter your comment</h2>
       <textarea bind:value={comment} rows="4" placeholder="Optional comment"></textarea>
       <div class="flex justify-center">
-        <Button on:click={saveReview} {loading}>Save</Button>
-        <Button on:click={closeModal} color="secondary">Cancel</Button>
+        <!-- <Button on:click={saveReview} {loading}>Save</Button>
+        <Button on:click={closeModal} color="secondary">Cancel</Button> -->
       </div>
     </div>
   </div>

@@ -32,5 +32,5 @@ export const SWIPER_CONSTS = {
   prevId: `data-${prevName}`,
   nextId: `data-${nextName}`,
   paginationId: `data-${paginationName}`,
-  scrollbarId: `data-${scrollbarName}`,
+  scrollbarId: `data-${scrollbarName}`
 };

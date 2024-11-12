@@ -1,19 +1,14 @@
-import { actionsPipe } from '../../../column-pipes/actions.pipe';
-import { checkboxPipe } from '../../../column-pipes/checkbox.pipe';
-import { datePipe } from '../../../column-pipes/date.pipe';
-import { indexPipe } from '../../../column-pipes/index.pipe';
-import { collections } from '../../collections';
+import {datePipe} from '../../../column-pipes/date.pipe';
+import {actionColumn} from '../../../columns/action.column';
+import {indexColumn} from '../../../columns/index.column';
+import {collections} from '../../collections';
 
 collections.addCollection('email-template-layouts', {
   name: 'Email Template Layouts',
   singularName: 'email template layout',
   module: 'management',
   tableHeaders: [
-    {
-      key: '/id',
-      label: 'Number',
-      pipes: [indexPipe]
-    },
+    indexColumn(),
     {
       key: '/createdOn',
       label: 'Created On',
@@ -30,11 +25,7 @@ collections.addCollection('email-template-layouts', {
       label: 'Title',
       sortable: true
     },
-    {
-      key: 'id',
-      label: '',
-      pipes: [actionsPipe()]
-    }
+    actionColumn()
   ],
-  initialSort: { key: 'createdOn', direction: 'desc' }
+  initialSort: {key: 'createdOn', direction: 'desc'}
 });

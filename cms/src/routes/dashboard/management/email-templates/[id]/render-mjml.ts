@@ -1,14 +1,15 @@
 import '@jaspero/web-components/dist/asset-manager.wc';
+import '@jaspero/web-components/dist/asset-manager.css';
 import 'grapesjs/dist/css/grapes.min.css';
 import { DEVICES } from '$lib/page-builder/consts/devices.const';
-import grapesjs from 'grapesjs';
+import grapesjs, {Editor} from 'grapesjs';
 import parserPostCSS from 'grapesjs-parser-postcss';
 import styleGradientPlugin from 'grapesjs-style-gradient';
 import { AMService } from '$lib/page-builder/am.service';
 import componentCodeEditor from '$lib/page-builder/plugins/component-code-editor/component-code-editor';
 import presetNewsletter from 'grapesjs-preset-newsletter';
 
-export function renderMjMl(pageBuilderEl: HTMLDivElement, grapesInstance: any, json?: any) {
+export function renderMjMl(pageBuilderEl: HTMLDivElement, grapesInstance: Editor, json?: any) {
   if (grapesInstance) {
     if (json) {
       grapesInstance.loadProjectData(json);
@@ -24,6 +25,7 @@ export function renderMjMl(pageBuilderEl: HTMLDivElement, grapesInstance: any, j
   let assetManager: any;
 
   grapesInstance = grapesjs.init({
+    telemetry: false,
     container: pageBuilderEl,
     panels: { defaults: [] },
     plugins: [
@@ -171,6 +173,14 @@ export function renderMjMl(pageBuilderEl: HTMLDivElement, grapesInstance: any, j
 
   grapesInstance.runCommand('core:component-outline');
   grapesInstance.DomComponents.getWrapper()!.set({ badgable: false, selectable: false });
+
+  grapesInstance.on('component:create', (component) => {
+
+    /**
+     * Rename the default naming convention in the layer manager
+     */
+    component.getName = () => component.attributes['custom-name'] || `${component.attributes.tagName}#${component.ccid}`;
+  });
 
   if (json) {
     grapesInstance.loadProjectData(json);

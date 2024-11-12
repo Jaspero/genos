@@ -14,7 +14,7 @@
     };
   };
 
-  meta.set({ title: 'Sitemap', noIndex: true });
+  meta.set({ title: 'Hidden Sitemap', noIndex: true });
 </script>
 
 <h1>Sitemap</h1>
@@ -53,9 +53,7 @@
   <li><a href="/sign-in">Sign In</a></li>
   <li><a href="/sign-up">Sign Up</a></li>
   <li><a href="/my-account">My Account</a></li>
+  <li><a href="/my-account/coupons">My Account - Coupons</a></li>
+  <li><a href="/my-account/favorites">My Account - Favorites</a></li>
+  <li><a href="/my-account/settings">My Account - Settings</a></li>
 </ul>
-
-<svelte:head>
-  <title>Hidden Sitemap - {CONFIG.title}</title>
-  <meta name="robots" content="noindex, nofollow" />
-</svelte:head>

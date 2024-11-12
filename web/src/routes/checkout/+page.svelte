@@ -1,6 +1,4 @@
 <script>
-  import Button from '$lib/Button.svelte';
-  import Field from '$lib/Field.svelte';
   import Product from '$lib/Product.svelte';
   import { cartState } from '$lib/cart/cart-state.ts';
   import { CONFIG } from '$lib/consts/config.const';
@@ -49,9 +47,9 @@
   <Product {product} showAdd={false} />
 {/each}
 
-<Field label="Email" placeholder="" bind:value={email} />
+<!-- <Field label="Email" placeholder="" bind:value={email} /> -->
 
-<Button loading={btnLoading} on:click={completeCheckout}>Complete Checkout</Button>
+<!-- <Button loading={btnLoading} on:click={completeCheckout}>Complete Checkout</Button> -->
 
 <svelte:head>
   <title>Checkout - {CONFIG.title}</title>

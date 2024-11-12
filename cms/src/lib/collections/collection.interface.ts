@@ -2,15 +2,7 @@ import type { DocumentReference } from 'firebase/firestore';
 import type { FilterOperators } from '../interfaces/filter-operators.interface';
 import type { Sort } from '../interfaces/sort.interface';
 import type { CommonDataContext } from '$lib/interfaces/common-data-context.interface';
-
-export interface TableHeader {
-  key: string;
-  label: string;
-  pipes?: Array<(value: any, row: any, index: number) => any>;
-  exportPipes?: Array<(value: any, row: any, index: number) => any>;
-  sortable?: boolean;
-  disabled?: boolean;
-}
+import type { TableHeader } from '@jaspero/web-components/dist/table-header.interface';
 
 export interface Collection {
   name: string;

@@ -10,7 +10,7 @@ export async function redirectUnauthorized(path = '/sign-in') {
 
       try {
         unsub();
-      } catch {};
+      } catch {}
 
       resolve(data);
     });

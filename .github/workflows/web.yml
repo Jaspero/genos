@@ -13,7 +13,7 @@ env:
   TARGET: web
 jobs:
   build_and_deploy:
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     steps:
       - name: Use Node.js 20.9.0
         uses: actions/setup-node@v1
@@ -27,20 +27,24 @@ jobs:
       - name: Create key
         working-directory: web
         run: |
-          echo $SV > key.json
+          echo $SV > prod.json
         env:
           SV: ${{ env.SERVICE_ACCOUNT }}
       - name: Install Dependencies
         run: npm ci
+      - name: Copy Build
+        id: copy
+        working-directory: web
+        run: npm run copy:prod        
       - name: Install Dependencies Web
         working-directory: web
         run: npm ci
-      - name: Build
-        working-directory: web
-        run: npm run build:prod
       - name: Configure Release
         id: config
-        run: JOB=start npm run configure-release
+        run: JOB=start npm run configure-release        
+      - name: Build
+        working-directory: web
+        run: npm run build
       - name: Deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:

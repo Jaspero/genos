@@ -1,24 +1,25 @@
-import type { PageBuilderForm } from '../types/page-builder-form.interface';
+import type {Component, Editor} from 'grapesjs';
+import type {PageBuilderForm} from '../types/page-builder-form.interface';
 
 const createOption = (value: string, content: string) => ({
   type: 'option',
   content,
-  attributes: { value }
+  attributes: {value}
 });
 
-const nameTrait = { name: 'name' };
-const placeholderTrait = { name: 'placeholder' };
-const requiredTrait = { type: 'checkbox', name: 'required' };
-const idTrait = { name: 'id' };
-const valueTrait = { name: 'value' };
-const checkedTrait = { type: 'checkbox', name: 'checked' };
-const minLengthTrait = { name: 'minlength', label: 'Min Length', type: 'number' };
-const maxLengthTrait = { name: 'maxlength', label: 'Max Length', type: 'number' };
-const patternTrait = { name: 'pattern', label: 'Pattern', type: 'text', changeProp: 1 };
-const titleTrait = { name: 'title', label: 'Title', type: 'text' };
-const directiveSelectTrait = { name: 'directives', label: 'Directives', type: 'directives-select' };
+const nameTrait = {name: 'name'};
+const placeholderTrait = {name: 'placeholder'};
+const requiredTrait = {type: 'checkbox', name: 'required'};
+const idTrait = {name: 'id'};
+const valueTrait = {name: 'value'};
+const checkedTrait = {type: 'checkbox', name: 'checked'};
+const minLengthTrait = {name: 'minlength', label: 'Min Length', type: 'number'};
+const maxLengthTrait = {name: 'maxlength', label: 'Max Length', type: 'number'};
+const patternTrait = {name: 'pattern', label: 'Pattern', type: 'text', changeProp: 1};
+const titleTrait = {name: 'title', label: 'Title', type: 'text'};
+const directiveSelectTrait = {name: 'directives', label: 'Directives', type: 'directives-select'};
 
-export const TYPES = (forms: PageBuilderForm[]) => [
+export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
   /**
    * Grid
    */
@@ -31,6 +32,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
         tagName: 'column',
         draggable: true,
         classes: ['gc-6'],
+        style: {},
         attributes: {
           dataset: {
             type: 'column'
@@ -43,18 +45,18 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             label: 'Column span - Desktop',
             changeProp: 1,
             options: [
-              { value: 'gc-1', name: '1 Column' },
-              { value: 'gc-2', name: '2 Columns' },
-              { value: 'gc-3', name: '3 Columns' },
-              { value: 'gc-4', name: '4 Columns' },
-              { value: 'gc-5', name: '5 Columns' },
-              { value: 'gc-6', name: '6 Columns' },
-              { value: 'gc-7', name: '7 Columns' },
-              { value: 'gc-8', name: '8 Columns' },
-              { value: 'gc-9', name: '9 Columns' },
-              { value: 'gc-10', name: '10 Columns' },
-              { value: 'gc-11', name: '11 Columns' },
-              { value: 'gc-12', name: '12 Columns' }
+              {value: 'gc-1', name: '1 Column'},
+              {value: 'gc-2', name: '2 Columns'},
+              {value: 'gc-3', name: '3 Columns'},
+              {value: 'gc-4', name: '4 Columns'},
+              {value: 'gc-5', name: '5 Columns'},
+              {value: 'gc-6', name: '6 Columns'},
+              {value: 'gc-7', name: '7 Columns'},
+              {value: 'gc-8', name: '8 Columns'},
+              {value: 'gc-9', name: '9 Columns'},
+              {value: 'gc-10', name: '10 Columns'},
+              {value: 'gc-11', name: '11 Columns'},
+              {value: 'gc-12', name: '12 Columns'}
             ]
           },
           {
@@ -63,19 +65,19 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             label: 'Column span - Tablet',
             changeProp: 1,
             options: [
-              { value: '', name: 'None' },
-              { value: 'gc-sm-1', name: '1 Column' },
-              { value: 'gc-sm-2', name: '2 Columns' },
-              { value: 'gc-sm-3', name: '3 Columns' },
-              { value: 'gc-sm-4', name: '4 Columns' },
-              { value: 'gc-sm-5', name: '5 Columns' },
-              { value: 'gc-sm-6', name: '6 Columns' },
-              { value: 'gc-sm-7', name: '7 Columns' },
-              { value: 'gc-sm-8', name: '8 Columns' },
-              { value: 'gc-sm-9', name: '9 Columns' },
-              { value: 'gc-sm-10', name: '10 Columns' },
-              { value: 'gc-sm-11', name: '11 Columns' },
-              { value: 'gc-sm-12', name: '12 Columns' }
+              {value: '', name: 'None'},
+              {value: 'gc-sm-1', name: '1 Column'},
+              {value: 'gc-sm-2', name: '2 Columns'},
+              {value: 'gc-sm-3', name: '3 Columns'},
+              {value: 'gc-sm-4', name: '4 Columns'},
+              {value: 'gc-sm-5', name: '5 Columns'},
+              {value: 'gc-sm-6', name: '6 Columns'},
+              {value: 'gc-sm-7', name: '7 Columns'},
+              {value: 'gc-sm-8', name: '8 Columns'},
+              {value: 'gc-sm-9', name: '9 Columns'},
+              {value: 'gc-sm-10', name: '10 Columns'},
+              {value: 'gc-sm-11', name: '11 Columns'},
+              {value: 'gc-sm-12', name: '12 Columns'}
             ]
           },
           {
@@ -84,19 +86,19 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             label: 'Column span - Mobile',
             changeProp: 1,
             options: [
-              { value: '', name: 'None' },
-              { value: 'gc-xs-1', name: '1 Column' },
-              { value: 'gc-xs-2', name: '2 Columns' },
-              { value: 'gc-xs-3', name: '3 Columns' },
-              { value: 'gc-xs-4', name: '4 Columns' },
-              { value: 'gc-xs-5', name: '5 Columns' },
-              { value: 'gc-xs-6', name: '6 Columns' },
-              { value: 'gc-xs-7', name: '7 Columns' },
-              { value: 'gc-xs-8', name: '8 Columns' },
-              { value: 'gc-xs-9', name: '9 Columns' },
-              { value: 'gc-xs-10', name: '10 Columns' },
-              { value: 'gc-xs-11', name: '11 Columns' },
-              { value: 'gc-xs-12', name: '12 Columns' }
+              {value: '', name: 'None'},
+              {value: 'gc-xs-1', name: '1 Column'},
+              {value: 'gc-xs-2', name: '2 Columns'},
+              {value: 'gc-xs-3', name: '3 Columns'},
+              {value: 'gc-xs-4', name: '4 Columns'},
+              {value: 'gc-xs-5', name: '5 Columns'},
+              {value: 'gc-xs-6', name: '6 Columns'},
+              {value: 'gc-xs-7', name: '7 Columns'},
+              {value: 'gc-xs-8', name: '8 Columns'},
+              {value: 'gc-xs-9', name: '9 Columns'},
+              {value: 'gc-xs-10', name: '10 Columns'},
+              {value: 'gc-xs-11', name: '11 Columns'},
+              {value: 'gc-xs-12', name: '12 Columns'}
             ]
           },
           {
@@ -105,19 +107,19 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             label: 'Column start - Desktop',
             changeProp: 1,
             options: [
-              { value: '', name: 'None' },
-              { value: 'gcs-1', name: 'Column 1' },
-              { value: 'gcs-2', name: 'Column 2' },
-              { value: 'gcs-3', name: 'Column 3' },
-              { value: 'gcs-4', name: 'Column 4' },
-              { value: 'gcs-5', name: 'Column 5' },
-              { value: 'gcs-6', name: 'Column 6' },
-              { value: 'gcs-7', name: 'Column 7' },
-              { value: 'gcs-8', name: 'Column 8' },
-              { value: 'gcs-9', name: 'Column 9' },
-              { value: 'gcs-10', name: 'Column 10' },
-              { value: 'gcs-11', name: 'Column 11' },
-              { value: 'gcs-12', name: 'Column 12' }
+              {value: '', name: 'None'},
+              {value: 'gcs-1', name: 'Column 1'},
+              {value: 'gcs-2', name: 'Column 2'},
+              {value: 'gcs-3', name: 'Column 3'},
+              {value: 'gcs-4', name: 'Column 4'},
+              {value: 'gcs-5', name: 'Column 5'},
+              {value: 'gcs-6', name: 'Column 6'},
+              {value: 'gcs-7', name: 'Column 7'},
+              {value: 'gcs-8', name: 'Column 8'},
+              {value: 'gcs-9', name: 'Column 9'},
+              {value: 'gcs-10', name: 'Column 10'},
+              {value: 'gcs-11', name: 'Column 11'},
+              {value: 'gcs-12', name: 'Column 12'}
             ]
           },
           {
@@ -126,19 +128,19 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             label: 'Column start - Tablet',
             changeProp: 1,
             options: [
-              { value: '', name: 'None' },
-              { value: 'gcs-sm-1', name: 'Column 1' },
-              { value: 'gcs-sm-2', name: 'Column 2' },
-              { value: 'gcs-sm-3', name: 'Column 3' },
-              { value: 'gcs-sm-4', name: 'Column 4' },
-              { value: 'gcs-sm-5', name: 'Column 5' },
-              { value: 'gcs-sm-6', name: 'Column 6' },
-              { value: 'gcs-sm-7', name: 'Column 7' },
-              { value: 'gcs-sm-8', name: 'Column 8' },
-              { value: 'gcs-sm-9', name: 'Column 9' },
-              { value: 'gcs-sm-10', name: 'Column 10' },
-              { value: 'gcs-sm-11', name: 'Column 11' },
-              { value: 'gcs-sm-12', name: 'Column 12' }
+              {value: '', name: 'None'},
+              {value: 'gcs-sm-1', name: 'Column 1'},
+              {value: 'gcs-sm-2', name: 'Column 2'},
+              {value: 'gcs-sm-3', name: 'Column 3'},
+              {value: 'gcs-sm-4', name: 'Column 4'},
+              {value: 'gcs-sm-5', name: 'Column 5'},
+              {value: 'gcs-sm-6', name: 'Column 6'},
+              {value: 'gcs-sm-7', name: 'Column 7'},
+              {value: 'gcs-sm-8', name: 'Column 8'},
+              {value: 'gcs-sm-9', name: 'Column 9'},
+              {value: 'gcs-sm-10', name: 'Column 10'},
+              {value: 'gcs-sm-11', name: 'Column 11'},
+              {value: 'gcs-sm-12', name: 'Column 12'}
             ]
           },
           {
@@ -147,19 +149,19 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             label: 'Column start - Mobile',
             changeProp: 1,
             options: [
-              { value: '', name: 'None' },
-              { value: 'gcs-xs-1', name: 'Column 1' },
-              { value: 'gcs-xs-2', name: 'Column 2' },
-              { value: 'gcs-xs-3', name: 'Column 3' },
-              { value: 'gcs-xs-4', name: 'Column 4' },
-              { value: 'gcs-xs-5', name: 'Column 5' },
-              { value: 'gcs-xs-6', name: 'Column 6' },
-              { value: 'gcs-xs-7', name: 'Column 7' },
-              { value: 'gcs-xs-8', name: 'Column 8' },
-              { value: 'gcs-xs-9', name: 'Column 9' },
-              { value: 'gcs-xs-10', name: 'Column 10' },
-              { value: 'gcs-xs-11', name: 'Column 11' },
-              { value: 'gcs-xs-12', name: 'Column 12' }
+              {value: '', name: 'None'},
+              {value: 'gcs-xs-1', name: 'Column 1'},
+              {value: 'gcs-xs-2', name: 'Column 2'},
+              {value: 'gcs-xs-3', name: 'Column 3'},
+              {value: 'gcs-xs-4', name: 'Column 4'},
+              {value: 'gcs-xs-5', name: 'Column 5'},
+              {value: 'gcs-xs-6', name: 'Column 6'},
+              {value: 'gcs-xs-7', name: 'Column 7'},
+              {value: 'gcs-xs-8', name: 'Column 8'},
+              {value: 'gcs-xs-9', name: 'Column 9'},
+              {value: 'gcs-xs-10', name: 'Column 10'},
+              {value: 'gcs-xs-11', name: 'Column 11'},
+              {value: 'gcs-xs-12', name: 'Column 12'}
             ]
           }
         ]
@@ -264,11 +266,31 @@ export const TYPES = (forms: PageBuilderForm[]) => [
     id: 'image',
     extends: 'image',
     model: {
+      initToolbar() {
+        const model = this as Component;
+
+        let toolbar = model.get('toolbar');
+
+        if (!toolbar) {
+          toolbar = [];
+        }
+
+        toolbar.push({
+          label: `<svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="#fff"><path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>`,
+          command: 'jp-info',
+        });
+
+        model.set('toolbar', toolbar);
+      },
       defaults: {
         traits: [
           {
             label: 'Source',
-            name: 'src'
+            name: 'src',
+            type: 'asset-select',
+            path: 'pages',
+            types: ['image'],
+            selectable: 'single'
           },
           {
             label: 'Alt',
@@ -325,8 +347,8 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             name: 'animation',
             default: 'instanct',
             options: [
-              { value: 'instant', name: 'instant' },
-              { value: 'smooth', name: 'smooth' }
+              {value: 'instant', name: 'instant'},
+              {value: 'smooth', name: 'smooth'}
             ]
           }
         ]
@@ -375,11 +397,11 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             name: 'type',
             label: 'Type',
             options: [
-              { id: 'text', label: 'Text' },
-              { id: 'email', label: 'Email' },
-              { id: 'password', label: 'Password' },
-              { id: 'url', label: 'URL' },
-              { id: 'tel', label: 'Tel' }
+              {id: 'text', label: 'Text'},
+              {id: 'email', label: 'Email'},
+              {id: 'password', label: 'Password'},
+              {id: 'url', label: 'URL'},
+              {id: 'tel', label: 'Tel'}
             ]
           },
           minLengthTrait,
@@ -499,7 +521,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
         draggable: 'form, form *',
         copyable: false,
         classes: ['checkbox'],
-        attributes: { type: 'checkbox' },
+        attributes: {type: 'checkbox'},
         traits: [idTrait, nameTrait, valueTrait, requiredTrait, checkedTrait]
       }
     }
@@ -513,7 +535,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
         tagName: 'input',
         draggable: 'form, form *',
         classes: ['radio'],
-        attributes: { type: 'radio' },
+        attributes: {type: 'radio'},
         traits: [idTrait, nameTrait, valueTrait, requiredTrait, checkedTrait]
       }
     }
@@ -528,6 +550,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
     model: {
       defaults: {
         tagName: 'pb-mobile-menu',
+        cName: 'Mobile Menu',
         draggable: true,
         droppable: false,
         traits: [
@@ -551,6 +574,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
     model: {
       defaults: {
         tagName: 'pb-submit',
+        cName: 'Submit',
         draggable: 'form',
         droppable: false,
         traits: [
@@ -598,14 +622,15 @@ export const TYPES = (forms: PageBuilderForm[]) => [
     model: {
       defaults: {
         tagName: 'pb-featured-products',
+        cName: 'Featured Products',
         traits: [
           {
             type: 'text',
             label: 'Sort Property',
             name: 'property',
             options: [
-              { id: 'price', label: 'Price' },
-              { id: 'name', label: 'Name' }
+              {id: 'price', label: 'Price'},
+              {id: 'name', label: 'Name'}
             ]
           },
           {
@@ -613,8 +638,8 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             label: 'Sort Direction',
             name: 'direction',
             options: [
-              { id: 'asc', label: 'Ascending' },
-              { id: 'desc', label: 'Descending' }
+              {id: 'asc', label: 'Ascending'},
+              {id: 'desc', label: 'Descending'}
             ]
           }
         ]
@@ -627,6 +652,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
     model: {
       defaults: {
         tagName: 'pb-products',
+        cName: 'Products',
         traits: [
           {
             type: 'number',
@@ -648,9 +674,9 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             label: 'Sort Property',
             name: 'property',
             options: [
-              { id: 'price', label: 'Price' },
-              { id: 'name', label: 'Name' },
-              { id: 'createdOn', label: 'Created On' }
+              {id: 'price', label: 'Price'},
+              {id: 'name', label: 'Name'},
+              {id: 'createdOn', label: 'Created On'}
             ]
           },
           {
@@ -658,8 +684,8 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             label: 'Sort Direction',
             name: 'direction',
             options: [
-              { id: 'asc', label: 'Ascending' },
-              { id: 'desc', label: 'Descending' }
+              {id: 'asc', label: 'Ascending'},
+              {id: 'desc', label: 'Descending'}
             ]
           },
           {
@@ -711,12 +737,45 @@ export const TYPES = (forms: PageBuilderForm[]) => [
     model: {
       defaults: {
         tagName: 'pb-product-card',
+        cName: 'Product Card',
         traits: [
           {
             type: 'document-lookup',
             label: 'Product',
             name: 'id',
             collection: 'products'
+          }
+        ]
+      }
+    }
+  },
+  {
+    id: 'pb-google-map',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-GOOGLE-MAP',
+    model: {
+      defaults: {
+        tagName: 'pb-google-map',
+        cName: 'Google Map',
+        traits: [
+          {
+            type: 'address-lookup',
+            label: 'Address',
+            name: 'address'
+          },
+          {
+            label: 'Zoom',
+            name: 'mapZoom',
+            type: 'number'
+          },
+          {
+            label: 'Latitute',
+            name: 'lat',
+            type: 'number'
+          },
+          {
+            label: 'Longitute',
+            name: 'lng',
+            type: 'number'
           }
         ]
       }
@@ -818,6 +877,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
     model: {
       defaults: {
         tagName: 'pb-blog',
+        cName: 'Blog',
         traits: [
           {
             type: 'document-lookup',
@@ -847,8 +907,8 @@ export const TYPES = (forms: PageBuilderForm[]) => [
             name: 'showcategoryfilters',
             label: 'Show Category Filters',
             options: [
-              { id: 'Yes', label: 'Yes' },
-              { id: 'No', label: 'No' }
+              {id: 'Yes', label: 'Yes'},
+              {id: 'No', label: 'No'}
             ],
             default: 'Yes'
           },
@@ -882,6 +942,7 @@ export const TYPES = (forms: PageBuilderForm[]) => [
     model: {
       defaults: {
         tagName: 'pb-featured-blog-articles',
+        cName: 'Featured Blog',
         traits: [
           {
             type: 'text',

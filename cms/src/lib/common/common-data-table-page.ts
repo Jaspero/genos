@@ -1,10 +1,10 @@
 import { collections } from '$lib/collections/collections.js';
 import { error } from '@sveltejs/kit';
-import type TableHeader from '../TableHeader.svelte';
 import type { FilterOperators } from '../interfaces/filter-operators.interface';
 import type { Sort } from '../interfaces/sort.interface';
 import type { Collection } from '../collections/collection.interface';
 import type { CommonDataContext } from '$lib/interfaces/common-data-context.interface';
+import type { TableHeader } from '@jaspero/web-components/dist/table-header.interface';
 
 export interface CommonDataTablePageData {
   name: string;

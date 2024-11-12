@@ -1,6 +1,6 @@
 <script lang="ts">
   export let label: string;
-  export let onClick: () => void;
+  export let onClick: () => any;
 </script>
 
 <button class="gsi-material-button" type="button" on:click={onClick}>

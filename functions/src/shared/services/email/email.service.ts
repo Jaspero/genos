@@ -24,8 +24,8 @@ export class EmailService {
 
   async parseEmail(
     templateId: string,
-    context?: any,
-    receiver?: string | string[],
+    context: any,
+    to: string | string[],
     additional?: any,
     source?: string,
     tracking = true,
@@ -37,7 +37,7 @@ export class EmailService {
     const message: EmailTemplate = messageSnap.data() as any;
 
     if (!message?.active) {
-      logger.log('Email doesn\'t exist or is not active', templateId);
+      logger.log("Email doesn't exist or is not active", templateId);
       return;
     }
 
@@ -86,7 +86,6 @@ export class EmailService {
       }
     }
 
-    const to = receiver ? receiver : EMAIL_CONFIG.adminEmail;
     const subject = compile(message.subject)({ ...context, global });
 
     const res = await this.sendEmail({ to, subject, html, ...additional });

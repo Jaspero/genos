@@ -1,10 +1,10 @@
 <script lang="ts">
   import { classList } from '$lib/actions/class-list';
   import { page } from '$app/stores';
-  import { browser, dev } from '$app/environment';
+  import { browser } from '$app/environment';
   import { meta } from '$lib/meta/meta.store';
   import './components';
-  import { onDestroy, onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import type { Page } from '@sveltejs/kit';
   import type { Unsubscriber } from 'svelte/store';
 
@@ -41,13 +41,8 @@
     classes.push('standalone');
   }
 
-  if (browser) {
-    pageSetup();
-  }
-
   function scrolled(top: number) {
     scrolls.forEach((scroll) => {
-
       if (!scroll.el || !scroll.className) {
         return;
       }
@@ -65,33 +60,59 @@
       await new Promise((r) => setTimeout(r, 50));
     }
 
-    if (!window.swipers) {
-      return;
+    let attempts = 0;
+
+    while (!window.swipers && attempts < 100) {
+      await new Promise((r) => setTimeout(r, 50));
+      attempts++;
     }
 
-    if (!Object.keys(window.swipers).length) {
+    if (!window.swipers || !Object.keys(window.swipers).length) {
       return;
     }
 
     for (const key in window.swipers) {
       const { swiper, id } = window.swipers![key];
-      const el = document.getElementById(id);
+      
+      let el = document.getElementById(id);
+
+      let attempts = 0;
+
+      while (!el && attempts < 100) {
+        await new Promise((r) => setTimeout(r, 50));
+        el = document.getElementById(id);
+      }
 
       if (el) {
-        swiper(el);
+        if (!window.swiperInstances) {
+          window.swiperInstances = {};
+        }
+
+        if (!window.swiperInstances[key]) {
+          window.swiperInstances[key] = swiper(el);
+        }
       }
     }
   }
 
   function pageChange(page: Page) {
     if (browser) {
-      renderSwiper().catch();
+
+      if (window.swipers) {
+        window.swipers = {};
+      }
+
+      if (window.swiperInstances && Object.keys(window.swiperInstances).length) {
+        window.swiperInstances = {};
+      }
 
       if (data.scripts) {
         const script = document.createElement('script');
         script.innerHTML = data.scripts;
         document.body.appendChild(script);
       }
+
+      renderSwiper().catch();
     }
 
     scrollTrackers = [];
@@ -224,7 +245,7 @@
   }
 
   onMount(() => {
-    pageChange($page);
+    pageSetup();
   });
 
   onDestroy(() => {

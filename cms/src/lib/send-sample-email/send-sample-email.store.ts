@@ -1,3 +1,3 @@
-import {writable} from 'svelte/store';
+import { writable } from 'svelte/store';
 
-export const sendSampleEmail = writable<null | { id: string; }>(null);
+export const sendSampleEmail = writable<null | { id: string }>(null);

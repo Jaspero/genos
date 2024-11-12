@@ -1,12 +1,20 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
-  import Button from '$lib/Button.svelte';
-  import Field from '$lib/Field.svelte';
+  import '@jaspero/web-components/dist/input.wc';
+  import '@jaspero/web-components/dist/input.css';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
   import { auth } from '$lib/utils/firebase';
+  import { renderAlert } from '@jaspero/web-components/dist/render-alert';
   import { confirmPasswordReset, verifyPasswordResetCode } from 'firebase/auth';
   import { onMount } from 'svelte';
+  import { meta } from '$lib/meta/meta.store';
+  import Recaptcha from '$lib/Recaptcha.svelte';
+
+  meta.set({
+    title: 'Reset Password',
+    noIndex: true
+  });
 
   const form = {
     password: '',
@@ -28,10 +36,7 @@
 
   async function submit() {
     if (form.password !== form.repeatPassword) {
-      // return notification.set({
-      //   content: 'Passwords do not match!',
-      //   type: 'error'
-      // });
+      return renderAlert({ title: 'Error', message: 'Passwords do not match!', state: 'error' });
     }
 
     loading = true;
@@ -44,51 +49,50 @@
     }
 
     await alertWrapper(
-      verifyPasswordResetCode(auth, code),
-      '',
+      verifyPasswordResetCode(auth, code).then(() =>
+        confirmPasswordReset(auth, code, form.password)
+      ),
+      'Password reset successful. You can now sign in.',
       'Your reset code is invalid or expired. Please visit the login page and request password reset again.',
       () => (loading = false)
     );
 
-    await alertWrapper(
-      confirmPasswordReset(auth, code, form.password),
-      'Password reset was successful. You are now signed in.',
-      '',
-      () => (loading = false)
-    );
-
-    goto('/dashboard');
-
     loading = false;
+
+    goto('/my-account');
   }
 </script>
 
-<form on:submit|preventDefault={() => submit()}>
-  <Field
-    type="password"
-    placeholder="Password"
-    label="Password"
-    bind:value={form.password}
-    required
-  />
-  <Field
-    label="Repeat Password"
-    type="password"
-    placeholder="Repeat Password"
-    bind:value={form.repeatPassword}
-    required
-  />
+<div class="w-[500px] mx-auto p-12 flex justify-center items-center">
+  <div id="recaptcha-container-id"></div>
 
-  <div class="ta-center">
-    {#if loading}
-      Loading
-    {:else}
-      <Button type="submit">Reset</Button>
-    {/if}
-  </div>
-</form>
+  <form on:submit|preventDefault={submit} class="w-full shadow-xl p-8 rounded">
+    <h2 class="text-lg font-bold mb-4">Reset Password</h2>
 
-<svelte:head>
-  <title>Reset Password - Jaspero</title>
-  <meta name="robots" content="noindex, nofollow" />
-</svelte:head>
+    <div class="flex flex-col gap-2">
+      <jp-input
+        label="Password"
+        required
+        type="password"
+        value={form.password}
+        on:value={(e) => (form.password = e.detail.value)}
+      ></jp-input>
+      <jp-input
+        label="Repeat Password"
+        required
+        type="password"
+        value={form.repeatPassword}
+        on:value={(e) => (form.repeatPassword = e.detail.value)}
+      ></jp-input>
+    </div>
+
+    <div class="mt-4">
+      <button type="submit" class="button" class:loading>Submit</button>
+    </div>
+
+    <p class="mt-8 mb-2">You don't need to change your password?</p>
+    <a class="underline" href="/sign-in">Back to sign in</a>
+  </form>
+</div>
+
+<Recaptcha bind:verify={recaptchaVerify} />

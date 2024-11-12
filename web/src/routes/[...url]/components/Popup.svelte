@@ -2,7 +2,6 @@
 
 <script lang="ts">
   import { browser } from '$app/environment';
-  import Button from '$lib/Button.svelte';
   import Dialog from '$lib/Dialog.svelte';
   import { db } from '$lib/utils/firebase';
   import { styleEscape } from '$lib/utils/style-escape';
@@ -24,7 +23,7 @@
   }
 </script>
 
-<Button on:click={() => (showing = true)}>{label}</Button>
+<button class="button" type="button" on:click={() => (showing = true)}>{label}</button>
 
 <Dialog bind:showing>
   {#if content}
