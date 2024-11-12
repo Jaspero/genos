@@ -1,12 +1,11 @@
 import { SearchService } from '../../services/search.service';
 import { GOOGLE_MAPS_API_KEY } from '$lib/consts/google-maps-api-key.conts';
-import { AMService } from '$lib/page-builder/am.service';
 
 export const CUSTOM_TRAITS: any[] = [
   {
     id: 'asset-select',
     eventCapture: ['input'],
-    createInput({ trait }: any) {
+    createInput({ trait, component }: any) {
       const el = document.createElement('asset-select') as any;
 
       el.name = trait.get('name');
@@ -14,15 +13,21 @@ export const CUSTOM_TRAITS: any[] = [
       el.types = trait.get('types') || ['image'];
       el.selectable = trait.get('selectable') || 'single';
 
+      // todo: check why we need this event defined
+      el.addEventListener('input', (e: any) => {
+        trait.set('value', e.detail);
+        el.value = e.detail;
+      });
+
       return el;
     },
-    onUpdate({ elInput, component }) {
-      if (component?.attributes?.attributes?.src) {
-        elInput.value = component?.attributes?.attributes?.src;
+    onUpdate({ elInput, component, trait }) {
+      if (component?.attributes?.attributes?.[trait.get('name')]) {
+        elInput.value = component?.attributes?.attributes?.[trait.get('name')];
       }
     },
-    onEvent({ elInput, component }) {
-      component.addAttributes({src: elInput.value});
+    onEvent({ elInput, component, trait }) {
+      component.addAttributes({ [trait.get('name')]: elInput.value });
     }
   },
   {
@@ -138,7 +143,7 @@ export const CUSTOM_TRAITS: any[] = [
   {
     id: 'address-lookup',
     events: {
-      keyup: 'onInputChange',
+      keyup: 'onInputChange'
     },
     createInput({ trait, component }) {
       const input = document.createElement('input');
@@ -172,8 +177,7 @@ export const CUSTOM_TRAITS: any[] = [
               latTrait.set('value', lat);
               lngTrait.set('value', lng);
             }
-          } catch (error) {
-          }
+          } catch (error) {}
         }
       };
 
@@ -181,23 +185,5 @@ export const CUSTOM_TRAITS: any[] = [
 
       return input;
     }
-  },
-  {
-    id: 'image-select',
-    noLabel: true,
-    templateInput: '',
-    createInput({ trait }: any) {
-      /*console.log(trait);
-      const el = document.createElement('jp-asset-manager') as any;
-
-      el.service = new AMService()
-      el.rootPath = 'pages';
-      el.shownFiles = ['image'];
-      el.selectable = 'single';
-      return el;*/
-    },
-    // onEvent({ elInput, component }) {
-      // setTimeout(() => component.addAttributes({ [elInput.name]: elInput.getValue() }), 500);
-    // }
   }
 ];

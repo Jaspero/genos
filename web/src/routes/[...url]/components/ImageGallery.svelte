@@ -12,6 +12,7 @@
   export let columnCount;
   export let columnCountTable;
   export let columnCountMobile;
+  export let enableGallery;
   export let gapX;
   export let gapY;
 
@@ -20,10 +21,11 @@
   $: if (el) {
     const imgEl = document.createElement('jp-image-gallery');
 
-    imgEl.images = images || [{}];
+    imgEl.images = images?.length ? images.split(',').map(src => ({src, alt: ''})) : [{}];
     imgEl.enablePagination = !!enablePagination;
     imgEl.sliderBar = !!sliderBar;
     imgEl.autoSlide = !!autoSlide;
+    imgEl.enableGallery = !!enableGallery;
 
     if (columnCount) {
       imgEl.columnCount = +parseInt(columnCount, 10);

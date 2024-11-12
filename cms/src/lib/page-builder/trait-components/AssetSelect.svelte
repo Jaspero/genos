@@ -62,8 +62,8 @@
       rendered = false;
     });
 
-    assetManager.addEventListener('selected', (event: { detail: { url: string } }) => {
-      value = event.detail.url;
+    assetManager.addEventListener('selected', (event: { detail: any }) => {
+      value = selectable === 'single' ? event.detail.url : event.detail.map((it: any) => it.url);
       document.body.removeChild(parentEl);
       rendered = false;
     });

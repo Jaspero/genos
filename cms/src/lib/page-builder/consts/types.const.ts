@@ -834,7 +834,17 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
             name: 'gapY'
           },
           {
-            type: 'image-select'
+            type: 'checkbox',
+            label: 'Enable Gallery',
+            name: 'enableGallery'
+          },
+          {
+            label: 'Source',
+            name: 'images',
+            type: 'asset-select',
+            path: 'pages',
+            types: ['image'],
+            selectable: 'multiple'
           }
           /*{
             type: 'array',
