@@ -10,11 +10,11 @@
 
   export let lat;
   export let lng;
-  export let mapZoom;
+  export let mapzoom;
 
   $: latitude = parseFloat(lat) || latitude || 37.7749;
   $: longitude = parseFloat(lng) || longitude || -122.4194;
-  $: zoom = parseInt(mapZoom) || zoom;
+  $: zoom = parseInt(mapzoom) || zoom;
 
   onMount(() => {
     const loadGoogleMapsScript = () => {
@@ -35,7 +35,7 @@
     loadGoogleMapsScript().then(() => {
       map = new window.google.maps.Map(document.getElementById('map'), {
         center: { lat: latitude, lng: longitude },
-        zoom: +mapZoom || zoom,
+        zoom: +mapzoom || zoom,
       });
 
       new window.google.maps.Marker({
