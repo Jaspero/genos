@@ -33,7 +33,7 @@
     };
 
     loadGoogleMapsScript().then(() => {
-      map = new window.google.maps.Map(mapElement, {
+      map = new window.google.maps.Map(document.getElementById('map'), {
         center: { lat: latitude, lng: longitude },
         zoom: +mapZoom || zoom,
       });
@@ -53,4 +53,4 @@
     }
 </style>
 
-<div id="map" bind:this={mapElement}></div>
+<div id="map"></div>
