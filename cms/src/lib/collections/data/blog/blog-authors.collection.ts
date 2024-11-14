@@ -1,25 +1,21 @@
-import { actionsPipe } from '../../../column-pipes/actions.pipe';
-import { datePipe } from '../../../column-pipes/date.pipe';
-import { imagePipe } from '../../../column-pipes/image.pipe';
-import { indexPipe } from '../../../column-pipes/index.pipe';
-import { releaseStatusPipe } from '../../../column-pipes/release-status.pipe';
-import { META_FORM_FIELDS } from '../../../consts/meta.form-fields';
-import { quillFiled } from '../../../form-fields/quill.field';
-import { BucketImageService } from '../../../services/image.service';
-import { generateSlug } from '../../../utils/generate-slug';
-import { collections } from '../../collections';
-import { DateTime } from 'luxon';
+import {DateTime} from 'luxon';
+import {datePipe} from '../../../column-pipes/date.pipe';
+import {imagePipe} from '../../../column-pipes/image.pipe';
+import {releaseStatusPipe} from '../../../column-pipes/release-status.pipe';
+import {actionColumn} from '../../../columns/action.column';
+import {indexColumn} from '../../../columns/index.column';
+import {META_FORM_FIELDS} from '../../../consts/meta.form-fields';
+import {quillFiled} from '../../../form-fields/quill.field';
+import {BucketImageService} from '../../../services/image.service';
+import {generateSlug} from '../../../utils/generate-slug';
+import {collections} from '../../collections';
 
 collections.addCollection('blog-authors', {
   name: 'Authors',
   singularName: 'authors',
   module: 'blog',
   tableHeaders: [
-    {
-      key: '/id',
-      label: '#',
-      pipes: [indexPipe]
-    },
+    indexColumn(),
     {
       key: '/image',
       label: 'Image',
@@ -36,29 +32,24 @@ collections.addCollection('blog-authors', {
       pipes: [releaseStatusPipe()],
       exportPipes: [datePipe]
     },
-    {
-      key: 'id',
-      label: '',
-      pipes: [
-        actionsPipe((id) => ({
-          actions: ['duplicate', 'delete'],
-          links: [
-            {
-              label: 'Edit',
-              href: `blog-authors/${id}`,
-              icon: 'edit'
-            },
-            {
-              label: 'Reporting',
-              href: `blog-authors/${id}/reporting`,
-              icon: 'monitoring'
-            }
-          ]
-        }))
+    actionColumn((id) => ({
+      actions: ['duplicate', 'delete'],
+      links: [
+        {
+
+          label: 'Edit',
+          href: `blog-authors/${id}`,
+          icon: 'edit'
+        },
+        {
+          label: 'Reporting',
+          href: `blog-authors/${id}/reporting`,
+          icon: 'monitoring'
+        }
       ]
-    }
+    }))
   ],
-  initialSort: { key: 'name', direction: 'asc' },
+  initialSort: {key: 'name', direction: 'asc'},
   editKey: 'name',
   form: async () => {
     const col = 'blog-authors';

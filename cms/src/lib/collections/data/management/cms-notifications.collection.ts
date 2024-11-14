@@ -1,19 +1,16 @@
-import { indexPipe } from '$lib/column-pipes/index.pipe';
-import { collections } from '../../collections';
-import { doc, updateDoc } from 'firebase/firestore';
-import { db } from '$lib/utils/firebase';
-import { DateTime } from 'luxon';
+import {db} from '$lib/utils/firebase';
+import {doc, updateDoc} from 'firebase/firestore';
+import {DateTime} from 'luxon';
+import {actionColumn} from '../../../columns/action.column';
+import {indexColumn} from '../../../columns/index.column';
+import {collections} from '../../collections';
 
 collections.addCollection('cms-notifications', {
   name: 'Notifications',
   singularName: 'notification',
   module: 'management',
   tableHeaders: [
-    {
-      key: '/id',
-      label: 'Number',
-      pipes: [indexPipe]
-    },
+    indexColumn(),
     {
       key: '/name',
       label: 'Name'
@@ -24,7 +21,7 @@ collections.addCollection('cms-notifications', {
     }
   ],
   add: false,
-  defaultFilters: async ({ user }) => [
+  defaultFilters: async ({user}) => [
     {
       key: 'userId',
       operator: '==',

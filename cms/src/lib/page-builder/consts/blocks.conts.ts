@@ -1,9 +1,10 @@
+import type {Editor} from 'grapesjs';
 import type { PageBuilderForm } from '../types/page-builder-form.interface';
 import type { Popup } from '../types/popup.interface';
 import { TYPES } from './types.const';
 
-export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
-  const typeMap = TYPES(forms).reduce((acc: any, { id, ...dt }) => {
+export const BLOCKS = (editor: Editor, forms: PageBuilderForm[], popups?: Popup[]) => {
+  const typeMap = TYPES(editor, forms).reduce((acc: any, { id, ...dt }) => {
     const { tagName, ...data } = dt.model.defaults;
 
     acc[id] = {
@@ -23,6 +24,7 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
       category: 'Content',
       select: true,
       content: {
+        droppable: true,
         type: 'text',
         tagName: 'h2',
         content: 'This is a heading',
@@ -39,7 +41,7 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
               { value: 'h3', name: 'Heading 3' },
               { value: 'h4', name: 'Heading 4' },
               { value: 'h5', name: 'Heading 5' },
-              { value: 'h6', name: 'Heading 6' }
+              { value: 'h6', name: 'Heading 6' },
             ]
           }
         ]
@@ -52,6 +54,14 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
       category: 'Content',
       select: true,
       content: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ipsum dolor sit</p>`
+    },
+    {
+      id: 'span',
+      label: 'Span',
+      media: `<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" style="width: 100%; height: 48px"><path d="M120-240v-80h480v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>`,
+      category: 'Content',
+      select: true,
+      content: `<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ipsum dolor sit</span>`
     },
     {
       id: 'ordered-list',
@@ -84,6 +94,13 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
       content: typeMap['anchor-link']
     },
     {
+      id: 'asset-download-link',
+      label: 'Asset Download Link',
+      media: `<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" style="width: 100%; height: 48px"><path d="M440-280H280q-83 0-141.5-58.5T80-480q0-83 58.5-141.5T280-680h160v80H280q-50 0-85 35t-35 85q0 50 35 85t85 35h160v80ZM320-440v-80h320v80H320Zm200 160v-80h160q50 0 85-35t35-85q0-50-35-85t-85-35H520v-80h160q83 0 141.5 58.5T880-480q0 83-58.5 141.5T680-280H520Z"/></svg>`,
+      category: 'Content',
+      content: typeMap['asset-download-link']
+    },
+    {
       id: 'link',
       label: 'Link',
       media: `<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" style="width: 100%; height: 48px"><path d="M440-280H280q-83 0-141.5-58.5T80-480q0-83 58.5-141.5T280-680h160v80H280q-50 0-85 35t-35 85q0 50 35 85t85 35h160v80ZM320-440v-80h320v80H320Zm200 160v-80h160q50 0 85-35t35-85q0-50-35-85t-85-35H520v-80h160q83 0 141.5 58.5T880-480q0 83-58.5 141.5T680-280H520Z"/></svg>`,
@@ -91,7 +108,6 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
       content: {
         type: 'link',
         content: 'Call to action',
-        style: {},
         droppable: true
       }
     },
@@ -103,7 +119,8 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
       content: {
         tagName: 'div',
         classes: ['grid', 'grid-large'],
-        name: 'Grid'
+        name: 'Grid',
+        style: {}
       }
     },
     {
@@ -338,6 +355,22 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
         type: 'swiper-container'
       }
     },
+    {
+      id: 'google-map',
+      label: 'Map',
+      category: 'Misc',
+      media: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" style="width: 100%; height: 48px;"><path d="m600-120-240-84-186 72q-20 8-37-4.5T120-170v-560q0-13 7.5-23t20.5-15l212-72 240 84 186-72q20-8 37 4.5t17 33.5v560q0 13-7.5 23T812-192l-212 72Zm-40-98v-468l-160-56v468l160 56Zm80 0 120-40v-474l-120 46v468Zm-440-10 120-46v-468l-120 40v474Zm440-458v468-468Zm-320-56v468-468Z"/></svg>`,
+      content: {
+        type: 'pb-google-map'
+      }
+    },
+    {
+      id: 'image-gallery',
+      label: 'Image Gallery',
+      category: 'Misc',
+      media: `<svg class="gjs-block-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 48px;"><path d="M22 7.6c0-1-.5-1.6-1.3-1.6H3.4C2.5 6 2 6.7 2 7.6v9.8c0 1 .5 1.6 1.3 1.6h17.4c.8 0 1.3-.6 1.3-1.6V7.6zM21 18H3V7h18v11z" fill-rule="nonzero"/><path d="M4 12.5L6 14v-3zM20 12.5L18 14v-3z"/></svg>`,
+      content: typeMap['pb-image-gallery']
+    },
 
     /**
      * Blog
@@ -352,7 +385,7 @@ export const BLOCKS = (forms: PageBuilderForm[], popups?: Popup[]) => {
     {
       id: 'pb-featured-blog-articles',
       label: 'Featured Blog Articles',
-      category: 'Misc',
+      category: 'Blog',
       media: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000" style="width: 100%; height: 48px;"><path d="M200-120q-33 0-56.5-23.5T120-200q0-33 23.5-56.5T200-280q33 0 56.5 23.5T280-200q0 33-23.5 56.5T200-120Zm480 0q0-117-44-218.5T516-516q-76-76-177.5-120T120-680v-120q142 0 265 53t216 146q93 93 146 216t53 265H680Zm-240 0q0-67-25-124.5T346-346q-44-44-101.5-69T120-440v-120q92 0 171.5 34.5T431-431q60 60 94.5 139.5T560-120H440Z"/></svg>`,
       content: typeMap['pb-featured-blog-articles']
     },

@@ -16,9 +16,10 @@
   import { token, user } from '$lib/utils/firebase';
   import type { Sort } from './interfaces/sort.interface';
   import type { CommonDataContext } from '$lib/interfaces/common-data-context.interface';
+  import type { TableHeader } from '@jaspero/web-components/dist/table-header.interface';
 
   export let col: string;
-  export let headers: any[];
+  export let headers: TableHeader[];
   export let pageSize = 10;
   export let pageSizes = [10, 25, 50, 100];
   export let baseLink: string | null = null;
@@ -281,6 +282,7 @@
       instance.rowClickable = rawClick;
       instance.freezeFirstColumn = freezeFirstColumn;
       instance.freezeLastColumn = freezeLastColumn;
+      instance.dropdownMenuExport = true;
       instance.id = id;
 
       if (initialSort) {
@@ -288,7 +290,7 @@
       }
 
       const { y } = el.getBoundingClientRect();
-      const headerHeight = 68;
+      const headerHeight = 44;
       const footerHeight = 80;
       const bottomPadding = 40;
 

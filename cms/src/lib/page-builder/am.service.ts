@@ -2,7 +2,7 @@ import type {
   Asset,
   AssetManagerService,
   Folder
-} from '@jaspero/web-components/dist/Types/asset-manager.service';
+} from '@jaspero/web-components/dist/asset-manager.service';
 import {
   deleteObject,
   getDownloadURL,
@@ -24,7 +24,10 @@ export class AMService implements AssetManagerService {
 
   async fetch(path: string) {
     if (path === 'pages/static-assets') {
-      return [...STATIC_ASSETS];
+      return [...STATIC_ASSETS.map(asset => {
+        asset.preventDelete = true;
+        return asset;
+      })];
     }
 
     const data = await listAll(ref(storage, path));

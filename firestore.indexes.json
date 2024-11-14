@@ -5,6 +5,20 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
+          "fieldPath": "active",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "publicationDate",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "blog-articles",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
           "fieldPath": "author",
           "order": "ASCENDING"
         },

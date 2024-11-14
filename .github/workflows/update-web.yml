@@ -37,13 +37,17 @@ jobs:
           echo $SV > prod.json
         env:
           SV: ${{ env.SERVICE_ACCOUNT }}
+      - name: Copy Build
+        id: copy
+        working-directory: web
+        run: npm run copy:prod          
+      - name: Configure Release
+        id: config
+        run: JOB=start TYPE=partial npm run configure-release          
       - name: Build
         if: contains(github.ref, 'build')
         working-directory: web
         run: npm run build:prod
-      - name: Configure Release
-        id: config
-        run: JOB=start TYPE=partial npm run configure-release
       - name: Commit
         run: |
           git config --local user.email "action@github.com"

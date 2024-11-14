@@ -16,7 +16,7 @@ export default tseslint.config({
   rules: {
     quotes: ['error', 'single'],
     'import/no-unresolved': 0,
-    indent: ['error', 2],
+    // indent: ['error', 2],
     'require-jsdoc': 0,
     'max-len': ['warn', 100],
     'no-empty': 'warn',

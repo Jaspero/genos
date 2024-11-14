@@ -8,7 +8,7 @@
 
   export let collectionPrefx: string;
   export let singlearticlelink: string;
-  export let linkLabel: string;
+  export let linklabel: string;
 
   let articles: BlogArticleSnippet[] = [];
 
@@ -38,7 +38,7 @@
         <h3 class="h3">{article.title}</h3>
         <p class="p">{article.description}</p>
         <div>
-          <a href="{singlearticlelink}/{article.url}" class="btn-pink">{linkLabel}</a>
+          <a href="{singlearticlelink}/{article.url}" class="btn-pink">{linklabel}</a>
         </div>
       </div>
     </div>

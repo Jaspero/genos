@@ -1,17 +1,13 @@
-import { actionsPipe } from '../../../column-pipes/actions.pipe';
-import { indexPipe } from '../../../column-pipes/index.pipe';
-import { collections } from '../../collections';
+import {actionColumn} from '../../../columns/action.column';
+import {indexColumn} from '../../../columns/index.column';
+import {collections} from '../../collections';
 
 collections.addCollection('sections', {
   name: 'Sections',
   singularName: 'section',
   module: 'pages',
   tableHeaders: [
-    {
-      key: '/id',
-      label: '#',
-      pipes: [indexPipe]
-    },
+    indexColumn(),
     {
       key: '/title',
       label: 'Title',
@@ -25,15 +21,9 @@ collections.addCollection('sections', {
       key: '/tags',
       label: 'Tags'
     },
-    {
-      key: '/id',
-      label: '',
-      pipes: [
-        actionsPipe((id) => ({
-          duplicateStorage: [`page-configurations/sections/${id}/`]
-        }))
-      ]
-    }
+    actionColumn((id) => ({
+      duplicateStorage: [`page-configurations/sections/${id}/`]
+    }))
   ],
-  initialSort: { key: 'title', direction: 'asc' }
+  initialSort: {key: 'title', direction: 'asc'}
 });

@@ -16,8 +16,8 @@
 </script>
 
 {#if loading}
-  <div class="loader bg-secondary">
-    <div class="loader-inner bg-secondary/5"></div>
+  <div class="loader bg-white">
+    <div class="loader-inner bg-secondary"></div>
   </div>
 {/if}
 

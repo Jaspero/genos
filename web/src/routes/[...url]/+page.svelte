@@ -4,7 +4,7 @@
   import { browser } from '$app/environment';
   import { meta } from '$lib/meta/meta.store';
   import './components';
-  import { onDestroy } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import type { Page } from '@sveltejs/kit';
   import type { Unsubscriber } from 'svelte/store';
 
@@ -39,10 +39,6 @@
 
   if (!data.renderLayout) {
     classes.push('standalone');
-  }
-
-  if (browser) {
-    pageSetup();
   }
 
   function scrolled(top: number) {
@@ -92,13 +88,23 @@
           window.swiperInstances = {};
         }
 
-        window.swiperInstances[key] = swiper(el);
+        if (!window.swiperInstances[key]) {
+          window.swiperInstances[key] = swiper(el);
+        }
       }
     }
   }
 
   function pageChange(page: Page) {
     if (browser) {
+
+      if (window.swipers) {
+        window.swipers = {};
+      }
+
+      if (window.swiperInstances && Object.keys(window.swiperInstances).length) {
+        window.swiperInstances = {};
+      }
 
       if (data.scripts) {
         const script = document.createElement('script');
@@ -126,7 +132,7 @@
     });
 
     /**
-     * Anchor Lunks
+     * Anchor Links
      */
     document.querySelectorAll<HTMLAnchorElement>('[data-pbanchor]').forEach((e) => {
       e.addEventListener('click', (event) => {
@@ -237,6 +243,10 @@
       }
     }
   }
+
+  onMount(() => {
+    pageSetup();
+  });
 
   onDestroy(() => {
     if (unsubscribe) {

@@ -1,29 +1,25 @@
-import { actionsPipe } from '../../../column-pipes/actions.pipe';
-import { checkboxPipe } from '../../../column-pipes/checkbox.pipe';
-import { datePipe } from '../../../column-pipes/date.pipe';
-import { indexPipe } from '../../../column-pipes/index.pipe';
-import { populatePipe } from '../../../column-pipes/populate.pipe';
-import { releaseStatusPipe } from '../../../column-pipes/release-status.pipe';
-import { yesNoPipe } from '../../../column-pipes/yes-no.pipe';
-import { META_FORM_FIELDS } from '../../../consts/meta.form-fields';
-import { quillFiled } from '../../../form-fields/quill.field';
-import type { SelectOptions } from '../../../interfaces/select-options.interface';
-import { BucketImageService } from '../../../services/image.service';
-import { generateSlug } from '../../../utils/generate-slug';
-import { getOptions } from '../../../utils/get-options';
-import { collections } from '../../collections';
-import { DateTime } from 'luxon';
+import {DateTime} from 'luxon';
+import {checkboxPipe} from '../../../column-pipes/checkbox.pipe';
+import {datePipe} from '../../../column-pipes/date.pipe';
+import {populatePipe} from '../../../column-pipes/populate.pipe';
+import {releaseStatusPipe} from '../../../column-pipes/release-status.pipe';
+import {yesNoPipe} from '../../../column-pipes/yes-no.pipe';
+import {actionColumn} from '../../../columns/action.column';
+import {indexColumn} from '../../../columns/index.column';
+import {META_FORM_FIELDS} from '../../../consts/meta.form-fields';
+import {quillFiled} from '../../../form-fields/quill.field';
+import type {SelectOptions} from '../../../interfaces/select-options.interface';
+import {BucketImageService} from '../../../services/image.service';
+import {generateSlug} from '../../../utils/generate-slug';
+import {getOptions} from '../../../utils/get-options';
+import {collections} from '../../collections';
 
 collections.addCollection('blog-articles', {
   name: 'Articles',
   singularName: 'article',
   module: 'blog',
   tableHeaders: [
-    {
-      key: '/id',
-      label: '#',
-      pipes: [indexPipe]
-    },
+    indexColumn(),
     {
       key: '/publicationDate',
       label: 'Publication Date',
@@ -44,7 +40,7 @@ collections.addCollection('blog-articles', {
       pipes: [populatePipe('blog-authors', 'name')]
     },
     {
-      key: '/id',
+      key: '/active',
       label: 'Active',
       pipes: [checkboxPipe('blog-articles', 'active')],
       exportPipes: [yesNoPipe]
@@ -55,34 +51,28 @@ collections.addCollection('blog-articles', {
       pipes: [releaseStatusPipe()],
       exportPipes: [datePipe]
     },
-    {
-      key: 'id',
-      label: '',
-      pipes: [
-        actionsPipe((id) => ({
-          actions: ['duplicate', 'delete'],
-          links: [
-            {
-              label: 'Edit',
-              href: `blog-articles/${id}`,
-              icon: 'edit'
-            },
-            {
-              label: 'Comments',
-              href: `blog-articles/${id}/comments`,
-              icon: 'forum'
-            },
-            {
-              label: 'Reporting',
-              href: `blog-articles/${id}/reporting`,
-              icon: 'monitoring'
-            }
-          ]
-        }))
+    actionColumn((id) => ({
+      actions: ['duplicate', 'delete'],
+      links: [
+        {
+          label: 'Edit',
+          href: `blog-articles/${id}`,
+          icon: 'edit'
+        },
+        {
+          label: 'Comments',
+          href: `blog-articles/${id}/comments`,
+          icon: 'forum'
+        },
+        {
+          label: 'Reporting',
+          href: `blog-articles/${id}/reporting`,
+          icon: 'monitoring'
+        }
       ]
-    }
+    }))
   ],
-  initialSort: { key: 'publicationDate', direction: 'desc' },
+  initialSort: {key: 'publicationDate', direction: 'desc'},
   filterOperators: {
     publicationDateStart: {
       operator: '>=',
@@ -94,8 +84,8 @@ collections.addCollection('blog-articles', {
     }
   },
   filterOptions: async () => {
-    const authors: SelectOptions = [{ label: 'Any', value: '' }];
-    const categories: SelectOptions = [{ label: 'Any', value: '' }];
+    const authors: SelectOptions = [{label: 'Any', value: ''}];
+    const categories: SelectOptions = [{label: 'Any', value: ''}];
 
     const items = [
       {

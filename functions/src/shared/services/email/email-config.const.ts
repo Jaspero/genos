@@ -8,13 +8,6 @@ export const EMAIL_CONFIG = {
 
   /**
    * TODO(Project Specific)
-   * Emails without a receiver are sent to this address.
-   * It can be changed to what ever address without restriction.
-   */
-  adminEmail: 'info@jaspero.co',
-
-  /**
-   * TODO(Project Specific)
    * This is the email of the sender it needs to match information
    * in sendgrid or email sending will fail.
    */
