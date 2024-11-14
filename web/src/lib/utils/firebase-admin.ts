@@ -5,7 +5,7 @@ import { CONFIG } from '../consts/config.const';
 const app = admin.initializeApp(
   {
     credential: admin.credential.cert(credential as any),
-    storageBucket: CONFIG.storageBucketName + '.appspot.com'
+    storageBucket: CONFIG.storageBucketName + '.firebasestorage.app'
   },
   'app-' + Date.now()
 );
