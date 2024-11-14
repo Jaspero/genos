@@ -338,8 +338,18 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
         },
         traits: [
           {
-            label: 'Target',
+            label: 'Link',
             name: 'href'
+          },
+          {
+            label: 'Target',
+            name: 'target',
+            type: 'select',
+            default: '_self',
+            options: [
+              {value: '_blank', name: 'Blank'},
+              {value: '_self', name: 'Self'}
+            ]
           },
           {
             type: 'select',
@@ -354,6 +364,52 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
         ]
       }
     }
+  },
+  {
+    id: 'asset-download-link',
+    extend: 'link',
+    // isComponent: (el: HTMLAnchorElement) => true,
+    model: {
+      defaults: {
+        type: 'asset-download-link',
+        draggable: true,
+        droppable: true,
+        content: 'Link',
+        attributes: {
+          // target: '_blank',
+          download: true
+        },
+        traits: [
+          {
+            label: 'Content',
+            name: 'content',
+            type: 'text',
+            changeProp: 1
+          },
+          {
+            label: 'Target',
+            type: 'select',
+            name: 'target',
+            default: '_self',
+            options: [
+              {value: '_blank', name: 'Blank'},
+              {value: '_self', name: 'Self'}
+            ]
+          },
+          {
+            label: 'Link',
+            name: 'href',
+            type: 'asset-select',
+            path: 'pages',
+            types: ['pdf'],
+            selectable: 'single'
+          }
+        ]
+      }
+    },
+    init() {
+      this.on('change:content', this.updateContent);
+    },
   },
 
   /**

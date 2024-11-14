@@ -132,7 +132,7 @@
     });
 
     /**
-     * Anchor Lunks
+     * Anchor Links
      */
     document.querySelectorAll<HTMLAnchorElement>('[data-pbanchor]').forEach((e) => {
       e.addEventListener('click', (event) => {
