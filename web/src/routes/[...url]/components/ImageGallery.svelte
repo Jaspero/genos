@@ -4,17 +4,17 @@
   // @ts-nocheck
   import '@jaspero/web-components/dist/image-gallery.wc';
 
-  export let enablePagination: boolean;
-  export let sliderBar: boolean;
-  export let autoSlide: boolean;
+  export let enablepagination: string | undefined;
+  export let sliderbar: string | undefined;
+  export let autoslide: string | undefined;
   export let interval: number;
   export let images: Array<{ src: string; alt: string }>;
-  export let columnCount;
-  export let columnCountTable;
-  export let columnCountMobile;
-  export let enableGallery;
-  export let gapX;
-  export let gapY;
+  export let columncount;
+  export let columncounttable;
+  export let columncountmobile;
+  export let enablegallery: string | undefined;
+  export let gapx;
+  export let gapy;
 
   let el: HTMLDivElement;
 
@@ -22,29 +22,29 @@
     const imgEl = document.createElement('jp-image-gallery');
 
     imgEl.images = images?.length ? images.split(',').map(src => ({src, alt: ''})) : [{}];
-    imgEl.enablePagination = !!enablePagination;
-    imgEl.sliderBar = !!sliderBar;
-    imgEl.autoSlide = !!autoSlide;
-    imgEl.enableGallery = !!enableGallery;
+    imgEl.enablePagination = enablepagination !== undefined;
+    imgEl.sliderBar = sliderbar !== undefined;
+    imgEl.autoSlide = autoslide !== undefined;
+    imgEl.enableGallery = enablegallery !== undefined;
 
-    if (columnCount) {
-      imgEl.columnCount = +parseInt(columnCount, 10);
+    if (columncount) {
+      imgEl.columnCount = +parseInt(columncount, 12);
     }
 
-    if (columnCountTable) {
-      imgEl.columnCountTable = +parseInt(columnCountTable, 10);
+    if (columncounttable) {
+      imgEl.columnCountTable = +parseInt(columncounttable, 12);
     }
 
-    if (columnCountMobile) {
-      imgEl.columnCountMobile = +parseInt(columnCountMobile, 10);
+    if (columncountmobile) {
+      imgEl.columnCountMobile = +parseInt(columncountmobile, 12);
     }
 
-    if (gapX) {
-      imgEl.gapX = +parseInt(gapX, 10);
+    if (gapx) {
+      imgEl.gapX = +parseInt(gapx, 10);
     }
 
-    if (gapY) {
-      imgEl.gapY = +parseInt(gapY, 10);
+    if (gapy) {
+      imgEl.gapY = +parseInt(gapy, 10);
     }
 
     if (interval) {

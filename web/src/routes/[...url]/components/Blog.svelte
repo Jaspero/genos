@@ -25,10 +25,10 @@
   export let pagesize = '10';
   export let singlearticlelink: string;
   export let showcategoryfilters: 'Yes' | 'No';
-  export let collectionPrefx: string;
-  export let loadMoreLabel: string;
-  export let dateLabel: string;
-  export let allCategoriesLabel: string;
+  export let collectionprefx: string;
+  export let loadmorelabel: string;
+  export let datelabel: string;
+  export let allcategorieslabel: string;
 
   let articles: BlogArticleSnippet[] = [];
   let lastRef: QueryDocumentSnapshot | null = null;
@@ -58,7 +58,7 @@
 
     const { docs } = await getDocs(
       query(
-        collection(db, 'blog-articles' + (collectionPrefx || '')),
+        collection(db, 'blog-articles' + (collectionprefx || '')),
         ...([
           category ? where('category', '==', category) : null,
           author ? where('author', '==', author) : null
@@ -83,7 +83,7 @@
   async function loadMore() {
     const { docs } = await getDocs(
       query(
-        collection(db, 'blog-articles' + (collectionPrefx || '')),
+        collection(db, 'blog-articles' + (collectionprefx || '')),
         ...([
           category ? where('category', '==', category) : null,
           author ? where('author', '==', author) : null
@@ -106,8 +106,8 @@
 
   onMount(async () => {
     const data = await Promise.all([
-      getDocs(collection(db, 'blog-categories' + (collectionPrefx || ''))),
-      getDocs(collection(db, 'blog-authors' + (collectionPrefx || '')))
+      getDocs(collection(db, 'blog-categories' + (collectionprefx || ''))),
+      getDocs(collection(db, 'blog-authors' + (collectionprefx || '')))
     ]);
 
     categories = data[0].docs.map((doc) => ({ name: doc.data()?.name || '', id: doc.id }));
@@ -132,7 +132,7 @@
       on:click={() => {
         category = '';
         typeChanges(pageSize, category, author, authorMap);
-      }}>{allCategoriesLabel}</button
+      }}>{allcategorieslabel}</button
     >
     {#each categories as cat}
       <button
@@ -162,7 +162,7 @@
           <h3 class="h3">{article.title}</h3>
           {#if article.publicationDate}
             <p class="post-date">
-              {dateLabel}: {new Date(article.publicationDate).toLocaleDateString()}
+              {datelabel}: {new Date(article.publicationDate).toLocaleDateString()}
             </p>
           {/if}
           <p class="p">{article.description}</p>
@@ -174,6 +174,6 @@
 
 {#if lastRef}
   <button type="button" class:loading={loading || resetLoading} on:click={loadMore}
-    >{loadMoreLabel}</button
+    >{loadmorelabel}</button
   >
 {/if}

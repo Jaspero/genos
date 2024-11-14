@@ -44,7 +44,7 @@ jobs:
         run: JOB=start npm run configure-release        
       - name: Build
         working-directory: web
-        run: npm run build
+        run: npm run build:prod
       - name: Deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:

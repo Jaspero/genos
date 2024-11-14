@@ -6,10 +6,10 @@
   import { COLLECTION_KEYS_MAP } from '$lib/consts/tracked-collection.const';
 
   interface FilterParams {
-    initialCategories: string[];
-    initialTags: string[];
-    initialMinPrice: number;
-    initialMaxPrice: number;
+    initialcategories: string[];
+    initialtags: string[];
+    initialminprice: number;
+    initialmaxprice: number;
     search: string;
     limit: string;
     direction: string;
@@ -24,18 +24,18 @@
   /**
    * Filters
    */
-  export let showPriceRangeFilter: boolean;
-  export let showCategoriesFilter: boolean;
-  export let showTagsFilter: boolean;
-  export let showSearch: boolean;
+  export let showpricerangefilter: boolean;
+  export let showcategoriesfilter: boolean;
+  export let showtagsfilter: boolean;
+  export let showsearch: boolean;
 
   /**
    * Initial values
    */
-  export let initialCategories: string[];
-  export let initialTags: string[];
-  export let initialMinPrice: number;
-  export let initialMaxPrice: number;
+  export let initialcategories: string[];
+  export let initialtags: string[];
+  export let initialminprice: number;
+  export let initialmaxprice: number;
 
   let products: any[] = [];
   let tags: any[] = [];
@@ -65,30 +65,30 @@
       /**
        * Check if the product belongs to the selected category
        */
-      if (data.initialCategories) {
-        valid = data.initialCategories.includes(product[COLLECTION_KEYS_MAP.products.category]);
+      if (data.initialcategories) {
+        valid = data.initialcategories.includes(product[COLLECTION_KEYS_MAP.products.category]);
       }
       /**
        * Check if the product has at least one of the selected tags
        */
-      if (valid && data.initialTags) {
+      if (valid && data.initialtags) {
         valid = product[COLLECTION_KEYS_MAP.products.tags].some((tag: string) =>
-          data.initialTags.includes(tag)
+          data.initialtags.includes(tag)
         );
       }
 
       /**
        * Check if the product price is within the selected range
        */
-      if (valid && (data.initialMinPrice || data.initialMinPrice === 0)) {
-        valid = product[COLLECTION_KEYS_MAP.products.price] >= data.initialMinPrice;
+      if (valid && (data.initialminprice || data.initialminprice === 0)) {
+        valid = product[COLLECTION_KEYS_MAP.products.price] >= data.initialminprice;
       }
 
       /**
        * Check if the product price is within the selected range
        */
-      if (valid && data.initialMaxPrice) {
-        valid = product[COLLECTION_KEYS_MAP.products.price] <= data.initialMaxPrice;
+      if (valid && data.initialmaxprice) {
+        valid = product[COLLECTION_KEYS_MAP.products.price] <= data.initialmaxprice;
       }
 
       /**
@@ -135,10 +135,10 @@
   }
 
   $: applyFilters({
-    initialCategories,
-    initialTags,
-    initialMinPrice,
-    initialMaxPrice,
+    initialcategories,
+    initialtags,
+    initialminprice,
+    initialmaxprice,
     search,
     limit,
     direction,
@@ -160,9 +160,9 @@
         <option value="desc">Descending</option>
       </select>
     {/if}
-    {#if showCategoriesFilter && categories.length}
+    {#if showcategoriesfilter && categories.length}
       <h4>Categories</h4>
-      <select bind:value={initialCategories}>
+      <select bind:value={initialcategories}>
         {#each categories as category}
           <option value={category[COLLECTION_KEYS_MAP.categories.id]}
             >{category[COLLECTION_KEYS_MAP.categories.name]}</option
@@ -171,9 +171,9 @@
       </select>
     {/if}
 
-    {#if showTagsFilter && tags.length}
+    {#if showtagsfilter && tags.length}
       <h4>Tags</h4>
-      <select bind:value={initialTags}>
+      <select bind:value={initialtags}>
         {#each tags as tag}
           <option value={tag[COLLECTION_KEYS_MAP.tags.id]}
             >{tag[COLLECTION_KEYS_MAP.tags.name]}</option
@@ -182,12 +182,12 @@
       </select>
     {/if}
 
-    {#if showPriceRangeFilter}
-      <input type="number" bind:value={initialMaxPrice} placeholder="Min price" />
-      <input type="number" bind:value={initialMinPrice} placeholder="Max price" />
+    {#if showpricerangefilter}
+      <input type="number" bind:value={initialmaxprice} placeholder="Min price" />
+      <input type="number" bind:value={initialminprice} placeholder="Max price" />
     {/if}
 
-    {#if showSearch}
+    {#if showsearch}
       <input type="text" placeholder="Search" on:input={(e) => handleSearchInput(e)} />
     {/if}
   </div>

@@ -11,9 +11,9 @@
   let latitude = 37.7749;
   let longitude = -122.4194;
 
-  export let lat
-  export let lng
-  export let mapZoom
+  export let lat;
+  export let lng;
+  export let mapZoom;
   export let address;
 
   $: if (lat) latitude = parseFloat(lat) || latitude;
