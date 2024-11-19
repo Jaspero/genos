@@ -9,13 +9,13 @@ export const DEVICES = [
     icon: 'tablet_mac',
     name: 'Tablet',
     width: '770px',
-    widthMedia: '992px'
+    widthMedia: '1024px'
   },
   {
     id: 'Mobile',
     icon: 'phone_iphone',
     name: 'Mobile',
     width: '320',
-    widthMedia: ''
+    widthMedia: '768px'
   }
 ];
