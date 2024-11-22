@@ -296,6 +296,16 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
             label: 'Alt',
             name: 'alt'
           },
+          {
+            type: 'text',
+            name: 'width',
+            label: 'Width',
+          },
+          {
+            type: 'text',
+            name: 'height',
+            label: 'Height',
+          },
           directiveSelectTrait
         ]
       }

@@ -1,0 +1,230 @@
+.media-section {
+    position: relative;
+    padding: 14rem 2rem;
+    .media-section-title {
+        z-index: 1;
+        position: relative;
+        text-align: center;
+    }
+    .media-section-image {
+        position: absolute;
+        width: 490px;
+        height: 321px;
+        @media (max-width: 900px) {
+            width: 300px;
+            height: 187px;
+        }
+        @media (max-width: 600px) {
+            width: 200px;
+            height: 131px;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+        }
+        &.media-section-image-1 {
+            top: 0;
+            left: 20%;
+        }
+        &.media-section-image-2 {
+            bottom: 12%;
+            right: 0;
+        }
+        &.media-section-image-3 {
+            left: 0;
+            bottom: 0;
+        }
+    }
+}
+
+
+
+/* Title - Background-image */
+.title-bg {
+    position: relative;
+    padding-top: 7.5rem;
+    padding-bottom: 4rem;
+    .title-bg-heading {
+        position: relative;
+        line-height: 125%;
+        text-align: center;
+        font-weight: bold;
+    }
+    .title-bg-image {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
+
+/* Solution */
+.solution {
+    border-bottom: 4px solid #D9F2F2;
+}
+.solution-reverse .solution-item {
+    justify-content: flex-start;
+}
+.solution-item {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 0 3rem;
+    @media (max-width: 900px) {
+        gap: 0 2.5rem;
+    }
+    @media (max-width: 600px) {
+        gap: 0 2rem;
+    }
+}
+.solution-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 0 1rem;
+    @media (max-width: 900px) {
+        gap: 0 .75rem;
+    }
+    @media (max-width: 600px) {
+        gap: 0 .5rem;
+    }
+}
+.solution-title {
+    line-height: 1;
+    font-size: 4rem;
+    @media (max-width: 900px) {
+        font-size: 3rem;
+    }
+    @media (max-width: 600px) {
+        font-size: 2rem;
+    }
+}
+.solution-number {
+    line-height: 1;
+    font-size: 2rem;
+    @media (max-width: 900px) {
+        font-size: 1.5rem;
+    }
+    @media (max-width: 600px) {
+        font-size: 1rem;
+    }
+}
+.solution-image {
+    align-self: flex-end;
+    margin-bottom: -3rem;
+    max-width: 250px;
+    @media (max-width: 900px) {
+        max-width: 200px;
+    }
+    @media (max-width: 600px) {
+        max-width: 150px;
+    }
+}
+
+
+
+/* Complex section */
+.complex-section {
+    position: relative;
+    padding-top: 10rem;
+    .complex-section-grid {
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 4rem 2rem;
+    }
+    .complex-section-bg-image {
+        z-index: -1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        @media (max-width: 900px) {
+         max-width: 400px;
+        }
+        @media (max-width: 600px) {
+            max-width: 200px;
+        }
+    }
+    .complex-section-title {
+        font-weight: bold;
+    }
+    .complex-section-image {
+        margin-top: -7.5rem;
+    }
+}
+
+
+
+/* CTA - Request */
+.cta-request {
+    background-color: #032130;
+    .cta-request-text {
+        color: white;
+        font-weight: bold;
+        line-height: 125%;
+        text-align: center;
+    }
+    .cta-request-grid {
+        gap: 5rem 0;
+        @media (max-width: 900px) {
+            gap: 3.5rem 0;
+        }
+        @media (max-width: 600px) {
+            gap: 2rem 0;
+        }
+    }
+}
+
+
+
+/* Genos about section */
+.genos-building {
+    max-width: 1240px;
+    width: 75%;
+    margin-left: auto;
+    margin-top: -10rem;
+    @media (max-width: 900px) {
+        margin-top: -7.5rem;
+    }
+    @media (max-width: 600px) {
+        margin-top: -2.5rem;
+    }
+}
+.genos-about-section {
+    position: relative;
+    background-color: #D9EAF2;
+    .genos-about-section-wave {
+        position: absolute;
+        bottom: 100%;
+    }
+    .genos-about-section-triangle {
+        position: absolute;
+        top: 100%;
+    }
+    .genos-about-section-grid {
+        padding-top: 10rem;
+        padding-bottom: 10rem;
+        @media (max-width: 900px) {
+            padding-top: 7.5rem;
+            padding-bottom: 7.5rem;
+        }
+        @media (max-width: 600px) {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+    }
+}
+
+.world-class-scientists {
+    margin-top: 15rem;
+}
+
+.gl-quote {
+    margin-left: auto;
+}
+.gl-name {
+    font-weight: bold;
+    margin-top: 5rem;
+}
+.gl-about {
+    margin-top: 3.75rem;
+}
