@@ -16,7 +16,7 @@ export async function getHtml(grapesInstance: Editor) {
   const minified = await minify(cleaned, {
     caseSensitive: true,
     collapseBooleanAttributes: true,
-    collapseInlineTagWhitespace: true,
+    collapseInlineTagWhitespace: false,
     collapseWhitespace: true,
     removeComments: true,
     removeAttributeQuotes: true,
