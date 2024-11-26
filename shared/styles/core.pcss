@@ -99,6 +99,10 @@ section {
   width: 100%;
 }
 
-span:not(:empty):not(:has(*)) {
+span > b:not(:empty):not(:has(*))::before {
+  content: ' ';
+}
+
+span > span:not(:empty):not(:has(*)) {
   color: red;
 }
