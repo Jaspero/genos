@@ -99,7 +99,13 @@ section {
   width: 100%;
 }
 
-span:not(:empty):not([id]) {
+span:not(:empty):not([id]):not(+ span)::before {
+  content: "\00A0";
+  display: inline-block;
+  max-width: 2rem;
+}
+
+span:not(:empty):not([id]):has(+ span)::after {
   content: "\00A0";
   display: inline-block;
   max-width: 2rem;
