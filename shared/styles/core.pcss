@@ -95,8 +95,8 @@ iframe {
   }
 }
 
-span:not([id]) {
-  display: inline-block;
+span:not([id])::before, span:not([id])::after {
+  content: "\00A0";
 }
 
 section {

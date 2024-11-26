@@ -143,6 +143,12 @@
         align-items: flex-start;
         justify-content: space-between;
         gap: 4rem 2rem;
+        @media (max-width: 900px) {
+            max-width: 400px;
+        }
+        @media (max-width: 600px) {
+            max-width: 200px;
+        }
     }
     .complex-section-bg-image {
         z-index: -1;
@@ -284,7 +290,7 @@
 
 
 .passion {
-    max-width: 42.5rem;
+    max-width: max(75%, 42.5rem);
     margin-top: -11rem;
     margin-bottom: 5rem;
     margin-left: auto;
