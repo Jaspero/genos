@@ -98,3 +98,9 @@ iframe {
 section {
   width: 100%;
 }
+
+span:not(:empty):not([id]) {
+  content: "\00A0";
+  display: inline-block;
+  max-width: 2rem;
+}
