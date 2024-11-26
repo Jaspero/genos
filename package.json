@@ -17,6 +17,7 @@
     "tsx": "4.19.2"
   },
   "dependencies": {
+    "firebase": "^11.0.2",
     "firebase-admin": "12.7.0",
     "luxon": "3.5.0"
   }

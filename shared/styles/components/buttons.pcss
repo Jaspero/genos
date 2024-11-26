@@ -1,14 +1,24 @@
 .button {
   position: relative;
   cursor: pointer;
-  background-color: var(--secondary-color);
-  color: var(--secondary-contrast-color);
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
+  font-size: 3.75rem;
   font-weight: bold;
-  border-radius: var(--border-radius);
-  border: none;
-  transition: background 0.2s ease-in-out;
+  text-decoration: underline;
+  text-decoration-thickness: .625rem;
+  text-underline-offset: 1rem;
+  padding: 3rem 6rem;
+  text-align: center;
+  background-color: #FFD400;
+  color: #032130;
+
+  @media (max-width: 900px) {
+    font-size: 2.5rem;
+    padding: 2rem 4rem;
+  }
+  @media (max-width: 600px) {
+    font-size: 2rem;
+    text-decoration-thickness: .5rem;
+  }
 
   &.loading {
     pointer-events: none;
@@ -32,12 +42,22 @@
     }
   }
 
-  &:hover {
-    background-color: var(--hover-color);
-  }
-
   &:disabled {
     pointer-events: none;
     opacity: .8;
+  }
+}
+
+.cta-big {
+  display: block;
+
+  @media (max-width: 900px) {
+    font-size: 3.25rem;
+    padding: 3.5rem 5.25rem;
+  }
+  @media (max-width: 600px) {
+    font-size: 2rem;
+    padding: 2rem 1.5rem;
+    text-decoration-thickness: .5rem;
   }
 }

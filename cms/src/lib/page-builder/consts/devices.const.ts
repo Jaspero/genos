@@ -8,14 +8,14 @@ export const DEVICES = [
     id: 'Tablet',
     icon: 'tablet_mac',
     name: 'Tablet',
-    width: '770px',
-    widthMedia: '992px'
+    width: '900px',
+    widthMedia: '900px'
   },
   {
     id: 'Mobile',
     icon: 'phone_iphone',
     name: 'Mobile',
-    width: '320',
-    widthMedia: ''
+    width: '600px',
+    widthMedia: '600px'
   }
 ];

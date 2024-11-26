@@ -1,7 +1,6 @@
 .label {
   display: flex;
-  flex-direction: column-reverse;
-  margin-bottom: 1rem;
+  flex-direction: column;
 }
 
 .input,
@@ -10,14 +9,7 @@
   width: 100%;
   border: 1px solid #c4d8ce;
   border-radius: 4px;
-  margin-top: 4px;
   font-size: 16px;
-}
-
-.input,
-.select {
-  padding: 0 16px;
-  height: 3rem;
 }
 
 .textarea {
@@ -25,4 +17,34 @@
   min-width: 100%;
   min-height: 3rem;
   padding: 16px;
+}
+
+.custom-input {
+  background-color: #D9EAF2;
+  padding: 4rem;
+  border-bottom: .5rem solid #4095BF;
+  text-align: center;
+  font-size: 3rem;
+  @media (max-width: 900px) {
+    padding: 3rem;
+    font-size: 2rem;
+  }
+  @media (max-width: 600px) {
+    padding: 2rem;
+    font-size: 1.5rem;
+  }
+}
+.custom-input::placeholder {
+  font-size: 3rem;
+  font-weight: bold;
+  @media (max-width: 900px) {
+    font-size: 2rem;
+  }
+  @media (max-width: 600px) {
+    font-size: 1.5rem;
+  }
+}
+.custom-submit {
+  display: flex;
+  justify-content: center;
 }
