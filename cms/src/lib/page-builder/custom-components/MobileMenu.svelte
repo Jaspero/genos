@@ -16,7 +16,7 @@
   }
 </script>
 
-<header>
+<header class:transparent-bg={open}>
   <div>
     <a href="/">
       <img class="logo" src="/images/logo.svg" alt="genos logo">
