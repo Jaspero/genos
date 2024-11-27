@@ -1,6 +1,10 @@
 <svelte:options customElement={{ tag: 'pb-mobile-menu', shadow: 'none' }} />
 
 <script lang="ts">
+  import {onMount} from 'svelte';
+
+  let previousScrollY = 0;
+  let showNavbar = true;
   export let links: string;
   export let labels: string;
 
@@ -14,12 +18,31 @@
 
     return allLinks.map((link, index) => ({ label: allLabels[index], url: link }));
   }
+
+  function handleScroll() {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > 400 && currentScrollY > previousScrollY) {
+      showNavbar = false;
+    } else {
+      showNavbar = true;
+    }
+
+    previousScrollY = currentScrollY;
+  }
+
+  onMount(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  });
 </script>
 
-<header class:transparent-bg={open}>
+<header class:transparent-bg={open} class:inactive={!showNavbar}>
   <div>
     <a href="/">
-      <img class="logo" src="/images/logo.svg" alt="genos logo">
+      <img class="logo" src="/brand/logo.svg" alt="genos logo">
     </a>
   </div>
 
