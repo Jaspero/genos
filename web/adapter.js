@@ -1,5 +1,5 @@
 import path from 'node:path';
-import minifyHtml from '@minify-html/node';
+/*import minifyHtml from '@minify-html/node';*/
 import { join } from 'path';
 import { readFile, writeFile } from 'node:fs/promises';
 
@@ -62,13 +62,13 @@ export default function (options) {
         );
 
         const buffer = await readFile(htmlPath);
-        const minified = minifyHtml.minify(buffer, {
+        /*const minified = minifyHtml.minify(buffer, {
           do_not_minify_doctype: true,
           ensure_spec_compliant_unquoted_attribute_values: true,
           keep_spaces_between_attributes: true,
           minify_css: true,
           minify_js: false
-        });
+        });*/
 
         await writeFile(htmlPath, minified);
       }
