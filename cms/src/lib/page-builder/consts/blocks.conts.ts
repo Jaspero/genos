@@ -144,6 +144,26 @@ export const BLOCKS = (editor: Editor, forms: PageBuilderForm[], popups?: Popup[
       }
     },
     {
+      id: 'pb-intro',
+      label: 'Intro',
+      category: 'Basic',
+      content: {
+        type: 'intro',
+        tagName: 'pb-intro',
+        attributes: {
+          src: '',
+          alt: ''
+        },
+        components: [
+          {
+            tagName: 'div',
+            attributes: { class: 'intro-content' },
+            components: []
+          }
+        ]
+      }
+    },
+    {
       id: 'div',
       label: 'Div',
       media: `<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" style="width: 100%; height: 48px;"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Z"/></svg>`,
@@ -318,12 +338,28 @@ export const BLOCKS = (editor: Editor, forms: PageBuilderForm[], popups?: Popup[
       content: typeMap['pb-submit']
     },
     {
+      id: 'hero-content-landing',
+      label: 'Landing - Hero Content',
+      category: 'Misc',
+      media:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 9c0-.6-.5-1-1.3-1H3.4C2.5 8 2 8.4 2 9v6c0 .6.5 1 1.3 1h17.4c.8 0 1.3-.4 1.3-1V9zm-1 6H3V9h18v6z"/><path d="M4 11.5h16v1H4z"/></svg>',
+      content: typeMap['pb-hero-content-landing']
+    },
+    {
       id: 'mobile-menu',
       label: 'Mobile Menu',
       category: 'Misc',
       media:
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#000" style="width: 100%; height: 48px;"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>',
       content: typeMap['pb-mobile-menu']
+    },
+    {
+      id: 'navigation',
+      label: 'Navigation',
+      category: 'Misc',
+      media:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#000" style="width: 100%; height: 48px;"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>',
+      content: typeMap['pb-navigation']
     },
     {
       id: 'products',
@@ -392,32 +428,32 @@ export const BLOCKS = (editor: Editor, forms: PageBuilderForm[], popups?: Popup[
 
     ...(popups
       ? [
-          {
-            id: 'popup-trigger',
-            label: 'Popup Trigger',
-            category: 'Misc',
-            media: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#000" style="width: 100%; height: 48px;"><path d="M240-120h480v-80H520v-288l64 64 56-56-160-160-160 160 56 56 64-64v288H240v80Zm240-360ZM160-320q-33 0-56.5-23.5T80-400v-360q0-33 23.5-56.5T160-840h640q33 0 56.5 23.5T880-760v360q0 33-23.5 56.5T800-320H600v-80h200v-360H160v360h200v80H160Z"/></svg>`,
-            content: {
-              type: `pb-popup`,
-              traits: [
-                {
-                  type: 'text',
-                  label: 'Label',
-                  name: 'label'
-                },
-                {
-                  type: 'select',
-                  name: 'popup',
-                  label: 'Popup',
-                  options: popups.map((popup) => ({
-                    id: popup.id,
-                    label: popup.title
-                  }))
-                }
-              ]
-            }
+        {
+          id: 'popup-trigger',
+          label: 'Popup Trigger',
+          category: 'Misc',
+          media: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#000" style="width: 100%; height: 48px;"><path d="M240-120h480v-80H520v-288l64 64 56-56-160-160-160 160 56 56 64-64v288H240v80Zm240-360ZM160-320q-33 0-56.5-23.5T80-400v-360q0-33 23.5-56.5T160-840h640q33 0 56.5 23.5T880-760v360q0 33-23.5 56.5T800-320H600v-80h200v-360H160v360h200v80H160Z"/></svg>`,
+          content: {
+            type: `pb-popup`,
+            traits: [
+              {
+                type: 'text',
+                label: 'Label',
+                name: 'label'
+              },
+              {
+                type: 'select',
+                name: 'popup',
+                label: 'Popup',
+                options: popups.map((popup) => ({
+                  id: popup.id,
+                  label: popup.title
+                }))
+              }
+            ]
           }
-        ]
+        }
+      ]
       : [])
   ];
 };

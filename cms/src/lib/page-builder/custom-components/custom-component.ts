@@ -3,6 +3,10 @@ export * from './Submit.svelte';
 export * from './MobileMenu.svelte';
 export * from './ImageGallery.svelte';
 export * from './GoogleMap.svelte';
+export * from './Navigation.svelte';
+export * from './Intro.svelte';
+export * from './HeroContentLanding.svelte';
+
 
 /**
  * Shop

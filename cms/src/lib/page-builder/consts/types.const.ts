@@ -199,6 +199,36 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
     }
   },
   {
+    id: 'intro',
+    extends: 'image',
+    model: {
+      defaults: {
+        traits: [
+          {
+            label: 'Source',
+            name: 'src',
+            type: 'asset-select',
+            path: 'pages',
+            types: ['image'],
+            selectable: 'single'
+          },
+          {
+            label: 'Alt Text',
+            name: 'alt',
+            type: 'text'
+          }
+        ],
+        components: [
+          {
+            tagName: 'div',
+            attributes: { class: 'intro-content' },
+            components: []
+          }
+        ]
+      }
+    }
+  },
+  {
     id: 'section',
     extends: 'text',
     isComponent: (el: HTMLDivElement) => el.tagName === 'SECTION',
@@ -610,6 +640,42 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
   /**
    * Custom Components
    */
+  {
+    id: 'pb-navigation',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-NAVIGATION',
+    model: {
+      defaults: {
+        tagName: 'pb-navigation',
+        cName: 'Navigation',
+        draggable: true,
+        droppable: false,
+        traits: [
+          {
+            type: 'text',
+            label: 'Labels',
+            name: 'labels'
+          },
+          {
+            type: 'text',
+            label: 'Links',
+            name: 'links'
+          }
+        ]
+      }
+    }
+  },
+  {
+    id: 'pb-hero-content-landing',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-HERO-CONTENT-LANDING',
+    model: {
+      defaults: {
+        tagName: 'pb-hero-content-landing',
+        cName: 'HeroContentLanding',
+        draggable: true,
+        droppable: false
+      }
+    }
+  },
   {
     id: 'pb-mobile-menu',
     isComponent: (el: HTMLElement) => el.tagName === 'PB-MOBILE-MENU',
