@@ -70,7 +70,7 @@ export default function (options) {
           minify_js: false
         });*/
 
-        await writeFile(htmlPath, minified);
+        await writeFile(htmlPath);
       }
 
       if (pages === assets) {
