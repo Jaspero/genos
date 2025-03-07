@@ -1,7 +1,7 @@
 import path from 'node:path';
-/*import minifyHtml from '@minify-html/node';*/
+/*import minifyHtml from '@minify-html/node';
 import { join } from 'path';
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';*/
 
 /** @type {import('./index.js').default} */
 export default function (options) {
@@ -55,23 +55,23 @@ export default function (options) {
         }
       }
 
-      for (const page of builder.prerendered.pages) {
+      /*for (const page of builder.prerendered.pages) {
         const htmlPath = join(
           pages,
           ...page.slice(1).map((p) => (typeof p === 'string' ? p : p.file))
         );
 
         const buffer = await readFile(htmlPath);
-        /*const minified = minifyHtml.minify(buffer, {
+        const minified = minifyHtml.minify(buffer, {
           do_not_minify_doctype: true,
           ensure_spec_compliant_unquoted_attribute_values: true,
           keep_spaces_between_attributes: true,
           minify_css: true,
           minify_js: false
-        });*/
+        });
 
-        await writeFile(htmlPath);
-      }
+        await writeFile(htmlPath, minified);
+      }*/
 
       if (pages === assets) {
         builder.log(`Wrote site to "${pages}"`);
