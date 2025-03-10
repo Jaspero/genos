@@ -6,7 +6,6 @@
 .input,
 .select,
 .textarea {
-  width: 100%;
   border: 1px solid #c4d8ce;
   border-radius: 4px;
   font-size: 16px;
@@ -20,11 +19,11 @@
 }
 
 .custom-input {
-  background-color: #D9EAF2;
-  padding: 2rem;
+  max-width: 30rem;
+  padding: 1rem;
   border-bottom: .5rem solid #4095BF;
-  text-align: center;
-  font-size: 2.5rem;
+  text-align: left;
+  font-size: 1.5rem;
   @media (max-width: 900px) {
     padding: 1.5rem;
     font-size: 2rem;
@@ -35,7 +34,7 @@
   }
 }
 .custom-input::placeholder {
-  font-size: 3rem;
+  font-size: 1.25rem;
   font-weight: bold;
   @media (max-width: 900px) {
     font-size: 2rem;
