@@ -101,16 +101,6 @@
         gap: 0 .5rem;
     }
 }
-.solution-title {
-    line-height: 1;
-    font-size: 4rem;
-    @media (max-width: 900px) {
-        font-size: 3rem;
-    }
-    @media (max-width: 600px) {
-        font-size: 2rem;
-    }
-}
 .solution-number {
     line-height: 1;
     font-size: 2rem;
@@ -138,7 +128,6 @@
 /* Complex section */
 .complex-section {
     position: relative;
-    padding-top: 10rem;
     .complex-section-grid {
         align-items: flex-start;
         justify-content: space-between;
@@ -161,6 +150,7 @@
     }
     .complex-section-title {
         font-weight: bold;
+        padding-top: 10rem;
     }
     .complex-section-image {
         margin-top: -7.5rem;
@@ -534,9 +524,8 @@
     font-weight: bold;
 }
 .request-text {
-    text-align: center;
     max-width: 34ch;
-    margin: 0 auto;
+    margin-top: 1.5rem;
 }
 
 
@@ -646,6 +635,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: .25rem;
 }
 .dropdown-checkbox {
     position: absolute;
@@ -654,17 +644,11 @@
     opacity: 0;
 }
 .dropdown-text-primary {
-    font-size: 5rem;
+    font-size: 2rem;
     color: #175E82;
     max-width: 16ch;
     text-align: center;
-    line-height: 1.5;
-    @media (max-width: 900px) {
-        font-size: 3.75rem;
-    }
-    @media (max-width: 900px) {
-        font-size: 2.75rem;
-    }
+    line-height: 1.25;
 }
 .dropdown-text-secondary {
     margin-top: 1.5rem;

@@ -52,6 +52,20 @@
   });
 </script>
 
+<div class="bg"></div>
+
 <slot />
 
 <Meta />
+
+<style>
+  .bg {
+      z-index: -1;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url(/images/texture.svg);
+  }
+</style>
