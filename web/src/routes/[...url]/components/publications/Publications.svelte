@@ -19,6 +19,17 @@
     const authorList = authors.split(',');
     return authorList[0];
   };
+
+  $effect(() => {
+    const savedScroll = sessionStorage.getItem('scrollPosition');
+    if (savedScroll) {
+      window.scrollTo(0, parseInt(savedScroll, 10));
+    }
+
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.setItem('scrollPosition', String(window.scrollY));
+    });
+  });
 </script>
 
 <div class="grid grid-small publications-grid">
