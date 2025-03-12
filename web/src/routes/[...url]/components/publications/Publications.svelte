@@ -1,24 +1,23 @@
-<script>
+<svelte:options customElement={{ tag: 'pb-publications', shadow: 'none' }} />
+
+<script lang="ts">
   import { PUBLICATIONS } from './publications.const';
 
-  const data = PUBLICATIONS.sort((a, b) => b.date - a.date);
-
-  let groupedData = {};
-
-  data.forEach(publication => {
-    const year = publication.date;
-    if (!groupedData[year]) {
-      groupedData[year] = [];
-    }
-    groupedData[year].push(publication);
-  });
+  const groupedData = PUBLICATIONS
+    .reduce((result: {[key: number]: any[]}, publication) => {
+      const year = publication.date;
+      if (!result[year]) {
+        result[year] = [];
+      }
+      result[year].push(publication);
+      return result;
+    }, {});
 
   const years = Object.keys(groupedData).sort((a, b) => b - a);
 
-  const getFirstAuthor = (authors) => {
+  const getFirstAuthor = (authors: string) => {
     const authorList = authors.split(',');
-    const firstAuthor = authorList[0];
-    return firstAuthor;
+    return authorList[0];
   };
 </script>
 
