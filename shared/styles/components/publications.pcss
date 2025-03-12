@@ -1,0 +1,111 @@
+.publications-grid {
+    align-items: flex-start;
+}
+
+.publications {
+    grid-column: span 10 / span 10;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.publication-card {
+    display: flex;
+    flex-direction: column;
+    border-width: 2px;
+    border-style: solid;
+    padding: 2rem;
+    scroll-behavior: smooth;
+}
+
+.publication-card-date {
+    font-weight: bold;
+    font-size: .75rem;
+    margin-bottom: .5rem;
+}
+
+.publication-card-paper {
+    font-size: 1.25rem;
+    line-height: 1.3;
+}
+
+.publication-card-author {
+    margin-top: 1rem;
+}
+
+.publication-card-link {
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.publication-card-link:hover {
+    text-decoration: underline;
+}
+
+.publications-years {
+    position: sticky;
+    top: 10rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    grid-column: span 2 / span 2;
+}
+
+.publication-year-link {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-right: 1rem;
+    text-decoration: none;
+    transition: .25s;
+}
+
+.publication-year-link:hover {
+    text-decoration: underline;
+    transform: translateX(.25rem);
+}
+
+.publications h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.publication-card:nth-child(5n + 1) {
+    border-color: #4095BF;
+    background-color: #D9EAF2;
+    .publication-card-link {
+        color: #297AA3 !important;
+    }
+}
+
+.publication-card:nth-child(5n + 2) {
+    border-color: #FF8000;
+    background-color: #FFE5CC;
+    .publication-card-link {
+        color: #F2700D !important;
+    }
+}
+
+.publication-card:nth-child(5n + 3) {
+    border-color: #80BF40;
+    background-color: #E5F2D9;
+    .publication-card-link {
+        color: #66A329 !important;
+    }
+}
+
+.publication-card:nth-child(5n + 4) {
+    border-color: #FFD400;
+    background-color: #FFF6CC;
+    .publication-card-link {
+        color: #E58D19 !important;
+    }
+}
+
+.publication-card:nth-child(5n + 5) {
+    border-color: #40BFBF;
+    background-color: #D9F2F2;
+    .publication-card-link {
+        color: #178282 !important;
+    }
+}

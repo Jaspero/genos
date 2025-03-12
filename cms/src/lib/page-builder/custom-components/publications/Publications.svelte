@@ -1,3 +1,5 @@
+<svelte:options customElement={{ tag: 'pb-publications', shadow: 'none' }} />
+
 <script>
   import { PUBLICATIONS } from './publications.const';
 
