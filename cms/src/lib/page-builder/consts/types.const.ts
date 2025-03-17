@@ -653,6 +653,18 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
     }
   },
   {
+    id: 'pb-projects',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-PROJECTS',
+    model: {
+      defaults: {
+        tagName: 'pb-projects',
+        cName: 'Projects',
+        draggable: true,
+        droppable: false
+      }
+    }
+  },
+  {
     id: 'pb-navigation',
     isComponent: (el: HTMLElement) => el.tagName === 'PB-NAVIGATION',
     model: {
