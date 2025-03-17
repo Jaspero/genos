@@ -9,5 +9,6 @@ export * from './ImageGallery.svelte';
 export * from './Navigation.svelte';
 export * from './HeroContentLanding.svelte';
 export * from './publications/Publications.svelte';
+export * from './projects/Projects.svelte';
 export * from './Intro.svelte';
 export * from './GoogleMap.svelte';
