@@ -238,7 +238,7 @@ export const PUBLICATIONS = [
     journal: `Unknown`
   },
   {
-    paper: `TheN-Glycosylation of Mouse Immunoglobulin G (IgG)-Fragment Crystallizable Differs Between IgG Subclasses and Strains`,
+    paper: `The N-Glycosylation of Mouse Immunoglobulin G (IgG)-Fragment Crystallizable Differs Between IgG Subclasses and Strains`,
     authors: `de Haan N, Reiding KR, Krištić J, Hipgrave Ederveen AL, Lauc G, Wuhrer M.`,
     date: 2017,
     doi: `10.3389/fimmu.2017.00608`,
@@ -1309,7 +1309,7 @@ export const PUBLICATIONS = [
     journal: `Anal Bioanal Chem`
   },
   {
-    paper: `TheN-Glycosylation of Total Plasma Proteins and IgG in Atrial Fibrillation`,
+    paper: `The N-Glycosylation of Total Plasma Proteins and IgG in Atrial Fibrillation`,
     authors: `Plavša B, Szavits-Nossan J, Blivajs A, Rapčan B, Radovani B, Šesto I, Štambuk K, Mustapić V, Đerek L, Rudan D, Lauc G, Gudelj I.`,
     date: 2023,
     doi: `10.3390/biom13040605`,
