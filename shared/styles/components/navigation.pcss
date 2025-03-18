@@ -27,7 +27,7 @@ pb-navigation {
             .links {
                 display: flex;
                 gap: 2rem;
-                a, button {
+                .links-link {
                     position: relative;
                     opacity: .85;
                     color: white;
@@ -47,13 +47,36 @@ pb-navigation {
                             width: 100%;
                         }
                     }
+
+                    .submenu {
+                        position: absolute;
+                        width: 100%;
+                        top: 0;
+                        right: 0;
+                        min-width: 15rem;
+                        padding-top: .25rem;
+                        padding-bottom: .25rem;
+                        background-color: white;
+                        color: #032130;
+
+                        a {
+                            display: flex;
+                            text-align: left;
+                            padding: .5rem 1rem;
+                            transition: .25s;
+
+                            &:hover {
+                                transform: translateX(.25rem);
+                            }
+                        }
+                    }
                 }
-                a {
+                .links-link.desktop {
                     @media (max-width: 1280px) {
                         display: none;
                     }
                 }
-                button {
+                .mobile {
                     @media (min-width: 1281px) {
                         display: none;
                     }
