@@ -1,5 +1,6 @@
 export const PROJECTS = [
   {
+    group: 'Horizon Europe',
     program: 'Horizon Europe',
     href: 'horizon-europe',
     projects: [
@@ -62,6 +63,7 @@ export const PROJECTS = [
     ]
   },
   {
+    group: 'H2020',
     program: 'H2020',
     href: 'h2020',
     projects: [
@@ -103,6 +105,7 @@ export const PROJECTS = [
     ]
   },
   {
+    group: 'ESIF',
     program: 'ESIF',
     href: 'esif',
     projects: [
@@ -151,26 +154,7 @@ export const PROJECTS = [
     ]
   },
   {
-    program: 'HRZZ',
-    href: 'hrzz',
-    projects: [
-      {
-        short: 'GlycoCOVID',
-        title: 'Support for developing competence centers',
-        startDate: '08/07/2020',
-        projectDuration: '18 months',
-        pdf: '4-1.pdf'
-      },
-      {
-        short: 'GlycoDown',
-        title: 'Protein Glycosylation in Aging-Related Diseases Through the Study of Down Syndrome as an Accelerated Aging Condition',
-        startDate: '01/10/2019',
-        projectDuration: '43 months',
-        pdf: '4-2.pdf'
-      }
-    ]
-  },
-  {
+    group: 'NPOO',
     program: 'NPOO',
     href: 'npoo',
     projects: [
@@ -198,6 +182,7 @@ export const PROJECTS = [
     ]
   },
   {
+    group: 'FP7',
     program: 'FP7',
     href: 'fp7',
     projects: [
@@ -246,100 +231,126 @@ export const PROJECTS = [
     ]
   },
   {
-    program: 'IRCRO',
-    href: 'ircro',
-    projects: [
+    group: 'Miscellaneous',
+    href: 'miscellaneous',
+    programs: [
       {
-        short: 'GENPrevent',
-        title: 'Research on Genetic Predispositions and Development of a Test for the Prevention of Sports Injuries',
-        startDate: '01/01/2016',
-        projectDuration: '24 months',
-        pdf: '7-1.pdf'
+        program: 'HRZZ',
+        href: 'hrzz',
+        projects: [
+          {
+            short: 'GlycoCOVID',
+            title: 'Support for developing competence centers',
+            startDate: '08/07/2020',
+            projectDuration: '18 months',
+            pdf: '4-1.pdf'
+          },
+          {
+            short: 'GlycoDown',
+            title: 'Protein Glycosylation in Aging-Related Diseases Through the Study of Down Syndrome as an Accelerated Aging Condition',
+            startDate: '01/10/2019',
+            projectDuration: '43 months',
+            pdf: '4-2.pdf'
+          }
+        ]
       },
       {
-        short: 'Development of Molecular Diagnostics Methods',
-        startDate: '28/03/2011',
-        projectDuration: '15 months',
-        pdf: '7-2.pdf'
+        program: 'IRCRO',
+        href: 'ircro',
+        projects: [
+          {
+            short: 'GENPrevent',
+            title: 'Research on Genetic Predispositions and Development of a Test for the Prevention of Sports Injuries',
+            startDate: '01/01/2016',
+            projectDuration: '24 months',
+            pdf: '7-1.pdf'
+          },
+          {
+            short: 'Development of Molecular Diagnostics Methods',
+            startDate: '28/03/2011',
+            projectDuration: '15 months',
+            pdf: '7-2.pdf'
+          }
+        ]
+      },
+      {
+        program: 'PoC Private',
+        href: 'pocprivate',
+        projects: [
+          {
+            short: 'Development of Molecular Diagnostics Methods',
+            startDate: '01/01/2014',
+            projectDuration: '12 months',
+            pdf: '8-1.pdf'
+          },
+          {
+            short: 'Analysis of Antenary Fucose as Routine Diagnostics for HNF1A-MODY',
+            startDate: '01/06/2011',
+            projectDuration: '6 months',
+            pdf: '8-2.pdf'
+          }
+        ]
+      },
+      {
+        program: 'Poduzetnički Impuls 2013',
+        href: 'poduzetnicki-impuls2013',
+        projects: [
+          {
+            short: 'Antenary Fucosylation of Plasma Proteins as a Biomarker for HNF1A-MODY',
+            startDate: '04/07/2013',
+            projectDuration: '12 months',
+            pdf: '9-1.pdf'
+          }
+        ]
+      },
+      {
+        program: '3C',
+        href: '3c',
+        projects: [
+          {
+            short: 'High-Throughput Plasma Glycan Analysis',
+            startDate: '01/12/2010',
+            projectDuration: '6 months',
+            pdf: '10-1.pdf'
+          }
+        ]
+      },
+      {
+        program: 'NSF',
+        href: 'nsf',
+        projects: [
+          {
+            short: 'Analysis of N-Linked Glycans in Human Plasma',
+            startDate: '01/06/2010',
+            projectDuration: '36 months',
+            pdf: '11-1.pdf'
+          },
+        ]
+      },
+      {
+        program: 'HIT',
+        href: 'hit',
+        projects: [
+          {
+            short: 'Application of DNA Analysis in the Development of Traceability Systems in Livestock and Meat Processing Production',
+            startDate: '26/03/2010',
+            projectDuration: '36 months',
+            pdf: '12-1.pdf'
+          },
+        ]
+      },
+      {
+        program: 'MZO',
+        href: 'mzo',
+        projects: [
+          {
+            short: 'Development of a System for DNA Analysis of Archaeological Bone Samples',
+            startDate: '02/01/2007',
+            projectDuration: '35 months',
+            pdf: '13-1.pdf'
+          },
+        ]
       }
-    ]
-  },
-  {
-    program: 'PoC Private',
-    href: 'pocprivate',
-    projects: [
-      {
-        short: 'Development of Molecular Diagnostics Methods',
-        startDate: '01/01/2014',
-        projectDuration: '12 months',
-        pdf: '8-1.pdf'
-      },
-      {
-        short: 'Analysis of Antenary Fucose as Routine Diagnostics for HNF1A-MODY',
-        startDate: '01/06/2011',
-        projectDuration: '6 months',
-        pdf: '8-2.pdf'
-      }
-    ]
-  },
-  {
-    program: 'Poduzetnički Impuls 2013',
-    href: 'poduzetnicki-impuls2013',
-    projects: [
-      {
-        short: 'Antenary Fucosylation of Plasma Proteins as a Biomarker for HNF1A-MODY',
-        startDate: '04/07/2013',
-        projectDuration: '12 months',
-        pdf: '9-1.pdf'
-      },
-    ]
-  },
-  {
-    program: '3C',
-    href: '3c',
-    projects: [
-      {
-        short: 'High-Throughput Plasma Glycan Analysis',
-        startDate: '01/12/2010',
-        projectDuration: '6 months',
-        pdf: '10-1.pdf'
-      },
-    ]
-  },
-  {
-    program: 'NSF',
-    href: 'nsf',
-    projects: [
-      {
-        short: 'Analysis of N-Linked Glycans in Human Plasma',
-        startDate: '01/06/2010',
-        projectDuration: '36 months',
-        pdf: '11-1.pdf'
-      },
-    ]
-  },
-  {
-    program: 'HIT',
-    href: 'hit',
-    projects: [
-      {
-        short: 'Application of DNA Analysis in the Development of Traceability Systems in Livestock and Meat Processing Production',
-        startDate: '26/03/2010',
-        projectDuration: '36 months',
-        pdf: '12-1.pdf'
-      },
-    ]
-  },
-  {
-    program: 'MZO',
-    href: 'mzo',
-    projects: [
-      {
-        short: 'Development of a System for DNA Analysis of Archaeological Bone Samples',
-        startDate: '02/01/2007',
-        projectDuration: '35 months',
-        pdf: '13-1.pdf'
-      },
     ]
   }
 ]

@@ -48,6 +48,17 @@
     }
   }
 
+  $: anyMenuOpen = servicesMenu || resourcesMenu;
+
+  $: {
+    if (anyMenuOpen) {
+      document.documentElement.classList.add('no-scroll');
+    } else {
+      document.documentElement.classList.remove('no-scroll');
+    }
+  }
+
+
   onMount(() => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('keydown', handleKeydown);
@@ -72,12 +83,12 @@
       <button class="links-link" on:click={toggleServicesMenu} bind:this={servicesMenuRef}>
         <span class="line-thing"></span>
         Services
-
+        <img src="/icons/arrow_down.svg" alt="">
         {#if servicesMenu}
           <span class="submenu">
-            <a href="/glycomics">Glycomics</a>
-            <a href="/epigenetics">Epigenetics</a>
-            <a href="/dna-and-forensics">DNA & Forensics</a>
+            <a href="/services/glycomics">Glycomics</a>
+            <a href="/services/epigenetics">Epigenetics</a>
+            <a href="/services/dna-and-forensics">DNA & Forensics</a>
             <a href="https://glycanage.com">GlycanAge</a>
           </span>
         {/if}
@@ -88,13 +99,11 @@
       <button class="links-link" on:click={toggleResourcesMenu} bind:this={resourcesMenuRef}>
         <span class="line-thing"></span>
         Resources
-
+        <img src="/icons/arrow_down.svg" alt="">
         {#if resourcesMenu}
           <span class="submenu">
-            <a href="/glycomics">Glycomics</a>
             <a href="https://www.youtube.com/@HumanGlycomeProject" target="_blank" rel="noreferrer noopener">The Human Glycome Project</a>
             <a href="https://glycanage.com/blog" target="_blank" rel="noreferrer noopener">GlycanAge blog</a>
-            <a href="https://glycanage.com">GlycanAge</a>
           </span>
         {/if}
       </button>

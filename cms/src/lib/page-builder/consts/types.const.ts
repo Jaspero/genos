@@ -653,6 +653,18 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
     }
   },
   {
+    id: 'pb-glycomics',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-GLYCOMICS',
+    model: {
+      defaults: {
+        tagName: 'pb-glycomics',
+        cName: 'Glycomics',
+        draggable: true,
+        droppable: false
+      }
+    }
+  },
+  {
     id: 'pb-projects',
     isComponent: (el: HTMLElement) => el.tagName === 'PB-PROJECTS',
     model: {

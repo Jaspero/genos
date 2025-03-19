@@ -6,6 +6,7 @@ export * from './GoogleMap.svelte';
 export * from './Navigation.svelte';
 export * from './Intro.svelte';
 export * from './HeroContentLanding.svelte';
+export * from './Glycomics.svelte';
 export * from './publications/Publications.svelte';
 export * from './projects/Projects.svelte';
 

@@ -29,8 +29,10 @@ pb-navigation {
                 gap: 2rem;
                 .links-link {
                     position: relative;
-                    opacity: .85;
-                    color: white;
+                    display: flex;
+                    align-items: center;
+                    gap: .25rem;
+                    color: rgba(255,255,255,.85);
                     font-weight: bold;
                     transition: .2s;
                     .line-thing {
@@ -42,31 +44,39 @@ pb-navigation {
                         transition: .2s;
                     }
                     &:hover, &.active {
-                        opacity: 1;
+                        color: rgba(255,255,255,1);
                         .line-thing {
                             width: 100%;
                         }
                     }
 
+                    img {
+                        width: 1rem;
+                        height: 1rem;
+                    }
+
                     .submenu {
                         position: absolute;
                         width: 100%;
-                        top: 0;
+                        top: 2rem;
                         right: 0;
                         min-width: 15rem;
                         padding-top: .25rem;
                         padding-bottom: .25rem;
                         background-color: white;
+                        border-radius: .25rem;
+                        box-shadow: 0 3px 6px rgba(0,0,0,.12);
                         color: #032130;
 
                         a {
                             display: flex;
                             text-align: left;
                             padding: .5rem 1rem;
+                            font-size: .875rem;
                             transition: .25s;
 
                             &:hover {
-                                transform: translateX(.25rem);
+                                padding-left: 1.25rem
                             }
                         }
                     }
