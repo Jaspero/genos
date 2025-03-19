@@ -61,15 +61,18 @@
       <div class="flex flex-col gap-12">
         <div class="publication-card">
           <div class="publication-card-paper">Released N-glycans</div>
+          <div class="publication-card-author">N-glycans are released from glycoproteins by digestion with PNGaseF, fluorescently labelled, purified and analysed by hydrophilic interaction ultra-high-performance liquid chromatography with fluorescence detection (HILIC-UHPLC-FLD) which allows relative quantification of different glycan species. Assignment of N-glycan structures is based on HILIC retention time, accurate mass and fragmentation spectra obtained by coupling HILIC-UHPLC-FLD to mass spectrometry via electrospray ionization (ESI-MS/MS).</div>
         </div>
         <div class="publication-card">
           <div class="publication-card-paper">Site-specific glycosylation</div>
-        </div>
-        <div class="publication-card">
-          <div class="publication-card-paper">Structural characterization of glycans</div>
+          <div class="publication-card-author">N-glycopeptides are obtained from glycoproteins by protease digestion, purified and analysed by C18 liquid chromatography coupled to mass spectrometry via electrospray ionization (C18-LC-ESI-MS/MS). Relative quantification of N-glycopeptides in obtained in a site-specific manner determined by the amino acid sequence of the glycoprotein. Assignment of N-glycopeptide structures is based on accurate mass and fragmentation spectra.</div>
         </div>
         <div class="publication-card">
           <div class="publication-card-paper">Glycosylation site occupancy</div>
+          <div class="publication-card-author">Site occupancy analysis is used to calculate the occupancy of potential N-glycosylation sites by measuring the proportion of N-glycosylated peptides in total peptides. The analysis is performed by releasing N-glycans with PNGaseF in the presence of 18O water followed by protease digestion, purification and C18-LC-ESI-MS/MS.</div>
+        </div>
+        <div class="publication-card">
+          <div class="publication-card-paper">Structural characterization of glycans</div>
         </div>
       </div>
     </div>

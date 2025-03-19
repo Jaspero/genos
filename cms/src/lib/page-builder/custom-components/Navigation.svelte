@@ -83,30 +83,33 @@
       <button class="links-link" on:click={toggleServicesMenu} bind:this={servicesMenuRef}>
         <span class="line-thing"></span>
         Services
-        <img src="/icons/arrow_down.svg" alt="">
+        <img src="/icons/arrow_down.svg" alt="" class:rotate={servicesMenu}>
         {#if servicesMenu}
-          <span class="submenu">
+          <span class="submenu" transition:fly={{y: -20}}>
             <a href="/services/glycomics">Glycomics</a>
             <a href="/services/epigenetics">Epigenetics</a>
             <a href="/services/dna-and-forensics">DNA & Forensics</a>
-            <a href="https://glycanage.com">GlycanAge</a>
+            <a href="https://glycanage.com" target="_blank" rel="noreferrer noopener">GlycanAge</a>
           </span>
         {/if}
       </button>
       <a class="links-link" href="/projects"><span class="line-thing"></span>Projects</a>
       <a class="links-link" href="/team"><span class="line-thing"></span>Our team</a>
-      <a class="links-link" href="/contact"><span class="line-thing"></span>Contact us</a>
       <button class="links-link" on:click={toggleResourcesMenu} bind:this={resourcesMenuRef}>
         <span class="line-thing"></span>
         Resources
-        <img src="/icons/arrow_down.svg" alt="">
+        <img src="/icons/arrow_down.svg" alt="" class:rotate={resourcesMenu}>
         {#if resourcesMenu}
-          <span class="submenu">
+          <span class="submenu" transition:fly={{y: -20}}>
             <a href="https://www.youtube.com/@HumanGlycomeProject" target="_blank" rel="noreferrer noopener">The Human Glycome Project</a>
             <a href="https://glycanage.com/blog" target="_blank" rel="noreferrer noopener">GlycanAge blog</a>
           </span>
         {/if}
       </button>
+      <a class="links-link" href="/news">
+        <span class="line-thing"></span>News
+      </a>
+      <a class="links-link contact" href="/contact">Contact us</a>
       <button class="mobile" on:click={() => (open = !open)}>
         <span class="line-thing"></span>Menu
       </button>
