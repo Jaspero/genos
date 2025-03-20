@@ -1,0 +1,1 @@
+import"../chunks/disclose-version.Bg9kRutz.js";import{c as e}from"../chunks/custom-element.BA3kAs82.js";import{P as o}from"../chunks/Projects.DMOj0VHL.js";function r(t){o(t)}e(r,{},[],[],!0);export{r as component};

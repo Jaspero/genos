@@ -1,0 +1,1 @@
+import"./custom-element.BA3kAs82.js";import{s as e}from"./entry.ryg6NfEW.js";const r=()=>{const s=e;return{page:{subscribe:s.page.subscribe},navigating:{subscribe:s.navigating.subscribe},updated:s.updated}},b={subscribe(s){return r().page.subscribe(s)}};export{b as p};
