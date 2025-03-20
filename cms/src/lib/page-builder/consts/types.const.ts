@@ -665,6 +665,18 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
     }
   },
   {
+    id: 'pb-price-list',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-PRICE-LIST',
+    model: {
+      defaults: {
+        tagName: 'pb-price-list',
+        cName: 'Price list',
+        draggable: true,
+        droppable: false
+      }
+    }
+  },
+  {
     id: 'pb-projects',
     isComponent: (el: HTMLElement) => el.tagName === 'PB-PROJECTS',
     model: {

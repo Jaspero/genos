@@ -58,7 +58,6 @@
     }
   }
 
-
   onMount(() => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('keydown', handleKeydown);
@@ -86,6 +85,7 @@
         <img src="/icons/arrow_down.svg" alt="" class:rotate={servicesMenu}>
         {#if servicesMenu}
           <span class="submenu" transition:fly={{y: -20}}>
+            <a href="/price-list">Prices</a>
             <a href="/services/glycomics">Glycomics</a>
             <a href="/services/epigenetics">Epigenetics</a>
             <a href="/services/dna-and-forensics">DNA & Forensics</a>
