@@ -17,10 +17,10 @@ export const STYLE_OVERRIDES = [
     id: 'typography',
     property: 'font-family',
     type: 'select',
-    default: 'Gotham',
+    default: 'Inter',
     options: [
-      { id: 'Sen', label: 'Sen' },
-      { id: 'Gotham', label: 'Gotham' }
+      { id: 'Inter', label: 'Inter' },
+      { id: 'Sen', label: 'Sen' }
     ]
   },
   {

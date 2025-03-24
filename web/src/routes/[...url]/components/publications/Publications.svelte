@@ -46,7 +46,7 @@
         <div class="flex flex-col gap-12">
           {#each groupedData[year] as publication}
             <a href="https://doi.org/{publication.doi}" target="_blank" rel="noreferrer noopener" class="publication-card">
-              <div class="publication-card-paper">{publication.paper}</div>
+              <div class="publication-card-paper">{publication.paper}<img src="/icons/open-in-new.svg" alt="" class="publications-open-in-new"></div>
               <div class="publication-card-journal">{publication.date} - {getFirstAuthor(publication.authors)} et al., {publication.journal}</div>
             </a>
           {/each}

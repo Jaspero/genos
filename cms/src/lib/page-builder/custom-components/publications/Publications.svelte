@@ -32,7 +32,7 @@
   });
 </script>
 
-<div class="grid grid-small publications-grid">
+<div class="grid grid-large publications-grid">
   <div class="publications-years">
     {#each years as year}
       <a href="/publications#{year}" class="publication-year-link">{year}</a>
@@ -46,13 +46,8 @@
         <div class="flex flex-col gap-12">
           {#each groupedData[year] as publication}
             <a href="https://doi.org/{publication.doi}" target="_blank" rel="noreferrer noopener" class="publication-card">
-              <div class="publication-card-header">
-                <div class="publication-card-date">{publication.date}</div>
-                <div class="publication-card-journal">{publication.journal}</div>
-              </div>
-              <div class="publication-card-paper">{publication.paper}</div>
-              <div class="publication-card-author">Authors: {getFirstAuthor(publication.authors)} et al.</div>
-              <span class="publication-card-link">View reference</span>
+              <div class="publication-card-paper">{publication.paper}<img src="/icons/open-in-new.svg" alt="" class="publications-open-in-new"></div>
+              <div class="publication-card-journal">{publication.date} - {getFirstAuthor(publication.authors)} et al., {publication.journal}</div>
             </a>
           {/each}
         </div>
