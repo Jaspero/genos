@@ -641,6 +641,18 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
    * Custom Components
    */
   {
+    id: 'pb-team',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-TEAM',
+    model: {
+      defaults: {
+        tagName: 'pb-team',
+        cName: 'Team',
+        draggable: true,
+        droppable: false
+      }
+    }
+  },
+  {
     id: 'pb-publications',
     isComponent: (el: HTMLElement) => el.tagName === 'PB-PUBLICATIONS',
     model: {

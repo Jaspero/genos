@@ -10,6 +10,7 @@ export * from './Glycomics.svelte';
 export * from './PriceList.svelte';
 export * from './publications/Publications.svelte';
 export * from './projects/Projects.svelte';
+export * from './team/Team.svelte';
 
 
 /**

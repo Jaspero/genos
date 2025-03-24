@@ -7,10 +7,6 @@
   let previousScrollY = 0;
   let showNavbar = true;
   let open = false;
-  let servicesMenu = false;
-  let servicesMenuRef: HTMLElement | null = null;
-  let resourcesMenu = false;
-  let resourcesMenuRef: HTMLElement | null = null;
 
   function handleScroll() {
     const currentScrollY = window.scrollY;
@@ -27,47 +23,16 @@
   function handleKeydown(event: KeyboardEvent) {
     if (event.key === 'Escape') {
       open = false;
-      servicesMenu = false;
     }
   }
-
-  function toggleServicesMenu() {
-    servicesMenu = !servicesMenu;
-  }
-
-  function toggleResourcesMenu() {
-    resourcesMenu = !resourcesMenu;
-  }
-
-  function handleClickOutside(event: MouseEvent) {
-    if (servicesMenuRef && !servicesMenuRef.contains(event.target as Node)) {
-      servicesMenu = false;
-    }
-    if (resourcesMenuRef && !resourcesMenuRef.contains(event.target as Node)) {
-      resourcesMenu = false;
-    }
-  }
-
-  $: anyMenuOpen = servicesMenu || resourcesMenu;
-
-  $: {
-    if (anyMenuOpen) {
-      document.documentElement.classList.add('no-scroll');
-    } else {
-      document.documentElement.classList.remove('no-scroll');
-    }
-  }
-
 
   onMount(() => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('keydown', handleKeydown);
-    document.addEventListener('click', handleClickOutside);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('keydown', handleKeydown);
-      document.removeEventListener('click', handleClickOutside);
     };
   });
 </script>
@@ -80,36 +45,14 @@
     <div class="links">
       <a class="links-link" href="/about"><span class="line-thing"></span>About</a>
       <a class="links-link" href="/publications"><span class="line-thing"></span>Publications</a>
-      <button class="links-link" on:click={toggleServicesMenu} bind:this={servicesMenuRef}>
+      <a href="/services" class="links-link">
         <span class="line-thing"></span>
         Services
-        <img src="/icons/arrow_down.svg" alt="" class:rotate={servicesMenu}>
-        {#if servicesMenu}
-          <span class="submenu" transition:fly={{y: -20}}>
-            <a href="/price-list">Prices</a>
-            <a href="/services/glycomics">Glycomics</a>
-            <a href="/services/epigenetics">Epigenetics</a>
-            <a href="/services/dna-and-forensics">DNA & Forensics</a>
-            <a href="https://glycanage.com" target="_blank" rel="noreferrer noopener">GlycanAge</a>
-          </span>
-        {/if}
-      </button>
+      </a>
       <a class="links-link" href="/projects"><span class="line-thing"></span>Projects</a>
       <a class="links-link" href="/team"><span class="line-thing"></span>Our team</a>
-      <button class="links-link" on:click={toggleResourcesMenu} bind:this={resourcesMenuRef}>
-        <span class="line-thing"></span>
-        Resources
-        <img src="/icons/arrow_down.svg" alt="" class:rotate={resourcesMenu}>
-        {#if resourcesMenu}
-          <span class="submenu" transition:fly={{y: -20}}>
-            <a href="https://www.youtube.com/@HumanGlycomeProject" target="_blank" rel="noreferrer noopener">The Human Glycome Project</a>
-            <a href="https://glycanage.com/blog" target="_blank" rel="noreferrer noopener">GlycanAge blog</a>
-          </span>
-        {/if}
-      </button>
-      <a class="links-link" href="/news">
-        <span class="line-thing"></span>News
-      </a>
+      <a class="links-link" href="/resources"><span class="line-thing"></span>Resources</a>
+      <a class="links-link" href="/news"><span class="line-thing"></span>News</a>
       <a class="links-link contact" href="/contact">Contact us</a>
       <button class="mobile" on:click={() => (open = !open)}>
         <span class="line-thing"></span>Menu
@@ -123,11 +66,10 @@
   <div class="menu" transition:fly={{y: -1000}}>
     <a href="/about">About</a>
     <a href="/publications">Publications</a>
-    <button on:click={toggleServicesMenu}>Services</button>
+    <a href="/services">Services</a>
     <a href="/projects">Projects</a>
     <a href="/team">Our team</a>
     <a href="/contact">Contact us</a>
-    <a href="https://glycanage.com/blog" target="_blank" rel="noopener">Science Magazine</a>
     <div class="filler"></div>
     <div class="socials">
       <a href="https://x.com/gglycoscience?lang=hr" target="_blank" rel="noreferrer noopener">

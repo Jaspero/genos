@@ -13,35 +13,19 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    gap: 1rem;
     border-width: 2px;
     border-style: solid;
+    border-radius: .25rem;
     padding: 2rem;
-    scroll-behavior: smooth;
-}
+    border-color: #032130;
+    background-color: white;
 
-.publication-card::before, .publication-card::after {
-    z-index: -1;
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: inherit;
-    background-color: inherit;
-    opacity: .5;
-    transition: .35s;
-}
-
-.publication-card:hover::before {
-    transform: rotate(6deg);
-}
-.publication-card:hover::after {
-    transform: rotate(-6deg);
 }
 
 .publication-card-header {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     margin-bottom: 1rem;
 }
@@ -96,46 +80,6 @@
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
-}
-
-.publication-card:nth-child(5n + 1) {
-    border-color: #4095BF;
-    background-color: #D9EAF2;
-    .publication-card-link {
-        color: #297AA3 !important;
-    }
-}
-
-.publication-card:nth-child(5n + 2) {
-    border-color: #FF8000;
-    background-color: #FFE5CC;
-    .publication-card-link {
-        color: #F2700D !important;
-    }
-}
-
-.publication-card:nth-child(5n + 3) {
-    border-color: #80BF40;
-    background-color: #E5F2D9;
-    .publication-card-link {
-        color: #66A329 !important;
-    }
-}
-
-.publication-card:nth-child(5n + 4) {
-    border-color: #FFD400;
-    background-color: #FFF6CC;
-    .publication-card-link {
-        color: #E58D19 !important;
-    }
-}
-
-.publication-card:nth-child(5n + 5) {
-    border-color: #40BFBF;
-    background-color: #D9F2F2;
-    .publication-card-link {
-        color: #178282 !important;
-    }
 }
 
 @media (max-width: 900px) {

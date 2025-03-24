@@ -4,7 +4,7 @@
   import { PROJECTS } from './projects.const';
 </script>
 
-<div class="grid grid-small projects-grid">
+<div class="grid grid-large projects-grid">
   <div class="col-span-3 projects-sticky">
     <div class="flex flex-col gap">
       {#each PROJECTS as program}
