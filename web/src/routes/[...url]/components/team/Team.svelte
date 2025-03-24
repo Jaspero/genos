@@ -15,7 +15,7 @@
     <button class="sm:col-span-12 md:col-span-4 col-span-3 team-member" on:click={() => selectMember(i)}>
       {#if member.img}
         <div>
-          <img class="w-24 h-24 object-cover rounded-full" src="/team/{member.img}.jpg" alt="">
+          <img class="w-24 h-24 object-cover rounded-fulln" src="/team/{member.img}.jpg" alt="">
         </div>
       {/if}
       <h3>
