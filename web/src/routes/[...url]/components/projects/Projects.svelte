@@ -21,7 +21,7 @@
         {#if program.projects}
           {#each program.projects as project}
             <div class="project-card-container">
-              <a href="/pdfs/{project.pdf}" download="Genos project-{project.short}" class="project-card">
+              <a href="/pdfs/{project.pdf}" target="_blank" class="project-card">
                 <div class="project-date">
                   <span>Start: {project.startDate}</span>
                 </div>
@@ -34,7 +34,7 @@
                 {/if}
                 </span>
                 <span class="project-link">
-                  Download project details • PDF
+                  View project details • PDF
                 </span>
               </a>
             </div>
@@ -47,7 +47,7 @@
 
             {#each programsGroup.projects as project}
               <div class="project-card-container">
-                <a  download="Genos project-{project.short}" class="project-card">
+                <a download="Genos project-{project.short}" class="project-card">
                   <div class="project-date">
                     <span>Start: {project.startDate}</span>
                   </div>
@@ -65,26 +65,6 @@
                 </a>
               </div>
             {/each}
-            <!--{#each programsGroup as project}
-              <div class="project-card-container">
-                <a href="/pdfs/{project.pdf}" download="Genos project-{project.short}" class="project-card">
-                  <div class="project-date">
-                    <span>Start: {project.startDate}</span>
-                  </div>
-                  <div class="project-title">
-                    {project.short}
-                  </div>
-                  <span class="project-text clamp">
-                {#if project.title}
-                  {project.title}
-                {/if}
-                </span>
-                  <span class="project-link">
-                  Download project details • PDF
-                </span>
-                </a>
-              </div>
-            {/each}-->
           {/each}
         {/if}
       </div>

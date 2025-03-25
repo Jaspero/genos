@@ -5,7 +5,7 @@ pb-navigation {
         top: 0;
         left: 0;
         width: 100%;
-        background-color: rgba(0,0,0,.36);
+        background-color: #032130;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         transition: .2s;
@@ -62,32 +62,6 @@ pb-navigation {
                             transform: rotate(-180deg);
                         }
                     }
-
-                    .submenu {
-                        position: absolute;
-                        width: 100%;
-                        top: 2rem;
-                        right: 0;
-                        min-width: 15rem;
-                        padding-top: .25rem;
-                        padding-bottom: .25rem;
-                        background-color: white;
-                        border-radius: .25rem;
-                        box-shadow: 0 3px 6px rgba(0,0,0,.12);
-                        color: #032130;
-
-                        a {
-                            display: flex;
-                            text-align: left;
-                            padding: .5rem 1rem;
-                            font-size: .875rem;
-                            transition: .25s;
-
-                            &:hover {
-                                padding-left: 1.25rem
-                            }
-                        }
-                    }
                 }
                 .links-link.desktop {
                     @media (max-width: 1280px) {
@@ -113,6 +87,7 @@ pb-navigation {
         background-color: rgba(0,0,0,.25);
     }
     .menu {
+        z-index: 10;
         position: fixed;
         top: 0;
         right: 0;

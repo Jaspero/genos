@@ -11,6 +11,8 @@ export * from './HeroContentLanding.svelte';
 export * from './Glycomics.svelte';
 export * from './PriceList.svelte';
 export * from './Services.svelte';
+export * from './Epigenetics.svelte';
+export * from './Forensics.svelte';
 export * from './team/Team.svelte';
 export * from './publications/Publications.svelte';
 export * from './projects/Projects.svelte';

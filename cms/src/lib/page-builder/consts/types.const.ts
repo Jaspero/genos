@@ -641,6 +641,30 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
    * Custom Components
    */
   {
+    id: 'pb-forensics',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-FORENSICS',
+    model: {
+      defaults: {
+        tagName: 'pb-forensics',
+        cName: 'Forensics',
+        draggable: true,
+        droppable: false
+      }
+    }
+  },
+  {
+    id: 'pb-epigenetics',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-EPIGENETICS',
+    model: {
+      defaults: {
+        tagName: 'pb-epigenetics',
+        cName: 'Epigenetics',
+        draggable: true,
+        droppable: false
+      }
+    }
+  },
+  {
     id: 'pb-services',
     isComponent: (el: HTMLElement) => el.tagName === 'PB-SERVICES',
     model: {

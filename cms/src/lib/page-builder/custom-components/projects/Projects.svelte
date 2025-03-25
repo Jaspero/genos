@@ -4,7 +4,7 @@
   import { PROJECTS } from './projects.const';
 </script>
 
-<div class="grid grid-large projects-grid">
+<div class="grid grid-small projects-grid">
   <div class="col-span-3 projects-sticky">
     <div class="flex flex-col gap">
       {#each PROJECTS as program}
@@ -21,7 +21,7 @@
         {#if program.projects}
           {#each program.projects as project}
             <div class="project-card-container">
-              <a href="/pdfs/{project.pdf}" download="Genos project-{project.short}" class="project-card">
+              <a href="/pdfs/{project.pdf}" target="_blank" class="project-card">
                 <div class="project-date">
                   <span>Start: {project.startDate}</span>
                 </div>
@@ -34,7 +34,7 @@
                 {/if}
                 </span>
                 <span class="project-link">
-                  Download project details • PDF
+                  View project details • PDF
                 </span>
               </a>
             </div>
@@ -60,7 +60,7 @@
                 {/if}
                 </span>
                   <span class="project-link">
-                  Download project details • PDF
+                  View project details • PDF
                 </span>
                 </a>
               </div>
