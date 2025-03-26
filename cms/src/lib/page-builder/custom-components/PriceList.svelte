@@ -3,7 +3,7 @@
 <div class="price-list grid grid-large">
   <div class="col-span-12">
     <p>
-      Our service price list is available <a class="underline" href="/pdfs/cjenik.pdf" download="Price list for Genos' services">here</a>.
+      Our service price list is available <a class="underline" href="/pdfs/price-list.pdf" target="_blank">here</a>.
     </p>
     <p class="mt-4">
       Payments for analyses and services can be made in the following ways:

@@ -50,6 +50,7 @@
       <a class="links-link desktop" href="/resources"><span class="line-thing"></span>Resources</a>
       <a class="links-link desktop" href="/news"><span class="line-thing"></span>News</a>
       <a class="links-link desktop" href="/team"><span class="line-thing"></span>Our team</a>
+      <a class="links-link desktop" href="/price-list"><span class="line-thing"></span>Price list</a>
       <a class="links-link desktop contact" href="/contact">Contact us</a>
       <button class="links-link mobile" on:click={() => (open = !open)}>
         <span class="line-thing"></span>Menu
@@ -68,6 +69,7 @@
     <a href="/resources">Resources</a>
     <a href="/news">News</a>
     <a href="/team">Our team</a>
+    <a href="/price-list">Price list</a>
     <a href="/contact">Contact us</a>
     <div class="filler"></div>
     <div class="socials">
