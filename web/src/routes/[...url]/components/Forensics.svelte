@@ -126,6 +126,35 @@
       <br><br>
       For DNA isolation, 3 mL of whole blood is required in a vacutainer tube with EDTA anticoagulant (purple cap). It is best to deliver the blood immediately after collection, but if necessary, it can be stored at +4°C for a few hours or at -20°C for extended periods.
     {:else if tab === 5}
+      <b>Determining the Sex of Birds Through DNA Analysis</b>
+      <br><br>
+      The sex of many bird species cannot be determined based on physical appearance and characteristics. By using DNA analysis methods, it is possible to examine parts of the birds' sex chromosomes. This allows us to distinguish between male birds (ZZ) and female birds (ZW).
+      <br><br>
+      <b>Advantages of DNA Analysis</b>
+      <ul>
+        <li>The sex of a bird can be determined from feather or blood samples.</li>
+        <li>The accuracy of DNA-based sex determination does not depend on the bird's age.</li>
+        <li>The accuracy of DNA sex determination is very high (>99%).</li>
+        <li>Knowing the bird's sex increases its value.</li>
+        <li>The analysis is conducted by experts with years of experience in DNA analysis.</li>
+      </ul>
+      <br>
+      <b>Sample collection</b>
+      <ul>
+        <li>3–5 freshly plucked feathers, preferably from the bird's chest (collect without touching the tip of the feather with your hands).</li>
+        <li>2–3 drops of blood on a card or tissue (sample collection cards for blood can be requested from the Genos DNA laboratory).</li>
+        <li>Each bird's sample should be placed in a separate envelope.</li>
+        <li>Samples can be sent by mail or delivered in person.</li>
+        <li>When sending samples by mail, include an order form and proof of payment for the analysis.</li>
+      </ul>
+      <br>
+      <a href="/pdfs/genbird-hr.pdf" target="_blank" class="underline">Instructions for Collecting Feather and Blood Samples</a>
+      <br><br>
+      <b>Results</b>
+      <ul>
+        <li>The average time for sex determination is 5–10 business days.</li>
+        <li>Results can be sent by mail or email.</li>
+      </ul>
     {:else if tab === 6}
       <b>How Is Testing Conducted?</b>
       <br><br>
