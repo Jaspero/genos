@@ -45,13 +45,13 @@ async function exec() {
       const config: {
         clearBuild: boolean;
         pages: string[];
-        deteleted: string[];
+        deleted: string[];
         crawl: boolean
       } = {
         clearBuild: true,
         crawl: true,
         pages: ['/sitemap-hidden'],
-        deteleted: []
+        deleted: []
       };
 
       console.log(`Changes:`, releaseData?.changes);
@@ -63,7 +63,7 @@ async function exec() {
           .filter(c => c.type === 'create' || c.type === 'update')
           .map((c: any) => c.page)
           .filter((value, index, array) => array.indexOf(value) === index);
-        config.deteleted = (releaseData?.changes || [])
+        config.deleted = (releaseData?.changes || [])
           .filter(c => c.type === 'delete')
           .map((c: any) => c.page)
           .filter((value, index, array) => array.indexOf(value) === index);

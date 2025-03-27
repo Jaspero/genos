@@ -4,7 +4,7 @@
   import { PROJECTS } from './projects.const';
 </script>
 
-<div class="grid grid-small projects-grid">
+<div class="grid grid-large projects-grid">
   <div class="col-span-3 projects-sticky">
     <div class="flex flex-col gap">
       {#each PROJECTS as program}
@@ -47,7 +47,7 @@
 
             {#each programsGroup.projects as project}
               <div class="project-card-container">
-                <a href="/pdfs/{project.pdf}" download="Genos project-{project.short}" class="project-card">
+                <a download="Genos project-{project.short}" class="project-card">
                   <div class="project-date">
                     <span>Start: {project.startDate}</span>
                   </div>
@@ -55,36 +55,16 @@
                     {project.short}
                   </div>
                   <span class="project-text clamp">
-                {#if project.title}
-                  {project.title}
-                {/if}
-                </span>
+                    {#if project.title}
+                      {project.title}
+                    {/if}
+                  </span>
                   <span class="project-link">
-                  View project details • PDF
-                </span>
+                    Download project details • PDF
+                  </span>
                 </a>
               </div>
             {/each}
-            <!--{#each programsGroup as project}
-              <div class="project-card-container">
-                <a href="/pdfs/{project.pdf}" download="Genos project-{project.short}" class="project-card">
-                  <div class="project-date">
-                    <span>Start: {project.startDate}</span>
-                  </div>
-                  <div class="project-title">
-                    {project.short}
-                  </div>
-                  <span class="project-text clamp">
-                {#if project.title}
-                  {project.title}
-                {/if}
-                </span>
-                  <span class="project-link">
-                  Download project details • PDF
-                </span>
-                </a>
-              </div>
-            {/each}-->
           {/each}
         {/if}
       </div>

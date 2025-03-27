@@ -11,7 +11,7 @@ const config = {
       pages: '../public/web',
       strict: false,
       clearBuild: buildConfig.clearBuild,
-      deleted: buildConfig.deteleted || []
+      deleted: buildConfig.deleted || []
     }),
     prerender: {
       crawl: buildConfig.crawl,

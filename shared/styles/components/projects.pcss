@@ -70,3 +70,20 @@
 .project-card:hover .project-link {
     text-decoration: underline;
 }
+
+.project-modal {
+    z-index: 11;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    transform: translate(-50%, -50%);
+}
+
+.project-modal iframe {
+    max-width: 80vw;
+    max-height: 80vh;
+    width: 590px;
+    height: 835px;
+    aspect-ratio: unset;
+}
