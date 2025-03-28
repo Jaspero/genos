@@ -31,12 +31,6 @@ export const TEAM = [
         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad ducimus, et id laboriosam porro quaerat rerum. Alias animi, aspernatur blanditiis commodi dolor harum ipsam, magnam, maxime officiis repellendus reprehenderit voluptatibus!'
       },
       {
-        name: 'Snježana Džijan, PhD',
-        job: 'Head of DNA Laboratory',
-        img: 'placeholder-female',
-        description: 'In January 2013, Snježana Džijan joined the Genos team as a researcher and experienced DNA analyst. <br><br> She is the Head of the DNA Laboratory and a permanent court expert witness for DNA analysis. <br><br> Laboratory analyses are focused on paternity testing, kinship testing, and forensic DNA analysis. <br><br> Snježana completed her Master’s degree at the Faculty of Food Technology and later obtained her PhD at the Faculty of Medicine J. J. Strossmayer University of Osijek. <br><br> She currently works as a Professor of Biochemistry at the Faculty of Dental Medicine and Health in Osijek at the aforementioned university. <br><br> As a Professor, she actively coordinates and participates in undergraduate and postgraduate teaching.'
-      },
-      {
         name: 'Tea Pribić, PhD',
         job: 'Head of UPLC Laboratory',
         img: 'pribic',
@@ -261,12 +255,6 @@ export const TEAM = [
     group: 'Analysts',
     members: [
       {
-        name: 'Iva Grubeša',
-        job: 'Laboratory Analyst',
-        img: 'grubesa',
-        description: 'Iva holds a degree in Pharmacy from the Faculty of Pharmacy and Biochemistry at the University of Zagreb. She completed her diploma thesis titled \'Comparison of LC-MS and nano-LC-MS methods for the analysis of N-glycosylation of alpha-1-acid glycoprotein\' at the Department of Biochemistry and Molecular Biology. <br><br> As a Junior Researcher, she is a member of the MS team, contributing to projects that investigate the glycosylation of IgG and other representative components of the host’s innate and adaptive immune systems.\n'
-      },
-      {
         name: 'Ivan Petrić',
         job: 'Laboratory Analyst',
         img: 'petric',
@@ -296,6 +284,12 @@ export const TEAM = [
         img: 'friganovic',
         description: 'Tomislav holds a Bachelor’s and a Master’s degree in Chemistry from the Faculty of Science, University of Zagreb, with a specialization in Inorganic and Physical Chemistry. <br><br> He has worked as a research assistant at the Faculty of Pharmacy and Biochemistry, University of Zagreb, and as an expert associate at the Department of Physics, Faculty of Science, University of Zagreb. <br><br> His scientific background primarily includes fluorescence spectroscopy, particularly attenuation corrections and microplate reader applications, as well as glycochemistry, with a focus on studying the thermodynamics of human transferrin glycoforms binding with iron(III) chelates. <br><br> He also has substantial experience in liquid chromatography.'
       },
+      {
+        name: 'Iva Grubeša',
+        job: 'Laboratory Analyst',
+        img: 'grubesa',
+        description: 'Iva holds a degree in Pharmacy from the Faculty of Pharmacy and Biochemistry at the University of Zagreb. She completed her diploma thesis titled \'Comparison of LC-MS and nano-LC-MS methods for the analysis of N-glycosylation of alpha-1-acid glycoprotein\' at the Department of Biochemistry and Molecular Biology. <br><br> As a Junior Researcher, she is a member of the MS team, contributing to projects that investigate the glycosylation of IgG and other representative components of the host’s innate and adaptive immune systems.\n'
+      }
     ]
   },
   {
@@ -334,13 +328,13 @@ export const TEAM = [
       {
         name: 'Dora Lalić',
         job: 'Project Implementation and Public Procurement Specialist',
-        img: 'sostaric',
+        img: 'lalic',
         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad ducimus, et id laboriosam porro quaerat rerum. Alias animi, aspernatur blanditiis commodi dolor harum ipsam, magnam, maxime officiis repellendus reprehenderit voluptatibus!'
       },
       {
         name: 'Paula Franceković',
         job: 'Administrative Asistant',
-        img: 'ruzic',
+        img: 'francekovic',
         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad ducimus, et id laboriosam porro quaerat rerum. Alias animi, aspernatur blanditiis commodi dolor harum ipsam, magnam, maxime officiis repellendus reprehenderit voluptatibus!'
       },
       {
@@ -360,6 +354,12 @@ export const TEAM = [
         job: 'Branch Manager',
         img: 'placeholder-male',
         description: 'Dario Fančović, a co-founder of Genos, currently holds the positions of Branch Manager in Osijek. With a diploma in Agricultural Engineering (dipl. ing. agr.) and a deep-rooted commitment to Genos since its inception, Dario has been an integral part of the company’s journey. He is known for his effective client communication, ensuring their specific needs are met, and overseeing the collection and distribution of various samples for analysis. Dario also takes care of legal affairs and court-related documentation related to forensic analyses, drawing from his valuable experience as a lay judge to successfully navigate legal proceedings. Dario’s dedication, combined with his practical approach, has been instrumental in fostering a collaborative and client-focused environment at Genos, reinforcing the company’s reputation for excellence in its industry.'
+      },
+      {
+        name: 'Snježana Džijan, PhD',
+        job: 'Head of DNA Laboratory',
+        img: 'placeholder-female',
+        description: 'In January 2013, Snježana Džijan joined the Genos team as a researcher and experienced DNA analyst. <br><br> She is the Head of the DNA Laboratory and a permanent court expert witness for DNA analysis. <br><br> Laboratory analyses are focused on paternity testing, kinship testing, and forensic DNA analysis. <br><br> Snježana completed her Master’s degree at the Faculty of Food Technology and later obtained her PhD at the Faculty of Medicine J. J. Strossmayer University of Osijek. <br><br> She currently works as a Professor of Biochemistry at the Faculty of Dental Medicine and Health in Osijek at the aforementioned university. <br><br> As a Professor, she actively coordinates and participates in undergraduate and postgraduate teaching.'
       }
     ]
   }

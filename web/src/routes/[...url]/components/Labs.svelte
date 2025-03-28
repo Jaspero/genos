@@ -2,10 +2,10 @@
 
 <div class="grid grid-large labs-grid">
   <div class="col-span-12">
-    <h2 class="text-center h4">Three labs, One mission</h2>
+    <h2 class="text-center h4">Our research laboratories</h2>
   </div>
   <div class="gc-4 gc-sm-6 gc-xs-12 h-full">
-    <a href="/glycomics" target="_blank" class="lab-card">
+    <a href="/glycomics" class="lab-card">
       <img class="lab-image" src="/images/lab.jpg" alt="Glycomics lab">
       <div class="lab-content">
         <h3 class="lab-name">Glycomics lab</h3>
@@ -15,7 +15,7 @@
     </a>
   </div>
   <div class="gc-4 gc-sm-6 gc-xs-12 h-full">
-    <a href="/epigenetics" target="_blank" class="lab-card">
+    <a href="/epigenetics" class="lab-card">
       <img class="lab-image" src="/images/lab.jpg" alt="Epigenetics lab">
       <div class="lab-content">
         <h3 class="lab-name">Epigenetics lab</h3>
@@ -25,7 +25,7 @@
     </a>
   </div>
   <div class="gc-4 gc-sm-6 gc-xs-12 h-full">
-    <a href="/dna-and-forensics" target="_blank" class="lab-card">
+    <a href="/dna-and-forensics" class="lab-card">
       <img class="lab-image" src="/images/lab.jpg" alt="DNA lab">
       <div class="lab-content">
         <h3 class="lab-name">DNA lab</h3>
