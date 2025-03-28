@@ -11,6 +11,7 @@ export * from './PriceList.svelte';
 export * from './Services.svelte';
 export * from './Epigenetics.svelte';
 export * from './Forensics.svelte';
+export * from './Resources.svelte';
 export * from './Labs.svelte';
 export * from './publications/Publications.svelte';
 export * from './projects/Projects.svelte';

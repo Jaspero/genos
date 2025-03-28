@@ -354,6 +354,14 @@ export const BLOCKS = (editor: Editor, forms: PageBuilderForm[], popups?: Popup[
       content: typeMap['pb-mobile-menu']
     },
     {
+      id: 'resources',
+      label: 'Resources',
+      category: 'Misc',
+      media:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#000" style="width: 100%; height: 48px;"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>',
+      content: typeMap['pb-resources']
+    },
+    {
       id: 'labs',
       label: 'Labs',
       category: 'Misc',

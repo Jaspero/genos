@@ -65,26 +65,6 @@
                 </a>
               </div>
             {/each}
-            <!--{#each programsGroup as project}
-              <div class="project-card-container">
-                <a href="/pdfs/{project.pdf}" download="Genos project-{project.short}" class="project-card">
-                  <div class="project-date">
-                    <span>Start: {project.startDate}</span>
-                  </div>
-                  <div class="project-title">
-                    {project.short}
-                  </div>
-                  <span class="project-text clamp">
-                {#if project.title}
-                  {project.title}
-                {/if}
-                </span>
-                  <span class="project-link">
-                  Download project details • PDF
-                </span>
-                </a>
-              </div>
-            {/each}-->
           {/each}
         {/if}
       </div>

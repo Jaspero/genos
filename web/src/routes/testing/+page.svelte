@@ -1,5 +1,5 @@
 <script>
-  import Labs from '../[...url]/components/Labs.svelte';
+  import Resources from '../[...url]/components/Resources.svelte';
 </script>
 
-<Labs></Labs>
+<Resources></Resources>
