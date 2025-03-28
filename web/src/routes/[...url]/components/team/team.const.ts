@@ -25,28 +25,28 @@ export const TEAM = [
     group: 'Head of',
     members: [
       {
-        name: 'Prof. Vlatka Zoldoš, PhD',
-        job: 'Head of Epigenetics Laboratory',
-        img: 'zoldos',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad ducimus, et id laboriosam porro quaerat rerum. Alias animi, aspernatur blanditiis commodi dolor harum ipsam, magnam, maxime officiis repellendus reprehenderit voluptatibus!'
-      },
-      {
         name: 'Tea Pribić, PhD',
-        job: 'Head of UPLC Laboratory',
+        job: 'Head of Glycomics UPLC Laboratory',
         img: 'pribic',
         description: 'Tea Pribić has been an integral part of the Glycoscience Research Laboratory at Genos Ltd in Zagreb, Croatia since 2018. <br><br> In July 2022, she assumed the role of Acting Head of the UPLC Laboratory at Genos, further demonstrating her leadership capabilities and commitment to advancing glycomics research. <br><br> Tea obtained her PhD degree in Biology at the Faculty of Science in 2023, which was focused on IgG glycosylation in COVID-19 disease. <br><br> Tea obtained her Master’s degree in Molecular Biology from the University of Zagreb in 2016. <br><br> She worked on her Master’s Thesis named "Effect of body mass index on in vitro fertilization outcomes in women" at Clinic for Gynecology and Obstetrics, University Hospital Center, Zagreb. <br><br> She volunteered at the Institute for Brain Research in Zagreb from August to November 2017, gaining valuable experience in the field of genetic engineering.'
       },
       {
         name: 'Maja Hanić, PhD',
-        job: 'Head of CGE Laboratory',
+        job: 'Head of Glycomics CGE Laboratory',
         img: 'hanic',
         description: 'Maja joined Genos Ltd as a researcher in 2016, specializing in protein glycosylation in humans and mice, as well as the development and optimization of capillary electrophoresis methods for the analysis of N-glycans. <br><br> In 2022, she was appointed Head of the Laboratory for Capillary Electrophoresis. <br><br> In this role, she oversees research activities and the analysis of the first commercially available glycan-based test for biological age. <br><br> She earned her Master of Pharmacy degree in 2015 and her PhD in Medical Biochemistry in 2024 from the University of Zagreb, Faculty of Pharmacy and Biochemistry. <br><br> Her dissertation focused on "Immunoglobulin G glycosylation in the prediction of therapeutic response and during anti-TNF therapy in Crohn\'s disease."'
       },
       {
         name: 'Jerko Štambuk, PhD',
-        job: 'Head of MS Laboratory',
+        job: 'Head of Glycomics MS Laboratory',
         img: 'stambuk-j',
         description: 'Jerko Štambuk has been an esteemed member of the Genos Glycoscience Laboratory. <br><br> Jerko\'s research focuses on glycan analysis utilizing various platforms, including liquid chromatography and mass spectrometry. <br><br> He actively contributes to the development of high throughput methods for glycan and glycopeptide analysis, as well as the implementation of new technologies in glycomics research. <br><br> His dedication and expertise in this field have led him to be a co-author of over 30 original scientific papers, demonstrating his significant contributions to the scientific community. <br><br> Additionally, Jerko has actively participated in numerous conferences, further showcasing his commitment to staying at the forefront of advancements in glycoscience research. <br><br> Jerko completed his undergraduate studies in Molecular Biology at the University of Zagreb, Faculty of Science, in 2011. <br><br> He continued his academic journey and obtained a PhD in Biology, specializing in Biochemistry and Molecular Biology, from the University of Zagreb in 2017. <br><br> In 2024 Jerko was appointed Head of the MS Laboratory.'
+      },
+      {
+        name: 'Prof. Vlatka Zoldoš, PhD',
+        job: 'Head of Epigenetics Laboratory',
+        img: 'zoldos',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad ducimus, et id laboriosam porro quaerat rerum. Alias animi, aspernatur blanditiis commodi dolor harum ipsam, magnam, maxime officiis repellendus reprehenderit voluptatibus!'
       },
       {
         name: 'Frano Vučković, PhD',
@@ -350,16 +350,16 @@ export const TEAM = [
         description: 'With a wealth of work experience in administration across various companies, Petra brings valuable expertise to her role as an Administrative Assistant at Genos. <br><br> Her proficiency and skills in administrative tasks contribute to the smooth functioning of our operations and the overall efficiency of our team. <br><br> Petra graduated from the Faculty of Hotel and Tourism Management, earning a Master\'s degree in Economics in 2009.'
       },
       {
-        name: 'Dario Fančović',
-        job: 'Branch Manager',
-        img: 'placeholder-male',
-        description: 'Dario Fančović, a co-founder of Genos, currently holds the positions of Branch Manager in Osijek. With a diploma in Agricultural Engineering (dipl. ing. agr.) and a deep-rooted commitment to Genos since its inception, Dario has been an integral part of the company’s journey. He is known for his effective client communication, ensuring their specific needs are met, and overseeing the collection and distribution of various samples for analysis. Dario also takes care of legal affairs and court-related documentation related to forensic analyses, drawing from his valuable experience as a lay judge to successfully navigate legal proceedings. Dario’s dedication, combined with his practical approach, has been instrumental in fostering a collaborative and client-focused environment at Genos, reinforcing the company’s reputation for excellence in its industry.'
-      },
-      {
         name: 'Snježana Džijan, PhD',
         job: 'Head of DNA Laboratory',
         img: 'placeholder-female',
         description: 'In January 2013, Snježana Džijan joined the Genos team as a researcher and experienced DNA analyst. <br><br> She is the Head of the DNA Laboratory and a permanent court expert witness for DNA analysis. <br><br> Laboratory analyses are focused on paternity testing, kinship testing, and forensic DNA analysis. <br><br> Snježana completed her Master’s degree at the Faculty of Food Technology and later obtained her PhD at the Faculty of Medicine J. J. Strossmayer University of Osijek. <br><br> She currently works as a Professor of Biochemistry at the Faculty of Dental Medicine and Health in Osijek at the aforementioned university. <br><br> As a Professor, she actively coordinates and participates in undergraduate and postgraduate teaching.'
+      },
+      {
+        name: 'Dario Fančović',
+        job: 'Branch Manager',
+        img: 'placeholder-male',
+        description: 'Dario Fančović, a co-founder of Genos, currently holds the positions of Branch Manager in Osijek. With a diploma in Agricultural Engineering (dipl. ing. agr.) and a deep-rooted commitment to Genos since its inception, Dario has been an integral part of the company’s journey. He is known for his effective client communication, ensuring their specific needs are met, and overseeing the collection and distribution of various samples for analysis. Dario also takes care of legal affairs and court-related documentation related to forensic analyses, drawing from his valuable experience as a lay judge to successfully navigate legal proceedings. Dario’s dedication, combined with his practical approach, has been instrumental in fostering a collaborative and client-focused environment at Genos, reinforcing the company’s reputation for excellence in its industry.'
       }
     ]
   }
