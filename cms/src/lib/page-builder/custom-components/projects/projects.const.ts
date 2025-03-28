@@ -196,7 +196,7 @@ export const PROJECTS = [
       {
         short: 'Pain-omics',
         title: 'Multidimensional Omics Approach to Stratification of Patients with Lower Back Pain',
-        startDate: '02/09/2023',
+        startDate: '02/09/2013',
         projectDuration: '60 months',
         pdf: '6-2.pdf'
       },

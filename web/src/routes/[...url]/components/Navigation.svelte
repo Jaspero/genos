@@ -37,7 +37,7 @@
   });
 </script>
 
-<header class:inactive={!showNavbar}>
+<header class="navigation" class:inactive={!showNavbar}>
   <nav>
     <a href="/">
       <img class="logo" src="/brand/genos-logo-white.svg" alt="genos logo">

@@ -38,7 +38,7 @@ export const TEAM = [
       },
       {
         name: 'Tea Pribić, PhD',
-        job: 'Head of UPLC lab',
+        job: 'Head of UPLC Laboratory',
         img: 'pribic',
         description: 'Tea Pribić has been an integral part of the Glycoscience Research Laboratory at Genos Ltd in Zagreb, Croatia since 2018. <br><br> In July 2022, she assumed the role of Acting Head of the UPLC Laboratory at Genos, further demonstrating her leadership capabilities and commitment to advancing glycomics research. <br><br> Tea obtained her PhD degree in Biology at the Faculty of Science in 2023, which was focused on IgG glycosylation in COVID-19 disease. <br><br> Tea obtained her Master’s degree in Molecular Biology from the University of Zagreb in 2016. <br><br> She worked on her Master’s Thesis named "Effect of body mass index on in vitro fertilization outcomes in women" at Clinic for Gynecology and Obstetrics, University Hospital Center, Zagreb. <br><br> She volunteered at the Institute for Brain Research in Zagreb from August to November 2017, gaining valuable experience in the field of genetic engineering.'
       },
@@ -109,7 +109,7 @@ export const TEAM = [
       },
       {
         name: 'Andrea Skelin, PhD',
-        job: 'Research Manager',
+        job: 'Lead Researcher',
         img: 'skelin',
         description: 'Dr. Andrea Skelin joined the research team at Genos in October 2014, where she continues to contribute her expertise to various research projects. <br><br> She worked at the Department of Microbiology, Faculty of Agriculture from November 1997 to 2014, achieving the position of assistant professor in the Biotechnical area. <br><br> In 2007, she pursued doctoral training at the University of Ljubljana, Slovenia, and conducted research at the Institute for Soil Ecology, Helmholtz Zentrum Munchen, Germany, in 2009. <br><br> Andrea expanded her knowledge by completing a Food Safety course at Michigan State University, USA, in 2004. <br><br> As a lecturer at the University of Zagreb, Faculty of Agriculture, she coordinates and participates in undergraduate and postgraduate courses. <br><br> She has authored and co-authored 14 scientific papers and has actively engaged in numerous conferences. <br><br> Andrea completed her undergraduate studies in Molecular Biology at the University of Zagreb, Faculty of Science, in 1997, and went on to defend her master\'s thesis in 2003 and doctoral thesis in 2010 in Biotechnical Sciences from the University of Zagreb.'
       }
@@ -260,6 +260,12 @@ export const TEAM = [
   {
     group: 'Analysts',
     members: [
+      {
+        name: 'Iva Grubeša',
+        job: 'Laboratory Analyst',
+        img: 'grubesa',
+        description: 'Iva holds a degree in Pharmacy from the Faculty of Pharmacy and Biochemistry at the University of Zagreb. She completed her diploma thesis titled \'Comparison of LC-MS and nano-LC-MS methods for the analysis of N-glycosylation of alpha-1-acid glycoprotein\' at the Department of Biochemistry and Molecular Biology. <br><br> As a Junior Researcher, she is a member of the MS team, contributing to projects that investigate the glycosylation of IgG and other representative components of the host’s innate and adaptive immune systems.\n'
+      },
       {
         name: 'Ivan Petrić',
         job: 'Laboratory Analyst',

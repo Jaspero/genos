@@ -254,6 +254,7 @@ collections.addCollection('blog-articles', {
     value.lastUpdatedOn = DateTime.now().toUTC().toISO();
   },
   preCreate: async (id, value) => {
+    value.active = false;
     value.url = value.url || generateSlug(value.title);
     value.publicationDate = value.publicationDate || DateTime.now().toUTC().toISO();
     value.createdOn = DateTime.now().toUTC().toISO();

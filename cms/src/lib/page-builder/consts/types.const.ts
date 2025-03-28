@@ -641,6 +641,18 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
    * Custom Components
    */
   {
+    id: 'pb-labs',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-LABS',
+    model: {
+      defaults: {
+        tagName: 'pb-labs',
+        cName: 'Labs',
+        draggable: true,
+        droppable: false
+      }
+    }
+  },
+  {
     id: 'pb-forensics',
     isComponent: (el: HTMLElement) => el.tagName === 'PB-FORENSICS',
     model: {
@@ -1110,11 +1122,11 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
    * Blog
    */
   {
-    id: 'pb-blog',
-    isComponent: (el: HTMLElement) => el.tagName === 'PB-BLOG',
+    id: 'pb-news',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-NEWS',
     model: {
       defaults: {
-        tagName: 'pb-blog',
+        tagName: 'pb-news',
         cName: 'Blog',
         traits: [
           {

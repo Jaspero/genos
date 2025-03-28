@@ -5,128 +5,144 @@
 </script>
 
 <div class="grid grid-large services-grid">
-  <h2 class="col-span-12">What we offer</h2>
+  <h2 class="col-span-12">Types of Tests Offered:</h2>
   <div class="col-span-4 tab-selectors">
-    <button class="tab-selector" class:active={tab === 1} on:click={() => tab = 1}>Determination of paternity</button>
-    <button class="tab-selector" class:active={tab === 2} on:click={() => tab = 2}>Determination of kinship</button>
-    <button class="tab-selector" class:active={tab === 3} on:click={() => tab = 3}>Non-invasive prenatal determination of sex and paternity</button>
+    <button class="tab-selector" class:active={tab === 1} on:click={() => tab = 1}>Paternity testing</button>
+    <button class="tab-selector" class:active={tab === 2} on:click={() => tab = 2}>Kinship testing</button>
+    <button class="tab-selector" class:active={tab === 3} on:click={() => tab = 3}>Non-Invasive Prenatal Gender and Paternity Testing</button>
     <button class="tab-selector" class:active={tab === 4} on:click={() => tab = 4}>Other analyses</button>
-    <button class="tab-selector" class:active={tab === 5} on:click={() => tab = 5}>Determination of bird sex through DNA analysis</button>
-    <button class="tab-selector" class:active={tab === 6} on:click={() => tab = 6}>How testing is conducted</button>
+    <button class="tab-selector" class:active={tab === 5} on:click={() => tab = 5}>Avian Gender Determination via DNA Analysis</button>
+    <button class="tab-selector" class:active={tab === 6} on:click={() => tab = 6}>Testing Procedure</button>
     <button class="tab-selector" class:active={tab === 7} on:click={() => tab = 7}>Data confidentiality</button>
   </div>
   <div class="col-span-8 tabs">
     {#if tab === 1}
       <ul>
-        <li>Paternity test for personal use using the analysis of 18 or 24 STR markers</li>
-        <li>Paternity expert analysis for court proceedings using the analysis of 24 STR markers</li>
+        <li>Personal Paternity Test – Analysis of 18 or 24 STR markers</li>
+        <li>Legal Paternity Test – Analysis of 24 STR markers for court proceedings</li>
       </ul>
       <br>
-      The result of a DNA analysis is fundamental evidence in many civil and criminal cases in municipal and county courts. While DNA analysis can definitively determine a person's identity or biological trace, it is not infallible and requires extensive knowledge and experience for accurate interpretation of laboratory results.
+      DNA analysis results serve as crucial evidence in numerous civil and criminal cases. While DNA analysis can definitively determine the identity of an individual or biological traces, correct interpretation of laboratory results requires significant expertise and experience.
       <br><br>
-      Genos was the first private laboratory in Croatia to be listed among legal entities authorized for forensic DNA analysis, recognized by our clients as an added value, providing confidence in the accuracy of our analyses.
+      Genos d.o.o. was the first private laboratory in Croatia authorized to perform forensic DNA analysis, a distinction recognized by our clients as an added value, fostering trust in the reliability of our results.
       <br><br>
-      With a full-time forensic expert with years of experience in DNA analysis, we also collaborate with other court-appointed forensic experts in Croatia. Our associates were part of the national project for the identification of Homeland War victims, conducted by the Administration for Detained and Missing Persons, Ministry of Family, Veterans, and Intergenerational Solidarity.
+      Our team includes a full-time court expert with extensive experience in DNA analysis, along with collaborations with other court experts in Croatia. Our experts were part of the national team that conducted victim identifications from the Homeland War under the Ministry of Family, Veterans, and Intergenerational Solidarity.
       <br><br>
-      Unlike companies that mostly send samples to other laboratories for analysis, we process all samples in our laboratory in Zagreb.
-      <br><br>
-
-      <b>Paternity/Maternity Testing - Personal Use</b>
-      <br><br>
-      For paternity/maternity testing upon personal request, comparing the DNA profiles of one parent and the child is sufficient. We analyze 16 or 24 STR markers (loci), which are internationally recognized as highly discriminatory, providing a probability of biological parenthood greater than 99.99%.
-      <br><br>
-      For increased accuracy, it is recommended to include the mother's sample in the analysis. When analyzing standard samples from the presumed father, child, and mother, the mother's sample is tested free of charge.
-      <br><br>
-      After obtaining and comparing DNA profiles in paternity tests, required alleles are identified to determine if the presumed father has the necessary alleles. A required allele is one inherited from the biological parent.
-      <br><br>
-      If the test result shows a mismatch between the child and the presumed father in at least three required alleles, it definitively confirms that the tested individual is not the biological father. If there is a mismatch in one or two genetic markers, it could be due to mutations (which are relatively common). In such cases, we recommend including the mother in the analysis or testing additional genetic markers. If necessary or upon request, Genos can perform an extended analysis of up to 24 markers for an additional fee.
+      Unlike companies that outsource DNA sample testing, we handle all analyses in our laboratory in Zagreb.
       <br><br>
 
-      <b>Paternity/Maternity Testing - Legal Cases</b>
+      <b>Paternity/Maternity Testing for Personal Purposes</b>
       <br><br>
-      Paternity/maternity determination for court proceedings is conducted based on a decision from the competent court, comparing the genotypes of the mother, child, and presumed father. As a court-appointed forensic expert, Genos provides expert reports that are admissible as legal evidence, allowing clients to avoid unnecessary costs of duplicate paternity tests (first for personal use, then for court proceedings).
+      For personal paternity/maternity testing, comparing the DNA profiles of one parent and the child is sufficient. We analyze 16 or 24 STR markers (loci), which are internationally recognized as sufficiently discriminatory, providing a probability of biological parenthood greater than 99.99%.
       <br><br>
-      The probability values for paternity determination in legal cases range from one in several million to one in several billion. The minimum threshold required for legally conclusive paternity determination in court is 99.999%.
+      For higher paternity accuracy, we recommend including the mother's sample in the analysis. When standard samples from the presumed father, child, and mother are tested, the mother's sample is analyzed free of charge.
+      <br><br>
+      After obtaining and comparing DNA profiles, for paternity testing, mandatory alleles are identified to determine if the presumed father carries the required alleles. A mandatory allele is one inherited from the biological parent.
+      <br><br>
+      If the analysis shows a mismatch in at least three mandatory alleles between the child and the presumed father, it is conclusive that the presumed father is not the biological father of the child. In cases of a mismatch in one or two molecular markers, mutations (which are relatively common) can be considered. In such cases, it is recommended to include the mother's sample in the analysis or test additional genetic markers. If desired or needed, Genos can perform an analysis of 24 markers for an additional fee.
+      <br><br>
+
+      <b>Paternity/Maternity Testing for Legal Proceedings</b>
+      <br><br>
+      Paternity/maternity testing for legal proceedings is conducted based on a court order, by comparing the genotypes of the mother, child, and presumed father. As a certified court expert, Genos d.o.o. performs paternity testing at the request of individuals, and the findings and opinions of our authorized expert are valid as evidence in court. This helps avoid unnecessary costs of double testing (once for personal purposes and once for legal proceedings).
+      <br><br>
+      The probability values for paternity in legal cases range from one in several million to one in several billion. The minimum threshold required for conclusive paternity determination in court is 99.999%.
     {:else if tab === 2}
-      <b>Determining Relationship Through the Male Line</b>
-      <br><br>
-      We determine relationships through the male lineage by analyzing 23 STR loci on the Y chromosome. Since the sex chromosome is inherited unchanged, kinship is confirmed by the complete match of all analyzed Y STR loci. Any changes that may occur are mutations—random substitutions of individual nucleotides that happen sporadically, spontaneously, and very rarely.
-      <br><br>
-      The Y chromosome is inherited through the male line, passing directly from father to son. This means that all male relatives on the father's side share the same loci on the Y chromosome, resulting in an identical Y DNA profile.
-      <br><br>
-      This method is useful and applicable in cases of indirect paternity determination for male children when a male relative on the father’s side (brother, grandfather, uncle, or any male family member) can replace a deceased alleged father. It is also used to confirm kinship between brothers, grandfathers and grandsons, uncles and nephews, and so on. Additionally, it is applicable in the process of identifying a male individual when only paternal relatives are available.
-      <br><br>
-      Y chromosome testing is useful in cases where:
       <ul>
-        <li>Brothers want to verify if they have the same biological father</li>
-        <li>Adopted male children are searching for their biological father or other male family members</li>
-        <li>An official proof of kinship between male individuals is required, such as in legal disputes or immigration cases</li>
+        <li>Male Lineage Testing – Analysis of 23 STR markers on the Y chromosome</li>
+        <li>Sibling and Half-Sibling Testing – Analysis of 24 STR markers</li>
+        <li>Grandparent-Grandchild Testing – Analysis of 24 STR markers</li>
       </ul>
+      <br>
+      <b>Paternity Testing Through the Male Line</b>
       <br><br>
-
-      <b>Determining Relationship Between Siblings and Half-Siblings</b>
+      Paternity testing through the male line is conducted by analyzing 23 STR markers on the Y chromosome. Since the sex chromosome is inherited unchanged, kinship is confirmed by a complete match of all the analyzed Y STR markers. Any changes that might occur are mutations, which are random nucleotide substitutions that happen spontaneously and very rarely.
       <br><br>
-      We determine kinship in the first generation between potential full siblings and half-siblings by analyzing 24 STR loci. The test is performed when the presumed father is unavailable for analysis, and potential siblings or half-siblings want to confirm whether they share the same father.
+      The Y chromosome is inherited through the male line, passed directly from father to son. Therefore, all male relatives on the paternal side share the same markers on the Y chromosome, meaning they have an identical Y DNA profile.
+      <br><br>
+      This method is useful in indirect paternity testing for male children when a male relative on the paternal side (brother, grandfather, uncle, or any male family member) can substitute for the deceased alleged father. It can also be applied for proving kinship between brothers, grandfather and grandson, uncle and nephew, etc. The test is also used in male identification cases when only paternal relatives are available.
+      <br><br>
+      Y chromosome testing is valuable in the following cases:
+      <ul>
+        <li>When brothers want to confirm they share the same biological father</li>
+        <li>When adopted male children seek to find their biological father or other male relatives</li>
+        <li>When official proof of kinship is required between males, such as in legal disputes or immigration cases.</li>
+      </ul>
+      <br>
+      <b>Sibling and Half-Sibling Testing</b>
+      <br><br>
+      Kinship testing for first-generation relationships between potential siblings and half-siblings is conducted by analyzing 24 STR markers. The test is used when the presumed father is unavailable for testing, and potential brothers or sisters, or half-siblings, want to confirm if they share the same father.
       <br><br>
       There are two types of tests:
       <ul>
-        <li>Sibling relationship test</li>
-        <li>Half-sibling relationship test</li>
+        <li>Full-Sibling Test – To confirm if two individuals share the same biological parents</li>
+        <li>Half-Sibling Test – To confirm if two individuals share one biological parent.</li>
       </ul>
+      <br>
+      <b>Grandparent-Grandchild Testing</b>
       <br><br>
-
-      <b>Determining Relationship Between Grandparents and Grandchildren</b>
-      <br><br>
-      We determine kinship between grandparents and grandchildren by analyzing 24 STR loci. This test is performed when the presumed father is unavailable for testing. It helps determine whether a child is related to their grandparents, thereby assisting in the identification of the child’s biological father. The same test can also be used to confirm maternity.
+      Grandparent-grandchild testing is performed by analyzing 24 STR markers and is conducted when the presumed father is unavailable for testing. The test confirms whether the child is biologically related to the grandparents, thus aiding in identifying the biological father. This test can also assist in confirming maternity.
     {:else if tab === 3}
+      <ul>
+        <li>Analysis of free fetal DNA from the mother’s blood using 23 Y STR markers</li>
+      </ul>
+      <br>
       <b>Prenatal Gender Determination and Paternity Testing</b>
       <br><br>
-      The gender of a child is most commonly determined through ultrasound. However, there are cases where this is not possible, and in such situations, prenatal gender determination of the fetus can be applied.
+      The sex of a baby is usually determined via ultrasound. However, in cases where this is not possible, prenatal gender determination can be performed through a DNA test.
       <br><br>
-      This process involves analyzing free fetal DNA from the mother’s blood by examining Y STR markers. Since the Y chromosome is characteristic only of the male sex, prenatal fetal DNA analysis detects whether a Y chromosome is present. If it is, the analysis will generate a Y DNA profile for the tested STR loci, indicating that the fetus is male. If the fetus is female, there is no Y chromosome in the mother’s blood, so no Y DNA profile will be detected.
+      This test analyzes free fetal DNA present in the mother’s blood by detecting Y STR markers. Since the Y chromosome is unique to males, the presence of a Y chromosome confirms that the fetus is male. If no Y chromosome is detected, the fetus is female.
       <br><br>
-      The first research results on prenatal gender determination were published in 2008 by researchers from the Genos DNA laboratory in collaboration with other scientific institutions, in the prestigious journal "Prenatal Diagnosis."
+      Genos DNA Laboratory researchers, in collaboration with other scientific institutions, were among the first to publish findings on prenatal gender determination in the prestigious journal Prenatal Diagnosis in 2008.
       <br><br>
-      Paternity testing in this case is only possible for a male child. The obtained Y DNA profile of the fetus is compared with the Y DNA profile of the potential father.
+      Paternity testing before birth is only possible if the fetus is male. The fetal Y DNA profile is compared to the Y DNA profile of the potential father to determine if they match.
       <br><br>
-      Prenatal paternity testing is not possible if the potential fathers are direct blood relatives along the male lineage, as they all have an identical Y chromosome. Due to the limitations of this analysis, it is recommended that all potential fathers be tested, and that the DNA analysis be repeated after the child is born to confirm paternity. Since this test only provides information about direct male-line blood relationships, it cannot provide a definitive confirmation of paternity but can determine whether a potential father can be excluded as the biological father.
+      However, prenatal paternity testing is not possible if the potential fathers are close male relatives (e.g., brothers or father and son) since they share an identical Y chromosome. Due to this limitation, it is recommended to test all potential fathers and confirm paternity with a standard DNA test after birth. This analysis can only determine whether a potential father can be the biological father but cannot definitively confirm paternity—it can only exclude a man as the biological father.
       <br><br>
-      Testing is conducted from the 14th week of pregnancy. To visit the laboratory, the pregnant woman must schedule an appointment and bring her maternity record book. The analysis requires 9 ml of the mother’s venous blood and a buccal swab from the potential father. The blood sampling procedure is completely safe for the fetus.
+      Testing is available from the 14th week of pregnancy. An appointment must be scheduled in advance, and the expectant mother must bring her pregnancy record book. The test requires 9 ml of the mother’s venous blood and a buccal swab from the potential father. The blood draw is completely safe for the fetus.
     {:else if tab === 4}
+      <ul>
+        <li>DNA Profiling – Analysis of 24 STR markers</li>
+        <li>Detection of Seminal Fluid Traces</li>
+        <li>DNA Isolation</li>
+      </ul>
       <b>DNA Profiling</b>
       <br><br>
-      DNA profiling is most commonly requested for comparison purposes, verification of an existing DNA profile or report, or as a supplement to a previously conducted paternity or kinship test. A DNA profile provides genetic identification evidence and can be used in numerous cases, such as:
+      DNA profiling is often requested to verify an existing DNA profile, confirm the authenticity of previous test results, or supplement earlier paternity or kinship tests. A DNA profile serves as genetic identification and can be used in various cases, such as:
+      <br>
       <ul>
-        <li>in cases of inheritance claims or disputes</li>
-        <li>in resolving cases of lost or abducted children</li>
-        <li>in immigration disputes</li>
-        <li>for individuals in high-risk professions</li>
-        <li>for insurance purposes</li>
-        <li>in cases of natural disasters, accidents, terrorist attacks, etc.</li>
-        <li>when there is suspicion of biological sample mix-up (e.g., tissue embedded in a paraffin block in cases of diagnosed cancer, sperm sample mix-up during IVF procedures).</li>
+        <li>Establishing or disputing inheritance rights</li>
+        <li>Resolving cases of missing or abducted children</li>
+        <li>Immigration disputes</li>
+        <li>For individuals in high-risk professions</li>
+        <li>Insurance purposes</li>
+        <li>Identifying victims of natural disasters, accidents, or terrorist attacks</li>
+        <li>Investigating potential sample mix-ups (e.g., verifying preserved tissue samples in cancer diagnoses or ensuring proper handling of reproductive cells in IVF procedures)</li>
       </ul>
       <br>
-      DNA profiling is conducted by analyzing 24 STR loci.
+      DNA profiling is performed by analyzing 24 STR loci.
       <br><br>
-
       <b>Detection of Semen Traces</b>
       <br><br>
-      The presence of semen traces on various samples (clothing, bedding, towels, vaginal swabs, etc.) is determined using the RSID™-Semen test (Rapid Stain Identification of Human Semen; Independent Forensics, USA). The RSID™-Semen test is based on detecting the presence of the human protein semenogelin using an immunochromatographic test strip, employing two anti-semenogelin monoclonal antibodies.
+      The presence of semen traces on various samples (e.g., clothing, bedding, towels, vaginal swabs) is determined using the RSID™-Semen test (Rapid Stain Identification of Human Semen; Independent Forensics, USA). This test detects the presence of human semenogelin protein via an immunochromatographic strip assay using two anti-semenogelin monoclonal antibodies.
       <br><br>
-
       <b>DNA Isolation</b>
       <br><br>
-      DNA isolation is primarily performed upon request for clients who need a DNA isolate for molecular diagnostic tests, which form the basis of personalized medicine, such as:
+      DNA isolation is typically performed upon request when the DNA sample is needed for molecular diagnostic tests, which are essential for personalized medicine. These tests may include:
+      <br><br>
+      Assessing genetic predisposition to certain diseases or disorders to enable early prevention and targeted treatment
+      <br><br>
+      Evaluating treatment outcomes to improve drug efficacy and reduce ineffective treatments (pharmacogenetics)
+      <br><br>
+      Since some of these analyses are not available in Croatia, the isolated DNA sample is often sent abroad for testing.
+      <br><br>
+      For DNA isolation, a 3 mL whole blood sample is required in a vacutainer tube with EDTA anticoagulant (purple cap). The sample should ideally be delivered immediately after collection. If necessary, it can be stored at +4°C for a few hours or at -20°C for longer periods.
+    {:else if tab === 5}
       <ul>
-        <li>determining genetic predisposition to certain diseases or disorders for timely and targeted prevention and/or treatment</li>
-        <li>assessing treatment outcomes to reduce ineffective treatments (pharmacogenetics).</li>
+        <li>Analysis of bird sex chromosomes to differentiate male and female birds</li>
       </ul>
       <br>
-      Often, these analyses are not available in Croatia, requiring the DNA isolate to be sent abroad.
-      <br><br>
-      For DNA isolation, 3 mL of whole blood is required in a vacutainer tube with EDTA anticoagulant (purple cap). It is best to deliver the blood immediately after collection, but if necessary, it can be stored at +4°C for a few hours or at -20°C for extended periods.
-    {:else if tab === 5}
-      <b>Determining the Sex of Birds Through DNA Analysis</b>
+      <b>Avian Gender Determination</b>
       <br><br>
       The sex of many bird species cannot be determined based on physical appearance and characteristics. By using DNA analysis methods, it is possible to examine parts of the birds' sex chromosomes. This allows us to distinguish between male birds (ZZ) and female birds (ZW).
       <br><br>
@@ -189,13 +205,13 @@
       <b>Download:</b>
       <a class="underline" href="/pdfs/cjenik.pdf" download="cjenik genos usluga">Price List</a>
     {:else if tab === 7}
-      <b>Confidentiality of Data</b>
+      <b>Data Confidentiality</b>
       <br><br>
-      The results of every test conducted are strictly confidential. Biological samples submitted for DNA analysis are destroyed after the analysis is completed, and all computer records are deleted 5 years after the results are issued. During this period, a copy of the issued result can be requested, but only with a personal written request from the Client who ordered the analysis.
+      All DNA test results are strictly confidential. Biological samples submitted for DNA analysis are destroyed after testing, and all digital records are deleted 5 years after results are issued. Within this period, a copy of the issued results can be requested only by the original client through a written request.
       <br><br>
-      The Genos DNA laboratory uses the most advanced DNA analysis methods to provide accurate answers to all questions posed. Unfortunately, sometimes the results do not match the expectations of the client and/or other participants in the testing, which can have negative emotional and social consequences. Genos d.o.o. is not authorized to provide psychological counseling services and cannot offer direct assistance in such situations.
+      The Genos d.o.o. DNA laboratory uses cutting-edge DNA analysis methods to provide accurate answers to all inquiries. However, in some cases, results may not align with expectations, which can have emotional and social consequences. Genos d.o.o. is not authorized to provide psychological counseling and cannot offer direct support in such situations.
       <br><br>
-      If the results of the DNA analysis cause negative emotions such as dissatisfaction, anger, fear, sadness, or concern, we strongly recommend that you seek professional assistance from one of the following addresses, your family doctor, or a psychologist at the relevant social welfare center.
+      If DNA test results cause emotional distress such as dissatisfaction, anger, fear, sadness, or concern, we strongly recommend seeking professional support from one of the organizations listed below, a family doctor, or a psychologist at the relevant social services center.
       <br><br>
       Psychological Center TESA, tel. 01 48 28 888 / <a class="underline" href="www.tesa.hr" target="_blank" rel="noreferrer noopener">www.tesa.hr</a>
       <br><br>

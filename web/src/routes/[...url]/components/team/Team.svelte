@@ -5,15 +5,15 @@
 
   let selectedMember: any = '';
 
-  function selectMember(pos: any) {
-    selectedMember = TEAM[pos];
+  function selectMember(gr: any, mem: any) {
+    selectedMember = TEAM[gr].members[mem];
   }
 </script>
 
 <div class="grid grid-large team-members gap-4">
   {#each TEAM as group, i}
-    {#each group.members as member}
-      <button class="sm:col-span-12 md:col-span-4 col-span-3 team-member" on:click={() => selectMember(i)}>
+    {#each group.members as member, m}
+      <button class="sm:col-span-12 md:col-span-4 col-span-3 team-member" on:click={() => selectMember(i,m)}>
         {#if member.img}
           <div>
             <img class="w-40 h-40 object-cover rounded-full" src="/team/{member.img}.jpg" alt="">
