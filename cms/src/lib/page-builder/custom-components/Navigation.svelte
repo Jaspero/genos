@@ -3,10 +3,96 @@
 <script lang="ts">
   import { fly } from 'svelte/transition';
   import { onMount } from 'svelte';
+  import {page} from '$app/stores';
+  import {language} from '$lib/stores/language';
 
   let previousScrollY = 0;
   let showNavbar = true;
   let open = false;
+
+  let links = [
+    {
+      hr: {
+        label: 'O nama',
+        link: '/o-nama'
+      },
+      en: {
+        label: 'About',
+        link: '/about'
+      }
+    },
+    {
+      hr: {
+        label: 'Projekti',
+        link: '/projekti'
+      },
+      en: {
+        label: 'Projects',
+        link: '/projects'
+      }
+    },
+    {
+      hr: {
+        label: 'Publikacije',
+        link: '/publikacije'
+      },
+      en: {
+        label: 'Publications',
+        link: '/publications'
+      }
+    },
+    {
+      hr: {
+        label: 'Usluge',
+        link: '/usluge'
+      },
+      en: {
+        label: 'Services',
+        link: '/services'
+      }
+    },
+    {
+      hr: {
+        label: 'Resursi',
+        link: '/resursi'
+      },
+      en: {
+        label: 'Resources',
+        link: '/resources'
+      }
+    },
+    {
+      hr: {
+        label: 'Novosti',
+        link: '/novosti'
+      },
+      en: {
+        label: 'News',
+        link: '/news'
+      }
+    },
+    {
+      hr: {
+        label: 'Naš tim',
+        link: '/tim'
+      },
+      en: {
+        label: 'Our team',
+        link: '/team'
+      }
+    },
+    {
+      hr: {
+        label: 'Kontaktirajte nas',
+        link: '/kontakt'
+      },
+      en: {
+        label: 'Contact us',
+        link: '/contact'
+      },
+      alt: true
+    }
+  ]
 
   function handleScroll() {
     const currentScrollY = window.scrollY;
@@ -26,6 +112,28 @@
     }
   }
 
+  function switchLanguage() {
+    language.update((lang) => {
+      const newLang = lang === 'en' ? 'hr' : 'en';
+
+      const currentPath = $page.url.pathname;
+
+      const matchingLink = links.find(link =>
+        link.en.link === currentPath || link.hr.link === currentPath
+      );
+
+      if (matchingLink) {
+        const newPath = newLang === 'en' ? matchingLink.en.link : matchingLink.hr.link;
+        window.location.href = newPath;
+      } else {
+        window.location.href = newLang === 'en' ? '/' : '/hr';
+      }
+
+      return newLang;
+    });
+  }
+
+
   onMount(() => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('keydown', handleKeydown);
@@ -43,8 +151,15 @@
       <img class="logo" src="/brand/genos-logo-white.svg" alt="genos logo">
     </a>
     <div class="links">
-      <a class="links-link desktop" href="/about"><span class="line-thing"></span>About</a>
-      <a class="links-link desktop" href="/projects"><span class="line-thing"></span>Projects</a>
+      {#each links as link}
+        <a class="links-link desktop" class:contact={link.alt} href={$language === 'en' ? link.en.link : link.hr.link}>
+          {#if !link.alt}
+            <span class="line-thing"></span>
+          {/if}
+          {$language === 'en' ? link.en.label : link.hr.label}
+        </a>
+      {/each}
+      <!--<a class="links-link desktop" href="/projects"><span class="line-thing"></span>Projects</a>
       <a class="links-link desktop" href="/publications"><span class="line-thing"></span>Publications</a>
       <a class="links-link desktop" href="/services"><span class="line-thing"></span>Services</a>
       <a class="links-link desktop" href="/resources"><span class="line-thing"></span>Resources</a>
@@ -53,7 +168,10 @@
       <a class="links-link desktop contact" href="/contact">Contact us</a>
       <button class="links-link mobile" on:click={() => (open = !open)}>
         <span class="line-thing"></span>Menu
-      </button>
+      </button>-->
+    </div>
+    <div class="language-toggle">
+      <button on:click={() => {switchLanguage()}}>{$language === 'en' ? 'EN' : 'HR'}</button>
     </div>
   </nav>
 </header>
