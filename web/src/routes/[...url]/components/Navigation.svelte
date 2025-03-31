@@ -115,18 +115,47 @@
   function switchLanguage() {
     language.update((lang) => {
       const newLang = lang === 'en' ? 'hr' : 'en';
+      if (typeof window === 'undefined') return newLang;
 
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('language', newLang);
-        const newPath = window.location.pathname === '/' ? '/pocetna' : '/';
-        goto(newPath); // Use SvelteKit's navigation to avoid full page reloads
+      localStorage.setItem('language', newLang);
+
+      const routeMapping: Record<string, string> = {
+        '/': '/pocetna',
+        '/pocetna': '/',
+        '/about': '/o-nama',
+        '/o-nama': '/about',
+        '/projects': '/projekti',
+        '/projekti': '/projects',
+        '/publications': '/publikacije',
+        '/publikacije': '/publications',
+        '/services': '/usluge',
+        '/usluge': '/services',
+        '/resources': '/korisni-linkovi',
+        '/korisni-linkovi': '/resources',
+        '/news': '/novosti',
+        '/novosti': '/news',
+        '/team': '/tim',
+        '/tim': '/team',
+        '/contact': '/kontakt',
+        '/kontakt': '/contact',
+        '/glikomika': '/glycomics',
+        '/glycomics': '/glikomika',
+        '/epigenetika': '/epigenetics',
+        '/epigenetics': '/epigenetika',
+        '/dnk-i-forenzika': '/dna-and-forensics',
+        '/dna-and-forensics': '/dnk-i-forenzika'
+      };
+
+      const currentPath = window.location.pathname;
+      const newPath = routeMapping[currentPath] || (newLang === 'en' ? '/' : '/pocetna');
+
+      if (newPath !== currentPath) {
+        goto(newPath);
       }
 
       return newLang;
     });
   }
-
-
 
   /*function switchLanguage() {
     language.update((lang) => {
@@ -187,8 +216,15 @@
         </a>
       {/each}
     </div>
-    <div class="language-toggle">
-      <button on:click={() => {switchLanguage()}}>{$language === 'en' ? 'EN' : 'HR'}</button>
+    <div class="flex gap-12">
+      <button class="links-link mobile" on:click={() => {open = !open}}>
+        Menu
+        <span class="line-thing"></span>
+      </button>
+      <button class="flex gap-4 text-white" on:click={() => {switchLanguage()}}>
+        <span class:underline={$language === 'en'}>EN</span>
+        <span class:underline={$language === 'hr'}>HR</span>
+      </button>
     </div>
   </nav>
 </header>
@@ -196,14 +232,11 @@
 {#if open}
   <button class="overlay" transition:fly on:click={() => open = false}></button>
   <div class="menu" transition:fly={{y: -1000}}>
-    <a href="/about">About</a>
-    <a href="/projects">Projects</a>
-    <a href="/publications">Publications</a>
-    <a href="/services">Services</a>
-    <a href="/resources">Resources</a>
-    <a href="/news">News</a>
-    <a href="/team">Our team</a>
-    <a href="/contact">Contact us</a>
+    {#each links as link}
+      <a href={$language === 'en' ? link.en.link : link.hr.link}>
+        {$language === 'en' ? link.en.label : link.hr.label}
+      </a>
+    {/each}
     <div class="filler"></div>
     <div class="socials">
       <a href="https://x.com/gglycoscience?lang=hr" target="_blank" rel="noreferrer noopener">

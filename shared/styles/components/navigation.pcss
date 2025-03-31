@@ -26,57 +26,55 @@
             display: flex;
             align-items: center;
             gap: 2rem;
-            .links-link {
-                position: relative;
-                display: flex;
-                align-items: center;
-                gap: .25rem;
-                color: rgba(255,255,255,.85);
-                font-weight: bold;
-                transition: .2s;
-                &.contact {
-                    padding: .5rem 1rem;
-                    border: 1px solid white;
-                }
-                .line-thing {
-                    position: absolute;
-                    bottom: -.25rem;
-                    width: 20px;
-                    height: 2px;
-                    background-color: #f7e704;
-                    transition: .2s;
-                }
-                &:hover, &.active {
-                    color: rgba(255,255,255,1);
-                    .line-thing {
-                        width: 100%;
-                    }
-                }
+        }
+    }
+}
 
-                img {
-                    width: 1rem;
-                    height: 1rem;
-                    transition: .4s;
-                    &.rotate {
-                        transform: rotate(-180deg);
-                    }
-                }
-            }
-            .links-link.desktop {
-                @media (max-width: 1280px) {
-                    display: none;
-                }
-            }
-            .mobile {
-                @media (min-width: 1281px) {
-                    display: none;
-                }
-            }
+.links-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    color: rgba(255,255,255,.85);
+    font-weight: bold;
+    transition: .2s;
+    &.contact {
+        padding: .5rem 1rem;
+        border: 1px solid white;
+    }
+    .line-thing {
+        position: absolute;
+        bottom: -.25rem;
+        width: 20px;
+        height: 2px;
+        background-color: #f7e704;
+        transition: .2s;
+    }
+    &:hover, &.active {
+        color: rgba(255,255,255,1);
+        .line-thing {
+            width: 100%;
         }
     }
 
-    .language-toggle {
-        color: white;
+    img {
+        width: 1rem;
+        height: 1rem;
+        transition: .4s;
+        &.rotate {
+            transform: rotate(-180deg);
+        }
+    }
+    &.desktop {
+        @media (max-width: 1280px) {
+            display: none;
+        }
+    }
+    &.mobile {
+        display: none;
+        @media (max-width: 1280px) {
+            display: flex;
+        }
     }
 }
 

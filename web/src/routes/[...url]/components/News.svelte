@@ -1,7 +1,7 @@
 <svelte:options customElement={{ tag: 'pb-news', shadow: 'none' }} />
 
 <script lang="ts">
-  import type {BlogArticleSnippet} from '$lib/types/blog/blog-article-snippet.interface.js';
+  import type { BlogArticleSnippet } from '$lib/types/blog/blog-article-snippet.interface.js';
   import {
     collection,
     getDocs,
@@ -9,13 +9,12 @@
     orderBy,
     query,
     QueryConstraint,
-    QueryDocumentSnapshot, startAt,
+    QueryDocumentSnapshot,
+    startAt,
     where
   } from 'firebase/firestore';
-  import {db} from '$lib/utils/firebase.js';
-  import {onMount} from 'svelte';
-
-  let tab = 1;
+  import { db } from '$lib/utils/firebase.js';
+  import { onMount } from 'svelte';
 
   type MapItem = {
     [key: string]: { id: string; name: string };
@@ -31,6 +30,8 @@
   export let datelabel: string;
   export let allcategorieslabel: string;
 
+  let tab = 1;
+  let loadingTwitter = true;
   let articles: BlogArticleSnippet[] = [];
   let lastRef: QueryDocumentSnapshot | null = null;
   let loading = false;
@@ -38,6 +39,8 @@
   let categoryMap: MapItem = {};
   let authorMap: MapItem = {};
   let categories: Array<{ name: string; id: string }>;
+
+  let twitterFeedLoaded = false; // Track if Twitter feed is loaded
 
   $: showCategoryFilters = showcategoryfilters === 'Yes';
   $: singleArticleLink = singlearticlelink;
@@ -105,6 +108,26 @@
     articles = [...articles, ...docs.map((doc) => doc.data() as BlogArticleSnippet)];
   }
 
+  function loadTwitter() {
+    // Prevent retriggering if the feed is already loaded
+    if (twitterFeedLoaded) return;
+
+    loadingTwitter = true;
+    twitterFeedLoaded = false;
+
+    setTimeout(() => {
+      if (window.twttr) {
+        window.twttr.events.bind('rendered', () => {
+          loadingTwitter = false;
+          twitterFeedLoaded = true; // Mark as loaded
+        });
+      } else {
+        loadingTwitter = false;
+        twitterFeedLoaded = true;
+      }
+    }, 1000);
+  }
+
   onMount(async () => {
     const data = await Promise.all([
       getDocs(collection(db, 'blog-categories' + (collectionprefx || ''))),
@@ -125,59 +148,81 @@
 </script>
 
 <div class="grid grid-large services-grid">
-  <div class="col-span-3 tab-selectors">
-    {#if showCategoryFilters}
-      <button
-        class="tab-selector"
-        type="button"
-        class:active={category === ''}
-        on:click={() => {
-        category = '';
-        typeChanges(pageSize, category, author, authorMap);
-      }}>{allcategorieslabel}</button
-      >
-      {#each categories as cat}
-        <button class="tab-selector"
-                class:active={category === cat.id}
-                on:click={() => {
-                category = cat.id;
-                typeChanges(pageSize, category, author, authorMap);
-              }}>
-          {cat.name}
-        </button>
-      {/each}
-    {/if}
+  <!-- Sidebar -->
+  <div class="col-span-3">
+    <!-- Tab Selectors (Articles / Twitter) -->
+    <div class="tab-selectors">
+      <button class="tab-selector" class:active={tab === 1} on:click={() => { tab = 1; category = ''; }}>
+        Articles
+      </button>
+      <button class="tab-selector" class:active={tab === 2} on:click={() => {
+        tab = 2;
+        loadTwitter(); // Only triggers when switching to Twitter tab
+      }}>
+        Twitter
+      </button>
+    </div>
   </div>
-  <div class="col-span-9">
-    {#if articles.length}
-      <div class="grid">
-        {#each articles as article}
-          <a class="article col-span-6" href={'/posts/' + article.url}>
-            <div class="article-image">
-              <img src={article.image} alt={article.imageAlt || article.title} />
-              {#if article.category}
-                <div class="article-category">{categoryMap[article.category]?.name || ''}</div>
-              {/if}
-              <div class="article-content">
-                <h3 class="article-title">{article.title}</h3>
-                <p class="article-description">{article.description}</p>
-              </div>
-            </div>
-          </a>
-        {/each}
-      </div>
-    {:else}
-      <div class="grid">
-        <div class="col-span-12">
-          No posts yet
-        </div>
-      </div>
-    {/if}
 
-    {#if lastRef}
-      <button type="button" class:loading={loading || resetLoading} on:click={loadMore}
-      >{loadmorelabel}</button
-      >
+  <!-- Main Content -->
+  <div class="col-span-9">
+    {#if tab === 1}
+      {#if showCategoryFilters}
+        <div class="category-filters">
+          <button class="category-filter" class:active={category === ''}
+                  on:click={() => { category = ''; typeChanges(pageSize, category, author, authorMap); }}>
+            {allcategorieslabel}
+          </button>
+          {#each categories as cat}
+            <button class="category-filter" class:active={category === cat.id}
+                    on:click={() => { category = cat.id; typeChanges(pageSize, category, author, authorMap); }}>
+              {cat.name}
+            </button>
+          {/each}
+        </div>
+      {/if}
+
+      {#if articles.length}
+        <div class="grid">
+          {#each articles as article}
+            <a class="article col-span-6" href={'/posts/' + article.url}>
+              <div class="article-image">
+                <img src={article.image} alt={article.imageAlt || article.title} />
+                {#if article.category}
+                  <div class="article-category">{categoryMap[article.category]?.name || ''}</div>
+                {/if}
+                <div class="article-content">
+                  <h3 class="article-title">{article.title}</h3>
+                  <p class="article-description">{article.description}</p>
+                </div>
+              </div>
+            </a>
+          {/each}
+        </div>
+      {:else}
+        <div class="grid">
+          <div class="col-span-12">No posts yet</div>
+        </div>
+      {/if}
+
+      {#if lastRef}
+        <button type="button" class:loading={loading || resetLoading} on:click={loadMore}>
+          {loadmorelabel}
+        </button>
+      {/if}
+
+    {:else if tab === 2}
+      <!-- Twitter Feed -->
+      <div class="flex items-center gap-2">
+        {#if loadingTwitter}
+          <div class="spinner animate-spin"></div>
+          Loading X feed
+        {/if}
+        <a class="twitter-timeline" data-width="600" data-height="600"
+           href="https://twitter.com/gglycoscience">
+        </a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </div>
     {/if}
   </div>
 </div>
