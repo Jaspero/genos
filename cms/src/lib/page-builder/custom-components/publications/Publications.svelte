@@ -2,6 +2,7 @@
 
 <script lang="ts">
   import { PUBLICATIONS } from './publications.const';
+  import {language} from '$lib/stores/language';
 
   const groupedData = PUBLICATIONS
     .reduce((result: {[key: number]: any[]}, publication) => {
@@ -35,7 +36,7 @@
 <div class="grid grid-large publications-grid">
   <div class="publications-years">
     {#each years as year}
-      <a href="/publications#{year}" class="publication-year-link">{year}</a>
+      <a href="/{$language === 'en' ? 'publications' : 'publikacije'}#{year}" class="publication-year-link">{year}</a>
     {/each}
   </div>
 

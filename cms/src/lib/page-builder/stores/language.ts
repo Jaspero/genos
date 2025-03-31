@@ -1,3 +1,12 @@
 import { writable } from 'svelte/store';
 
-export const language = writable<'en' | 'hr'>('en');
+const isBrowser = typeof window !== 'undefined';
+const savedLanguage = isBrowser ? (localStorage.getItem('language') as 'en' | 'hr') || 'en' : 'en';
+
+export const language = writable<'en' | 'hr'>(savedLanguage);
+
+if (isBrowser) {
+  language.subscribe((value) => {
+    localStorage.setItem('language', value);
+  });
+}

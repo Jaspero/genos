@@ -159,16 +159,6 @@
           {$language === 'en' ? link.en.label : link.hr.label}
         </a>
       {/each}
-      <!--<a class="links-link desktop" href="/projects"><span class="line-thing"></span>Projects</a>
-      <a class="links-link desktop" href="/publications"><span class="line-thing"></span>Publications</a>
-      <a class="links-link desktop" href="/services"><span class="line-thing"></span>Services</a>
-      <a class="links-link desktop" href="/resources"><span class="line-thing"></span>Resources</a>
-      <a class="links-link desktop" href="/news"><span class="line-thing"></span>News</a>
-      <a class="links-link desktop" href="/team"><span class="line-thing"></span>Our team</a>
-      <a class="links-link desktop contact" href="/contact">Contact us</a>
-      <button class="links-link mobile" on:click={() => (open = !open)}>
-        <span class="line-thing"></span>Menu
-      </button>-->
     </div>
     <div class="language-toggle">
       <button on:click={() => {switchLanguage()}}>{$language === 'en' ? 'EN' : 'HR'}</button>

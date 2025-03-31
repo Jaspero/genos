@@ -231,29 +231,33 @@ export const PROJECTS = [
     ]
   },
   {
+    group: {
+      hr: 'HRZZ',
+      en: 'CSF'
+    },
+    program: 'CSF',
+    href: 'csf',
+    projects: [
+      {
+        short: 'GlycoCOVID',
+        title: 'Support for developing competence centers',
+        startDate: '08/07/2020',
+        projectDuration: '18 months',
+        pdf: '4-1.pdf'
+      },
+      {
+        short: 'GlycoDown',
+        title: 'Protein Glycosylation in Aging-Related Diseases Through the Study of Down Syndrome as an Accelerated Aging Condition',
+        startDate: '01/10/2019',
+        projectDuration: '43 months',
+        pdf: '4-2.pdf'
+      }
+    ]
+  },
+  {
     group: 'Miscellaneous',
     href: 'miscellaneous',
     programs: [
-      {
-        program: 'HRZZ',
-        href: 'hrzz',
-        projects: [
-          {
-            short: 'GlycoCOVID',
-            title: 'Support for developing competence centers',
-            startDate: '08/07/2020',
-            projectDuration: '18 months',
-            pdf: '4-1.pdf'
-          },
-          {
-            short: 'GlycoDown',
-            title: 'Protein Glycosylation in Aging-Related Diseases Through the Study of Down Syndrome as an Accelerated Aging Condition',
-            startDate: '01/10/2019',
-            projectDuration: '43 months',
-            pdf: '4-2.pdf'
-          }
-        ]
-      },
       {
         program: 'IRCRO',
         href: 'ircro',

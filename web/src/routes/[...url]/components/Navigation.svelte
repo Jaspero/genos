@@ -3,7 +3,7 @@
 <script lang="ts">
   import { fly } from 'svelte/transition';
   import { onMount } from 'svelte';
-  import {page} from '$app/stores';
+  import { goto } from '$app/navigation';
   import {language} from '$lib/stores/language';
 
   let previousScrollY = 0;
@@ -53,8 +53,8 @@
     },
     {
       hr: {
-        label: 'Resursi',
-        link: '/resursi'
+        label: 'Korisni linkovi',
+        link: '/korisni-linkovi'
       },
       en: {
         label: 'Resources',
@@ -116,7 +116,33 @@
     language.update((lang) => {
       const newLang = lang === 'en' ? 'hr' : 'en';
 
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('language', newLang);
+        const newPath = window.location.pathname === '/' ? '/pocetna' : '/';
+        goto(newPath); // Use SvelteKit's navigation to avoid full page reloads
+      }
+
+      return newLang;
+    });
+  }
+
+
+
+  /*function switchLanguage() {
+    language.update((lang) => {
+      const newLang = lang === 'en' ? 'hr' : 'en';
+
       const currentPath = $page.url.pathname;
+
+      if (currentPath === '/' && newLang === 'hr') {
+        window.location.href = '/pocetna';
+        return newLang;
+      }
+
+      if (currentPath === '/pocetna' && newLang === 'en') {
+        window.location.href = '/';
+        return newLang;
+      }
 
       const matchingLink = links.find(link =>
         link.en.link === currentPath || link.hr.link === currentPath
@@ -126,12 +152,13 @@
         const newPath = newLang === 'en' ? matchingLink.en.link : matchingLink.hr.link;
         window.location.href = newPath;
       } else {
-        window.location.href = newLang === 'en' ? '/' : '/hr';
+        window.location.href = newLang === 'en' ? '/' : '/pocetna';
       }
 
       return newLang;
     });
-  }
+  }*/
+
 
 
   onMount(() => {
@@ -147,7 +174,7 @@
 
 <header class="navigation" class:inactive={!showNavbar}>
   <nav>
-    <a href="/">
+    <a href={$language === 'en' ? '/' : '/pocetna'}>
       <img class="logo" src="/brand/genos-logo-white.svg" alt="genos logo">
     </a>
     <div class="links">
@@ -159,16 +186,6 @@
           {$language === 'en' ? link.en.label : link.hr.label}
         </a>
       {/each}
-      <!--<a class="links-link desktop" href="/projects"><span class="line-thing"></span>Projects</a>
-      <a class="links-link desktop" href="/publications"><span class="line-thing"></span>Publications</a>
-      <a class="links-link desktop" href="/services"><span class="line-thing"></span>Services</a>
-      <a class="links-link desktop" href="/resources"><span class="line-thing"></span>Resources</a>
-      <a class="links-link desktop" href="/news"><span class="line-thing"></span>News</a>
-      <a class="links-link desktop" href="/team"><span class="line-thing"></span>Our team</a>
-      <a class="links-link desktop contact" href="/contact">Contact us</a>
-      <button class="links-link mobile" on:click={() => (open = !open)}>
-        <span class="line-thing"></span>Menu
-      </button>-->
     </div>
     <div class="language-toggle">
       <button on:click={() => {switchLanguage()}}>{$language === 'en' ? 'EN' : 'HR'}</button>
