@@ -329,7 +329,7 @@ export const TEAM = [
         name: 'Dora Lalić',
         job: 'Project Implementation and Public Procurement Specialist',
         img: 'lalic',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad ducimus, et id laboriosam porro quaerat rerum. Alias animi, aspernatur blanditiis commodi dolor harum ipsam, magnam, maxime officiis repellendus reprehenderit voluptatibus!'
+        description: 'Dora earned a Bachelor’s degree in Biology and a Master’s in Molecular Biology from the Faculty of Science, University of Zagreb. Her Master\'s research focused on the epigenetic manipulation of glycosylation-associated genes in a pancreatic cell model. In 2023, she joined GlycanAge, a spin-off of Genos, before recently becoming part of the Genos team.'
       },
       {
         name: 'Paula Franceković',

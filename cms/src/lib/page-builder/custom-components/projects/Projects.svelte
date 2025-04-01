@@ -2,8 +2,8 @@
 
 <script lang="ts">
   import { PROJECTS } from './projects.const';
-  import { language } from '$lib/stores/language';
   import { derived } from 'svelte/store';
+  import {language} from '$lib/page-builder/stores/language';
 
   const parseDate = (dateStr: string): Date => {
     const [day, month, year] = dateStr.split('/').map(Number);
