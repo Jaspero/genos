@@ -1,5 +1,5 @@
 <script>
-  import {language} from '$lib/stores/language';
+  import {language} from '$lib/page-builder/stores/language';
 </script>
 
 <svelte:options customElement={{ tag: 'pb-labs', shadow: 'none' }} />

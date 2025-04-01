@@ -4,7 +4,7 @@
   import { fly } from 'svelte/transition';
   import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
-  import {language} from '$lib/stores/language';
+  import {language} from '$lib/page-builder/stores/language';
 
   let previousScrollY = 0;
   let showNavbar = true;

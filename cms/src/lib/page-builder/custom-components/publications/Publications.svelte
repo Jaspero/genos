@@ -2,7 +2,7 @@
 
 <script lang="ts">
   import { PUBLICATIONS } from './publications.const';
-  import {language} from '$lib/stores/language';
+  import {language} from '$lib/page-builder/stores/language';
 
   const groupedData = PUBLICATIONS
     .reduce((result: {[key: number]: any[]}, publication) => {
