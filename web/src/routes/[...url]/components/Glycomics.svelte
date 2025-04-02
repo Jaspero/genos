@@ -8,8 +8,11 @@
   <div class="col-span-4 tab-selectors">
     <button class="tab-selector" class:active={tab === 1} on:click={() => tab = 1}>Technologies</button>
     <button class="tab-selector" class:active={tab === 2} on:click={() => tab = 2}>Sample types</button>
-    <button class="tab-selector" class:active={tab === 3} on:click={() => tab = 3}>Analyses</button>
-    <button class="tab-selector" class:active={tab === 4} on:click={() => tab = 4}>High-throughput analysis</button>
+    <button class="tab-selector" class:active={tab === 3} on:click={() => tab = 3}>Glycoprofiling</button>
+    <button class="tab-selector" class:active={tab === 4} on:click={() => tab = 4}>High-throughput analyses</button>
+    <button class="tab-selector" class:active={tab === 5} on:click={() => tab = 5}>Data analysis</button>
+    <button class="tab-selector" class:active={tab === 6} on:click={() => tab = 6}>Study design</button>
+    <button class="tab-selector" class:active={tab === 7} on:click={() => tab = 7}>Joint research collaboration</button>
   </div>
 
   <div class="col-span-8 tabs">
@@ -20,18 +23,26 @@
           <li>UHPLC GLYCOPROFILING</li>
         </ul>
         7 Waters UHPLC instruments with fluorescence detectors, HT glycoprofiling of up to 200 samples/day
+        <img class="mt-2 max-w-[20rem]" src="/images/technologies/uplc.jpg" alt="uplc equipment">
         <ul>
           <li>CGE GLYCOPROFILING</li>
         </ul>
         2 Applied Biosystems 3500 DNA sequencers adapted for glycan analysis, HT glycoprofiling of up to 300 samples/day
+        <img class="mt-2 max-w-[20rem]" src="/images/technologies/cge.jpg" alt="cge equipment">
         <ul>
           <li>MS GLYCOPROFILING</li>
         </ul>
         2 Bruker Compact Q-TOF coupled to Waters nanoUPLC systems, Orbitrap Exploris 240 coupled to Dionex UltiMate 3000 RSLCnano system, HT glycoprofiling of up to 100 samples/day
+        <img class="mt-2 max-w-[20rem]" src="/images/technologies/ms.jpg" alt="ms equipment">
       </div>
     {:else if tab === 2}
       <div>
         <h2>Sample types</h2>
+        <div class="flex max-w-[12rem] gap-4">
+          <img class="object-cover" src="/images/sample-types/sample.jpg" alt="uplc equipment">
+          <img class="object-cover" src="/images/sample-types/spinner.jpg" alt="uplc equipment">
+          <img class="object-cover" src="/images/sample-types/pipettes.jpg" alt="uplc equipment">
+        </div>
         <ul>
           <li>Complex biological samples</li>
         </ul>
@@ -47,7 +58,7 @@
       </div>
     {:else if tab === 3}
       <div>
-        <h2>Analyses</h2>
+        <h2>Glycoprofiling</h2>
         <ul>
           <li>Released N-glycans</li>
         </ul>
@@ -67,6 +78,8 @@
     {:else if tab === 4}
       <div>
         <h2>High-Throughput analyses</h2>
+        Genos offers in-depth glycoprofiling for various sample types such as biopharmaceuticals and glycoproteins purified from complex samples. Sample preparation conditions and analysis parameters are optimised for a specific sample.
+
         <ul>
           <li>Analysis of total human serum/plasma N-glycans</li>
           <li>Analysis of total human IgG N-glycans</li>
@@ -77,6 +90,16 @@
           <li>Analysis of subclass-specific rodent IgG N-glycopeptides</li>
         </ul>
       </div>
+    {:else if tab === 5}
+      Data analysis is an important aspect of the workflow Genos provides to the public. Since pure numbers, without thoughtful and meaningful explanation, are usually of little interest Genos invested significantly to its employee’s competence in statistics and computer science. Therefore, Genos now offers a wide range of statistical techniques from basic experimental methods of normalization or batch correction to standard topics like statistical inference or machine/statistical learning.
+    {:else if tab === 6}
+      Genos offers consultancies in study design, under the full or partial control of the experiment, for different fields of biomedicine. The mixture of expertise from Genos employees (biologists, pharmacist, chemists, statisticians and mathematicians) ensures the quality of the study design.
+    {:else if tab === 7}
+      <h2>Cooperation and joint project development</h2>
+      <br>
+      Genos is also an active research organization. On the basis of the recommendation of the National Science Council, the Ministry of Science, Education and Sports of the Republic of Croatia issued a permit that allowed Genos to formally register as a research organization in 2007. Genos currently participates in six FP7 projects (GlycoBioM, HighGlycan, IBD-BIOM, MIMOmics, Pain-OMICS and HTP-GlycoMet).
+      <br><br>
+      We are constantly in search of potential collaborative projects where we can contribute with our expertise in high-throughput glycomics and extensive experience of participation in large FP7 and H2020 consortia.
     {/if}
   </div>
 </div>
