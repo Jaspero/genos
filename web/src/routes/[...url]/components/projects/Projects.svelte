@@ -33,6 +33,8 @@
   });
 
   let selectedProject: any = '';
+
+  $: console.log(selectedProject,selectedProject.pdf);
 </script>
 
 

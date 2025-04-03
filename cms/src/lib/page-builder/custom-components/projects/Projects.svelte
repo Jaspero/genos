@@ -2,7 +2,7 @@
 
 <script lang="ts">
   import { PROJECTS } from './projects.const';
-  import {language} from '$lib/page-builder/stores/language.js';
+  import {language} from '$lib/page-builder/stores/language';
   import { derived } from 'svelte/store';
 
   const parseDate = (dateStr: string): Date => {
