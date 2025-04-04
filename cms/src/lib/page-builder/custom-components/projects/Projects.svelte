@@ -2,7 +2,7 @@
 
 <script lang="ts">
   import { PROJECTS } from './projects.const';
-  import {language} from '$lib/page-builder/stores/language';
+  import { language } from '$lib/stores/language';
   import { derived } from 'svelte/store';
 
   const parseDate = (dateStr: string): Date => {
@@ -10,7 +10,6 @@
     return new Date(year, month - 1, day);
   };
 
-  // Create a derived store to avoid mutating PROJECTS
   const sortedProjects = derived([], () => {
     return PROJECTS.map(program => {
       let sortedProgram = { ...program };
@@ -31,10 +30,7 @@
       return sortedProgram;
     });
   });
-
-  let selectedProject: any = '';
 </script>
-
 
 <div class="grid grid-large projects-grid">
   <div class="col-span-3 projects-sticky">
@@ -63,7 +59,7 @@
         {#if program.projects}
           {#each program.projects as project}
             <div class="project-card-container">
-              <button class="project-card" on:click={() => {selectedProject = project}}>
+              <a href="/pdfs/{project.pdf}" target="_blank" class="project-card">
                 <div class="project-date">
                   <span>{$language === 'en' ? 'Start' : 'Početak'}: {project.startDate}</span>
                 </div>
@@ -78,7 +74,7 @@
                 <span class="project-link">
                   {$language === 'en' ? 'View project details' : 'Pogledaj detalje projekta'} • PDF
                 </span>
-              </button>
+              </a>
             </div>
           {/each}
         {:else if program}
@@ -89,7 +85,7 @@
 
             {#each programsGroup.projects as project}
               <div class="project-card-container">
-                <button class="project-card" on:click={() => {selectedProject = project}}>
+                <a href="/pdfs/{project.pdf}" target="_blank" class="project-card">
                   <div class="project-date">
                     <span>{$language === 'en' ? 'Start' : 'Početak'}: {project.startDate}</span>
                   </div>
@@ -104,7 +100,7 @@
                   <span class="project-link">
                   {$language === 'en' ? 'View project details' : 'Pogledaj detalje projekta'} • PDF
                 </span>
-                </button>
+                </a>
               </div>
             {/each}
           {/each}
@@ -113,10 +109,3 @@
     {/each}
   </div>
 </div>
-
-{#if selectedProject}
-  <button class="overlay" on:click={() => selectedProject = ''}></button>
-  <div class="project-modal">
-    <iframe src="/pdfs/{selectedProject.pdf}"></iframe>
-  </div>
-{/if}
