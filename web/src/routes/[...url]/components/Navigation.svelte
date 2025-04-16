@@ -157,39 +157,6 @@
     });
   }
 
-  /*function switchLanguage() {
-    language.update((lang) => {
-      const newLang = lang === 'en' ? 'hr' : 'en';
-
-      const currentPath = $page.url.pathname;
-
-      if (currentPath === '/' && newLang === 'hr') {
-        window.location.href = '/pocetna';
-        return newLang;
-      }
-
-      if (currentPath === '/pocetna' && newLang === 'en') {
-        window.location.href = '/';
-        return newLang;
-      }
-
-      const matchingLink = links.find(link =>
-        link.en.link === currentPath || link.hr.link === currentPath
-      );
-
-      if (matchingLink) {
-        const newPath = newLang === 'en' ? matchingLink.en.link : matchingLink.hr.link;
-        window.location.href = newPath;
-      } else {
-        window.location.href = newLang === 'en' ? '/' : '/pocetna';
-      }
-
-      return newLang;
-    });
-  }*/
-
-
-
   onMount(() => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('keydown', handleKeydown);

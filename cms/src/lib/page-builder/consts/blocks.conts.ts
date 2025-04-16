@@ -442,6 +442,30 @@ export const BLOCKS = (editor: Editor, forms: PageBuilderForm[], popups?: Popup[
       content: typeMap['pb-navigation']
     },
     {
+      id: 'pb-automated',
+      label: 'Home - First Section',
+      category: 'Misc',
+      media:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#000" style="width: 100%; height: 48px;"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>',
+      content: typeMap['pb-automated']
+    },
+    {
+      id: 'pb-footer',
+      label: 'Custom Footer',
+      category: 'Misc',
+      media:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#000" style="width: 100%; height: 48px;"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>',
+      content: typeMap['pb-footer']
+    },
+    {
+      id: 'pb-collaboration',
+      label: 'Collaboration',
+      category: 'Misc',
+      media:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#000" style="width: 100%; height: 48px;"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>',
+      content: typeMap['pb-collaboration']
+    },
+    {
       id: 'products',
       label: 'Products',
       category: 'Shop',

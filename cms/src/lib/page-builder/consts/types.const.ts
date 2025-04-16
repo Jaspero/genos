@@ -280,19 +280,6 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
     }
   },
   {
-    id: 'footer',
-    extends: 'text',
-    isComponent: (el: HTMLDivElement) => el.tagName === 'FOOTER',
-    model: {
-      defaults: {
-        type: 'footer',
-        tagName: 'footer',
-        classes: ['footer'],
-        traits: [directiveSelectTrait]
-      }
-    }
-  },
-  {
     id: 'image',
     extends: 'image',
     model: {
@@ -761,6 +748,42 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
     }
   },
   {
+    id: 'pb-automated',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-AUTOMATED',
+    model: {
+      defaults: {
+        tagName: 'pb-automated',
+        cName: 'Home - First section',
+        draggable: true,
+        droppable: false,
+      }
+    }
+  },
+  {
+    id: 'pb-collaboration',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-COLLABORATION',
+    model: {
+      defaults: {
+        tagName: 'pb-collaboration',
+        cName: 'Collaboration',
+        draggable: true,
+        droppable: false,
+      }
+    }
+  },
+  {
+    id: 'pb-footer',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-FOOTER',
+    model: {
+      defaults: {
+        tagName: 'pb-footer',
+        cName: 'Custom Footer',
+        draggable: true,
+        droppable: false,
+      }
+    }
+  },
+  {
     id: 'pb-navigation',
     isComponent: (el: HTMLElement) => el.tagName === 'PB-NAVIGATION',
     model: {
@@ -768,19 +791,7 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
         tagName: 'pb-navigation',
         cName: 'Navigation',
         draggable: true,
-        droppable: false,
-        traits: [
-          {
-            type: 'text',
-            label: 'Labels',
-            name: 'labels'
-          },
-          {
-            type: 'text',
-            label: 'Links',
-            name: 'links'
-          }
-        ]
+        droppable: false
       }
     }
   },

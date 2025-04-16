@@ -4,38 +4,69 @@
 
 <svelte:options customElement={{ tag: 'pb-labs', shadow: 'none' }} />
 
-<div class="grid grid-large labs-grid">
-  <div class="col-span-12">
-    <h2 class="text-center h4">{$language === 'en' ? 'Our research laboratories' : 'Naši istraživački laboratoriji'}</h2>
+<div class="grid grid-large gap-8">
+  <div class="gc-12">
+    <h2 class="h5 text-center">
+      {$language === 'en' ? 'Explore our services provided by our laboratories' : 'Istražite naše usluge koje pružaju naši laboratoriji.'}
+    </h2>
+    <div class="mt-4 text-center max-w-[64ch] mx-auto">
+      Genos unites expertise in glycomics, epigenetics, and DNA analysis to deliver integrated, high-quality solutions for diverse research and commercial applications.
+    </div>
   </div>
-  <div class="gc-4 gc-sm-6 gc-xs-12 h-full">
-    <a href="{$language === 'en' ? '/glycomics' : '/glikomika'}" target="_blank" class="lab-card">
-      <img class="lab-image" src="/images/lab.jpg" alt="Glycomics lab">
-      <div class="lab-content">
-        <h3 class="lab-name">{$language === 'en' ? 'Glycomics lab' : 'Laboratorij za glikomiku'}</h3>
-        <span class="lab-description">We are the largest and most advanced laboratory dedicated to glycan analysis, setting the standard in high-throughput glycomics research. With the capacity for over 150,000 glycan analyses each year, our laboratory handles the majority of global glycan research.</span>
-        <span class="lab-services">{$language === 'en' ? 'Services' : 'Usluge'}</span>
+  <div class="gc-12 h-full">
+    <div class="lab-card lab-card-big">
+      <div class="lab-card-left">
+        <h3 class="h5">{$language === 'en' ? 'Glycomics' : 'Glikomika'}</h3>
+        {
+          $language === 'en' ?
+          'Reliable and accurate high-throughput glycan analysis and custom method development.'
+          : 'Pouzdana i točna visokoprotočna analiza glikana i razvoj prilagođenih metoda.'
+        }
+        <div>
+          <button class="button-outlined">{$language === 'en' ? 'Explore' : 'Istraži'}</button>
+        </div>
       </div>
-    </a>
+      <div class="lab-card-right">
+        <img src="/illustrations/glycomics.svg" alt="">
+      </div>
+    </div>
   </div>
-  <div class="gc-4 gc-sm-6 gc-xs-12 h-full">
-    <a href="{$language === 'en' ? '/epigenetics' : '/epigenetika'}" target="_blank" class="lab-card">
-      <img class="lab-image" src="/images/lab.jpg" alt="Epigenetics lab">
-      <div class="lab-content">
-        <h3 class="lab-name">{$language === 'en' ? 'Epigenetics lab' : 'Laboratorij za epigenetiku'}</h3>
-        <span class="lab-description">Our lab is the leading epigenetics laboratory in Croatia, pioneering the development of a custom CRISPR/dCas9 toolbox for precise gene regulation. We study the interplay between DNA methylation and histone modifications, the epigenetic regulation of protein glycosylation, and its role in complex diseases such as diabetes, chronic inflammation, and cancer.</span>
-        <span class="lab-services">{$language === 'en' ? 'Services' : 'Usluge'}</span>
+  <div class="gc-6 h-full">
+    <div class="lab-card lab-card-small">
+      <div class="lab-card-left">
+        <h3 class="h5">{$language === 'en' ? 'Epigenetics' : 'Epigenetika'}</h3>
+        {
+          $language === 'en' ?
+            'DNA methylation analysis, gene expression profiling, and custom CRISPR/dCas9 tool design.'
+            : 'Analiza metilacije DNK, profiliranje genske ekspresije i dizajn prilagođenih CRISPR/dCas9 alata.'
+        }
+        <img src="/illustrations/epigenetics-graph.svg" alt="">
+        <div>
+          <button class="button-outlined">{$language === 'en' ? 'Explore' : 'Istraži'}</button>
+        </div>
       </div>
-    </a>
+      <div class="lab-card-right">
+        <img src="/illustrations/epigenetics.jpg" alt="">
+      </div>
+    </div>
   </div>
-  <div class="gc-4 gc-sm-6 gc-xs-12 h-full">
-    <a href="{$language === 'en' ? '/dna-and-forensics' : '/dnk-i-forenzika'}" target="_blank" class="lab-card">
-      <img class="lab-image" src="/images/lab.jpg" alt="DNA lab">
-      <div class="lab-content">
-        <h3 class="lab-name">{$language === 'en' ? 'DNA & Forensics lab' : 'Laboratorij za DNK i forenziku'}</h3>
-        <span class="lab-description">As Croatia's first authorized forensic DNA laboratory, we specialize in precise paternity, kinship, and prenatal testing, offering accredited services for legal proceedings. With state-of-the-art technology and certified proficiency, we provide unmatched reliability in DNA analysis for both personal and court-ordered cases.</span>
-        <span class="lab-services">{$language === 'en' ? 'Services' : 'Usluge'}</span>
+  <div class="gc-6 h-full">
+    <div class="lab-card lab-card-small">
+      <div class="lab-card-left">
+        <h3 class="h5">{$language === 'en' ? 'DNA laboratory' : 'DNK laboratorij'}</h3>
+        {
+          $language === 'en' ?
+            'Accurate and confidential DNA testing for paternity, kinship, and identity verification.'
+            : 'Točno i povjerljivo testiranje DNK za utvrđivanje očinstva, srodstva i identiteta.'
+        }
+        <img src="/illustrations/dna-graph.svg" alt="">
+        <div>
+          <button class="button-outlined">{$language === 'en' ? 'Explore' : 'Istraži'}</button>
+        </div>
       </div>
-    </a>
+      <div class="lab-card-right">
+        <img src="/illustrations/dna.jpg" alt="">
+      </div>
+    </div>
   </div>
 </div>
