@@ -1,7 +1,7 @@
 <svelte:options customElement={{ tag: 'pb-collaboration', shadow: 'none' }} />
 
 <script>
-  import {language} from '$lib/page-builder/stores/language';
+  import {language} from '$lib/stores/language';
 
   let logos = [
     '3tr.jpg',

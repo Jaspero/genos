@@ -1,7 +1,7 @@
 <svelte:options customElement={{ tag: 'pb-automated', shadow: 'none' }} />
 
 <script>
-  import {language} from '$lib/page-builder/stores/language';
+  import {language} from '$lib/stores/language';
 </script>
 
 <div class="automated">
