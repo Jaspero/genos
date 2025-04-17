@@ -7,6 +7,7 @@ export * from './Navigation.svelte';
 export * from './Footer.svelte';
 export * from './Intro.svelte';
 export * from './Automated.svelte';
+export * from './WeAre.svelte';
 export * from './Collaboration.svelte';
 export * from './HeroContentLanding.svelte';
 export * from './Glycomics.svelte';

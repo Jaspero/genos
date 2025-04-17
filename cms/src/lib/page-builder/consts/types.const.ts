@@ -748,6 +748,18 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
     }
   },
   {
+    id: 'pb-we-are',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-WEARE',
+    model: {
+      defaults: {
+        tagName: 'pb-we-are',
+        cName: 'Home - First section',
+        draggable: true,
+        droppable: false,
+      }
+    }
+  },
+  {
     id: 'pb-automated',
     isComponent: (el: HTMLElement) => el.tagName === 'PB-AUTOMATED',
     model: {

@@ -13,6 +13,7 @@ export * from './Glycomics.svelte';
 export * from './Footer.svelte';
 export * from './PriceList.svelte';
 export * from './Services.svelte';
+export * from './WeAre.svelte';
 export * from './Automated.svelte';
 export * from './Collaboration.svelte';
 export * from './Resources.svelte';
