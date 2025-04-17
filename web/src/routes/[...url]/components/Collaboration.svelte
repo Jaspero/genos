@@ -43,7 +43,10 @@
 <div class="grid grid-large collaboration">
   <div class="gc-12">
     <h2 class="h3">
-      Success through collaboration
+      {$language === 'en' ?
+        'Success through collaboration' :
+        'Uspjeh kroz kolaboracije'
+      }
     </h2>
   </div>
   <div class="gc-12">
@@ -51,20 +54,39 @@
       {@html
         $language === 'en' ?
           `With over 40 larger and smaller collaborative <a class="underline" href="/projects">projects</a> and over 300 <a class="underline" href="/projects">publications</a>, Genos is a global leader in high-throughput <a class="underline" href="/glycomics">glycomics</a>.` :
-          `S više od 40 većih i manjih suradničkih <a class="underline" href="/projekti">projekata</a> i preko 300 znanstvenih <a class="/publikacije">publikacija</a>, Genos je među vodećima u svijetu visokoprotočne <a class="underline" href="/glikomika">glycomics</a>.`
+          `S više od 40 većih i manjih suradničkih projekata i preko 300 znanstvenih publikacija, Genos je među vodećima u svijetu visokoprotočne glikomike.`
       }
     </p>
   </div>
 
   <div class="gc-12">
     <div class="collaboration-worldwide">
-      <h3 class="h5">We collaborate with leading academic and research institutions worldwide.</h3>
+      <h3 class="h5">
+        {@html
+          $language === 'en' ?
+            'We collaborate with leading academic and research institutions worldwide.' :
+            `S više od 40 većih i manjih suradničkih projekata i preko 300 znanstvenih publikacija, Genos je među vodećima u svijetu visokoprotočne glikomike.`
+        }
+      </h3>
     </div>
     <div class="collaboration-partners">
       {#each logos as logo}
         <img src="/partners/{logo}" alt="">
       {/each}
-      <div class="cta">asdf</div>
+    </div>
+  </div>
+
+  <div class="gc-12">
+    <div class="flex justify-center items-center">
+      <img src="/icons/arrow_forward_green.svg" alt="" class="arrow-big">
+      <img src="/icons/arrow_forward_green.svg" alt="" class="arrow-big">
+      <img src="/icons/arrow_forward_green.svg" alt="" class="arrow-big">
+      <a class="cta-arrows green" href="{$language === 'en' ? '/projects' : '/projekti'}">
+        {$language === 'en' ? 'Our projects in details' : 'Naši projekti'}
+      </a>
+      <img src="/icons/arrow_back_green.svg" alt="" class="arrow-big">
+      <img src="/icons/arrow_back_green.svg" alt="" class="arrow-big">
+      <img src="/icons/arrow_back_green.svg" alt="" class="arrow-big">
     </div>
   </div>
 </div>
