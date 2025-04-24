@@ -82,6 +82,43 @@
     text-decoration: underline;
 }
 
+.dialog {
+    z-index: 11;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    max-height: 90vh;
+    border-radius: .25rem;
+    overflow: auto;
+    box-shadow: 0 3px 16px rgba(0,0,0,.16);
+}
+
+.dialog-header {
+    display: flex;
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(0,0,0,.16);
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+}
+
+.dialog-content {
+    padding: 1.5rem;
+
+    ul {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-size: .875rem;
+    }
+}
+
 .overlay {
     z-index: 10;
     position: fixed;
@@ -128,4 +165,9 @@
 .link {
     font-weight: bold;
     text-decoration: underline;
+}
+
+.ordered-list {
+    list-style-type: decimal;
+    margin-left: 1.5rem;
 }

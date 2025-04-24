@@ -30,6 +30,8 @@
       return sortedProgram;
     });
   });
+
+  let selectedProject: any = '';
 </script>
 
 <div class="grid grid-large projects-grid">
@@ -59,7 +61,7 @@
         {#if program.projects}
           {#each program.projects as project}
             <div class="project-card-container">
-              <a href="/pdfs/{project.pdf}" target="_blank" class="project-card">
+              <button class="project-card" on:click={() => selectedProject = project}>
                 <div class="project-date">
                   <span>{$language === 'en' ? 'Start' : 'Početak'}: {project.startDate}</span>
                 </div>
@@ -74,7 +76,7 @@
                 <span class="project-link">
                   {$language === 'en' ? 'View project details' : 'Pogledaj detalje projekta'} • PDF
                 </span>
-              </a>
+              </button>
             </div>
           {/each}
         {:else if program}
@@ -85,7 +87,7 @@
 
             {#each programsGroup.projects as project}
               <div class="project-card-container">
-                <a href="/pdfs/{project.pdf}" target="_blank" class="project-card">
+                <button class="project-card" on:click={() => selectedProject = project}>
                   <div class="project-date">
                     <span>{$language === 'en' ? 'Start' : 'Početak'}: {project.startDate}</span>
                   </div>
@@ -100,7 +102,7 @@
                   <span class="project-link">
                   {$language === 'en' ? 'View project details' : 'Pogledaj detalje projekta'} • PDF
                 </span>
-                </a>
+                </button>
               </div>
             {/each}
           {/each}
@@ -109,3 +111,61 @@
     {/each}
   </div>
 </div>
+
+{#if selectedProject}
+  <div class="overlay" on:click={() => selectedProject = ''}></div>
+  <div class="dialog">
+    <div class="dialog-header">
+      <div class="dialog-header-titles">
+        {#if selectedProject.short}
+          <h2>{selectedProject.short}</h2>
+        {/if}
+        {#if selectedProject.title}
+          <h3>{selectedProject.title}</h3>
+        {/if}
+      </div>
+      <div class="dialog-header-details">
+      </div>
+    </div>
+    <div class="dialog-content">
+      <ul>
+        {#if selectedProject.startDate}
+          <li>Start Date: {selectedProject.startDate}</li>
+        {/if}
+        {#if selectedProject.projectDuration}
+          <li>Project Duration: {selectedProject.projectDuration}</li>
+        {/if}
+        {#if selectedProject.projectId}
+          <li>Project ID: {selectedProject.projectId}</li>
+        {/if}
+        {#if selectedProject.callForProposals}
+          <li>Call For Proposals: {selectedProject.callForProposals}</li>
+        {/if}
+        {#if selectedProject.coordinator}
+          <li>Coordinator: {selectedProject.coordinator}</li>
+        {/if}
+        {#if selectedProject.projectParticipants}
+          <li>Project Participants: {selectedProject.projectParticipants}</li>
+        {/if}
+        {#if selectedProject.projectValue}
+          <li>Project Value: {selectedProject.projectValue}</li>
+        {/if}
+        {#if selectedProject.genosContribution}
+          <li>Genos Contribution: {selectedProject.genosContribution}</li>
+        {/if}
+        {#if selectedProject.euCoFinancingAmount}
+          <li>Eu Co-finacing Amount: {selectedProject.euCoFinancingAmount}</li>
+        {/if}
+        {#if selectedProject.contactPerson}
+          <li>Contact Person: {selectedProject.contactPerson}</li>
+        {/if}
+        {#if selectedProject.pdf}
+          <li><a class="link" href="/pdfs/{selectedProject.pdf}" target="_blank">Open as PDF</a></li>
+        {/if}
+      </ul>
+      {#if selectedProject.description}
+        <div>{@html selectedProject.description}</div>
+      {/if}
+    </div>
+  </div>
+{/if}

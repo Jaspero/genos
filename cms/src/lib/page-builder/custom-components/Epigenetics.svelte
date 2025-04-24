@@ -1,6 +1,8 @@
 <svelte:options customElement={{ tag: 'pb-epigenetics', shadow: 'none' }} />
 
 <script lang="ts">
+  import {language} from '$lib/page-builder/stores/language';
+
   $effect(() => {
     const savedScroll = sessionStorage.getItem('scrollPosition');
     if (savedScroll) {
@@ -14,7 +16,15 @@
 </script>
 
 <div class="grid grid-large publications-grid">
-  <div class="publications">
+  <div class="col-span-4 tab-selectors">
+    <div class="flex flex-col mb-4">
+      <h2>{$language === 'en' ? 'Services' : 'Usluge'}</h2>
+      <a href="/{$language === 'en' ? 'glycomics' : 'glikomika'}" class="tab-selector">{$language === 'en' ? 'Glycomics' : 'Glikomika'}</a>
+      <span class="tab-selector active">{$language === 'en' ? 'Epigenetics' : 'Epigenetika'}</span>
+      <a href="/{$language === 'en' ? 'dna-and-forensics' : 'dnk-i-forenzika'}" class="tab-selector">{$language === 'en' ? 'DNA and Forensics' : 'DNK i Forenzika'}</a>
+    </div>
+  </div>
+  <div class="col-span-8 tabs flex flex-col gap-8">
     <div id="technologies">
       <h2>Technologies</h2>
       <ul>

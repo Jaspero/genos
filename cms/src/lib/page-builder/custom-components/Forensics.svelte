@@ -1,19 +1,29 @@
 <svelte:options customElement={{ tag: 'pb-forensics', shadow: 'none' }} />
 
 <script>
+  import {language} from '$lib/page-builder/stores/language';
+
   let tab = 1;
 </script>
 
 <div class="grid grid-large services-grid">
-  <h2 class="col-span-12">Types of Tests Offered:</h2>
   <div class="col-span-4 tab-selectors">
-    <button class="tab-selector" class:active={tab === 1} on:click={() => tab = 1}>Paternity testing</button>
-    <button class="tab-selector" class:active={tab === 2} on:click={() => tab = 2}>Kinship testing</button>
-    <button class="tab-selector" class:active={tab === 3} on:click={() => tab = 3}>Non-Invasive Prenatal Gender and Paternity Testing</button>
-    <button class="tab-selector" class:active={tab === 4} on:click={() => tab = 4}>Other analyses</button>
-    <button class="tab-selector" class:active={tab === 5} on:click={() => tab = 5}>Avian Gender Determination via DNA Analysis</button>
-    <button class="tab-selector" class:active={tab === 6} on:click={() => tab = 6}>Testing Procedure</button>
-    <button class="tab-selector" class:active={tab === 7} on:click={() => tab = 7}>Data confidentiality</button>
+    <div class="flex flex-col mb-4">
+      <h2>{$language === 'en' ? 'Services' : 'Usluge'}</h2>
+      <a href="/{$language === 'en' ? 'glycomics' : 'glikomika'}" class="tab-selector">{$language === 'en' ? 'Glycomics' : 'Glikomika'}</a>
+      <a href="/{$language === 'en' ? 'epigenetics' : 'epigenetika'}" class="tab-selector">{$language === 'en' ? 'Epigenetics' : 'Epigenetika'}</a>
+      <span class="tab-selector active">{$language === 'en' ? 'DNA and Forensics' : 'DNK i Forenzika'}</span>
+    </div>
+    <div class="flex flex-col">
+      <h2>{$language === 'en' ? 'Types of Tests Offered' : 'Vrste ponuđenih testova'}:</h2>
+      <button class="tab-selector" class:active={tab === 1} on:click={() => tab = 1}>Paternity testing</button>
+      <button class="tab-selector" class:active={tab === 2} on:click={() => tab = 2}>Kinship testing</button>
+      <button class="tab-selector" class:active={tab === 3} on:click={() => tab = 3}>Non-Invasive Prenatal Gender and Paternity Testing</button>
+      <button class="tab-selector" class:active={tab === 4} on:click={() => tab = 4}>Other analyses</button>
+      <button class="tab-selector" class:active={tab === 5} on:click={() => tab = 5}>Avian Gender Determination via DNA Analysis</button>
+      <button class="tab-selector" class:active={tab === 6} on:click={() => tab = 6}>Testing Procedure</button>
+      <button class="tab-selector" class:active={tab === 7} on:click={() => tab = 7}>Data confidentiality</button>
+    </div>
   </div>
   <div class="col-span-8 tabs">
     {#if tab === 1}

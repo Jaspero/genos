@@ -1,18 +1,40 @@
 <svelte:options customElement={{ tag: 'pb-glycomics', shadow: 'none' }} />
 
 <script>
+  import {language} from '$lib/stores/language';
+
   let tab = 1;
 </script>
 
 <div class="grid grid-large publications-grid">
   <div class="col-span-4 tab-selectors">
-    <button class="tab-selector" class:active={tab === 1} on:click={() => tab = 1}>Technologies</button>
-    <button class="tab-selector" class:active={tab === 2} on:click={() => tab = 2}>Sample types</button>
-    <button class="tab-selector" class:active={tab === 3} on:click={() => tab = 3}>Glycoprofiling</button>
-    <button class="tab-selector" class:active={tab === 4} on:click={() => tab = 4}>High-throughput analyses</button>
-    <button class="tab-selector" class:active={tab === 5} on:click={() => tab = 5}>Data analysis</button>
-    <button class="tab-selector" class:active={tab === 6} on:click={() => tab = 6}>Study design</button>
-    <button class="tab-selector" class:active={tab === 7} on:click={() => tab = 7}>Joint research collaboration</button>
+    <div class="flex flex-col mb-4">
+      <h2>{$language === 'en' ? 'Services' : 'Usluge'}</h2>
+      <span class="tab-selector active">{$language === 'en' ? 'Glycomics' : 'Glikomika'}</span>
+      <a href="/{$language === 'en' ? 'epigenetics' : 'epigenetika'}" class="tab-selector">{$language === 'en' ? 'Epigenetics' : 'Epigenetika'}</a>
+      <a href="/{$language === 'en' ? 'dna-and-forensics' : 'dnk-i-forenzika'}" class="tab-selector">{$language === 'en' ? 'DNA and Forensics' : 'DNK i Forenzika'}</a>
+    </div>
+    <button class="tab-selector" class:active={tab === 1} on:click={() => tab = 1}>
+      {$language === 'en' ? 'Technologies' : 'Tehnologije'}
+    </button>
+    <button class="tab-selector" class:active={tab === 2} on:click={() => tab = 2}>
+      {$language === 'en' ? 'Sample types' : 'Tipovi uzoraka'}
+    </button>
+    <button class="tab-selector" class:active={tab === 3} on:click={() => tab = 3}>
+      {$language === 'en' ? 'Glycoprofiling' : 'Glikoprofiliranje'}
+    </button>
+    <button class="tab-selector" class:active={tab === 4} on:click={() => tab = 4}>
+      {$language === 'en' ? 'High-throughput analyses' : 'Visoko-protočna analiza'}
+    </button>
+    <button class="tab-selector" class:active={tab === 5} on:click={() => tab = 5}>
+      {$language === 'en' ? 'Data analysis' : 'Analiza podataka'}
+    </button>
+    <button class="tab-selector" class:active={tab === 6} on:click={() => tab = 6}>
+      {$language === 'en' ? 'Study design' : 'Dizajn istraživanja'}
+    </button>
+    <button class="tab-selector" class:active={tab === 7} on:click={() => tab = 7}>
+      {$language === 'en' ? 'Joint research collaboration' : 'zajednička istraživačka suradnja'}
+    </button>
   </div>
 
   <div class="col-span-8 tabs">
