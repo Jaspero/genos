@@ -3,6 +3,7 @@
 <script lang="ts">
   import { fly } from 'svelte/transition';
   import { onMount } from 'svelte';
+  import { page } from '$app/stores';
   import { goto } from '$app/navigation';
   import {language} from '$lib/stores/language';
 
@@ -175,18 +176,14 @@
     </a>
     <div class="links">
       {#each links as link}
-        <a class="links-link desktop" class:contact={link.alt} href={$language === 'en' ? link.en.link : link.hr.link}>
-          {#if !link.alt}
-            <span class="line-thing"></span>
-          {/if}
-          {$language === 'en' ? link.en.label : link.hr.label}
-        </a>
+          <a class:contact={link.alt} href={$language === 'en' ? link.en.link : link.hr.link}>
+            {$language === 'en' ? link.en.label : link.hr.label}
+          </a>
       {/each}
     </div>
     <div class="flex gap-12">
       <button class="links-link mobile" on:click={() => {open = !open}}>
         Menu
-        <span class="line-thing"></span>
       </button>
       <button class="flex gap-4 text-white" on:click={() => {switchLanguage()}}>
         <span class:underline={$language === 'en'}>EN</span>
@@ -200,10 +197,15 @@
   <button class="overlay" transition:fly on:click={() => open = false}></button>
   <div class="menu" transition:fly={{y: -1000}}>
     {#each links as link}
-      <a href={$language === 'en' ? link.en.link : link.hr.link}>
-        {$language === 'en' ? link.en.label : link.hr.label}
+      <a
+        class:contact={link.alt}
+        class:active={($language === 'en' ? link.en.link : link.hr.link) === $page.url.pathname}
+        href={$language === 'en' ? link.en.link : link.hr.link}
+      >
+      {$language === 'en' ? link.en.label : link.hr.label}
       </a>
     {/each}
+
     <div class="filler"></div>
     <div class="socials">
       <a href="https://x.com/gglycoscience?lang=hr" target="_blank" rel="noreferrer noopener">

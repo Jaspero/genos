@@ -157,8 +157,22 @@ export const BLOCKS = (editor: Editor, forms: PageBuilderForm[], popups?: Popup[
         components: [
           {
             tagName: 'div',
-            attributes: { class: 'intro-content' },
-            components: []
+            attributes: {
+              class: 'grid grid-large'
+            },
+            components: [
+              {
+                tagName: 'div',
+                attributes: {
+                  class: 'gc-12'
+                },
+                components: {
+                  tagName: 'h1',
+                  type: 'text',
+                  content: 'This is a title'
+                }
+              }
+            ]
           }
         ]
       }
@@ -362,12 +376,28 @@ export const BLOCKS = (editor: Editor, forms: PageBuilderForm[], popups?: Popup[
       content: typeMap['pb-resources']
     },
     {
-      id: 'labs',
-      label: 'Labs',
+      id: 'about',
+      label: 'About',
       category: 'Misc',
       media:
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#000" style="width: 100%; height: 48px;"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>',
-      content: typeMap['pb-labs']
+      content: typeMap['pb-about']
+    },
+    {
+      id: 'leaders',
+      label: 'Leaders',
+      category: 'Misc',
+      media:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#000" style="width: 100%; height: 48px;"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>',
+      content: typeMap['pb-leaders']
+    },
+    {
+      id: 'plug',
+      label: 'Plug',
+      category: 'Misc',
+      media:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#000" style="width: 100%; height: 48px;"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>',
+      content: typeMap['pb-plug']
     },
     {
       id: 'forensics',

@@ -4,6 +4,24 @@
   import {language} from '$lib/stores/language';
 </script>
 
+<div class="grid grid-large gap-16 items-center spacer">
+  <div class="gc-6 flex flex-col gap-4">
+    <h2 class="h2 font-bold max-w-[24ch]">Global Leaders in High-Throughput Glycomics</h2>
+    <p class="h4">
+      With decades of research and innovation behind us, our team of world-renowned scientists conducts over 80% of all glycan analyses globally.
+      <br><br>
+      From pioneering discoveries to advancing clinical applications, we’re at the forefront of unlocking the power of glycans to transform health.
+    </p>
+    <div>
+      <a href="/team" class="button-outlined">Our team</a>
+    </div>
+  </div>
+  <div class="gc-6">
+    <img src="/images/team.jpg" alt="" class="rounded-lg">
+  </div>
+</div>
+
+<!--
 <div class="spacer grid grid-large we-are">
   <div class="gc-6 gc-xs-12">
     <img src="/images/team.jpg" alt="">
@@ -17,4 +35,4 @@
       {/if}
     </h2>
   </div>
-</div>
+</div>-->

@@ -7,6 +7,8 @@
   import { doc, getDoc } from 'firebase/firestore';
   import { onMount } from 'svelte';
   import '../../../shared/styles/index.pcss';
+  import Navigation from '$lib/Navigation.svelte';
+  import Footer from '$lib/Footer.svelte';
 
   onMount(async () => {
     const userDoc: any = $user;
@@ -52,11 +54,15 @@
   });
 </script>
 
+<Navigation></Navigation>
+
 <div class="bg"></div>
 
 <slot />
 
 <Meta />
+
+<Footer></Footer>
 
 <style>
   .bg {

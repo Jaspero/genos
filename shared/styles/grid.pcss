@@ -1,17 +1,24 @@
 .grid {
   display: grid;
+  width: 100%;
   margin: 0 auto;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   align-items: center;
-  padding: 1rem;
+  padding: 3rem;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    padding: 1rem;
+  }
 }
 
 .grid-large {
-  max-width: 80rem;
+  max-width: 87.5rem;
 }
 
 .grid-small {
-  max-width: 50rem;
+  max-width: 69rem;
 }
 
 .gc-1 {

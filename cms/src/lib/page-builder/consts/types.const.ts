@@ -221,8 +221,22 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
         components: [
           {
             tagName: 'div',
-            attributes: { class: 'intro-content' },
-            components: []
+            attributes: {
+              class: 'grid grid-large'
+            },
+            components: [
+              {
+                tagName: 'div',
+                attributes: {
+                  class: 'gc-12'
+                },
+                components: {
+                  tagName: 'h1',
+                  type: 'text',
+                  content: 'This is a title'
+                }
+              }
+            ]
           }
         ]
       }
@@ -634,6 +648,42 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
       defaults: {
         tagName: 'pb-resources',
         cName: 'Resources',
+        draggable: true,
+        droppable: false
+      }
+    }
+  },
+  {
+    id: 'pb-leaders',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-LEADERS',
+    model: {
+      defaults: {
+        tagName: 'pb-leaders',
+        cName: 'Leaders',
+        draggable: true,
+        droppable: false
+      }
+    }
+  },
+  {
+    id: 'pb-about',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-ABOUT',
+    model: {
+      defaults: {
+        tagName: 'pb-about',
+        cName: 'About',
+        draggable: true,
+        droppable: false
+      }
+    }
+  },
+  {
+    id: 'pb-plug',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-PLUG',
+    model: {
+      defaults: {
+        tagName: 'pb-plug',
+        cName: 'Plug',
         draggable: true,
         droppable: false
       }

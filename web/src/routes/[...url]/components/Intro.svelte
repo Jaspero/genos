@@ -5,6 +5,4 @@
   export let alt: string = "";
 </script>
 
-<div class="intro">
-  <img src={src} alt={alt} class="intro-bg" />
-</div>
+<img src={src} alt={alt} class="intro-bg" />

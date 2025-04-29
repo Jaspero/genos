@@ -1,3 +1,4 @@
+/*
 .team-member {
     display: flex;
     flex-direction: column;
@@ -58,7 +59,7 @@
 
 
 
-/* Title - Background-image */
+!* Title - Background-image *!
 .title-bg {
     position: relative;
     padding-top: 7.5rem;
@@ -78,7 +79,7 @@
 
 
 
-/* Solution */
+!* Solution *!
 .solution {
     border-bottom: 4px solid #D9F2F2;
 }
@@ -132,7 +133,7 @@
 
 
 
-/* Complex section */
+!* Complex section *!
 .complex-section {
     position: relative;
     .complex-section-grid {
@@ -166,7 +167,7 @@
 
 
 
-/* CTA - Request */
+!* CTA - Request *!
 .cta-request {
     background-color: #032130;
     padding: 7.5rem 0;
@@ -201,7 +202,7 @@
 
 
 
-/* Genos about section */
+!* Genos about section *!
 .genos-building {
     max-width: 1240px;
     width: 75%;
@@ -261,7 +262,7 @@
 }
 
 
-/* Team  */
+!* Team  *!
 .team {
     gap: 5rem;
     @media (max-width: 900px) {
@@ -388,16 +389,6 @@
     margin-top: 10rem;
 }
 
-.spacer {
-    margin-top: 5rem;
-    @media (max-width: 900px) {
-        margin-top: 2.5rem;
-    }
-    @media (max-width: 600px) {
-        margin-top: 1rem;
-    }
-}
-
 .spacer-small {
     margin-top: 4rem;
     @media (max-width: 900px) {
@@ -454,44 +445,159 @@
 }
 
 .collaboration {
-
-}
-.collaboration-text {
-    margin-top: .5rem;
-    max-width: 48ch;
-}
-.collaboration-worldwide {
-    text-align: center;
-    margin-top: 6rem;
-}
-.collaboration-partners {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
     margin-top: 4rem;
-    margin-bottom: 4rem;
-    gap: 2rem;
 }
-.collaboration-partners img {
-    height: 4rem;
-    @media (max-width: 900px) {
-        height: 3rem;
-    }
-    @media (max-width: 600px) {
-        height: 2rem;
+
+:root {
+    --color-text: navy;
+    --color-bg: papayawhip;
+    --color-bg-accent: #ecdcc0;
+    --size: clamp(10rem, 1rem + 40vmin, 30rem);
+    --gap: calc(var(--size) / 14);
+    --duration: 60s;
+    --scroll-start: 0;
+    --scroll-end: calc(-100% - var(--gap));
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text: papayawhip;
+        --color-bg: navy;
+        --color-bg-accent: #2626a0;
     }
 }
+
+.marquee {
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    gap: var(--gap);
+    mask-image: linear-gradient(
+            var(--mask-direction, to right),
+            hsl(0 0% 0% / 0),
+            hsl(0 0% 0% / 1) 20%,
+            hsl(0 0% 0% / 1) 80%,
+            hsl(0 0% 0% / 0)
+    );
+}
+
+.marquee__group {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: var(--gap);
+    min-width: 100%;
+    animation: scroll-x var(--duration) linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .marquee__group {
+        animation-play-state: paused;
+    }
+}
+
+@keyframes scroll-x {
+    from {
+        transform: translateX(var(--scroll-start));
+    }
+    to {
+        transform: translateX(var(--scroll-end));
+    }
+}
+
+.marquee-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+    max-width: 100vw;
+    margin-top: 2rem;
+}
+
+@keyframes fade {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
 
 .automated {
     margin-top: 4rem;
+}
 
-    h1 {
-        font-weight: bold;
-    }
+.labs {
+    margin-top: 4rem;
 }
 
 .we-are {
     img {
         border-radius: .5rem;
     }
+}*/
+
+.image-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4rem;
+
+    .image {
+        flex: 1 1 0;
+        img {
+            border-radius: .5rem;
+        }
+    }
+
+    .text {
+        flex: 1 1 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
+
+.collaboration {
+    margin-top: 2rem;
+    gap: 4rem;
+
+    h2 {
+        margin-bottom: 2rem;
+    }
+}
+
+.labs {
+    margin-top: 4rem;
+    .title {
+        margin-bottom: 2rem;
+    }
+    .subtitle {
+        max-width: 46ch;
+        margin-bottom: 4rem;
+    }
+    .text-p {
+        max-width: 40ch;
+    }
+}
+
+.plug {
+    .text-p {
+        max-width: 44ch;
+
+        a {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+    }
+}
+
+.footer-cta {
+    color: #FFD500;
+    text-decoration: underline;
+    font-weight: bold;
 }

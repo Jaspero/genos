@@ -76,7 +76,7 @@
     <div class="links-menu">
       <ul class="links-social">
         <li>
-          <a href="mailto:info@genos-glyco.com" style="text-decoration: underline">info@genos-glyco.com</a>
+          <a href="mailto:info@genos.hr" style="text-decoration: underline">info@genos.hr</a>
         </li>
         <li>
           <a href="tel:+38516471181">+385 1 647 1181</a>

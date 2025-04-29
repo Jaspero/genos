@@ -22,7 +22,7 @@
           Fax: <a href="">+385 1 647 1169</a>
         </div>
         <a href="">
-          info@genos-glyco.com
+          info@genos.hr
         </a>
       </div>
     </div>

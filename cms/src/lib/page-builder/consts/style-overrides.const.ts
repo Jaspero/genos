@@ -17,9 +17,9 @@ export const STYLE_OVERRIDES = [
     id: 'typography',
     property: 'font-family',
     type: 'select',
-    default: 'Inter',
+    default: 'Open Sans',
     options: [
-      { id: 'Inter', label: 'Inter' },
+      { id: 'Open Sans', label: 'Open Sans' },
       { id: 'Sen', label: 'Sen' }
     ]
   },

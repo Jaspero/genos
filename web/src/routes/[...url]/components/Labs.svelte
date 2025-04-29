@@ -4,112 +4,85 @@
   import {language} from '$lib/stores/language';
 </script>
 
-<div class="grid grid-large gap-8">
+<div class="grid grid-large labs">
   <div class="gc-12">
-    <h2 class="h5 text-center">
-      {#if $language === 'en'}
-        Explore our services provided by our laboratories
-      {:else}
-        Istražite naše usluge koje pružaju naši laboratoriji.
-      {/if}
+    <h2 class="title">
+      {$language === 'en' ? 'Services provided by our laboratories' : 'Usluge koje pružaju naši laboratoriji.'}
     </h2>
-    <div class="mt-4 text-center max-w-[64ch] mx-auto">
-      {#if $language === 'en'}
-        Genos unites expertise in glycomics, epigenetics, and DNA analysis to deliver integrated, high-quality solutions for diverse research and commercial applications.
-      {:else}
-        Genos ujedinjuje stručnost u glikomicima, epigenetici i DNK analizi kako bi pružio integrirana, visokokvalitetna rješenja za različite istraživačke i komercijalne primjene.
-      {/if}
-    </div>
+    <p class="subtitle">
+      {
+        $language === 'en'
+          ? 'Genos unites expertise in glycomics, epigenetics, and DNA analysis to deliver integrated, high-quality solutions for diverse research and commercial applications.'
+          : 'Genos ujedinjuje stručnost u glikomicima, epigenetici i DNK analizi kako bi pružio integrirana, visokokvalitetna rješenja za različite istraživačke i komercijalne primjene.'
+      }
+    </p>
   </div>
-  <div class="gc-12 h-full">
-    <div class="lab-card lab-card-big">
-      <div class="lab-card-left">
-        <h3 class="h5">
-          {#if $language === 'en'}
-            Glycomics
-          {:else}
-            Glikomika
-          {/if}
-        </h3>
-        {#if $language === 'en'}
-          Reliable and accurate high-throughput glycan analysis and custom method development.
-        {:else}
-          Pouzdana i točna visokoprotočna analiza glikana i razvoj prilagođenih metoda.
-        {/if}
-        <div>
-          <button class="button-outlined">
-            {#if $language === 'en'}
-              Explore
-            {:else}
-              Istraži
-            {/if}
-          </button>
-        </div>
+
+  <div class="gc-12">
+    <div class="image-text">
+      <div class="image">
+        <img src="/images/glycomics.jpg" alt="">
       </div>
-      <div class="lab-card-right">
-        <img src="/illustrations/glycomics.svg" alt="">
+      <div class="text">
+        <h2>{$language === 'en' ? 'Glycomics' : 'Glikomika'}</h2>
+        <p class="text-p">
+          {
+            $language === 'en'
+              ? 'Reliable and accurate high-throughput glycan analysis and custom method development.'
+              : 'Pouzdana i precizna visokoprotočna analiza glikana te razvoj prilagođenih metoda.'
+          }
+        </p>
+        <div>
+          <a class="button-filled" href="/{$language === 'en' ? 'glycomics' : 'glikomika'}">
+            {$language === 'en' ? 'Glycomic services' : 'Usluge za glikomiku'}
+          </a>
+        </div>
       </div>
     </div>
   </div>
-  <div class="gc-6 gc-xs-12 h-full">
-    <div class="lab-card lab-card-small">
-      <div class="lab-card-left">
-        <h3 class="h5">
-          {#if $language === 'en'}
-            Epigenetics
-          {:else}
-            Epigenetika
-          {/if}
-        </h3>
-        {#if $language === 'en'}
-          DNA methylation analysis, gene expression profiling, and custom CRISPR/dCas9 tool design.
-        {:else}
-          Analiza metilacije DNK, profiliranje genske ekspresije i dizajn prilagođenih CRISPR/dCas9 alata.
-        {/if}
-        <img src="/illustrations/epigenetics-graph.svg" alt="">
-        <div>
-          <button class="button-outlined">
-            {#if $language === 'en'}
-              Explore
-            {:else}
-              Istraži
-            {/if}
-          </button>
-        </div>
+
+  <div class="gc-12 spacer">
+    <div class="image-text">
+      <div class="image">
+        <img src="/images/epigenetics.jpg" alt="">
       </div>
-      <div class="lab-card-right">
-        <img src="/illustrations/epigenetics.jpg" alt="">
+      <div class="text">
+        <h2>{$language === 'en' ? 'Epigenetics' : 'Epigenetika'}</h2>
+        <p class="text-p">
+          {
+            $language === 'en'
+              ? 'DNA methylation analysis, gene expression profiling, and custom CRISPR/dCas9 tool design.'
+              : 'Analiza metilacije DNK, profiliranje genske ekspresije i dizajn prilagođenih CRISPR/dCas9 alata.'
+          }
+        </p>
+        <div>
+          <a class="button-filled" href="/{$language === 'en' ? 'epigenetics' : 'epigenetika'}">
+            {$language === 'en' ? 'Epigenetic services' : 'Usluge za epigenetiku'}
+          </a>
+        </div>
       </div>
     </div>
   </div>
-  <div class="gc-6 gc-xs-12 h-full">
-    <div class="lab-card lab-card-small">
-      <div class="lab-card-left">
-        <h3 class="h5">
-          {#if $language === 'en'}
-            DNA laboratory
-          {:else}
-            DNK laboratorij
-          {/if}
-        </h3>
-        {#if $language === 'en'}
-          Accurate and confidential DNA testing for paternity, kinship, and identity verification.
-        {:else}
-          Točno i povjerljivo testiranje DNK za utvrđivanje očinstva, srodstva i identiteta.
-        {/if}
-        <img src="/illustrations/dna-graph.svg" alt="">
-        <div>
-          <button class="button-outlined">
-            {#if $language === 'en'}
-              Explore
-            {:else}
-              Istraži
-            {/if}
-          </button>
-        </div>
+
+  <div class="gc-12 spacer">
+    <div class="image-text">
+      <div class="image">
+        <img src="/images/forensics.jpg" alt="">
       </div>
-      <div class="lab-card-right">
-        <img src="/illustrations/dna.jpg" alt="">
+      <div class="text">
+        <h2>{$language === 'en' ? 'DNA & Forensics' : 'DNK I Forenzika'}</h2>
+        <p class="text-p">
+          {
+            $language === 'en'
+              ? 'Accurate and confidential DNA testing for paternity, kinship, and identity verification.'
+              : 'Točno i povjerljivo DNK testiranje za utvrđivanje očinstva, srodstva i identiteta.'
+          }
+        </p>
+        <div>
+          <a class="button-filled" href="/{$language === 'en' ? 'dna-and-forensics' : 'dna-i-forenzika'}">
+            {$language === 'en' ? 'DNA & Forensics services' : 'Usluge za DNK i forenziku'}
+          </a>
+        </div>
       </div>
     </div>
   </div>

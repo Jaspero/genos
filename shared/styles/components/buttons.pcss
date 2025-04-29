@@ -1,65 +1,16 @@
-.button {
-  position: relative;
-  cursor: pointer;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-right: auto;
-  text-decoration: underline;
-  text-decoration-thickness: .25rem;
-  text-underline-offset: .5rem;
-  padding: 1.25rem 2.5rem;
-  text-align: center;
-  background-color: #FFD400;
-  color: #032130;
-
-  @media (max-width: 900px) {
-    font-size: 2.5rem;
-    padding: 2rem 4rem;
-  }
-  @media (max-width: 600px) {
-    font-size: 2rem;
-    text-decoration-thickness: .5rem;
-  }
-
-  &.loading {
-    pointer-events: none;
-    color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 7px;
-
-    &:after {
-      content: '';
-      position: absolute;
-      z-index: 1;
-      width: 18px;
-      height: 18px;
-      border-radius: 50px;
-      border: 3px solid #fff;
-      border-top-color: transparent;
-      background: inherit;
-      animation: spin 2s linear infinite;
-    }
-  }
-
-  &:disabled {
-    pointer-events: none;
-    opacity: .8;
-  }
+.button-filled {
+    padding: .5rem 1rem;
+    line-height: 1.5;
+    background-color: #0A415C;
+    color: white;
+    font-weight: bold;
+    border-radius: .25rem;
 }
-
-.button-outlined {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: .25rem;
-  padding: .5rem 1rem;
-  border: 1px solid white;
-  color: rgba(255,255,255,.85);
-  font-weight: bold;
-  transition: .2s;
-  &:hover, &.active {
-    color: rgba(255,255,255,1);
-  }
+.button-filled-yellow {
+    padding: .5rem 1rem;
+    line-height: 1.5;
+    background-color: #FFD500;
+    color: #032130;
+    font-weight: bold;
+    border-radius: .25rem;
 }
