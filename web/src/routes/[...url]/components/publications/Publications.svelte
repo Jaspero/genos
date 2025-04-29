@@ -33,22 +33,39 @@
   });
 </script>
 
-<div class="grid grid-large publications-grid">
-  <div class="publications-years">
-    {#each years as year}
-      <a href="/{$language === 'en' ? 'publications' : 'publikacije'}#{year}" class="publication-year-link">{year}</a>
-    {/each}
+<div class="grid grid-small publications">
+  <div class="gc-12 mb-24">
+    <h2>
+      {
+        $language === 'en'
+          ? 'Genos has been at the forefront of glycoscience. We have published over 300 articles in the past 15+ years. We continue to advance the field and look forward to further developments in our research field.'
+          : 'Genos je na čelu glikoznanosti. U proteklih više od 15 godina objavili smo preko 300 znanstvenih radova. Nastavljamo s unaprjeđenjem ovog područja i veselimo se daljnjem razvoju naših istraživanja.'
+      }
+    </h2>
   </div>
-
-  <div class="publications">
+  <div class="gc-3 sticky">
+    <p>
+      {
+        $language === 'en'
+          ? 'Quick links:'
+          : 'Izbornik:'
+      }
+    </p>
+    <div class="sticky-items">
+      {#each years as year}
+        <a href="/{$language === 'en' ? 'publications' : 'publikacije'}#{year}" class="publication-year-link">{year}</a>
+      {/each}
+    </div>
+  </div>
+  <div class="gc-9 publications-container">
     {#each years as year}
-      <div id={year}>
-        <h2>{year}</h2>
-        <div class="flex flex-col gap-12">
+      <div class="publications-cards" id={year}>
+        <h3>{year}</h3>
+        <div class="flex flex-col">
           {#each groupedData[year] as publication}
             <a href="https://doi.org/{publication.doi}" target="_blank" rel="noreferrer noopener" class="publication-card">
-              <div class="publication-card-paper">{publication.paper}<img src="/icons/open-in-new.svg" alt="" class="publications-open-in-new"></div>
-              <div class="publication-card-journal">{publication.date} - {getFirstAuthor(publication.authors)} et al., {publication.journal}</div>
+              <div class="publication-card-paper">{publication.paper}</div>
+              <div class="publication-card-journal">{publication.date} | {getFirstAuthor(publication.authors)} et al. | {publication.journal}</div>
             </a>
           {/each}
         </div>

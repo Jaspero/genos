@@ -1629,5 +1629,335 @@ export const PUBLICATIONS = [
     date: 2024,
     doi: `10.1016/j.bbadva.2024.100137`,
     journal: `BBA Adv`
+  },
+  {
+    paper: 'The association between galactosylation of immunoglobulin G and body mass index',
+    authors: ' Nikolac Perkovic M, Pucic Bakovic M, Kristic J, Novokmet M, Huffman JE, Vitart V, Hayward C, Rudan I, Wilson JF, Campbell H, Polasek O, Lauc G, Pivac N.',
+    date: 2014,
+    doi: '10.1016/j.pnpbp.2013.08.014',
+    journal: 'ScienceDirect'
+  },
+  {
+    paper: 'Expression of leukocyte adhesion-related glycosyltransferase genes in acute coronary syndrome patients',
+    authors: 'Hadžibegović I, Vrselja Z, Lauc G, Curić G. ',
+    date: 2014,
+    doi: '10.1007/s00011-014-0735-3',
+    journal: 'Springer Nature Link'
+  },
+  {
+    paper: 'Epigenetic regulation of glycosylation is the quantum mechanics of biology',
+    authors: 'Lauc G, Vojta A, Zoldoš V.',
+    date: 2014,
+    doi: '10.1016/j.bbagen.2013.08.017',
+    journal: 'ScuenceDirect'
+  },
+  {
+    paper: 'The role of glycosylation in IBD',
+    authors: 'Theodoratou E, Campbell H, Ventham NT, Kolarich D, Pučić-Baković M, Zoldoš V, Fernandes D, Pemberton IK, Rudan I, Kennedy NA, Wuhrer M, Nimmo E, Annese V, McGovern DP, Satsangi J, Lauc G.',
+    date: 2014,
+    doi: '10.1038/nrgastro.2014.78',
+    journal: 'Nature reviews'
+  },
+  {
+    paper: 'Changes in IgG and total plasma protein glycomes in acute systemic inflammation',
+    authors: 'Novokmet M, Lukić E, Vučković F, Ðurić Ž, Keser T, Rajšl K, Remondini D, Castellani G, Gašparović H, Gornik O, Lauc G.',
+    date: 2014,
+    doi: '10.1038/srep04347',
+    journal: 'Scientific reports'
+  },
+  {
+    paper: 'Glycans are a novel biomarker of chronological and biological ages',
+    authors: 'Krištić J, Vučković F, Menni C, Klarić L, Keser T, Beceheli I, Pučić-Baković M, Novokmet M, Mangino M, Thaqi K, Rudan P, Novokmet N, Sarac J, Missoni S, Kolčić I, Polašek O, Rudan I, Campbell H, Hayward C, Aulchenko Y, Valdes A, Wilson JF, Gornik O, Primorac D, Zoldoš V, Spector T, Lauc G.',
+    date: 2014,
+    doi: '10.1093/gerona/glt190',
+    journal: 'The Journals of Gerontology: Series A'
+  },
+  {
+    paper: 'Glycans – the third revolution in evolution',
+    authors: 'Lauc G, Krištić J, Zoldoš V. Glycans',
+    date: 2014,
+    doi: '10.3389/fgene.2014.00145',
+    journal: 'Frontiers'
+  },
+  {
+    paper: 'Comparative performance of four methods for high-throughput glycosylation analysis of immunoglobulin G in genetic and epidemiological research',
+    authors: 'Huffman JE, Pučić-Baković M, Klarić L, Hennig R, Selman MH, Vučković F, Novokmet M, Krištić J, Borowiak M, Muth T, Polašek O, Razdorov G, Gornik O, Plomp R, Theodoratou E, Wright AF, Rudan I, Hayward C, Campbell H, Deelder AM, Reichl U, Aulchenko YS, Rapp E, Wuhrer M, Lauc G.',
+    date: 2014,
+    doi: '10.1074/mcp.M113.037465',
+    journal: 'MCP'
+  },
+  {
+    paper: 'Glycosylation of immunoglobulin g: role of genetic and epigenetic influences',
+    authors: 'Menni C, Keser T, Mangino M, Bell JT, Erte I, Akmačić I, Vučković F, Pučić Baković M, Gornik O, McCarthy MI, Zoldoš V, Spector TD, Lauc G, Valdes AM.',
+    date: 2013,
+    doi: '10.1371/journal.pone.0082558',
+    journal: 'PLOS'
+  },
+  {
+    paper: 'High-throughput IgG Fc N-glycosylation profiling by mass spectrometry of glycopeptides',
+    authors: 'Baković MP, Selman MH, Hoffmann M, Rudan I, Campbell H, Deelder AM, Lauc G, Wuhrer M.',
+    date: 2013,
+    doi: '10.1021/pr300887z',
+    journal: 'ACS'
+  },
+  {
+    paper: 'Reversibility of Membrane N-Glycome of HeLa Cells upon Treatment with Epigenetic Inhibitors',
+    authors: 'Horvat T, Deželjin M, Redžić I, Barišić D, Herak Bosnar M, Lauc G, Zoldoš V.',
+    date: 2013,
+    doi: '10.1371/journal.pone.0054672',
+    journal: 'PLOS'
+  },
+  {
+    paper: 'The association between galactosylation of immunoglobulin G and body mass index.',
+    authors: 'Nikolac Perkovic M, Pucic Bakovic M, Kristic J, Novokmet M, Huffman JE, Vitart V, Hayward C, Rudan I, Wilson JF, Campbell H, Polasek O, Lauc G, Pivac N. ',
+    date: 2014,
+    doi: '10.1016/j.pnpbp.2013.08.014',
+    journal: 'ScienceDirect'
+  },
+  {
+    paper: 'Loci associated with N-glycosylation of human immunoglobulin G show pleiotropy with autoimmune diseases and haematological cancers',
+    authors: 'Lauc G, Huffman JE, Pučić M, Zgaga L, Adamczyk B, Mužinić A, Novokmet M, Polašek O, Gornik O, Krištić J, Keser T, Vitart V, Scheijen B, Uh HW, Molokhia M, Patrick AL, McKeigue P, Kolčić I, Lukić IK, Swann O, van Leeuwen FN, Ruhaak LR, Houwing-Duistermaat JJ, Slagboom PE, Beekman M, de Craen AJ, Deelder AM, Zeng Q, Wang W, Hastie ND, Gyllensten U, Wilson JF, Wuhrer M, Wright AF, Rudd PM, Hayward C, Aulchenko Y, Campbell H, Rudan I.',
+    date: 2013,
+    doi: '10.1371/journal.pgen.1003225',
+    journal: 'PLOS'
+  },
+  {
+    paper: 'Mutations in HNF1A result in marked alterations of plasma glycan profile',
+    authors: 'Thanabalasingham G, Huffman JE, Kattla JJ, Novokmet M, Rudan I, Gloyn AL, Hayward C, Adamczyk B, Reynolds RM, Muzinic A, Hassanali N, Pucic M, Bennett AJ, Essafi A, Polasek O, Mughal SA, Redzic I, Primorac D, Zgaga L, Kolcic I, Hansen T, Gasperikova D, Tjora E, Strachan MW, Nielsen T, Stanik J, Klimes I, Pedersen OB, Njølstad PR, Wild SH, Gyllensten U, Gornik O, Wilson JF, Hastie ND, Campbell H, McCarthy MI, Rudd PM, Owen KR, Lauc G, Wright AF.',
+    date: 2013,
+    doi: '10.2337/db12-0880',
+    journal: 'Diabetes'
+  },
+  {
+    paper: 'Prognostic value of cell-free DNA in plasma of out-of-hospital cardiac arrest survivors at ICU admission and 24 hours post-admission',
+    authors: 'Gornik I, Wagner J, Gašparović V, Miličić D, Degoricija V, Skorić B, Gornik O, Lauc G.',
+    date: 2014,
+    doi: '10.1016/j.resuscitation.2013.10.008',
+    journal: 'Resuscitation'
+  },
+  {
+    paper: 'Glycosylation of Immunoglobulin G: Role of genetic and epigenetic influences',
+    authors: 'Menni C, Keser T, Mangino M, Bell JT, Erte I, Akmačić I, Vučković F, Pučić Baković M, Gornik O, McCarthy MI, Zoldoš V, Spector TD, Lauc G, Valdes AM. ',
+    date: 2013,
+    doi: '10.1371/journal.pone.0082558',
+    journal: 'PLOS'
+  },
+  {
+    paper: 'Genomics and epigenomics of the human glycome',
+    authors: 'Zoldoš V, Novokmet M, Bečeheli I, Lauc G. ',
+    date: 2013,
+    doi: '10.1007/s10719-012-9397-y',
+    journal: 'Springer Nature Link'
+  },
+  {
+    paper: 'High-throughput IgG Fc N-glycosylation profiling by mass spectrometry of glycopeptides',
+    authors: 'Pučić Baković M, Selman MHJ, Hoffmann M, Rudan I, Campbell H, Deelder AM, Lauc G, Wuhrer M.',
+    date: 2013,
+    doi: '10.1021/pr300887z',
+    journal: 'ACS'
+  },
+  {
+    paper: 'Glycomics meets genomics, epigenomics and other high throughput omics for system biology studies',
+    authors: 'Zoldoš V, Horvat T, Lauc G.',
+    date: 2013,
+    doi: '10.1016/j.cbpa.2012.12.007',
+    journal: 'ScienceDirect'
+  },
+  {
+    paper: 'Changes in plasma and IgG N-glycome during childhood and adolescence',
+    authors: 'Pucic M, Muzinic A, Novokmet M, Skledar M, Pivac N, Lauc G, Gornik O.',
+    date: 2012,
+    doi: '10.1093/glycob/cws062',
+    journal: 'Glycobiology'
+  },
+  {
+    paper: 'The future of glycoscience.',
+    authors: 'Lauc G.',
+    date: 2012,
+    doi: '10.1016/j.bbagen.2012.03.001',
+    journal: 'ScienceDirect'
+  },
+  {
+    paper: 'Changes in plasma and IgG N-glycome during childhood and adolescence',
+    authors: 'Pucic M, Muzinic A, Novokmet M, Skledar M, Pivac N, Lauc G, Gornik O.',
+    date: 2012,
+    doi: '10.1093/glycob/cws062',
+    journal: 'Glycobiology'
+  },
+  {
+    paper: 'Association of medication with the human plasma N-glycome',
+    authors: 'Saldova R, Huffman JE, Adamczyk B, Mužinić A, Kattla JJ, Pučić M, Novokmet M, Abrahams JL, Hayward C, Rudan I, Wild SH, Wright AF, Polašek O, Lauc G, Campbell H, Wilson JF, Rudd PM.',
+    date: 2012,
+    doi: '10.1021/pr2010605',
+    journal: 'ACS'
+  },
+  {
+    paper: 'The future of glycoscience (editorial)',
+    authors: 'Lauc G.',
+    date: 2012,
+    doi: '0.1016/j.bbagen.2012.03.001',
+    journal: 'ScienceDirect'
+  },
+  {
+    paper: 'Heterozygous carriage of a dysfunctional TLR9 allele affects CPG-oligonucleotide responses in B cells',
+    authors: 'Knezević J, Pavlinić D, Rose WA 2nd, Leifer CA, Bendelja K, Gabrilovac J, Parcina M, Lauc G, Kubarenko AV, Petricevic B, Vrbanec D, Bulat-Kardum L, Bekeredjian-Ding I, Pavelić J, Dembić Z, Weber AN.',
+    date: 2012,
+    doi: '10.1074/jbc.M111.337477',
+    journal: 'JBC'
+  },
+  {
+    paper: 'Genomics and epigenomics of the human glycome.',
+    authors: 'Zoldoš V, Novokmet M, Bečeheli I, Lauc G.',
+    date: 2013,
+    doi: '10.1007/s10719-012-9397-y',
+    journal: 'Springer Nature Link'
+  },
+  {
+    paper: 'Alternative glycosylation modulates function of IgG and other proteins – implications on evolution and disease',
+    authors: 'Gornik O, Pavić T, Lauc G.',
+    date: 2011,
+    doi: '10.1016/j.bbagen.2011.12.004',
+    journal: 'ScienceDirect'
+  },
+  {
+    paper: 'Epigenetic silencing of HNF1A by CpG methylation associates with higher branching of N-glycans in human plasma',
+    authors: 'Zoldoš V, Horvat T, Novokmet M, Cuenin C, Mužinić A, Pučić M, Huffman JE, Gornik O, Polašek O, Campbell H, Hayward C, Wright AF, Rudan I, Owen K, McCarthy MI, Herceg Z, Lauc G.',
+    date: 2012,
+    doi: '10.4161/epi.7.2.18918',
+    journal: 'Taylor&Francis online'
+  },
+  {
+    paper: 'Epigenetic silencing of HNF1A associates with changes in the composition of the human plasma N-glycome.',
+    authors: 'Zoldoš V, Horvat T, Novokmet M, Cuenin C, Mužinić A, Pučić M, Huffman JE, Gornik O, Polašek O, Campbell H, Hayward C, Wright AF, Rudan I, Owen K, McCarthy MI, Herceg Z, Lauc G.',
+    date: 2012,
+    doi: ' 10.4161/epi.7.2.18918',
+    journal: 'Taylor&Francis online'
+  },
+  {
+    paper: 'Change of transferrin sialylation differs between mild sepsis and severe sepsis and septic shock',
+    authors: 'Gornik O, Gornik I, Zagorec-Kolednjak I, Lauc G',
+    date: 2011,
+    doi: '10.2169/internalmedicine.50.4704',
+    journal: 'Internal Medicine'
+  },
+  {
+    paper: 'Glycosylation of human plasma proteins in attention-deficit hyperactivity disorder and autism spectrum disorder',
+    authors: 'Pivac N, Knezević A, Gornik O, Pucić M, Igl W, Peeters H, Crepel A, Steyaert J, Novokmet M, Redzić I, Nikolac M, Hercigonja VN, Curković KD, Curković M, Nedić G, Muck-Seler D, Borovecki F, Rudan I, Lauc G.',
+    date: 2011,
+    doi: '10.1074/mcp.M110.004200',
+    journal: 'MCP'
+  },
+  {
+    paper: 'Glycomics meets lipidomics –Associations of N-glycans with classical lipids, glycerophospholipids, and sphingolipids in three',
+    authors: 'Maja P B at al.',
+    date: 2011,
+    doi: '10.1039/c0mb00095g',
+    journal: 'Molecular BioSystem'
+  },
+  {
+    paper: 'High throughput isolation and glycosylation analysis of IgG – variability and heritability of the IgG glycome in three isolated human',
+    authors: 'Pucić M, Knezević A, Vidic J, Adamczyk B, Novokmet M, Polasek O, Gornik O, Supraha-Goreta S, Wormald MR, Redzić I, Campbell H, Wright A, Hastie ND, Wilson JF, Rudan I, Wuhrer M, Rudd PM, Josić D, Lauc G.',
+    date: 2011,
+    doi: '10.1074/mcp.M111.010090',
+    journal: 'MCP'
+  },
+  {
+    paper: 'The role of epigenetic regulation of membrane glycoconjugates in the attenuation of viral pandemics',
+    authors: 'Lauc G, Zoldoš V. ',
+    date: 2011,
+    doi: '10.1016/j.mehy.2010.09.033',
+    journal: 'ScienceDirect'
+  },
+  {
+    paper: 'Does inbreeding affect N-glycosylation of human plasma proteins?',
+    authors: 'Polašek O, Leutenegger AL, Gornik O, Zgaga L, Kolcic I, McQuillan R, Wilson JF, Hayward C, Wright AF, Lauc G, Campbell H, Rudan I',
+    date: 2011,
+    doi: '10.1007/s00438-011-0620-5',
+    journal: 'Springer Nature Link'
+  },
+  {
+    paper: 'Polymorphisms in B3GAT1, SLC9A9 and MGAT5 are associated with variation within the human plasma N-glycome of 3533 European adults',
+    authors: 'Huffman JE, Knezevic A, Vitart V, Kattla J, Adamczyk B, Novokmet M, Igl W, Pucic M, Zgaga L, Johannson Å, Redzic I, Gornik O, Zemunik T, Polasek O, Kolcic I, Pehlic M, Koeleman CA, Campbell S, Wild SH, Hastie ND, Campbell H, Gyllensten U, Wuhrer M, Wilson JF, Hayward C, Rudan I, Rudd PM, Wright AF, Lauc G.',
+    date: 2011,
+    doi: '10.1093/hmg/ddr414',
+    journal: 'Oxford academic'
+  },
+  {
+    paper: 'Screening novel biomarkers for metabolic syndrome by profiling human plasma N-glycans in Chinese Han and Croatian populations',
+    authors: 'Lu JP, Knežević A, Wang YX, Rudan I, Campbell H, Zou ZK, Lan J, Lai QX, Wu JJ, He Y, Song MS, Zhang L, Lauc G, Wang W.',
+    date: 2011,
+    doi: '10.1021/pr2004067',
+    journal: 'ACS'
+  },
+  {
+    paper: 'Evolutional and clinical implications of the epigenetic regulation of protein glycosylation',
+    authors: 'Horvat T, Zoldoš V, Lauc G.',
+    date: 2011,
+    doi: '10.1007/s13148-011-0039-1',
+    journal: 'BMC'
+  },
+  {
+    paper: 'High Throughput Plasma N-Glycome Profiling using Multiplexed Labelling and UPLC with Fluorescence Detection',
+    authors: 'Knežević A, Bones J, Kračun SK, Gornik O, Rudd PM, Lauc G.',
+    date: 2011,
+    doi: '10.1039/c1an15684e',
+    journal: 'RSC'
+  },
+  {
+    paper: 'Complex genetics of protein glycosylation',
+    authors: 'Lauc G, Rudan I, Campbell H, Rudd PM.',
+    date: 2010,
+    doi: '10.1039/b910377e',
+    journal: 'Molecular BioSystem'
+  },
+  {
+    paper: 'Common aberrations from normal human N-glycan plasma profile',
+    authors: 'ucic M, Pinto S, Novokmet M, Knezevic A, Gornik O, Polasek O, Vlahovicek K, Wang W, Rudd PM, Wright AF, Campbell H, Rudan I, Lauc G. ',
+    date: 2010,
+    doi: '10.1093/glycob/cwq052',
+    journal: 'Glycobiology'
+  },
+  {
+    paper: 'Protein glycosylation – an evolutionary crossroad between genes and environment',
+    authors: 'Lauc G, Zoldoš V.',
+    date: 2010,
+    doi: '10.1039/c0mb00067a',
+    journal: 'Molecular BioSystem'
+  },
+  {
+    paper: 'Effects of aging, body mass index, plasma lipid profiles, and smoking on human plasma N-glycans',
+    authors: 'Knezevic A, Gornik O, Polasek O, Pucic M, Redzic I, Novokmet M, Rudd PM, Wright AF, Campbell H, Rudan I, Lauc G.',
+    date: 2010,
+    doi: '10.1093/glycob/cwq051',
+    journal: 'Glycobiology'
+  },
+  {
+    paper: 'Genomics meets glycomics – The first GWAS study of human glycome identifies HNF1a as a master regulator of plasma protein',
+    authors: 'Lauc G, Essafi A, Huffman JE, Hayward C, Knežević A, Kattla JJ, Polašek O, Gornik O, Vitart V, Abrahams JL, Pučić M, Novokmet M, Redžić I, Campbell S, Wild SH, Borovečki F, Wang W, Kolčić I, Zgaga L, Gyllensten U, Wilson JF, Wright AF, Hastie ND, Campbell H, Rudd PM, Rudan I.',
+    date: 2010,
+    doi: '10.1371/journal.pgen.1001256',
+    journal: 'PLOS'
+  },
+  {
+    paper: 'Variability, Heritability and Environmental Determinants of Human Plasma N-Glycome',
+    authors: 'Knezević A, Polasek O, Gornik O, Rudan I, Campbell H, Hayward C, Wright A, Kolcic I, O\'Donoghue N, Bones J, Rudd PM, Lauc G.',
+    date: 2009,
+    doi: '10.1021/pr800737u',
+    journal: 'ACS'
+  },
+  {
+    paper: 'Stability of N-glycan profiles in human plasma',
+    authors: 'Gornik O, Wagner J, Pucić M, Knezević A, Redzic I, Lauc G.',
+    date: 2009,
+    doi: '10.1093/glycob/cwp134',
+    journal: 'Glycobiology'
+  },
+  {
+    paper: 'Genome-wide linkage analysis of serum creatinine in three isolated European populations',
+    authors: 'Pattaro C, Aulchenko YS, Isaacs A, Vitart V, Hayward C, Franklin CS, Polasek O, Kolcic I, Biloglav Z, Campbell S, Hastie N, Lauc G, Meitinger T, Oostra BA, Gyllensten U, Wilson JF, Pichler I, Hicks AA, Campbell H, Wright AF, Rudan I, van Duijn CM, Riegler P, Marroni F, Pramstaller PP; EUROSPAN Consortium. ',
+    date: 2009,
+    doi: '10.1038/ki.2009.135',
+    journal: 'Kidney international'
   }
 ]
+

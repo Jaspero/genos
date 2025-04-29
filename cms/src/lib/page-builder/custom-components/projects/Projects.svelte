@@ -40,8 +40,8 @@
     <h2>
       {
         $language === 'en'
-        ? 'With over 40 larger and smaller collaborative projects conducted with scientific teams from different research institutions from around the world, we have the expertise to design studies and bring them to a successful conclusion.'
-        : 'S više od 40 većih i manjih suradničkih projekata provedenih sa znanstvenim timovima iz različitih istraživačkih institucija diljem svijeta, posjedujemo stručnost za osmišljavanje studija i njihovo uspješno provođenje.'
+          ? 'With over 40 larger and smaller collaborative projects conducted with scientific teams from different research institutions from around the world, we have the expertise to design studies and bring them to a successful conclusion.'
+          : 'S više od 40 većih i manjih suradničkih projekata provedenih sa znanstvenim timovima iz različitih istraživačkih institucija diljem svijeta, posjedujemo stručnost za osmišljavanje studija i njihovo uspješno provođenje.'
       }
     </h2>
   </div>
@@ -68,20 +68,20 @@
   <div class="gc-9 programs">
     {#each $sortedProjects as program}
       <div class="projects-cards">
-        <h2 class="program-title" id="{program.href}">
+        <h3 class="program-title" id="{program.href}">
           {#if program.group.en || program.group.hr}
             {$language === 'en' ? program.group.en : program.group.hr} {$language === 'en' ? 'projects' : 'projekti'}
           {:else}
             {program.group} {$language === 'en' ? 'projects' : 'projekti'}
           {/if}
-        </h2>
+        </h3>
         {#if program.projects}
           {#each program.projects as project}
             <div class="project-card-container">
               <div class="project-card">
-                <h3 class="project-title">
+                <h4 class="project-title">
                   {project.short}
-                </h3>
+                </h4>
                 {#if project.title}
                   <p class="project-text clamp">
                     {project.title}.
@@ -96,7 +96,6 @@
                 {/if}
                 {#if selectedProject === project}
                   <div class="project-details" transition:slide>
-
                     <table>
                       <tbody>
                       {#if selectedProject.startDate}
@@ -117,7 +116,6 @@
                           <td>{selectedProject.projectId}</td>
                         </tr>
                       {/if}
-
                       {#if selectedProject.callForProposals}
                         <tr>
                           <td>Call For Proposals:</td>
@@ -173,15 +171,15 @@
         {:else if program}
           {#each program.programs as programsGroup}
             <div class="program-container">
-              <h2 class="program-title" id="{programsGroup.href}" style="margin-top: 1.5rem">
+              <h3 class="program-title" id="{programsGroup.href}" style="margin-top: 1.5rem">
                 {programsGroup.program} {$language === 'en' ? 'projects' : 'projekti'}
-              </h2>
+              </h3>
               {#each programsGroup.projects as project}
                 <div class="project-card-container">
                   <div class="project-card">
-                    <h3 class="project-title">
+                    <h4 class="project-title">
                       {project.short}
-                    </h3>
+                    </h4>
                     <p class="project-text clamp">
                       {#if project.title}
                         {project.title}.
