@@ -1,124 +1,3 @@
-.cta-big {
-    display: block;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-decoration: underline;
-    text-decoration-thickness: .375rem;
-    text-underline-offset: .75rem;
-    padding: 2rem 4rem;
-    max-width: 25rem;
-    margin: 0 auto;
-    text-align: center;
-    @media (max-width: 900px) {
-        font-size: 1.25rem;
-        padding: 1.5rem 3rem;
-        text-underline-offset: .5rem;
-    }
-    @media (max-width: 600px) {
-        font-size: 1rem;
-        padding: 1rem 2rem;
-        text-underline-offset: .25rem;
-    }
-}
-
-.cta-blue {
-    background-color: #006cd9;
-    color: white;
-}
-
-.cta-yellow {
-    background-color: #FACA38;
-    color: #032130;
-}
-
-.scroll-to-learn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: .5rem;
-    font-size: 2.5rem;
-    @media (max-width: 900px) {
-        font-size: 2rem;
-    }
-    @media (max-width: 600px) {
-        font-size: 1.5rem;
-    }
-}
-
-.cta-arrows {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    line-height: 1;
-    gap: 0 1rem;
-    &:hover {
-        text-decoration: underline;
-    }
-    &.green {
-        color: #4C8217;
-    }
-    @media (max-width: 900px) {
-        font-size: 2rem;
-        gap: 0 .5rem;
-    }
-    @media (max-width: 600px) {
-        font-size: 1.5rem;
-    }
-}
-
-.arrow-small {
-    width: 1.5rem;
-    height: 1.5rem;
-}
-
-.arrow-big {
-    width: 2rem;
-    height: 2rem;
-}
-
-
-.hover-underline:hover {
-    text-decoration: underline;
-}
-
-.dialog {
-    z-index: 11;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    max-height: 90vh;
-    border-radius: .25rem;
-    overflow: auto;
-    box-shadow: 0 3px 16px rgba(0,0,0,.16);
-}
-
-.dialog-header {
-    display: flex;
-    padding: 1.5rem;
-    border-bottom: 1px solid rgba(0,0,0,.16);
-
-    h2 {
-        font-size: 2rem;
-    }
-
-    h3 {
-        font-size: 1.5rem;
-    }
-}
-
-.dialog-content {
-    padding: 1.5rem;
-
-    ul {
-        margin-top: 0;
-        margin-bottom: 1rem;
-        font-size: .875rem;
-    }
-}
-
 .overlay {
     z-index: 10;
     position: fixed;
@@ -129,60 +8,42 @@
     background-color: rgba(0,0,0,.25);
 }
 
-.fake-button {
+.selected-member-dialog {
+    z-index: 11;
     position: fixed;
-    top: 8rem;
-    right: 2rem;
-    padding: 1rem;
-    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: white;
-}
-
-.spinner {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-    border-color: rgba(0,41,72,.16);
-    border-top-color: #032130;
-    border-style: solid;
-    border-width: 4px;
-}
-
-.resource-card {
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    background-color: white;
-    border-radius: .125rem;
-    box-shadow: 0 3px 6px rgba(0,0,0,.08);
-    overflow: hidden;
-}
-
-.flipped {
-    transform: rotate(180deg);
-}
-
-.link {
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-.ordered-list {
-    list-style-type: decimal;
-    margin-left: 1.5rem;
-}
-
-.data-card {
-    padding: 2rem 1.5rem;
-    border-radius: 2rem;
-    background-color: white;
-    box-shadow: 0 3px 6px rgba(0,0,0,.12);
-}
-
-.lab-card {
-    display: flex;
+    border-radius: 1rem;
     width: 100%;
-    background-color: white;
-    border-radius: .25rem;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, .08);
+    max-width: 60rem;
+    max-height: 50vh;
+    overflow-y: auto;
+
+    .selected-member-dialog-header {
+        position: sticky;
+        top: 0;
+        display: flex;
+        align-items: center;
+        background-color: white;
+        border-bottom: 1px solid rgba(3,33,48,.4);
+        gap: 1.5rem;
+        padding: 2rem;
+
+        .selected-member-dialog-image {
+            width: 5rem;
+            height: 5rem;
+        }
+        .selected-member-dialog-name {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .selected-member-dialog-job {
+            font-size: .875rem;
+        }
+    }
+    .selected-member-description {
+        padding: 2rem;
+    }
 }
