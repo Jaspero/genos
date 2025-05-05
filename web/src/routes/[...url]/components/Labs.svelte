@@ -21,7 +21,7 @@
   <div class="gc-12">
     <div class="image-text">
       <div class="image">
-        <img src="/images/glycomics.jpg" alt="">
+        <img src="/illustrations/glycomics.jpg" alt="">
       </div>
       <div class="text">
         <h2>{$language === 'en' ? 'Glycomics' : 'Glikomika'}</h2>
@@ -44,7 +44,7 @@
   <div class="gc-12 spacer">
     <div class="image-text">
       <div class="image">
-        <img src="/images/epigenetics.jpg" alt="">
+        <img src="/illustrations/epigenetics.jpg" alt="">
       </div>
       <div class="text">
         <h2>{$language === 'en' ? 'Epigenetics' : 'Epigenetika'}</h2>
@@ -67,7 +67,7 @@
   <div class="gc-12 spacer">
     <div class="image-text">
       <div class="image">
-        <img src="/images/forensics.jpg" alt="">
+        <img src="/illustrations/dna.jpg" alt="">
       </div>
       <div class="text">
         <h2>{$language === 'en' ? 'DNA & Forensics' : 'DNK I Forenzika'}</h2>

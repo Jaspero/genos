@@ -6,10 +6,10 @@
 
 <div class="grid grid-large labs">
   <div class="gc-12">
-    <h2>
+    <h2 class="title">
       {$language === 'en' ? 'Services provided by our laboratories' : 'Usluge koje pružaju naši laboratoriji.'}
     </h2>
-    <p>
+    <p class="subtitle">
       {
         $language === 'en'
           ? 'Genos unites expertise in glycomics, epigenetics, and DNA analysis to deliver integrated, high-quality solutions for diverse research and commercial applications.'
@@ -21,11 +21,11 @@
   <div class="gc-12">
     <div class="image-text">
       <div class="image">
-        <img src="/illustrations/glycomics.svg" alt="">
+        <img src="/illustrations/glycomics.jpg" alt="">
       </div>
       <div class="text">
         <h2>{$language === 'en' ? 'Glycomics' : 'Glikomika'}</h2>
-        <p>
+        <p class="text-p">
           {
             $language === 'en'
               ? 'Reliable and accurate high-throughput glycan analysis and custom method development.'
@@ -41,14 +41,14 @@
     </div>
   </div>
 
-  <div class="gc-12">
+  <div class="gc-12 spacer">
     <div class="image-text">
       <div class="image">
-        <img src="/illustrations/epigenetics.svg" alt="">
+        <img src="/illustrations/epigenetics.jpg" alt="">
       </div>
       <div class="text">
         <h2>{$language === 'en' ? 'Epigenetics' : 'Epigenetika'}</h2>
-        <p>
+        <p class="text-p">
           {
             $language === 'en'
               ? 'DNA methylation analysis, gene expression profiling, and custom CRISPR/dCas9 tool design.'
@@ -64,14 +64,14 @@
     </div>
   </div>
 
-  <div class="gc-12">
+  <div class="gc-12 spacer">
     <div class="image-text">
       <div class="image">
-        <img src="/illustrations/glycomics.svg" alt="">
+        <img src="/illustrations/dna.jpg" alt="">
       </div>
       <div class="text">
         <h2>{$language === 'en' ? 'DNA & Forensics' : 'DNK I Forenzika'}</h2>
-        <p>
+        <p class="text-p">
           {
             $language === 'en'
               ? 'Accurate and confidential DNA testing for paternity, kinship, and identity verification.'
