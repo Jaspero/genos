@@ -90,10 +90,16 @@
     <h3 id="1.0.">1. {$language === 'en' ? 'Glycomics' : 'Glikomika'}</h3>
     <div class="services-segment">
       <h4 id="1.1.">1.1. {$language === 'en' ? 'Technologies' : 'Tehnologije'}</h4>
-      <div class="flex">
-        <img src="" alt="">
-        <img src="" alt="">
-        <img src="" alt="">
+      <div class="services-images-row">
+        <div>
+          <img src="/images/uhplc.jpg" alt="">
+        </div>
+        <div>
+          <img src="/images/cge.jpg" alt="">
+        </div>
+        <div>
+          <img src="/images/ms.jpg" alt="">
+        </div>
       </div>
       <h5>
         {$language === 'en' ? 'UHPLC GLYCOPROFILING (1)' : 'UHPLC GLIKOPROFILIRANJE (1)'}
@@ -128,10 +134,16 @@
     </div>
     <div class="services-segment">
       <h4 id="1.2.">1.2. {$language === 'en' ? 'Sample types' : 'Vrste uzoraka'}</h4>
-      <div class="flex">
-        <img src="" alt="">
-        <img src="" alt="">
-        <img src="" alt="">
+      <div class="services-images-row">
+        <div>
+          <img src="/images/glycoprofiling/glycoprofiling-1.jpg" alt="">
+        </div>
+        <div>
+          <img src="/images/glycoprofiling/glycoprofiling-2.jpg" alt="">
+        </div>
+        <div>
+          <img src="/images/glycoprofiling/glycoprofiling-3.jpg" alt="">
+        </div>
       </div>
       <ul>
         <li>{$language === 'en' ? 'Complex biological samples' : 'Složeni biološki uzorci'}</li>
@@ -179,9 +191,6 @@
             : 'Analiza zauzetosti mjesta koristi se za izračun udjela potencijalnih N-glikozilacijskih mjesta koji su stvarno glikozilirani, mjerenjem udjela N-glikoziliranih peptida u ukupnoj količini peptida. Analiza se provodi oslobađanjem N-glikana pomoću PNGaseF u prisutnosti vode obogaćene kisikom-18 (^18O), nakon čega slijede proteolitička digestija, pročišćavanje i C18-LC-ESI-MS/MS analiza.'
         }
       </p>
-      <h5>
-        {$language === 'en' ? 'Structural characterization of glycans' : 'Strukturna karakterizacija glikana'}
-      </h5>
     </div>
     <div class="services-segment">
       <h4 id="1.4.">1.4. {$language === 'en' ? 'High-Throughput analyses' : 'Visokoprotočne analize'}</h4>
@@ -324,7 +333,7 @@
       <p>
         {
           $language === 'en'
-            ? 'Data analysis is an important aspect of the workflow Genos provides to the public. Since pure numbers, without thoughtful and meaningful explanation, are usually of little interest Genos invested significantly to its employee’s competence in statistics and computer science. Therefore, Genos now offers a wide range of statistical techniques from basic experimental methods of normalization or batch correction to standard topics like statistical inference or machine/statistical learning.'
+            ? 'Data analysis is an important aspect of the workflow that we provide for our partners and collaborators. Since pure numbers, without thoughtful and meaningful explanation, are usually of little interest, Genos invested significantly in its employee’s competence in statistics and computer science. Therefore, Genos offers a wide range of statistical techniques from basic experimental methods of normalization or batch correction to standard topics like statistical inference or machine/statistical learning.'
             : 'Analiza podataka važan je aspekt radnog procesa koji Genos pruža javnosti. Budući da čisti brojevi, bez promišljenog i značenjskog objašnjenja, obično nisu od velikog interesa, Genos je značajno investirao u kompetencije svojih zaposlenika u statistici i računalnim znanostima. Stoga, Genos sada nudi širok spektar statističkih tehnika, od osnovnih eksperimentalnih metoda normalizacije ili ispravka serije uzoraka, do standardnih tema kao što su statistička inferencija ili strojno/statističko učenje.'
         }
       </p>
@@ -334,7 +343,7 @@
       <p>
         {
           $language === 'en'
-            ? 'Genos offers consultancies in study design, under the full or partial control of the experiment, for different fields of biomedicine. The mixture of expertise from Genos employees (biologists, pharmacist, chemists, statisticians and mathematicians) ensures the quality of the study design.'
+            ? 'Genos offers consultancies in study design, under the full or partial control of the experiment, for different fields of biomedicine. The mixture of expertise from Genos employees (biologists, pharmacist, biotechnologists, chemists, chemical engineers and statisticians ) ensures the quality of the study design.'
             : 'Genos nudi konzultacije u dizajnu studija, uz potpuni ili djelomični nadzor nad eksperimentom, za različita područja biomedicine. Mješavina stručnosti zaposlenika Genosa (biologa, farmaceuta, kemičara, statističara i matematičara) jamči kvalitetu dizajna studije./statističko učenje.'
         }
       </p>
@@ -344,8 +353,8 @@
       <p>
         {@html
           $language === 'en'
-            ? 'Genos is also an active research organization. On the basis of the recommendation of the National Science Council, the Ministry of Science, Education and Sports of the Republic of Croatia issued a permit that allowed Genos to formally register as a research organization in 2007. Genos currently participates in six FP7 projects (GlycoBioM, HighGlycan, IBD-BIOM, MIMOmics, Pain-OMICS and HTP-GlycoMet).<br><br>We are constantly in search of potential collaborative projects where we can contribute with our expertise in high-throughput glycomics and extensive experience of participation in large FP7 and H2020 consortia.'
-            : 'Genos je također aktivna istraživačka organizacija. Na temelju preporuke Nacionalnog vijeća za znanost, Ministarstvo znanosti, obrazovanja i športa Republike Hrvatske izdalo je dozvolu koja je omogućila Genosu da se formalno registrira kao istraživačka organizacija 2007. godine. Genos trenutno sudjeluje u šest FP7 projekata (GlycoBioM, HighGlycan, IBD-BIOM, MIMOmics, Pain-OMICS i HTP-GlycoMet).<br><br>Stalno smo u potrazi za potencijalnim zajedničkim projektima na kojima možemo doprinijeti našom stručnošću u visokoprotočnoj glikomaniji i opsežnim iskustvom sudjelovanja u velikim FP7 i H2020 konzorcijima.'
+            ? 'Genos is an active research organization. On the basis of the recommendation of the National Science Council, the Ministry of Science, Education and Sports of the Republic of Croatia issued a permit that allowed Genos to formally register as a research organization in 2007. Genos has participated in six FP7 projects, five Horizon2020 projects and is currently active in eight Horizon Europe projects.<br><br>We are constantly in search of potential collaborative projects where we can contribute with our expertise in high-throughput glycomics and extensive experience of participation in large research consortia.'
+            : 'Genos je aktivna istraživačka organizacija. Na temelju preporuke Nacionalnog vijeća za znanost, Ministarstvo znanosti, obrazovanja i sporta Republike Hrvatske izdalo je dozvolu kojom je Genos 2007. godine službeno registriran kao istraživačka organizacija. Genos je sudjelovao u šest FP7 projekata, pet Horizon2020 projekata i trenutno je aktivan u osam projekata programa Horizon Europe.<br><br>Stalno tražimo potencijalne suradničke projekte u kojima možemo doprinijeti svojim stručnim znanjem iz područja visokoprotočne glikomike i bogatim iskustvom sudjelovanja u velikim istraživačkim konzorcijima.'
         }
       </p>
     </div>
@@ -1011,7 +1020,6 @@
             : 'Svi rezultati DNA testova su strogo povjerljivi. Biološki uzorci dostavljeni na DNA analizu uništavaju se nakon testiranja, a svi digitalni zapisi brišu se 5 godina nakon izdavanja rezultata. U tom razdoblju kopiju izdanih rezultata može zatražiti isključivo izvorni naručitelj putem pisanog zahtjeva.<br><br>DNA laboratorij Genos d.o.o. koristi najnaprednije metode DNA analize kako bi pružio točne odgovore na sve upite. Međutim, u nekim slučajevima rezultati možda neće odgovarati očekivanjima, što može imati emocionalne i društvene posljedice. Genos d.o.o. nije ovlašten pružati psihološko savjetovanje i ne može ponuditi izravnu podršku u takvim situacijama.<br><br>Ako rezultati DNA testa izazovu emocionalnu nelagodu poput nezadovoljstva, ljutnje, straha, tuge ili zabrinutosti, preporučujemo da potražite stručnu pomoć kod neke od dolje navedenih organizacija, obiteljskog liječnika ili psihologa u nadležnom centru za socijalnu skrb.<br><br>Psihološki centar TESA, tel. 01 48 28 888 / <a href="https://www.tesa.hr" target="_blank" class="underline">www.tesa.hr</a><br>Društvo za psihološku pomoć, MODUS – Centar za djecu, mlade i obitelj, tel. 01 4621 554 / <a href="https://www.dpp.hr" target="_blank" class="underline">www.dpp.hr</a>'
         }
       </p>
-
     </div>
   </div>
 </div>

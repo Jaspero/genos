@@ -42,29 +42,6 @@
     </h2>
   </div>
 
-  <div class="gc-12">
-    <div class="image-text">
-      <div class="image">
-        <img src="/images/glycanage.jpg" alt="">
-      </div>
-      <div class="text">
-        <h2>GlycanAge</h2>
-        <p class="text-p">
-          {
-            $language === 'en'
-              ? 'GlycanAge is a biological age test that measures chronic inflammation and healthspan by analyzing glycans attached to IgG antibodies. It provides science-backed insights into how lifestyle affects aging at a molecular level.'
-              : 'GlycanAge je test biološke dobi koji mjeri kroničnu upalu i trajanje zdravog života analizom glikana vezanih za IgG protutijela. Pruža znanstveno utemeljene uvide u to kako način života utječe na starenje na molekularnoj razini.'
-          }
-        </p>
-        <div>
-          <a class="button-filled" href="/{$language === 'en' ? 'glycomics' : 'glikomika'}">
-            {$language === 'en' ? 'Official website' : 'Službena stranica'}
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="gc-12 spacer">
     <div class="image-text">
       <div class="image">
@@ -94,7 +71,7 @@
         <img src="/images/lbg-card.jpg" alt="">
       </div>
       <div class="text">
-        <h2>The Library of Brain Glycans</h2>
+        <h2>Glyco database</h2>
         <p class="text-p">
           {
             $language === 'en'
@@ -104,6 +81,28 @@
         </p>
         <div>
           <a class="button-filled" href="https://lbg.human-glycome.org/" target="_blank">
+            {$language === 'en' ? 'Official website' : 'Službena stranica'}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="gc-12 spacer">
+    <div class="image-text">
+      <div class="image">
+        <img src="/images/glycanage.jpg" alt="">
+      </div>
+      <div class="text">
+        <h2>GlycanAge</h2>
+        <p class="text-p">
+          {
+            $language === 'en'
+              ? 'GlycanAge is a biological age test that measures chronic inflammation and healthspan by analyzing glycans attached to IgG antibodies. It provides science-backed insights into how lifestyle affects aging at a molecular level.'
+              : 'GlycanAge je test biološke dobi koji mjeri kroničnu upalu i trajanje zdravog života analizom glikana vezanih za IgG protutijela. Pruža znanstveno utemeljene uvide u to kako način života utječe na starenje na molekularnoj razini.'
+          }
+        </p>
+        <div>
+          <a class="button-filled" href="https://glycanage.com/" target="blank">
             {$language === 'en' ? 'Official website' : 'Službena stranica'}
           </a>
         </div>
