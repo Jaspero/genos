@@ -31,7 +31,7 @@
   <div class="gc-12 spacer">
     <div class="image-text">
       <div class="image">
-        <img src="/images/hgp.jpg" alt="the human glycome project">
+        <img src="/images/hgp-card.jpg" alt="the human glycome project">
       </div>
       <div class="text">
         <h2>The Human Glycome Project</h2>
