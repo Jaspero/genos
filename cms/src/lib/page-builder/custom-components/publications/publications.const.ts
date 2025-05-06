@@ -1,5 +1,26 @@
 export const PUBLICATIONS = [
   {
+    paper: 'Statin effects on immunoglobulin-G glycomic architecture and the link to cardiovascular disease',
+    authors: 'Yazdani A',
+    date: 2025,
+    doi: '10.21203/rs.3.rs-6112380/v1',
+    journal: 'Research Square'
+  },
+  {
+    paper: 'Total cell N-glycosylation is altered during differentiation of induced pluripotent stem cells to neural stem cells and is disturbed by trisomy 21',
+    authors: 'Cindrić A',
+    date: 2025,
+    doi: '10.1016/j.bbadva.2024.100137',
+    journal: 'BBA Advances'
+  },
+  {
+    paper: 'Phosphorylation of N-glycans in the brain: The case for a non-canonical pathway?',
+    authors: 'Sironić L',
+    date: 2025,
+    doi: '10.1016/j.bbadva.2024.100134',
+    journal: 'BBA Advances'
+  },
+  {
     paper: `Estimation of human age using N-glycan profiles from bloodstains`,
     authors: `Gudelj I, Keser T, Vučković F, Škaro V, Goreta SŠ, Pavić T, Dumić J, Primorac D, Lauc G, Gornik O.`,
     date: 2015,
@@ -39,7 +60,7 @@ export const PUBLICATIONS = [
     authors: `Lauc G, Pezer M, Rudan I, Campbell H.`,
     date: 2015,
     doi: `10.1016/j.bbagen.2015.10.016`,
-    journal: `ScienceDirecBiochimica et Biophysica Acta`
+    journal: `ScienceDirect - Biochimica et Biophysica Acta`
   },
   {
     paper: `High-throughput glycomics: optimization of sample preparation`,
@@ -1439,7 +1460,7 @@ export const PUBLICATIONS = [
     authors: `Lauc G.`,
     date: 2024,
     doi: `10.1080/14728222.2023.2277218`,
-    journal: `Expert Opin Ther Targets`
+    journal: `Expert Opinion on Therapeutic Targets`
   },
   {
     paper: `Human-specific features and developmental dynamics of the brain N-glycome`,
@@ -1481,7 +1502,7 @@ export const PUBLICATIONS = [
     authors: `Štambuk T, Kifer D, Greto VL, Dempster NJ, Cvetko A, Gillies RS, Tomlinson JW, Sgromo B, Mineo C, Shaul PW, Lauc G, Lingvay I, Geremia A, Arancibia-Cárcamo CV.`,
     date: 2024,
     doi: `10.1016/j.soard.2024.01.007`,
-    journal: `Surg Obes Relat Dis`
+    journal: `Surgery for Obesity and Related Diseases`
   },
   {
     paper: `Anastrozole and Tamoxifen Impact on IgG Glycome Composition Dynamics in Luminal A and Luminal B Breast Cancers`,
@@ -1551,7 +1572,7 @@ export const PUBLICATIONS = [
     authors: `Gilroy R, Lauc G.`,
     date: 2024,
     doi: `10.1080/14728222.2024.2375809`,
-    journal: `Expert Opin Ther Targets`
+    journal: `Expert Opinion on Therapeutic Targets`
   },
   {
     paper: `A unique serum IgG glycosylation signature predicts development of Crohn's disease and is associated with pathogenic antibodies to mannose glycan`,
@@ -1960,4 +1981,3 @@ export const PUBLICATIONS = [
     journal: 'Kidney international'
   }
 ]
-

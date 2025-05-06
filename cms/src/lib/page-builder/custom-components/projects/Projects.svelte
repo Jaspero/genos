@@ -185,7 +185,10 @@
                         {project.title}.
                       {/if}
                       <button class="details-toggle" on:click={() => selectedProject = selectedProject === project ? '' : project}>
-                        {selectedProject === project ? 'Less' : 'More'} details
+                        {
+                          selectedProject === project
+                            ? ($language === 'en' ? 'Less details' : 'Manje detalja')
+                            : ($language === 'hr' ? 'More details' : 'Više detalja')}
                       </button>
                     </p>
                     {#if selectedProject === project}
@@ -238,7 +241,10 @@
                           {#if selectedProject.projectLead}
                             <tr>
                               <td>Project Lead:</td>
-                              <td>{selectedProject.projectLead}</td>
+                              <td>
+                                {#if $language === 'hr'}{selectedProject.jobTitle?.hr}{/if}
+                                {selectedProject.projectLead}{#if $language === 'en'}{selectedProject.jobTitle?.en}{/if}
+                              </td>
                             </tr>
                           {/if}
                           {#if selectedProject.genosContribution}

@@ -2,6 +2,7 @@
 
 <script lang="ts">
   import {TEAM} from './team.const';
+  import {language} from '$lib/page-builder/stores/language';
 
   let selectedMember: any = '';
 
@@ -27,7 +28,7 @@
             <img src="/team/{member.img}.jpg" alt="">
           </div>
           <h2>
-            {member.name}
+            {#if $language === 'hr'}{member.title?.[0]?.hr || ''}{/if} {member.name}{#if $language === 'en'}{member.title?.[0]?.en || ''}{/if}
           </h2>
           <h3>
             {member.job}

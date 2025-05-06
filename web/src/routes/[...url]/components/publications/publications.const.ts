@@ -1,5 +1,26 @@
 export const PUBLICATIONS = [
   {
+    paper: 'Statin effects on immunoglobulin-G glycomic architecture and the link to cardiovascular disease',
+    authors: 'Yazdani A',
+    date: 2025,
+    doi: '10.21203/rs.3.rs-6112380/v1',
+    journal: 'Research Square'
+  },
+  {
+    paper: 'Total cell N-glycosylation is altered during differentiation of induced pluripotent stem cells to neural stem cells and is disturbed by trisomy 21',
+    authors: 'Cindrić A',
+    date: 2025,
+    doi: '10.1016/j.bbadva.2024.100137',
+    journal: 'BBA Advances'
+  },
+  {
+    paper: 'Phosphorylation of N-glycans in the brain: The case for a non-canonical pathway?',
+    authors: 'Sironić L',
+    date: 2025,
+    doi: '10.1016/j.bbadva.2024.100134',
+    journal: 'BBA Advances'
+  },
+  {
     paper: `Estimation of human age using N-glycan profiles from bloodstains`,
     authors: `Gudelj I, Keser T, Vučković F, Škaro V, Goreta SŠ, Pavić T, Dumić J, Primorac D, Lauc G, Gornik O.`,
     date: 2015,
@@ -1960,4 +1981,3 @@ export const PUBLICATIONS = [
     journal: 'Kidney international'
   }
 ]
-

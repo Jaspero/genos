@@ -458,7 +458,11 @@ export const PROJECTS = [
             startDate: '28/03/2011',
             projectDuration: '15 months',
             pdf: '7-2.pdf',
-            projectLead: "Dr. Vedrana Škaro",
+            projectLead: 'Vedrana Škaro',
+            jobTitle: {
+              hr: 'Dr.Sc.',
+              en: ', PhD'
+            },
             projectValue: "831,800.00 HRK"
           }
         ]
@@ -473,7 +477,11 @@ export const PROJECTS = [
             startDate: '01/01/2014',
             projectDuration: '12 months',
             pdf: '8-1.pdf',
-            projectLead: "dr.sc. Mislav Novokmet",
+            projectLead: 'Mislav Novokmet',
+            jobTitle: {
+              hr: 'Dr.Sc.',
+              en: ', PhD'
+            },
             projectValue: "699,795.23 HRK"
           },
           {
@@ -482,7 +490,11 @@ export const PROJECTS = [
             startDate: '01/06/2011',
             projectDuration: '6 months',
             pdf: '8-2.pdf',
-            projectLead: "dr. sc. Ana Knežević",
+            projectLead: "Ana Knežević",
+            jobTitle: {
+              hr: 'Dr.Sc.',
+              en: ', PhD'
+            },
             projectValue: "707,331.00 HRK"
           }
         ]
@@ -511,7 +523,11 @@ export const PROJECTS = [
             startDate: '01/12/2010',
             projectDuration: '6 months',
             pdf: '10-1.pdf',
-            projectLead: "dr. sc. Ana Knežević",
+            projectLead: 'Ana Knežević',
+            jobTitle: {
+              hr: 'Dr.Sc.',
+              en: ', PhD'
+            },
             projectValue: "445,700.00 HRK"
           }
         ]
@@ -526,7 +542,11 @@ export const PROJECTS = [
             startDate: '01/06/2010',
             projectDuration: '36 months',
             pdf: '11-1.pdf',
-            projectLead: "Prof. Dr. Igor Rudan",
+            projectLead: 'Igor Rudan',
+            jobTitle: {
+              hr: 'Dr.Sc.',
+              en: ', PhD'
+            },
           },
         ]
       },
@@ -540,7 +560,11 @@ export const PROJECTS = [
             startDate: '26/03/2010',
             projectDuration: '36 months',
             pdf: '12-1.pdf',
-            projectLead: "Dr. Sc. Damir Marjanović",
+            projectLead: 'Damir Marjanović',
+            jobTitle: {
+              hr: 'Dr.Sc.',
+              en: ', PhD'
+            },
             projectValue: "1,810,000.00 HRK"
           },
         ]
@@ -555,7 +579,11 @@ export const PROJECTS = [
             startDate: '02/01/2007',
             projectDuration: '35 months',
             pdf: '13-1.pdf',
-            projectLead: "Dr. Sc. Damir Marjanović",
+            projectLead: 'Damir Marjanović',
+            jobTitle: {
+              hr: 'Dr.Sc.',
+              en: ', PhD'
+            },
             projectValue: "233,315.36 HRK"
           },
         ]
