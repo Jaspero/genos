@@ -17,23 +17,6 @@ export const TEAM = [
     ]
   },
   {
-    group: 'Head of Glycomics',
-    members: [
-      {
-        name: 'Irena Trbojević Akmačić',
-        title: [
-          {
-            hr: 'Dr.sc.',
-            en: ', PhD'
-          }
-        ],
-        job: 'Head of Glycomics',
-        img: 'akmacic',
-        description: 'Irena Trbojević Akmačić is an accomplished biochemist and analytical chemist, currently serving as the Head of Glycomics at Genos, where she provides scientific and strategic leadership across glycomics technologies, driving innovation and integration of high-throughput analytical platforms in research and commercial projects.<br><br>NIrena began her scientific journey during her graduate studies in chemistry at the Faculty of Science, University of Zagreb, volunteering at the Ruđer Bošković Institute, Laboratory for Molecular Genetics, working on recombinant protein expression, purification, and biochemical characterization; she earned her Master’s degree in chemistry with research on the cloning and isolation of elongation factor Tu from E. coli and its interactions with aminoacylated tRNA^Leu, and received her PhD in Biochemistry in 2015, focusing on the analysis of IgG glycosylation in inflammatory bowel disease; she further expanded her expertise at Johns Hopkins University, Baltimore, and the Max Planck Institute for Dynamics of Complex Technical Systems in Magdeburg, working on glycan analysis methods and MALDI-MS characterization of N-glycans.<br><br>Since joining Genos, Irena has held multiple leadership roles including Deputy Head, Acting Head, Head of the UHPLC Laboratory for Glycan Analysis, and Head of the Laboratory for High-throughput Glycomics, leading a multidisciplinary team on the development, optimization, and application of advanced glycomics workflows; in her current role as Head of Glycomics, she provides cross-platform strategic leadership aligning innovation with Genos’s scientific vision and global collaborations; she has mentored two PhD students and numerous junior researchers, authored/co-authored over 60 scientific publications and book chapters (Google Scholar H-index: 37, >4000 citations), actively contributed to national and EU-funded projects (FP7, H2020), and regularly participates in conferences, symposia, and expert trainings in glycoscience.'
-      },
-    ]
-  },
-  {
     group: 'Vice Head of Research Laboratory',
     members: [
       {
@@ -48,6 +31,23 @@ export const TEAM = [
         img: 'bakovic',
         description: 'Maja Pučić Baković joined Genos Ltd. in 2008 as a researcher, and her exceptional contributions and leadership qualities led to her appointment as the Head of the Glycobiology laboratory in 2012. <br><br> In this role, she is responsible for coordinating and supervising lab activities and PhD students, managing project writing and reporting, implementing new procedures, and maintaining lab equipment and supplies. <br><br> In 2018, she assumed the position of Head of Glycoprofiling, where she focuses on method development, managing research within European and national funded projects and grants, and establishing collaborations with potential partners. <br><br> Maja completed her Master\'s degree in Molecular Biology at the University of Zagreb, Faculty of Science in 2008, and later obtained her PhD in Biochemistry and Molecular Biology from the same university in 2013. <br><br> During her doctoral training, Maja conducted research at renowned institutions such as the Proteomics Core of COBRE Center for Cancer Research and Development at Rhode Island Hospital in Providence, USA, the Biomolecular Mass Spectrometry Unit at the Leiden University Medical Center in Leiden, the Netherlands, and BIA Separations Ltd in Slovenia. <br><br> Her international collaborations and research excellence were recognized through prestigious awards, including the Collaborative Experimental Scholarship from FEBS in 2010, the Young Scientist Award for 2011 from the Croatian Society of Biochemistry and Molecular Biology, and the Best Publication Award for 2011 from the Croatian Immunological Society.'
       }
+    ]
+  },
+  {
+    group: 'Head of Glycomics',
+    members: [
+      {
+        name: 'Irena Trbojević Akmačić',
+        title: [
+          {
+            hr: 'Dr.sc.',
+            en: ', PhD'
+          }
+        ],
+        job: 'Head of Glycomics',
+        img: 'akmacic',
+        description: 'Irena Trbojević Akmačić is an accomplished biochemist and analytical chemist, currently serving as the Head of Glycomics at Genos, where she provides scientific and strategic leadership across glycomics technologies, driving innovation and integration of high-throughput analytical platforms in research and commercial projects.<br><br>NIrena began her scientific journey during her graduate studies in chemistry at the Faculty of Science, University of Zagreb, volunteering at the Ruđer Bošković Institute, Laboratory for Molecular Genetics, working on recombinant protein expression, purification, and biochemical characterization; she earned her Master’s degree in chemistry with research on the cloning and isolation of elongation factor Tu from E. coli and its interactions with aminoacylated tRNA^Leu, and received her PhD in Biochemistry in 2015, focusing on the analysis of IgG glycosylation in inflammatory bowel disease; she further expanded her expertise at Johns Hopkins University, Baltimore, and the Max Planck Institute for Dynamics of Complex Technical Systems in Magdeburg, working on glycan analysis methods and MALDI-MS characterization of N-glycans.<br><br>Since joining Genos, Irena has held multiple leadership roles including Deputy Head, Acting Head, Head of the UHPLC Laboratory for Glycan Analysis, and Head of the Laboratory for High-throughput Glycomics, leading a multidisciplinary team on the development, optimization, and application of advanced glycomics workflows; in her current role as Head of Glycomics, she provides cross-platform strategic leadership aligning innovation with Genos’s scientific vision and global collaborations; she has mentored two PhD students and numerous junior researchers, authored/co-authored over 60 scientific publications and book chapters (Google Scholar H-index: 37, >4000 citations), actively contributed to national and EU-funded projects (FP7, H2020), and regularly participates in conferences, symposia, and expert trainings in glycoscience.'
+      },
     ]
   },
   {
@@ -374,6 +374,18 @@ export const TEAM = [
         description: 'Borna Rapčan joined Genos in December 2023 as a researcher, focusing on bioinformatics and the study of hormonal influences on glycosylation. He has authored several scientific papers and actively participates in research projects. Borna obtained his Master’s degree in 2019 and is set to complete his PhD in Medical Biochemistry in 2025 from the Faculty of Pharmacy and Biochemistry, University of Zagreb.'
       },
       {
+        name: 'Tomislav Friganović',
+        title: [
+          {
+            hr: 'Dr.sc.',
+            en: ', PhD'
+          }
+        ],
+        job: 'Senior Researcher',
+        img: 'friganovic',
+        description: 'Tomislav holds a Bachelor’s and a Master’s degree in Chemistry from the Faculty of Science, University of Zagreb, with a specialization in Inorganic and Physical Chemistry. <br><br> He has worked as a research assistant at the Faculty of Pharmacy and Biochemistry, University of Zagreb, and as an expert associate at the Department of Physics, Faculty of Science, University of Zagreb. <br><br> His scientific background primarily includes fluorescence spectroscopy, particularly attenuation corrections and microplate reader applications, as well as glycochemistry, with a focus on studying the thermodynamics of human transferrin glycoforms binding with iron(III) chelates. <br><br> He also has substantial experience in liquid chromatography.'
+      },
+      {
         name: 'Genadij Razdorov',
         job: 'Senior Researcher',
         img: 'razdorov',
@@ -386,90 +398,79 @@ export const TEAM = [
     members: [
       {
         name: 'Helena Deriš',
-        job: 'Research PhD Student',
+        job: 'Junior Researcher',
         img: 'deris',
         description: 'Since joining Genos in June 2018 as a Laboratory Analyst, Helena specializes in protein glycosylation analysis using ultra-performance liquid chromatography, particularly focusing on IgG and fibrinogen glycans. She is currently pursuing a Ph.D. at the University of Zagreb, Faculty of Science, Department of Chemistry, expanding her knowledge in the field of glycobiology. <br><br> Helena obtained a degree in Pharmacy - Research and Development of new drugs from the University of Zagreb, Faculty of Pharmacy and Biochemistry in October 2017. Her research during her studies focused on transferrin chemistry and glycosylation, earning recognition with the University of Zagreb Rector\'s award for her work on the redox potential of holo-transferrin. She gained practical experience through a six-month internship at Roche Diabetes Care\'s Competitive Intelligence Department in Mannheim, Germany.'
       },
       {
         name: 'Filip Kliček',
-        job: 'Research PhD Student',
+        job: 'Junior Researcher',
         img: 'klicek',
         description: 'Filip Kliček is pursuing a PhD with his main focus in the development and optimization of new LC-MS methods for analyzing plasma and IgG glycans in humans and other vertebrates. <br><br> Filip holds a Master\'s degree in chemistry from the University of Zagreb, which he obtained in 2018. During his time at Genos Ltd., he conducted research for his master\'s thesis, exploring the impact of salinomycin on the N-glycome of cancer stem cells using liquid chromatography coupled with mass spectrometry.'
       },
       {
         name: 'Fran Lukšić',
-        job: 'Research PhD student',
+        job: 'Junior Researcher',
         img: 'luksic',
         description: 'Fran Lukšić joined the Genos team in March 2024, where he continues his research on key transcription factors involved in the development and regulation of pancreatic beta cells. <br><br> Fran obtained his Master’s degree in Molecular Biology from the University of Zagreb, Faculty of Science, in 2021 and started his PhD in the Group for Epigenetics led by Professor Vlatka Zoldoš in the same year.'
       },
       {
         name: 'Nikol Mraz',
-        job: 'Research PhD student',
+        job: 'Junior Researcher',
         img: 'mraz',
         description: 'Since June 2022, Nikol has been working as a Laboratory Analyst at Genos Ltd, Glycoscience Research Laboratory in Zagreb, Croatia. Her primary focus is on high-throughput glycomics, where she specializes in the analysis of complex glycan structures. <br><br> Nikol Mraz completed her studies in Laboratory Biomedicine at the University of Ljubljana, Faculty of Pharmacy in September 2021. As part of her academic journey, she conducted research for her Master\'s Thesis titled "Suitability of selected fluorescent probes for long-term live-cell imaging" at Jožef Stefan Institute in Ljubljana. <br><br> She is currently pursuing a Ph.D. at the Faculty of Science, University of Zagreb, Department of Biology, specializing in glycobiology with a focus on brain glycans.'
       },
       {
         name: 'Martina Vinicki',
-        job: 'Research PhD student',
+        job: 'Junior Researcher',
         img: 'vinicki',
         description: 'Martina Vinicki joined Genos Ltd. in 2021 as a Laboratory Analyst, specializing in protein glycosylation using ultra-performance liquid chromatography with a focus on IgG and plasma glycans. <br><br> Martina graduated with a degree in Molecular Biotechnology from the University of Zagreb, Faculty of Food Technology and Biotechnology in 2019 with her master\'s thesis titled "Biological evaluation of synthesized methoxyflavones." During her academic journey, Martina actively participated in conferences on Food Biotechnology, further enhancing her knowledge and understanding of the subject. <br><br> To expand her practical skills, Martina completed an internship at the Andrija Štampar Teaching Institute of Public Health. During this time, she gained hands-on experience with diagnostic procedures and methods such as PCR, real-time PCR, multiplex PCR, ELISA, Western blot, ELFA, and ITFA, and their applications in the Clinical Microbiology Service. <br><br> Martina Vinicki is currently pursuing a Ph.D. as a researcher in the Initialise project, further expanding her expertise and knowledge in the field.'
       },
       {
         name: 'Matko Fančović',
-        job: 'Research PhD student',
+        job: 'Junior Researcher',
         img: 'fancovic',
         description: 'Matko Fančović is a PhD student at the Faculty of Chemical Engineering and Technology (FKIT) in Zagreb and works as a Research PhD student at Genos. <br><br> Proficient in UHPLC/HPLC and CE, Matko contributes to the development of automated glycosylation analysis processes and plays an important role in the innovative glycan-based test for biological age. With a background in organic molecule synthesis and the development of magnetic particles for medical purposes, he successfully completed his Master’s Degree in Chemical Engineering in 2023. <br><br> He brings not only strong scientific acumen but also programming proficiency, excelling in Python for data analysis and process automation. Furthermore, Matko possesses comprehensive knowledge in polymer characterization techniques such as FTIR, DMA, and TGA. This breadth of expertise equips him to provide valuable insights and contribute effectively to Genos.'
       },
       {
         name: 'Ivana Duvnjak Orešković',
-        job: 'Research PhD student',
+        job: 'Junior Researcher',
         img: 'oreskovic',
         description: 'Since October 2017, Ivana Duvnjak Orešković has been a valuable member of the Genos team, primarily working in the DNA analysis laboratory. <br><br> In January 2023, she expanded her role by joining the glycomics laboratory at Genos, which specializes in high-throughput glycomics. <br><br> Ivana holds a master\'s degree in Genetics and Animal Breeding, which she obtained in 2017 from the Faculty of Agriculture. Her master\'s thesis was titled "Variability of Cattle Mitochondrial DNA". <br><br> She is currently pursuing a Ph.D. at the University of Osijek.'
       },
-    ]
-  },
-  {
-    group: 'Analysts',
-    members: [
       {
         name: 'Ivan Petrić',
-        job: 'Laboratory Analyst',
+        job: 'Junior Researcher',
         img: 'petric',
         description: 'Since February 2023, Ivan Petrić has been working as a laboratory analyst at the Glycobiology Laboratory in Genos Ltd. <br><br> Ivan completed his master\'s degree in applied chemistry at the University of Zagreb, Faculty of Chemical Engineering and Technology in 2021. <br><br> His master\'s thesis was titled "Li-polymer batteries: electrochemical properties and degradation".'
       },
       {
         name: 'Lara Butumović',
-        job: 'Laboratory analyst',
+        job: 'Junior Researcher',
         img: 'butumovic',
         description: 'Lara Butumović holds a Master\'s degree in Food Safety Management and a Bachelor\'s degree in Biotechnology from the Faculty of Food Technology and Biotechnology, University of Zagreb. <br><br> During her studies, she gained valuable experience working in the Laboratory of Biology and Genetics of Microorganisms, where she completed her master\'s thesis and developed a passion for experimental research. <br><br> She is currently part of the capillary electrophoresis team at Genos, focusing on analyses related to the glycan-based test for biological age.'
       },
       {
         name: 'Dora Stergar',
-        job: 'Laboratory analyst',
+        job: 'Junior Researcher',
         img: 'stergar',
         description: 'Dora Stergar joined Genos in December 2024 as a laboratory analyst in the DNA laboratory, working primarily on DNA analyses in the context of paternity and kinship. <br><br> Dora graduated with a Bachelor\'s degree in Animal Sciences from the Faculty of Agriculture in Zagreb. <br><br> In 2021, she earned her Master\'s degree in Animal Genetics and Breeding. Her master\'s thesis was titled "Darwin\'s Theory of Evolution and Animal Selection." <br><br> During her studies, she participated in numerous exercises in DNA analysis laboratories and completed her professional practice at the Ruđer Bošković Institute, gaining valuable hands-on experience in scientific research.'
       },
       {
         name: 'Antea Posavec',
-        job: 'Laboratory analyst',
+        job: 'Junior Researcher',
         img: 'posavec',
         description: 'Antea Posavec joined Genos Ltd. as a Laboratory Analyst in December 2024, shortly after graduating that same year. <br><br> As a current member of the CGE team, she is focusing on the GlycanAge test for biological age determination. <br><br> Antea holds a Master’s degree in Applied Chemistry from the University of Zagreb, Faculty of Chemical Engineering and Technology. <br><br> Throughout her studies, she gained valuable experience in (green) organic synthesis and the structural characterization of organic compounds. <br><br> For her Master’s Thesis, she conducted research at Selvita Ltd., where she worked on optimizing electrochemical organic reactions. <br><br> During this time, she gained hands-on experience with UPLC-MS/UV and further developed her skills in 1D and 2D NMR spectrum analysis.'
       },
       {
-        name: 'Tomislav Friganović',
-        job: 'Laboratory analyst',
-        img: 'friganovic',
-        description: 'Tomislav holds a Bachelor’s and a Master’s degree in Chemistry from the Faculty of Science, University of Zagreb, with a specialization in Inorganic and Physical Chemistry. <br><br> He has worked as a research assistant at the Faculty of Pharmacy and Biochemistry, University of Zagreb, and as an expert associate at the Department of Physics, Faculty of Science, University of Zagreb. <br><br> His scientific background primarily includes fluorescence spectroscopy, particularly attenuation corrections and microplate reader applications, as well as glycochemistry, with a focus on studying the thermodynamics of human transferrin glycoforms binding with iron(III) chelates. <br><br> He also has substantial experience in liquid chromatography.'
-      },
-      {
         name: 'Iva Grubeša',
-        job: 'Laboratory Analyst',
+        job: 'Junior Researcher',
         img: 'grubesa',
         description: 'Iva holds a degree in Pharmacy from the Faculty of Pharmacy and Biochemistry at the University of Zagreb. She completed her diploma thesis titled \'Comparison of LC-MS and nano-LC-MS methods for the analysis of N-glycosylation of alpha-1-acid glycoprotein\' at the Department of Biochemistry and Molecular Biology. <br><br> As a Junior Researcher, she is a member of the MS team, contributing to projects that investigate the glycosylation of IgG and other representative components of the host’s innate and adaptive immune systems.'
       },
       {
         name: 'Lucija Dončević',
-        job: 'Laboratory Analyst',
+        job: 'Junior Researcher',
         img: 'doncevic',
         description: 'Lucija completed her Bachelor’s degree in Chemistry at the Josip Juraj Strossmayer University of Osijek. Later she obtained her Master’s degree in Analytical Chemistry and Biochemistry from the Faculty of Science, University of Zagreb, where she is currently pursuing her PhD in Analytical Chemistry.<br><br>Her research focuses on the chromatographic separation of glycoproteins. She has a strong background in bacterial and tissue proteome extraction for de novo protein elucidation and specie identification. Lucija has extensive experience in chromatography and mass spectrometry for protein analysis, including the optimization of chromatographic methods for protein and peptide purification and fractionation procedures.'
       }
@@ -510,13 +511,13 @@ export const TEAM = [
       },
       {
         name: 'Dora Lalić',
-        job: 'Project Implementation and Public Procurement Specialist',
+        job: 'Research Manager',
         img: 'lalic',
         description: 'Dora earned a Bachelor’s degree in Biology and a Master’s in Molecular Biology from the Faculty of Science, University of Zagreb. Her Master\'s research focused on the epigenetic manipulation of glycosylation-associated genes in a pancreatic cell model. In 2023, she joined GlycanAge, a spin-off of Genos, before recently becoming part of the Genos team.'
       },
       {
         name: 'Paula Franceković',
-        job: 'Administrative Asistant',
+        job: 'Research Manager',
         img: 'francekovic',
         description: 'Paula holds a Bachelor’s in Nutrition from the Faculty of Food Technology and Biotechnology in Zagreb and a Master’s in Human Nutrition from the Faculty of Science, University of Copenhagen. Her Master\'s research focused on the nutritional therapies for endothelial glycocalyx regeneration and was published in Nutrients. She spent two years as lead nutritionist at a private health center, while also working with GlycanAge to help clients interpret their glycan results and apply them to improve health. In 2024, she officially joined GlycanAge to support Partner education and guide the clinical use of the test. Most recently, she became part of the Genos team, continuing her work at the intersection of science and practice.'
       },

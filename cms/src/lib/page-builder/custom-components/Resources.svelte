@@ -35,6 +35,37 @@
   </div>
 </div>
 
+<div class="grid grid-large resources">
+  <div class="gc-12">
+    <div class="image-text">
+      <div class="text">
+        <h2>{$language === 'en' ? 'Why glycans?' : 'Zašto glikani?'}</h2>
+        <p class="text-p">
+          {@html
+            $language === 'en'
+              ? 'Glycosylation is one of the most important posttranslational modifications found in organisms from bacteria to humans. The addition of glycans, branched oligosaccharides, determines the structure and function of proteins and other macromolecules.<br><br>However, unlike the other three types of macromolecules (nucleic acids, lipids, and proteins), glycans are still on the margins of contemporary science. If proteins are the main workforce in living organisms, secondary modifications are the tools that give each one its functional purpose. And glycans are the pinnacle of life\'s toolkit.<br><br>The level of molecular complexity achieved by glycosylation increases the proteome diversity to orders of magnitude greater than any other secondary modification. Over half of all existing proteins are glycosylated, as well as virtually all secreted proteins. Many of them take on the role of biomarkers or therapeutics in modern biomedicine - a role for which glycosylation is essential.<br><br>Determining exact glycosylation patterns is not only important in research and development but also in clinical settings where they can serve prognostic as well as diagnostic purposes. Personalized and targeted medicine can hardly exist without taking glycans into account.<br><br>Additionally, glycosylation of biopharmaceuticals can have a significant impact on their effectiveness and safety. Failure to characterize it can result in increased heterogeneity, unsatisfactory clinical outcomes, or even legal consequences.<br><br>GENOS specializes in high-throughput glycan analysis using methods developed over 15 years of experience in academia and partnerships with clients in the clinical, pharmaceutical, and biotech industries.'
+              : 'Glikozilacija je jedna od najvažnijih posttranslacijskih modifikacija prisutna u organizmima od bakterija do ljudi. Dodavanje glikana, razgranatih oligosaharida, određuje strukturu i funkciju proteina i drugih makromolekula.<br><br>Međutim, za razliku od preostale tri vrste makromolekula (nukleinskih kiselina, lipida i proteina), glikani se i dalje nalaze na marginama suvremene znanosti. Ako su proteini glavna radna snaga živih organizama, sekundarne modifikacije su alati koji svakom od njih daju funkcionalnu svrhu. A glikani su vrhunac tog životnog alata.<br><br>Razina molekularne složenosti koju omogućuje glikozilacija povećava raznolikost proteoma za nekoliko redova veličine više nego bilo koja druga sekundarna modifikacija. Više od polovice svih postojećih proteina je glikozilirano, uključujući gotovo sve sekretorne proteine. Mnogi od njih imaju ulogu biomarkera ili terapijskih sredstava u modernoj biomedicini – ulogu za koju je glikozilacija ključna.<br><br>Određivanje točnih obrazaca glikozilacije nije važno samo u istraživanju i razvoju, već i u kliničkom okruženju gdje može imati prognostičku i dijagnostičku vrijednost. Personalizirana i ciljana medicina teško da mogu postojati bez uzimanja glikana u obzir.<br><br>Osim toga, glikozilacija biofarmaceutika može imati značajan utjecaj na njihovu učinkovitost i sigurnost. Neuspjeh u karakterizaciji može dovesti do povećane heterogenosti, nezadovoljavajućih kliničkih ishoda ili čak pravnih posljedica.<br><br>GENOS je specijaliziran za visokoprotočnu analizu glikana koristeći metode razvijene kroz više od 15 godina iskustva u akademskoj zajednici i suradnji s klijentima iz kliničke, farmaceutske i biotehnološke industrije.'
+          }
+        </p>
+      </div>
+      <div class="images">
+        <div class="image">
+          <img src="/images/why-1.jpg" alt="">
+        </div>
+        <div class="image">
+          <img src="/images/why-2.jpg" alt="">
+        </div>
+        <div class="image">
+          <img src="/images/why-3.jpg" alt="">
+        </div>
+        <div class="image">
+          <img src="/images/why-4.jpg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="grid grid-large labs">
   <div class="gc-12">
     <h2 class="title">
@@ -71,16 +102,16 @@
         <img src="/images/lbg-card.jpg" alt="">
       </div>
       <div class="text">
-        <h2>Glyco database</h2>
+        <h2>Glyco databases</h2>
         <p class="text-p">
           {
             $language === 'en'
-              ? 'The Library of Brain Glycans is a comprehensive database by Genos, cataloging brain-specific glycans to support research on their role in neurological function, aging, and disease.'
-              : 'The Library of Brain Glycans je sveobuhvatna baza podataka koju je razvio Genos, a katalogizira glikane specifične za mozak kako bi podržala istraživanja njihove uloge u neurološkim funkcijama, starenju i bolestima.'
+              ? 'A number of glycobiology databases have been developed to store, analyze, and integrate data related to glycan structures, glycosylation sites, and associated glycogenes.'
+              : 'Brojne glikobiološke baze podataka razvijene su za pohranu, analizu i integraciju podataka koji se odnose na strukture glikana, glikozilacijska mjesta, i povezane glikogene.'
           }
         </p>
         <div>
-          <a class="button-filled" href="https://lbg.human-glycome.org/" target="_blank">
+          <a class="button-filled" href="https://human-glycome.org/glyco-databases" target="_blank">
             {$language === 'en' ? 'Official website' : 'Službena stranica'}
           </a>
         </div>

@@ -71,16 +71,16 @@
         <img src="/images/lbg-card.jpg" alt="">
       </div>
       <div class="text">
-        <h2>Glyco database</h2>
+        <h2>Glyco databases</h2>
         <p class="text-p">
           {
             $language === 'en'
-              ? 'The Library of Brain Glycans is a comprehensive database by Genos, cataloging brain-specific glycans to support research on their role in neurological function, aging, and disease.'
-              : 'The Library of Brain Glycans je sveobuhvatna baza podataka koju je razvio Genos, a katalogizira glikane specifične za mozak kako bi podržala istraživanja njihove uloge u neurološkim funkcijama, starenju i bolestima.'
+              ? 'A number of glycobiology databases have been developed to store, analyze, and integrate data related to glycan structures, glycosylation sites, and associated glycogenes.'
+              : 'Brojne glikobiološke baze podataka razvijene su za pohranu, analizu i integraciju podataka koji se odnose na strukture glikana, glikozilacijska mjesta, i povezane glikogene.'
           }
         </p>
         <div>
-          <a class="button-filled" href="https://lbg.human-glycome.org/" target="_blank">
+          <a class="button-filled" href="https://human-glycome.org/glyco-databases" target="_blank">
             {$language === 'en' ? 'Official website' : 'Službena stranica'}
           </a>
         </div>
