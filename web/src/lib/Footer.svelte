@@ -39,7 +39,6 @@
         }
       </a>
     </div>
-    <div class="flex-1"></div>
     <div class="subfooter-contact">
       <a href="mailto:info@genos.hr">info@genos.hr</a>
       <span>© 2025 Genos Glyco</span>
@@ -56,6 +55,10 @@
         height: 29rem;
         padding: 3.5rem 3.5rem 2rem;
         gap: 3rem;
+        @media (max-width: 600px) {
+            gap: 1rem;
+            padding: 1.5rem;
+        }
     }
 
     .footer-logo {
@@ -74,6 +77,11 @@
         padding-top: 2rem;
         font-weight: 600;
         color: white;
+        @media (max-width: 600px) {
+            flex-direction: column;
+            padding-top: 1.5rem;
+            gap: 1rem;
+        }
     }
 
     .subfooter a {
@@ -90,6 +98,10 @@
         gap: .5rem;
     }
 
+    .subfooter-legal {
+        flex: 1 1 0;
+    }
+
     .subfooter-legal, .subfooter-contact {
         display: flex;
         gap: 1.5rem;
@@ -102,5 +114,7 @@
         left: 0;
         width: 100%;
         height: 100%;
+        border-radius: .5rem;
+        object-fit: cover;
     }
 </style>

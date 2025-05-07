@@ -10,6 +10,7 @@ export * from './ImageGallery.svelte';
 export * from './Navigation.svelte';
 export * from './Leaders.svelte';
 export * from './Plug.svelte';
+export * from './Contact.svelte';
 export * from './About.svelte';
 export * from './HeroContentLanding.svelte';
 export * from './Footer.svelte';

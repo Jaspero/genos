@@ -834,6 +834,18 @@ export const TYPES = (editor: Editor, forms: PageBuilderForm[]) => [
     }
   },
   {
+    id: 'pb-contact',
+    isComponent: (el: HTMLElement) => el.tagName === 'PB-CONTACT',
+    model: {
+      defaults: {
+        tagName: 'pb-contact',
+        cName: 'Contact',
+        draggable: true,
+        droppable: false,
+      }
+    }
+  },
+  {
     id: 'pb-footer',
     isComponent: (el: HTMLElement) => el.tagName === 'PB-FOOTER',
     model: {

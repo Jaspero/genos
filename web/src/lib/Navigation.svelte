@@ -91,7 +91,6 @@
         label: 'Contact',
         link: '/contact'
       },
-      alt: true
     }
   ]
 
@@ -186,17 +185,19 @@
     <div class="links">
       {#each links as link}
         <a href={$language === 'en' ? link.en.link : link.hr.link}
-           class:contact={link.alt}
            class:active={($language === 'en' ? link.en.link : link.hr.link) === $page.url.pathname}
         >
           {$language === 'en' ? link.en.label : link.hr.label}
         </a>
       {/each}
     </div>
-    <div class="flex gap-12">
+    <div class="flex gap-8">
       <button class="language-toggle" on:click={() => {switchLanguage()}} disabled={languageDisabled}>
-      <span class:active={$language === 'en'}>EN</span>
+        <span class:active={$language === 'en'}>EN</span>
         <span class:active={$language === 'hr'}>HR</span>
+      </button>
+      <button class="menu-toggle" on:click={() => open = !open}>
+        <img src="/icons/menu.svg" alt="">
       </button>
     </div>
   </nav>
@@ -205,15 +206,24 @@
 {#if open}
   <button class="overlay" transition:fly on:click={() => open = false}></button>
   <div class="menu" transition:fly={{y: -1000}}>
-    {#each links as link}
+    <div class="menu-links">
       <a
-        class:contact={link.alt}
-        class:active={($language === 'en' ? link.en.link : link.hr.link) === $page.url.pathname}
-        href={$language === 'en' ? link.en.link : link.hr.link}
+        class:active={($language === 'en' ? '/' : '/pocetna') === $page.url.pathname}
+        href={$language === 'en' ? '/' : '/pocetna'}
+        on:click={() => open = false}
       >
-      {$language === 'en' ? link.en.label : link.hr.label}
+        {$language === 'en' ? 'Home' : 'Početna'}
       </a>
-    {/each}
+      {#each links as link}
+        <a
+          class:active={($language === 'en' ? link.en.link : link.hr.link) === $page.url.pathname}
+          href={$language === 'en' ? link.en.link : link.hr.link}
+          on:click={() => open = false}
+        >
+          {$language === 'en' ? link.en.label : link.hr.label}
+        </a>
+      {/each}
+    </div>
 
     <div class="filler"></div>
     <div class="socials">
@@ -251,9 +261,16 @@
             max-width: 87.5rem;
             margin: 0 auto;
             padding: 2rem 3rem;
+            gap: 1rem;
+            @media (max-width: 1100px) {
+                padding: 2rem;
+            }
 
             .logo {
                 height: 3rem;
+                @media (max-width: 1100px) {
+                    height: 2rem;
+                }
             }
 
             .links {
@@ -261,6 +278,15 @@
                 gap: 1.5rem;
                 color: white;
 
+                @media (max-width: 1100px) {
+                    gap: 1rem;
+                }
+                @media (max-width: 1000px) {
+                    font-size: .875rem;
+                }
+                @media (max-width: 730px) {
+                    display: none;
+                }
                 a {
                     font-weight: 600;
                     opacity: .8;
@@ -287,6 +313,9 @@
         border: 1px solid white;
         border-radius: 999px;
         padding: .25rem;
+        @media (max-width: 1000px) {
+            padding: .125rem;
+        }
 
         span {
             border-radius: 999px;
@@ -297,6 +326,43 @@
             &.active {
                 color: #032130;
                 background-color: white;
+            }
+        }
+    }
+
+    .menu-toggle {
+        @media (min-width: 731px) {
+            display: none;
+        }
+    }
+
+    .menu {
+        z-index: 11;
+        position: fixed;
+        top: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        max-width: 16rem;
+        padding: .5rem 0;
+        background-color: white;
+
+        .menu-links {
+            display: flex;
+            flex-direction: column;
+
+            a {
+                padding: .75rem 1rem;
+                font-weight: bold;
+                opacity: .75;
+                transition: .25s;
+
+                &:hover, &.active {
+                    background-color: rgba(0,0,0,.08);
+                    opacity: 1;
+                }
             }
         }
     }
