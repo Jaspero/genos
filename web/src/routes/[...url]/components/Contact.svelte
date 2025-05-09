@@ -107,7 +107,7 @@
         </h3>
         <p>Borongajska cesta 83h, 10000 Zagreb</p>
       </div>
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2781.043093962708!2d16.0378828529667!3d45.81039533126865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47667878cfccc679%3A0xcd44853685675d18!2sBIOCentar!5e0!3m2!1sen!2shr!4v1746530710947!5m2!1sen!2shr" width="600" height="450" class="map-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2781.043093962708!2d16.0378828529667!3d45.81039533126865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47667878cfccc679%3A0xcd44853685675d18!2sBIOCentar!5e0!3m2!1sen!2shr!4v1746530710947!5m2!1sen!2shr" width="600" height="450" title="Genos in Zagreb" class="map-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       <div class="flex flex-col gap-2 mt-14">
         <h3>
           {
@@ -118,7 +118,7 @@
         </h3>
         <p>Drniška 9, 31000 Osijek</p>
       </div>
-      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d391.6209008573307!2d18.70494826164722!3d45.54262289695526!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475ce6329d240dbd%3A0x3ba7ee8572ac6c1f!2sDrni%C5%A1ka%20ul.%209%2C%2031000%2C%20Osijek!5e0!3m2!1shr!2shr!4v1746531428409!5m2!1shr!2shr" width="600" height="450" class="map-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d391.6209008573307!2d18.70494826164722!3d45.54262289695526!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475ce6329d240dbd%3A0x3ba7ee8572ac6c1f!2sDrni%C5%A1ka%20ul.%209%2C%2031000%2C%20Osijek!5e0!3m2!1shr!2shr!4v1746531428409!5m2!1shr!2shr" width="600" height="450" title="Genos in Osijek" class="map-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </div>
 </div>

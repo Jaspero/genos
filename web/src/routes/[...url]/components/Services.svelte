@@ -2,6 +2,11 @@
 
 <script>
   import {language} from '$lib/stores/language';
+  import {slide} from 'svelte/transition';
+
+  let glycomics = false;
+  let epigenetics = false;
+  let forensics = false;
 </script>
 
 <div class="grid grid-small services">
@@ -23,71 +28,111 @@
       }
     </p>
     <div class="sticky-items">
-      <a href="{ $language === 'en' ? '/services#1.0.' : '/usluge#1.0.'}" class="main-link">
-        1. {$language === 'en' ? 'Glycomics' : 'Glikomika'}
-      </a>
-      <a href="{$language === 'en' ? '/services#1.1.' : '/usluge#1.1.'}" class="sub-link">
-        1.1. {$language === 'en' ? 'Technologies' : 'Tehnologije'}
-      </a>
-      <a href="{$language === 'en' ? '/services#1.2.' : '/usluge#1.2.'}" class="sub-link">
-        1.2. {$language === 'en' ? 'Sample types' : 'Tipovi uzoraka'}
-      </a>
-      <a href="{$language === 'en' ? '/services#1.3.' : '/usluge#1.3.'}" class="sub-link">
-        1.3. {$language === 'en' ? 'Glycoprofiling' : 'Glikoprofiliranje'}
-      </a>
-      <a href="{$language === 'en' ? '/services#1.4.' : '/usluge#1.4.'}" class="sub-link">
-        1.4. {$language === 'en' ? 'High-throughput analyses' : 'Visokoprotočne analize'}
-      </a>
-      <a href="{$language === 'en' ? '/services#1.5.' : '/usluge#1.5.'}" class="sub-link">
-        1.5. {$language === 'en' ? 'Data analysis' : 'Analiza podataka'}
-      </a>
-      <a href="{$language === 'en' ? '/services#1.6.' : '/usluge#1.6.'}" class="sub-link">
-        1.6. {$language === 'en' ? 'Study design' : 'Dizajn studije'}
-      </a>
-      <a href="{$language === 'en' ? '/services#1.7.' : '/usluge#1.7.'}" class="sub-link">
-        1.7. {$language === 'en' ? 'Joint research collaboration' : 'Zajednička znanstvena suradnja'}
-      </a>
-      <a href="{$language === 'en' ? '/services#2.0.' : '/usluge#2.0.'}" class="main-link">
-        2. {$language === 'en' ? 'Epigenetics' : 'Epigenetika'}
-      </a>
-      <a href="{$language === 'en' ? '/services#2.1.' : '/usluge#2.1.'}" class="sub-link">
-        2.1. {$language === 'en' ? 'Technologies' : 'Tehnologije'}
-      </a>
-      <a href="{$language === 'en' ? '/services#2.2.' : '/usluge#2.2.'}" class="sub-link">
-        2.2. {$language === 'en' ? 'Services' : 'Usluge'}
-      </a>
-      <a href="{$language === 'en' ? '/services#3.0.' : '/usluge#3.0.'}" class="main-link">
-        3. {$language === 'en' ? 'DNA & Forensics' : 'DNA i forenzika'}
-      </a>
-      <a href="{$language === 'en' ? '/services#3.1.' : '/usluge#3.1.'}" class="sub-link">
-        3.1. {$language === 'en' ? 'Paternity testing' : 'Test očinstva'}
-      </a>
-      <a href="{$language === 'en' ? '/services#3.2.' : '/usluge#3.2.'}" class="sub-link">
-        3.2. {$language === 'en' ? 'Kinship testing' : 'Test srodstva'}
-      </a>
-      <a href="{$language === 'en' ? '/services#3.3.' : '/usluge#3.3.'}" class="sub-link">
-        3.3. {$language === 'en'
-        ? 'Non-Invasive Prenatal Gender and Paternity Testing'
-        : 'Neinvazivno prenatalno utvrđivanje spola i očinstva'}
-      </a>
-      <a href="{$language === 'en' ? '/services#3.4.' : '/usluge#3.4.'}" class="sub-link">
-        3.4. {$language === 'en' ? 'Other analyses' : 'Ostale analize'}
-      </a>
-      <a href="{$language === 'en' ? '/services#3.5.' : '/usluge#3.5.'}" class="sub-link">
-        3.5. {$language === 'en'
-        ? 'Avian Gender Determination via DNA Analysis'
-        : 'Određivanje spola ptica DNK analizom'}
-      </a>
-      <a href="{$language === 'en' ? '/services#3.6.' : '/usluge#3.6.'}" class="sub-link">
-        3.6. {$language === 'en' ? 'Testing Procedure' : 'Postupak testiranja'}
-      </a>
-      <a href="{$language === 'en' ? '/services#3.7.' : '/usluge#3.7.'}" class="sub-link">
-        3.7. {$language === 'en' ? 'Data confidentiality' : 'Povjerljivost podataka'}
-      </a>
+      <div class="flex">
+        <a href="{ $language === 'en' ? '/services#1.0.' : '/usluge#1.0.'}" class="main-link">
+          1. {$language === 'en' ? 'Glycomics' : 'Glikomika'}
+        </a>
+        <button on:click={() => {
+          glycomics = !glycomics;
+          epigenetics = false;
+          forensics = false;
+        }}>
+          <img src="/icons/arrow_dropdown.svg" alt="" class:rotate-180={glycomics}>
+        </button>
+      </div>
+      {#if glycomics}
+        <div class="flex flex-col gap-y-1" transition:slide>
+          <a href="{$language === 'en' ? '/services#1.1.' : '/usluge#1.1.'}" class="sub-link">
+            1.1. {$language === 'en' ? 'Technologies' : 'Tehnologije'}
+          </a>
+          <a href="{$language === 'en' ? '/services#1.2.' : '/usluge#1.2.'}" class="sub-link">
+            1.2. {$language === 'en' ? 'Sample types' : 'Tipovi uzoraka'}
+          </a>
+          <a href="{$language === 'en' ? '/services#1.3.' : '/usluge#1.3.'}" class="sub-link">
+            1.3. {$language === 'en' ? 'Glycoprofiling' : 'Glikoprofiliranje'}
+          </a>
+          <a href="{$language === 'en' ? '/services#1.4.' : '/usluge#1.4.'}" class="sub-link">
+            1.4. {$language === 'en' ? 'High-throughput analyses' : 'Visokoprotočne analize'}
+          </a>
+          <a href="{$language === 'en' ? '/services#1.5.' : '/usluge#1.5.'}" class="sub-link">
+            1.5. {$language === 'en' ? 'Data analysis' : 'Analiza podataka'}
+          </a>
+          <a href="{$language === 'en' ? '/services#1.6.' : '/usluge#1.6.'}" class="sub-link">
+            1.6. {$language === 'en' ? 'Study design' : 'Dizajn studije'}
+          </a>
+          <a href="{$language === 'en' ? '/services#1.7.' : '/usluge#1.7.'}" class="sub-link">
+            1.7. {$language === 'en' ? 'Joint research collaboration' : 'Zajednička znanstvena suradnja'}
+          </a>
+        </div>
+      {/if}
+      <div class="flex">
+        <a href="{ $language === 'en' ? '/services#2.0.' : '/usluge#2.0.'}" class="main-link">
+          2. {$language === 'en' ? 'Epigenetics' : 'Epigenetika'}
+        </a>
+        <button on:click={() => {
+          glycomics = false;
+          epigenetics = !epigenetics;
+          forensics = false;
+        }}>
+          <img src="/icons/arrow_dropdown.svg" alt="" class:rotate-180={epigenetics}>
+        </button>
+      </div>
+      {#if epigenetics}
+        <div class="flex flex-col gap-y-1" transition:slide>
+          <a href="{$language === 'en' ? '/services#2.1.' : '/usluge#2.1.'}" class="sub-link">
+            2.1. {$language === 'en' ? 'Technologies' : 'Tehnologije'}
+          </a>
+          <a href="{$language === 'en' ? '/services#2.2.' : '/usluge#2.2.'}" class="sub-link">
+            2.2. {$language === 'en' ? 'Services' : 'Usluge'}
+          </a>
+        </div>
+      {/if}
+      <div class="flex">
+        <a href="{ $language === 'en' ? '/services#3.0.' : '/usluge#3.0.'}" class="main-link">
+          3. {$language === 'en' ? 'DNA & Forensics' : 'DNK i Forenzika'}
+        </a>
+        <button on:click={() => {
+          glycomics = false;
+          epigenetics = false;
+          forensics = !forensics;
+        }}>
+          <img src="/icons/arrow_dropdown.svg" alt="" class:rotate-180={forensics}>
+        </button>
+      </div>
+      {#if forensics}
+        <div class="flex flex-col gap-y-1" transition:slide>
+          <a href="{$language === 'en' ? '/services#3.1.' : '/usluge#3.1.'}" class="sub-link">
+            3.1. {$language === 'en' ? 'Paternity testing' : 'Test očinstva'}
+          </a>
+          <a href="{$language === 'en' ? '/services#3.2.' : '/usluge#3.2.'}" class="sub-link">
+            3.2. {$language === 'en' ? 'Kinship testing' : 'Test srodstva'}
+          </a>
+          <a href="{$language === 'en' ? '/services#3.3.' : '/usluge#3.3.'}" class="sub-link">
+            3.3. {$language === 'en'
+            ? 'Non-Invasive Prenatal Gender and Paternity Testing'
+            : 'Neinvazivno prenatalno utvrđivanje spola i očinstva'}
+          </a>
+          <a href="{$language === 'en' ? '/services#3.4.' : '/usluge#3.4.'}" class="sub-link">
+            3.4. {$language === 'en' ? 'Other analyses' : 'Ostale analize'}
+          </a>
+          <a href="{$language === 'en' ? '/services#3.5.' : '/usluge#3.5.'}" class="sub-link">
+            3.5. {$language === 'en'
+            ? 'Avian Gender Determination via DNA Analysis'
+            : 'Određivanje spola ptica DNK analizom'}
+          </a>
+          <a href="{$language === 'en' ? '/services#3.6.' : '/usluge#3.6.'}" class="sub-link">
+            3.6. {$language === 'en' ? 'Testing Procedure' : 'Postupak testiranja'}
+          </a>
+          <a href="{$language === 'en' ? '/services#3.7.' : '/usluge#3.7.'}" class="sub-link">
+            3.7. {$language === 'en' ? 'Data confidentiality' : 'Povjerljivost podataka'}
+          </a>
+        </div>
+      {/if}
     </div>
   </div>
   <div class="gc-9 services-container">
     <h3 id="1.0.">1. {$language === 'en' ? 'Glycomics' : 'Glikomika'}</h3>
+    <img src="/illustrations/glycomics.jpg" alt="" class="w-full">
     <div class="services-segment">
       <h4 id="1.1.">1.1. {$language === 'en' ? 'Technologies' : 'Tehnologije'}</h4>
       <div class="services-images-row">
@@ -156,11 +201,6 @@
     </div>
     <div class="services-segment">
       <h4 id="1.3.">1.3. {$language === 'en' ? 'Glycoprofiling' : 'Glikoprofiliranje'}</h4>
-      <div class="flex">
-        <img src="" alt="">
-        <img src="" alt="">
-        <img src="" alt="">
-      </div>
       <h5>
         {$language === 'en' ? 'Released N-glycans' : 'Oslobođeni N-glikani'}
       </h5>
@@ -192,7 +232,7 @@
         }
       </p>
     </div>
-    <div class="services-segment">
+    <div class="services-segment dropdowns">
       <h4 id="1.4.">1.4. {$language === 'en' ? 'High-Throughput analyses' : 'Visokoprotočne analize'}</h4>
       <p>
         {
@@ -216,7 +256,7 @@
           </span>
         </span>
         <span class="dropdown-content">
-
+          <img src="/images/glycoprofiling/analysis_of_total_human_serum.jpg" alt="">
         </span>
       </label>
       <label class="dropdown-container">
@@ -234,7 +274,7 @@
           </span>
         </span>
         <span class="dropdown-content">
-
+          <img src="/images/glycoprofiling/analysis_of_total_human_igg_n-glycans.jpg" alt="">
         </span>
       </label>
       <label class="dropdown-container">
@@ -252,7 +292,7 @@
           </span>
         </span>
         <span class="dropdown-content">
-
+          <img src="/images/glycoprofiling/analysis_of_total_human_iga_n-glycans.jpg" alt="">
         </span>
       </label>
       <label class="dropdown-container">
@@ -270,7 +310,7 @@
           </span>
         </span>
         <span class="dropdown-content">
-
+          <img src="/images/glycoprofiling/analysis_of_human_igg_n-glycopeptides.jpg" alt="">
         </span>
       </label>
       <label class="dropdown-container">
@@ -288,7 +328,7 @@
           </span>
         </span>
         <span class="dropdown-content">
-
+          <img src="/images/glycoprofiling/analysis_of_human_agp_n-glycopeptides.jpg" alt="">
         </span>
       </label>
       <label class="dropdown-container">
@@ -306,7 +346,7 @@
           </span>
         </span>
         <span class="dropdown-content">
-
+          <img src="/images/glycoprofiling/analysis_of_human_c3_n-glycopeptides.jpg" alt="">
         </span>
       </label>
       <label class="dropdown-container">
@@ -324,7 +364,7 @@
           </span>
         </span>
         <span class="dropdown-content">
-
+          <img src="/images/glycoprofiling/analysis_of_rodent_igg_n-glycopeptides.jpg" alt="">
         </span>
       </label>
     </div>
@@ -361,6 +401,7 @@
     <hr>
     <div class="services-segment">
       <h3 id="2.0.">2. {$language === 'en' ? 'Epigenetics' : 'Epigenetika'}</h3>
+      <img src="/illustrations/epigenetics.jpg" alt="" class="w-full">
       <h4 id="2.1.">2.1. {$language === 'en' ? 'Technologies' : 'Tehnologije'}</h4>
       <ul>
         <li>{$language === 'en' ? 'Epigenetics analyses' : 'Epigenetske analize'}</li>
@@ -459,6 +500,7 @@
     <hr>
     <div class="services-segment">
       <h3 id="3.0.">3. {$language === 'en' ? 'DNA & Forensics' : 'DNK i Forenzika'}</h3>
+      <img src="/illustrations/dna.jpg" alt="" class="w-full">
       <h4 id="3.1.">3.1. {$language === 'en' ? 'Paternity testing' : 'Utvrđivanje očinstva'}</h4>
       <ul>
         <li>
