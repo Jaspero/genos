@@ -251,7 +251,7 @@
             {
               $language === 'en'
                 ? 'Analysis of total human serum/plasma N-glycans'
-                : 'Analiza ukupnih N-glikana ljudskog seruma/plazme'
+                : 'Analiza ukupnih N-glikana humanog seruma/plazme'
             }
           </span>
         </span>
@@ -269,7 +269,7 @@
             {
               $language === 'en'
                 ? 'Analysis of total human IgG N-glycans'
-                : 'Analiza ukupnih N-glikana ljudskog IgG'
+                : 'Analiza ukupnih N-glikana humanog IgG'
             }
           </span>
         </span>
@@ -287,7 +287,7 @@
             {
               $language === 'en'
                 ? 'Analysis of total human IgA N-glycans'
-                : 'Analiza ukupnih N-glikana ljudskog IgA'
+                : 'Analiza ukupnih N-glikana humanog IgA'
             }
           </span>
         </span>
@@ -305,7 +305,7 @@
             {
               $language === 'en'
                 ? 'Analysis of subclass-specific human IgG N-glycopeptides'
-                : 'Analiza podtip-specifičnih N-glikopeptida ljudskog IgG'
+                : 'Analiza podtip-specifičnih N-glikopeptida humanog IgG'
             }
           </span>
         </span>
@@ -323,7 +323,7 @@
             {
               $language === 'en'
                 ? 'Analysis of human AGP N-glycopeptides'
-                : 'Analiza N-glikopeptida ljudskog AGP'
+                : 'Analiza N-glikopeptida humanog AGP'
             }
           </span>
         </span>
@@ -341,7 +341,7 @@
             {
               $language === 'en'
                 ? 'Analysis of human C3 N-glycopeptides'
-                : 'Analiza N-glikopeptida ljudskog C3'
+                : 'Analiza N-glikopeptida humanog C3'
             }
           </span>
         </span>
@@ -1035,9 +1035,19 @@
             : 'Ako se testiranje zahtijeva za osobnu uporabu u pravnim postupcima, potrebno je unaprijed zakazati termin. Sve strane moraju prisustvovati prikupljanju uzoraka zajedno u dogovoreno vrijeme. Za identifikaciju moraju donijeti važeću osobnu iskaznicu ili drugi važeći foto-dokument (koji uključuje osobni identifikacijski broj - OIB), a za dijete, rodni list i osobnu iskaznicu (ako je dostupna). Identitet djeteta mora potvrditi sve strane u procesu potpisivanjem obrasca za narudžbu.<br><br>Ako se testiranje očinstva provodi na zahtjev suda, ovlašteni predstavnik Genosa može prikupiti uzorke na sudu tijekom saslušanja ili u prostorijama Genosa na temelju sudskog naloga.<br><br>Uzorke možete također prikupiti sami u privatnosti svog doma koristeći **DNA Sample Collection Kit**.'
         }
       </p>
-      <h5>Results Available in the Shortest Possible Time!</h5>
+      <h5>
+        {@html
+          $language === 'en'
+            ? 'Results Available in the Shortest Possible Time!'
+            : 'Rezultati dostupni u najkraćem mogućem vremenu!'
+        }
+      </h5>
       <p>
-        For personal paternity/kinship testing, the standard timeframe for analysis completion and result delivery is **7 working days** from the date of payment and sample receipt at the laboratory. For urgent testing, results are available within **4 working days** (subject to an additional fee).<br><br>For court-ordered testing, the timeframe for completing the analysis and delivering the expert report is **10 working days**.<br><br>The test results are delivered exclusively to the Client or the person specified by the Client in the signed order form (in person, via email, or by mail).
+        {@html
+          $language === 'en'
+            ? 'For personal paternity/kinship testing, the standard timeframe for analysis completion and result delivery is **7 working days** from the date of payment and sample receipt at the laboratory. For urgent testing, results are available within **4 working days** (subject to an additional fee).<br><br>For court-ordered testing, the timeframe for completing the analysis and delivering the expert report is **10 working days**.<br><br>The test results are delivered exclusively to the Client or the person specified by the Client in the signed order form (in person, via email, or by mail).'
+            : 'Za osobno testiranje očinstva/rodbinske veze, standardni rok za dovršetak analize i dostavu rezultata je 7 radnih dana od dana plaćanja i primitka uzorka u laboratorij. Za hitno testiranje, rezultati su dostupni unutar 4 radna dana (uz dodatnu naknadu).<br><br>Za testiranje na zahtjev suda, rok za dovršetak analize i dostavu izvještaja vještaka je 10 radnih dana.<br><br>Rezultati testa dostavljaju se isključivo Klijentu ili osobi koju je Klijent naveo u potpisanom obrascu narudžbe (osobno, putem e-maila ili poštom).'
+        }
       </p>
       <ul>
         <li>

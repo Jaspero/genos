@@ -1,8 +1,8 @@
+<svelte:options customElement={{ tag: 'pb-resources', shadow: 'none' }} />
+
 <script>
   import {language} from '$lib/stores/language';
 </script>
-
-<svelte:options customElement={{ tag: 'pb-resources', shadow: 'none' }} />
 
 <div class="grid grid-large resources">
   <div class="gc-12">
@@ -48,7 +48,13 @@
         <img src="/images/hgp-card.jpg" alt="">
       </div>
       <div class="text">
-        <h2>The Human Glycome Project</h2>
+        <h2>
+          {
+            $language === 'en'
+              ? 'The Human Glycome Project'
+              : 'Projekt Humanog Glikoma'
+          }
+        </h2>
         <p class="text-p">
           {
             $language === 'en'
@@ -71,7 +77,13 @@
         <img src="/images/lbg-card.jpg" alt="">
       </div>
       <div class="text">
-        <h2>Glyco databases</h2>
+        <h2>
+          {
+            $language === 'en'
+              ? 'Glyco databases'
+              : 'Glikobioloske baze podataka'
+          }
+        </h2>
         <p class="text-p">
           {
             $language === 'en'
