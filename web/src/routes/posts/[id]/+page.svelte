@@ -34,16 +34,17 @@
 
     galleryEl.appendChild(el);
   }
-
-  onMount(() => console.log(data.article))
 </script>
 
-<div class="single-article">
-  <img src="https://firebasestorage.googleapis.com/v0/b/genos-ec52a.firebasestorage.app/o/blog-articles%2Fbar-Bat8LhhH8n0nAJzjoedSyt0F%2F6qm931jx.png?alt=media" alt="">
-  <h2 class="single-article-title">{data.article.title}</h2>
-  <p class="single-article-description">{data.article.description}</p>
-      <img class="single-article-image" src={data.article.image} alt={data.article.imageAlt} />
-  {data.article.image}
+<div class="grid grid-small">
+  <div class="gc-12 single-article spacer">
+    <h2 class="single-article-title">{data.article.title}</h2>
+    <p class="single-article-description">{data.article.description}</p>
+    <img class="single-article-image" src={data.article.image} alt={data.article.imageAlt} />
+    <div class="single-article-content">
+      <p>{@html content}</p>
+    </div>
+  </div>
 </div>
 <!--<section class="section single-article-section">
   <div class="container-xs flex-col single-article-container">
@@ -79,6 +80,84 @@
 <style>
     .single-article {
         padding: 6.5rem;
+    }
+    .single-article-title {
+    }
+    .single-article-description {
+        margin-top: .5rem;
+    }
+    .single-article-image {
+        margin-top: 1rem;
+        border-radius: 1rem;
+    }
+
+    :global(.single-article-content h1) {
+        margin: 2em 0 0.75em;
+        font-size: 2rem;
+        font-family: var(--ff-2);
+        font-weight: normal;
+    }
+    :global(.single-article-content h2) {
+        margin: 2em 0 0.75em;
+        font-size: 1.75rem;
+        font-weight: normal;
+    }
+
+    :global(.single-article-content h3) {
+        margin: 2em 0 0.75em;
+        font-size: 1.5rem;
+        font-weight: normal;
+    }
+
+    :global(.single-article-content ul) {
+        margin: 1rem 0;
+    }
+
+    :global(.single-article-content li) {
+        margin: 0.5rem;
+    }
+
+    :global(.single-article-content p) {
+        margin: 1em 0;
+        font-size: 1rem;
+    }
+
+    :global(.single-article-content hr) {
+        border-top: 2px dashed var(--fg-3);
+        border-bottom: none;
+        border-right: none;
+        border-left: none;
+        margin: 2rem 0;
+        width: 100%;
+    }
+
+    :global(.single-article-content img) {
+        width: calc(100% + 4rem);
+        max-width: calc(100% + 4rem);
+        border-radius: 1.5rem;
+        margin: 2rem -2rem;
+        color: transparent;
+        height: auto;
+    }
+
+    :global(.single-article-content blockquote) {
+        margin: 2rem 0;
+        padding: 0 1rem;
+        border-left: 2px solid var(--fg-3);
+    }
+
+    :global(.single-article-content figure) {
+        margin: 2rem 0;
+    }
+
+    :global(.single-article-content figure img) {
+        margin: 0 -2rem;
+    }
+
+    :global(.single-article-content figcaption) {
+        margin: 0.5rem 0;
+        text-align: center;
+        font-size: 0.875rem;
     }
   /*.single-article-section {
     padding-top: 20px !important;

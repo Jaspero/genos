@@ -151,13 +151,13 @@ collections.addCollection('blog-articles', {
         height: 1000,
         width: 1000,
         filePrefix: 'thumb_m_',
-        folder: '../../thumbs'
+        folder: '../../generated'
       },
       {
         width: 500,
         height: 500,
         filePrefix: 'thumb_s_',
-        folder: '../../thumbs'
+        folder: '../../generated'
       }
     ];
 
