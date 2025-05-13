@@ -58,7 +58,7 @@ async function blog() {
     return {
       id: it.id.trim(),
       name: data.name,
-      image: data.image ? getThumb(data.image, 'thumb_') : undefined,
+      image: data.image ? getThumb(data.image, 'thumb_m_') : undefined,
       about: data.about,
       meta: data.meta
     };
@@ -113,7 +113,7 @@ async function blog() {
     }
 
     if (!data.meta.og.image && data.image) {
-      data.meta.og.image = getThumb(data.image, 'thumb_');
+      data.meta.og.image = getThumb(data.image, 'thumb_m_');
     }
 
     data.meta.og.type = 'article';
