@@ -1,6 +1,8 @@
 import { initializeApp } from 'firebase-admin/app';
 import { tracking } from './website-releases/tracking-changes';
 import { releaseUpdated } from './website-releases/release-updated';
+import {fileDeleted} from './image-processing/file-deleted';
+import {fileCreated} from './image-processing/file-created';
 
 initializeApp();
 
@@ -28,6 +30,13 @@ export { layoutDeleted } from './triggers/layout-deleted';
 export { popupDeleted } from './triggers/popup-deleted';
 export { sectionDeleted } from './triggers/section-deleted';
 export { templateDeleted } from './triggers/template-deleted';
+
+
+export const imageProcessing = {
+  fileCreated,
+  fileDeleted
+};
+
 
 /**
  * Rest

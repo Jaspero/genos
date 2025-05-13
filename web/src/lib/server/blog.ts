@@ -45,7 +45,7 @@ async function blog() {
     }
 
     if (!data.meta.og.image && data.image) {
-      data.meta.og.image = getThumb(data.image, 'thumb_');
+      data.meta.og.image = getThumb(data.image, 'thumb_m_');
     }
 
     data.meta.og.type = 'profile';
