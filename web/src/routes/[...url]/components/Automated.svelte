@@ -4,7 +4,7 @@
   import {language} from '$lib/stores/language';
 </script>
 
-<div class="grid grid-large gap-y-12 gap-x-2 spacer automated">
+<div class="grid grid-large sm:gap-y-6 gap-y-12 gap-x-2 spacer automated">
   <div class="gc-12">
     <h2>
       {
@@ -16,7 +16,7 @@
   </div>
   <div class="gc-3 gc-sm-6">
     <div class="data-number">200k+</div>
-    <div class="data-label">{$language === 'en' ? 'Samples analysed to date' : 'Dosad analizirani uzorci'}</div>
+    <div class="data-label">{$language === 'en' ? 'Total samples analyzed' : 'Dosad analizirani uzorci'}</div>
     <div class="progress-bar" style="background-color: #66AACC;"></div>
   </div>
   <div class="gc-3 gc-sm-6">

@@ -12,7 +12,6 @@ export * from './Leaders.svelte';
 export * from './Plug.svelte';
 export * from './Contact.svelte';
 export * from './About.svelte';
-export * from './HeroContentLanding.svelte';
 export * from './Footer.svelte';
 export * from './PriceList.svelte';
 export * from './Services.svelte';
