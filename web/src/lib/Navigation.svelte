@@ -170,11 +170,16 @@
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('keydown', handleKeydown);
 
+    if (window.location.pathname === '/' && localStorage.getItem('language') === 'hr') {
+      goto('/pocetna');
+    }
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('keydown', handleKeydown);
     };
   });
+
 </script>
 
 <header class="navigation" class:scrolled={scrolled > 96 || $page.url.pathname.includes('/posts/')} class:inactive={!showNavbar}>
