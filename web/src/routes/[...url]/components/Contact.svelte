@@ -16,7 +16,7 @@
   async function handleSubmit() {
     error.set('');
     if (!name || !email || !message) {
-      error.set('Please fill out all fields.');
+      error.set($language === 'en' ? 'Please fill out all fields.' : 'Popunite sva polja.');
       return;
     }
 
@@ -33,7 +33,7 @@
       message = '';
     } catch (err) {
       console.error('Error submitting form:', err);
-      error.set('An error occurred while submitting your request.');
+      error.set($language === 'en' ? 'An error occurred while submitting your request.' : 'Dogodila se greška sa slanjem vašeg zahtjeva.');
     }
   }
 </script>
@@ -112,8 +112,8 @@
         <h3>
           {
             $language === 'en'
-              ? 'Osijek, Podružnica'
-              : 'Osijek, Branch Office'
+              ? 'Osijek, Branch Office'
+              : 'Osijek, Podružnica'
           }
         </h3>
         <p>Drniška 9, 31000 Osijek</p>
