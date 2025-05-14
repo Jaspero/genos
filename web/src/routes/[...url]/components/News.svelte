@@ -29,6 +29,7 @@
   export let collectionprefx: string;
   export let loadmorelabel: string;
   export let datelabel: string;
+  let linkedin = true;
 
   let articles: BlogArticleSnippet[] = [];
   let lastRef: QueryDocumentSnapshot | null = null;
@@ -124,20 +125,35 @@
 </script>
 
 <div class="grid grid-large news">
-  {#if showCategoryFilters}
     <div class="gc-12 filters">
-      <button class:active={category === ''}
-              on:click={() => { category = ''; typeChanges(pageSize, category, author, authorMap); }}>
-        {$language === 'en' ? 'All posts' : 'Sve novosti'}
+      <button class:active={linkedin}
+              on:click={() => {linkedin = true}}>
+        LinkedIn {$language === 'en' ? 'Feed' : 'Objave'}
       </button>
-      {#each categories as cat}
-        <button class:active={category === cat.id}
-                on:click={() => { category = cat.id; typeChanges(pageSize, category, author, authorMap); }}>
-          {cat.name}
-        </button>
-      {/each}
+      <button class:active={!linkedin}
+              on:click={() => {linkedin = false}}>
+        {$language === 'en' ? 'News' : 'Novosti'}
+      </button>
     </div>
-  {/if}
+  {#if linkedin}
+    <div class="gc-12">
+      <iframe src='https://widgets.sociablekit.com/linkedin-profile-posts/iframe/25556751' class="social-feed" frameborder='0' width='100%'></iframe>
+    </div>
+  {:else}
+    {#if showCategoryFilters}
+      <div class="gc-12 filters">
+        <button class:active={category === ''}
+                on:click={() => { category = ''; typeChanges(pageSize, category, author, authorMap); }}>
+          {$language === 'en' ? 'All posts' : 'Sve novosti'}
+        </button>
+        {#each categories as cat}
+          <button class:active={category === cat.id}
+                  on:click={() => { category = cat.id; typeChanges(pageSize, category, author, authorMap); }}>
+            {cat.name}
+          </button>
+        {/each}
+      </div>
+    {/if}
 
     {#if articles.length}
       {#each articles as article}
@@ -159,48 +175,13 @@
         {$language === 'en' ? 'No posts for this category yet.' : 'Nema objava za ovu kategoriju.'}
       </div>
     {/if}
-</div>
 
-<!--<div class="grid grid-large services-grid">
-  <div class="col-span-9">
-      {#if showCategoryFilters}
-        <div class="category-filters">
-          <button class="category-filter" class:active={category === ''}
-                  on:click={() => { category = ''; typeChanges(pageSize, category, author, authorMap); }}>
-            {allcategorieslabel}
-          </button>
-          {#each categories as cat}
-            <button class="category-filter" class:active={category === cat.id}
-                    on:click={() => { category = cat.id; typeChanges(pageSize, category, author, authorMap); }}>
-              {cat.name}
-            </button>
-          {/each}
-        </div>
-      {/if}
-
-      {#if articles.length}
-          {#each articles as article}
-            <a class="article col-span-6" href={'/posts/' + article.url}>
-              <div class="article-image">
-                <img src={article.image} alt={article.imageAlt || article.title} />
-                {#if article.category}
-                  <div class="article-category">{categoryMap[article.category]?.name || ''}</div>
-                {/if}
-                <div class="article-content">
-                  <h3 class="article-title">{article.title}</h3>
-                  <p class="article-description">{article.description}</p>
-                </div>
-              </div>
-            </a>
-          {/each}
-      {:else}
-          <div class="col-span-12">No posts yet</div>
-      {/if}
-
-      {#if lastRef}
-        <button type="button" class:loading={loading || resetLoading} on:click={loadMore}>
+    {#if lastRef}
+      <div class="gc-12 flex justify-center">
+        <button type="button" class="button-filled" class:loading={loading || resetLoading} on:click={loadMore}>
           {loadmorelabel}
         </button>
-      {/if}
-  </div>
-</div>-->
+      </div>
+    {/if}
+  {/if}
+</div>
