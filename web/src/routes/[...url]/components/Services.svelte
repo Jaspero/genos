@@ -28,20 +28,19 @@
       }
     </p>
     <div class="sticky-items">
-      <div class="flex">
-        <a href="{ $language === 'en' ? '/services#1.0.' : '/usluge#1.0.'}" class="main-link">
-          1. {$language === 'en' ? 'Glycomics' : 'Glikomika'}
-        </a>
-        <button on:click={() => {
+      <button class="flex" on:click={() => {
           glycomics = !glycomics;
           epigenetics = false;
           forensics = false;
         }}>
-          <img src="/icons/arrow_dropdown.svg" alt="" class:rotate-180={glycomics}>
-        </button>
-      </div>
+        {$language === 'en' ? 'Glycomics' : 'Glikomika'}
+        <img src="/icons/arrow_dropdown.svg" alt="" class:rotate-180={glycomics}>
+      </button>
       {#if glycomics}
         <div class="flex flex-col gap-y-1" transition:slide>
+          <a href="{$language === 'en' ? '/services#1.0.' : '/usluge#1.0.'}" class="sub-link">
+            1. {$language === 'en' ? 'Glycomics' : 'Glikomika'}
+          </a>
           <a href="{$language === 'en' ? '/services#1.1.' : '/usluge#1.1.'}" class="sub-link">
             1.1. {$language === 'en' ? 'Technologies' : 'Tehnologije'}
           </a>
@@ -65,20 +64,19 @@
           </a>
         </div>
       {/if}
-      <div class="flex">
-        <a href="{ $language === 'en' ? '/services#2.0.' : '/usluge#2.0.'}" class="main-link">
-          2. {$language === 'en' ? 'Epigenetics' : 'Epigenetika'}
-        </a>
-        <button on:click={() => {
+      <button class="flex" on:click={() => {
           glycomics = false;
           epigenetics = !epigenetics;
           forensics = false;
         }}>
-          <img src="/icons/arrow_dropdown.svg" alt="" class:rotate-180={epigenetics}>
-        </button>
-      </div>
+        {$language === 'en' ? 'Epigenetics' : 'Epigenetika'}
+        <img src="/icons/arrow_dropdown.svg" alt="" class:rotate-180={epigenetics}>
+      </button>
       {#if epigenetics}
         <div class="flex flex-col gap-y-1" transition:slide>
+          <a href="{$language === 'en' ? '/services#2.0.' : '/usluge#2.0.'}" class="sub-link">
+            2. {$language === 'en' ? 'Epigenetics' : 'Epigenetika'}
+          </a>
           <a href="{$language === 'en' ? '/services#2.1.' : '/usluge#2.1.'}" class="sub-link">
             2.1. {$language === 'en' ? 'Technologies' : 'Tehnologije'}
           </a>
@@ -87,20 +85,19 @@
           </a>
         </div>
       {/if}
-      <div class="flex">
-        <a href="{ $language === 'en' ? '/services#3.0.' : '/usluge#3.0.'}" class="main-link">
-          3. {$language === 'en' ? 'DNA & Forensics' : 'DNK i Forenzika'}
-        </a>
-        <button on:click={() => {
+      <button class="flex" on:click={() => {
           glycomics = false;
           epigenetics = false;
           forensics = !forensics;
         }}>
-          <img src="/icons/arrow_dropdown.svg" alt="" class:rotate-180={forensics}>
-        </button>
-      </div>
+        {$language === 'en' ? 'DNA & Forensics' : 'DNK i Forenzika'}
+        <img src="/icons/arrow_dropdown.svg" alt="" class:rotate-180={forensics}>
+      </button>
       {#if forensics}
         <div class="flex flex-col gap-y-1" transition:slide>
+          <a href="{$language === 'en' ? '/services#3.0.' : '/usluge#3.0.'}" class="sub-link">
+            3. {$language === 'en' ? 'DNA & Forensics' : 'DNK i Forenzika'}
+          </a>
           <a href="{$language === 'en' ? '/services#3.1.' : '/usluge#3.1.'}" class="sub-link">
             3.1. {$language === 'en' ? 'Paternity testing' : 'Test očinstva'}
           </a>
