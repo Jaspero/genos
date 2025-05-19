@@ -473,6 +473,12 @@ export const TEAM = [
         job: 'Junior Researcher',
         img: 'doncevic',
         description: 'Lucija completed her Bachelor’s degree in Chemistry at the Josip Juraj Strossmayer University of Osijek. Later she obtained her Master’s degree in Analytical Chemistry and Biochemistry from the Faculty of Science, University of Zagreb, where she is currently pursuing her PhD in Analytical Chemistry.<br><br>Her research focuses on the chromatographic separation of glycoproteins. She has a strong background in bacterial and tissue proteome extraction for de novo protein elucidation and specie identification. Lucija has extensive experience in chromatography and mass spectrometry for protein analysis, including the optimization of chromatographic methods for protein and peptide purification and fractionation procedures.'
+      },
+      {
+        name: 'Petra Radović',
+        job: 'Junior Researcher',
+        img: 'radovic',
+        description: 'Petra Radović holds a Master’s degree in Biology and Chemistry from the Faculty of Science, University of Zagreb. She conducted her master’s thesis at the Ruđer Bošković Institute, focusing on the expression of genes involved in DNA-protein crosslink repair in zebrafish (Danio rerio) carrying a mutation in the tyrosyl-DNA phosphodiesterase 2b gene. During an Erasmus+ internship at the Jožef Stefan Institute in Ljubljana, she worked in analytical chemistry, focusing on the extraction and analysis of bioactive compounds. She has experience in molecular biology and analytical chemistry, with applications in biotechnology and industrial research.<br><br>She has been employed in Genos as a Junior Researcher from April 2025, working primarily on high-throughput glycomics analyses.'
       }
     ]
   },
