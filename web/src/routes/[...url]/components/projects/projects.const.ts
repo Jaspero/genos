@@ -123,6 +123,20 @@ export const PROJECTS = [
         projectWebsite: "https://www.wormvacs.org/",
         projectValue: "593,587.50€",
         genosContribution: "539,625.00€"
+      },
+      {
+        short: 'AttractAdria',
+        title: 'Attractive Research Ecosystem in the Adria Region in the Field of Personalised Preventive Healthcare',
+        description: 'AttractAdria will create an attractive ecosystem to improve access to excellence at the universities in BiH by raising the research profile of the institution and its staff in the field of personalised healthcare via targeted networking and mentoring and training activities with internationally leading research institutions.<br><br>By networking activities with global leaders, the potential of the BiH universities will be developed to become European-wide known centres with increasing R&amp;I contributions and achievements.<br><br>During the AttractAdria, Ministry of Civil Affairs, Ministry of Science and Higher Education of Kanton Sarajevo, HNK Government and SERDA in BiH and the National Science Foundation in Croatia will pilot some novel measures for R&amp;D.<br><br>The AttractAdria project will help to increase the scientific level, research quality, international visibility, and competitiveness of the BiH universities through targeted activities aimed at career development, transfer of knowledge, institutional development, exchange of best practices and networking.<br><br>Cumulatively, this will improve integration of researchers from Croatia and BiH in the European Research Area and increase their participation in international projects.',
+        startDate: '01/09/2025',
+        projectDuration: '36 months',
+        pdf: '1-9.pdf',
+        projectId: "101216942",
+        callForProposals: "HORIZON-WIDERA-2024-ERA-02",
+        coordinator: "UNIVERZITET U SARAJEVU (UNSA)",
+        projectParticipants: 14,
+        projectValue: "2,192,727.50€",
+        genosContribution: "401,500.00€"
       }
     ]
   },

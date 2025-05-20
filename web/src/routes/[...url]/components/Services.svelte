@@ -189,11 +189,11 @@
       </div>
       <ul>
         <li>{$language === 'en' ? 'Complex biological samples' : 'Složeni biološki uzorci'}</li>
-        <li>{$language === 'en' ? '(e.g. human serum/plasma, cell lysates, tissues)' : '(npr. ljudski serum/plazma, stanični lizati, tkiva)'}</li>
+        <li class="ml-6 mb-2">{$language === 'en' ? '(e.g. human serum/plasma, cell lysates, tissues)' : '(npr. ljudski serum/plazma, stanični lizati, tkiva)'}</li>
         <li>{$language === 'en' ? 'Purified glycoproteins' : 'Pročišćeni glikoproteini'}</li>
-        <li>{$language === 'en' ? '(e.g. human IgG, IgA, AGP, C3, transferrin, HDL, LDL, rodent IgG)' : '(npr. ljudski IgG, IgA, AGP, C3, transferin, HDL, LDL, IgG glodavaca)'}</li>
+        <li class="ml-6 mb-2">{$language === 'en' ? '(e.g. human IgG, IgA, AGP, C3, transferrin, HDL, LDL, rodent IgG)' : '(npr. ljudski IgG, IgA, AGP, C3, transferin, HDL, LDL, IgG glodavaca)'}</li>
         <li>{$language === 'en' ? 'Biopharmaceuticals' : 'Biofarmaceutici'}</li>
-        <li>{$language === 'en' ? '(e.g. mAb)' : '(npr. monoklonska antitijela)'}</li>
+        <li class="ml-6">{$language === 'en' ? '(e.g. mAb)' : '(npr. monoklonska antitijela)'}</li>
       </ul>
     </div>
     <div class="services-segment">

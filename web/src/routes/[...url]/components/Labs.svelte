@@ -33,7 +33,7 @@
           }
         </p>
         <div>
-          <a class="button-filled" href="/{$language === 'en' ? 'glycomics' : 'glikomika'}">
+          <a class="button-filled" href="/{$language === 'en' ? 'services#1.0.' : 'usluge#1.0.'}">
             {$language === 'en' ? 'Glycomic services' : 'Usluge za glikomiku'}
           </a>
         </div>
@@ -56,7 +56,7 @@
           }
         </p>
         <div>
-          <a class="button-filled" href="/{$language === 'en' ? 'epigenetics' : 'epigenetika'}">
+          <a class="button-filled" href="{$language === 'en' ? 'services#2.0.' : 'usluge#2.0.'}">
             {$language === 'en' ? 'Epigenetic services' : 'Usluge za epigenetiku'}
           </a>
         </div>
@@ -79,7 +79,7 @@
           }
         </p>
         <div>
-          <a class="button-filled" href="/{$language === 'en' ? 'dna-and-forensics' : 'dna-i-forenzika'}">
+          <a class="button-filled" href="/{$language === 'en' ? 'services#3.0.' : 'usluge#3.0.'}">
             {$language === 'en' ? 'DNA & Forensics services' : 'Usluge za DNK i forenziku'}
           </a>
         </div>
