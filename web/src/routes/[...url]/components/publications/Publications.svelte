@@ -63,10 +63,17 @@
         <h3>{year}</h3>
         <div class="flex flex-col">
           {#each groupedData[year] as publication}
-            <a href="https://doi.org/{publication.doi}" target="_blank" rel="noreferrer noopener" class="publication-card">
-              <div class="publication-card-paper">{publication.paper}</div>
-              <div class="publication-card-journal">{publication.date} | {getFirstAuthor(publication.authors)} et al. | {publication.journal}</div>
-            </a>
+            {#if publication.doi}
+              <a href="https://doi.org/{publication.doi}" target="_blank" rel="noreferrer noopener" class="publication-card">
+                <div class="publication-card-paper">{publication.paper}</div>
+                <div class="publication-card-journal">{publication.date} | {getFirstAuthor(publication.authors)} et al. | {publication.journal}</div>
+              </a>
+            {:else if publication.href}
+              <a href={publication.href} target="_blank" rel="noreferrer noopener" class="publication-card">
+                <div class="publication-card-paper">{publication.paper}</div>
+                <div class="publication-card-journal">{publication.date} | {getFirstAuthor(publication.authors)} et al. | {publication.journal}</div>
+              </a>
+            {/if}
           {/each}
         </div>
       </div>

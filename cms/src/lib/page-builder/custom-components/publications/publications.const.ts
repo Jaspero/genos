@@ -1491,10 +1491,11 @@ export const PUBLICATIONS = [
     journal: `Glycoconj J`
   },
   {
-    paper: `N-Glycosylation Profiles`,
+    paper: `N-Glycosylation Profiles of Immunoglobulin G and Future Cardiovascular Events`,
     authors: `Hoshi RA, Plavša B, Liu Y, Trbojević-Akmačić I, Glynn RJ, Ridker PM, Cummings RD, Gudelj I, Lauc G, Demler OV, Mora S.`,
     date: 2024,
-    doi: `10.1161/CIRCRESAHA.123.323623`,
+    /*doi: `10.1161/CIRCRESAHA.123.323623`,*/
+    href: 'https://pubmed.ncbi.nlm.nih.gov/38348651/',
     journal: `Circ Res`
   },
   {
@@ -1851,7 +1852,7 @@ export const PUBLICATIONS = [
     paper: 'Epigenetic silencing of HNF1A associates with changes in the composition of the human plasma N-glycome.',
     authors: 'Zoldoš V, Horvat T, Novokmet M, Cuenin C, Mužinić A, Pučić M, Huffman JE, Gornik O, Polašek O, Campbell H, Hayward C, Wright AF, Rudan I, Owen K, McCarthy MI, Herceg Z, Lauc G.',
     date: 2012,
-    doi: ' 10.4161/epi.7.2.18918',
+    doi: '10.4161/epi.7.2.18918',
     journal: 'Taylor&Francis online'
   },
   {
