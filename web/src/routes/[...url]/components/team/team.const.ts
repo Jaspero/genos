@@ -479,6 +479,12 @@ export const TEAM = [
         job: 'Junior Researcher',
         img: 'radovic',
         description: 'Petra Radović holds a Master’s degree in Biology and Chemistry from the Faculty of Science, University of Zagreb. She conducted her master’s thesis at the Ruđer Bošković Institute, focusing on the expression of genes involved in DNA-protein crosslink repair in zebrafish (Danio rerio) carrying a mutation in the tyrosyl-DNA phosphodiesterase 2b gene. During an Erasmus+ internship at the Jožef Stefan Institute in Ljubljana, she worked in analytical chemistry, focusing on the extraction and analysis of bioactive compounds. She has experience in molecular biology and analytical chemistry, with applications in biotechnology and industrial research.<br><br>She has been employed in Genos as a Junior Researcher from April 2025, working primarily on high-throughput glycomics analyses.'
+      },
+      {
+        name: 'Kristina Nikolić',
+        job: 'Junior Researcher',
+        img: 'nikolic',
+        description: 'Kristina Nikolić joined the Genos team in May 2025. She has experience in molecular biology, neurobiology, and biochemistry, with a primary research focus on the mechanisms of immunoglobulin G glycosylation.<br><br> Kristina earned her Master\'s degree in Molecular Biology from the Faculty of Science, University of Zagreb, in 2024. Her Master\'s thesis research was conducted under the mentorship of Prof. Jasminka Štefulj, PhD, at the Laboratory for Neurochemistry and Molecular Neurobiology, where she investigated gene polymorphisms, expression, and enzyme activity of monoamine oxidase A in the human placenta.'
       }
     ]
   },
