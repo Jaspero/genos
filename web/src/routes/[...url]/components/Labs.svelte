@@ -12,8 +12,8 @@
     <p class="subtitle">
       {
         $language === 'en'
-          ? 'Genos unites expertise in glycomics, epigenetics, and DNA analysis to deliver integrated, high-quality solutions for diverse research and commercial applications.'
-          : 'Genos ujedinjuje stručnost u glikomicima, epigenetici i DNK analizi kako bi pružio integrirana, visokokvalitetna rješenja za različite istraživačke i komercijalne primjene.'
+          ? 'Genos unites expertise in glycomics, glycoproteomics, epigenetics, and DNA analysis to deliver integrated, high-quality solutions for diverse research and commercial applications.'
+          : 'Genos ujedinjuje stručnost u glikomicima, glikoproteomicima, epigenetici i DNK analizi kako bi pružio integrirana, visokokvalitetna rješenja za različite istraživačke i komercijalne primjene.'
       }
     </p>
   </div>
@@ -24,7 +24,7 @@
         <img src="/illustrations/glycomics.jpg" alt="">
       </div>
       <div class="text">
-        <h2>{$language === 'en' ? 'Glycomics' : 'Glikomika'}</h2>
+        <h2>{$language === 'en' ? 'Glycomics & Glycoproteomics' : 'Glikomika i Glikoproteomika'}</h2>
         <p class="text-p">
           {
             $language === 'en'
@@ -34,7 +34,7 @@
         </p>
         <div>
           <a class="button-filled" href="/{$language === 'en' ? 'services#1.0.' : 'usluge#1.0.'}">
-            {$language === 'en' ? 'Glycomic services' : 'Usluge za glikomiku'}
+            {$language === 'en' ? 'Glycomic & Glycoproteomic Services' : 'Usluge za Glikomiku i Glikoproteomiku'}
           </a>
         </div>
       </div>

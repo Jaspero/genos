@@ -188,11 +188,17 @@
         </div>
       </div>
       <ul>
-        <li>{$language === 'en' ? 'Complex biological samples' : 'Složeni biološki uzorci'}</li>
-        <li class="ml-6 mb-2">{$language === 'en' ? '(e.g. human serum/plasma, cell lysates, tissues)' : '(npr. ljudski serum/plazma, stanični lizati, tkiva)'}</li>
-        <li>{$language === 'en' ? 'Purified glycoproteins' : 'Pročišćeni glikoproteini'}</li>
-        <li class="ml-6 mb-2">{$language === 'en' ? '(e.g. human IgG, IgA, AGP, C3, transferrin, HDL, LDL, rodent IgG)' : '(npr. ljudski IgG, IgA, AGP, C3, transferin, HDL, LDL, IgG glodavaca)'}</li>
-        <li>{$language === 'en' ? 'Biopharmaceuticals' : 'Biofarmaceutici'}</li>
+        {$language === 'en' ? 'Complex biological samples' : 'Složeni biološki uzorci'}
+        <li class="ml-6">{$language === 'en' ? '(e.g. human serum/plasma, cell lysates, tissues)' : '(npr. ljudski serum/plazma, stanični lizati, tkiva)'}</li>
+      </ul>
+
+      <ul>
+        {$language === 'en' ? 'Purified glycoproteins' : 'Pročišćeni glikoproteini'}
+        <li class="ml-6">{$language === 'en' ? '(e.g. human IgG, IgA, AGP, C3, transferrin, HDL, LDL, rodent IgG)' : '(npr. ljudski IgG, IgA, AGP, C3, transferin, HDL, LDL, IgG glodavaca)'}</li>
+      </ul>
+
+      <ul>
+        {$language === 'en' ? 'Biopharmaceuticals' : 'Biofarmaceutici'}
         <li class="ml-6">{$language === 'en' ? '(e.g. mAb)' : '(npr. monoklonska antitijela)'}</li>
       </ul>
     </div>
@@ -204,8 +210,8 @@
       <p>
         {
           $language === 'en'
-            ? 'N-glycans are released from glycoproteins by digestion with PNGaseF, fluorescently labelled, purified and analysed by hydrophilic interaction ultra-high-performance liquid chromatography with fluorescence detection (HILIC-UHPLC-FLD) which allows relative quantification of different glycan species. Assignment of N-glycan structures is based on HILIC retention time, accurate mass and fragmentation spectra obtained by coupling HILIC-UHPLC-FLD to mass spectrometry via electrospray ionization (ESI-MS/MS).'
-            : 'N-glikani se oslobađaju iz glikoproteina enzimskom digestijom pomoću PNGaseF, fluorescentno se obilježavaju, pročišćavaju i analiziraju hidrofobno-interakcijskom ultra-visokoučinkovitom tekućinskom kromatografijom s fluorescentnom detekcijom (HILIC-UHPLC-FLD), što omogućuje relativno kvantificiranje različitih glikanskih vrsta. Identifikacija N-glikanskih struktura temelji se na HILIC retencijskom vremenu, točnoj masi i spektrima fragmentacije dobivenima spajanjem HILIC-UHPLC-FLD sustava s masenom spektrometrijom putem elektrospray ionizacije (ESI-MS/MS).'
+            ? 'N-glycans are released from glycoproteins by digestion with PNGaseF, fluorescently labelled, purified and analysed by hydrophilic interaction ultra-high-performance liquid chromatography with fluorescence detection (HILIC-UHPLC-FLD) or capillary gel electrophoresis with laser-induced fluorescence (CGE-LIF), which allows relative quantification of different glycan species. Assignment of N-glycan structures is based on HILIC retention time, accurate mass and fragmentation spectra obtained by coupling HILIC-UHPLC-FLD to mass spectrometry via electrospray ionization (ESI-MS/MS).'
+            : 'N-glikani se oslobađaju iz glikoproteina digestijom s PNGaseF, fluorescentno se obilježavaju, pročišćavaju i analiziraju hidrofilnom interakcijskom ultra-visokoučinkovitom tekućinskom kromatografijom s fluorescentnom detekcijom (HILIC-UHPLC-FLD) ili kapilarnom gel elektroforezom s laserski induciranom fluorescencijom (CGE-LIF), što omogućuje relativnu kvantifikaciju različitih glikanskih vrsta. Identifikacija N-glikanskih struktura temelji se na HILIC retencijskom vremenu, točnoj masi i spektrima fragmentacije dobivenima spajanjem HILIC-UHPLC-FLD sustava s masenom spektrometrijom putem elektrospray ionizacije (ESI-MS/MS).'
         }
       </p>
       <h5>
@@ -214,8 +220,8 @@
       <p>
         {
           $language === 'en'
-            ? 'N-glycopeptides are obtained from glycoproteins by protease digestion, purified and analysed by C18 liquid chromatography coupled to mass spectrometry via electrospray ionization (C18-LC-ESI-MS/MS). Relative quantification of N-glycopeptides in obtained in a site-specific manner determined by the amino acid sequence of the glycoprotein. Assignment of N-glycopeptide structures is based on accurate mass and fragmentation spectra.'
-            : 'N-glikopeptidi se dobivaju iz glikoproteina proteolitičkom digestijom, pročišćavaju se i analiziraju C18 tekućinskom kromatografijom spojenom s masenom spektrometrijom putem elektrospray ionizacije (C18-LC-ESI-MS/MS). Relativna kvantifikacija N-glikopeptida provodi se na mjestu specifičan način određen slijedom aminokiselina glikoproteina. Identifikacija struktura N-glikopeptida temelji se na točnoj masi i spektrima fragmentacije.'
+            ? 'N-glycopeptides are obtained from glycoproteins by protease digestion, purified and analysed by C18 liquid chromatography coupled to mass spectrometry via electrospray ionization (C18-LC-ESI-MS/MS). Relative quantification of N-glycopeptides is obtained in a site-specific manner determined by the amino acid sequence of the glycoprotein. Assignment of N-glycopeptide structures is based on accurate mass and fragmentation spectra.'
+            : 'N-glikopeptidi se dobivaju iz glikoproteina proteolitičkom digestijom, pročišćavaju se i analiziraju C18 tekućinskom kromatografijom spojenom s masenom spektrometrijom putem elektrospray ionizacije (C18-LC-ESI-MS/MS). Relativna kvantifikacija N-glikopeptida dobiva se na specifičan način određen aminokiselinskim slijedom glikoproteina. Dodjeljivanje struktura N-glikopeptida temelji se na točnoj masi i spektrima fragmentacije.'
         }
       </p>
       <h5>
@@ -370,8 +376,8 @@
       <p>
         {
           $language === 'en'
-            ? 'Data analysis is an important aspect of the workflow that we provide for our partners and collaborators. Since pure numbers, without thoughtful and meaningful explanation, are usually of little interest, Genos invested significantly in its employee’s competence in statistics and computer science. Therefore, Genos offers a wide range of statistical techniques from basic experimental methods of normalization or batch correction to standard topics like statistical inference or machine/statistical learning.'
-            : 'Analiza podataka važan je aspekt radnog procesa koji Genos pruža javnosti. Budući da čisti brojevi, bez promišljenog i značenjskog objašnjenja, obično nisu od velikog interesa, Genos je značajno investirao u kompetencije svojih zaposlenika u statistici i računalnim znanostima. Stoga, Genos sada nudi širok spektar statističkih tehnika, od osnovnih eksperimentalnih metoda normalizacije ili ispravka serije uzoraka, do standardnih tema kao što su statistička inferencija ili strojno/statističko učenje.'
+            ? 'Data analysis is an important aspect of the workflow that we provide for our partners and collaborators. Since pure numbers, without thoughtful and meaningful explanation, are usually of little interest, Genos offers a wide range of statistical techniques from basic experimental methods of normalization or batch correction to standard topics like statistical inference or machine/statistical learning.'
+            : 'Analiza podataka važan je aspekt radnog toka koji pružamo našim partnerima i suradnicima. Budući da su čisti brojevi, bez promišljenog i smislenog objašnjenja, obično od malog interesa, Genos nudi širok raspon statističkih tehnika, od osnovnih eksperimentalnih metoda normalizacije ili korekcije serija do standardnih tema kao što su statistički zaključci ili strojno/statističko učenje.\n'
         }
       </p>
     </div>

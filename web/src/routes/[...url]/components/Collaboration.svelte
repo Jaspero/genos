@@ -6,11 +6,11 @@
 
 <div class="grid grid-large collaboration">
   <div class="gc-12">
-    <h2 class="centered" style="max-width: 36ch">
+    <h2 class="centered" style="max-width: 28ch">
       {
         $language === 'en'
-        ? 'We have successfully completed over 40 larger and smaller collaborative projects...'
-        : 'Uspješno smo završili više od 40 većih i manjih suradničkih projekata...'
+        ? 'We’ve actively contributed to over 40 scientific projects...'
+        : 'Aktivno smo sudjelovali u više od 40 znanstvenih projekata...'
       }
     </h2>
     <picture>
@@ -19,16 +19,16 @@
     </picture>
   </div>
   <div class="gc-12">
-    <h2 class="centered" style="max-width: 36ch">
+    <h2 class="centered" style="max-width: 42ch">
       {
         $language === 'en'
-          ? '...and we collaborate with leading academic and research institutions worldwide'
-          : '...i surađujemo s vodećim akademskim i istraživačkim institucijama diljem svijeta.'
+          ? '...and continue to collaborate with leading academic and research institutions worldwide'
+          : '...i nastavljamo surađivati s vodećim akademskim i istraživačkim institucijama diljem svijeta.'
       }
     </h2>
     <picture>
       <source srcset="/partners/universities-mobile.jpg" media="(max-width: 600px)">
-      <img src="/partners/universities.jpg" alt="universities" class="centered rounded">
+      <img src="/partners/universities.jpg" alt="sniversities" class="centered rounded">
     </picture>
   </div>
 </div>

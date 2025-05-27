@@ -20,8 +20,8 @@
     <div class="progress-bar" style="background-color: #66AACC;"></div>
   </div>
   <div class="gc-3 gc-sm-6">
-    <div class="data-number">500+</div>
-    <div class="data-label">{$language === 'en' ? 'Samples analysed daily' : 'Dnevno analizirani uzorci'}</div>
+    <div class="data-number">20k+</div>
+    <div class="data-label">{$language === 'en' ? 'Samples analysed annually' : 'Uzoraka analizirano godišnje'}</div>
     <div class="progress-bar" style="background-color: #FFDD33;"></div>
   </div>
   <div class="gc-3 gc-sm-6">

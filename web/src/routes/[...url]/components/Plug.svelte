@@ -15,8 +15,8 @@
         <p class="text-p">
           {@html
             $language === 'en'
-              ? 'GlycanAge is a cutting-edge test that measures biological age by assessing chronic inflammation through glycans.<br><br>Genos has researched glycans as biomarkers over the past 20 years, and now serves as the central hub for GlycanAge blood sample analysis.'
-              : 'GlycanAge je vrhunski test koji mjeri biološku dob procjenjujući kroničnu upalu putem glikana.<br><br>Genos je proučavao glikane kao biomarkere tijekom posljednjih 20 godina i sada služi kao središnje središte za analizu uzoraka krvi za GlycanAge.'
+              ? 'GlycanAge is a cutting-edge test that measures biological age by assessing chronic inflammation through glycans.<br><br>Genos has researched glycans as biomarkers over the past 18 years, and now serves as the central hub for GlycanAge blood sample analysis.'
+              : 'GlycanAge je vrhunski test koji mjeri biološku dob procjenjujući kroničnu upalu putem glikana.<br><br>Genos je proučavao glikane kao biomarkere tijekom posljednjih 18 godina i sada služi kao središnje središte za analizu uzoraka krvi za GlycanAge.'
           }
         </p>
         <div>
@@ -31,15 +31,16 @@
   <div class="gc-12 spacer">
     <div class="image-text">
       <div class="image">
-        <img src="/images/hgp-card.jpg" alt="the human glycome project">
+        <img src="/images/hgp-card.jpg" alt="{$language === 'en' ? 'The Human Glycome Project' : 'Projekt Humanog Glikoma'} Logo">
       </div>
       <div class="text">
-        {@html
-          $language === 'en'
-            ? 'An ambitious scientific initiative focused on mapping the entire human glycome, encompassing all glycans present in the human body.<br><br><a href="https://www.youtube.com/@HumanGlycomeProject" target="_blank">Watch the latest videos</a> on glycobiology research and innovations.'
-            : 'Projekt HUmanog Glikoma'
-        }
-        <h2>The Human Glycome Project</h2>
+        <h2>
+          {@html
+            $language === 'en'
+              ? 'The Human Glycome Project'
+              : 'Projekt Humanog Glikoma'
+          }
+        </h2>
         <p class="text-p">
           {@html
             $language === 'en'
