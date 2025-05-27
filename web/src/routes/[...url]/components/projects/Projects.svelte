@@ -80,81 +80,95 @@
             <div class="project-card-container">
               <div class="project-card">
                 <h4 class="project-title">
-                  {project.short}
+                  {#if project.shortEn && project.shortHr}
+                    {#if $language === 'en'}
+                      {project.shortEn}
+                    {:else}
+                      {project.shortHr}
+                    {/if}
+                  {:else}
+                    {project.short}
+                  {/if}
                 </h4>
-                {#if project.title}
+                {#if project.titleEn && project.titleHr}
                   <p class="project-text clamp">
-                    {project.title}.
-                    <button class="details-toggle" on:click={() => selectedProject = selectedProject === project ? '' : project}>
-                      {#if $language === 'en'}
-                        {selectedProject === project ? 'Less details' : 'More details'}
-                      {:else}
-                        {selectedProject === project ? 'Manje detalja' : 'Više detalja'}
-                      {/if}
-                    </button>
+                    {#if $language === 'en'}
+                      {project.titleEn}.
+                    {:else}
+                      {project.titleHr}.
+                    {/if}
                   </p>
                 {/if}
+                <button class="details-toggle" on:click={() => selectedProject = selectedProject === project ? '' : project}>
+                  {#if $language === 'en'}
+                    {selectedProject === project ? 'Less details' : 'More details'}
+                  {:else}
+                    {selectedProject === project ? 'Manje detalja' : 'Više detalja'}
+                  {/if}
+                </button>
                 {#if selectedProject === project}
                   <div class="project-details" transition:slide>
                     <table>
                       <tbody>
                       {#if selectedProject.startDate}
                         <tr>
-                          <td>Start Date:</td>
+                          <td>
+                            {@html $language === 'en' ? 'Start Date:' : 'Datum početka:'}
+                          </td>
                           <td>{selectedProject.startDate}</td>
                         </tr>
                       {/if}
                       {#if selectedProject.projectDuration}
                         <tr>
-                          <td>Project Duration:</td>
-                          <td>{selectedProject.projectDuration}</td>
+                          <td>{@html $language === 'en' ? 'Project Duration:' : 'Trajanje projekta:'}</td>
+                          <td>{selectedProject.projectDuration} {@html $language === 'en' ? 'months' : 'mjeseci'}</td>
                         </tr>
                       {/if}
                       {#if selectedProject.projectId}
                         <tr>
-                          <td>Project ID:</td>
+                          <td>{@html $language === 'en' ? 'Project ID:' : 'ID projekta:'}</td>
                           <td>{selectedProject.projectId}</td>
                         </tr>
                       {/if}
                       {#if selectedProject.callForProposals}
                         <tr>
-                          <td>Call For Proposals:</td>
+                          <td>{@html $language === 'en' ? 'Call For Proposals:' : 'Poziv:'}</td>
                           <td>{selectedProject.callForProposals}</td>
                         </tr>
                       {/if}
                       {#if selectedProject.coordinator}
                         <tr>
-                          <td>Coordinator:</td>
+                          <td>{@html $language === 'en' ? 'Coordinator:' : 'Koordinator:'}</td>
                           <td>{selectedProject.coordinator}</td>
                         </tr>
                       {/if}
                       {#if selectedProject.projectParticipants}
                         <tr>
-                          <td>Project Participants:</td>
+                          <td>{@html $language === 'en' ? 'Project Participants:' : 'Sudionici projekta:'}</td>
                           <td>{selectedProject.projectParticipants}</td>
                         </tr>
                       {/if}
                       {#if selectedProject.projectValue}
                         <tr>
-                          <td>Project Value:</td>
+                          <td>{@html $language === 'en' ? 'Project Value:' : 'Vrijednost projekta:'}</td>
                           <td>{selectedProject.projectValue}</td>
                         </tr>
                       {/if}
                       {#if selectedProject.genosContribution}
                         <tr>
-                          <td>Genos Contribution:</td>
+                          <td>{@html $language === 'en' ? 'Genos Grant Amount:' : 'Iznos Genosove potpore:'}</td>
                           <td>{selectedProject.genosContribution}</td>
                         </tr>
                       {/if}
                       {#if selectedProject.euCoFinancingAmount}
                         <tr>
-                          <td>Eu Co-finacing Amount:</td>
+                          <td>{@html $language === 'en' ? 'Eu Co-finacing Amount:' : 'Iznos EU sufinanciranja:'}</td>
                           <td>{selectedProject.euCoFinancingAmount}</td>
                         </tr>
                       {/if}
                       {#if selectedProject.contactPerson}
                         <tr>
-                          <td>Contact Person:</td>
+                          <td>{@html $language === 'en' ? 'Contact Person:' : 'Kontakt osoba:'}</td>
                           <td>{selectedProject.contactPerson}</td>
                         </tr>
                       {/if}
@@ -162,9 +176,15 @@
                     </table>
                   </div>
                 {/if}
-                <a href="/pdfs/{project.pdf}" target="_blank" class="button-filled open-pdf">
-                  {$language === 'en' ? 'Open as' : 'Otvori kao'} PDF
-                </a>
+                {#if $language === 'en'}
+                  <a href="/pdfs/en/{project.pdf}" target="_blank" class="button-filled open-pdf">
+                    Open as PDF
+                  </a>
+                {:else}
+                  <a href="/pdfs/hr/{project.pdf}" target="_blank" class="button-filled open-pdf">
+                    Otvori kao PDF
+                  </a>
+                {/if}
               </div>
             </div>
           {/each}
@@ -178,69 +198,83 @@
                 <div class="project-card-container">
                   <div class="project-card">
                     <h4 class="project-title">
-                      {project.short}
-                    </h4>
-                    <p class="project-text clamp">
-                      {#if project.title}
-                        {project.title}.
+                      {#if project.shortEn && project.shortHr}
+                        {#if $language === 'en'}
+                          {project.shortEn}
+                        {:else}
+                          {project.shortHr}
+                        {/if}
+                      {:else}
+                        {project.short}
                       {/if}
-                      <button class="details-toggle" on:click={() => selectedProject = selectedProject === project ? '' : project}>
-                        {
-                          selectedProject === project
-                          ? ($language === 'en' ? 'Less details' : 'Manje detalja')
-                          : ($language === 'hr' ? 'More details' : 'Više detalja')}
-                      </button>
-                    </p>
+                    </h4>
+                    {#if project.titleEn && project.titleHr}
+                      <p class="project-text clamp">
+                        {#if $language === 'en'}
+                          {project.titleEn}.
+                        {:else}
+                          {project.titleHr}.
+                        {/if}
+                      </p>
+                    {/if}
+                    <button class="details-toggle" on:click={() => selectedProject = selectedProject === project ? '' : project}>
+                      {#if $language === 'en'}
+                        {selectedProject === project ? 'Less details' : 'More details'}
+                      {:else}
+                        {selectedProject === project ? 'Manje detalja' : 'Više detalja'}
+                      {/if}
+                    </button>
                     {#if selectedProject === project}
                       <div class="project-details" transition:slide>
                         <table>
                           <tbody>
                           {#if selectedProject.startDate}
                             <tr>
-                              <td>Start Date:</td>
+                              <td>
+                                {@html $language === 'en' ? 'Start Date:' : 'Datum početka:'}
+                              </td>
                               <td>{selectedProject.startDate}</td>
                             </tr>
                           {/if}
                           {#if selectedProject.projectDuration}
                             <tr>
-                              <td>Project Duration:</td>
-                              <td>{selectedProject.projectDuration}</td>
+                              <td>{@html $language === 'en' ? 'Project Duration:' : 'Trajanje projekta:'}</td>
+                              <td>{selectedProject.projectDuration} {@html $language === 'en' ? 'months' : 'mjeseci'}</td>
                             </tr>
                           {/if}
                           {#if selectedProject.projectId}
                             <tr>
-                              <td>Project ID:</td>
+                              <td>{@html $language === 'en' ? 'Project ID:' : 'ID projekta:'}</td>
                               <td>{selectedProject.projectId}</td>
                             </tr>
                           {/if}
-
                           {#if selectedProject.callForProposals}
                             <tr>
-                              <td>Call For Proposals:</td>
+                              <td>{@html $language === 'en' ? 'Call For Proposals:' : 'Poziv:'}</td>
                               <td>{selectedProject.callForProposals}</td>
                             </tr>
                           {/if}
                           {#if selectedProject.coordinator}
                             <tr>
-                              <td>Coordinator:</td>
+                              <td>{@html $language === 'en' ? 'Coordinator:' : 'Koordinator:'}</td>
                               <td>{selectedProject.coordinator}</td>
                             </tr>
                           {/if}
                           {#if selectedProject.projectParticipants}
                             <tr>
-                              <td>Project Participants:</td>
+                              <td>{@html $language === 'en' ? 'Project Participants:' : 'Sudionici projekta:'}</td>
                               <td>{selectedProject.projectParticipants}</td>
                             </tr>
                           {/if}
                           {#if selectedProject.projectValue}
                             <tr>
-                              <td>Project Value:</td>
+                              <td>{@html $language === 'en' ? 'Project Value:' : 'Vrijednost projekta:'}</td>
                               <td>{selectedProject.projectValue}</td>
                             </tr>
                           {/if}
                           {#if selectedProject.projectLead}
                             <tr>
-                              <td>Project Lead:</td>
+                              <td>{@html $language === 'en' ? 'Project lead' : 'Voditelj projekta:'}</td>
                               <td>
                                 {#if $language === 'hr'}{selectedProject.jobTitle?.hr}{/if}
                                 {selectedProject.projectLead}{#if $language === 'en'}{selectedProject.jobTitle?.en}{/if}
@@ -249,19 +283,19 @@
                           {/if}
                           {#if selectedProject.genosContribution}
                             <tr>
-                              <td>Genos Contribution:</td>
+                              <td>{@html $language === 'en' ? 'Genos Grant Amount:' : 'Iznos Genosove potpore:'}</td>
                               <td>{selectedProject.genosContribution}</td>
                             </tr>
                           {/if}
                           {#if selectedProject.euCoFinancingAmount}
                             <tr>
-                              <td>Eu Co-finacing Amount:</td>
+                              <td>{@html $language === 'en' ? 'Eu Co-finacing Amount:' : 'Iznos EU sufinanciranja:'}</td>
                               <td>{selectedProject.euCoFinancingAmount}</td>
                             </tr>
                           {/if}
                           {#if selectedProject.contactPerson}
                             <tr>
-                              <td>Contact Person:</td>
+                              <td>{@html $language === 'en' ? 'Contact Person:' : 'Kontakt osoba:'}</td>
                               <td>{selectedProject.contactPerson}</td>
                             </tr>
                           {/if}
