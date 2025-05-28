@@ -303,9 +303,15 @@
                         </table>
                       </div>
                     {/if}
-                    <a href="/pdfs/{project.pdf}" target="_blank" class="button-filled open-pdf">
-                      {$language === 'en' ? 'Open as' : 'Otvori kao'} PDF
-                    </a>
+                    {#if $language === 'en'}
+                      <a href="/pdfs/en/{project.pdf}" target="_blank" class="button-filled open-pdf">
+                        Open as PDF
+                      </a>
+                    {:else}
+                      <a href="/pdfs/hr/{project.pdf}" target="_blank" class="button-filled open-pdf">
+                        Otvori kao PDF
+                      </a>
+                    {/if}
                   </div>
                 </div>
               {/each}

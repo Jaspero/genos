@@ -115,7 +115,7 @@ export const PROJECTS = [
         startDate: '01/10/2024',
         projectDuration: '48',
         pdf: '1-7.pdf',
-        projectId: "101217069",
+        projectId: "10121705-19",
         callForProposals: "HORIZON-WIDERA-2023-ACCESS-06",
         coordinator: "Kobenhavns Universitet",
         projectParticipants: 2,
@@ -344,7 +344,8 @@ export const PROJECTS = [
     href: 'npoo',
     projects: [
       {
-        short: 'Development of Personalized Tests for Determining Biological Age of the Brain and Early Detection of Dementia',
+        shortEn: 'Development of Personalized Tests for Determining Biological Age of the Brain and Early Detection of Dementia',
+        shortHr: 'Razvoj personaliziranih testova za određivanje biološke dobi mozga i rano otkrivanje demencije',
         titleEn: 'Targeted Scientific Research',
         descriptionEn: 'This project focuses on developing personalized tests to assess the biological age of the brain and enable early detection of dementia. It aims to create innovative diagnostic tools that can help identify early biomarkers of dementia, improving patient outcomes through early intervention. The project involves a partnership between various institutions, with Genos as one of the key project partners, contributing to the research and development of personalized health solutions.',
         titleHr: 'Ciljana znanstvena istraživanja',
@@ -356,7 +357,8 @@ export const PROJECTS = [
         projectValue: "1,591,504.70€"
       },
       {
-        short: 'Biochemical and Genetic Mechanisms in the Development of Anterior Cruciate Ligament Injuries: A New Concept for Injury Prevention',
+        shortEn: 'Biochemical and Genetic Mechanisms in the Development of Anterior Cruciate Ligament Injuries: A New Concept for Injury Prevention',
+        shortHr: 'Biokemijski i genetski mehanizmi u razvoju ozljeda prednjeg križnog ligamenta: novi koncept prevencije ozljeda',
         titleEn: 'Targeted Scientific Research',
         descriptionEn: 'This project focuses on investigating the biochemical and genetic mechanisms underlying anterior cruciate ligament (ACL) injuries, aiming to develop new methods for their prevention. ACL injuries are a significant concern in both sports and general health, often leading to long-term complications such as joint instability and increased risk of osteoarthritis. By examining the genetic and biochemical factors that contribute to ACL injuries, this research seeks to identify high-risk individuals and develop personalized approaches for injury prevention.<br><br>Through an interdisciplinary approach, the project will explore the molecular and genetic profiles of individuals susceptible to ACL injuries. By understanding these factors, the project aims to establish a preventive framework that can guide interventions in individuals at higher risk, ultimately reducing the incidence of ACL injuries.<br><br>Objectives:<ol class="ordered-list"><li>To identify biochemical markers associated with ACL injury susceptibility.</li><li>To investigate the genetic predisposition to ACL injuries.</li><li>To develop a novel prevention strategy based on genetic and biochemical insights.</li></ol><br>Expected Outcomes:<ul class="unordered-list"><li>Identification of key genetic and biochemical markers linked to ACL injuries.</li><li>Development of innovative strategies and interventions for preventing ACL injuries, particularly for individuals with a genetic predisposition.</li><li>Contribution to improved rehabilitation methods for individuals recovering from ACL injuries.</li></ul><br>The research will contribute to a deeper understanding of ACL injuries and has the potential to revolutionize preventive care in sports medicine and orthopedics.',
         titleHr: 'Ciljana znanstvena istraživanja',
