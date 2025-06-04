@@ -71,13 +71,13 @@
       <h2>{$language === 'en' ? 'Contact info' : 'Kontakt informacije'}</h2>
     </div>
     <div class="contact-section-right">
-      <p class="text-3xl md:text-2xl">{$language === 'en' ? 'Glycomics and Glycoproteomics lab' : 'Laboratorij za glikomiku i glikoproteomiku'}</p>
       <div>
         <span class="span-label">Email:</span>
         <div class="contact-links">
-          <a href="mailto:info@genos-glyco.com">info@genos-glyco.com</a>
+          <a href="mailto:info@genos.hr">info@genos.hr</a>
         </div>
       </div>
+      <p class="text-3xl md:text-2xl mt-4">{$language === 'en' ? 'Glycomics and Glycoproteomics lab' : 'Laboratorij za glikomiku i glikoproteomiku'}</p>
       <div>
         <span class="span-label">{$language === 'en' ? 'Phone' : 'Telefon'}</span>
         <div class="contact-links">
@@ -92,12 +92,6 @@
         </div>
       </div>
       <p class="text-3xl md:text-2xl mt-4">{$language === 'en' ? 'DNA & Forensics lab' : 'Laboratorij za DNA i forenziku'}</p>
-      <div>
-        <span class="span-label">Email:</span>
-        <div class="contact-links">
-          <a href="mailto:info@genos.hr">info@genos.hr</a>
-        </div>
-      </div>
       <div>
         <span class="span-label">{$language === 'en' ? 'Phone' : 'Telefon'}</span>
         <div class="contact-links">
