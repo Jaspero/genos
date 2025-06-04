@@ -91,7 +91,6 @@
           <span>+385 1 647 1169</span>
         </div>
       </div>
-
       <p class="text-3xl md:text-2xl mt-4">{$language === 'en' ? 'DNA & Forensics lab' : 'Laboratorij za DNA i forenziku'}</p>
       <div>
         <span class="span-label">Email:</span>
