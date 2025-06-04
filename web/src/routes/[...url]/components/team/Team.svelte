@@ -53,7 +53,7 @@
       </button>
     </div>
     <p class="selected-member-description">
-      {@html selectedMember.description}
+      {@html $language === 'en' ? selectedMember.descriptionEn : selectedMember.descriptionHr}
     </p>
   </div>
 {/if}

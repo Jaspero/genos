@@ -121,7 +121,10 @@
             3.6. {$language === 'en' ? 'Testing Procedure' : 'Postupak testiranja'}
           </a>
           <a href="{$language === 'en' ? '/services#3.7.' : '/usluge#3.7.'}" class="sub-link">
-            3.7. {$language === 'en' ? 'Data confidentiality' : 'Povjerljivost podataka'}
+            3.7. GENBird test
+          </a>
+          <a href="{$language === 'en' ? '/services#3.8.' : '/usluge#3.8.'}" class="sub-link">
+            3.8. {$language === 'en' ? 'Data confidentiality' : 'Povjerljivost podataka'}
           </a>
         </div>
       {/if}
@@ -539,8 +542,8 @@
       <p>
         {@html
           $language === 'en'
-            ? 'For personal paternity/maternity testing, comparing the DNA profiles of one parent and the child is sufficient. We analyze 16 or 24 STR markers (loci), which are internationally recognized as sufficiently discriminatory, providing a probability of biological parenthood greater than 99.99%.<br><br>For higher paternity accuracy, we recommend including the mother\'s sample in the analysis. When standard samples from the presumed father, child, and mother are tested, the mother\'s sample is analyzed free of charge.<br><br>After obtaining and comparing DNA profiles, for paternity testing, mandatory alleles are identified to determine if the presumed father carries the required alleles. A mandatory allele is one inherited from the biological parent.<br><br>If the analysis shows a mismatch in at least three mandatory alleles between the child and the presumed father, it is conclusive that the presumed father is not the biological father of the child. In cases of a mismatch in one or two molecular markers, mutations (which are relatively common) can be considered. In such cases, it is recommended to include the mother\'s sample in the analysis or test additional genetic markers. If desired or needed, Genos can perform an analysis of 24 markers for an additional fee.'
-            : 'Za osobno testiranje očinstva/majčinstva dovoljno je usporediti DNK profile jednog roditelja i djeteta. Analiziramo 16 ili 24 STR biljega (lokus), koji su međunarodno priznati kao dovoljno diskriminirajući i omogućuju određivanje vjerojatnosti biološkog roditeljstva veću od 99,99%.<br><br>Za veću točnost u utvrđivanju očinstva preporučujemo uključivanje uzorka majke u analizu. Kada se analiziraju standardni uzorci pretpostavljenog oca, djeteta i majke, uzorak majke se analizira bez dodatne naknade.<br><br>Nakon dobivanja i usporedbe DNK profila, u testiranju očinstva identificiraju se obvezni aleli kako bi se utvrdilo nosi li pretpostavljeni otac tražene alele. Obvezni alel je onaj koji je naslijeđen od biološkog roditelja.<br><br>Ako analiza pokaže nepodudaranje u najmanje tri obvezna alela između djeteta i pretpostavljenog oca, sa sigurnošću se može isključiti da je pretpostavljeni otac biološki otac djeteta. U slučajevima nepodudaranja u jednom ili dva molekularna biljega, moguće je uzeti u obzir mutacije (koje su relativno česte). U takvim slučajevima preporučuje se uključivanje uzorka majke u analizu ili testiranje dodatnih genetskih biljega. Ako je potrebno ili željeno, Genos može provesti analizu 24 biljega uz dodatnu naknadu.'
+            ? 'For personal paternity/maternity testing, comparing the DNA profiles of one parent and the child is sufficient. We analyze 18 or 24 STR markers (loci), which are internationally recognized as sufficiently discriminatory, providing a probability of biological parenthood higher than 99.99%.<br><br>For higher paternity accuracy, we recommend including the mother\'s sample in the analysis. When standard samples from the alleged father, child, and mother are tested, the mother\'s sample is analyzed free of charge.<br><br>After obtaining and comparing DNA profiles, for paternity testing, mandatory alleles are identified to determine if the alleged father carries the required alleles. A mandatory allele is one inherited from the biological parent.<br><br>If the analysis shows a mismatch in at least three mandatory alleles between the child and the alleged father, it is conclusive that the alleged father is not the biological father of the child. In cases of a mismatch in one or two molecular markers, mutations (which are relatively common) can be considered. In such cases, it is recommended to include the mother\'s sample in the analysis or test additional genetic markers. If desired or needed, Genos can perform an analysis of 24 markers for an additional fee.'
+            : 'Za osobno testiranje očinstva/majčinstva dovoljno je usporediti DNK profile jednog roditelja i djeteta. Analiziramo 18 ili 24 STR biljega (lokus), koji su međunarodno priznati kao dovoljno diskriminirajući i omogućuju određivanje vjerojatnosti biološkog roditeljstva veću od 99,99%.<br><br>Za veću točnost u utvrđivanju očinstva preporučujemo uključivanje uzorka majke u analizu. Kada se analiziraju standardni uzorci pretpostavljenog oca, djeteta i majke, uzorak majke se analizira bez dodatne naknade.<br><br>Nakon dobivanja i usporedbe DNK profila, u testiranju očinstva identificiraju se obvezni aleli kako bi se utvrdilo nosi li pretpostavljeni otac tražene alele. Obvezni alel je onaj koji je naslijeđen od biološkog roditelja.<br><br>Ako analiza pokaže nepodudaranje u najmanje tri obvezna alela između djeteta i pretpostavljenog oca, sa sigurnošću se može isključiti da je pretpostavljeni otac biološki otac djeteta. U slučajevima nepodudaranja u jednom ili dva molekularna biljega, moguće je uzeti u obzir mutacije (koje su relativno česte). U takvim slučajevima preporučuje se uključivanje uzorka majke u analizu ili testiranje dodatnih genetskih biljega. Ako je potrebno ili željeno, Genos može provesti analizu 24 biljega uz dodatnu naknadu.'
         }
       </p>
       <h5>
@@ -553,7 +556,7 @@
       <p>
         {@html
           $language === 'en'
-            ? 'Paternity/maternity testing for legal proceedings is conducted based on a court order, by comparing the genotypes of the mother, child, and presumed father. As a certified court expert, Genos d.o.o. performs paternity testing at the request of individuals, and the findings and opinions of our authorized expert are valid as evidence in court. This helps avoid unnecessary costs of double testing (once for personal purposes and once for legal proceedings).<br><br>The probability values for paternity in legal cases range from one in several million to one in several billion. The minimum threshold required for conclusive paternity determination in court is 99.999%.'
+            ? 'Paternity/maternity testing for legal proceedings is conducted based on a court order, by comparing the genotypes of the mother, child, and alleged father. As a certified court expert, Genos d.o.o. performs paternity testing at the request of individuals, and the findings and opinions of our authorized expert are valid as evidence in court. This helps avoid unnecessary costs of double testing (once for personal purposes and once for legal proceedings).<br><br>The probability values for paternity in legal cases range from one in several million to one in several billion. The minimum threshold required for conclusive paternity determination in court is 99.999%.'
             : 'Testiranje očinstva/majčinstva za pravne postupke provodi se na temelju sudskog naloga, usporedbom genotipova majke, djeteta i pretpostavljenog oca. Kao certificirani sudski vještak, Genos d.o.o. provodi testiranje očinstva na zahtjev pojedinaca, a nalazi i mišljenja našeg ovlaštenog vještaka imaju dokaznu snagu na sudu. To pomaže u izbjegavanju nepotrebnih troškova dvostrukog testiranja (jednom za osobne potrebe, a jednom za pravne postupke).<br><br>Vjerojatnost očinstva u pravnim slučajevima kreće se od jednog na nekoliko milijuna do jednog na nekoliko milijardi. Minimalni prag koji je potreban za zaključivanje očinstva na sudu je 99,999%.'
         }
       </p>
@@ -586,7 +589,7 @@
       <h5>
         {
           $language === 'en'
-            ? 'Paternity Testing Through the Male Line'
+            ? 'Patrilineality'
             : 'Testiranje očinstva kroz mušku lozu'
         }
       </h5>
@@ -630,7 +633,7 @@
       <p>
         {@html
           $language === 'en'
-            ? 'Kinship testing for first-generation relationships between potential siblings and half-siblings is conducted by analyzing 24 STR markers. The test is used when the presumed father is unavailable for testing, and potential brothers or sisters, or half-siblings, want to confirm if they share the same father.<br><br>There are two types of tests:'
+            ? 'Kinship testing for first-generation relationships between potential siblings and half-siblings is conducted by analyzing 24 STR markers. The test is used when the alleged father is unavailable for testing, and potential brothers or sisters, or half-siblings, want to confirm if they share the same father.<br><br>There are two types of tests:'
             : 'Testiranje srodstva za prve generacije odnosa između potencijalnih braće i sestara ili polubraće i polusestre provodi se analizom 24 STR biljega. Test se koristi kada pretpostavljeni otac nije dostupan za testiranje, a potencijalni braća ili sestre, ili polubraća i polusestre, žele potvrditi ako dijele istog oca.<br><br>Postoje dva tipa testova:'
         }
       </p>
@@ -660,7 +663,7 @@
       <p>
         {
           $language === 'en'
-            ? 'Grandparent-grandchild testing is performed by analyzing 24 STR markers and is conducted when the presumed father is unavailable for testing. The test confirms whether the child is biologically related to the grandparents, thus aiding in identifying the biological father. This test can also assist in confirming maternity.'
+            ? 'Grandparent-grandchild testing is performed by analyzing 24 STR markers and is conducted when the alleged father is unavailable for testing. The test confirms whether the child is biologically related to the grandparents, thus aiding in identifying the biological father. This test can also assist in confirming maternity.'
             : 'Testiranje djeda-unuče provodi se analizom 24 STR biljega i koristi se kada pretpostavljeni otac nije dostupan za testiranje. Test potvrđuje je li dijete biološki povezano s djedom i bakom, čime pomaže u identificiranju biološkog oca. Ovaj test također može pomoći u potvrđivanju majčinstva.'
         }
       </p>
@@ -690,7 +693,7 @@
       <p>
         {@html
           $language === 'en'
-            ? 'The sex of a baby is usually determined via ultrasound. However, in cases where this is not possible, prenatal gender determination can be performed through a DNA test.<br><br>This test analyzes free fetal DNA present in the mother’s blood by detecting Y STR markers. Since the Y chromosome is unique to males, the presence of a Y chromosome confirms that the fetus is male. If no Y chromosome is detected, the fetus is female.<br><br>Genos DNA Laboratory researchers, in collaboration with other scientific institutions, were among the first to publish findings on prenatal gender determination in the prestigious journal Prenatal Diagnosis in 2008.<br><br>Paternity testing before birth is only possible if the fetus is male. The fetal Y DNA profile is compared to the Y DNA profile of the potential father to determine if they match.<br><br>However, prenatal paternity testing is not possible if the potential fathers are close male relatives (e.g., brothers or father and son) since they share an identical Y chromosome. Due to this limitation, it is recommended to test all potential fathers and confirm paternity with a standard DNA test after birth. This analysis can only determine whether a potential father can be the biological father but cannot definitively confirm paternity—it can only exclude a man as the biological father.<br><br>Testing is available from the 14th week of pregnancy. An appointment must be scheduled in advance, and the expectant mother must bring her pregnancy record book. The test requires 9 ml of the mother’s venous blood and a buccal swab from the potential father. The blood draw is completely safe for the fetus.'
+            ? 'The sex of a baby is usually determined via ultrasound. However, in cases where this is not possible, prenatal gender determination can be performed through a DNA test.<br><br>This test analyzes free fetal DNA present in the mother’s blood by detecting Y STR markers. Since the Y chromosome is unique to males, the presence of a Y chromosome confirms that the fetus is male. If Y chromosome is not detected, the fetus is female.<br><br>Genos DNA Laboratory researchers, in collaboration with other scientific institutions, were among the first to publish findings on prenatal gender determination in the prestigious journal Prenatal Diagnosis in 2008.<br><br>Paternity testing before birth is only possible if the fetus is male. The fetal Y DNA profile is compared to the Y DNA profile of the alleged father to determine if they match.<br><br>However, prenatal paternity testing is not possible if the alleged fathers are close male relatives (e.g., brothers or father and son) since they share an identical Y chromosome. Due to this limitation, it is recommended to test all alleged fathers and confirm paternity with a standard DNA test after birth. This analysis can only determine whether the alleged father can be the biological father but cannot definitively confirm paternity—it can only exclude a man as the biological father.<br><br>Testing is available from the 18th week of pregnancy. An appointment must be scheduled in advance, and a pregant woman must bring her pregnancy record book. The test requires 9 ml of the mother’s venous blood and a buccal swab from the alleged father. The blood draw is completely safe for the fetus.'
             : 'Spol djeteta najčešće se određuje ultrazvukom. Međutim, u slučajevima kada to nije moguće, spol se može odrediti prenatalnim DNK testom. Ovaj test analizira slobodnu fetalnu DNK prisutnu u krvi majke detekcijom Y STR biljega. Budući da je Y kromosom specifičan za muškarce, prisutnost Y kromosoma potvrđuje da je fetus muškog spola. Ako Y kromosom nije detektiran, fetus je ženskog spola.<br><br>Istraživači iz Genos DNA laboratorija, u suradnji s drugim znanstvenim institucijama, bili su među prvima koji su 2008. godine objavili rezultate istraživanja o prenatalnom određivanju spola u prestižnom časopisu Prenatal Diagnosis.<br><br>Testiranje očinstva prije rođenja moguće je samo ako je fetus muškog spola. Fetalni Y DNK profil uspoređuje se s Y DNK profilom potencijalnog oca kako bi se utvrdilo podudaranje. Međutim, prenatalno testiranje očinstva nije moguće ako su potencijalni očevi bliski muški rođaci (npr. braća ili otac i sin) jer dijele identičan Y kromosom. Zbog tog ograničenja preporučuje se testiranje svih potencijalnih očeva te naknadna potvrda očinstva standardnim DNK testom nakon rođenja. Ova analiza može isključiti muškarca kao biološkog oca, ali ne može s apsolutnom sigurnošću potvrditi očinstvo.<br><br>Testiranje je moguće od 14. tjedna trudnoće. Potrebno je prethodno dogovoriti termin, a trudnica na pregled mora donijeti trudničku knjižicu. Test zahtijeva uzimanje 9 ml venske krvi trudnice te obrisak usne sluznice potencijalnog oca. Uzimanje uzorka potpuno je sigurno za fetus.'
         }
       </p>
@@ -1061,17 +1064,34 @@
           {/if}
         </li>
       </ul>
-      <h4 id="3.7.">
+      <h4 id="3.7.">3.7. GENBird test</h4>
+      <p>
+        {@html
+          $language === 'en'
+            ? 'The GENBird Test allows for simple and non-invasive DNA sample collection from birds using either feathers or blood. Clear instructions guide users through labeling, collecting, and sending the samples. Feathers must include the calamus (the base of the feather) as it contains DNA, while blood is collected with a sterile needle and applied to a card or tissue. Each sample is stored in a labeled paper envelope and sent to the lab with an order form. The test enables accurate genetic analysis while ensuring the bird’s wellbeing and sample quality.'
+            : 'GENBird test omogućuje jednostavno i neinvazivno prikupljanje DNA uzoraka ptica putem pera ili krvi. Upute jasno opisuju kako označiti, prikupiti i poslati uzorke. Važno je da pero sadrži kalamus (osnovu pera) jer on nosi DNA, dok se krv uzima sterilnom iglom i nanosi na papir ili maramicu. Svaki uzorak sprema se u označenu papirnatu omotnicu i šalje u laboratorij zajedno s narudžbenicom. Test omogućuje točnu genetsku analizu uz brigu o zdravlju ptice i kvaliteti uzorka.'
+        }
+      </p>
+      <ul>
+        <li>
+          {#if $language === 'en'}
+            <a href="/pdfs/genbird-en.pdf" target="_blank" class="underline">View intructions for the GENBird test (PDF)</a>
+          {:else}
+            <a href="/pdfs/genbird-hr.pdf" target="_blank" class="underline">Pogledaj uputstva za GENBird test (PDF)</a>
+          {/if}
+        </li>
+      </ul>
+      <h4 id="3.8.">
         {
           $language === 'en'
-            ? '3.7. Data Confidentiality'
-            : '3.7. Povjerljivost podataka'
+            ? '3.8. Data Confidentiality'
+            : '3.8. Povjerljivost podataka'
         }
       </h4>
       <p>
         {@html
           $language === 'en'
-            ? 'All DNA test results are strictly confidential. Biological samples submitted for DNA analysis are destroyed after testing, and all digital records are deleted 5 years after results are issued. Within this period, a copy of the issued results can be requested only by the original client through a written request.<br><br>The Genos d.o.o. DNA laboratory uses cutting-edge DNA analysis methods to provide accurate answers to all inquiries. However, in some cases, results may not align with expectations, which can have emotional and social consequences. Genos d.o.o. is not authorized to provide psychological counseling and cannot offer direct support in such situations.<br><br>If DNA test results cause emotional distress such as dissatisfaction, anger, fear, sadness, or concern, we strongly recommend seeking professional support from one of the organizations listed below, a family doctor, or a psychologist at the relevant social services center.<br><br>Psychological Center TESA, tel. 01 48 28 888 / <a href="https://www.tesa.hr" target="_blank" class="underline">www.tesa.hr</a><br>Society for Psychological Help, MODUS – Center for Children, Youth, and Families, tel. 01 4621 554 / <a href="https://www.dpp.hr" target="_blank" class="underline">www.dpp.hr</a>'
+            ? 'All DNA test results are strictly confidential. Biological samples submitted for DNA analysis are destroyed after testing, and all digital records are deleted 5 years after results are issued. Within this period, a copy of the issued results can be requested only by the original client through a written request.<br><br>The Genos d.o.o. DNA laboratory uses cutting-edge DNA analysis methods to provide accurate answers to all inquiries. However, in some cases, results may not align with expectations, which can have emotional and social consequences. Genos d.o.o. is not authorized to provide psychological counselling and cannot offer direct support in such situations.<br><br>If DNA test results cause emotional distress such as dissatisfaction, anger, fear, sadness, or concern, we strongly recommend seeking professional support from one of the organizations listed below, a family doctor, or a psychologist at the relevant social services center.<br><br>Psychological Center TESA, tel. 01 48 28 888 / <a href="https://www.tesa.hr" target="_blank" class="underline">www.tesa.hr</a><br>Society for Psychological Help, MODUS – Center for Children, Youth, and Families, tel. 01 4621 554 / <a href="https://www.dpp.hr" target="_blank" class="underline">www.dpp.hr</a>'
             : 'Svi rezultati DNA testova su strogo povjerljivi. Biološki uzorci dostavljeni na DNA analizu uništavaju se nakon testiranja, a svi digitalni zapisi brišu se 5 godina nakon izdavanja rezultata. U tom razdoblju kopiju izdanih rezultata može zatražiti isključivo izvorni naručitelj putem pisanog zahtjeva.<br><br>DNA laboratorij Genos d.o.o. koristi najnaprednije metode DNA analize kako bi pružio točne odgovore na sve upite. Međutim, u nekim slučajevima rezultati možda neće odgovarati očekivanjima, što može imati emocionalne i društvene posljedice. Genos d.o.o. nije ovlašten pružati psihološko savjetovanje i ne može ponuditi izravnu podršku u takvim situacijama.<br><br>Ako rezultati DNA testa izazovu emocionalnu nelagodu poput nezadovoljstva, ljutnje, straha, tuge ili zabrinutosti, preporučujemo da potražite stručnu pomoć kod neke od dolje navedenih organizacija, obiteljskog liječnika ili psihologa u nadležnom centru za socijalnu skrb.<br><br>Psihološki centar TESA, tel. 01 48 28 888 / <a href="https://www.tesa.hr" target="_blank" class="underline">www.tesa.hr</a><br>Društvo za psihološku pomoć, MODUS – Centar za djecu, mlade i obitelj, tel. 01 4621 554 / <a href="https://www.dpp.hr" target="_blank" class="underline">www.dpp.hr</a>'
         }
       </p>
