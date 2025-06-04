@@ -129,8 +129,8 @@
       <div>
         <span class="span-label">{$language === 'en' ? 'Working hours' : 'Radno vrijeme'}</span>
         <div class="contact-links">
-          <span> Ponedjeljak - petak, od 9:00 do 15:30 </span>
-          <span> Tijekom državnih praznika i blagdana ne radimo </span>
+          <span> {$language === 'en' ? 'Monday - Friday, 9:00-15:30' : 'Ponedjeljak - petak, od 9:00 do 15:30'} </span>
+          <span> {$language === 'en' ? 'Closed on public holidays' : 'Tijekom državnih praznika i blagdana ne radimo'} </span>
         </div>
       </div>
     </div>

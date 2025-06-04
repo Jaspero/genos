@@ -13,7 +13,7 @@
       {
         $language === 'en'
           ? 'Genos unites expertise in glycomics, glycoproteomics, epigenetics, and DNA analysis to deliver integrated, high-quality solutions for diverse research and commercial applications.'
-          : 'Genos ujedinjuje stručnost u glikomicima, glikoproteomicima, epigenetici i DNA analizi kako bi pružio integrirana, visokokvalitetna rješenja za različite istraživačke i komercijalne primjene.'
+          : 'Genos ujedinjuje stručnost u glikomici, glikoproteomici, epigenetici i DNA analizi kako bi pružio integrirana, visokokvalitetna rješenja za različite istraživačke i komercijalne primjene.'
       }
     </p>
   </div>

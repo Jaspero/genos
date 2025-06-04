@@ -16,7 +16,7 @@
   </div>
   <div class="gc-3 gc-sm-6">
     <div class="data-number">200k+</div>
-    <div class="data-label">{$language === 'en' ? 'Total samples analyzed' : 'Dosad analizirani uzorci'}</div>
+    <div class="data-label">{$language === 'en' ? 'Total samples analysed' : 'Dosad analiziranih uzoraka'}</div>
     <div class="progress-bar" style="background-color: #66AACC;"></div>
   </div>
   <div class="gc-3 gc-sm-6">
