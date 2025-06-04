@@ -34,7 +34,7 @@
         </p>
         <div>
           <a class="button-filled" href="/{$language === 'en' ? 'services#1.0.' : 'usluge#1.0.'}">
-            {$language === 'en' ? 'Glycomic & Glycoproteomic Services' : 'Usluge za Glikomiku i Glikoproteomiku'}
+            {$language === 'en' ? 'Glycomic & Glycoproteomic services' : 'Usluge za Glikomiku i Glikoproteomiku'}
           </a>
         </div>
       </div>
@@ -57,7 +57,7 @@
         </p>
         <div>
           <a class="button-filled" href="{$language === 'en' ? 'services#2.0.' : 'usluge#2.0.'}">
-            {$language === 'en' ? 'Epigenetic services' : 'Usluge za epigenetiku'}
+            {$language === 'en' ? 'Epigenetics services' : 'Usluge za epigenetiku'}
           </a>
         </div>
       </div>

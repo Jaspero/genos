@@ -46,7 +46,7 @@
       <img class="selected-member-dialog-image" src="/team/{selectedMember.img}.jpg" alt="">
       <div class="flex-1">
         <div class="selected-member-dialog-name">{selectedMember.name}</div>
-        <div class="selected-member-dialog-job">{selectedMember.job}</div>
+        <div class="selected-member-dialog-job">{$language === 'en' ? selectedMember.job.en : selectedMember.job.hr}</div>
       </div>
       <button class="selected-member-dialog-close" on:click={() => selectedMember = ''}>
         <img src="/images/close.svg" alt="">

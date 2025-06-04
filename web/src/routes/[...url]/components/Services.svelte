@@ -33,7 +33,7 @@
           epigenetics = false;
           forensics = false;
         }}>
-        {$language === 'en' ? 'Glycomics and glycoproteomics' : 'Glikomika i glikoproteomika'}
+        {$language === 'en' ? 'Glycomics & glycoproteomics' : 'Glikomika i glikoproteomika'}
         <img src="/icons/arrow_dropdown.svg" alt="" class:rotate-180={glycomics}>
       </button>
       {#if glycomics}
