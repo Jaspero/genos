@@ -142,8 +142,8 @@
         '/glycomics': '/glikomika',
         '/epigenetika': '/epigenetics',
         '/epigenetics': '/epigenetika',
-        '/dnk-i-forenzika': '/dna-and-forensics',
-        '/dna-and-forensics': '/dnk-i-forenzika'
+        '/dna-i-forenzika': '/dna-and-forensics',
+        '/dna-and-forensics': '/dna-i-forenzika'
       };
 
       const currentPath = window.location.pathname;

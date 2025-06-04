@@ -14,8 +14,8 @@
     <h2>
       {
         $language === 'en'
-          ? 'Genos unites expertise in glycomics, epigenetics, and DNA analysis to deliver integrated, high-quality solutions for diverse research and commercial applications.'
-          : 'Genos objedinjuje stručnost u glikomici, epigenetici i analizi DNK kako bi pružio integrirana, visokokvalitetna rješenja za raznolike istraživačke i komercijalne primjene.'
+          ? 'Genos unites expertise in glycomics, glycoproteomics, epigenetics, and DNA analysis to deliver integrated, high-quality solutions for diverse research and commercial applications.'
+          : 'Genos objedinjuje stručnost u glikomici, glikoproteomici, epigenetici i analizi DNA kako bi pružio integrirana, visokokvalitetna rješenja za raznolike istraživačke i komercijalne primjene.'
       }
     </h2>
   </div>
@@ -28,18 +28,18 @@
       }
     </p>
     <div class="sticky-items">
-      <button class="flex" on:click={() => {
+      <button class="flex text-left" on:click={() => {
           glycomics = !glycomics;
           epigenetics = false;
           forensics = false;
         }}>
-        {$language === 'en' ? 'Glycomics' : 'Glikomika'}
+        {$language === 'en' ? 'Glycomics and glycoproteomics' : 'Glikomika i glikoproteomika'}
         <img src="/icons/arrow_dropdown.svg" alt="" class:rotate-180={glycomics}>
       </button>
       {#if glycomics}
         <div class="flex flex-col gap-y-1" transition:slide>
           <a href="{$language === 'en' ? '/services#1.0.' : '/usluge#1.0.'}" class="sub-link">
-            1. {$language === 'en' ? 'Glycomics' : 'Glikomika'}
+            1. {$language === 'en' ? 'Glycomics & Glycoproteomics' : 'Glikomika i glikoproteomika'}
           </a>
           <a href="{$language === 'en' ? '/services#1.1.' : '/usluge#1.1.'}" class="sub-link">
             1.1. {$language === 'en' ? 'Technologies' : 'Tehnologije'}
@@ -90,13 +90,13 @@
           epigenetics = false;
           forensics = !forensics;
         }}>
-        {$language === 'en' ? 'DNA & Forensics' : 'DNK i Forenzika'}
+        {$language === 'en' ? 'DNA & Forensics' : 'DNA i Forenzika'}
         <img src="/icons/arrow_dropdown.svg" alt="" class:rotate-180={forensics}>
       </button>
       {#if forensics}
         <div class="flex flex-col gap-y-1" transition:slide>
           <a href="{$language === 'en' ? '/services#3.0.' : '/usluge#3.0.'}" class="sub-link">
-            3. {$language === 'en' ? 'DNA & Forensics' : 'DNK i Forenzika'}
+            3. {$language === 'en' ? 'DNA & Forensics' : 'DNA i Forenzika'}
           </a>
           <a href="{$language === 'en' ? '/services#3.1.' : '/usluge#3.1.'}" class="sub-link">
             3.1. {$language === 'en' ? 'Paternity testing' : 'Test očinstva'}
@@ -115,7 +115,7 @@
           <a href="{$language === 'en' ? '/services#3.5.' : '/usluge#3.5.'}" class="sub-link">
             3.5. {$language === 'en'
             ? 'Avian Gender Determination via DNA Analysis'
-            : 'Određivanje spola ptica DNK analizom'}
+            : 'Određivanje spola ptica DNA analizom'}
           </a>
           <a href="{$language === 'en' ? '/services#3.6.' : '/usluge#3.6.'}" class="sub-link">
             3.6. {$language === 'en' ? 'Testing Procedure' : 'Postupak testiranja'}
@@ -131,7 +131,7 @@
     </div>
   </div>
   <div class="gc-9 services-container">
-    <h3 id="1.0.">1. {$language === 'en' ? 'Glycomics' : 'Glikomika'}</h3>
+    <h3 id="1.0.">1. {$language === 'en' ? 'Glycomics & Glycoproteomics' : 'Glikomika i glikoproteomika'}</h3>
     <img src="/illustrations/glycomics.jpg" alt="" class="w-full">
     <div class="services-segment">
       <h4 id="1.1.">1.1. {$language === 'en' ? 'Technologies' : 'Tehnologije'}</h4>
@@ -163,7 +163,7 @@
         {
           $language === 'en'
             ? '2 Applied Biosystems 3500 DNA sequencers adapted for glycan analysis, HT glycoprofiling of up to 300 samples/day'
-            : '2 Applied Biosystems 3500 DNK sekvencera prilagođena za analizu glikana, visokoprotočno glikoprofiliranje do 300 uzoraka dnevno'
+            : '2 Applied Biosystems 3500 DNA sekvencera prilagođena za analizu glikana, visokoprotočno glikoprofiliranje do 300 uzoraka dnevno'
         }
       </p>
       <h5>
@@ -419,7 +419,7 @@
           {
             $language === 'en'
               ? 'Epigenetics Pyrosequencers PyroMark Q24 Advanced (Qiagen) for DNA methylation analyses'
-              : 'Pirosekvenceri PyroMark Q24 Advanced (Qiagen) za analize metilacije DNK-a'
+              : 'Pirosekvenceri PyroMark Q24 Advanced (Qiagen) za analize metilacije DNA-a'
           }
         </li>
         <li>
@@ -483,7 +483,7 @@
           {
             $language === 'en'
               ? 'Analysis of DNA methylation by pyrosequencing'
-              : 'Analiza metilacije DNK pomoću pirosekvenciranja'
+              : 'Analiza metilacije DNA pomoću pirosekvenciranja'
           }
         </li>
         <li>
@@ -505,7 +505,7 @@
     </div>
     <hr>
     <div class="services-segment">
-      <h3 id="3.0.">3. {$language === 'en' ? 'DNA & Forensics' : 'DNK i Forenzika'}</h3>
+      <h3 id="3.0.">3. {$language === 'en' ? 'DNA & Forensics' : 'DNA i Forenzika'}</h3>
       <img src="/illustrations/dna.jpg" alt="" class="w-full">
       <h4 id="3.1.">3.1. {$language === 'en' ? 'Paternity testing' : 'Utvrđivanje očinstva'}</h4>
       <ul>
@@ -529,7 +529,7 @@
         {@html
           $language === 'en'
             ? 'DNA analysis results serve as crucial evidence in numerous civil and criminal cases. While DNA analysis can definitively determine the identity of an individual or biological traces, correct interpretation of laboratory results requires significant expertise and experience.<br><br>Genos d.o.o. was the first private laboratory in Croatia authorized to perform forensic DNA analysis, a distinction recognized by our clients as an added value, fostering trust in the reliability of our results.<br><br>Our team includes a full-time court expert with extensive experience in DNA analysis, along with collaborations with other court experts in Croatia. Our experts were part of the national team that conducted victim identifications from the Homeland War under the Ministry of Family, Veterans, and Intergenerational Solidarity.<br><br>Unlike companies that outsource DNA sample testing, we handle all analyses in our laboratory in Zagreb.'
-            : 'Rezultati analize DNK predstavljaju ključni dokaz u brojnim građanskim i kaznenim postupcima. Iako DNK analiza može nedvojbeno utvrditi identitet osobe ili biološkog traga, pravilna interpretacija laboratorijskih rezultata zahtijeva značajnu stručnost i iskustvo.<br><br>Genos d.o.o. bio je prvi privatni laboratorij u Hrvatskoj ovlašten za provedbu forenzičkih DNK analiza, a to priznanje naši klijenti prepoznaju kao dodatnu vrijednost koja doprinosi povjerenju u pouzdanost naših rezultata.<br><br>Naš tim uključuje stalnog sudskog vještaka s bogatim iskustvom u DNK analizama te surađuje i s drugim sudskim vještacima u Hrvatskoj. Naši su stručnjaci bili dio nacionalnog tima za identifikaciju žrtava Domovinskog rata pod okriljem Ministarstva obitelji, branitelja i međugeneracijske solidarnosti.<br><br>Za razliku od tvrtki koje testiranje DNK uzoraka povjeravaju vanjskim partnerima, sve analize provodimo u vlastitom laboratoriju u Zagrebu.'
+            : 'Rezultati analize DNA predstavljaju ključni dokaz u brojnim građanskim i kaznenim postupcima. Iako DNA analiza može nedvojbeno utvrditi identitet osobe ili biološkog traga, pravilna interpretacija laboratorijskih rezultata zahtijeva značajnu stručnost i iskustvo.<br><br>Genos d.o.o. bio je prvi privatni laboratorij u Hrvatskoj ovlašten za provedbu forenzičkih DNA analiza, a to priznanje naši klijenti prepoznaju kao dodatnu vrijednost koja doprinosi povjerenju u pouzdanost naših rezultata.<br><br>Naš tim uključuje stalnog sudskog vještaka s bogatim iskustvom u DNA analizama te surađuje i s drugim sudskim vještacima u Hrvatskoj. Naši su stručnjaci bili dio nacionalnog tima za identifikaciju žrtava Domovinskog rata pod okriljem Ministarstva obitelji, branitelja i međugeneracijske solidarnosti.<br><br>Za razliku od tvrtki koje testiranje DNA uzoraka povjeravaju vanjskim partnerima, sve analize provodimo u vlastitom laboratoriju u Zagrebu.'
         }
       </p>
       <h5>
@@ -543,7 +543,7 @@
         {@html
           $language === 'en'
             ? 'For personal paternity/maternity testing, comparing the DNA profiles of one parent and the child is sufficient. We analyze 18 or 24 STR markers (loci), which are internationally recognized as sufficiently discriminatory, providing a probability of biological parenthood higher than 99.99%.<br><br>For higher paternity accuracy, we recommend including the mother\'s sample in the analysis. When standard samples from the alleged father, child, and mother are tested, the mother\'s sample is analyzed free of charge.<br><br>After obtaining and comparing DNA profiles, for paternity testing, mandatory alleles are identified to determine if the alleged father carries the required alleles. A mandatory allele is one inherited from the biological parent.<br><br>If the analysis shows a mismatch in at least three mandatory alleles between the child and the alleged father, it is conclusive that the alleged father is not the biological father of the child. In cases of a mismatch in one or two molecular markers, mutations (which are relatively common) can be considered. In such cases, it is recommended to include the mother\'s sample in the analysis or test additional genetic markers. If desired or needed, Genos can perform an analysis of 24 markers for an additional fee.'
-            : 'Za osobno testiranje očinstva/majčinstva dovoljno je usporediti DNK profile jednog roditelja i djeteta. Analiziramo 18 ili 24 STR biljega (lokus), koji su međunarodno priznati kao dovoljno diskriminirajući i omogućuju određivanje vjerojatnosti biološkog roditeljstva veću od 99,99%.<br><br>Za veću točnost u utvrđivanju očinstva preporučujemo uključivanje uzorka majke u analizu. Kada se analiziraju standardni uzorci pretpostavljenog oca, djeteta i majke, uzorak majke se analizira bez dodatne naknade.<br><br>Nakon dobivanja i usporedbe DNK profila, u testiranju očinstva identificiraju se obvezni aleli kako bi se utvrdilo nosi li pretpostavljeni otac tražene alele. Obvezni alel je onaj koji je naslijeđen od biološkog roditelja.<br><br>Ako analiza pokaže nepodudaranje u najmanje tri obvezna alela između djeteta i pretpostavljenog oca, sa sigurnošću se može isključiti da je pretpostavljeni otac biološki otac djeteta. U slučajevima nepodudaranja u jednom ili dva molekularna biljega, moguće je uzeti u obzir mutacije (koje su relativno česte). U takvim slučajevima preporučuje se uključivanje uzorka majke u analizu ili testiranje dodatnih genetskih biljega. Ako je potrebno ili željeno, Genos može provesti analizu 24 biljega uz dodatnu naknadu.'
+            : 'Za osobno testiranje očinstva/majčinstva dovoljno je usporediti DNA profile jednog roditelja i djeteta. Analiziramo 18 ili 24 STR biljega (lokus), koji su međunarodno priznati kao dovoljno diskriminirajući i omogućuju određivanje vjerojatnosti biološkog roditeljstva veću od 99,99%.<br><br>Za veću točnost u utvrđivanju očinstva preporučujemo uključivanje uzorka majke u analizu. Kada se analiziraju standardni uzorci pretpostavljenog oca, djeteta i majke, uzorak majke se analizira bez dodatne naknade.<br><br>Nakon dobivanja i usporedbe DNA profila, u testiranju očinstva identificiraju se obvezni aleli kako bi se utvrdilo nosi li pretpostavljeni otac tražene alele. Obvezni alel je onaj koji je naslijeđen od biološkog roditelja.<br><br>Ako analiza pokaže nepodudaranje u najmanje tri obvezna alela između djeteta i pretpostavljenog oca, sa sigurnošću se može isključiti da je pretpostavljeni otac biološki otac djeteta. U slučajevima nepodudaranja u jednom ili dva molekularna biljega, moguće je uzeti u obzir mutacije (koje su relativno česte). U takvim slučajevima preporučuje se uključivanje uzorka majke u analizu ili testiranje dodatnih genetskih biljega. Ako je potrebno ili željeno, Genos može provesti analizu 24 biljega uz dodatnu naknadu.'
         }
       </p>
       <h5>
@@ -597,7 +597,7 @@
         {@html
           $language === 'en'
             ? 'Paternity testing through the male line is conducted by analyzing 23 STR markers on the Y chromosome. Since the sex chromosome is inherited unchanged, kinship is confirmed by a complete match of all the analyzed Y STR markers. Any changes that might occur are mutations, which are random nucleotide substitutions that happen spontaneously and very rarely.<br><br>The Y chromosome is inherited through the male line, passed directly from father to son. Therefore, all male relatives on the paternal side share the same markers on the Y chromosome, meaning they have an identical Y DNA profile. This method is useful in indirect paternity testing for male children when a male relative on the paternal side (brother, grandfather, uncle, or any male family member) can substitute for the deceased alleged father. It can also be applied for proving kinship between brothers, grandfather and grandson, uncle and nephew, etc. The test is also used in male identification cases when only paternal relatives are available.<br><br>Y chromosome testing is valuable in the following cases:'
-            : 'Testiranje očinstva kroz mušku lozu provodi se analizom 23 STR biljega na Y kromosomu. Budući da se spolni kromosom nasljeđuje nepromijenjen, srodstvo se potvrđuje potpunim podudaranjem svih analiziranih Y STR biljega. Svaka promjena koja bi se mogla dogoditi su mutacije, koje su nasumične zamjene nukleotida koje se spontano javljaju i vrlo rijetko.<br><br>Y kromosom se nasljeđuje kroz mušku lozu, prenosi se izravno s oca na sina. Stoga svi muški rođaci s očeve strane dijele iste markere na Y kromosomu, što znači da imaju identičan Y DNK profil. Ova metoda korisna je u neizravnom testiranju očinstva za mušku djecu kada muški rođak s očeve strane (brat, djed, ujak ili bilo koji muški član obitelji) može zamijeniti preminulog navodnog oca. Također se može primijeniti za dokazivanje srodstva između braće, djeda i unuka, ujaka i nećaka itd. Test se također koristi u slučajevima identifikacije muškaraca kada su dostupni samo rođaci s očeve strane.<br><br>Testiranje Y kromosoma je vrijedno u sljedećim slučajevima:'
+            : 'Testiranje očinstva kroz mušku lozu provodi se analizom 23 STR biljega na Y kromosomu. Budući da se spolni kromosom nasljeđuje nepromijenjen, srodstvo se potvrđuje potpunim podudaranjem svih analiziranih Y STR biljega. Svaka promjena koja bi se mogla dogoditi su mutacije, koje su nasumične zamjene nukleotida koje se spontano javljaju i vrlo rijetko.<br><br>Y kromosom se nasljeđuje kroz mušku lozu, prenosi se izravno s oca na sina. Stoga svi muški rođaci s očeve strane dijele iste markere na Y kromosomu, što znači da imaju identičan Y DNA profil. Ova metoda korisna je u neizravnom testiranju očinstva za mušku djecu kada muški rođak s očeve strane (brat, djed, ujak ili bilo koji muški član obitelji) može zamijeniti preminulog navodnog oca. Također se može primijeniti za dokazivanje srodstva između braće, djeda i unuka, ujaka i nećaka itd. Test se također koristi u slučajevima identifikacije muškaraca kada su dostupni samo rođaci s očeve strane.<br><br>Testiranje Y kromosoma je vrijedno u sljedećim slučajevima:'
         }
       </p>
       <ul>
@@ -679,7 +679,7 @@
           {
             $language === 'en'
               ? 'Analysis of free fetal DNA from the mother’s blood using 23 Y STR markers'
-              : 'Analiza slobodne fetalne DNK iz majčine krvi pomoću 23 Y STR biljega'
+              : 'Analiza slobodne fetalne DNA iz majčine krvi pomoću 23 Y STR biljega'
           }
         </li>
       </ul>
@@ -694,7 +694,7 @@
         {@html
           $language === 'en'
             ? 'The sex of a baby is usually determined via ultrasound. However, in cases where this is not possible, prenatal gender determination can be performed through a DNA test.<br><br>This test analyzes free fetal DNA present in the mother’s blood by detecting Y STR markers. Since the Y chromosome is unique to males, the presence of a Y chromosome confirms that the fetus is male. If Y chromosome is not detected, the fetus is female.<br><br>Genos DNA Laboratory researchers, in collaboration with other scientific institutions, were among the first to publish findings on prenatal gender determination in the prestigious journal Prenatal Diagnosis in 2008.<br><br>Paternity testing before birth is only possible if the fetus is male. The fetal Y DNA profile is compared to the Y DNA profile of the alleged father to determine if they match.<br><br>However, prenatal paternity testing is not possible if the alleged fathers are close male relatives (e.g., brothers or father and son) since they share an identical Y chromosome. Due to this limitation, it is recommended to test all alleged fathers and confirm paternity with a standard DNA test after birth. This analysis can only determine whether the alleged father can be the biological father but cannot definitively confirm paternity—it can only exclude a man as the biological father.<br><br>Testing is available from the 18th week of pregnancy. An appointment must be scheduled in advance, and a pregant woman must bring her pregnancy record book. The test requires 9 ml of the mother’s venous blood and a buccal swab from the alleged father. The blood draw is completely safe for the fetus.'
-            : 'Spol djeteta najčešće se određuje ultrazvukom. Međutim, u slučajevima kada to nije moguće, spol se može odrediti prenatalnim DNK testom. Ovaj test analizira slobodnu fetalnu DNK prisutnu u krvi majke detekcijom Y STR biljega. Budući da je Y kromosom specifičan za muškarce, prisutnost Y kromosoma potvrđuje da je fetus muškog spola. Ako Y kromosom nije detektiran, fetus je ženskog spola.<br><br>Istraživači iz Genos DNA laboratorija, u suradnji s drugim znanstvenim institucijama, bili su među prvima koji su 2008. godine objavili rezultate istraživanja o prenatalnom određivanju spola u prestižnom časopisu Prenatal Diagnosis.<br><br>Testiranje očinstva prije rođenja moguće je samo ako je fetus muškog spola. Fetalni Y DNK profil uspoređuje se s Y DNK profilom potencijalnog oca kako bi se utvrdilo podudaranje. Međutim, prenatalno testiranje očinstva nije moguće ako su potencijalni očevi bliski muški rođaci (npr. braća ili otac i sin) jer dijele identičan Y kromosom. Zbog tog ograničenja preporučuje se testiranje svih potencijalnih očeva te naknadna potvrda očinstva standardnim DNK testom nakon rođenja. Ova analiza može isključiti muškarca kao biološkog oca, ali ne može s apsolutnom sigurnošću potvrditi očinstvo.<br><br>Testiranje je moguće od 14. tjedna trudnoće. Potrebno je prethodno dogovoriti termin, a trudnica na pregled mora donijeti trudničku knjižicu. Test zahtijeva uzimanje 9 ml venske krvi trudnice te obrisak usne sluznice potencijalnog oca. Uzimanje uzorka potpuno je sigurno za fetus.'
+            : 'Spol djeteta najčešće se određuje ultrazvukom. Međutim, u slučajevima kada to nije moguće, spol se može odrediti prenatalnim DNA testom. Ovaj test analizira slobodnu fetalnu DNA prisutnu u krvi majke detekcijom Y STR biljega. Budući da je Y kromosom specifičan za muškarce, prisutnost Y kromosoma potvrđuje da je fetus muškog spola. Ako Y kromosom nije detektiran, fetus je ženskog spola.<br><br>Istraživači iz Genos DNA laboratorija, u suradnji s drugim znanstvenim institucijama, bili su među prvima koji su 2008. godine objavili rezultate istraživanja o prenatalnom određivanju spola u prestižnom časopisu Prenatal Diagnosis.<br><br>Testiranje očinstva prije rođenja moguće je samo ako je fetus muškog spola. Fetalni Y DNA profil uspoređuje se s Y DNA profilom potencijalnog oca kako bi se utvrdilo podudaranje. Međutim, prenatalno testiranje očinstva nije moguće ako su potencijalni očevi bliski muški rođaci (npr. braća ili otac i sin) jer dijele identičan Y kromosom. Zbog tog ograničenja preporučuje se testiranje svih potencijalnih očeva te naknadna potvrda očinstva standardnim DNA testom nakon rođenja. Ova analiza može isključiti muškarca kao biološkog oca, ali ne može s apsolutnom sigurnošću potvrditi očinstvo.<br><br>Testiranje je moguće od 14. tjedna trudnoće. Potrebno je prethodno dogovoriti termin, a trudnica na pregled mora donijeti trudničku knjižicu. Test zahtijeva uzimanje 9 ml venske krvi trudnice te obrisak usne sluznice potencijalnog oca. Uzimanje uzorka potpuno je sigurno za fetus.'
         }
       </p>
       <h4 id="3.4.">
@@ -710,7 +710,7 @@
           {
             $language === 'en'
               ? 'DNA Profiling – Analysis of 24 STR markers'
-              : 'DNK Profiliranje – Analiza 24 STR markera'
+              : 'DNA Profiliranje – Analiza 24 STR markera'
           }
         </li>
         <li>
@@ -724,7 +724,7 @@
           {
             $language === 'en'
               ? 'DNA Isolation'
-              : 'Izolacija DNK'
+              : 'Izolacija DNA'
           }
         </li>
       </ul>
@@ -732,14 +732,14 @@
         {
           $language === 'en'
             ? 'DNA Profiling'
-            : 'DNK Profiliranje'
+            : 'DNA Profiliranje'
         }
       </h5>
       <p>
         {
           $language === 'en'
             ? 'DNA profiling is often requested to verify an existing DNA profile, confirm the authenticity of previous test results, or supplement earlier paternity or kinship tests. A DNA profile serves as genetic identification and can be used in various cases, such as:'
-            : 'DNK profiliranje često se traži kako bi se verificirao postojeći DNK profil, potvrdila autentičnost prethodnih rezultata testiranja ili dopunili raniji testovi očinstva ili srodstva. DNK profil služi kao genetska identifikacija i može se koristiti u različitim slučajevima, poput:'
+            : 'DNA profiliranje često se traži kako bi se verificirao postojeći DNA profil, potvrdila autentičnost prethodnih rezultata testiranja ili dopunili raniji testovi očinstva ili srodstva. DNA profil služi kao genetska identifikacija i može se koristiti u različitim slučajevima, poput:'
         }
       </p>
       <ul>
@@ -797,7 +797,7 @@
         {
           $language === 'en'
             ? 'DNA profiling is performed by analyzing 24 STR loci.'
-            : 'DNK profiliranje se izvodi analizom 24 STR lokusa.'
+            : 'DNA profiliranje se izvodi analizom 24 STR lokusa.'
         }
       </p>
       <h5>
@@ -818,14 +818,14 @@
         {
           $language === 'en'
             ? 'DNA Isolation'
-            : 'Izolacija DNK'
+            : 'Izolacija DNA'
         }
       </h5>
       <p>
         {
           $language === 'en'
             ? 'DNA isolation is typically performed upon request when the DNA sample is needed for molecular diagnostic tests, which are essential for personalized medicine. These tests may include:'
-            : 'Izolacija DNK obično se izvodi na zahtjev kada je uzorak DNK potreban za molekularne dijagnostičke testove, koji su ključni za personaliziranu medicinu. Ovi testovi mogu uključivati:'
+            : 'Izolacija DNA obično se izvodi na zahtjev kada je uzorak DNA potreban za molekularne dijagnostičke testove, koji su ključni za personaliziranu medicinu. Ovi testovi mogu uključivati:'
         }
       </p>
       <ul>
@@ -848,7 +848,7 @@
         {@html
           $language === 'en'
             ? 'Since some of these analyses are not available in Croatia, the isolated DNA sample is often sent abroad for testing.<br><br>For DNA isolation, a 3 mL whole blood sample is required in a vacutainer tube with EDTA anticoagulant (purple cap). The sample should ideally be delivered immediately after collection. If necessary, it can be stored at +4°C for a few hours or at -20°C for longer periods.'
-            : 'Budući da neki od ovih testova nisu dostupni u Hrvatskoj, izolirani DNK uzorak često se šalje u inozemstvo na testiranje.<br><br>Za izolaciju DNK potreban je uzorak cijele krvi od 3 mL u vacutainer cijevi s EDTA antikoagulantom (ljubičasti čep). Uzorak bi trebao biti dostavljen odmah nakon uzimanja. Ako je potrebno, može se čuvati na +4°C nekoliko sati ili na -20°C dulje vrijeme.'
+            : 'Budući da neki od ovih testova nisu dostupni u Hrvatskoj, izolirani DNA uzorak često se šalje u inozemstvo na testiranje.<br><br>Za izolaciju DNA potreban je uzorak cijele krvi od 3 mL u vacutainer cijevi s EDTA antikoagulantom (ljubičasti čep). Uzorak bi trebao biti dostavljen odmah nakon uzimanja. Ako je potrebno, može se čuvati na +4°C nekoliko sati ili na -20°C dulje vrijeme.'
         }
       </p>
       <h4 id="3.5.">
@@ -856,7 +856,7 @@
         {
           $language === 'en'
             ? 'Avian Gender Determination via DNA Analysis'
-            : 'Određivanje spola ptica putem DNK analize'
+            : 'Određivanje spola ptica putem DNA analize'
         }
       </h4>
       <ul>
@@ -879,14 +879,14 @@
         {
           $language === 'en'
             ? 'The sex of many bird species cannot be determined based on physical appearance and characteristics. By using DNA analysis methods, it is possible to examine parts of the birds\' sex chromosomes. This allows us to distinguish between male birds (ZZ) and female birds (ZW).'
-            : 'Spol mnogih vrsta ptica ne može se odrediti na temelju fizičkog izgleda i karakteristika. Korištenjem metoda DNK analize moguće je ispitati dijelove spolnih kromosoma ptica. To nam omogućava razlikovanje mužjaka ptica (ZZ) i ženki ptica (ZW).'
+            : 'Spol mnogih vrsta ptica ne može se odrediti na temelju fizičkog izgleda i karakteristika. Korištenjem metoda DNA analize moguće je ispitati dijelove spolnih kromosoma ptica. To nam omogućava razlikovanje mužjaka ptica (ZZ) i ženki ptica (ZW).'
         }
       </p>
       <h5>
         {
           $language === 'en'
             ? 'Advantages of DNA Analysis'
-            : 'Prednosti DNK analize'
+            : 'Prednosti DNA analize'
         }
       </h5>
       <ul>
@@ -901,14 +901,14 @@
           {
             $language === 'en'
               ? 'The accuracy of DNA-based sex determination does not depend on the bird\'s age.'
-              : 'Točnost određivanja spola na temelju DNK-a ne ovisi o dobi ptice.'
+              : 'Točnost određivanja spola na temelju DNA-a ne ovisi o dobi ptice.'
           }
         </li>
         <li>
           {
             $language === 'en'
               ? 'The accuracy of DNA sex determination is very high (>99%).'
-              : 'Točnost određivanja spola na temelju DNK-a je vrlo visoka (>99%).'
+              : 'Točnost određivanja spola na temelju DNA-a je vrlo visoka (>99%).'
           }
         </li>
         <li>
@@ -922,7 +922,7 @@
           {
             $language === 'en'
               ? 'The analysis is conducted by experts with years of experience in DNA analysis.'
-              : 'Analizu provode stručnjaci s godinama iskustva u DNK analizi.'
+              : 'Analizu provode stručnjaci s godinama iskustva u DNA analizi.'
           }
         </li>
       </ul>
@@ -1024,7 +1024,7 @@
         {@html
           $language === 'en'
             ? 'At the Genos DNA laboratory, paternity/kinship determination through DNA analysis is conducted quickly and painlessly by collecting buccal swab samples (swabbing the inner cheek lining). Blood sampling is not required.<br><br>Fasting before sample collection is not necessary. However, an appointment must be scheduled before visiting the laboratory!<br><br>Sample collection can be performed at our laboratory in Zagreb (Borongajska cesta 83 H, 1st floor, BIOCenter building, within the Borongaj Science and Education Campus), or at our office in Osijek (Drniška 9).<br><br>For sample collection from minors, the presence of both parents or guardians is required, or a written and notarized consent from the absent parent/guardian.'
-            : 'U Genos DNA laboratoriju, određivanje očinstva/rodbinskih odnosa putem DNK analize provodi se brzo i bezbolno prikupljanjem uzoraka brisa iz usne šupljine (brisanjem unutrašnjeg dijela obraza). Uzorkovanje krvi nije potrebno.<br><br>Postenje prije prikupljanja uzoraka nije potrebno. Međutim, potrebno je unaprijed zakazati termin za posjetu laboratoriju!<br><br>Prikupljanje uzoraka može se obaviti u našem laboratoriju u Zagrebu (Borongajska cesta 83 H, 1. kat, zgrada BIOCentra, unutar kampusa Borongaj), ili u našoj poslovnici u Osijeku (Drniška 9).<br><br>Za prikupljanje uzoraka od maloljetnika, prisutnost oba roditelja ili staratelja je obavezna, ili pisana i ovjerena suglasnost odsutnog roditelja/staratelja.'
+            : 'U Genos DNA laboratoriju, određivanje očinstva/rodbinskih odnosa putem DNA analize provodi se brzo i bezbolno prikupljanjem uzoraka brisa iz usne šupljine (brisanjem unutrašnjeg dijela obraza). Uzorkovanje krvi nije potrebno.<br><br>Postenje prije prikupljanja uzoraka nije potrebno. Međutim, potrebno je unaprijed zakazati termin za posjetu laboratoriju!<br><br>Prikupljanje uzoraka može se obaviti u našem laboratoriju u Zagrebu (Borongajska cesta 83 H, 1. kat, zgrada BIOCentra, unutar kampusa Borongaj), ili u našoj poslovnici u Osijeku (Drniška 9).<br><br>Za prikupljanje uzoraka od maloljetnika, prisutnost oba roditelja ili staratelja je obavezna, ili pisana i ovjerena suglasnost odsutnog roditelja/staratelja.'
         }
       </p>
       <h5>

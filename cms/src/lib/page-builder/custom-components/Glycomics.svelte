@@ -12,7 +12,7 @@
       <h2>{$language === 'en' ? 'Services' : 'Usluge'}</h2>
       <span class="tab-selector active">{$language === 'en' ? 'Glycomics' : 'Glikomika'}</span>
       <a href="/{$language === 'en' ? 'epigenetics' : 'epigenetika'}" class="tab-selector">{$language === 'en' ? 'Epigenetics' : 'Epigenetika'}</a>
-      <a href="/{$language === 'en' ? 'dna-and-forensics' : 'dnk-i-forenzika'}" class="tab-selector">{$language === 'en' ? 'DNA and Forensics' : 'DNK i Forenzika'}</a>
+      <a href="/{$language === 'en' ? 'dna-and-forensics' : 'dna-i-forenzika'}" class="tab-selector">{$language === 'en' ? 'DNA and Forensics' : 'DNA i Forenzika'}</a>
     </div>
     <button class="tab-selector" class:active={tab === 1} on:click={() => tab = 1}>
       {$language === 'en' ? 'Technologies' : 'Tehnologije'}

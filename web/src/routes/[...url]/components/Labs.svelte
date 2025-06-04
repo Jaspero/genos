@@ -13,7 +13,7 @@
       {
         $language === 'en'
           ? 'Genos unites expertise in glycomics, glycoproteomics, epigenetics, and DNA analysis to deliver integrated, high-quality solutions for diverse research and commercial applications.'
-          : 'Genos ujedinjuje stručnost u glikomicima, glikoproteomicima, epigenetici i DNK analizi kako bi pružio integrirana, visokokvalitetna rješenja za različite istraživačke i komercijalne primjene.'
+          : 'Genos ujedinjuje stručnost u glikomicima, glikoproteomicima, epigenetici i DNA analizi kako bi pružio integrirana, visokokvalitetna rješenja za različite istraživačke i komercijalne primjene.'
       }
     </p>
   </div>
@@ -52,7 +52,7 @@
           {
             $language === 'en'
               ? 'DNA methylation analysis, gene expression profiling, and custom CRISPR/dCas9 tool design.'
-              : 'Analiza metilacije DNK, profiliranje genske ekspresije i dizajn prilagođenih CRISPR/dCas9 alata.'
+              : 'Analiza metilacije DNA, profiliranje genske ekspresije i dizajn prilagođenih CRISPR/dCas9 alata.'
           }
         </p>
         <div>
@@ -70,17 +70,17 @@
         <img src="/illustrations/dna.jpg" alt="">
       </div>
       <div class="text">
-        <h2>{$language === 'en' ? 'DNA & Forensics' : 'DNK I Forenzika'}</h2>
+        <h2>{$language === 'en' ? 'DNA & Forensics' : 'DNA I Forenzika'}</h2>
         <p class="text-p">
           {
             $language === 'en'
               ? 'Accurate and confidential DNA testing for paternity, kinship, and identity verification.'
-              : 'Točno i povjerljivo DNK testiranje za utvrđivanje očinstva, srodstva i identiteta.'
+              : 'Točno i povjerljivo DNA testiranje za utvrđivanje očinstva, srodstva i identiteta.'
           }
         </p>
         <div>
           <a class="button-filled" href="/{$language === 'en' ? 'services#3.0.' : 'usluge#3.0.'}">
-            {$language === 'en' ? 'DNA & Forensics services' : 'Usluge za DNK i forenziku'}
+            {$language === 'en' ? 'DNA & Forensics services' : 'Usluge za DNA i forenziku'}
           </a>
         </div>
       </div>

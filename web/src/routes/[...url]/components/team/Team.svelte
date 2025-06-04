@@ -31,7 +31,7 @@
             {#if $language === 'hr'}{member.title?.[0]?.hr || ''}{/if} {member.name}{#if $language === 'en'}{member.title?.[0]?.en || ''}{/if}
           </h2>
           <h3>
-            {member.job}
+            {$language === 'en' ? member.job.en : member.job.hr}
           </h3>
         </button>
       </div>

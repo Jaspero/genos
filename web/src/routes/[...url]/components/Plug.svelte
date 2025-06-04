@@ -63,19 +63,14 @@
         <img src="/images/test-kit.jpg" alt="{$language === 'en' ? 'DNA Sample Collection Kit' : 'Set za prikupljanje DNA uzorka'}">
       </div>
       <div class="text">
-        <h2>{$language === 'en' ? 'DNA Sample Collection Kit' : 'Set za prikupljanje DNA uzorka'}</h2>
+        <h2>{$language === 'en' ? 'DNA Testing Sample Collection Kit' : 'Set za izuzimanje uzoraka za analizu DNA'}</h2>
         <p class="text-p">
           {@html
             $language === 'en'
-              ? 'Genos’ DNA collection kit enables quick and easy sample collection for reliable kinship analysis. Backed by 18 years of expertise, we guarantee accurate and high-quality results.'
-              : 'Genosov set za uzorkovanje DNA omogućuje brzo i jednostavno prikupljanje uzoraka za pouzdanu analizu srodstva. Uz stručnost stečenu kroz 18 godina rada, jamčimo precizne i kvalitetne rezultate.'
+              ? 'If, due to any reason, it is not convenient for you visit our laboratory, you can also take the sample in the privacy of your home with DNA Testing Sample Collection Kit. The kit contains everything you need for quick, reliable and non-invasive sampling, shipping and delivery to our DNA Laboratory.'
+              : 'Ukoliko Vam iz nekog razloga ne odgovara radi izuzimanja uzoraka dolaziti u naš laboratorij, to možete napraviti i u privatnosti vlastitog doma, korištenjem Seta za izuzimanje uzoraka za analizu DNA. U setu se nalazi sve što Vam je potrebno za brzo, pouzdano i neinvazivno izuzimanje uzoraka te njihovo slanje i dostavljanje u naš DNA laboratorij.'
           }
         </p>
-        <!--<div>
-          <a class="button-filled" href="https://glycanage.com/" target="_blank">
-            {$language === 'en' ? 'Official website' : 'Službena stranica'}
-          </a>
-        </div>-->
       </div>
     </div>
   </div>

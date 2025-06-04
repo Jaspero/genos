@@ -21,7 +21,7 @@
       <h2>{$language === 'en' ? 'Services' : 'Usluge'}</h2>
       <a href="/{$language === 'en' ? 'glycomics' : 'glikomika'}" class="tab-selector">{$language === 'en' ? 'Glycomics' : 'Glikomika'}</a>
       <span class="tab-selector active">{$language === 'en' ? 'Epigenetics' : 'Epigenetika'}</span>
-      <a href="/{$language === 'en' ? 'dna-and-forensics' : 'dnk-i-forenzika'}" class="tab-selector">{$language === 'en' ? 'DNA and Forensics' : 'DNK i Forenzika'}</a>
+      <a href="/{$language === 'en' ? 'dna-and-forensics' : 'dna-i-forenzika'}" class="tab-selector">{$language === 'en' ? 'DNA and Forensics' : 'DNA i Forenzika'}</a>
     </div>
   </div>
   <div class="col-span-8 tabs flex flex-col gap-8">
