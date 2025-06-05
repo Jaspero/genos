@@ -15,6 +15,191 @@
           "source": "/",
           "destination": "/home",
           "type": 301
+        },
+        {
+          "source": "/dna/about-us",
+          "destination": "/about",
+          "type": 301
+        },
+        {
+          "source": "/dna/o-nama",
+          "destination": "/o-nama",
+          "type": 301
+        },
+        {
+          "source": "/dna/working-hours",
+          "destination": "/contact",
+          "type": 301
+        },
+        {
+          "source": "/dna/radno-vrijeme",
+          "destination": "/kontakt",
+          "type": 301
+        },
+        {
+          "source": "/dna/staff",
+          "destination": "/team",
+          "type": 301
+        },
+        {
+          "source": "/dna/djelatnici",
+          "destination": "/tim",
+          "type": 301
+        },
+        {
+          "source": "/dna/associates",
+          "destination": "/",
+          "type": 301
+        },
+        {
+          "source": "/dna/suradne-ustanove",
+          "destination": "/",
+          "type": 301
+        },
+        {
+          "source": "/dna/nagrade-i-priznanja",
+          "destination": "/",
+          "type": 301
+        },
+        {
+          "source": "/dna/services",
+          "destination": "/services",
+          "type": 301
+        },
+        {
+          "source": "/dna/usluge-i-cjenik",
+          "destination": "/usluge",
+          "type": 301
+        },
+        {
+          "source": "/dna/tests-human-dna",
+          "destination": "/services#3.4.",
+          "type": 301
+        },
+        {
+          "source": "/dna/testovi-humana-dna",
+          "destination": "/usluge#3.4.",
+          "type": 301
+        },
+        {
+          "source": "/dna/tests-animal-dna",
+          "destination": "/services#3.7.",
+          "type": 301
+        },
+        {
+          "source": "/dna/testovi-animalna-dna",
+          "destination": "/usluge#3.7.",
+          "type": 301
+        },
+        {
+          "source": "/dna/pricelist",
+          "destination": "/pdfs/price-list.pdf",
+          "type": 301
+        },
+        {
+          "source": "/dna/cjenik",
+          "destination": "/pdfs/cjenik.pdf",
+          "type": 301
+        },
+        {
+          "source": "/dna/order-forms",
+          "destination": "/contact",
+          "type": 301
+        },
+        {
+          "source": "/dna/narudzbenice",
+          "destination": "/kontakt",
+          "type": 301
+        },
+        {
+          "source": "/dna/sample-collection-kits-for-dna-testing",
+          "destination": "/contact",
+          "type": 301
+        },
+        {
+          "source": "/dna/setovi-za-uzimanje-uzoraka-za-dna-testiranje",
+          "destination": "/kontakt",
+          "type": 301
+        },
+        {
+          "source": "/dna/analytical-dna-laboratory",
+          "destination": "/services#3.0.",
+          "type": 301
+        },
+        {
+          "source": "/dna/forensic-dna-laboratory",
+          "destination": "/services#3.0.",
+          "type": 301
+        },
+        {
+          "source": "/dna/analiticki-dna-laboratorij",
+          "destination": "/usluge#3.0.",
+          "type": 301
+        },
+        {
+          "source": "/dna/forenzicki-dna-laboratorij",
+          "destination": "/usluge#3.0.",
+          "type": 301
+        },
+        {
+          "source": "/dna/human-dna-analysis",
+          "destination": "/services#3.0.",
+          "type": 301
+        },
+        {
+          "source": "/dna/analiza-humane-dna",
+          "destination": "/#services#3.0.",
+          "type": 301
+        },
+        {
+          "source": "/dna/expertise",
+          "destination": "/about",
+          "type": 301
+        },
+        {
+          "source": "/dna/vjestacenje",
+          "destination": "/about",
+          "type": 301
+        },
+        {
+          "source": "/dna/istrazivacki-projekti",
+          "destination": "/projekti",
+          "type": 301
+        },
+        {
+          "source": "/dna/novosti",
+          "destination": "/novosti",
+          "type": 301
+        },
+        {
+          "source": "/dna/news",
+          "destination": "/news",
+          "type": 301
+        },
+        {
+          "source": "/dna/contact",
+          "destination": "/contact",
+          "type": 301
+        },
+        {
+          "source": "/dna/publikacije",
+          "destination": "/publikacije",
+          "type": 301
+        },
+        {
+          "source": "/dna/genos-u-medijima",
+          "destination": "/novosti",
+          "type": 301
+        },
+        {
+          "source": "/dna/objave-za-medije",
+          "destination": "/novosti",
+          "type": 301
+        },
+        {
+          "source": "/dna/javna-nabava",
+          "destination": "/novosti",
+          "type": 301
         }
       ],
       "rewrites": [
