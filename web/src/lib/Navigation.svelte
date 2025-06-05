@@ -144,13 +144,7 @@
         '/team': '/tim',
         '/tim': '/team',
         '/contact': '/kontakt',
-        '/kontakt': '/contact',
-        '/glikomika': '/glycomics',
-        '/glycomics': '/glikomika',
-        '/epigenetika': '/epigenetics',
-        '/epigenetics': '/epigenetika',
-        '/dna-i-forenzika': '/dna-and-forensics',
-        '/dna-and-forensics': '/dna-i-forenzika'
+        '/kontakt': '/contact'
       };
 
       const currentPath = window.location.pathname;
