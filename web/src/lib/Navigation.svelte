@@ -224,13 +224,12 @@
       {/each}
     </div>
 
-    <div class="filler"></div>
     <div class="socials">
       <a href="https://x.com/gglycoscience?lang=hr" target="_blank" rel="noreferrer noopener">
-        <img src="/socials/x.svg" alt="">
+        <img src="/icons/x.svg" alt="">
       </a>
       <a href="https://www.linkedin.com/company/genos-ltd/posts/?feedView=all" target="_blank" rel="noreferrer noopener">
-        <img src="/socials/linkedin.svg" alt="">
+        <img src="/icons/linkedin.svg" alt="">
       </a>
     </div>
   </div>
@@ -351,6 +350,7 @@
         .menu-links {
             display: flex;
             flex-direction: column;
+            flex: 1 1 0;
 
             a {
                 padding: .75rem 1rem;
@@ -364,5 +364,11 @@
                 }
             }
         }
+    }
+
+    .socials {
+        display: flex;
+        gap: 1rem;
+        padding: 1rem;
     }
 </style>

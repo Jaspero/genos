@@ -19,7 +19,7 @@
       }
     </h2>
   </div>
-  <div class="gc-3 sticky">
+  <div class="gc-xs-12 gc-3 sticky">
     <p>
       {
         $language === 'en'
@@ -64,7 +64,7 @@
           </a>
         </div>
       {/if}
-      <button class="flex" on:click={() => {
+      <button class="flex text-left" on:click={() => {
           glycomics = false;
           epigenetics = !epigenetics;
           forensics = false;
@@ -85,7 +85,7 @@
           </a>
         </div>
       {/if}
-      <button class="flex" on:click={() => {
+      <button class="flex text-left" on:click={() => {
           glycomics = false;
           epigenetics = false;
           forensics = !forensics;
@@ -130,7 +130,7 @@
       {/if}
     </div>
   </div>
-  <div class="gc-9 services-container">
+  <div class="gc-9 gc-xs-12 services-container">
     <h3 id="1.0.">1. {$language === 'en' ? 'Glycomics & Glycoproteomics' : 'Glikomika i glikoproteomika'}</h3>
     <img src="/illustrations/glycomics.jpg" alt="" class="w-full">
     <div class="services-segment">

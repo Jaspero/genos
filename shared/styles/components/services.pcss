@@ -1,11 +1,14 @@
 .services {
     align-items: flex-start;
     gap: 1.5rem;
+    @media (max-width: 600px) {
+        padding: 1rem 0;
+    }
     .sticky {
         position: sticky;
         top: 10rem;
         @media (max-width: 600px) {
-            top: 8rem;
+            position: static;
         }
         .sticky-items {
             display: flex;
