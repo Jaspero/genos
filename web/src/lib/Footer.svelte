@@ -17,10 +17,10 @@
   <div class="subfooter">
     <div class="subfooter-social">
       <a href="https://www.linkedin.com/company/genos-ltd" target="_blank">
-        <img src="/icons/linkedin.svg" alt="linkedin">
+        <img src="/icons/linkedin-w.svg" alt="linkedin">
       </a>
       <a href="https://x.com/gglycoscience" target="_blank">
-        <img src="/icons/x.svg" alt="x">
+        <img src="/icons/x-w.svg" alt="x">
       </a>
     </div>
     <div class="subfooter-legal">
