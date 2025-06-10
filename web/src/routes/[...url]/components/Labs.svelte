@@ -70,7 +70,7 @@
         <img src="/illustrations/dna.jpg" alt="">
       </div>
       <div class="text">
-        <h2>{$language === 'en' ? 'DNA & Forensics' : 'DNA I Forenzika'}</h2>
+        <h2>{$language === 'en' ? 'DNA & Forensics' : 'DNA i Forenzika'}</h2>
         <p class="text-p">
           {
             $language === 'en'

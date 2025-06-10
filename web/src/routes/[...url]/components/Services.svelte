@@ -115,6 +115,9 @@
           <a href="{$language === 'en' ? '/services#3.5.' : '/usluge#3.5.'}" class="sub-link">
             3.5. {$language === 'en' ? 'Testing Procedure' : 'Postupak testiranja'}
           </a>
+          <a href="{$language === 'en' ? '/services#3.5.1.' : '/usluge#3.5.1.'}" class="sub-link">
+            3.5.1. {$language === 'en' ? 'Set for DNA sample collection and analysis' : 'Set za izuzimanje uzoraka za analizu DNA'}
+          </a>
           <a href="{$language === 'en' ? '/services#3.6.' : '/usluge#3.6.'}" class="sub-link">
             3.6. {$language === 'en' ? 'Data confidentiality' : 'Povjerljivost podataka'}
           </a>
@@ -855,6 +858,51 @@
           {/if}
         </li>
       </ul>
+      <h4 id="3.5.1.">
+        3.5.1.
+        {
+          $language === 'en'
+            ? 'Set for DNA sample collection and analysis'
+            : 'Set za izuzimanje uzoraka za analizu DNA'
+        }
+      </h4>
+      <p>
+        {@html $language === 'en'
+          ? 'The Sample Collection Kit is used for DNA analysis from a buccal swab sample.<br><br>Such samples can be collected easily and painlessly using the collectors from the kit, which are specially designed for this purpose.<br><br>The sterile protective tube is designed to safeguard the sample from environmental factors, reducing the overall risk of contamination and enabling safe transport of the sample to the laboratory.<br><br>If the sample is collected according to the instructions enclosed in the kit, it remains preserved in the collector for months.<br><br>All collectors, the completed order form, and proof of payment need to be enclosed in the pre-addressed protective envelope and then mailed or delivered to the laboratory.<br><br>Sample Collection Kit for DNA Testing contains:'
+          : 'Set za izuzimanje uzorka koristi se za DNA analizu iz brisa bukalne sluznice.<br><br>Takvi se uzorci mogu jednostavno i bezbolno uzeti pomoću kolektora iz seta, koji su posebno dizajnirani za tu svrhu.<br><br>Sterilna zaštitna epruveta osigurava zaštitu uzorka od vanjskih utjecaja, smanjuje rizik od kontaminacije i omogućuje siguran transport uzorka do laboratorija.<br><br>Ako se uzorak uzme prema uputama priloženima u setu, ostaje stabilan u kolektoru mjesecima.<br><br>Svi kolektori, ispunjena narudžbenica i potvrda o uplati moraju se staviti u unaprijed adresiranu zaštitnu omotnicu te poslati poštom ili osobno dostaviti u laboratorij.<br><br>Set za izuzimanje uzorka za DNA analizu sadrži:'}
+      </p>
+
+      {#if $language === 'en'}
+        <ul class="list-disc ml-6">
+          <li>Three collectors for samples of buccal swabs</li>
+          <li>Sample storage bag</li>
+          <li>Gloves</li>
+          <li>Instructions</li>
+          <li>Order form</li>
+          <li>Unbreakable protective envelope for sending samples to laboratory</li>
+        </ul>
+      {:else}
+        <ul class="list-disc ml-6">
+          <li>Tri kolektora za uzorke brisa bukalne sluznice</li>
+          <li>Vrećicu za pohranu uzorka</li>
+          <li>Rukavice</li>
+          <li>Upute</li>
+          <li>Narudžbenicu</li>
+          <li>Nepoderivu zaštitnu omotnicu za slanje uzoraka u laboratorij</li>
+        </ul>
+      {/if}
+      <p>
+        {@html
+          $language === 'en'
+            ? 'You can order the Sample Collection Kit by phone, e-mail or via our website and receive it at your home address. You can buy it in our laboratory and in pharmacies.'
+            : 'Set za uzorkovanje možete naručiti telefonom, e-mailom ili putem naše web stranice i primit ćete ga na svoju kućnu adresu. Također ga možete kupiti u našem laboratoriju i u ljekarnama.'
+        }
+      </p>
+      {#if $language === 'en'}
+        <a class="button-filled" href="/contact">Order a set for sampling</a>
+      {:else}
+        <a class="button-filled" href="/kontakt">Naruči set za uzorkovanje</a>
+      {/if}
       <h4 id="3.6.">
         {
           $language === 'en'

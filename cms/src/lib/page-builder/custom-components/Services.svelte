@@ -115,6 +115,9 @@
           <a href="{$language === 'en' ? '/services#3.5.' : '/usluge#3.5.'}" class="sub-link">
             3.5. {$language === 'en' ? 'Testing Procedure' : 'Postupak testiranja'}
           </a>
+          <a href="{$language === 'en' ? '/services#3.5.1.' : '/usluge#3.5.1.'}" class="sub-link">
+            3.5.1. {$language === 'en' ? 'Set for DNA sample collection and analysis' : 'Set za izuzimanje uzoraka za analizu DNA'}
+          </a>
           <a href="{$language === 'en' ? '/services#3.6.' : '/usluge#3.6.'}" class="sub-link">
             3.6. {$language === 'en' ? 'Data confidentiality' : 'Povjerljivost podataka'}
           </a>
@@ -416,7 +419,7 @@
           {
             $language === 'en'
               ? 'Epigenetics Pyrosequencers PyroMark Q24 Advanced (Qiagen) for DNA methylation analyses'
-              : 'Pirosekvenceri PyroMark Q24 Advanced (Qiagen) za analize metilacije DNA-a'
+              : 'Pirosekvenceri PyroMark Q24 Advanced (Qiagen) za analize metilacije DNA'
           }
         </li>
         <li>
@@ -525,7 +528,7 @@
         {@html
           $language === 'en'
             ? 'DNA analysis today plays a unique role in forensic science and is universally accepted in most legal systems. In forensic medicine, it has become an integral part of standard procedures in the investigation of various crimes, establishing identity, and conducting paternity testing. The use of DNA analysis is an indispensable method for identifying the remains of victims of natural disasters, terrorist attacks, civil and military traffic accidents, fires, explosions, and war casualties. The development of DNA extraction and analysis methods has enabled the successful detection of DNA profiles from various biological traces.<br><br>The results of DNA analysis are a fundamental form of evidence in numerous civil and criminal cases at municipal and county courts. Although DNA analysis can unequivocally determine the identity of a person or a biological trace, proper interpretation of laboratory results requires significant expertise and experience.<br><br>Genos d.o.o. was the first private laboratory in Croatia authorized to conduct forensic DNA analyses, and our clients recognize this accreditation as an added value that contributes to trust and reliability in our results.<br><br>Our team includes a permanent court expert with extensive experience in DNA analysis and collaborates with other court experts in Croatia. Our experts were part of the nat\n'
-            : 'Analiza DNA danas ima jedinstvenu ulogu u forenzičkim znanostima i univerzalno je prihvaćena u većini pravnih sustava. U sudskoj medicini je postala sastavni dio standardnih postupaka u istragama raznih zločina, utvrđivanju identiteta te vještačenju roditeljstva. Primjena analize DNA je neizostavna metoda kod utvrđivanja identiteta posmrtnih ostataka žrtava prirodnih katastrofa, terorističkih napada, civilnih i vojnih prometnih nesreća, požara, eksplozija i žrtava rata. Razvojem metoda izdvajanja i analize DNA omogućeno je uspješno detektiranje DNA profila iz različitih bioloških tragova.<br><br>Rezultat analize DNA temeljni je dokaz u brojnim građanskim i kaznenim predmetima na općinskim i županijskim sudovima. Iako DNA analiza može nedvojbeno utvrditi identitet osobe ili biološkog traga, pravilna interpretacija laboratorijskih rezultata zahtijeva značajnu stručnost i iskustvo.<br><br>Genos d.o.o. bio je prvi privatni laboratorij u Hrvatskoj ovlašten za provedbu forenzičkih DNA analiza, a to priznanje naši klijenti prepoznaju kao dodatnu vrijednost koja doprinosi povjerenju u pouzdanost naših rezultata.<br><br>Naš tim uključuje stalnog sudskog vještaka s bogatim iskustvom u DNA analizama te surađuje i s drugim sudskim vještacima u Hrvatskoj. Naši su stručnjaci bili dio nacionalnog tima za identifikaciju žrtava Domovinskog rata pod okriljem Ministarstva obitelji, branitelja i međugeneracijske solidarnosti.<br><br>Za razliku od tvrtki koje testiranje DNK uzoraka povjeravaju vanjskim partnerima, sve analize provodimo u vlastitom laboratoriju u Zagrebu.<br><br>Novija znanstvena otkrića iz područja molekularne biologije omogućila su analizu DNA koja zadovoljava sve kriterije izuzetno pouzdane metode za testiranje spornog roditeljstva. Time je testiranje očinstva, odnosno majčinstva, postalo dostupnije široj javnosti.'
+            : 'Analiza DNA danas ima jedinstvenu ulogu u forenzičkim znanostima i univerzalno je prihvaćena u većini pravnih sustava. U sudskoj medicini je postala sastavni dio standardnih postupaka u istragama raznih zločina, utvrđivanju identiteta te vještačenju roditeljstva. Primjena analize DNA je neizostavna metoda kod utvrđivanja identiteta posmrtnih ostataka žrtava prirodnih katastrofa, terorističkih napada, civilnih i vojnih prometnih nesreća, požara, eksplozija i žrtava rata. Razvojem metoda izdvajanja i analize DNA omogućeno je uspješno detektiranje DNA profila iz različitih bioloških tragova.<br><br>Rezultat analize DNA temeljni je dokaz u brojnim građanskim i kaznenim predmetima na općinskim i županijskim sudovima. Iako DNA analiza može nedvojbeno utvrditi identitet osobe ili biološkog traga, pravilna interpretacija laboratorijskih rezultata zahtijeva značajnu stručnost i iskustvo.<br><br>Genos d.o.o. bio je prvi privatni laboratorij u Hrvatskoj ovlašten za provedbu forenzičkih DNA analiza, a to priznanje naši klijenti prepoznaju kao dodatnu vrijednost koja doprinosi povjerenju u pouzdanost naših rezultata.<br><br>Naš tim uključuje stalnog sudskog vještaka s bogatim iskustvom u DNA analizama te surađuje i s drugim sudskim vještacima u Hrvatskoj. Naši su stručnjaci bili dio nacionalnog tima za identifikaciju žrtava Domovinskog rata pod okriljem Ministarstva obitelji, branitelja i međugeneracijske solidarnosti.<br><br>Za razliku od tvrtki koje testiranje DNA uzoraka povjeravaju vanjskim partnerima, sve analize provodimo u vlastitom laboratoriju u Zagrebu.<br><br>Novija znanstvena otkrića iz područja molekularne biologije omogućila su analizu DNA koja zadovoljava sve kriterije izuzetno pouzdane metode za testiranje spornog roditeljstva. Time je testiranje očinstva, odnosno majčinstva, postalo dostupnije široj javnosti.'
         }
       </p>
       <h5>
@@ -553,7 +556,7 @@
         {@html
           $language === 'en'
             ? 'Establishing or disputing paternity/maternity for legal proceedings is carried out based on a Decision issued by the competent court, by comparing the genotypes of the mother, child, and alleged father. As a certified court expert, Genos d.o.o. also conducts paternity testing upon personal request, and the report and opinion of our authorized court expert are admissible as legal evidence. This helps avoid unnecessary costs of double testing (once for personal purposes and once for legal proceedings).<br><br>The probability values of paternity in court expert reports range from one in several million to one in several billion. The minimum threshold required to conclusively establish paternity in court is 99.999%.'
-            : 'Utvrđivanje ili osporavanje očinstva/majčinstva za sudske postupke provodi se na temelju Rješenja nadležnog suda, usporedbom genotipova majke, djeteta i pretpostavljenog oca. Kao stalni sudski vještak, Genos d.o.o. provodi testiranje očinstva i na osobni zahtjev, a nalaz i mišljenje našeg ovlaštenog sudskog vještaka vrijedi kao dokaz na sudu. To pomaže u izbjegavanju nepotrebnih troškova dvostrukog testiranja (jednom za osobne potrebe, a jednom za pravne postupke).<br><br>Vrijednosti vjerojatnosti očinstva kod vještačenja za potrebe suda kreću se od jedan prema nekoliko milijuna, do jedan prema nekoliko milijardi. Minimalna granica koja je potrebna za nedvojbeno utvrđivanje očinstva na sudu je 99,999 %.'
+            : 'Utvrđivanje ili osporavanje očinstva/majčinstva za sudske postupke provodi se na temelju Rješenja nadležnog suda, usporedbom genotipova majke, djeteta i pretpostavljenog oca. Kao stalni sudski vještak, Genos d.o.o. provodi testiranje očinstva i na osobni zahtjev, a nalaz i mišljenje našeg ovlaštenog sudskog vještaka vrijedi kao dokaz na sudu. To pomaže u izbjegavanju nepotrebnih troškova dvostrukog testiranja (jednom za osobne potrebe, a jednom za sudske postupke).<br><br>Vrijednosti vjerojatnosti očinstva kod vještačenja za potrebe suda kreću se od jedan prema nekoliko milijuna, do jedan prema nekoliko milijardi. Minimalna granica koja je potrebna za nedvojbeno utvrđivanje očinstva na sudu je 99,999 %.'
         }
       </p>
       <h4 id="3.2.">
@@ -564,7 +567,7 @@
           {
             $language === 'en'
               ? 'Male Lineage Testing – Analysis of 23 STR markers on the Y chromosome'
-              : 'Testiranje srodstva po muškoj lozi – Analiza 23 STR biljega na Y kromosomu'
+              : 'Testiranje srodstva po muškoj liniji – Analiza 23 STR biljega na Y kromosomu'
           }
         </li>
         <li>
@@ -586,14 +589,14 @@
         {
           $language === 'en'
             ? 'Patrilineality'
-            : 'Testiranje srodstva po muškoj lozi'
+            : 'Testiranje srodstva po muškoj liniji'
         }
       </h5>
       <p>
         {@html
           $language === 'en'
             ? 'Paternity testing through the male line is conducted by analyzing 23 STR markers on the Y chromosome. Since the sex chromosome is inherited unchanged, kinship is confirmed by a complete match of all the analyzed Y STR markers. Any changes that might occur are mutations, which are random nucleotide substitutions that happen spontaneously and very rarely.<br><br>The Y chromosome is inherited through the male line, passed directly from father to son. Therefore, all male relatives on the paternal side share the same markers on the Y chromosome, meaning they have an identical Y DNA profile. This method is useful in indirect paternity testing for male children when a male relative on the paternal side (brother, grandfather, uncle, or any male family member) can substitute for the deceased alleged father. It can also be applied for proving kinship between brothers, grandfather and grandson, uncle and nephew, etc. The test is also used in male identification cases when only paternal relatives are available.<br><br>Y chromosome testing is valuable in the following cases:'
-            : 'Testiranje srodstva po muškoj lozi provodi se analizom 23 STR biljega na Y kromosomu. Budući da se spolni kromosom nasljeđuje nepromijenjen, srodstvo se potvrđuje potpunim podudaranjem svih analiziranih Y STR biljega. Promjene koje bi se eventualno mogle dogoditi su mutacije, koje predstavljaju nasumične zamjene nukleotida, koje se događaju spontano i vrlo rijetko.<br><br>Y kromosom se nasljeđuje po muškoj lozi, odnosno prenosi se izravno s oca na sina. Stoga svi muški srodnici s očeve strane dijele iste lokuse na Y kromosomu, što znači da imaju identičan Y DNA profil. Ova metoda je korisna i primjenjiva u neizravnom testiranju očinstva za mušku djecu kada muški srodnik s očeve strane (brat, djed, stric ili bilo koji član obitelji po muškoj liniji) može zamijeniti preminulog navodnog oca.<br><br>Također se može primijeniti za dokazivanje srodstva između braće, djeda i unuka, strica i nećaka itd. Primjenjuje se i u slučajevima identifikacije muške osobe kada su dostupni samo srodnici s očeve strane.<br><br>Testiranje po Y kromosomu je korisno u slučajevima:'
+            : 'Testiranje srodstva po muškoj liniji provodi se analizom 23 STR biljega na Y kromosomu. Budući da se spolni kromosom nasljeđuje nepromijenjen, srodstvo se potvrđuje potpunim podudaranjem svih analiziranih Y STR biljega. Promjene koje bi se eventualno mogle dogoditi su mutacije, koje predstavljaju nasumične zamjene nukleotida, koje se događaju spontano i vrlo rijetko.<br><br>Y kromosom se nasljeđuje po muškoj liniji, odnosno prenosi se izravno s oca na sina. Stoga svi muški srodnici s očeve strane dijele iste lokuse na Y kromosomu, što znači da imaju identičan Y DNA profil. Ova metoda je korisna i primjenjiva u neizravnom testiranju očinstva za mušku djecu kada muški srodnik s očeve strane (brat, djed, stric ili bilo koji član obitelji po muškoj liniji) može zamijeniti preminulog navodnog oca.<br><br>Također se može primijeniti za dokazivanje srodstva između braće, djeda i unuka, strica i nećaka itd. Primjenjuje se i u slučajevima identifikacije muške osobe kada su dostupni samo srodnici s očeve strane.<br><br>Testiranje po Y kromosomu je korisno u slučajevima:'
         }
       </p>
       <ul>
@@ -630,7 +633,7 @@
         {@html
           $language === 'en'
             ? 'Kinship testing for first-generation relationships between potential siblings and half-siblings is conducted by analyzing 24 STR markers. The test is used when the alleged father is unavailable for testing, and potential brothers or sisters, or half-siblings, want to confirm if they share the same father.<br><br>There are two types of tests:'
-            : 'Testiranje srodstva za prve generacije odnosa između potencijalnih braće i sestara ili polubraće i polusestre provodi se analizom 24 STR biljega. Test se koristi kada pretpostavljeni otac nije dostupan za testiranje, a potencijalni braća i sestre, ili polubraća i polusestre, žele utvrditi da li imaju istog oca.<br><br>Postoje dva tipa testova:'
+            : 'Testiranje srodstva za prve generacije odnosa između potencijalnih braće i sestara ili polubraće i polusestara provodi se analizom 24 STR biljega. Test se koristi kada pretpostavljeni otac nije dostupan za testiranje, a potencijalni braća i sestre, ili polubraća i polusestre, žele utvrditi da li imaju istog oca.<br><br>Postoje dva tipa testova:'
         }
       </p>
       <ul>
@@ -660,7 +663,7 @@
         {
           $language === 'en'
             ? 'Grandparent-grandchild testing is performed by analyzing 24 STR markers and is conducted when the alleged father is unavailable for testing. The test confirms whether the child is biologically related to the grandparents, thus aiding in identifying the biological father. This test can also assist in confirming maternity.'
-            : 'Testiranje srodtsva između djeda/bake i unuka/unuke provodi se analizom 24 STR biljega i provodi se kada pretpostavljeni otac nije dostupan za testiranje. Testom se utvrđuje da li je dijete biološki povezano s djedom i bakom i time pomaže u identificiranju biološkog oca djeteta. Ovaj test također može pomoći u potvrđivanju majčinstva.'
+            : 'Testiranje srodstva između djeda/bake i unuka/unuke provodi se analizom 24 STR biljega i provodi se kada pretpostavljeni otac nije dostupan za testiranje. Testom se utvrđuje da li je dijete biološki povezano s djedom i bakom i time pomaže u identificiranju biološkog oca djeteta. Ovaj test također može pomoći u potvrđivanju majčinstva.'
         }
       </p>
       <h4 id="3.3.">3.3.
@@ -855,6 +858,51 @@
           {/if}
         </li>
       </ul>
+      <h4 id="3.5.1.">
+        3.5.1.
+        {
+          $language === 'en'
+            ? 'Set for DNA sample collection and analysis'
+            : 'Set za izuzimanje uzoraka za analizu DNA'
+        }
+      </h4>
+      <p>
+        {@html $language === 'en'
+          ? 'The Sample Collection Kit is used for DNA analysis from a buccal swab sample.<br><br>Such samples can be collected easily and painlessly using the collectors from the kit, which are specially designed for this purpose.<br><br>The sterile protective tube is designed to safeguard the sample from environmental factors, reducing the overall risk of contamination and enabling safe transport of the sample to the laboratory.<br><br>If the sample is collected according to the instructions enclosed in the kit, it remains preserved in the collector for months.<br><br>All collectors, the completed order form, and proof of payment need to be enclosed in the pre-addressed protective envelope and then mailed or delivered to the laboratory.<br><br>Sample Collection Kit for DNA Testing contains:'
+          : 'Set za izuzimanje uzorka koristi se za DNA analizu iz brisa bukalne sluznice.<br><br>Takvi se uzorci mogu jednostavno i bezbolno uzeti pomoću kolektora iz seta, koji su posebno dizajnirani za tu svrhu.<br><br>Sterilna zaštitna epruveta osigurava zaštitu uzorka od vanjskih utjecaja, smanjuje rizik od kontaminacije i omogućuje siguran transport uzorka do laboratorija.<br><br>Ako se uzorak uzme prema uputama priloženima u setu, ostaje stabilan u kolektoru mjesecima.<br><br>Svi kolektori, ispunjena narudžbenica i potvrda o uplati moraju se staviti u unaprijed adresiranu zaštitnu omotnicu te poslati poštom ili osobno dostaviti u laboratorij.<br><br>Set za izuzimanje uzorka za DNA analizu sadrži:'}
+      </p>
+
+      {#if $language === 'en'}
+        <ul class="list-disc ml-6">
+          <li>Three collectors for samples of buccal swabs</li>
+          <li>Sample storage bag</li>
+          <li>Gloves</li>
+          <li>Instructions</li>
+          <li>Order form</li>
+          <li>Unbreakable protective envelope for sending samples to laboratory</li>
+        </ul>
+      {:else}
+        <ul class="list-disc ml-6">
+          <li>Tri kolektora za uzorke brisa bukalne sluznice</li>
+          <li>Vrećicu za pohranu uzorka</li>
+          <li>Rukavice</li>
+          <li>Upute</li>
+          <li>Narudžbenicu</li>
+          <li>Nepoderivu zaštitnu omotnicu za slanje uzoraka u laboratorij</li>
+        </ul>
+      {/if}
+      <p>
+        {@html
+          $language === 'en'
+            ? 'You can order the Sample Collection Kit by phone, e-mail or via our website and receive it at your home address. You can buy it in our laboratory and in pharmacies.'
+            : 'Set za uzorkovanje možete naručiti telefonom, e-mailom ili putem naše web stranice i primit ćete ga na svoju kućnu adresu. Također ga možete kupiti u našem laboratoriju i u ljekarnama.'
+        }
+      </p>
+      {#if $language === 'en'}
+        <a class="button-filled" href="/contact">Order a set for sampling</a>
+      {:else}
+        <a class="button-filled" href="/kontakt">Naruči set za uzorkovanje</a>
+      {/if}
       <h4 id="3.6.">
         {
           $language === 'en'
@@ -908,7 +956,7 @@
         {
           $language === 'en'
             ? 'The sex of many bird species cannot be determined based on physical appearance and characteristics. By using DNA analysis methods, it is possible to examine parts of the birds\' sex chromosomes. This allows us to distinguish between male birds (ZZ) and female birds (ZW).'
-            : 'Spol mnogih vrsta ptica ne može se odrediti na temelju fizičkog izgleda i karakteristika. Korištenjem metoda DNA analize moguće je ispitati dijelove spolnih kromosoma ptica. To nam omogućava razlikovanje mužjaka ptica (ZZ) i ženki ptica (ZW).'
+            : 'Spol mnogih vrsta ptica ne može se odrediti na temelju fizičkog izgleda i karakteristika. Korištenjem metoda DNA analize moguće je ispitati fragmente spolnih kromosoma ptica. To nam omogućava razlikovanje mužjaka ptica (ZZ) i ženki ptica (ZW).'
         }
       </p>
       <h5>
@@ -930,14 +978,14 @@
           {
             $language === 'en'
               ? 'The accuracy of DNA-based sex determination does not depend on the bird\'s age.'
-              : 'Točnost određivanja spola na temelju DNA-a ne ovisi o dobi ptice.'
+              : 'Točnost određivanja spola na temelju DNA ne ovisi o dobi ptice.'
           }
         </li>
         <li>
           {
             $language === 'en'
               ? 'The accuracy of DNA sex determination is very high (>99%).'
-              : 'Točnost određivanja spola na temelju DNA-a je vrlo visoka (>99%).'
+              : 'Točnost određivanja spola na temelju DNA je vrlo visoka (>99%).'
           }
         </li>
         <li>
@@ -951,7 +999,7 @@
           {
             $language === 'en'
               ? 'The analysis is conducted by experts with years of experience in DNA analysis.'
-              : 'Analizu provode stručnjaci s godinama iskustva u DNA analizi.'
+              : 'Analizu provode stručnjaci s dugogodišnjim iskustvom u DNA analizi.'
           }
         </li>
       </ul>
@@ -967,7 +1015,7 @@
           {
             $language === 'en'
               ? '3–5 freshly plucked feathers, preferably from the bird\'s chest (collect without touching the tip of the feather with your hands).'
-              : '3–5 svježe iščupanih pera, po mogućstvu s ptičje grudi (prikupljati bez dodirivanja vrha pera rukama).'
+              : '3–5 svježe iščupanih pera, po mogućnosti s ptičje grudi (prikupljati bez dodirivanja vrha pera rukama).'
           }
         </li>
         <li>
@@ -995,14 +1043,7 @@
           {
             $language === 'en'
               ? 'When sending samples by mail, include an order form and proof of payment for the analysis.'
-              : 'Prilikom slanja uzoraka poštom, priložite obrazac narudžbe i dokaz o uplati za analizu.'
-          }
-        </li>
-        <li>
-          {
-            $language === 'en'
-              ? 'Instructions for Collecting Feather and Blood Samples'
-              : 'Upute za prikupljanje uzoraka perja i krvi'
+              : 'Prilikom slanja uzoraka poštom, priložite popunjenu i potpisanu narudžbenicu.'
           }
         </li>
       </ul>
