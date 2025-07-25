@@ -1,0 +1,56 @@
+{
+	"/": [
+		"src/routes/+layout.server.ts"
+	],
+	"/404": [
+		"src/routes/+layout.server.ts"
+	],
+	"/checkout": [
+		"src/routes/+layout.server.ts"
+	],
+	"/my-account": [
+		"src/routes/my-account/+layout.server.ts",
+		"src/routes/+layout.server.ts",
+		"src/routes/my-account/+layout.server.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/my-account/coupons": [
+		"src/routes/my-account/+layout.server.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/my-account/favorites": [
+		"src/routes/my-account/+layout.server.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/my-account/settings": [
+		"src/routes/my-account/+layout.server.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/posts/[id]": [
+		"src/routes/posts/[id]/+page.server.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/reset-password": [
+		"src/routes/reset-password/+page.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/sign-in": [
+		"src/routes/sign-in/+page.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/sign-up": [
+		"src/routes/sign-up/+page.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/sitemap-hidden": [
+		"src/routes/sitemap-hidden/+page.server.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/testing": [
+		"src/routes/+layout.server.ts"
+	],
+	"/[...url]": [
+		"src/routes/[...url]/+page.server.ts",
+		"src/routes/+layout.server.ts"
+	]
+}
