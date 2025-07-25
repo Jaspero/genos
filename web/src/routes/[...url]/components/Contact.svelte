@@ -133,6 +133,18 @@
           <span> {$language === 'en' ? 'Closed on public holidays' : 'Tijekom državnih praznika i blagdana ne radimo'} </span>
         </div>
       </div>
+      <div>
+        <span class="span-label font-bold">{$language === 'en' ? 'NOTICE OF SUMMER WORKING HOURS FOR THE DNA LABORATORY:' : 'OBAVIJEST O LJETNOM RADNOM VREMENU DNA LABORATORIJA:'}</span>
+        <div class="contact-links">
+          <span>
+            {
+              $language === 'en' ?
+              'The DNA laboratory will be closed from August 11th to August 15th, 2025, and no samples for analysis will be accepted during this period. From August 18th, 2025, the laboratory will operate according to its regular working hours.' :
+              'DNA laboratorij neće raditi u periodu od 11. kolovoza 2025. do 15. kolovoza 2025. te se u tom periodu neće zaprimati uzorci za analize. Od 18. kolovoza 2025. laboratorij će raditi prema standardnom radnom vremenu.'
+            }
+          </span>
+        </div>
+      </div>
     </div>
   </div>
   <div class="gc-12 contact-section spacer">
