@@ -6,7 +6,6 @@
   import { db } from '$lib/utils/firebase';
   import { language } from '$lib/stores/language';
 
-  let name = '';
   let email = '';
   let message = '';
 
@@ -15,20 +14,18 @@
 
   async function handleSubmit() {
     error.set('');
-    if (!name || !email || !message) {
+    if (!email || !message) {
       error.set($language === 'en' ? 'Please fill out all fields.' : 'Popunite sva polja.');
       return;
     }
 
     try {
       await addDoc(collection(db, 'contacts'), {
-        name,
         email,
         message,
         createdAt: serverTimestamp()
       });
       submitted.set(true);
-      name = '';
       email = '';
       message = '';
     } catch (err) {
