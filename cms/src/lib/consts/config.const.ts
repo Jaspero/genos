@@ -4,7 +4,7 @@ import SendSampleEmail from '../send-sample-email/SendSampleEmail.svelte';
 
 export const CONFIG = {
   title: 'Shop CMS',
-  label: 'Webshop Template',
+  label: 'Genos CMS',
   webUrl: 'https://genos-ec52a.web.app',
   links: [
     {
