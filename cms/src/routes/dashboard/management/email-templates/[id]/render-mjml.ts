@@ -2,7 +2,7 @@ import '@jaspero/web-components/dist/asset-manager.wc';
 import '@jaspero/web-components/dist/asset-manager.css';
 import 'grapesjs/dist/css/grapes.min.css';
 import { DEVICES } from '$lib/page-builder/consts/devices.const';
-import grapesjs, {Editor} from 'grapesjs';
+import grapesjs, {type Editor} from 'grapesjs';
 import parserPostCSS from 'grapesjs-parser-postcss';
 import styleGradientPlugin from 'grapesjs-style-gradient';
 import { AMService } from '$lib/page-builder/am.service';
