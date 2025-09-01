@@ -12,7 +12,7 @@ export const EMAIL_CONFIG = {
    * in sendgrid or email sending will fail.
    */
   fromEmail: {
-    email: 'info@jaspero.co',
-    name: 'Jaspero'
+    email: 'info@genos.hr',
+    name: 'Genos Info'
   }
 };
