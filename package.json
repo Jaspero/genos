@@ -6,7 +6,9 @@
     "lint": "prettier --check .",
     "format": "prettier --write . && npm run check --prefix cms && npm run check --prefix web && npm run lint:fix --prefix functions",
     "write:indexes": "firebase firestore:indexes > firestore.indexes.json",
-    "configure-release": "tsx scripts/configure-release.ts"
+    "configure-release": "tsx scripts/configure-release.ts",
+    "send:test-email": "node scripts\\test-sendgrid-email.js",
+    "send:test-email:service": "tsx scripts\\test-email-service.ts"
   },
   "type": "commonjs",
   "devDependencies": {
@@ -17,6 +19,7 @@
     "tsx": "4.19.2"
   },
   "dependencies": {
+    "@sendgrid/mail": "8.1.4",
     "firebase": "^11.0.2",
     "firebase-admin": "12.7.0",
     "luxon": "3.5.0"

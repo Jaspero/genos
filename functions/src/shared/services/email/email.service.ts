@@ -16,10 +16,13 @@ export class EmailService {
   token: string | undefined;
 
   constructor() {
-    if (process.env.SENDGRID_API_KEY) {
-      this.token = process.env.SENDGRID_API_KEY;
-      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const apiKey = process.env.SENDGRID_API_KEY?.trim();
+    if (!apiKey || /[^A-Za-z0-9._-]/.test(apiKey)) {
+      logger.error('Invalid or missing SendGrid API key.');
+      throw new Error('Invalid or missing SendGrid API key.');
     }
+    this.token = apiKey;
+    sgMail.setApiKey(apiKey);
   }
 
   async parseEmail(
@@ -102,6 +105,11 @@ export class EmailService {
     }
 
     try {
+      // Ensure we never write undefined into Firestore (it rejects undefined values)
+      const errorForDb = res === true
+        ? undefined
+        : (typeof res === 'string' ? res : JSON.parse(JSON.stringify(res ?? null)));
+
       await firestore()
         .collection('sent-emails')
         .doc(id)
@@ -111,7 +119,7 @@ export class EmailService {
           html,
           subject,
           templateId,
-          ...(res === true ? { status: true } : { status: false, error: res }),
+          ...(res === true ? { status: true } : { status: false, error: errorForDb }),
           ...(source && { source }),
           context
         });
