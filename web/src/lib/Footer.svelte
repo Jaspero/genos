@@ -38,6 +38,15 @@
             : 'Plan za ravnopravnost spolova'
         }
       </a>
+      {#if $language === 'en'}
+        <a href="/conflict-of-interest.pdf" target="_blank">
+          Conflict of interest
+        </a>
+      {:else}
+        <a href="/sukob-interesa.pdf" target="_blank">
+          Sukob interesa
+        </a>
+      {/if}
     </div>
     <div class="subfooter-contact">
       <a href="mailto:info@genos.hr">info@genos.hr</a>
