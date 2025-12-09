@@ -1,89 +1,10 @@
 <svelte:options customElement={{ tag: 'pb-contact', shadow: 'none' }} />
 
 <script lang="ts">
-  import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-  import { writable } from 'svelte/store';
-  import { db } from '$lib/utils/firebase';
   import { language } from '$lib/stores/language';
-
-  let email = '';
-  let message = '';
-
-  const submitted = writable(false);
-  const error = writable('');
-
-  async function handleSubmit() {
-    error.set('');
-    if (!email || !message) {
-      error.set($language === 'en' ? 'Please fill out all fields.' : 'Popunite sva polja.');
-      return;
-    }
-
-    try {
-      await addDoc(collection(db, 'contacts'), {
-        email,
-        message,
-        createdAt: serverTimestamp()
-      });
-      submitted.set(true);
-      email = '';
-      message = '';
-    } catch (err) {
-      console.error('Error submitting form:', err);
-      error.set(
-        $language === 'en'
-          ? 'An error occurred while submitting your request.'
-          : 'Dogodila se greška sa slanjem vašeg zahtjeva.'
-      );
-    }
-  }
 </script>
 
-<div class="grid grid-small spacer">
-  <div class="gc-12 contact-section">
-    <div class="contact-section-left">
-      <h2>{$language === 'en' ? 'Get in touch' : 'Kontaktirajte nas'}</h2>
-    </div>
-    <div class="contact-section-right">
-      <form on:submit|preventDefault={handleSubmit} class="space-y-4">
-        {#if $error}
-          <p class="text-red-500">{$error}</p>
-        {/if}
-        <div>
-          <label class="custom-field custom-field-small">
-            <span class="custom-field-label"
-              >{$language === 'en' ? 'Your email address' : 'Vaša email adresa'}</span
-            >
-            <input
-              type="email"
-              placeholder="{$language === 'en' ? 'example' : 'primjer'}@email.com"
-              class="custom-field-input"
-              bind:value={email}
-              required
-            />
-          </label>
-        </div>
-        <div>
-          <label class="custom-field custom-field-large">
-            <span class="custom-field-label"
-              >{$language === 'en' ? 'What is your request?' : 'Koji je vaš zahtjev?'}</span
-            >
-            <textarea
-              placeholder={$language === 'en' ? "I'm interested in" : 'Zanima me...'}
-              cols="30"
-              rows="5"
-              class="custom-field-input"
-              required
-              bind:value={message}
-            ></textarea>
-          </label>
-        </div>
-        <button type="submit" class="button-filled">
-          {$language === 'en' ? 'Submit request' : 'Pošalji zahtjev'}
-        </button>
-      </form>
-    </div>
-  </div>
+<div class="grid spacer">
   <div class="gc-12 contact-section spacer">
     <div class="contact-section-left">
       <h2>{$language === 'en' ? 'Contact info' : 'Kontakt informacije'}</h2>
@@ -127,20 +48,18 @@
         <span class="span-label">{$language === 'en' ? 'Working hours' : 'Radno vrijeme'}</span>
         <div class="contact-links">
           <span> {$language === 'en' ? 'Monday - Friday, 9:00-15:30' : 'Ponedjeljak - petak, od 9:00 do 15:30'} </span>
-          <span> {$language === 'en' ? 'Closed on public holidays' : 'Tijekom državnih praznika i blagdana ne radimo'} </span>
+          <span> {$language === 'en' ? 'Closed on public holidays' : 'Tijekom državnih praznika i blagdana ne radimo'} </span>
         </div>
       </div>
-      <div>
-        <span class="span-label font-bold">{$language === 'en' ? 'NOTICE OF SUMMER WORKING HOURS FOR THE DNA LABORATORY:' : 'OBAVIJEST O LJETNOM RADNOM VREMENU DNA LABORATORIJA:'}</span>
-        <div class="contact-links">
-          <span>
+      <div class="contact-links">
+        <span class="span-label font-bold">{$language === 'en' ? 'NOTICE OF WINTER WORKING HOURS FOR THE DNA LABORATORY:' : 'OBAVIJEST O ZIMSKOM RADNOM VREMENU DNA LABORATORIJA:'}</span>
+        <span>
             {
               $language === 'en' ?
-              'The DNA laboratory will be closed from August 11th to August 15th, 2025, and no samples for analysis will be accepted during this period. From August 18th, 2025, the laboratory will operate according to its regular working hours.' :
-              'DNA laboratorij neće raditi u periodu od 11. kolovoza 2025. do 15. kolovoza 2025. te se u tom periodu neće zaprimati uzorci za analize. Od 18. kolovoza 2025. laboratorij će raditi prema standardnom radnom vremenu.'
+                'The DNA laboratory will be closed from 25 December 2025 to 06 January 2026, and no samples will be accepted for analysis during this period. From 07 January 2026, the laboratory will operate according to its standard working hours.' :
+                'DNA laboratorij neće raditi u periodu od 25. prosinca 2025. do 06. siječnja 2026. te se u tom periodu neće zaprimati uzorci za analize. Od 07. siječnja 2026. laboratorij će raditi prema standardnom radnom vremenu.'
             }
           </span>
-        </div>
       </div>
     </div>
   </div>
@@ -178,9 +97,9 @@
           <a href="tel:+38531218612">+385 31 218 612</a>
         </p>
         <b
-          >{$language === 'en'
-            ? 'Arrival by prior phone appointment'
-            : 'Dolazak uz prethodnu najavu telefonom'}</b
+        >{$language === 'en'
+          ? 'Arrival by prior phone appointment'
+          : 'Dolazak uz prethodnu najavu telefonom'}</b
         >
       </div>
       <iframe

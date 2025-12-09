@@ -12,6 +12,7 @@ export * from './About.svelte';
 export * from './Automated.svelte';
 export * from './WeAre.svelte';
 export * from './Collaboration.svelte';
+export * from './Contact.svelte';
 export * from './HeroContentLanding.svelte';
 export * from './Glycomics.svelte';
 export * from './PriceList.svelte';
