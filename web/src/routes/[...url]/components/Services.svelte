@@ -1084,6 +1084,12 @@
             <a href="/pdfs/genbird-hr.pdf" target="_blank" class="underline">Pogledaj uputstva za GENBird test (PDF)</a>
           {/if}
         </li>
+        <li>
+          <a href="/pdfs/genbird-order-form.pdf" target="_blank" class="underline">{$language === 'en' ? 'Order form for the GENBird test' : 'Narudžbenica za GENBird test'} (PDF)</a>
+        </li>
+        <li>
+          <a href="/pdfs/genbird-order-form-appendix.pdf" target="_blank" class="underline">{$language === 'en' ? 'Appendix to the order form for a larger number of samples' : 'Dodatak narudžbenici za veći broj uzoraka'} (PDF)</a>
+        </li>
       </ul>
     </div>
   </div>
