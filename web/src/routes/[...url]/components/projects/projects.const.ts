@@ -1,6 +1,57 @@
 export const PROJECTS = [
   {
     group: 'Horizon Europe',
+    program: 'Digit',
+    href: 'digit',
+    projects: [
+      {
+        short: 'public-consultation-esmp',
+        titleEn: 'Public Consultation on ESMP Checklists',
+        descriptionEn: 'The interested public is invited to participate in a public consultation on draft Environmental and Social Management Plan (ESMP) checklists prepared for two activities: GlycoCardio 2023 and CRISPRdCas9. The purpose of the consultation is to collect comments, suggestions, and opinions in order to improve the quality, clarity, and implementability of the listed documents.',
+        titleHr: 'Javno savjetovanje o ESMP kontrolnim listama',
+        descriptionHr: 'Zainteresirana javnost poziva se na sudjelovanje u javnom savjetovanju o nacrtima kontrolnih listi Plana upravljanja okolišem i društvom (ESMP) pripremljenih za dvije aktivnosti: GlycoCardio 2023 i CRISPRdCas9. Svrha savjetovanja je prikupljanje komentara, prijedloga i mišljenja radi poboljšanja kvalitete, jasnoće i provedivosti navedenih dokumenata.',
+        startDate: '22/12/2025',
+        projectDurationInDays: '14',
+        pdf: 'public-consultation.pdf',
+        projectId: 'P180755',
+        callForProposals: 'DIGIT.2.2.01',
+        coordinator: 'Genos d.o.o.',
+        projectParticipants: 2,
+      },
+      {
+        short: 'EpiGen-toolbox',
+        titleEn: 'CRISPR/dCas9 Toolbox for Epigenome and Genome Editing',
+        descriptionEn: 'The EpiGen-toolbox project develops a modular CRISPR/dCas9-based platform for precise epigenome and genome editing. The project will deliver a collaborative online platform that enables global access to standardized and customizable epigenome-editing tools for academic and pharmaceutical users. By integrating modular design, biological validation, and digital infrastructure, the project aims to accelerate translational epigenetics research and support applications in drug discovery and biotechnology.',
+        titleHr: 'CRISPR/dCas9 alat za uređivanje epigenoma i genoma',
+        descriptionHr: 'Projekt EpiGen-toolbox razvija modularni CRISPR/dCas9 alat za precizno uređivanje epigenoma i genoma. Projekt uključuje izgradnju suradničke internetske platforme koja omogućuje globalni pristup standardiziranim i prilagodljivim alatima za epigenetičko uređivanje za akademsku i farmaceutsku zajednicu. Integracijom modularnog dizajna, biološke validacije i digitalne infrastrukture, projekt ima za cilj ubrzati translacijska epigenetička istraživanja te podržati primjene u otkrivanju lijekova i biotehnologiji.',
+        startDate: '01/01/2025',
+        projectDuration: '18',
+        pdf: 'epigen-toolbox.pdf',
+        projectId: 'P180755',
+        callForProposals: 'DIGIT.2.2.01',
+        coordinator: 'Genos d.o.o.',
+        projectParticipants: 1,
+      },
+      {
+        short: 'GlycoCardio',
+        titleEn: 'IgG Glycome Composition as a Biomarker for Personalised Prevention and Treatment of Cardiovascular Diseases',
+        titleHr: 'Sastav IgG glikoma kao biomarker za personaliziranu prevenciju i liječenje kardiovaskularnih bolesti',
+        descriptionEn: 'The GlycoCardio PoC project aims to validate IgG glycans as dynamic, modifiable biomarkers for personalised cardiovascular disease (CVD) risk management. Unlike static genetic risk factors, IgG glycans respond to lifestyle and pharmacological interventions. The project will conduct validation studies using large prospective cohorts and real-world intervention data, and develop a dedicated digital application to calculate and present individualised CVD risk scores. The final outcome is a novel GlycoCardio test intended for global commercial deployment via clinical partners.',
+        descriptionHr: 'Projekt GlycoCardio PoC ima za cilj validirati IgG glikane kao dinamične i promjenjive biomarkere za personalizirano upravljanje rizikom od kardiovaskularnih bolesti. Za razliku od genetskih čimbenika rizika, IgG glikani reagiraju na promjene načina života i farmakološke intervencije. Projekt uključuje validacijske studije na velikim kohortama i u stvarnim uvjetima te razvoj namjenske digitalne aplikacije za izračun i prikaz individualnog rizika. Krajnji rezultat je novi GlycoCardio test namijenjen komercijalnoj primjeni putem globalne mreže kliničkih partnera.',
+        startDate: '22/12/2025',
+        projectDuration: '18',
+        pdf: 'glycocardio.pdf',
+        projectId: 'P180755',
+        callForProposals: 'DIGIT.2.2.01',
+        programme: 'DIGITAL, Innovation and Green Technology Project (DIGIT)',
+        coordinator: 'Genos d.o.o.',
+        projectParticipants: 2,
+        projectLocation: 'Zagreb, Croatia',
+      }
+    ]
+  },
+  {
+    group: 'Horizon Europe',
     program: 'Horizon Europe',
     href: 'horizon-europe',
     projects: [

@@ -236,10 +236,16 @@
                               <td>{selectedProject.startDate}</td>
                             </tr>
                           {/if}
-                          {#if selectedProject.projectDuration}
+                          {#if selectedProject.projectDuration || selectedProject.projectDurationInDays}
                             <tr>
                               <td>{@html $language === 'en' ? 'Project Duration:' : 'Trajanje projekta:'}</td>
-                              <td>{selectedProject.projectDuration} {@html $language === 'en' ? 'months' : 'mjeseci'}</td>
+                              <td>
+                                {#if selectedProject.projectDurationInDays}
+                                  {selectedProject.projectDurationInDays} {@html $language === 'en' ? 'days' : 'dana'}
+                                {:else}
+                                  {selectedProject.projectDuration} {@html $language === 'en' ? 'months' : 'mjeseci'}
+                                {/if}
+                              </td>
                             </tr>
                           {/if}
                           {#if selectedProject.projectId}
