@@ -1,6 +1,6 @@
 export const PROJECTS = [
   {
-    group: 'Horizon Europe',
+    group: 'Digit',
     program: 'Digit',
     href: 'digit',
     projects: [
