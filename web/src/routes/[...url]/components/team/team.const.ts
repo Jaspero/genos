@@ -167,38 +167,6 @@ export const TEAM = [
     group: 'Lead researcher',
     members: [
       {
-        name: 'Anđelo Beletić',
-        title: [
-          {
-            hr: 'Dr.sc.',
-            en: ', PhD'
-          }
-        ],
-        job: {
-          en: 'Lead Researcher',
-          hr: 'Vodeći istraživač'
-        },
-        img: 'beletic',
-        descriptionEn: 'Anđelo Beletić holds a Master of Pharmacy-Medical Biochemist degree (2002) from the Faculty of Pharmacy, University of Belgrade, Serbia. <br><br> He obtained his Specialist in Medical Biochemistry title (2012) and a PhD in Medical Sciences-Pharmacy (2014) from the same institution. <br><br> The European Federation of Clinical Chemistry and Laboratory Medicine assigned him a European Specialist of Laboratory Medicine certificate in 2022. <br><br> Following his engagement at the Faculty of Pharmacy, University of Belgrade, Serbia, the University Clinical Center of Serbia, and the Faculty of Veterinary Medicine, University of Zagreb, Croatia, he joined Genos in 2023. <br><br> His professional and scientific expertise covers the fields of Human and Veterinary Laboratory Medicine, proteomic research, and canine vector-borne diseases. <br><br> His publication record contains more than 30 articles. Besides, he serves as an Assistant Editor of Biochemia Medica, the official journal of the Croatian Society of Medical Biochemistry and Laboratory Medicine.',
-        descriptionHr: 'Anđelo Beletić magistrirao je farmaciju – medicinsku biokemiju 2002. godine na Farmaceutskom fakultetu Sveučilišta u Beogradu, Srbija.<br><br>Titulu specijalista medicinske biokemije stekao je 2012., a doktorat iz medicinskih znanosti – farmacije 2014. godine na istoj instituciji.<br><br>Europska federacija za kliničku kemiju i laboratorijsku medicinu dodijelila mu je 2022. godine certifikat europskog specijalista laboratorijske medicine.<br><br>Nakon angažmana na Farmaceutskom fakultetu Sveučilišta u Beogradu, Kliničkom centru Srbije i Veterinarskom fakultetu Sveučilišta u Zagrebu, Hrvatskoj, pridružio se Genosu 2023. godine.<br><br>Njegova stručnost i znanstveni interesi obuhvaćaju područja humane i veterinarske laboratorijske medicine, proteomskih istraživanja i bolesti pasa koje prenose vektori.<br><br>Autor je više od 30 znanstvenih radova. Osim toga, obnaša funkciju pomoćnog urednika časopisa *Biochemia Medica*, službenog glasila Hrvatskog društva za medicinsku biokemiju i laboratorijsku medicinu.'
-      },
-      {
-        name: 'Ivan Gudelj',
-        title: [
-          {
-            hr: 'Dr.sc.',
-            en: ', PhD'
-          }
-        ],
-        job: {
-          en: 'Lead Researcher',
-          hr: 'Vodeći istraživač'
-        },
-        img: 'gudelj',
-        descriptionEn: 'Ivan Gudelj actively contributes to the Pain-OMICS project, investigating glycosylation changes in patients with low-back pain, and the Brain Glycome project, which aims to advance methods for analyzing protein glycosylation in the brain. <br><br> With expertise in analytical glycobiology, specifically, UPLC and MALDI-TOF-MS analysis of N-glycans, his research interests encompass the analysis of brain glycosylation across regions and development, as well as the comparison of the brain glycome among different species. <br><br> Ivan obtained his Master of Pharmacy degree from the University of Zagreb, Faculty of Pharmacy and Biochemistry (2013), and a Ph.D. in Chemistry from the Faculty of Science (2017), where his dissertation focused on the "Evolutionary and spatio-temporal comparison of the brain N-glycoms." <br><br> He received notable accolades, including the Rector\'s award in 2012 and the Dean\'s award in 2013.',
-        descriptionHr: 'Ivan Gudelj aktivno doprinosi projektu Pain-OMICS, istražujući promjene u glikozilaciji kod pacijenata s bolovima u donjem dijelu leđa, te projektu Brain Glycome, koji ima za cilj unaprijediti metode analize glikozilacije proteina u mozgu.<br><br>Sa stručnosti u analitičkoj glikobiologiji, posebno u UPLC i MALDI-TOF-MS analizi N-glikana, njegovi istraživački interesi obuhvaćaju analizu glikozilacije mozga kroz različite regije i razvojne faze, kao i usporedbe glikomova mozga među različitim vrstama.<br><br>Ivan je diplomirao na Farmaceutsko-biokemijskom fakultetu Sveučilišta u Zagrebu 2013. godine, a doktorirao kemiju na Prirodoslovno-matematičkom fakultetu 2017. godine, s disertacijom na temu „Evolucijska i prostorno-vremenska usporedba N-glikomova mozga“.<br><br>Dobitnik je značajnih priznanja, uključujući Rektorovu nagradu 2012. i Dekanovu nagradu 2013. godine.'
-      },
-      {
         name: 'Thomas Klarić',
         title: [
           {
@@ -613,16 +581,6 @@ export const TEAM = [
         descriptionHr: 'Od lipnja 2022. godine, Nikol radi kao analitičarka u laboratoriju u tvrtki Genos d.o.o., Laboratoriju za istraživanje glikoznanosti u Zagrebu, Hrvatska. Njezin glavni fokus je visokoprotočna glikomika, gdje se specijalizirala za analizu kompleksnih struktura glikana.<br><br>Nikol Mraz završila je studij laboratorijske biomedicine na Farmaceutskom fakultetu Sveučilišta u Ljubljani u rujnu 2021. godine. Tijekom studija izradila je diplomski rad pod nazivom „Prikladnost odabranih fluorescentnih sondi za dugotrajno snimanje živih stanica“ na Institutu Jožef Stefan u Ljubljani.<br><br>Trenutno pohađa doktorski studij na Prirodoslovno-matematičkom fakultetu Sveučilišta u Zagrebu, na Odsjeku za biologiju, s posebnim fokusom na glikobiologiju mozga.'
       },
       {
-        name: 'Kristina Nikolić',
-        job: {
-          en: 'Junior Researcher',
-          hr: 'Junior istraživač'
-        },
-        img: 'nikolic',
-        descriptionEn: 'Kristina Nikolić joined the Genos team in May 2025. She has experience in molecular biology, neurobiology, and biochemistry, with a primary research focus on the mechanisms of immunoglobulin G glycosylation.<br><br> Kristina earned her Master\'s degree in Molecular Biology from the Faculty of Science, University of Zagreb, in 2024. Her Master\'s thesis research was conducted under the mentorship of Prof. Jasminka Štefulj, PhD, at the Laboratory for Neurochemistry and Molecular Neurobiology, where she investigated gene polymorphisms, expression, and enzyme activity of monoamine oxidase A in the human placenta.',
-        descriptionHr: 'Kristina Nikolić pridružila se timu Genosa u svibnju 2025. godine. Ima iskustvo u području molekularne biologije, neurobiologije i biokemije, a njezin primarni istraživački fokus je na mehanizmima glikozilacije imunoglobulina G.<br><br>Kristina je diplomirala molekularnu biologiju na Prirodoslovno-matematičkom fakultetu Sveučilišta u Zagrebu 2024. godine. Svoj diplomski rad izradila je pod mentorstvom prof. dr. sc. Jasminke Štefulj u Laboratoriju za neurokemiju i molekularnu neurobiologiju, gdje je istraživala polimorfizme gena, ekspresiju i enzimsku aktivnost monoamin oksidaze A u ljudskoj posteljici.'
-      },
-      {
         name: 'Antea Posavec',
         job: {
           en: 'Junior Researcher',
@@ -680,22 +638,12 @@ export const TEAM = [
       {
         name: 'Svjetlana Bušić',
         job: {
-          en: 'Director of EU Funds and Finance',
-          hr: 'Direktorica EU fondova i financija'
+          en: 'Chief Operating Officer',
+          hr: 'Operativna direktorica'
         },
         img: 'busic',
         descriptionEn: 'Svjetlana leads and coordinates the Management Board Office at Genos, which includes the Office for National and International Projects, Finance and Accounting, and Human Resources. <br><br> She holds a master\'s degree from the Faculty of Economics at the University of Zagreb. With a strong educational foundation, she brings her expertise to her current role as the Director of EU Funds and Finance at Genos. <br><br> Svjetlana\'s professional experience encompasses managing and implementing projects in the field of Research, Development, and Innovation. Notably, she served as the Head of the Monitoring Service for Research, Development, and Innovation at the Croatian Agency for Small Business, Innovation, and Investment, successfully securing grants totaling EUR 128.2 million under the EU funds 2014-2020 program. <br><br> She also held key positions in World Bank projects, overseeing programs such as Proof of Concept (PoC) and Technology and Innovation Infrastructure Development (TEHCRO), with a loan amount of EUR 30 million. <br><br> Furthermore, Svjetlana actively participated in the preparation of National programs to support companies focused on Research, Development, and Innovation.',
         descriptionHr: 'Svjetlana vodi i koordinira Ured Uprave u Genosu, koji uključuje Ured za nacionalne i međunarodne projekte, financije i računovodstvo te ljudske resurse.<br><br> Posjeduje magistarsku diplomu s Ekonomskog fakulteta Sveučilišta u Zagrebu. Sa snažnom obrazovnom podlogom, donosi svoje stručno znanje u svoju trenutnu ulogu direktorice EU fondova i financija u Genosu.<br><br> Svjetlanino profesionalno iskustvo obuhvaća upravljanje i provedbu projekata u području istraživanja, razvoja i inovacija. Posebno je bila voditeljica Službe za monitoring istraživanja, razvoja i inovacija u Hrvatskoj agenciji za malo gospodarstvo, inovacije i investicije, uspješno osiguravši bespovratna sredstva u ukupnom iznosu od 128,2 milijuna eura u okviru programa EU fondova 2014.-2020.<br><br> Također je obnašala ključne pozicije u projektima Svjetske banke, nadzirući programe poput Proof of Concept (PoC) i razvoja tehnološke i inovacijske infrastrukture (TEHCRO), s iznosom zajma od 30 milijuna eura.<br><br> Nadalje, Svjetlana je aktivno sudjelovala u pripremi nacionalnih programa za potporu poduzećima usmjerenima na istraživanje, razvoj i inovacije.'
-      },
-      {
-        name: 'Vesna Juras',
-        job: {
-          en: 'Head of Project Management Office',
-          hr: 'Voditeljica Ureda za upravljanje projektima'
-        },
-        img: 'juras',
-        descriptionEn: 'In June 2020, Vesna joined Genos as the Head of the Project Management Office. With her extensive experience in commercial operations and a proven track record in implementing and supervising EU-funded projects, Vesna brings valuable expertise to our team. <br><br> She has held various positions as a Key Account Manager and Project Manager, successfully overseeing projects in the private and public sectors, particularly in the field of research and development (R&D) and innovation. <br><br> Vesna graduated from the Faculty of Economics & Business at the University of Zagreb, and her dedication to continuous learning has earned her additional certifications, including a Public Procurement Certificate and a Certificate of Internal Auditor of Quality Management Systems ISO 9001.',
-        descriptionHr: 'U lipnju 2020. Vesna se pridružila Genosu kao voditeljica Ureda za upravljanje projektima. Sa svojim bogatim iskustvom u komercijalnim poslovima i dokazanim rezultatima u provedbi i nadzoru projekata financiranih iz EU fondova, Vesna donosi vrijednu stručnost našem timu.<br><br> Obnašala je različite funkcije kao Key Account Manager i voditeljica projekata, uspješno nadzirući projekte u privatnom i javnom sektoru, posebno u području istraživanja i razvoja (R\\&D) te inovacija.<br><br> Vesna je diplomirala na Ekonomskom fakultetu Sveučilišta u Zagrebu, a njezina predanost kontinuiranom učenju donijela joj je dodatne certifikate, uključujući Certifikat za javnu nabavu i Certifikat unutarnjeg revizora sustava upravljanja kvalitetom ISO 9001.'
       },
       {
         name: 'Dijana Peić',
@@ -750,8 +698,8 @@ export const TEAM = [
       {
         name: 'Filip Šoštarić',
         job: {
-          en: 'Project Implementation and Public Procurement Specialist',
-          hr: 'Stručnjak za provedbu projekata i javnu nabavu'
+          en: 'Head of Project Management Office',
+          hr: 'Voditelj ureda za upravljanje projektima'
         },
         img: 'sostaric',
         descriptionEn: 'Filip joined Genos in autumn 2022 as a Project Implementation and Public Procurement Specialist. <br><br> He gained extensive experience in project implementation, procurement process management, and business plan development at Zagorje Development Agency (2014-2018), where he managed procurement procedures and provided education and training to small and medium-sized entrepreneurs. <br><br> In 2018, Filip transitioned to the Croatian Agency for Small Business, Innovation, and Investment (HAMAG-BICRO) as a Senior Analyst and Deputy Head of the Procurement Verification Department for R&D projects, holding a valid certificate in public procurement. <br><br> Filip graduated with a Master\'s degree in Accounting and Auditing from the Faculty of Economics in Zagreb in 2014.',

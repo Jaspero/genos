@@ -15,7 +15,7 @@
   } from 'firebase/firestore';
   import { db } from '$lib/utils/firebase.js';
   import { onMount } from 'svelte';
-  import {language} from '$lib/stores/language';
+  import { language } from '$lib/stores/language';
 
   type MapItem = {
     [key: string]: { id: string; name: string };
@@ -125,37 +125,97 @@
 </script>
 
 <div class="grid grid-large news">
-    <div class="gc-12 filters">
-      <button class:active={linkedin}
-              on:click={() => {linkedin = true}}>
-        LinkedIn {$language === 'en' ? 'Feed' : 'Objave'}
-      </button>
-      <button class:active={!linkedin}
-              on:click={() => {linkedin = false}}>
-        {$language === 'en' ? 'News' : 'Novosti'}
-      </button>
-    </div>
+  <div class="gc-12 filters">
+    <button
+      class:active={linkedin}
+      on:click={() => {
+        linkedin = true;
+      }}
+    >
+      LinkedIn {$language === 'en' ? 'Feed' : 'Objave'}
+    </button>
+    <button
+      class:active={!linkedin}
+      on:click={() => {
+        linkedin = false;
+      }}
+    >
+      {$language === 'en' ? 'News' : 'Novosti'}
+    </button>
+  </div>
   {#if linkedin}
     <div class="gc-12">
-      <iframe src='https://widgets.sociablekit.com/linkedin-profile-posts/iframe/25556751' class="social-feed" frameborder='0' width='100%'></iframe>
+      <iframe
+        src="https://widgets.sociablekit.com/linkedin-profile-posts/iframe/25556751"
+        class="social-feed"
+        frameborder="0"
+        width="100%"
+      ></iframe>
     </div>
   {:else}
     {#if showCategoryFilters}
       <div class="gc-12 filters">
-        <button class:active={category === ''}
-                on:click={() => { category = ''; typeChanges(pageSize, category, author, authorMap); }}>
+        <button
+          class:active={category === ''}
+          on:click={() => {
+            category = '';
+            typeChanges(pageSize, category, author, authorMap);
+          }}
+        >
           {$language === 'en' ? 'All posts' : 'Sve novosti'}
         </button>
         {#each categories as cat}
-          <button class:active={category === cat.id}
-                  on:click={() => { category = cat.id; typeChanges(pageSize, category, author, authorMap); }}>
+          <button
+            class:active={category === cat.id}
+            on:click={() => {
+              category = cat.id;
+              typeChanges(pageSize, category, author, authorMap);
+            }}
+          >
             {cat.name}
           </button>
         {/each}
       </div>
     {/if}
 
-    {#if articles.length}
+    {#if articles.length || category === ''}
+      {#if category === ''}
+        {#if $language === 'en'}
+          <a
+            class="article gc-4"
+            href="/pdfs/en/ISO_9001-ENG-C765442-0-20250529.pdf"
+            target="_blank"
+          >
+            <div class="article-image">
+              <img src="/images/lab.jpg" alt="ISO 9001:2015" />
+            </div>
+            <span class="article-content">
+              <h2 class="article-title">Genos Secures ISO 9001:2015 Certification</h2>
+              <span class="article-description"
+                >Genos holds the ISO 9001:2015 certification for Quality Management Systems. ISO
+                13485:2016 certification is also in progress.</span
+              >
+            </span>
+          </a>
+        {:else}
+          <a
+            class="article gc-4"
+            href="/pdfs/hr/ISO_9001-HRV-C765442-0-20250529.pdf"
+            target="_blank"
+          >
+            <div class="article-image">
+              <img src="/images/lab.jpg" alt="ISO 9001:2015" />
+            </div>
+            <span class="article-content">
+              <h2 class="article-title">Genos je dobio ISO 9001:2015 certifikat</h2>
+              <span class="article-description"
+                >Genos posjeduje certifikat ISO 9001:2015 za sustave upravljanja kvalitetom.
+                Također, u tijeku je postupak certifikacije prema ISO 13485:2016.</span
+              >
+            </span>
+          </a>
+        {/if}
+      {/if}
       {#each articles as article}
         <a class="article gc-4" href={'/posts/' + article.url}>
           <div class="article-image">
@@ -178,7 +238,12 @@
 
     {#if lastRef}
       <div class="gc-12 flex justify-center">
-        <button type="button" class="button-filled" class:loading={loading || resetLoading} on:click={loadMore}>
+        <button
+          type="button"
+          class="button-filled"
+          class:loading={loading || resetLoading}
+          on:click={loadMore}
+        >
           {loadmorelabel}
         </button>
       </div>
