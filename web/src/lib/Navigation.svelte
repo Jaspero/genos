@@ -176,7 +176,7 @@
 
 </script>
 
-<header class="navigation" class:scrolled={scrolled > 96 || $page.url.pathname.includes('/posts/')} class:inactive={!showNavbar}>
+<header class="navigation" class:scrolled={scrolled > 96 || $page.url.pathname.includes('/posts/') || $page.url.pathname.includes('/tools/')} class:inactive={!showNavbar}>
   <nav>
     <a href={$language === 'en' ? '/' : '/pocetna'}>
       <img class="logo" src="/brand/genos-logo-white.svg" alt="genos logo">

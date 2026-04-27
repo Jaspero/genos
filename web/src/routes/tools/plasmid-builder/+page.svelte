@@ -1,11 +1,16 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import { goto } from '$app/navigation';
   import { authenticated, functions } from '$lib/utils/firebase';
   import { httpsCallable } from 'firebase/functions';
+  import { language } from '$lib/stores/language';
 
   let ready = false;
   let container: HTMLDivElement;
+  let langUnsub: (() => void) | null = null;
+
+  // This callback will be set by initBuilder so we can push language changes into it
+  let onLangChange: ((lang: string) => void) | null = null;
 
   onMount(async () => {
     const authUser: any = await new Promise((resolve) => {
@@ -26,21 +31,36 @@
     // Wait for DOM to render the template
     await new Promise(r => setTimeout(r, 0));
 
-    initBuilder(container, async (cartData: any[], notes: string, lang: string) => {
+    onLangChange = initBuilder(container, $language, async (cartData: any[], notes: string, lang: string) => {
       const fn = httpsCallable(functions, 'submitPlasmidOrder');
       const res = await fn({ configurations: cartData, notes, language: lang });
       return (res.data as any)?.orderId as string;
     });
+
+    // Subscribe to the site-wide language store and push changes into the builder
+    langUnsub = language.subscribe((lang) => {
+      if (onLangChange) onLangChange(lang);
+    });
   });
+
+  onDestroy(() => {
+    langUnsub?.();
+  });
+
+  function scrollTo(id: string) {
+    const el = container?.querySelector('#' + id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
   function initBuilder(
     root: HTMLElement,
+    initialLang: string,
     submitFn: (cart: any[], notes: string, lang: string) => Promise<string>
-  ) {
+  ): (lang: string) => void {
     // All the builder logic runs in vanilla JS against the rendered DOM inside root.
     // This is a direct port of the preview HTML demo.
 
-    let currentLang = "en";
+    let currentLang = initialLang || "en";
 
     const I18N: Record<string, Record<string, string>> = {
       en: {
@@ -711,8 +731,6 @@
       $("subDcas").textContent = t("moduleDcasSub");
       $("subM").textContent = t("moduleMSub");
       $("subTer").textContent = t("moduleTerSub");
-      $("langEnBtn").classList.toggle("active", currentLang === "en");
-      $("langHrBtn").classList.toggle("active", currentLang === "hr");
       $("submitOrderBtn").textContent = t("submitOrder");
       $("notesLabel").textContent = t("notes");
       ($("notesInput") as HTMLTextAreaElement).placeholder = t("notesPlaceholder");
@@ -744,9 +762,6 @@
       render(); showToast(t("toastReset"));
     });
 
-    $("langEnBtn").addEventListener("click", () => { currentLang = "en"; applyLanguage(); });
-    $("langHrBtn").addEventListener("click", () => { currentLang = "hr"; applyLanguage(); });
-
     // Submit order
     let isSubmitting = false;
     $("submitOrderBtn").addEventListener("click", async () => {
@@ -772,6 +787,14 @@
     });
 
     applyLanguage();
+
+    // Return a callback so the site's language store can push changes in
+    return (lang: string) => {
+      if (lang !== currentLang) {
+        currentLang = lang;
+        applyLanguage();
+      }
+    };
   }
 </script>
 
@@ -788,13 +811,9 @@
           <span id="backLink">Back to projects</span>
         </a>
         <div class="pb-toolbar-nav">
-          <a href="#builder" id="navBuilder">Builder</a>
-          <a href="#plasmid" id="navMap">Plasmid map</a>
-          <a href="#cart" id="navCart">Cart</a>
-        </div>
-        <div class="pb-lang-switch">
-          <button class="pb-lang-btn active" id="langEnBtn" type="button">EN</button>
-          <button class="pb-lang-btn" id="langHrBtn" type="button">HR</button>
+          <button type="button" on:click={() => scrollTo('builder')} id="navBuilder">Builder</button>
+          <button type="button" on:click={() => scrollTo('plasmid')} id="navMap">Plasmid map</button>
+          <button type="button" on:click={() => scrollTo('cart')} id="navCart">Cart</button>
         </div>
       </div>
     </div>
@@ -1002,21 +1021,12 @@
   }
   .pb-root :global(.pb-back:hover) { color: white; }
   .pb-root :global(.pb-toolbar-nav) { display: flex; gap: .5rem; }
-  .pb-root :global(.pb-toolbar-nav a) {
-    padding: .375rem .75rem; border-radius: .25rem;
+  .pb-root :global(.pb-toolbar-nav button) {
+    padding: .375rem .75rem; border-radius: .25rem; border: none; background: transparent;
     color: rgba(255,255,255,.7); font-size: .8125rem; font-weight: 600;
-    transition: background .15s, color .15s;
+    cursor: pointer; transition: background .15s, color .15s;
   }
-  .pb-root :global(.pb-toolbar-nav a:hover) { background: rgba(255,255,255,.1); color: white; }
-  .pb-root :global(.pb-lang-switch) {
-    display: flex; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: .125rem;
-  }
-  .pb-root :global(.pb-lang-btn) {
-    padding: .125rem .5rem; border-radius: 999px; border: none;
-    background: transparent; color: rgba(255,255,255,.7);
-    font-size: .75rem; font-weight: 700; cursor: pointer;
-  }
-  .pb-root :global(.pb-lang-btn.active) { background: white; color: #032130; }
+  .pb-root :global(.pb-toolbar-nav button:hover) { background: rgba(255,255,255,.1); color: white; }
 
   /* --- Container --- */
   .pb-root :global(.pb-container) { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
@@ -1041,6 +1051,7 @@
   .pb-root :global(.sub) { margin: .5rem 0 0; color: rgba(255,255,255,.72); max-width: 82ch; font-size: .875rem; line-height: 1.6; }
 
   .pb-root :global(.builder) { padding: 0 0 2rem; }
+  .pb-root :global(#builder), .pb-root :global(#plasmid), .pb-root :global(#cart) { scroll-margin-top: 7rem; }
   .pb-root :global(.builder-grid) { display: grid; grid-template-columns: 1.18fr .82fr; gap: 1rem; align-items: start; }
   @media (max-width: 980px) { .pb-root :global(.builder-grid) { grid-template-columns: 1fr; } }
 
