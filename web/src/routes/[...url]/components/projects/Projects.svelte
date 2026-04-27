@@ -220,6 +220,13 @@
                     </a>
                   {/if}
                 {/if}
+                {#if project.toolUrl}
+                  <a href={project.toolUrl} class="button-filled open-pdf open-tool">
+                    {$language === 'en'
+                      ? project.toolLabelEn || 'Open tool'
+                      : project.toolLabelHr || 'Otvori alat'}
+                  </a>
+                {/if}
               </div>
             </div>
           {/each}
@@ -410,6 +417,13 @@
                           Otvori kao PDF
                         </a>
                       {/if}
+                    {/if}
+                    {#if project.toolUrl}
+                      <a href={project.toolUrl} class="button-filled open-pdf open-tool">
+                        {$language === 'en'
+                          ? project.toolLabelEn || 'Open tool'
+                          : project.toolLabelHr || 'Otvori alat'}
+                      </a>
                     {/if}
                   </div>
                 </div>

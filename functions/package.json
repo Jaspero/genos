@@ -26,6 +26,7 @@
     "handlebars": "4.7.8",
     "lodash": "4.17.21",
     "luxon": "3.5.0",
+    "resend": "^4.0.0",
     "sharp": "0.33.4",
     "stripe": "15.9.0",
     "typescript-eslint": "8.10.0"

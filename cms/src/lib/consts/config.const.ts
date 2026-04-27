@@ -31,7 +31,8 @@ export const CONFIG = {
       href: '/dashboard/sales',
       links: [
         { label: 'Orders', href: '/dashboard/sales/orders' },
-        { label: 'Customers', href: '/dashboard/sales/customers' }
+        { label: 'Customers', href: '/dashboard/sales/customers' },
+        { label: 'Plasmid Orders', href: '/dashboard/sales/plasmid-orders' }
       ]
     },
     {

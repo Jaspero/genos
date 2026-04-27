@@ -1,0 +1,1715 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Design your own expression plasmid</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --text:rgba(255,255,255,.94);
+      --muted:rgba(255,255,255,.68);
+
+      /* Distinct module colors */
+      --bb:#355070;
+      --gRNA:#3a86ff;
+      --pro:#2fbf71;
+      --ed:#ff8c42;
+      --dcas:#9b5de5;
+      --mark:#e63946;
+      --ter:#00b894;
+
+      --panel:rgba(255,255,255,.04);
+      --panel-border:rgba(255,255,255,.12);
+      --white:#ffffff;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1000px 600px at 20% -10%, rgba(58,134,255,.18), transparent 60%),
+        radial-gradient(900px 700px at 85% 10%, rgba(155,93,229,.18), transparent 55%),
+        radial-gradient(700px 500px at 50% 110%, rgba(230,57,70,.12), transparent 55%),
+        var(--bg);
+    }
+
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1280px;margin:0 auto;padding:0 18px}
+
+    .nav{
+      position:sticky;top:0;z-index:30;
+      backdrop-filter:blur(14px);
+      background:linear-gradient(to bottom, rgba(11,18,32,.82), rgba(11,18,32,.45));
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:12px;padding:14px 0;flex-wrap:wrap;
+    }
+    .logo{display:flex;align-items:center;gap:10px;font-weight:800}
+    .logo-badge{
+      width:34px;height:34px;border-radius:12px;
+      background:conic-gradient(from 220deg, #3dd6d0, #7c5cff, #ff4d6d);
+      box-shadow:0 10px 30px rgba(124,92,255,.18);
+    }
+    .nav-links{display:flex;gap:16px;color:var(--muted);font-size:14px;flex-wrap:wrap}
+    .nav-links a{padding:8px 10px;border-radius:10px}
+    .nav-links a:hover{background:rgba(255,255,255,.06);color:var(--text)}
+
+    .right-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .lang-switch{
+      display:flex;align-items:center;gap:6px;padding:6px;
+      border-radius:14px;border:1px solid var(--panel-border);background:var(--panel);
+    }
+    .lang-btn,.nav-action{
+      padding:9px 14px;border-radius:12px;border:1px solid transparent;
+      background:transparent;color:#fff;cursor:pointer;font-weight:700;
+    }
+    .lang-btn.active{
+      background:rgba(255,255,255,.12);
+      border-color:rgba(255,255,255,.2);
+    }
+    .nav-action{
+      background:rgba(255,255,255,.05);
+      border-color:rgba(255,255,255,.12);
+    }
+    .nav-action:hover{background:rgba(255,255,255,.08)}
+
+    .hero{padding:34px 0 12px}
+    .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+    @media (max-width:980px){.hero-grid{grid-template-columns:1fr}}
+
+    .hero-card,.card{
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border-radius:22px;padding:20px;
+      box-shadow:0 18px 60px rgba(0,0,0,.25);
+      position:relative;overflow:hidden;
+    }
+    .hero-card:before{
+      content:"";position:absolute;inset:-2px;pointer-events:none;
+      background:
+        radial-gradient(600px 300px at 20% 0%, rgba(58,134,255,.12), transparent 60%),
+        radial-gradient(600px 300px at 80% 30%, rgba(155,93,229,.12), transparent 55%);
+    }
+    .hero-card>*{position:relative}
+    h1{margin:0;font-size:36px;line-height:1.08;letter-spacing:-.4px}
+    .sub{margin:10px 0 0;color:var(--muted);max-width:82ch;font-size:15px;line-height:1.6}
+
+    .builder{padding:12px 0 34px}
+    .builder-grid{display:grid;grid-template-columns:1.18fr .82fr;gap:18px;align-items:start}
+    @media (max-width:980px){.builder-grid{grid-template-columns:1fr}}
+
+    .card h2{margin:0 0 8px;font-size:16px}
+    .muted{color:var(--muted);font-size:13px;line-height:1.5}
+
+    .module-grid{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px
+    }
+    @media (max-width:980px){.module-grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:620px){.module-grid{grid-template-columns:1fr}}
+
+    .module-btn{
+      display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);cursor:pointer;min-height:108px;
+      transition:transform .08s ease, filter .12s ease;color:#fff;text-align:left;
+    }
+    .module-btn:hover{filter:brightness(1.06)}
+    .module-btn:active{transform:scale(.99)}
+    .module-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .module-abbr{font-weight:850;color:#fff}
+    .module-sub{font-size:12px;color:rgba(255,255,255,.8);line-height:1.35;min-height:30px}
+    .tag{
+      font-size:12px;padding:6px 8px;border-radius:999px;color:#fff;
+      border:1px solid rgba(255,255,255,.20);background:rgba(0,0,0,.12)
+    }
+    .value{font-size:13px;color:rgba(255,255,255,.95);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+    .value.dim{color:rgba(255,255,255,.78)}
+
+    .mod-bb{background:linear-gradient(180deg, color-mix(in srgb, var(--bb) 38%, transparent), color-mix(in srgb, var(--bb) 20%, transparent));border-color:color-mix(in srgb, var(--bb) 62%, white 12%)}
+    .mod-gRNA{background:linear-gradient(180deg, color-mix(in srgb, var(--gRNA) 38%, transparent), color-mix(in srgb, var(--gRNA) 20%, transparent));border-color:color-mix(in srgb, var(--gRNA) 62%, white 12%)}
+    .mod-pro{background:linear-gradient(180deg, color-mix(in srgb, var(--pro) 38%, transparent), color-mix(in srgb, var(--pro) 20%, transparent));border-color:color-mix(in srgb, var(--pro) 62%, white 12%)}
+    .mod-ed{background:linear-gradient(180deg, color-mix(in srgb, var(--ed) 38%, transparent), color-mix(in srgb, var(--ed) 20%, transparent));border-color:color-mix(in srgb, var(--ed) 62%, white 12%)}
+    .mod-dcas{background:linear-gradient(180deg, color-mix(in srgb, var(--dcas) 38%, transparent), color-mix(in srgb, var(--dcas) 20%, transparent));border-color:color-mix(in srgb, var(--dcas) 62%, white 12%)}
+    .mod-m{background:linear-gradient(180deg, color-mix(in srgb, var(--mark) 34%, transparent), color-mix(in srgb, var(--mark) 18%, transparent));border-color:color-mix(in srgb, var(--mark) 62%, white 12%)}
+    .mod-ter{background:linear-gradient(180deg, color-mix(in srgb, var(--ter) 38%, transparent), color-mix(in srgb, var(--ter) 20%, transparent));border-color:color-mix(in srgb, var(--ter) 62%, white 12%)}
+
+    .plasmid-wrap{display:grid;gap:12px;margin-top:10px}
+    .plasmid-box{
+      position:relative;border-radius:20px;border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      padding:14px;min-height:740px;overflow:hidden;
+    }
+    .plasmid-header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+    .plasmid-stage{position:relative;width:100%;min-height:650px}
+    .plasmid-svg{width:100%;height:auto;display:block}
+
+    .ring-label{
+      position:absolute;padding:10px 12px;border-radius:16px;color:#fff;
+      font-size:12px;line-height:1.35;font-weight:700;cursor:pointer;max-width:170px;
+      border:1px solid rgba(255,255,255,.2);box-shadow:0 10px 30px rgba(0,0,0,.18);
+      transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
+      user-select:none;
+    }
+    .ring-label:hover{
+      transform:scale(1.05);
+      box-shadow:0 0 0 2px rgba(255,255,255,.08), 0 12px 32px rgba(0,0,0,.28);
+      filter:brightness(1.08);
+    }
+    .ring-label .small{display:block;font-size:11px;font-weight:600;opacity:.94;margin-top:3px}
+    .ring-label.bb{background:linear-gradient(180deg, color-mix(in srgb, var(--bb) 44%, transparent), color-mix(in srgb, var(--bb) 24%, transparent));border-color:color-mix(in srgb, var(--bb) 56%, white 20%)}
+    .ring-label.gRNA{background:linear-gradient(180deg, color-mix(in srgb, var(--gRNA) 44%, transparent), color-mix(in srgb, var(--gRNA) 24%, transparent));border-color:color-mix(in srgb, var(--gRNA) 56%, white 20%)}
+    .ring-label.pro{background:linear-gradient(180deg, color-mix(in srgb, var(--pro) 44%, transparent), color-mix(in srgb, var(--pro) 24%, transparent));border-color:color-mix(in srgb, var(--pro) 56%, white 20%)}
+    .ring-label.ed{background:linear-gradient(180deg, color-mix(in srgb, var(--ed) 44%, transparent), color-mix(in srgb, var(--ed) 24%, transparent));border-color:color-mix(in srgb, var(--ed) 56%, white 20%)}
+    .ring-label.dcas{background:linear-gradient(180deg, color-mix(in srgb, var(--dcas) 44%, transparent), color-mix(in srgb, var(--dcas) 24%, transparent));border-color:color-mix(in srgb, var(--dcas) 56%, white 20%)}
+    .ring-label.m{background:linear-gradient(180deg, color-mix(in srgb, var(--mark) 40%, transparent), color-mix(in srgb, var(--mark) 22%, transparent));border-color:color-mix(in srgb, var(--mark) 56%, white 20%)}
+    .ring-label.ter{background:linear-gradient(180deg, color-mix(in srgb, var(--ter) 44%, transparent), color-mix(in srgb, var(--ter) 24%, transparent));border-color:color-mix(in srgb, var(--ter) 56%, white 20%)}
+
+    .legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .leg{
+      display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.78);
+      padding:7px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03)
+    }
+    .sw{width:10px;height:10px;border-radius:3px;background:var(--bb)}
+    .sw.gRNA{background:var(--gRNA)}
+    .sw.pro{background:var(--pro)}
+    .sw.ed{background:var(--ed)}
+    .sw.dcas{background:var(--dcas)}
+    .sw.mark{background:var(--mark)}
+    .sw.ter{background:var(--ter)}
+
+    .summary{display:flex;flex-direction:column;gap:12px;position:sticky;top:78px}
+    @media (max-width:980px){.summary{position:relative;top:auto}}
+
+    .kv{display:grid;gap:10px;margin-top:10px}
+    .kv .item{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+      border-radius:18px;padding:12px;
+    }
+    .k{font-size:12px;color:rgba(255,255,255,.65)}
+    .v{font-size:13px;margin-top:4px}
+
+    .btn{
+      width:100%;padding:12px 14px;border-radius:16px;border:1px solid rgba(255,255,255,.14);
+      background:linear-gradient(135deg, rgba(61,214,208,.18), rgba(124,92,255,.16));
+      color:#fff;font-weight:700;cursor:pointer;transition:transform .08s ease, filter .12s ease;
+    }
+    .btn:hover{filter:brightness(1.06)}
+    .btn:active{transform:scale(.995)}
+    .btn:disabled{cursor:not-allowed;opacity:.55;filter:none;background:rgba(255,255,255,.04)}
+    .btn.secondary{background:rgba(255,255,255,.04)}
+
+    .modal-back{
+      position:fixed;inset:0;background:rgba(0,0,0,.55);
+      display:none;align-items:center;justify-content:center;padding:16px;z-index:50;
+    }
+    .modal{
+      width:min(920px, 100%);border-radius:22px;border:1px solid rgba(255,255,255,.14);
+      background:rgba(15,26,51,.97);box-shadow:0 30px 120px rgba(0,0,0,.45);
+      overflow:hidden;color:#fff;
+    }
+    .modal-h{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:16px 16px 12px;border-bottom:1px solid rgba(255,255,255,.10);
+    }
+    .modal-h h3{margin:0;font-size:15px}
+    .x{
+      width:38px;height:38px;border-radius:14px;border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.03);cursor:pointer;color:#fff;font-size:18px;
+    }
+    .modal-b{padding:14px 16px 16px}
+
+    .section-title{
+      margin:14px 0 8px;font-size:12px;letter-spacing:.12em;
+      text-transform:uppercase;color:rgba(255,255,255,.75);
+    }
+
+    .opt-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    @media (max-width:620px){.opt-grid{grid-template-columns:1fr}}
+
+    .opt{
+      padding:12px;border-radius:18px;border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.04);cursor:pointer;text-align:left;color:#fff;
+      transition:background .12s ease, transform .08s ease, border-color .12s ease;
+    }
+    .opt:hover{background:rgba(255,255,255,.07)}
+    .opt:active{transform:scale(.995)}
+    .opt.active{
+      background:rgba(255,255,255,.12);
+      border-color:rgba(255,255,255,.42);
+      box-shadow:0 0 0 1px rgba(255,255,255,.08) inset;
+    }
+    .opt .t{font-weight:800;font-size:13px;color:#fff}
+    .opt .d{margin-top:6px;font-size:12px;color:rgba(255,255,255,.78);line-height:1.4}
+
+    .form-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .input{
+      flex:1;min-width:220px;padding:10px 12px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);
+      color:#fff;outline:none;
+    }
+    .note{margin-top:10px;font-size:12px;color:rgba(255,255,255,.76)}
+
+    .list{margin-top:12px;border:1px solid rgba(255,255,255,.10);border-radius:18px;overflow:hidden}
+    .list .li{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      padding:10px 12px;border-top:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.02);
+    }
+    .list .li:first-child{border-top:none}
+    .li-left{display:flex;flex-direction:column;gap:3px;min-width:0}
+    .li-left .l1{font-size:13px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .li-left .l2{font-size:12px;color:rgba(255,255,255,.75);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+    .mini-btn{
+      padding:8px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.04);color:#fff;cursor:pointer;font-size:12px;flex:0 0 auto;
+    }
+    .mini-btn:hover{background:rgba(255,255,255,.07)}
+
+    .cart{margin-top:10px;display:grid;gap:10px}
+    .cart-item{
+      border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:12px;background:rgba(255,255,255,.03);
+    }
+    .cart-item .title{font-size:13px;font-weight:800}
+    .cart-item .meta{margin-top:6px;font-size:12px;color:rgba(255,255,255,.75);line-height:1.5}
+
+    .toast{
+      position:fixed;left:50%;bottom:22px;transform:translateX(-50%);
+      background:rgba(15,26,51,.92);border:1px solid rgba(255,255,255,.14);
+      padding:10px 14px;border-radius:14px;box-shadow:0 20px 80px rgba(0,0,0,.35);
+      color:#fff;font-size:13px;display:none;z-index:60;
+    }
+
+    @media (max-width:760px){
+      .plasmid-box{min-height:760px}
+      .plasmid-stage{min-height:660px}
+      .ring-label{max-width:140px;font-size:11px}
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <div class="logo">
+          <div class="logo-badge" aria-hidden="true"></div>
+          <div id="brandTitle">Genos · Plasmid Builder</div>
+        </div>
+
+        <div class="nav-links">
+          <a href="#builder" id="navBuilder">Builder</a>
+          <a href="#plasmid" id="navMap">Plasmid map</a>
+          <a href="#cart" id="navCart">Cart</a>
+        </div>
+
+        <div class="right-controls">
+          <div class="lang-switch">
+            <button class="lang-btn active" id="langEnBtn" type="button">EN</button>
+            <button class="lang-btn" id="langHrBtn" type="button">HR</button>
+          </div>
+          <button class="nav-action" id="authBtn" type="button">Sign In / Log In</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container hero">
+    <div class="hero-grid">
+      <div class="hero-card">
+        <h1 id="heroTitle">Design your own expression plasmid</h1>
+        <p class="sub" id="heroText">
+          Choose number of gRNAs (gRNAs), eukaryotic promoter type (Pro), effector domain (ED), selection markers - fluorescence markers or antibiotic resistance markers (M), transcriptional terminators (Ter) and backbone type (B).
+        </p>
+      </div>
+
+      <div class="hero-card">
+        <h2 id="rulesTitle" style="margin:0 0 6px;font-size:16px;">Quick rules</h2>
+        <p class="muted" id="rulesText" style="margin:0">
+          • dSpCas9 works with all ED domains<br>
+          • dSaCas9 works only with: <b>DNMT3A, TET1, VPR, KRAB</b><br>
+          • gRNA: unlimited number can be added<br>
+          • Custom option for each module is available - write your own module of interest, target gene or UCSC coordinates for gRNA design.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div id="builder" class="container builder">
+    <div class="builder-grid">
+      <div class="card">
+        <h2 id="buildTitle">Build modules</h2>
+        <div class="muted" id="buildText">Click module cards below or click colored module boxes around the plasmid map to edit the same module.</div>
+
+        <div class="module-grid">
+          <button class="module-btn mod-bb" id="btn-bb" type="button">
+            <div class="module-top">
+              <span class="module-abbr">B</span>
+              <span class="tag" id="tagBb">Backbone</span>
+            </div>
+            <div class="module-sub" id="subBb">(backbone type)</div>
+            <div class="value dim" id="val-bb">Not selected</div>
+          </button>
+
+          <button class="module-btn mod-gRNA" id="btn-gRNA" type="button">
+            <div class="module-top">
+              <span class="module-abbr">gRNAs</span>
+              <span class="tag">B → A</span>
+            </div>
+            <div class="module-sub" id="subGrna">(guide RNAs)</div>
+            <div class="value dim" id="val-gRNA">No gRNAs added</div>
+          </button>
+
+          <button class="module-btn mod-pro" id="btn-pro" type="button">
+            <div class="module-top">
+              <span class="module-abbr">Pro</span>
+              <span class="tag">A → I</span>
+            </div>
+            <div class="module-sub" id="subPro">(eukaryotic promoter type)</div>
+            <div class="value dim" id="val-pro">Not selected</div>
+          </button>
+
+          <button class="module-btn mod-ed" id="btn-ed" type="button">
+            <div class="module-top">
+              <span class="module-abbr">ED</span>
+              <span class="tag">I → II</span>
+            </div>
+            <div class="module-sub" id="subEd">(effector domain)</div>
+            <div class="value dim" id="val-ed">Not selected</div>
+          </button>
+
+          <button class="module-btn mod-dcas" id="btn-dcas" type="button">
+            <div class="module-top">
+              <span class="module-abbr">dCas9</span>
+              <span class="tag">II → III</span>
+            </div>
+            <div class="module-sub" id="subDcas">(dCas9 type)</div>
+            <div class="value dim" id="val-dcas">Not selected</div>
+          </button>
+
+          <button class="module-btn mod-m" id="btn-m" type="button">
+            <div class="module-top">
+              <span class="module-abbr">M</span>
+              <span class="tag">III → IV</span>
+            </div>
+            <div class="module-sub" id="subM">(selection markers)</div>
+            <div class="value dim" id="val-m">Optional</div>
+          </button>
+
+          <button class="module-btn mod-ter" id="btn-ter" type="button">
+            <div class="module-top">
+              <span class="module-abbr">Ter</span>
+              <span class="tag">IV → Z</span>
+            </div>
+            <div class="module-sub" id="subTer">(transcription terminator)</div>
+            <div class="value dim" id="val-ter">Not selected</div>
+          </button>
+        </div>
+
+        <div id="plasmid" class="plasmid-wrap">
+          <div class="plasmid-box">
+            <div class="plasmid-header">
+              <div style="font-weight:850" id="plasmidMapTitle">Plasmid map</div>
+              <div class="muted" id="plasmidMapText">Module colors match Build modules and the boxes around the plasmid map.</div>
+            </div>
+
+            <div class="plasmid-stage" id="plasmidStage">
+              <div class="ring-label bb" id="ring-bb"></div>
+              <div class="ring-label gRNA" id="ring-gRNA"></div>
+              <div class="ring-label pro" id="ring-pro"></div>
+              <div class="ring-label ed" id="ring-ed"></div>
+              <div class="ring-label dcas" id="ring-dcas"></div>
+              <div class="ring-label m" id="ring-m"></div>
+              <div class="ring-label ter" id="ring-ter"></div>
+
+              <svg class="plasmid-svg" id="plasmidSvg" viewBox="0 0 620 620" role="img" aria-label="Plasmid map">
+                <defs>
+                  <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000" flood-opacity="0.35"/>
+                  </filter>
+                </defs>
+
+                <rect x="10" y="10" width="600" height="600" rx="22" fill="rgba(255,255,255,.02)" stroke="rgba(255,255,255,.08)"/>
+
+                <circle cx="310" cy="310" r="150" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="20"/>
+
+                <g filter="url(#softShadow)">
+                  <path id="arc-bb" d="" fill="none" stroke="var(--bb)" stroke-width="20" stroke-linecap="round"/>
+                  <path id="arc-gRNA" d="" fill="none" stroke="var(--gRNA)" stroke-width="20" stroke-linecap="round"/>
+                  <path id="arc-pro" d="" fill="none" stroke="var(--pro)" stroke-width="20" stroke-linecap="round"/>
+                  <path id="arc-ed" d="" fill="none" stroke="var(--ed)" stroke-width="20" stroke-linecap="round"/>
+                  <path id="arc-dcas" d="" fill="none" stroke="var(--dcas)" stroke-width="20" stroke-linecap="round"/>
+                  <path id="arc-m" d="" fill="none" stroke="var(--mark)" stroke-width="20" stroke-linecap="round"/>
+                  <path id="arc-ter" d="" fill="none" stroke="var(--ter)" stroke-width="20" stroke-linecap="round"/>
+                </g>
+
+                <circle cx="310" cy="310" r="98" fill="rgba(15,26,51,.84)" stroke="rgba(255,255,255,.10)"/>
+                <text id="centerTitle" x="310" y="300" text-anchor="middle" font-size="18" fill="rgba(255,255,255,.94)" font-weight="800">
+                  Expression plasmid
+                </text>
+                <text id="centerSize" x="310" y="326" text-anchor="middle" font-size="14" fill="rgba(255,255,255,.82)" font-weight="700">
+                  0 bp
+                </text>
+
+                <g opacity="0">
+                  <path id="hit-bb" d="" fill="none" stroke="#fff" stroke-width="34" stroke-linecap="round" style="cursor:pointer"/>
+                  <path id="hit-gRNA" d="" fill="none" stroke="#fff" stroke-width="34" stroke-linecap="round" style="cursor:pointer"/>
+                  <path id="hit-pro" d="" fill="none" stroke="#fff" stroke-width="34" stroke-linecap="round" style="cursor:pointer"/>
+                  <path id="hit-ed" d="" fill="none" stroke="#fff" stroke-width="34" stroke-linecap="round" style="cursor:pointer"/>
+                  <path id="hit-dcas" d="" fill="none" stroke="#fff" stroke-width="34" stroke-linecap="round" style="cursor:pointer"/>
+                  <path id="hit-m" d="" fill="none" stroke="#fff" stroke-width="34" stroke-linecap="round" style="cursor:pointer"/>
+                  <path id="hit-ter" d="" fill="none" stroke="#fff" stroke-width="34" stroke-linecap="round" style="cursor:pointer"/>
+                </g>
+              </svg>
+            </div>
+
+            <div class="legend">
+              <div class="leg"><span class="sw"></span><span id="legBb">Backbone</span></div>
+              <div class="leg"><span class="sw gRNA"></span><span id="legGrna">gRNAs</span></div>
+              <div class="leg"><span class="sw pro"></span><span id="legPro">Promoter</span></div>
+              <div class="leg"><span class="sw ed"></span><span id="legEd">Effector</span></div>
+              <div class="leg"><span class="sw dcas"></span><span id="legDcas">dCas9</span></div>
+              <div class="leg"><span class="sw mark"></span><span id="legM">Markers</span></div>
+              <div class="leg"><span class="sw ter"></span><span id="legTer">Terminator</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary">
+        <div class="card">
+          <h2 id="configTitle">Current configuration</h2>
+          <div class="muted" id="configText">“Add to cart” is enabled when B, gRNAs, Pro, ED, dCas9 and Ter are selected.</div>
+
+          <div class="kv">
+            <div class="item"><div class="k" id="sumKb">Backbone (B)</div><div class="v" id="sum-bb">—</div></div>
+            <div class="item"><div class="k" id="sumKg">gRNAs</div><div class="v" id="sum-gRNA">—</div></div>
+            <div class="item"><div class="k" id="sumKp">Eukaryotic promoter type (Pro)</div><div class="v" id="sum-pro">—</div></div>
+            <div class="item"><div class="k" id="sumKe">Effector domain (ED)</div><div class="v" id="sum-ed">—</div></div>
+            <div class="item"><div class="k" id="sumKd">dCas9</div><div class="v" id="sum-dcas">—</div></div>
+            <div class="item"><div class="k" id="sumKm">Selection markers (M)</div><div class="v" id="sum-m">—</div></div>
+            <div class="item"><div class="k" id="sumKt">Transcription terminator (Ter)</div><div class="v" id="sum-ter">—</div></div>
+            <div class="item"><div class="k" id="sumKtotal">Total plasmid size</div><div class="v" id="sum-total">0 bp</div></div>
+          </div>
+
+          <div style="margin-top:12px;display:grid;gap:10px">
+            <button class="btn" id="addToCartBtn" type="button" disabled>Add to cart</button>
+            <button class="btn secondary" id="resetBtn" type="button">Reset</button>
+          </div>
+        </div>
+
+        <div id="cart" class="card">
+          <h2 id="cartTitle">Cart</h2>
+          <div class="muted" id="cartText">Saved configurations.</div>
+          <div class="cart" id="cartList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-back" id="modalBack" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-h">
+        <h3 id="modalTitle">Select</h3>
+        <button class="x" id="modalClose" aria-label="Close">×</button>
+      </div>
+      <div class="modal-b" id="modalBody"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    let currentLang = "en";
+
+    const I18N = {
+      en: {
+        brandTitle: "Genos · Plasmid Builder",
+        navBuilder: "Builder",
+        navMap: "Plasmid map",
+        navCart: "Cart",
+        authBtn: "Sign In / Log In",
+        heroTitle: "Design your own expression plasmid",
+        heroText: "Choose number of gRNAs (gRNAs), eukaryotic promoter type (Pro), effector domain (ED), selection markers - fluorescence markers or antibiotic resistance markers (M), transcriptional terminators (Ter) and backbone type (B).",
+        rulesTitle: "Quick rules",
+        rulesText: "• dSpCas9 works with all ED domains<br>• dSaCas9 works only with: <b>DNMT3A, TET1, VPR, KRAB</b><br>• gRNA: unlimited number can be added<br>• Custom option for each module is available - write your own module of interest, target gene or UCSC coordinates for gRNA design.",
+        buildTitle: "Build modules",
+        buildText: "Click module cards below or click colored module boxes around the plasmid map to edit the same module.",
+        plasmidMapTitle: "Plasmid map",
+        plasmidMapText: "Module colors match Build modules and the boxes around the plasmid map.",
+        legBb: "Backbone",
+        legGrna: "gRNAs",
+        legPro: "Promoter",
+        legEd: "Effector",
+        legDcas: "dCas9",
+        legM: "Markers",
+        legTer: "Terminator",
+        configTitle: "Current configuration",
+        configText: "“Add to cart” is enabled when B, gRNAs, Pro, ED, dCas9 and Ter are selected.",
+        sumKb: "Backbone (B)",
+        sumKg: "gRNAs",
+        sumKp: "Eukaryotic promoter type (Pro)",
+        sumKe: "Effector domain (ED)",
+        sumKd: "dCas9",
+        sumKm: "Selection markers (M)",
+        sumKt: "Transcription terminator (Ter)",
+        sumKtotal: "Total plasmid size",
+        cartTitle: "Cart",
+        cartText: "Saved configurations.",
+        addToCart: "Add to cart",
+        reset: "Reset",
+        notSelected: "Not selected",
+        noGRNA: "No gRNAs added",
+        optional: "Optional",
+        moduleBackbone: "Backbone",
+        moduleBackboneSub: "(backbone type)",
+        moduleGrnaSub: "(guide RNAs)",
+        moduleProSub: "(eukaryotic promoter type)",
+        moduleEdSub: "(effector domain)",
+        moduleDcasSub: "(dCas9 type)",
+        moduleMSub: "(selection markers)",
+        moduleTerSub: "(transcription terminator)",
+        strongPromoters: "Strong promoters",
+        weakPromoters: "Weak promoters",
+        custom: "Custom",
+        modalBackbone: "Select backbone (B)",
+        modalBackboneCustom: "Custom backbone (if selected Custom)",
+        modalBackboneNote: "If you choose Custom, write your own backbone type.",
+        configureGRNA: "Configure gRNAs (no limit)",
+        gRNAIntro: "Choose gRNA type and add as many gRNAs as you want.",
+        gRNAType: "gRNA type",
+        gRNADetails: "gRNA details",
+        existingGRNAs: "Existing gRNAs",
+        clearFields: "Clear fields",
+        addGRNA: "Add gRNA",
+        done: "Done",
+        remove: "Remove",
+        gRNAName: "gRNA name",
+        gRNASeq: "gRNA sequence (without PAM)",
+        gRNATarget: "Target gene / UCSC coordinates",
+        saDesc: "Enter gRNA name and sequence without PAM.",
+        spDesc: "Enter gRNA name and sequence without PAM.",
+        customDesc: "Enter target gene / UCSC coordinates.",
+        noGRNAsAdded: "No gRNAs added.",
+        promoterTitle: "Eukaryotic promoter type (Pro)",
+        promoterCustom: "Custom promoter (if selected Custom)",
+        effectorTitle: "Effector domains (ED)",
+        dnaMeth: "Manipulation of DNA methylation",
+        directGene: "Direct gene expression manipulation",
+        acetylation: "Histone acetylation",
+        h3k4: "Histone H3K4 methylation",
+        h3k9: "Histone H3K9 methylation",
+        edCustom: "Custom ED (if selected Custom)",
+        edNote: "Compatibility: dSaCas9 only with DNMT3A, TET1, VPR, KRAB. Others → dSpCas9.",
+        dcasTitle: "Select dCas9",
+        dcasCustom: "Custom dCas9 (if selected Custom)",
+        markersTitle: "Selection markers (M)",
+        markersIntro: "Choose fluorescence markers and/or antibiotic resistance markers.",
+        fluorTitle: "Fluorescence markers",
+        abxTitle: "Antibiotic resistance markers",
+        clear: "Clear",
+        terminatorTitle: "Transcription terminator (Ter)",
+        customTer: "Custom terminator (if selected Custom)",
+        cartEmpty: "Cart is empty.",
+        configNum: "Configuration",
+        name: "name",
+        seq: "seq",
+        target: "target",
+        size: "size",
+        totalSize: "Total size",
+        bp: "bp",
+        toastBackbone: "Backbone selected",
+        toastGRNAAdded: "gRNA added",
+        toastGRNAUpdated: "gRNAs updated",
+        toastPromoter: "Promoter selected",
+        toastED: "ED selected",
+        toastDcas: "dCas9 selected",
+        toastMarkersUpdated: "Markers updated",
+        toastMarkersCleared: "Markers cleared",
+        toastTer: "Terminator selected",
+        toastReset: "Reset done",
+        toastCart: "Added to cart",
+        toastNeedAll: "Please select all required modules first",
+        toastNeedSeq: "Please enter gRNA sequence without PAM",
+        toastNeedTarget: "Please enter target gene / UCSC coordinates",
+        toastDcasReset: "dCas9 reset (incompatible with selected ED)",
+        standardBackbone: "Standard Backbone",
+        lentiviralBackbone: "Lentiviral backbone",
+        piggyBackbone: "PiggyBac compatible backbone",
+        sleepingBackbone: "Sleeping Beauty compatible backbone",
+        secondaryPuro: "Secondary backbone - Puro",
+        secondaryMClover: "Secondary backbone - mClover3",
+        bbDesc1: "for transient transfections",
+        bbDesc2: "for stable transfections",
+        bbDesc3: "for stable integrations",
+        bbDesc4: "for stable integrations",
+        bbDesc5: "Puromycin resistance already under the strong promoter with cloning cassette for other modules",
+        bbDesc6: "mClover3 already under the strong promoter with cloning cassette for other modules",
+        bghTerm: "BGH terminator",
+        sv40Term: "SV40 terminator"
+      },
+      hr: {
+        brandTitle: "Genos · Konstruktor plazmida",
+        navBuilder: "Konstruktor",
+        navMap: "Mapa plazmida",
+        navCart: "Košarica",
+        authBtn: "Prijava / Log In",
+        heroTitle: "Dizajniraj svoj ekspresijski plazmid",
+        heroText: "Odaberi broj gRNA (gRNAs), tip eukariotskog promotora (Pro), efektorsku domenu (ED), selekcijske markere - fluorescentne markere ili markere antibiotske rezistencije (M), transkripcijske terminatore (Ter) i tip okosnice plazmida (B).",
+        rulesTitle: "Brza pravila",
+        rulesText: "• dSpCas9 radi sa svim ED domenama<br>• dSaCas9 radi samo s: <b>DNMT3A, TET1, VPR, KRAB</b><br>• gRNA: može se dodati neograničen broj<br>• Za svaki modul dostupna je Custom opcija - upiši vlastiti modul, ciljni gen ili UCSC koordinate za dizajn gRNA.",
+        buildTitle: "Odabir modula",
+        buildText: "Klikni kartice modula ispod ili klikni obojane prozorčiće oko mape plazmida za uređivanje istog modula.",
+        plasmidMapTitle: "Mapa plazmida",
+        plasmidMapText: "Boje modula iste su u Build modules, na plasmid map i u prozorčićima oko mape.",
+        legBb: "Okosnica",
+        legGrna: "gRNA",
+        legPro: "Promotor",
+        legEd: "Efektor",
+        legDcas: "dCas9",
+        legM: "Markeri",
+        legTer: "Terminator",
+        configTitle: "Trenutna konfiguracija",
+        configText: "„Dodaj u košaricu” je aktivan kada su odabrani B, gRNAs, Pro, ED, dCas9 i Ter.",
+        sumKb: "Okosnica (B)",
+        sumKg: "gRNA",
+        sumKp: "Tip eukariotskog promotora (Pro)",
+        sumKe: "Efektorska domena (ED)",
+        sumKd: "dCas9",
+        sumKm: "Selekcijski markeri (M)",
+        sumKt: "Transkripcijski terminator (Ter)",
+        sumKtotal: "Ukupna veličina plazmida",
+        cartTitle: "Košarica",
+        cartText: "Spremljene konfiguracije.",
+        addToCart: "Dodaj u košaricu",
+        reset: "Reset",
+        notSelected: "Nije odabrano",
+        noGRNA: "Nijedna gRNA nije dodana",
+        optional: "Opcionalno",
+        moduleBackbone: "Okosnica",
+        moduleBackboneSub: "(tip okosnice)",
+        moduleGrnaSub: "(guide RNA)",
+        moduleProSub: "(tip eukariotskog promotora)",
+        moduleEdSub: "(efektorska domena)",
+        moduleDcasSub: "(tip dCas9)",
+        moduleMSub: "(selekcijski markeri)",
+        moduleTerSub: "(transkripcijski terminator)",
+        strongPromoters: "Jaki promotori",
+        weakPromoters: "Slabi promotori",
+        custom: "Custom",
+        modalBackbone: "Odaberi okosnicu (B)",
+        modalBackboneCustom: "Custom okosnica (ako je odabran Custom)",
+        modalBackboneNote: "Ako odabereš Custom, upiši vlastiti tip okosnice.",
+        configureGRNA: "Konfiguracija gRNA (bez ograničenja)",
+        gRNAIntro: "Odaberi tip gRNA i dodaj koliko god gRNA želiš.",
+        gRNAType: "Tip gRNA",
+        gRNADetails: "Detalji gRNA",
+        existingGRNAs: "Postojeće gRNA",
+        clearFields: "Očisti polja",
+        addGRNA: "Dodaj gRNA",
+        done: "Gotovo",
+        remove: "Ukloni",
+        gRNAName: "Naziv gRNA",
+        gRNASeq: "gRNA sekvenca (bez PAM-a)",
+        gRNATarget: "Ciljni gen / UCSC koordinate",
+        saDesc: "Unesi naziv gRNA i sekvencu bez PAM-a.",
+        spDesc: "Unesi naziv gRNA i sekvencu bez PAM-a.",
+        customDesc: "Unesi ciljni gen / UCSC koordinate.",
+        noGRNAsAdded: "Nijedna gRNA nije dodana.",
+        promoterTitle: "Tip eukariotskog promotora (Pro)",
+        promoterCustom: "Custom promotor (ako je odabran Custom)",
+        effectorTitle: "Efektorske domene (ED)",
+        dnaMeth: "Manipulacija DNA metilacijom",
+        directGene: "Izravna manipulacija ekspresijom gena",
+        acetylation: "Histonska acetilacija",
+        h3k4: "Metilacija histona H3K4",
+        h3k9: "Metilacija histona H3K9",
+        edCustom: "Custom ED (ako je odabran Custom)",
+        edNote: "Kompatibilnost: dSaCas9 samo s DNMT3A, TET1, VPR, KRAB. Ostalo → dSpCas9.",
+        dcasTitle: "Odaberi dCas9",
+        dcasCustom: "Custom dCas9 (ako je odabran Custom)",
+        markersTitle: "Selekcijski markeri (M)",
+        markersIntro: "Odaberi fluorescentne markere i/ili markere antibiotske rezistencije.",
+        fluorTitle: "Fluorescentni markeri",
+        abxTitle: "Markeri antibiotske rezistencije",
+        clear: "Obriši",
+        terminatorTitle: "Transkripcijski terminator (Ter)",
+        customTer: "Custom terminator (ako je odabran Custom)",
+        cartEmpty: "Košarica je prazna.",
+        configNum: "Konfiguracija",
+        name: "ime",
+        seq: "sek",
+        target: "target",
+        size: "veličina",
+        totalSize: "Ukupna veličina",
+        bp: "bp",
+        toastBackbone: "Okosnica je odabrana",
+        toastGRNAAdded: "gRNA je dodana",
+        toastGRNAUpdated: "gRNA su ažurirane",
+        toastPromoter: "Promotor je odabran",
+        toastED: "ED je odabran",
+        toastDcas: "dCas9 je odabran",
+        toastMarkersUpdated: "Markeri su ažurirani",
+        toastMarkersCleared: "Markeri su obrisani",
+        toastTer: "Terminator je odabran",
+        toastReset: "Reset je napravljen",
+        toastCart: "Dodano u košaricu",
+        toastNeedAll: "Molimo odaberi sve obavezne module",
+        toastNeedSeq: "Molimo unesi gRNA sekvencu bez PAM-a",
+        toastNeedTarget: "Molimo unesi ciljni gen / UCSC koordinate",
+        toastDcasReset: "dCas9 je resetiran (nije kompatibilan s odabranim ED)",
+        standardBackbone: "Standard Backbone",
+        lentiviralBackbone: "Lentiviral backbone",
+        piggyBackbone: "PiggyBac compatible backbone",
+        sleepingBackbone: "Sleeping Beauty compatible backbone",
+        secondaryPuro: "Secondary backbone - Puro",
+        secondaryMClover: "Secondary backbone - mClover3",
+        bbDesc1: "za prolazne transfekcije",
+        bbDesc2: "za stabilne transfekcije",
+        bbDesc3: "za stabilne integracije",
+        bbDesc4: "za stabilne integracije",
+        bbDesc5: "Puromycin resistance je već pod jakim promotorom s klonirajućom kasetom za druge module",
+        bbDesc6: "mClover3 je već pod jakim promotorom s klonirajućom kasetom za druge module",
+        bghTerm: "BGH terminator",
+        sv40Term: "SV40 terminator"
+      }
+    };
+
+    function t(key){ return I18N[currentLang][key] ?? key; }
+
+    const SIZE_BP = {
+      "Standard Backbone": 2013,
+      "Lentiviral backbone": 7528,
+      "PiggyBac compatible backbone": 3187,
+      "Sleeping Beauty compatible backbone": 3174,
+      "Secondary backbone - Puro": 3147,
+      "Secondary backbone - mClover3": 3264,
+
+      "SaCas9-gRNA": 390,
+      "SpCas9-gRNA": 390,
+
+      "CbH": 848,
+      "SV40": 369,
+      "EF1a": 1204,
+      "EFS": 281,
+
+      "DNMT3A": 1001,
+      "TET1": 2219,
+      "VPR": 1643,
+      "KRAB": 275,
+      "p300": 1958,
+      "HDAC3": 1334,
+      "LSD1": 2609,
+      "KDM5A": 2447,
+      "RIOX1": 1973,
+      "PRDM9": 965,
+      "G9a": 1181,
+      "G9a-me3": 1181,
+
+      "dSpCas9": 4290,
+      "dSaCas9": 3276,
+
+      "mRuby3": 809,
+      "mClover3": 815,
+      "mCerulean3": 810,
+      "Puromycin resistance": 676,
+      "Hygromycin resistance": 1105,
+      "Blasticidin resistance": 472,
+
+      "BGH terminator": 213,
+      "SV40 terminator": 151
+    };
+
+    function toast(msg){
+      const el = document.getElementById("toast");
+      el.textContent = msg;
+      el.style.display = "block";
+      clearTimeout(toast._tm);
+      toast._tm = setTimeout(()=> el.style.display = "none", 1800);
+    }
+
+    function esc(s){
+      return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    }
+
+    const state = {
+      backbone: null,
+      backboneCustom: "",
+      gRNAs: [],
+      promoter: null,
+      promoterCustom: "",
+      ed: null,
+      edCustom: "",
+      dcas: null,
+      dcasCustom: "",
+      markers: { fluorescent: [], antibiotic: [] },
+      terminator: null,
+      terminatorCustom: ""
+    };
+
+    let gDraft = { type: "SpCas9-gRNA", name:"", sequence:"", target:"" };
+
+    Object.defineProperties(state, {
+      backboneValue: { get(){
+        if(!state.backbone) return "";
+        return state.backbone === t("custom") ? (state.backboneCustom || t("custom")) : state.backbone;
+      }},
+      promoterValue: { get(){
+        if(!state.promoter) return "";
+        return state.promoter === t("custom") ? (state.promoterCustom || t("custom")) : state.promoter;
+      }},
+      edValue: { get(){
+        if(!state.ed) return "";
+        return state.ed === t("custom") ? (state.edCustom || t("custom")) : state.ed;
+      }},
+      dcasValue: { get(){
+        if(!state.dcas) return "";
+        return state.dcas === t("custom") ? (state.dcasCustom || t("custom")) : state.dcas;
+      }},
+      terminatorValue: { get(){
+        if(!state.terminator) return "";
+        return state.terminator === t("custom") ? (state.terminatorCustom || t("custom")) : state.terminator;
+      }}
+    });
+
+    function getBackboneList(){
+      return [
+        { name: t("standardBackbone"), desc: t("bbDesc1") },
+        { name: t("lentiviralBackbone"), desc: t("bbDesc2") },
+        { name: t("piggyBackbone"), desc: t("bbDesc3") },
+        { name: t("sleepingBackbone"), desc: t("bbDesc4") },
+        { name: t("secondaryPuro"), desc: t("bbDesc5") },
+        { name: t("secondaryMClover"), desc: t("bbDesc6") },
+        { name: t("custom"), desc: "" }
+      ];
+    }
+
+    function getPromoterGroups(){
+      return [
+        { title: t("strongPromoters"), items: ["CbH","SV40","EF1a"] },
+        { title: t("weakPromoters"), items: ["EFS"] },
+        { title: t("custom"), items: [t("custom")] }
+      ];
+    }
+
+    function getEdGroups(){
+      return [
+        { title: t("dnaMeth"), items: ["DNMT3A","TET1"] },
+        { title: t("directGene"), items: ["VPR (direct gene activation)","KRAB (direct gene repression)"] },
+        { title: t("acetylation"), items: ["p300 (histone acetylation)","HDAC3 (histone deacetylation)"] },
+        { title: t("h3k4"), items: ["LSD1 (H3K4me1/2 demethylation)","KDM5A (H3K4me2/3 demethylation)","RIOX1 (H3K4me1/2/3 demethylation)","PRDM9 (introduction of H3K4me3)"] },
+        { title: t("h3k9"), items: ["G9a (introduction of H3K9me2)","G9a-me3 (introduction of H3K9me3)"] },
+        { title: t("custom"), items: [t("custom")] }
+      ];
+    }
+
+    function baseED(label){
+      if(!label) return "";
+      if(label === t("custom")) return t("custom");
+      return label.split(" ")[0];
+    }
+
+    function allowedDcasOptions(){
+      if(!state.ed) return ["dSpCas9","dSaCas9",t("custom")];
+      if(state.ed === t("custom")) return ["dSpCas9",t("custom")];
+      const edBase = baseED(state.edValue);
+      if(["DNMT3A","TET1","VPR","KRAB"].includes(edBase)) return ["dSpCas9","dSaCas9",t("custom")];
+      return ["dSpCas9",t("custom")];
+    }
+
+    function reconcileDcasWithED(){
+      const allowed = new Set(allowedDcasOptions());
+      if(state.dcas && !allowed.has(state.dcas)){
+        state.dcas = null;
+        state.dcasCustom = "";
+        toast(t("toastDcasReset"));
+      }
+    }
+
+    function getBackboneSize(){
+      return SIZE_BP[state.backboneValue] || 0;
+    }
+    function getGRNASize(){
+      return state.gRNAs.reduce((sum, g) => sum + (SIZE_BP[g.type] || 0), 0);
+    }
+    function getPromoterSize(){
+      return SIZE_BP[state.promoterValue] || 0;
+    }
+    function getEDSize(){
+      return SIZE_BP[baseED(state.edValue)] || 0;
+    }
+    function getDcasSize(){
+      return SIZE_BP[state.dcasValue] || 0;
+    }
+    function getMarkerSize(){
+      return [...state.markers.fluorescent, ...state.markers.antibiotic].reduce((sum, x)=> sum + (SIZE_BP[x] || 0), 0);
+    }
+    function getTerminatorSize(){
+      return SIZE_BP[state.terminatorValue] || 0;
+    }
+    function getTotalSelectedSize(){
+      return getBackboneSize() + getGRNASize() + getPromoterSize() + getEDSize() + getDcasSize() + getMarkerSize() + getTerminatorSize();
+    }
+
+    function getMainBackboneName(){ return state.backboneValue || t("notSelected"); }
+    function getMainGRNAName(){
+      if(!state.gRNAs.length) return t("notSelected");
+      return [...new Set(state.gRNAs.map(g => g.type))].join(", ");
+    }
+    function getMainPromoterName(){ return state.promoterValue || t("notSelected"); }
+    function getMainEDName(){ return state.edValue ? baseED(state.edValue) : t("notSelected"); }
+    function getMainDcasName(){ return state.dcasValue || t("notSelected"); }
+    function getMainMarkerName(){
+      const all = [...state.markers.fluorescent, ...state.markers.antibiotic];
+      return all.length ? all.join(", ") : t("notSelected");
+    }
+    function getMainTerminatorName(){ return state.terminatorValue || t("notSelected"); }
+
+    function markerValue(){
+      const f = state.markers.fluorescent;
+      const a = state.markers.antibiotic;
+      const parts = [];
+      if(f.length) parts.push(`Fluor: ${f.join(", ")}`);
+      if(a.length) parts.push(`Abx: ${a.join(", ")}`);
+      return parts.length ? parts.join(" · ") : "—";
+    }
+
+    function isRequiredComplete(){
+      return !!state.backboneValue &&
+        state.gRNAs.length > 0 &&
+        !!state.promoterValue &&
+        !!state.edValue &&
+        !!state.dcasValue &&
+        !!state.terminatorValue;
+    }
+
+    function polarToCartesian(cx, cy, r, angleDeg){
+      const a = (angleDeg - 90) * Math.PI / 180;
+      return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
+    }
+
+    function arcPath(cx, cy, r, startAngle, endAngle){
+      const start = polarToCartesian(cx, cy, r, endAngle);
+      const end = polarToCartesian(cx, cy, r, startAngle);
+      const largeArc = (endAngle - startAngle) <= 180 ? "0" : "1";
+      return `M ${start.x.toFixed(2)} ${start.y.toFixed(2)} A ${r} ${r} 0 ${largeArc} 0 ${end.x.toFixed(2)} ${end.y.toFixed(2)}`;
+    }
+
+    function clamp(val, min, max){
+      return Math.max(min, Math.min(max, val));
+    }
+
+    function computeSegments(){
+      const sizes = {
+        bb: getBackboneSize() || 300,
+        gRNA: getGRNASize() || 300,
+        pro: getPromoterSize() || 300,
+        ed: getEDSize() || 300,
+        dcas: getDcasSize() || 300,
+        m: getMarkerSize() || 300,
+        ter: getTerminatorSize() || 300
+      };
+      const order = ["bb","gRNA","pro","ed","dcas","m","ter"];
+      const total = order.reduce((s, k) => s + sizes[k], 0);
+      let start = 0;
+      const out = {};
+      order.forEach(k => {
+        const angle = sizes[k] / total * 360;
+        out[k] = { start, end: start + angle, size: sizes[k] };
+        start += angle;
+      });
+      return out;
+    }
+
+    function setArc(id, a0, a1){
+      document.getElementById(id).setAttribute("d", arcPath(310,310,150,a0,a1));
+    }
+
+    function highlightSegment(moduleKey, on){
+      const arc = document.getElementById(`arc-${moduleKey}`);
+      if(!arc) return;
+      arc.style.strokeWidth = on ? "28" : "20";
+      arc.style.filter = on ? "brightness(1.25)" : "";
+    }
+
+    const modalBack = document.getElementById("modalBack");
+    const modalBody = document.getElementById("modalBody");
+    const modalTitle = document.getElementById("modalTitle");
+
+    function openModal(title, html){
+      modalTitle.textContent = title;
+      modalBody.innerHTML = html;
+      modalBack.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal(){
+      modalBack.style.display = "none";
+      document.body.style.overflow = "";
+    }
+
+    document.getElementById("modalClose").addEventListener("click", closeModal);
+    modalBack.addEventListener("click", e => {
+      if(e.target === modalBack) closeModal();
+    });
+
+    function buildOptionCard(title, desc, attrName, value, active){
+      return `
+        <button class="opt ${active ? "active" : ""}" ${attrName}="${esc(value)}" type="button">
+          <div class="t">${esc(title)}</div>
+          <div class="d">${esc(desc || "")}</div>
+        </button>
+      `;
+    }
+
+    function openBackbonePicker(){
+      const cards = getBackboneList().map(item =>
+        buildOptionCard(item.name, item.desc, "data-bb", item.name, state.backbone === item.name)
+      ).join("");
+
+      openModal(t("modalBackbone"), `
+        <div class="opt-grid">${cards}</div>
+        <div class="form-row">
+          <input class="input" id="customBB" placeholder="${esc(t("modalBackboneCustom"))}" value="${esc(state.backboneCustom)}" />
+        </div>
+        <div class="note">${t("modalBackboneNote")}</div>
+      `);
+
+      modalBody.querySelectorAll("[data-bb]").forEach(btn => {
+        btn.addEventListener("click", ()=>{
+          state.backbone = btn.getAttribute("data-bb");
+          render();
+          toast(t("toastBackbone"));
+          if(state.backbone !== t("custom")) closeModal();
+          else openBackbonePicker();
+        });
+      });
+
+      modalBody.querySelector("#customBB").addEventListener("input", e => {
+        state.backboneCustom = e.target.value.trim();
+        if(state.backbone === t("custom")) render();
+      });
+    }
+
+    function openGRNAPicker(){
+      const cards = ["SaCas9-gRNA","SpCas9-gRNA","Custom"].map(type => {
+        let desc = t("customDesc");
+        if(type === "SaCas9-gRNA") desc = t("saDesc");
+        if(type === "SpCas9-gRNA") desc = t("spDesc");
+        return buildOptionCard(type, desc, "data-gt", type, gDraft.type === type);
+      }).join("");
+
+      openModal(t("configureGRNA"), `
+        <div class="muted">${t("gRNAIntro")}</div>
+
+        <div class="section-title">${t("gRNAType")}</div>
+        <div class="opt-grid">${cards}</div>
+
+        <div class="section-title">${t("gRNADetails")}</div>
+        <div class="form-row">
+          <input class="input" id="gName" placeholder="${esc(t("gRNAName"))}" value="${esc(gDraft.name)}" />
+          <input class="input" id="gSeq" placeholder="${esc(t("gRNASeq"))}" value="${esc(gDraft.sequence)}" />
+        </div>
+
+        <div class="form-row" id="targetRow" style="display:none">
+          <input class="input" id="gTarget" placeholder="${esc(t("gRNATarget"))}" value="${esc(gDraft.target)}" />
+        </div>
+
+        <div class="form-row">
+          <button class="mini-btn" id="clearDraft" type="button">${t("clearFields")}</button>
+          <button class="mini-btn" id="addG" type="button">${t("addGRNA")}</button>
+        </div>
+
+        <div class="section-title">${t("existingGRNAs")}</div>
+        ${renderGRNAList()}
+
+        <div class="form-row" style="justify-content:flex-end">
+          <button class="mini-btn" id="doneG" type="button">${t("done")}</button>
+        </div>
+      `);
+
+      function refreshTargetVisibility(){
+        const show = gDraft.type === "Custom";
+        modalBody.querySelector("#targetRow").style.display = show ? "flex" : "none";
+      }
+      refreshTargetVisibility();
+
+      modalBody.querySelectorAll("[data-gt]").forEach(btn => {
+        btn.addEventListener("click", ()=>{
+          gDraft.type = btn.getAttribute("data-gt");
+          openGRNAPicker();
+        });
+      });
+
+      modalBody.querySelector("#gName").addEventListener("input", e => gDraft.name = e.target.value);
+      modalBody.querySelector("#gSeq").addEventListener("input", e => gDraft.sequence = e.target.value);
+      const gTarget = modalBody.querySelector("#gTarget");
+      if(gTarget) gTarget.addEventListener("input", e => gDraft.target = e.target.value);
+
+      modalBody.querySelector("#clearDraft").addEventListener("click", ()=>{
+        gDraft = { type: gDraft.type, name:"", sequence:"", target:"" };
+        openGRNAPicker();
+      });
+
+      modalBody.querySelector("#addG").addEventListener("click", ()=>{
+        const name = (modalBody.querySelector("#gName").value || "").trim();
+        const seq = (modalBody.querySelector("#gSeq").value || "").trim();
+        const target = (modalBody.querySelector("#gTarget")?.value || "").trim();
+
+        if(gDraft.type !== "Custom" && !seq){
+          toast(t("toastNeedSeq"));
+          return;
+        }
+        if(gDraft.type === "Custom" && !target){
+          toast(t("toastNeedTarget"));
+          return;
+        }
+
+        state.gRNAs.push({ type: gDraft.type, name, sequence: seq, target });
+        render();
+        toast(t("toastGRNAAdded"));
+        gDraft = { type: gDraft.type, name:"", sequence:"", target:"" };
+        openGRNAPicker();
+      });
+
+      wireGRNADeleteButtons();
+      modalBody.querySelector("#doneG").addEventListener("click", ()=>{
+        closeModal();
+        toast(t("toastGRNAUpdated"));
+      });
+    }
+
+    function renderGRNAList(){
+      if(!state.gRNAs.length) return `<div class="note">${t("noGRNAsAdded")}</div>`;
+      return `
+        <div class="list">
+          ${state.gRNAs.map((g, i) => `
+            <div class="li">
+              <div class="li-left">
+                <div class="l1">${esc(g.type)} <span style="opacity:.75; font-weight:750">#${i + 1}</span></div>
+                <div class="l2">
+                  ${g.name ? `<b>${esc(g.name)}</b>` : ""}
+                  ${g.sequence ? ` · <span style="opacity:.95">${esc(g.sequence)}</span>` : ""}
+                  ${g.target ? ` · <span style="opacity:.90">${t("target")}: ${esc(g.target)}</span>` : ""}
+                </div>
+              </div>
+              <button class="mini-btn" data-del="${i}" type="button">${t("remove")}</button>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function wireGRNADeleteButtons(){
+      modalBody.querySelectorAll("[data-del]").forEach(btn => {
+        btn.addEventListener("click", ()=>{
+          const idx = Number(btn.getAttribute("data-del"));
+          state.gRNAs.splice(idx, 1);
+          render();
+          openGRNAPicker();
+        });
+      });
+    }
+
+    function openPromoterPicker(){
+      const groups = getPromoterGroups().map(group => `
+        <div class="section-title">${esc(group.title)}</div>
+        <div class="opt-grid">
+          ${group.items.map(v => buildOptionCard(v, "", "data-pro", v, state.promoter === v)).join("")}
+        </div>
+      `).join("");
+
+      openModal(t("promoterTitle"), `
+        ${groups}
+        <div class="form-row">
+          <input class="input" id="customPro" placeholder="${esc(t("promoterCustom"))}" value="${esc(state.promoterCustom)}" />
+        </div>
+      `);
+
+      modalBody.querySelectorAll("[data-pro]").forEach(btn => {
+        btn.addEventListener("click", ()=>{
+          state.promoter = btn.getAttribute("data-pro");
+          render();
+          toast(t("toastPromoter"));
+          if(state.promoter !== t("custom")) closeModal();
+          else openPromoterPicker();
+        });
+      });
+
+      modalBody.querySelector("#customPro").addEventListener("input", e => {
+        state.promoterCustom = e.target.value.trim();
+        if(state.promoter === t("custom")) render();
+      });
+    }
+
+    function parseEDOption(option){
+      if(option === t("custom")) return { title: option, desc: "", value: option };
+      const match = String(option).match(/^([^()]+?)\s*\((.+)\)$/);
+      if(!match) return { title: option, desc: "", value: option };
+      return {
+        title: match[1].trim(),
+        desc: `(${match[2].trim()})`,
+        value: option
+      };
+    }
+
+    function openEDPicker(){
+      const groups = getEdGroups().map(group => `
+        <div class="section-title">${esc(group.title)}</div>
+        <div class="opt-grid">
+          ${group.items.map(v => {
+            const parsed = parseEDOption(v);
+            return buildOptionCard(parsed.title, parsed.desc, "data-ed", parsed.value, state.ed === parsed.value);
+          }).join("")}
+        </div>
+      `).join("");
+
+      openModal(t("effectorTitle"), `
+        ${groups}
+        <div class="form-row">
+          <input class="input" id="customED" placeholder="${esc(t("edCustom"))}" value="${esc(state.edCustom)}" />
+        </div>
+        <div class="note">${t("edNote")}</div>
+      `);
+
+      modalBody.querySelectorAll("[data-ed]").forEach(btn => {
+        btn.addEventListener("click", ()=>{
+          state.ed = btn.getAttribute("data-ed");
+          reconcileDcasWithED();
+          render();
+          toast(t("toastED"));
+          if(state.ed !== t("custom")) closeModal();
+          else openEDPicker();
+        });
+      });
+
+      modalBody.querySelector("#customED").addEventListener("input", e => {
+        state.edCustom = e.target.value.trim();
+        if(state.ed === t("custom")){
+          reconcileDcasWithED();
+          render();
+        }
+      });
+    }
+
+    function openDcasPicker(){
+      const cards = allowedDcasOptions().map(v => {
+        let desc = "";
+        if(v === "dSpCas9") desc = currentLang === "en" ? "Compatible with all effector domains." : "Kompatibilan sa svim efektorskim domenama.";
+        if(v === "dSaCas9") desc = currentLang === "en" ? "Compatible only with DNMT3A, TET1, VPR, KRAB." : "Kompatibilan samo s DNMT3A, TET1, VPR, KRAB.";
+        return buildOptionCard(v, desc, "data-dcas", v, state.dcas === v);
+      }).join("");
+
+      openModal(t("dcasTitle"), `
+        <div class="opt-grid">${cards}</div>
+        <div class="form-row">
+          <input class="input" id="customDCAS" placeholder="${esc(t("dcasCustom"))}" value="${esc(state.dcasCustom)}" />
+        </div>
+      `);
+
+      modalBody.querySelectorAll("[data-dcas]").forEach(btn => {
+        btn.addEventListener("click", ()=>{
+          state.dcas = btn.getAttribute("data-dcas");
+          render();
+          toast(t("toastDcas"));
+          if(state.dcas !== t("custom")) closeModal();
+          else openDcasPicker();
+        });
+      });
+
+      modalBody.querySelector("#customDCAS").addEventListener("input", e => {
+        state.dcasCustom = e.target.value.trim();
+        if(state.dcas === t("custom")) render();
+      });
+    }
+
+    function toggleInArray(arr, val, shouldHave){
+      const idx = arr.indexOf(val);
+      if(shouldHave && idx === -1) arr.push(val);
+      if(!shouldHave && idx !== -1) arr.splice(idx, 1);
+    }
+
+    function openMarkersPicker(){
+      const fluor = ["mRuby3","mClover3","mCerulean3"];
+      const abx = ["Puromycin resistance","Hygromycin resistance","Blasticidin resistance"];
+
+      const mk = (group, name, checked) => `
+        <label class="opt ${checked ? "active" : ""}" style="display:flex;gap:10px;align-items:flex-start;cursor:pointer">
+          <input type="checkbox" data-mg="${esc(group)}" data-mv="${esc(name)}" ${checked ? "checked" : ""} style="margin-top:3px;transform:scale(1.1)" />
+          <div>
+            <div class="t">${esc(name)}</div>
+            <div class="d">${group === "fluor" ? t("fluorTitle") : t("abxTitle")}</div>
+          </div>
+        </label>
+      `;
+
+      openModal(t("markersTitle"), `
+        <div class="muted">${t("markersIntro")}</div>
+
+        <div class="section-title">${t("fluorTitle")}</div>
+        <div class="opt-grid">${fluor.map(v => mk("fluor", v, state.markers.fluorescent.includes(v))).join("")}</div>
+
+        <div class="section-title">${t("abxTitle")}</div>
+        <div class="opt-grid">${abx.map(v => mk("abx", v, state.markers.antibiotic.includes(v))).join("")}</div>
+
+        <div class="form-row" style="justify-content:flex-end">
+          <button class="mini-btn" id="clearMarkers" type="button">${t("clear")}</button>
+          <button class="mini-btn" id="doneMarkers" type="button">${t("done")}</button>
+        </div>
+      `);
+
+      modalBody.querySelectorAll("input[type=checkbox][data-mg]").forEach(ch => {
+        ch.addEventListener("change", ()=>{
+          const g = ch.getAttribute("data-mg");
+          const v = ch.getAttribute("data-mv");
+          if(g === "fluor") toggleInArray(state.markers.fluorescent, v, ch.checked);
+          else toggleInArray(state.markers.antibiotic, v, ch.checked);
+          render();
+          openMarkersPicker();
+        });
+      });
+
+      modalBody.querySelector("#clearMarkers").addEventListener("click", ()=>{
+        state.markers.fluorescent = [];
+        state.markers.antibiotic = [];
+        render();
+        closeModal();
+        toast(t("toastMarkersCleared"));
+      });
+
+      modalBody.querySelector("#doneMarkers").addEventListener("click", ()=>{
+        render();
+        closeModal();
+        toast(t("toastMarkersUpdated"));
+      });
+    }
+
+    function openTerminatorPicker(){
+      const items = [t("bghTerm"), t("sv40Term"), t("custom")];
+      const cards = items.map(v => buildOptionCard(v, "", "data-ter", v, state.terminator === v)).join("");
+
+      openModal(t("terminatorTitle"), `
+        <div class="opt-grid">${cards}</div>
+        <div class="form-row">
+          <input class="input" id="customTer" placeholder="${esc(t("customTer"))}" value="${esc(state.terminatorCustom)}" />
+        </div>
+      `);
+
+      modalBody.querySelectorAll("[data-ter]").forEach(btn => {
+        btn.addEventListener("click", ()=>{
+          state.terminator = btn.getAttribute("data-ter");
+          render();
+          toast(t("toastTer"));
+          if(state.terminator !== t("custom")) closeModal();
+          else openTerminatorPicker();
+        });
+      });
+
+      modalBody.querySelector("#customTer").addEventListener("input", e => {
+        state.terminatorCustom = e.target.value.trim();
+        if(state.terminator === t("custom")) render();
+      });
+    }
+
+    function setArc(id, a0, a1){
+      document.getElementById(id).setAttribute("d", arcPath(310,310,150,a0,a1));
+    }
+
+    function prepareRingLabel(id, moduleKey, midAngle, title, sizeText){
+      const stage = document.getElementById("plasmidStage");
+      const label = document.getElementById(id);
+      const r = 270;
+      const rad = (midAngle - 90) * Math.PI / 180;
+
+      const px = 310 + r * Math.cos(rad);
+      const py = 310 + r * Math.sin(rad);
+
+      label.innerHTML = `${esc(title)}<span class="small">${esc(t("size"))}: ${esc(sizeText)}</span>`;
+      label.style.left = "0px";
+      label.style.top = "0px";
+
+      const width = label.offsetWidth || 150;
+      const height = label.offsetHeight || 46;
+      const stageWidth = stage.clientWidth || 620;
+      const stageHeight = stage.clientHeight || 650;
+
+      label.onmouseenter = () => highlightSegment(moduleKey, true);
+      label.onmouseleave = () => highlightSegment(moduleKey, false);
+
+      return {
+        id,
+        label,
+        width,
+        height,
+        preferredX: clamp(px - width / 2, 16, stageWidth - width - 16),
+        preferredY: clamp(py - height / 2, 24, stageHeight - height - 16),
+        x: 0,
+        y: 0,
+        side: px >= 310 ? "right" : "left"
+      };
+    }
+
+    function layoutRingLabels(items){
+      const stage = document.getElementById("plasmidStage");
+      const stageWidth = stage.clientWidth || 620;
+      const stageHeight = stage.clientHeight || 650;
+      const margin = 16;
+      const gap = 10;
+
+      const groups = {
+        left: items.filter(item => item.side === "left").sort((a, b) => a.preferredY - b.preferredY),
+        right: items.filter(item => item.side === "right").sort((a, b) => a.preferredY - b.preferredY)
+      };
+
+      Object.values(groups).forEach(group => {
+        if(!group.length) return;
+
+        group.forEach(item => {
+          item.x = clamp(item.preferredX, margin, stageWidth - item.width - margin);
+          item.y = item.preferredY;
+        });
+
+        group[0].y = clamp(group[0].y, margin + 8, stageHeight - group[0].height - margin);
+        for(let i = 1; i < group.length; i++){
+          const minY = group[i - 1].y + group[i - 1].height + gap;
+          group[i].y = Math.max(group[i].y, minY);
+        }
+
+        const overflow = group[group.length - 1].y + group[group.length - 1].height + margin - stageHeight;
+        if(overflow > 0){
+          for(let i = group.length - 1; i >= 0; i--){
+            group[i].y -= overflow;
+          }
+          group[0].y = Math.max(group[0].y, margin + 8);
+          for(let i = 1; i < group.length; i++){
+            const minY = group[i - 1].y + group[i - 1].height + gap;
+            group[i].y = Math.max(group[i].y, minY);
+          }
+        }
+
+        for(let i = group.length - 2; i >= 0; i--){
+          const maxY = group[i + 1].y - group[i].height - gap;
+          group[i].y = Math.min(group[i].y, maxY);
+        }
+
+        group.forEach(item => {
+          item.x = item.side === "right"
+            ? clamp(Math.max(item.preferredX, 420), margin, stageWidth - item.width - margin)
+            : clamp(Math.min(item.preferredX, 200 - item.width), margin, stageWidth - item.width - margin);
+
+          item.y = clamp(item.y, margin + 8, stageHeight - item.height - margin);
+          item.label.style.left = `${item.x}px`;
+          item.label.style.top = `${item.y}px`;
+        });
+      });
+    }
+
+    function renderPlasmidRing(){
+      const segs = computeSegments();
+
+      Object.entries(segs).forEach(([k, v]) => {
+        setArc(`arc-${k}`, v.start, v.end);
+        setArc(`hit-${k}`, v.start, v.end);
+      });
+
+      document.getElementById("arc-bb").style.opacity = getBackboneSize() ? "1" : ".25";
+      document.getElementById("arc-gRNA").style.opacity = getGRNASize() ? "1" : ".25";
+      document.getElementById("arc-pro").style.opacity = getPromoterSize() ? "1" : ".25";
+      document.getElementById("arc-ed").style.opacity = getEDSize() ? "1" : ".25";
+      document.getElementById("arc-dcas").style.opacity = getDcasSize() ? "1" : ".25";
+      document.getElementById("arc-m").style.opacity = getMarkerSize() ? "1" : ".25";
+      document.getElementById("arc-ter").style.opacity = getTerminatorSize() ? "1" : ".25";
+
+      const labelItems = [
+        prepareRingLabel("ring-bb", "bb", (segs.bb.start + segs.bb.end) / 2, getMainBackboneName(), `${getBackboneSize()} ${t("bp")}`),
+        prepareRingLabel("ring-gRNA", "gRNA", (segs.gRNA.start + segs.gRNA.end) / 2, getMainGRNAName(), `${getGRNASize()} ${t("bp")}`),
+        prepareRingLabel("ring-pro", "pro", (segs.pro.start + segs.pro.end) / 2, getMainPromoterName(), `${getPromoterSize()} ${t("bp")}`),
+        prepareRingLabel("ring-ed", "ed", (segs.ed.start + segs.ed.end) / 2, getMainEDName(), `${getEDSize()} ${t("bp")}`),
+        prepareRingLabel("ring-dcas", "dcas", (segs.dcas.start + segs.dcas.end) / 2, getMainDcasName(), `${getDcasSize()} ${t("bp")}`),
+        prepareRingLabel("ring-m", "m", (segs.m.start + segs.m.end) / 2, getMainMarkerName(), `${getMarkerSize()} ${t("bp")}`),
+        prepareRingLabel("ring-ter", "ter", (segs.ter.start + segs.ter.end) / 2, getMainTerminatorName(), `${getTerminatorSize()} ${t("bp")}`)
+      ];
+
+      layoutRingLabels(labelItems);
+      document.getElementById("centerSize").textContent = `${getTotalSelectedSize()} ${t("bp")}`;
+    }
+
+    function renderSummary(){
+      document.getElementById("val-bb").textContent = state.backbone ? `${state.backboneValue} · ${getBackboneSize()} ${t("bp")}` : t("notSelected");
+      document.getElementById("val-gRNA").textContent = state.gRNAs.length ? `${getMainGRNAName()} · ${getGRNASize()} ${t("bp")}` : t("noGRNA");
+      document.getElementById("val-pro").textContent = state.promoter ? `${state.promoterValue} · ${getPromoterSize()} ${t("bp")}` : t("notSelected");
+      document.getElementById("val-ed").textContent = state.ed ? `${getMainEDName()} · ${getEDSize()} ${t("bp")}` : t("notSelected");
+      document.getElementById("val-dcas").textContent = state.dcas ? `${state.dcasValue} · ${getDcasSize()} ${t("bp")}` : t("notSelected");
+      document.getElementById("val-m").textContent = getMarkerSize() ? `${getMainMarkerName()} · ${getMarkerSize()} ${t("bp")}` : t("optional");
+      document.getElementById("val-ter").textContent = state.terminator ? `${state.terminatorValue} · ${getTerminatorSize()} ${t("bp")}` : t("notSelected");
+
+      document.getElementById("sum-bb").textContent = state.backbone ? `${state.backboneValue} · ${getBackboneSize()} ${t("bp")}` : "—";
+      document.getElementById("sum-gRNA").textContent = state.gRNAs.length
+        ? state.gRNAs.map((g, i) => {
+            const parts = [`${i + 1}. ${g.type}`];
+            if(g.name) parts.push(`${t("name")}: ${g.name}`);
+            if(g.sequence) parts.push(`${t("seq")}: ${g.sequence}`);
+            if(g.target) parts.push(`${t("target")}: ${g.target}`);
+            return parts.join(" — ");
+          }).join(" | ") + ` · ${getGRNASize()} ${t("bp")}`
+        : "—";
+      document.getElementById("sum-pro").textContent = state.promoter ? `${state.promoterValue} · ${getPromoterSize()} ${t("bp")}` : "—";
+      document.getElementById("sum-ed").textContent = state.ed ? `${getMainEDName()} · ${getEDSize()} ${t("bp")}` : "—";
+      document.getElementById("sum-dcas").textContent = state.dcas ? `${state.dcasValue} · ${getDcasSize()} ${t("bp")}` : "—";
+      document.getElementById("sum-m").textContent = getMarkerSize() ? `${getMainMarkerName()} · ${getMarkerSize()} ${t("bp")}` : "—";
+      document.getElementById("sum-ter").textContent = state.terminator ? `${state.terminatorValue} · ${getTerminatorSize()} ${t("bp")}` : "—";
+      document.getElementById("sum-total").textContent = `${getTotalSelectedSize()} ${t("bp")}`;
+
+      document.getElementById("addToCartBtn").disabled = !isRequiredComplete();
+    }
+
+    const cart = [];
+
+    function renderCart(){
+      const list = document.getElementById("cartList");
+      if(!cart.length){
+        list.innerHTML = `<div class="muted" style="margin-top:10px">${t("cartEmpty")}</div>`;
+        return;
+      }
+
+      list.innerHTML = cart.map((c, idx) => `
+        <div class="cart-item">
+          <div class="title">${t("configNum")} #${cart.length - idx}</div>
+          <div class="meta">
+            <b>B</b>: ${esc(c.backbone)}<br>
+            <b>gRNAs</b>: ${esc(c.gRNAs)}<br>
+            <b>Pro</b>: ${esc(c.promoter)}<br>
+            <b>ED</b>: ${esc(c.ed)}<br>
+            <b>dCas9</b>: ${esc(c.dcas)}<br>
+            <b>M</b>: ${esc(c.markers)}<br>
+            <b>Ter</b>: ${esc(c.ter)}<br>
+            <b>${t("totalSize")}</b>: ${esc(String(c.total))} ${t("bp")}
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function addToCart(){
+      cart.unshift({
+        backbone: `${state.backboneValue} · ${getBackboneSize()} ${t("bp")}`,
+        gRNAs: state.gRNAs.length ? `${state.gRNAs.map(g => g.type).join(", ")} · ${getGRNASize()} ${t("bp")}` : "—",
+        promoter: `${state.promoterValue} · ${getPromoterSize()} ${t("bp")}`,
+        ed: `${getMainEDName()} · ${getEDSize()} ${t("bp")}`,
+        dcas: `${state.dcasValue} · ${getDcasSize()} ${t("bp")}`,
+        markers: getMarkerSize() ? `${getMainMarkerName()} · ${getMarkerSize()} ${t("bp")}` : "—",
+        ter: `${state.terminatorValue} · ${getTerminatorSize()} ${t("bp")}`,
+        total: getTotalSelectedSize()
+      });
+      renderCart();
+      toast(t("toastCart"));
+    }
+
+    function render(){
+      renderSummary();
+      renderPlasmidRing();
+    }
+
+    function applyLanguage(){
+      document.documentElement.lang = currentLang;
+
+      const ids = [
+        "brandTitle","navBuilder","navMap","navCart","authBtn","heroTitle","heroText","rulesTitle","rulesText",
+        "buildTitle","buildText","plasmidMapTitle","plasmidMapText","legBb","legGrna","legPro","legEd","legDcas","legM","legTer",
+        "configTitle","configText","sumKb","sumKg","sumKp","sumKe","sumKd","sumKm","sumKt","sumKtotal","cartTitle","cartText"
+      ];
+      ids.forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.innerHTML = t(id);
+      });
+
+      document.getElementById("addToCartBtn").textContent = t("addToCart");
+      document.getElementById("resetBtn").textContent = t("reset");
+      document.getElementById("tagBb").textContent = t("moduleBackbone");
+      document.getElementById("subBb").textContent = t("moduleBackboneSub");
+      document.getElementById("subGrna").textContent = t("moduleGrnaSub");
+      document.getElementById("subPro").textContent = t("moduleProSub");
+      document.getElementById("subEd").textContent = t("moduleEdSub");
+      document.getElementById("subDcas").textContent = t("moduleDcasSub");
+      document.getElementById("subM").textContent = t("moduleMSub");
+      document.getElementById("subTer").textContent = t("moduleTerSub");
+
+      document.getElementById("langEnBtn").classList.toggle("active", currentLang === "en");
+      document.getElementById("langHrBtn").classList.toggle("active", currentLang === "hr");
+
+      render();
+      renderCart();
+    }
+
+    document.getElementById("btn-bb").addEventListener("click", openBackbonePicker);
+    document.getElementById("btn-gRNA").addEventListener("click", openGRNAPicker);
+    document.getElementById("btn-pro").addEventListener("click", openPromoterPicker);
+    document.getElementById("btn-ed").addEventListener("click", openEDPicker);
+    document.getElementById("btn-dcas").addEventListener("click", openDcasPicker);
+    document.getElementById("btn-m").addEventListener("click", openMarkersPicker);
+    document.getElementById("btn-ter").addEventListener("click", openTerminatorPicker);
+
+    document.getElementById("ring-bb").addEventListener("click", openBackbonePicker);
+    document.getElementById("ring-gRNA").addEventListener("click", openGRNAPicker);
+    document.getElementById("ring-pro").addEventListener("click", openPromoterPicker);
+    document.getElementById("ring-ed").addEventListener("click", openEDPicker);
+    document.getElementById("ring-dcas").addEventListener("click", openDcasPicker);
+    document.getElementById("ring-m").addEventListener("click", openMarkersPicker);
+    document.getElementById("ring-ter").addEventListener("click", openTerminatorPicker);
+
+    document.getElementById("hit-bb").addEventListener("click", openBackbonePicker);
+    document.getElementById("hit-gRNA").addEventListener("click", openGRNAPicker);
+    document.getElementById("hit-pro").addEventListener("click", openPromoterPicker);
+    document.getElementById("hit-ed").addEventListener("click", openEDPicker);
+    document.getElementById("hit-dcas").addEventListener("click", openDcasPicker);
+    document.getElementById("hit-m").addEventListener("click", openMarkersPicker);
+    document.getElementById("hit-ter").addEventListener("click", openTerminatorPicker);
+
+    document.getElementById("addToCartBtn").addEventListener("click", ()=>{
+      if(!isRequiredComplete()){
+        toast(t("toastNeedAll"));
+        return;
+      }
+      addToCart();
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", ()=>{
+      state.backbone = null;
+      state.backboneCustom = "";
+      state.gRNAs = [];
+      state.promoter = null;
+      state.promoterCustom = "";
+      state.ed = null;
+      state.edCustom = "";
+      state.dcas = null;
+      state.dcasCustom = "";
+      state.markers.fluorescent = [];
+      state.markers.antibiotic = [];
+      state.terminator = null;
+      state.terminatorCustom = "";
+      gDraft = { type: "SpCas9-gRNA", name:"", sequence:"", target:"" };
+      render();
+      toast(t("toastReset"));
+    });
+
+    document.getElementById("langEnBtn").addEventListener("click", ()=>{
+      currentLang = "en";
+      applyLanguage();
+    });
+    document.getElementById("langHrBtn").addEventListener("click", ()=>{
+      currentLang = "hr";
+      applyLanguage();
+    });
+
+    document.getElementById("authBtn").addEventListener("click", ()=>{
+      toast(currentLang === "en" ? "Sign In / Log In clicked" : "Prijava / Log In kliknuto");
+    });
+
+    applyLanguage();
+  </script>
+</body>
+</html>

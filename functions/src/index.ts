@@ -13,6 +13,7 @@ initializeApp();
 export { createAdmin } from './callable/create-admin';
 export { updateUser } from './callable/update-user';
 export { sendSampleEmail } from './callable/send-sample-email';
+export { submitPlasmidOrder } from './callable/submit-plasmid-order';
 
 /**
  * Triggers
@@ -23,6 +24,7 @@ export { userCreated } from './triggers/user-created';
 export { productCreated } from './triggers/product-created';
 export { formResponsesCreated } from './triggers/form-responses-created';
 export { formResponsesDeleted } from './triggers/form-responses-deleted';
+export { onPlasmidOrderUpdated } from './triggers/plasmid-order-updated';
 
 // Pages cleanup
 export { pageDeleted } from './triggers/page-deleted';

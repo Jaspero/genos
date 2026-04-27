@@ -22,6 +22,10 @@
       url: '/my-account'
     },
     {
+      label: 'Plasmid Orders',
+      url: '/my-account/plasmid-orders'
+    },
+    {
       label: 'Favorites',
       url: '/my-account/favorites'
     },
