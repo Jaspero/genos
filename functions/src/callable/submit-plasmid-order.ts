@@ -79,9 +79,17 @@ function baseED(label: string): string {
   return label.split(' ')[0];
 }
 
+function normalizeLabel(label: unknown): string {
+  return String(label ?? '')
+    .replace(/[–—]/g, '-')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function sizeOf(label: unknown): number {
-  const normalized = String(label ?? '').trim();
-  return SIZE_BP[normalized] || SIZE_BP[baseED(normalized)] || 0;
+  const normalized = normalizeLabel(label);
+  const withoutDetails = normalizeLabel(normalized.replace(/\s*\(.+\)$/, ''));
+  return SIZE_BP[normalized] || SIZE_BP[withoutDetails] || SIZE_BP[baseED(withoutDetails)] || 0;
 }
 
 function sizeOrFallback(sentSize: unknown, label: unknown): number {

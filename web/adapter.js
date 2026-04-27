@@ -36,9 +36,7 @@ export default function (options) {
 
       builder.generateEnvModule();
 
-      if (clearBuild) {
-        builder.writeClient(assets);
-      }
+      builder.writeClient(assets);
 
       builder.writePrerendered(pages);
 

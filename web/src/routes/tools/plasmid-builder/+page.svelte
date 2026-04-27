@@ -258,9 +258,22 @@
     return label.split(" ")[0];
   }
 
-  function sizeOf(label: string): number {
-    const normalized = String(label || '').trim();
-    return SIZE_BP[normalized] || SIZE_BP[baseED(normalized)] || 0;
+  function normalizeLabel(label: unknown): string {
+    return String(label || '')
+      .replace(/[–—]/g, '-')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function sizeOf(label: unknown): number {
+    const normalized = normalizeLabel(label);
+    const withoutDetails = normalizeLabel(normalized.replace(/\s*\(.+\)$/, ''));
+    return SIZE_BP[normalized] || SIZE_BP[withoutDetails] || SIZE_BP[baseED(withoutDetails)] || 0;
+  }
+
+  function openOrders(event?: MouseEvent) {
+    event?.preventDefault();
+    goto('/my-account/plasmid-orders');
   }
 
   $: backboneSize = sizeOf(getVal('backbone'));
@@ -583,7 +596,7 @@
       <div class="rounded-lg p-5 bg-[#032130] text-white">
         <h2 class="text-base font-bold mb-1">{t('rulesTitle')}</h2>
         <p class="text-white/60 text-[.8125rem] leading-relaxed">{@html t('rulesText')}</p>
-        <a href="/my-account/plasmid-orders" class="mt-4 flex items-center justify-between gap-3 rounded-md border border-white/15 bg-white/10 px-3 py-2.5 text-sm font-bold text-white transition-colors hover:bg-white/15">
+        <a href="/my-account/plasmid-orders" class="mt-4 flex items-center justify-between gap-3 rounded-md border border-white/15 bg-white/10 px-3 py-2.5 text-sm font-bold text-white transition-colors hover:bg-white/15" on:click={openOrders}>
           <span>{t('ordersLinkCta')}</span>
           <span aria-hidden="true">→</span>
         </a>
@@ -702,7 +715,7 @@
           <div class="mb-4 rounded-md border border-[#0A415C]/15 bg-[#0A415C]/5 p-3">
             <h2 class="text-base font-bold text-[#032130] mb-1">{t('ordersLinkTitle')}</h2>
             <p class="text-gray-500 text-[.8125rem] leading-relaxed mb-3">{t('ordersLinkText')}</p>
-            <a href="/my-account/plasmid-orders" class="inline-flex items-center justify-center rounded bg-[#0A415C] px-3 py-2 text-xs font-bold text-white transition-colors hover:bg-[#063044]">
+            <a href="/my-account/plasmid-orders" class="inline-flex items-center justify-center rounded bg-[#0A415C] px-3 py-2 text-xs font-bold text-white transition-colors hover:bg-[#063044]" on:click={openOrders}>
               {t('ordersLinkCta')}
             </a>
           </div>

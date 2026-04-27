@@ -9,6 +9,7 @@
 
   let orders: PlasmidOrder[] = [];
   let loading = true;
+  let errorMessage = '';
   let unsub: (() => void) | null = null;
   let expandedId: string | null = null;
 
@@ -34,13 +35,34 @@
     return label.split(' ')[0];
   }
 
-  function sizeOf(label: string): number {
-    const normalized = String(label || '').trim();
-    return SIZE_BP[normalized] || SIZE_BP[baseED(normalized)] || 0;
+  function normalizeLabel(label: unknown): string {
+    return String(label || '')
+      .replace(/[–—]/g, '-')
+      .replace(/\s+/g, ' ')
+      .trim();
   }
 
-  function displaySize(stored: unknown, label: string): number {
+  function sizeOf(label: unknown): number {
+    const normalized = normalizeLabel(label);
+    const withoutDetails = normalizeLabel(normalized.replace(/\s*\(.+\)$/, ''));
+    return SIZE_BP[normalized] || SIZE_BP[withoutDetails] || SIZE_BP[baseED(withoutDetails)] || 0;
+  }
+
+  function displaySize(stored: unknown, label: unknown): number {
     return Number(stored) || sizeOf(label);
+  }
+
+  function setOrdersFromSnapshot(snap: { docs: Array<{ id: string; data: () => unknown }> }, sortClientSide = false) {
+    orders = snap.docs.map((d) => ({ id: d.id, ...(d.data() as Record<string, unknown>) } as PlasmidOrder));
+    if (sortClientSide) {
+      orders = [...orders].sort((a, b) => {
+        const aTime = a.createdAt?.toMillis?.() ?? a.createdAt?.toDate?.()?.getTime?.() ?? 0;
+        const bTime = b.createdAt?.toMillis?.() ?? b.createdAt?.toDate?.()?.getTime?.() ?? 0;
+        return bTime - aTime;
+      });
+    }
+    errorMessage = '';
+    loading = false;
   }
 
   function gRNAsSize(cfg: PlasmidOrder['configurations'][number]): number {
@@ -76,10 +98,27 @@
         orderBy('createdAt', 'desc')
       );
 
-      unsub = onSnapshot(q, (snap) => {
-        orders = snap.docs.map((d) => ({ id: d.id, ...d.data() } as PlasmidOrder));
-        loading = false;
-      });
+      unsub = onSnapshot(
+        q,
+        (snap) => setOrdersFromSnapshot(snap),
+        (error) => {
+          console.error('Failed to load plasmid orders with ordered query', error);
+          const fallbackQuery = query(
+            collection(db, 'plasmid-orders'),
+            where('customerId', '==', authUser.uid)
+          );
+
+          unsub = onSnapshot(
+            fallbackQuery,
+            (snap) => setOrdersFromSnapshot(snap, true),
+            (fallbackError) => {
+              console.error('Failed to load plasmid orders', fallbackError);
+              errorMessage = 'Unable to load plasmid orders. Please try again later.';
+              loading = false;
+            }
+          );
+        }
+      );
 
       try { authUnsub(); } catch {}
     });
@@ -122,6 +161,8 @@
 
 {#if loading}
   <p>Loading...</p>
+{:else if errorMessage}
+  <p class="text-red-600">{errorMessage}</p>
 {:else if !orders.length}
   <p class="text-gray-400">No plasmid orders yet.</p>
 {:else}

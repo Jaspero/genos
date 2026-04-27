@@ -35,12 +35,20 @@
     return label.split(' ')[0];
   }
 
-  function sizeOf(label: string): number {
-    const normalized = String(label || '').trim();
-    return SIZE_BP[normalized] || SIZE_BP[baseED(normalized)] || 0;
+  function normalizeLabel(label: unknown): string {
+    return String(label || '')
+      .replace(/[–—]/g, '-')
+      .replace(/\s+/g, ' ')
+      .trim();
   }
 
-  function displaySize(stored: unknown, label: string): number {
+  function sizeOf(label: unknown): number {
+    const normalized = normalizeLabel(label);
+    const withoutDetails = normalizeLabel(normalized.replace(/\s*\(.+\)$/, ''));
+    return SIZE_BP[normalized] || SIZE_BP[withoutDetails] || SIZE_BP[baseED(withoutDetails)] || 0;
+  }
+
+  function displaySize(stored: unknown, label: unknown): number {
     return Number(stored) || sizeOf(label);
   }
 
@@ -67,7 +75,7 @@
 
   onMount(() => {
     const ref = doc(db, 'plasmid-orders', orderId);
-    unsub = onSnapshot(ref, (snap) => {
+    unsub = onSnapshot(ref, (snap: any) => {
       if (snap.exists()) {
         order = { id: snap.id, ...snap.data() };
         if (!editStatus) {

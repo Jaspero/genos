@@ -10,7 +10,7 @@
   export let data: {
     header: string;
     footer: string;
-  };
+  } = { header: '', footer: '' };
 
   let loading = true;
 
