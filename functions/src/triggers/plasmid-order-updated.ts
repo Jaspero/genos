@@ -13,6 +13,37 @@ function esc(value: unknown): string {
   return String(value ?? '').replace(/[&<>"']/g, (m) => ESC_MAP[m]);
 }
 
+const SIZE_BP: Record<string, number> = {
+  'Standard Backbone': 2013, 'Lentiviral backbone': 7528,
+  'PiggyBac compatible backbone': 3187, 'Sleeping Beauty compatible backbone': 3174,
+  'Secondary backbone - Puro': 3147, 'Secondary backbone - mClover3': 3264,
+  'SaCas9-gRNA': 390, 'SpCas9-gRNA': 390,
+  CbH: 848, SV40: 369, EF1a: 1204, EFS: 281,
+  DNMT3A: 1001, TET1: 2219, VPR: 1643, KRAB: 275,
+  p300: 1958, HDAC3: 1334, LSD1: 2609, KDM5A: 2447,
+  RIOX1: 1973, PRDM9: 965, G9a: 1181, 'G9a-me3': 1181,
+  dSpCas9: 4290, dSaCas9: 3276,
+  mRuby3: 809, mClover3: 815, mCerulean3: 810,
+  'Puromycin resistance': 676, 'Hygromycin resistance': 1105,
+  'Blasticidin resistance': 472,
+  'BGH terminator': 213, 'SV40 terminator': 151
+};
+
+function baseED(label: string): string {
+  if (!label) return '';
+  if (label === 'Custom') return 'Custom';
+  return label.split(' ')[0];
+}
+
+function sizeOf(label: unknown): number {
+  const normalized = String(label ?? '').trim();
+  return SIZE_BP[normalized] || SIZE_BP[baseED(normalized)] || 0;
+}
+
+function displaySize(stored: unknown, label: unknown): number {
+  return Number(stored) || sizeOf(label);
+}
+
 interface PlasmidOrderDoc {
   customerEmail: string;
   customerName?: string;
@@ -45,6 +76,16 @@ interface PlasmidOrderDoc {
 
 function configSummaryHtml(cfg: NonNullable<PlasmidOrderDoc['configurations']>[number], idx: number, lang: 'en' | 'hr'): string {
   const t = (en: string, hr: string) => (lang === 'hr' ? hr : en);
+  const gRNAsSizeBp = Number(cfg.gRNAsSizeBp) || (cfg.gRNAs ?? []).reduce((sum, g) => sum + sizeOf(g.type), 0);
+  const markersSizeBp = Number(cfg.markersSizeBp) || [...(cfg.markersFluorescent ?? []), ...(cfg.markersAntibiotic ?? [])].reduce((sum, marker) => sum + sizeOf(marker), 0);
+  const totalSizeBp = Number(cfg.totalSizeBp) ||
+    displaySize(cfg.backboneSizeBp, cfg.backbone) +
+    gRNAsSizeBp +
+    displaySize(cfg.promoterSizeBp, cfg.promoter) +
+    displaySize(cfg.edSizeBp, cfg.ed) +
+    displaySize(cfg.dcasSizeBp, cfg.dcas) +
+    markersSizeBp +
+    displaySize(cfg.terminatorSizeBp, cfg.terminator);
   const gRNA = (cfg.gRNAs ?? [])
     .map(
       (g) =>
@@ -58,15 +99,15 @@ function configSummaryHtml(cfg: NonNullable<PlasmidOrderDoc['configurations']>[n
   return `
     <h3 style="margin:20px 0 8px;font-family:sans-serif;">${t('Configuration', 'Konfiguracija')} #${idx + 1}</h3>
     <table cellpadding="6" cellspacing="0" border="0" style="border-collapse:collapse;font-family:sans-serif;font-size:13px;border:1px solid #ddd;">
-      <tr><td><b>${t('Backbone', 'Okosnica')}</b></td><td>${esc(cfg.backbone)} (${cfg.backboneSizeBp ?? 0} bp)</td></tr>
-      <tr><td><b>gRNAs</b></td><td>${cfg.gRNAs?.length ?? 0} (${cfg.gRNAsSizeBp ?? 0} bp)<ul>${gRNA}</ul></td></tr>
-      <tr><td><b>${t('Promoter', 'Promotor')}</b></td><td>${esc(cfg.promoter)} (${cfg.promoterSizeBp ?? 0} bp)</td></tr>
-      <tr><td><b>${t('Effector domain', 'Efektorska domena')}</b></td><td>${esc(cfg.ed)} (${cfg.edSizeBp ?? 0} bp)</td></tr>
-      <tr><td><b>dCas9</b></td><td>${esc(cfg.dcas)} (${cfg.dcasSizeBp ?? 0} bp)</td></tr>
+      <tr><td><b>${t('Backbone', 'Okosnica')}</b></td><td>${esc(cfg.backbone)} (${displaySize(cfg.backboneSizeBp, cfg.backbone)} bp)</td></tr>
+      <tr><td><b>gRNAs</b></td><td>${cfg.gRNAs?.length ?? 0} (${gRNAsSizeBp} bp)<ul>${gRNA}</ul></td></tr>
+      <tr><td><b>${t('Promoter', 'Promotor')}</b></td><td>${esc(cfg.promoter)} (${displaySize(cfg.promoterSizeBp, cfg.promoter)} bp)</td></tr>
+      <tr><td><b>${t('Effector domain', 'Efektorska domena')}</b></td><td>${esc(cfg.ed)} (${displaySize(cfg.edSizeBp, cfg.ed)} bp)</td></tr>
+      <tr><td><b>dCas9</b></td><td>${esc(cfg.dcas)} (${displaySize(cfg.dcasSizeBp, cfg.dcas)} bp)</td></tr>
       <tr><td><b>${t('Markers (fluor)', 'Markeri (fluor)')}</b></td><td>${fluor}</td></tr>
-      <tr><td><b>${t('Markers (abx)', 'Markeri (abx)')}</b></td><td>${abx}</td></tr>
-      <tr><td><b>${t('Terminator', 'Terminator')}</b></td><td>${esc(cfg.terminator)} (${cfg.terminatorSizeBp ?? 0} bp)</td></tr>
-      <tr><td><b>${t('Total size', 'Ukupna veličina')}</b></td><td>${cfg.totalSizeBp ?? 0} bp</td></tr>
+      <tr><td><b>${t('Markers (abx)', 'Markeri (abx)')}</b></td><td>${abx} (${markersSizeBp} bp)</td></tr>
+      <tr><td><b>${t('Terminator', 'Terminator')}</b></td><td>${esc(cfg.terminator)} (${displaySize(cfg.terminatorSizeBp, cfg.terminator)} bp)</td></tr>
+      <tr><td><b>${t('Total size', 'Ukupna veličina')}</b></td><td>${totalSizeBp} bp</td></tr>
     </table>
   `;
 }
