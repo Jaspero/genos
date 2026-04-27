@@ -781,30 +781,25 @@
   </div>
 {:else}
   <div class="pb-root" bind:this={container}>
-    <div class="nav">
-      <div class="container">
-        <div class="nav-inner">
-          <div class="logo">
-            <div class="logo-badge" aria-hidden="true"></div>
-            <div id="brandTitle">Genos · Plasmid Builder</div>
-          </div>
-          <div class="nav-links">
-            <a href="#builder" id="navBuilder">Builder</a>
-            <a href="#plasmid" id="navMap">Plasmid map</a>
-            <a href="#cart" id="navCart">Cart</a>
-          </div>
-          <div class="right-controls">
-            <div class="lang-switch">
-              <button class="lang-btn active" id="langEnBtn" type="button">EN</button>
-              <button class="lang-btn" id="langHrBtn" type="button">HR</button>
-            </div>
-            <a class="nav-action" id="backLink" href="/projects">Back to projects</a>
-          </div>
+    <div class="pb-toolbar">
+      <div class="pb-toolbar-inner">
+        <a class="pb-back" href="/projects">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+          <span id="backLink">Back to projects</span>
+        </a>
+        <div class="pb-toolbar-nav">
+          <a href="#builder" id="navBuilder">Builder</a>
+          <a href="#plasmid" id="navMap">Plasmid map</a>
+          <a href="#cart" id="navCart">Cart</a>
+        </div>
+        <div class="pb-lang-switch">
+          <button class="pb-lang-btn active" id="langEnBtn" type="button">EN</button>
+          <button class="pb-lang-btn" id="langHrBtn" type="button">HR</button>
         </div>
       </div>
     </div>
 
-    <div class="container hero">
+    <div class="pb-container hero">
       <div class="hero-grid">
         <div class="hero-card">
           <h1 id="heroTitle">Design your own expression plasmid</h1>
@@ -817,7 +812,7 @@
       </div>
     </div>
 
-    <div id="builder" class="container builder">
+    <div id="builder" class="pb-container builder">
       <div class="builder-grid">
         <div class="card">
           <h2 id="buildTitle">Build modules</h2>
@@ -969,19 +964,12 @@
 {/if}
 
 <style>
-  :global(body) {
-    margin: 0 !important;
-  }
-
   .pb-loading {
     display: flex; align-items: center; justify-content: center;
-    min-height: 100vh; background: #0b1220; color: white; font-family: sans-serif;
+    min-height: 60vh; color: #032130; font-family: sans-serif;
   }
 
   .pb-root {
-    --bg: #0b1220;
-    --text: rgba(255,255,255,.94);
-    --muted: rgba(255,255,255,.68);
     --bb: #355070;
     --gRNA: #3a86ff;
     --pro: #2fbf71;
@@ -991,77 +979,87 @@
     --ter: #00b894;
     --panel: rgba(255,255,255,.04);
     --panel-border: rgba(255,255,255,.12);
-    --white: #ffffff;
 
     font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-    color: var(--text);
-    background:
-      radial-gradient(1000px 600px at 20% -10%, rgba(58,134,255,.18), transparent 60%),
-      radial-gradient(900px 700px at 85% 10%, rgba(155,93,229,.18), transparent 55%),
-      radial-gradient(700px 500px at 50% 110%, rgba(230,57,70,.12), transparent 55%),
-      var(--bg);
-    min-height: 100vh;
+    padding-top: 6rem;
   }
 
-  .pb-root :global(*) { box-sizing: border-box; }
-  .pb-root :global(a) { color: inherit; text-decoration: none; }
-
-  .pb-root :global(.container) { max-width: 1280px; margin: 0 auto; padding: 0 18px; }
-
-  .pb-root :global(.nav) {
-    position: sticky; top: 0; z-index: 30;
-    backdrop-filter: blur(14px);
-    background: linear-gradient(to bottom, rgba(11,18,32,.82), rgba(11,18,32,.45));
-    border-bottom: 1px solid rgba(255,255,255,.08);
+  /* --- Toolbar --- */
+  .pb-root :global(.pb-toolbar) {
+    background: #032130;
+    border-radius: .5rem;
+    margin: 0 1rem 1rem;
+    padding: .75rem 1.25rem;
   }
-  .pb-root :global(.nav-inner) { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; flex-wrap: wrap; }
-  .pb-root :global(.logo) { display: flex; align-items: center; gap: 10px; font-weight: 800; }
-  .pb-root :global(.logo-badge) { width: 34px; height: 34px; border-radius: 12px; background: conic-gradient(from 220deg, #3dd6d0, #7c5cff, #ff4d6d); box-shadow: 0 10px 30px rgba(124,92,255,.18); }
-  .pb-root :global(.nav-links) { display: flex; gap: 16px; color: var(--muted); font-size: 14px; flex-wrap: wrap; }
-  .pb-root :global(.nav-links a) { padding: 8px 10px; border-radius: 10px; }
-  .pb-root :global(.nav-links a:hover) { background: rgba(255,255,255,.06); color: var(--text); }
-  .pb-root :global(.right-controls) { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .pb-root :global(.lang-switch) { display: flex; align-items: center; gap: 6px; padding: 6px; border-radius: 14px; border: 1px solid var(--panel-border); background: var(--panel); }
-  .pb-root :global(.lang-btn), .pb-root :global(.nav-action) { padding: 9px 14px; border-radius: 12px; border: 1px solid transparent; background: transparent; color: #fff; cursor: pointer; font-weight: 700; }
-  .pb-root :global(.lang-btn.active) { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.2); }
-  .pb-root :global(.nav-action) { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.12); }
-  .pb-root :global(.nav-action:hover) { background: rgba(255,255,255,.08); }
+  .pb-root :global(.pb-toolbar-inner) {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    max-width: 1280px; margin: 0 auto; flex-wrap: wrap;
+  }
+  .pb-root :global(.pb-back) {
+    display: flex; align-items: center; gap: .375rem;
+    color: rgba(255,255,255,.8); font-size: .8125rem; font-weight: 600;
+    transition: color .2s;
+  }
+  .pb-root :global(.pb-back:hover) { color: white; }
+  .pb-root :global(.pb-toolbar-nav) { display: flex; gap: .5rem; }
+  .pb-root :global(.pb-toolbar-nav a) {
+    padding: .375rem .75rem; border-radius: .25rem;
+    color: rgba(255,255,255,.7); font-size: .8125rem; font-weight: 600;
+    transition: background .15s, color .15s;
+  }
+  .pb-root :global(.pb-toolbar-nav a:hover) { background: rgba(255,255,255,.1); color: white; }
+  .pb-root :global(.pb-lang-switch) {
+    display: flex; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: .125rem;
+  }
+  .pb-root :global(.pb-lang-btn) {
+    padding: .125rem .5rem; border-radius: 999px; border: none;
+    background: transparent; color: rgba(255,255,255,.7);
+    font-size: .75rem; font-weight: 700; cursor: pointer;
+  }
+  .pb-root :global(.pb-lang-btn.active) { background: white; color: #032130; }
 
-  .pb-root :global(.hero) { padding: 34px 0 12px; }
-  .pb-root :global(.hero-grid) { display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; }
+  /* --- Container --- */
+  .pb-root :global(.pb-container) { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+
+  /* --- Dark content area --- */
+  .pb-root :global(.hero) { padding: 0 0 1rem; }
+  .pb-root :global(.hero-grid) { display: grid; grid-template-columns: 1.2fr .8fr; gap: 1rem; }
   @media (max-width: 980px) { .pb-root :global(.hero-grid) { grid-template-columns: 1fr; } }
 
   .pb-root :global(.hero-card), .pb-root :global(.card) {
-    border: 1px solid rgba(255,255,255,.10);
-    background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-    border-radius: 22px; padding: 20px;
-    box-shadow: 0 18px 60px rgba(0,0,0,.25);
+    border: 1px solid rgba(3,33,48,.12);
+    background: white;
+    border-radius: .5rem; padding: 1.25rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,.06);
     position: relative; overflow: hidden;
   }
-  .pb-root :global(.hero-card:before) { content: ""; position: absolute; inset: -2px; pointer-events: none; background: radial-gradient(600px 300px at 20% 0%, rgba(58,134,255,.12), transparent 60%), radial-gradient(600px 300px at 80% 30%, rgba(155,93,229,.12), transparent 55%); }
-  .pb-root :global(.hero-card > *) { position: relative; }
-  .pb-root :global(h1) { margin: 0; font-size: 36px; line-height: 1.08; letter-spacing: -.4px; }
-  .pb-root :global(.sub) { margin: 10px 0 0; color: var(--muted); max-width: 82ch; font-size: 15px; line-height: 1.6; }
+  .pb-root :global(.hero-card) {
+    background: #032130; color: white;
+    border-color: transparent;
+  }
+  .pb-root :global(h1) { margin: 0; font-size: 1.75rem; line-height: 1.2; letter-spacing: -.02em; color: white; }
+  .pb-root :global(.sub) { margin: .5rem 0 0; color: rgba(255,255,255,.72); max-width: 82ch; font-size: .875rem; line-height: 1.6; }
 
-  .pb-root :global(.builder) { padding: 12px 0 34px; }
-  .pb-root :global(.builder-grid) { display: grid; grid-template-columns: 1.18fr .82fr; gap: 18px; align-items: start; }
+  .pb-root :global(.builder) { padding: 0 0 2rem; }
+  .pb-root :global(.builder-grid) { display: grid; grid-template-columns: 1.18fr .82fr; gap: 1rem; align-items: start; }
   @media (max-width: 980px) { .pb-root :global(.builder-grid) { grid-template-columns: 1fr; } }
 
-  .pb-root :global(.card h2) { margin: 0 0 8px; font-size: 16px; }
-  .pb-root :global(.muted) { color: var(--muted); font-size: 13px; line-height: 1.5; }
+  .pb-root :global(.card h2) { margin: 0 0 .5rem; font-size: 1rem; color: #032130; }
+  .pb-root :global(.muted) { color: #6b7280; font-size: .8125rem; line-height: 1.5; }
 
-  .pb-root :global(.module-grid) { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-top: 12px; }
+  /* --- Module buttons --- */
+  .pb-root :global(.module-grid) { display: grid; grid-template-columns: repeat(4,1fr); gap: .625rem; margin-top: .75rem; }
   @media (max-width: 980px) { .pb-root :global(.module-grid) { grid-template-columns: repeat(2,1fr); } }
   @media (max-width: 620px) { .pb-root :global(.module-grid) { grid-template-columns: 1fr; } }
 
-  .pb-root :global(.module-btn) { display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: 18px; border: 1px solid rgba(255,255,255,.12); cursor: pointer; min-height: 108px; transition: transform .08s ease, filter .12s ease; color: #fff; text-align: left; }
+  .pb-root :global(.module-btn) { display: flex; flex-direction: column; gap: .5rem; padding: .75rem; border-radius: .5rem; border: 1px solid rgba(255,255,255,.12); cursor: pointer; min-height: 6.5rem; transition: transform .08s ease, filter .12s ease; color: #fff; text-align: left; }
   .pb-root :global(.module-btn:hover) { filter: brightness(1.06); }
   .pb-root :global(.module-btn:active) { transform: scale(.99); }
-  .pb-root :global(.module-top) { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .pb-root :global(.module-top) { display: flex; justify-content: space-between; align-items: center; gap: .625rem; }
   .pb-root :global(.module-abbr) { font-weight: 850; color: #fff; }
-  .pb-root :global(.module-sub) { font-size: 12px; color: rgba(255,255,255,.8); line-height: 1.35; min-height: 30px; }
-  .pb-root :global(.tag) { font-size: 12px; padding: 6px 8px; border-radius: 999px; color: #fff; border: 1px solid rgba(255,255,255,.20); background: rgba(0,0,0,.12); }
-  .pb-root :global(.value) { font-size: 13px; color: rgba(255,255,255,.95); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .pb-root :global(.module-sub) { font-size: .75rem; color: rgba(255,255,255,.8); line-height: 1.35; min-height: 1.875rem; }
+  .pb-root :global(.tag) { font-size: .75rem; padding: .375rem .5rem; border-radius: 999px; color: #fff; border: 1px solid rgba(255,255,255,.20); background: rgba(0,0,0,.12); }
+  .pb-root :global(.value) { font-size: .8125rem; color: rgba(255,255,255,.95); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
   .pb-root :global(.value.dim) { color: rgba(255,255,255,.78); }
 
   .pb-root :global(.mod-bb) { background: linear-gradient(180deg, color-mix(in srgb, var(--bb) 38%, transparent), color-mix(in srgb, var(--bb) 20%, transparent)); border-color: color-mix(in srgb, var(--bb) 62%, white 12%); }
@@ -1072,15 +1070,22 @@
   .pb-root :global(.mod-m) { background: linear-gradient(180deg, color-mix(in srgb, var(--mark) 34%, transparent), color-mix(in srgb, var(--mark) 18%, transparent)); border-color: color-mix(in srgb, var(--mark) 62%, white 12%); }
   .pb-root :global(.mod-ter) { background: linear-gradient(180deg, color-mix(in srgb, var(--ter) 38%, transparent), color-mix(in srgb, var(--ter) 20%, transparent)); border-color: color-mix(in srgb, var(--ter) 62%, white 12%); }
 
-  .pb-root :global(.plasmid-wrap) { display: grid; gap: 12px; margin-top: 10px; }
-  .pb-root :global(.plasmid-box) { position: relative; border-radius: 20px; border: 1px solid rgba(255,255,255,.10); background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)); padding: 14px; min-height: 740px; overflow: hidden; }
-  .pb-root :global(.plasmid-header) { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; }
+  /* --- Plasmid ring (dark panel) --- */
+  .pb-root :global(.plasmid-wrap) { display: grid; gap: .75rem; margin-top: .625rem; }
+  .pb-root :global(.plasmid-box) {
+    position: relative; border-radius: .75rem;
+    border: 1px solid rgba(3,33,48,.08);
+    background: #0b1220;
+    padding: .875rem; min-height: 740px; overflow: hidden;
+  }
+  .pb-root :global(.plasmid-header) { display: flex; justify-content: space-between; align-items: center; gap: .625rem; margin-bottom: .625rem; color: rgba(255,255,255,.9); }
+  .pb-root :global(.plasmid-header .muted) { color: rgba(255,255,255,.6); }
   .pb-root :global(.plasmid-stage) { position: relative; width: 100%; min-height: 650px; }
   .pb-root :global(.plasmid-svg) { width: 100%; height: auto; display: block; }
 
-  .pb-root :global(.ring-label) { position: absolute; padding: 10px 12px; border-radius: 16px; color: #fff; font-size: 12px; line-height: 1.35; font-weight: 700; cursor: pointer; max-width: 170px; border: 1px solid rgba(255,255,255,.2); box-shadow: 0 10px 30px rgba(0,0,0,.18); transition: transform .12s ease, box-shadow .12s ease, filter .12s ease; user-select: none; }
-  .pb-root :global(.ring-label:hover) { transform: scale(1.05); box-shadow: 0 0 0 2px rgba(255,255,255,.08), 0 12px 32px rgba(0,0,0,.28); filter: brightness(1.08); }
-  .pb-root :global(.ring-label .small) { display: block; font-size: 11px; font-weight: 600; opacity: .94; margin-top: 3px; }
+  .pb-root :global(.ring-label) { position: absolute; padding: .625rem .75rem; border-radius: .5rem; color: #fff; font-size: .75rem; line-height: 1.35; font-weight: 700; cursor: pointer; max-width: 10.625rem; border: 1px solid rgba(255,255,255,.2); box-shadow: 0 .625rem 1.875rem rgba(0,0,0,.18); transition: transform .12s ease, box-shadow .12s ease, filter .12s ease; user-select: none; }
+  .pb-root :global(.ring-label:hover) { transform: scale(1.05); box-shadow: 0 0 0 2px rgba(255,255,255,.08), 0 .75rem 2rem rgba(0,0,0,.28); filter: brightness(1.08); }
+  .pb-root :global(.ring-label .small) { display: block; font-size: .6875rem; font-weight: 600; opacity: .94; margin-top: .1875rem; }
   .pb-root :global(.ring-label.bb) { background: linear-gradient(180deg, color-mix(in srgb, var(--bb) 44%, transparent), color-mix(in srgb, var(--bb) 24%, transparent)); border-color: color-mix(in srgb, var(--bb) 56%, white 20%); }
   .pb-root :global(.ring-label.gRNA) { background: linear-gradient(180deg, color-mix(in srgb, var(--gRNA) 44%, transparent), color-mix(in srgb, var(--gRNA) 24%, transparent)); border-color: color-mix(in srgb, var(--gRNA) 56%, white 20%); }
   .pb-root :global(.ring-label.pro) { background: linear-gradient(180deg, color-mix(in srgb, var(--pro) 44%, transparent), color-mix(in srgb, var(--pro) 24%, transparent)); border-color: color-mix(in srgb, var(--pro) 56%, white 20%); }
@@ -1089,9 +1094,10 @@
   .pb-root :global(.ring-label.m) { background: linear-gradient(180deg, color-mix(in srgb, var(--mark) 40%, transparent), color-mix(in srgb, var(--mark) 22%, transparent)); border-color: color-mix(in srgb, var(--mark) 56%, white 20%); }
   .pb-root :global(.ring-label.ter) { background: linear-gradient(180deg, color-mix(in srgb, var(--ter) 44%, transparent), color-mix(in srgb, var(--ter) 24%, transparent)); border-color: color-mix(in srgb, var(--ter) 56%, white 20%); }
 
-  .pb-root :global(.legend) { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
-  .pb-root :global(.leg) { display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(255,255,255,.78); padding: 7px 9px; border-radius: 999px; border: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.03); }
-  .pb-root :global(.sw) { width: 10px; height: 10px; border-radius: 3px; background: var(--bb); }
+  /* --- Legend --- */
+  .pb-root :global(.legend) { display: flex; gap: .625rem; flex-wrap: wrap; margin-top: .875rem; }
+  .pb-root :global(.leg) { display: flex; align-items: center; gap: .5rem; font-size: .75rem; color: rgba(255,255,255,.78); padding: .4375rem .5625rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.03); }
+  .pb-root :global(.sw) { width: .625rem; height: .625rem; border-radius: .1875rem; background: var(--bb); }
   .pb-root :global(.sw.gRNA) { background: var(--gRNA); }
   .pb-root :global(.sw.pro) { background: var(--pro); }
   .pb-root :global(.sw.ed) { background: var(--ed); }
@@ -1099,62 +1105,76 @@
   .pb-root :global(.sw.mark) { background: var(--mark); }
   .pb-root :global(.sw.ter) { background: var(--ter); }
 
-  .pb-root :global(.summary) { display: flex; flex-direction: column; gap: 12px; position: sticky; top: 78px; }
+  /* --- Summary panel --- */
+  .pb-root :global(.summary) { display: flex; flex-direction: column; gap: .75rem; position: sticky; top: 6rem; }
   @media (max-width: 980px) { .pb-root :global(.summary) { position: relative; top: auto; } }
 
-  .pb-root :global(.kv) { display: grid; gap: 10px; margin-top: 10px; }
-  .pb-root :global(.kv .item) { border: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.03); border-radius: 18px; padding: 12px; }
-  .pb-root :global(.k) { font-size: 12px; color: rgba(255,255,255,.65); }
-  .pb-root :global(.v) { font-size: 13px; margin-top: 4px; }
+  .pb-root :global(.kv) { display: grid; gap: .625rem; margin-top: .625rem; }
+  .pb-root :global(.kv .item) { border: 1px solid rgba(3,33,48,.08); background: #f8f9fa; border-radius: .375rem; padding: .75rem; }
+  .pb-root :global(.k) { font-size: .75rem; color: #6b7280; }
+  .pb-root :global(.v) { font-size: .8125rem; margin-top: .25rem; color: #1f2937; }
 
-  .pb-root :global(.btn) { width: 100%; padding: 12px 14px; border-radius: 16px; border: 1px solid rgba(255,255,255,.14); background: linear-gradient(135deg, rgba(61,214,208,.18), rgba(124,92,255,.16)); color: #fff; font-weight: 700; cursor: pointer; transition: transform .08s ease, filter .12s ease; }
-  .pb-root :global(.btn:hover) { filter: brightness(1.06); }
-  .pb-root :global(.btn:active) { transform: scale(.995); }
-  .pb-root :global(.btn:disabled) { cursor: not-allowed; opacity: .55; filter: none; background: rgba(255,255,255,.04); }
-  .pb-root :global(.btn.secondary) { background: rgba(255,255,255,.04); }
+  /* --- Action buttons --- */
+  .pb-root :global(.btn) {
+    width: 100%; padding: .75rem .875rem; border-radius: .25rem;
+    border: none; background: #0A415C; color: #fff;
+    font-weight: 700; cursor: pointer; transition: background .15s ease;
+  }
+  .pb-root :global(.btn:hover) { background: #063044; }
+  .pb-root :global(.btn:disabled) { cursor: not-allowed; opacity: .45; background: #9ca3af; }
+  .pb-root :global(.btn.secondary) { background: transparent; border: 1px solid #d1d5db; color: #374151; }
+  .pb-root :global(.btn.secondary:hover) { background: #f3f4f6; }
 
-  .pb-root :global(.modal-back) { position: fixed; inset: 0; background: rgba(0,0,0,.55); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 50; }
-  .pb-root :global(.modal) { width: min(920px, 100%); border-radius: 22px; border: 1px solid rgba(255,255,255,.14); background: rgba(15,26,51,.97); box-shadow: 0 30px 120px rgba(0,0,0,.45); overflow: hidden; color: #fff; }
-  .pb-root :global(.modal-h) { display: flex; align-items: center; justify-content: space-between; padding: 16px 16px 12px; border-bottom: 1px solid rgba(255,255,255,.10); }
-  .pb-root :global(.modal-h h3) { margin: 0; font-size: 15px; }
-  .pb-root :global(.x) { width: 38px; height: 38px; border-radius: 14px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.03); cursor: pointer; color: #fff; font-size: 18px; }
-  .pb-root :global(.modal-b) { padding: 14px 16px 16px; max-height: 70vh; overflow-y: auto; }
+  /* --- Modal --- */
+  .pb-root :global(.modal-back) { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: none; align-items: center; justify-content: center; padding: 1rem; z-index: 50; }
+  .pb-root :global(.modal) { width: min(920px, 100%); border-radius: .5rem; border: 1px solid #e5e7eb; background: #032130; box-shadow: 0 1.875rem 7.5rem rgba(0,0,0,.3); overflow: hidden; color: #fff; }
+  .pb-root :global(.modal-h) { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1rem .75rem; border-bottom: 1px solid rgba(255,255,255,.1); }
+  .pb-root :global(.modal-h h3) { margin: 0; font-size: .9375rem; }
+  .pb-root :global(.x) { width: 2.375rem; height: 2.375rem; border-radius: .25rem; border: 1px solid rgba(255,255,255,.15); background: rgba(255,255,255,.05); cursor: pointer; color: #fff; font-size: 1.125rem; }
+  .pb-root :global(.modal-b) { padding: .875rem 1rem 1rem; max-height: 70vh; overflow-y: auto; }
 
-  .pb-root :global(.section-title) { margin: 14px 0 8px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.75); }
-  .pb-root :global(.opt-grid) { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+  .pb-root :global(.section-title) { margin: .875rem 0 .5rem; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.75); }
+  .pb-root :global(.opt-grid) { display: grid; grid-template-columns: repeat(2,1fr); gap: .625rem; }
   @media (max-width: 620px) { .pb-root :global(.opt-grid) { grid-template-columns: 1fr; } }
 
-  .pb-root :global(.opt) { padding: 12px; border-radius: 18px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.04); cursor: pointer; text-align: left; color: #fff; transition: background .12s ease, transform .08s ease, border-color .12s ease; }
+  .pb-root :global(.opt) { padding: .75rem; border-radius: .375rem; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.04); cursor: pointer; text-align: left; color: #fff; transition: background .12s ease, transform .08s ease, border-color .12s ease; }
   .pb-root :global(.opt:hover) { background: rgba(255,255,255,.07); }
   .pb-root :global(.opt:active) { transform: scale(.995); }
   .pb-root :global(.opt.active) { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.42); box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset; }
-  .pb-root :global(.opt .t) { font-weight: 800; font-size: 13px; color: #fff; }
-  .pb-root :global(.opt .d) { margin-top: 6px; font-size: 12px; color: rgba(255,255,255,.78); line-height: 1.4; }
+  .pb-root :global(.opt .t) { font-weight: 800; font-size: .8125rem; color: #fff; }
+  .pb-root :global(.opt .d) { margin-top: .375rem; font-size: .75rem; color: rgba(255,255,255,.78); line-height: 1.4; }
 
-  .pb-root :global(.form-row) { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
-  .pb-root :global(.input) { flex: 1; min-width: 220px; padding: 10px 12px; border-radius: 14px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.04); color: #fff; outline: none; font-family: inherit; font-size: 13px; }
-  .pb-root :global(.note) { margin-top: 10px; font-size: 12px; color: rgba(255,255,255,.76); }
+  .pb-root :global(.form-row) { display: flex; gap: .625rem; flex-wrap: wrap; margin-top: .75rem; }
+  .pb-root :global(.input) { flex: 1; min-width: 13.75rem; padding: .625rem .75rem; border-radius: .25rem; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.04); color: #fff; outline: none; font-family: inherit; font-size: .8125rem; }
+  .pb-root :global(.note) { margin-top: .625rem; font-size: .75rem; color: rgba(255,255,255,.76); }
 
-  .pb-root :global(.list) { margin-top: 12px; border: 1px solid rgba(255,255,255,.10); border-radius: 18px; overflow: hidden; }
-  .pb-root :global(.list .li) { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; border-top: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.02); }
+  /* --- gRNA list --- */
+  .pb-root :global(.list) { margin-top: .75rem; border: 1px solid rgba(255,255,255,.10); border-radius: .375rem; overflow: hidden; }
+  .pb-root :global(.list .li) { display: flex; align-items: center; justify-content: space-between; gap: .625rem; padding: .625rem .75rem; border-top: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.02); }
   .pb-root :global(.list .li:first-child) { border-top: none; }
-  .pb-root :global(.li-left) { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-  .pb-root :global(.li-left .l1) { font-size: 13px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .pb-root :global(.li-left .l2) { font-size: 12px; color: rgba(255,255,255,.75); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pb-root :global(.li-left) { display: flex; flex-direction: column; gap: .1875rem; min-width: 0; }
+  .pb-root :global(.li-left .l1) { font-size: .8125rem; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pb-root :global(.li-left .l2) { font-size: .75rem; color: rgba(255,255,255,.75); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-  .pb-root :global(.mini-btn) { padding: 8px 10px; border-radius: 12px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.04); color: #fff; cursor: pointer; font-size: 12px; flex: 0 0 auto; }
+  .pb-root :global(.mini-btn) { padding: .5rem .625rem; border-radius: .25rem; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.04); color: #fff; cursor: pointer; font-size: .75rem; flex: 0 0 auto; }
   .pb-root :global(.mini-btn:hover) { background: rgba(255,255,255,.07); }
 
-  .pb-root :global(.cart) { margin-top: 10px; display: grid; gap: 10px; }
-  .pb-root :global(.cart-item) { border: 1px solid rgba(255,255,255,.10); border-radius: 18px; padding: 12px; background: rgba(255,255,255,.03); }
-  .pb-root :global(.cart-item .title) { font-size: 13px; font-weight: 800; }
-  .pb-root :global(.cart-item .meta) { margin-top: 6px; font-size: 12px; color: rgba(255,255,255,.75); line-height: 1.5; }
+  /* --- Cart --- */
+  .pb-root :global(.cart) { margin-top: .625rem; display: grid; gap: .625rem; }
+  .pb-root :global(.cart-item) { border: 1px solid rgba(3,33,48,.08); border-radius: .375rem; padding: .75rem; background: #f8f9fa; }
+  .pb-root :global(.cart-item .title) { font-size: .8125rem; font-weight: 800; color: #1f2937; }
+  .pb-root :global(.cart-item .meta) { margin-top: .375rem; font-size: .75rem; color: #4b5563; line-height: 1.5; }
 
-  .pb-root :global(.toast) { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); background: rgba(15,26,51,.92); border: 1px solid rgba(255,255,255,.14); padding: 10px 14px; border-radius: 14px; box-shadow: 0 20px 80px rgba(0,0,0,.35); color: #fff; font-size: 13px; display: none; z-index: 60; }
+  /* --- Toast --- */
+  .pb-root :global(.toast) { position: fixed; left: 50%; bottom: 1.375rem; transform: translateX(-50%); background: #032130; border: 1px solid rgba(255,255,255,.14); padding: .625rem .875rem; border-radius: .375rem; box-shadow: 0 1.25rem 5rem rgba(0,0,0,.3); color: #fff; font-size: .8125rem; display: none; z-index: 60; }
 
   @media (max-width: 760px) {
     .pb-root :global(.plasmid-box) { min-height: 760px; }
     .pb-root :global(.plasmid-stage) { min-height: 660px; }
-    .pb-root :global(.ring-label) { max-width: 140px; font-size: 11px; }
+    .pb-root :global(.ring-label) { max-width: 8.75rem; font-size: .6875rem; }
+  }
+
+  @media (max-width: 620px) {
+    .pb-root :global(.pb-toolbar-nav) { display: none; }
   }
 </style>
