@@ -148,7 +148,9 @@
       };
 
       const currentPath = window.location.pathname;
-      const newPath = routeMapping[currentPath] || (newLang === 'en' ? '/' : '/pocetna');
+      const stableRoutePrefixes = ['/tools', '/my-account', '/sign-in', '/sign-up', '/reset-password', '/checkout'];
+      const isStableRoute = stableRoutePrefixes.some((prefix) => currentPath === prefix || currentPath.startsWith(`${prefix}/`));
+      const newPath = routeMapping[currentPath] || (isStableRoute ? currentPath : newLang === 'en' ? '/' : '/pocetna');
 
       if (newPath !== currentPath) {
         goto(newPath);

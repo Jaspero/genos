@@ -258,13 +258,18 @@
     return label.split(" ")[0];
   }
 
-  $: backboneSize = SIZE_BP[getVal('backbone')] || 0;
-  $: gRNASize = gRNAs.reduce((s, g) => s + (SIZE_BP[g.type] || 0), 0);
-  $: promoterSize = SIZE_BP[getVal('promoter')] || 0;
-  $: edSize = SIZE_BP[baseED(getVal('ed'))] || 0;
-  $: dcasSize = SIZE_BP[getVal('dcas')] || 0;
-  $: markerSize = [...markersFluorescent, ...markersAntibiotic].reduce((s, x) => s + (SIZE_BP[x] || 0), 0);
-  $: terminatorSize = SIZE_BP[getVal('terminator')] || 0;
+  function sizeOf(label: string): number {
+    const normalized = String(label || '').trim();
+    return SIZE_BP[normalized] || SIZE_BP[baseED(normalized)] || 0;
+  }
+
+  $: backboneSize = sizeOf(getVal('backbone'));
+  $: gRNASize = gRNAs.reduce((s, g) => s + sizeOf(g.type), 0);
+  $: promoterSize = sizeOf(getVal('promoter'));
+  $: edSize = sizeOf(getVal('ed'));
+  $: dcasSize = sizeOf(getVal('dcas'));
+  $: markerSize = [...markersFluorescent, ...markersAntibiotic].reduce((s, x) => s + sizeOf(x), 0);
+  $: terminatorSize = sizeOf(getVal('terminator'));
   $: totalSize = backboneSize + gRNASize + promoterSize + edSize + dcasSize + markerSize + terminatorSize;
   $: requiredComplete = !!getVal('backbone') && gRNAs.length > 0 && !!getVal('promoter') && !!getVal('ed') && !!getVal('dcas') && !!getVal('terminator');
 
@@ -554,7 +559,8 @@
       if (val === null) return;          // still loading
       try { unsub(); } catch {}
       if (!val) {
-        goto('/sign-in?forward=' + encodeURIComponent('/tools/plasmid-builder'));
+        const forward = window.location.pathname + window.location.search + window.location.hash;
+        goto('/sign-in?forward=' + encodeURIComponent(forward));
         return;
       }
       ready = true;
@@ -563,7 +569,7 @@
 </script>
 
 {#if !ready}
-  <div class="flex items-center justify-center min-h-[60vh] text-[#032130]">
+  <div class="pt-36 flex items-center justify-center min-h-[60vh] text-[#032130]">
     <p>Loading...</p>
   </div>
 {:else}
@@ -654,6 +660,7 @@
                       d={segments[k].path} fill="none" stroke="#fff" stroke-width="34" stroke-linecap="round"
                       style="cursor:pointer"
                       on:click={() => openModal(moduleModalMap[k])}
+                      on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && openModal(moduleModalMap[k])}
                       role="button" tabindex="-1"
                     />
                   {/each}

@@ -36,6 +36,58 @@ interface IncomingPayload {
   language?: 'en' | 'hr';
 }
 
+const SIZE_BP: Record<string, number> = {
+  'Standard Backbone': 2013,
+  'Lentiviral backbone': 7528,
+  'PiggyBac compatible backbone': 3187,
+  'Sleeping Beauty compatible backbone': 3174,
+  'Secondary backbone - Puro': 3147,
+  'Secondary backbone - mClover3': 3264,
+  'SaCas9-gRNA': 390,
+  'SpCas9-gRNA': 390,
+  CbH: 848,
+  SV40: 369,
+  EF1a: 1204,
+  EFS: 281,
+  DNMT3A: 1001,
+  TET1: 2219,
+  VPR: 1643,
+  KRAB: 275,
+  p300: 1958,
+  HDAC3: 1334,
+  LSD1: 2609,
+  KDM5A: 2447,
+  RIOX1: 1973,
+  PRDM9: 965,
+  G9a: 1181,
+  'G9a-me3': 1181,
+  dSpCas9: 4290,
+  dSaCas9: 3276,
+  mRuby3: 809,
+  mClover3: 815,
+  mCerulean3: 810,
+  'Puromycin resistance': 676,
+  'Hygromycin resistance': 1105,
+  'Blasticidin resistance': 472,
+  'BGH terminator': 213,
+  'SV40 terminator': 151
+};
+
+function baseED(label: string): string {
+  if (!label) return '';
+  if (label === 'Custom') return 'Custom';
+  return label.split(' ')[0];
+}
+
+function sizeOf(label: unknown): number {
+  const normalized = String(label ?? '').trim();
+  return SIZE_BP[normalized] || SIZE_BP[baseED(normalized)] || 0;
+}
+
+function sizeOrFallback(sentSize: unknown, label: unknown): number {
+  return sizeOf(label) || Number(sentSize) || 0;
+}
+
 const ESC_MAP: Record<string, string> = {
   '&': '&amp;',
   '<': '&lt;',
@@ -129,29 +181,43 @@ export const submitPlasmidOrder = onCall(
       throw new HttpsError('failed-precondition', 'No email on customer profile');
     }
 
-    const configurations = payload.configurations!.map((cfg) => ({
-      backbone: cfg.backbone ?? '',
-      backboneSizeBp: Number(cfg.backboneSizeBp) || 0,
-      gRNAs: (cfg.gRNAs ?? []).map((g) => ({
+    const configurations = payload.configurations!.map((cfg) => {
+      const gRNAs = (cfg.gRNAs ?? []).map((g) => ({
         type: g.type ?? '',
         name: g.name ?? '',
         sequence: g.sequence ?? '',
         target: g.target ?? ''
-      })),
-      gRNAsSizeBp: Number(cfg.gRNAsSizeBp) || 0,
-      promoter: cfg.promoter ?? '',
-      promoterSizeBp: Number(cfg.promoterSizeBp) || 0,
-      ed: cfg.ed ?? '',
-      edSizeBp: Number(cfg.edSizeBp) || 0,
-      dcas: cfg.dcas ?? '',
-      dcasSizeBp: Number(cfg.dcasSizeBp) || 0,
-      markersFluorescent: Array.isArray(cfg.markersFluorescent) ? cfg.markersFluorescent.map(String) : [],
-      markersAntibiotic: Array.isArray(cfg.markersAntibiotic) ? cfg.markersAntibiotic.map(String) : [],
-      markersSizeBp: Number(cfg.markersSizeBp) || 0,
-      terminator: cfg.terminator ?? '',
-      terminatorSizeBp: Number(cfg.terminatorSizeBp) || 0,
-      totalSizeBp: Number(cfg.totalSizeBp) || 0
-    }));
+      }));
+      const markersFluorescent = Array.isArray(cfg.markersFluorescent) ? cfg.markersFluorescent.map(String) : [];
+      const markersAntibiotic = Array.isArray(cfg.markersAntibiotic) ? cfg.markersAntibiotic.map(String) : [];
+      const backboneSizeBp = sizeOrFallback(cfg.backboneSizeBp, cfg.backbone);
+      const gRNAsSizeBp = gRNAs.reduce((sum, g) => sum + sizeOf(g.type), 0) || Number(cfg.gRNAsSizeBp) || 0;
+      const promoterSizeBp = sizeOrFallback(cfg.promoterSizeBp, cfg.promoter);
+      const edSizeBp = sizeOrFallback(cfg.edSizeBp, cfg.ed);
+      const dcasSizeBp = sizeOrFallback(cfg.dcasSizeBp, cfg.dcas);
+      const markersSizeBp = [...markersFluorescent, ...markersAntibiotic].reduce((sum, marker) => sum + sizeOf(marker), 0) || Number(cfg.markersSizeBp) || 0;
+      const terminatorSizeBp = sizeOrFallback(cfg.terminatorSizeBp, cfg.terminator);
+      const totalSizeBp = backboneSizeBp + gRNAsSizeBp + promoterSizeBp + edSizeBp + dcasSizeBp + markersSizeBp + terminatorSizeBp;
+
+      return {
+        backbone: cfg.backbone ?? '',
+        backboneSizeBp,
+        gRNAs,
+        gRNAsSizeBp,
+        promoter: cfg.promoter ?? '',
+        promoterSizeBp,
+        ed: cfg.ed ?? '',
+        edSizeBp,
+        dcas: cfg.dcas ?? '',
+        dcasSizeBp,
+        markersFluorescent,
+        markersAntibiotic,
+        markersSizeBp,
+        terminator: cfg.terminator ?? '',
+        terminatorSizeBp,
+        totalSizeBp
+      };
+    });
 
     const now = admin.firestore.FieldValue.serverTimestamp();
     const orderRef = fs.collection('plasmid-orders').doc();

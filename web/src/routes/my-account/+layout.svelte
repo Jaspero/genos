@@ -46,8 +46,9 @@
   }
 
   onMount(async () => {
+    const forward = window.location.pathname + window.location.search + window.location.hash;
     const user = await redirectUnauthorized(
-      '/sign-in?forward=' + encodeURIComponent(window.location.pathname)
+      '/sign-in?forward=' + encodeURIComponent(forward)
     );
 
     if (user) {
@@ -112,6 +113,10 @@
   {#if data.footer}
     {@html data.footer}
   {/if}
+{:else}
+  <div class="pt-36 min-h-[60vh] flex items-center justify-center text-[#032130]">
+    <p>Loading...</p>
+  </div>
 {/if}
 
 <style lang="pcss">
