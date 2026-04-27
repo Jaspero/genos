@@ -543,19 +543,16 @@
     return map[k] ?? 0;
   }
 
-  onMount(async () => {
-    const authUser: any = await new Promise((resolve) => {
-      const unsub = authenticated.subscribe((data) => {
-        if (data === null) return;
-        try { unsub(); } catch {}
-        resolve(data);
-      });
+  onMount(() => {
+    const unsub = authenticated.subscribe((val) => {
+      if (val === null) return;          // still loading
+      try { unsub(); } catch {}
+      if (!val) {
+        goto('/sign-in?forward=' + encodeURIComponent('/tools/plasmid-builder'));
+        return;
+      }
+      ready = true;
     });
-    if (!authUser) {
-      goto('/sign-in?forward=' + encodeURIComponent('/tools/plasmid-builder'));
-      return;
-    }
-    ready = true;
   });
 </script>
 
@@ -566,7 +563,7 @@
 {:else}
   <div class="pt-24 max-w-[1280px] mx-auto px-4">
     <!-- Hero -->
-    <div class="grid grid-cols-[1.2fr_.8fr] gap-4 mb-4 mlg:grid-cols-1">
+    <div class="[display:grid] grid-cols-[1.2fr_.8fr] gap-4 mb-4 mlg:grid-cols-1">
       <div class="rounded-lg p-5 bg-[#032130] text-white">
         <h1 class="text-[1.75rem] font-bold leading-tight tracking-tight">{t('heroTitle')}</h1>
         <p class="mt-2 text-white/70 text-sm leading-relaxed">{t('heroText')}</p>
@@ -578,13 +575,13 @@
     </div>
 
     <!-- Builder -->
-    <div id="builder" class="scroll-mt-28 grid grid-cols-[1.18fr_.82fr] gap-4 items-start pb-8 mlg:grid-cols-1">
+    <div id="builder" class="scroll-mt-28 [display:grid] grid-cols-[1.18fr_.82fr] gap-4 items-start pb-8 mlg:grid-cols-1">
       <!-- Left column -->
       <div class="bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
         <h2 class="text-base font-bold text-[#032130] mb-1">{t('buildTitle')}</h2>
         <p class="text-gray-500 text-[.8125rem]">{t('buildText')}</p>
 
-        <div class="grid grid-cols-4 gap-2.5 mt-3 mlg:grid-cols-2 sm:grid-cols-1">
+        <div class="[display:grid] grid-cols-4 gap-2.5 mt-3 mlg:grid-cols-2 sm:grid-cols-1">
           {#each moduleBtns as mod}
             <button
               type="button"
@@ -670,7 +667,7 @@
         <div class="bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
           <h2 class="text-base font-bold text-[#032130] mb-1">{t('configTitle')}</h2>
           <p class="text-gray-500 text-[.8125rem]">{t('configText')}</p>
-          <div class="grid gap-2.5 mt-2.5">
+          <div class="[display:grid] gap-2.5 mt-2.5">
             {#each summaryItems as item}
               <div class="border border-gray-100 bg-gray-50 rounded-md p-3">
                 <div class="text-xs text-gray-500">{item.label}</div>
@@ -678,7 +675,7 @@
               </div>
             {/each}
           </div>
-          <div class="mt-3 grid gap-2.5">
+          <div class="mt-3 [display:grid] gap-2.5">
             <button type="button" class="w-full py-3 px-3.5 rounded bg-[#0A415C] text-white font-bold hover:bg-[#063044] disabled:opacity-45 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors" disabled={!requiredComplete} on:click={addToCart}>{t('addToCart')}</button>
             <button type="button" class="w-full py-3 px-3.5 rounded border border-gray-300 text-gray-700 font-bold bg-transparent hover:bg-gray-100 transition-colors" on:click={resetAll}>{t('reset')}</button>
           </div>
@@ -687,7 +684,7 @@
         <div id="cart" class="scroll-mt-28 bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
           <h2 class="text-base font-bold text-[#032130] mb-1">{t('cartTitle')}</h2>
           <p class="text-gray-500 text-[.8125rem]">{t('cartText')}</p>
-          <div class="mt-2.5 grid gap-2.5">
+          <div class="mt-2.5 [display:grid] gap-2.5">
             {#if !cart.length}
               <p class="text-gray-500 text-[.8125rem] mt-2">{t('cartEmpty')}</p>
             {:else}
@@ -740,7 +737,7 @@
         <div class="p-4 max-h-[70vh] overflow-y-auto">
 
           {#if modalType === 'backbone'}
-            <div class="grid grid-cols-2 gap-2.5 sm:grid-cols-1">
+            <div class="[display:grid] grid-cols-2 gap-2.5 sm:grid-cols-1">
               {#each backboneOptions as opt}
                 <button type="button" class="p-3 rounded-md border text-left transition-all hover:bg-white/10 {backbone === opt.name ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}" on:click={() => selectBackbone(opt.name)}>
                   <div class="font-black text-[.8125rem]">{opt.name}</div>
@@ -756,7 +753,7 @@
           {:else if modalType === 'gRNA'}
             <p class="text-white/60 text-[.8125rem] mb-3">{t('gRNAIntro')}</p>
             <div class="text-xs uppercase tracking-widest text-white/75 mb-2">{t('gRNAType')}</div>
-            <div class="grid grid-cols-2 gap-2.5 sm:grid-cols-1">
+            <div class="[display:grid] grid-cols-2 gap-2.5 sm:grid-cols-1">
               {#each ["SaCas9-gRNA", "SpCas9-gRNA", "Custom"] as gType}
                 <button type="button" class="p-3 rounded-md border text-left transition-all hover:bg-white/10 {gDraftType === gType ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}" on:click={() => selectGRNAType(gType)}>
                   <div class="font-black text-[.8125rem]">{gType}</div>
@@ -803,7 +800,7 @@
           {:else if modalType === 'promoter'}
             {#each promoterGroups as group}
               <div class="text-xs uppercase tracking-widest text-white/75 mt-3.5 first:mt-0 mb-2">{group.title}</div>
-              <div class="grid grid-cols-2 gap-2.5 sm:grid-cols-1">
+              <div class="[display:grid] grid-cols-2 gap-2.5 sm:grid-cols-1">
                 {#each group.items as val}
                   <button type="button" class="p-3 rounded-md border text-left transition-all hover:bg-white/10 {promoter === val ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}" on:click={() => selectPromoter(val)}>
                     <div class="font-black text-[.8125rem]">{val}</div>
@@ -818,7 +815,7 @@
           {:else if modalType === 'ed'}
             {#each edGroups as group}
               <div class="text-xs uppercase tracking-widest text-white/75 mt-3.5 first:mt-0 mb-2">{group.title}</div>
-              <div class="grid grid-cols-2 gap-2.5 sm:grid-cols-1">
+              <div class="[display:grid] grid-cols-2 gap-2.5 sm:grid-cols-1">
                 {#each group.items as val}
                   {@const parsed = parseEDOption(val)}
                   <button type="button" class="p-3 rounded-md border text-left transition-all hover:bg-white/10 {ed === parsed.value ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}" on:click={() => selectED(parsed.value)}>
@@ -834,7 +831,7 @@
             <p class="mt-2.5 text-xs text-white/75">{t('edNote')}</p>
 
           {:else if modalType === 'dcas'}
-            <div class="grid grid-cols-2 gap-2.5 sm:grid-cols-1">
+            <div class="[display:grid] grid-cols-2 gap-2.5 sm:grid-cols-1">
               {#each allowedDcasOptions() as val}
                 <button type="button" class="p-3 rounded-md border text-left transition-all hover:bg-white/10 {dcas === val ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}" on:click={() => selectDcas(val)}>
                   <div class="font-black text-[.8125rem]">{val}</div>
@@ -850,7 +847,7 @@
           {:else if modalType === 'markers'}
             <p class="text-white/60 text-[.8125rem] mb-3">{t('markersIntro')}</p>
             <div class="text-xs uppercase tracking-widest text-white/75 mb-2">{t('fluorTitle')}</div>
-            <div class="grid grid-cols-2 gap-2.5 sm:grid-cols-1">
+            <div class="[display:grid] grid-cols-2 gap-2.5 sm:grid-cols-1">
               {#each ["mRuby3","mClover3","mCerulean3"] as name}
                 <label class="flex gap-2.5 items-start p-3 rounded-md border cursor-pointer transition-all hover:bg-white/10 {markersFluorescent.includes(name) ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}">
                   <input type="checkbox" checked={markersFluorescent.includes(name)} on:change={() => toggleMarker('fluorescent', name)} class="mt-0.5 scale-110" />
@@ -862,7 +859,7 @@
               {/each}
             </div>
             <div class="text-xs uppercase tracking-widest text-white/75 mt-3.5 mb-2">{t('abxTitle')}</div>
-            <div class="grid grid-cols-2 gap-2.5 sm:grid-cols-1">
+            <div class="[display:grid] grid-cols-2 gap-2.5 sm:grid-cols-1">
               {#each ["Puromycin resistance","Hygromycin resistance","Blasticidin resistance"] as name}
                 <label class="flex gap-2.5 items-start p-3 rounded-md border cursor-pointer transition-all hover:bg-white/10 {markersAntibiotic.includes(name) ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}">
                   <input type="checkbox" checked={markersAntibiotic.includes(name)} on:change={() => toggleMarker('antibiotic', name)} class="mt-0.5 scale-110" />
@@ -879,7 +876,7 @@
             </div>
 
           {:else if modalType === 'terminator'}
-            <div class="grid grid-cols-2 gap-2.5 sm:grid-cols-1">
+            <div class="[display:grid] grid-cols-2 gap-2.5 sm:grid-cols-1">
               {#each [t('bghTerm'), t('sv40Term'), 'Custom'] as val}
                 <button type="button" class="p-3 rounded-md border text-left transition-all hover:bg-white/10 {terminator === val ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}" on:click={() => selectTerminator(val)}>
                   <div class="font-black text-[.8125rem]">{val}</div>
