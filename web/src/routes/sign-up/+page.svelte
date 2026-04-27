@@ -21,6 +21,33 @@
   let recaptchaVerify: () => Promise<string>;
   let type = 'password';
 
+  function getForwardPath() {
+    const forward = $page.url.searchParams.get('forward');
+
+    if (!forward) {
+      return '/my-account';
+    }
+
+    try {
+      const decoded = decodeURIComponent(forward);
+      return decoded.startsWith('/') && !decoded.startsWith('//') ? decoded : '/my-account';
+    } catch {
+      return '/my-account';
+    }
+  }
+
+  function updateEmail(e: CustomEvent<{ value: string }>) {
+    email = e.detail.value;
+  }
+
+  function updatePassword(e: CustomEvent<{ value: string }>) {
+    password = e.detail.value;
+  }
+
+  function updatePasswordConfirm(e: CustomEvent<{ value: string }>) {
+    passwordConfirm = e.detail.value;
+  }
+
   function toggleVisible() {
     type = type === 'password' ? 'text' : 'password';
   }
@@ -61,10 +88,7 @@
   }
 
   function navigate() {
-    const { searchParams } = $page.url;
-    goto(
-      searchParams.has('forward') ? decodeURIComponent(searchParams.get('forward') as string) : '/'
-    );
+    goto(getForwardPath());
   }
 </script>
 
@@ -91,7 +115,7 @@
             value={email}
             required
             autocomplete="email"
-            on:value={(e) => (email = e.detail.value)}
+            on:value={updateEmail}
           ></jp-input>
           <jp-input
             label="Password"
@@ -99,7 +123,7 @@
             value={password}
             required
             autocomplete="new-password"
-            on:value={(e) => (password = e.detail.value)}
+            on:value={updatePassword}
           ></jp-input>
           <jp-input
             label="Confirm Password"
@@ -107,7 +131,7 @@
             value={passwordConfirm}
             required
             autocomplete="repeat-password"
-            on:value={(e) => (passwordConfirm = e.detail.value)}
+            on:value={updatePasswordConfirm}
           ></jp-input>
           <div class="auth-toggle-vis">
             <button type="button" on:click={toggleVisible}>
@@ -120,7 +144,7 @@
 
         <div class="auth-footer-link">
           <span>Already have an account?</span>
-          <a href="/sign-in">Sign in</a>
+          <a href={`/sign-in?forward=${encodeURIComponent(getForwardPath())}`}>Sign in</a>
         </div>
       </form>
     </div>

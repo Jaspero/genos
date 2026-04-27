@@ -4,7 +4,7 @@
   import Dialog from '$lib/Dialog.svelte';
   import Recaptcha from '$lib/Recaptcha.svelte';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
-  import { auth } from '$lib/utils/firebase';
+  import { auth, authenticated } from '$lib/utils/firebase';
   import {
     GoogleAuthProvider,
     PhoneAuthProvider,
@@ -42,9 +42,22 @@
   let resolver: any;
   let verId: string;
 
-  async function submit() {
-    const { searchParams } = $page.url;
+  function getForwardPath() {
+    const forward = $page.url.searchParams.get('forward');
 
+    if (!forward) {
+      return '/my-account';
+    }
+
+    try {
+      const decoded = decodeURIComponent(forward);
+      return decoded.startsWith('/') && !decoded.startsWith('//') ? decoded : '/my-account';
+    } catch {
+      return '/my-account';
+    }
+  }
+
+  async function submit() {
     email = email.trim();
 
     if (loading) {
@@ -59,7 +72,7 @@
       await alertWrapper(
         signInWithEmailAndPassword(auth, email, password),
         'Login successful',
-        (e) => {
+        (e: any) => {
           if (e.code == 'auth/multi-factor-auth-required') {
             resolver = getMultiFactorResolver(auth, e);
             if (resolver.hints) {
@@ -89,11 +102,7 @@
         () => (loading = false)
       );
 
-      goto(
-        searchParams.has('forward')
-          ? decodeURIComponent(searchParams.get('forward') as string)
-          : '/my-account'
-      );
+      goto(getForwardPath());
     } catch {
       password = '';
     }
@@ -102,14 +111,12 @@
   }
 
   async function loginGoogle() {
-    const { searchParams } = $page.url;
-
     loading = true;
 
     await alertWrapper(
       signInWithPopup(auth, new GoogleAuthProvider()),
       'Login successful',
-      (e) => {
+      (e: any) => {
         if (e.code == 'auth/multi-factor-auth-required') {
           resolver = getMultiFactorResolver(auth, e);
           if (resolver.hints) {
@@ -134,13 +141,9 @@
       () => (loading = false)
     );
 
-    setTimeout(() => {
-      goto(
-        searchParams.has('forward')
-          ? decodeURIComponent(searchParams.get('forward') as string)
-          : '/my-account'
-      );
-    }, 1000);
+    if (!showCodeInput) {
+      setTimeout(() => goto(getForwardPath()), 1000);
+    }
   }
 
   async function resetPassword() {
@@ -177,6 +180,22 @@
     codeInput = '';
   }
 
+  function updateCodeInput(e: CustomEvent<{ value: string }>) {
+    codeInput = e.detail.value;
+  }
+
+  function updateEmail(e: CustomEvent<{ value: string }>) {
+    email = e.detail.value;
+  }
+
+  function updatePassword(e: CustomEvent<{ value: string }>) {
+    password = e.detail.value;
+  }
+
+  function updateResetEmail(e: CustomEvent<{ value: string }>) {
+    rEmail = e.detail.value;
+  }
+
   async function confirm() {
     confirmLoader = true;
     const cred = PhoneAuthProvider.credential(verId, codeInput);
@@ -190,15 +209,18 @@
       () => (confirmLoader = false)
     );
 
-    const { searchParams } = $page.url;
-    goto(
-      searchParams.has('forward') ? decodeURIComponent(searchParams.get('forward') as string) : '/'
-    );
+    goto(getForwardPath());
   }
 
   onMount(() => {
     recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container-id', {
       size: 'invisible'
+    });
+
+    const unsub = authenticated.subscribe((authUser) => {
+      if (authUser === null) return;
+      try { unsub(); } catch {}
+      if (authUser) goto(getForwardPath());
     });
   });
 </script>
@@ -223,7 +245,7 @@
             label="Verification Code"
             value={codeInput}
             required
-            on:value={(e) => (codeInput = e.detail.value)}
+            on:value={updateCodeInput}
           ></jp-input>
 
           <button type="submit" class="auth-btn" class:loading={confirmLoader}>Confirm</button>
@@ -242,7 +264,7 @@
               value={email}
               required
               autocomplete="email"
-              on:value={(e) => (email = e.detail.value)}
+              on:value={updateEmail}
             ></jp-input>
             <jp-input
               label="Password"
@@ -250,7 +272,7 @@
               value={password}
               required
               autocomplete="current-password"
-              on:value={(e) => (password = e.detail.value)}
+              on:value={updatePassword}
             ></jp-input>
             <div class="auth-toggle-vis">
               <button type="button" on:click={toggleVisible}>
@@ -271,7 +293,7 @@
 
           <div class="auth-footer-link">
             <span>Don't have an account?</span>
-            <a href="/sign-up">Sign up</a>
+            <a href={`/sign-up?forward=${encodeURIComponent(getForwardPath())}`}>Sign up</a>
           </div>
         </form>
       {/if}
@@ -293,7 +315,7 @@
       value={rEmail}
       required
       autocomplete="email"
-      on:value={(e) => (rEmail = e.detail.value)}
+      on:value={updateResetEmail}
     ></jp-input>
 
     <div class="mt-4">

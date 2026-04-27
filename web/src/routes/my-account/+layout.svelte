@@ -46,7 +46,9 @@
   }
 
   onMount(async () => {
-    const user = await redirectUnauthorized();
+    const user = await redirectUnauthorized(
+      '/sign-in?forward=' + encodeURIComponent(window.location.pathname)
+    );
 
     if (user) {
       loading = false;
@@ -114,7 +116,8 @@
 
 <style lang="pcss">
   .active {
-    @apply bg-slate-500 text-white;
+    background: #64748b;
+    color: #fff;
   }
 
   aside {

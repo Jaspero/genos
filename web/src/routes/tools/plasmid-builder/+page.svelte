@@ -91,6 +91,9 @@
       orderSubmitted: "Order submitted successfully! ID:",
       dSpCas9Desc: "Compatible with all effector domains.",
       dSaCas9Desc: "Compatible only with DNMT3A, TET1, VPR, KRAB.",
+      ordersLinkTitle: "Profile & plasmid orders",
+      ordersLinkText: "View submitted plasmid orders, current statuses, pricing and configuration details.",
+      ordersLinkCta: "View existing orders",
     },
     hr: {
       heroTitle: "Dizajniraj svoj ekspresijski plazmid",
@@ -176,6 +179,9 @@
       orderSubmitted: "Narudžba je uspješno poslana! ID:",
       dSpCas9Desc: "Kompatibilan sa svim efektorskim domenama.",
       dSaCas9Desc: "Kompatibilan samo s DNMT3A, TET1, VPR, KRAB.",
+      ordersLinkTitle: "Profil i narudžbe plazmida",
+      ordersLinkText: "Pogledaj poslane narudžbe plazmida, trenutne statuse, cijene i detalje konfiguracija.",
+      ordersLinkCta: "Pogledaj postojeće narudžbe",
     }
   };
 
@@ -561,7 +567,7 @@
     <p>Loading...</p>
   </div>
 {:else}
-  <div class="pt-24 max-w-[1280px] mx-auto px-4">
+  <div class="pt-36 max-w-[1280px] mx-auto px-4 mlg:pt-32">
     <!-- Hero -->
     <div class="[display:grid] grid-cols-[1.2fr_.8fr] gap-4 mb-4 mlg:grid-cols-1">
       <div class="rounded-lg p-5 bg-[#032130] text-white">
@@ -571,6 +577,10 @@
       <div class="rounded-lg p-5 bg-[#032130] text-white">
         <h2 class="text-base font-bold mb-1">{t('rulesTitle')}</h2>
         <p class="text-white/60 text-[.8125rem] leading-relaxed">{@html t('rulesText')}</p>
+        <a href="/my-account/plasmid-orders" class="mt-4 flex items-center justify-between gap-3 rounded-md border border-white/15 bg-white/10 px-3 py-2.5 text-sm font-bold text-white transition-colors hover:bg-white/15">
+          <span>{t('ordersLinkCta')}</span>
+          <span aria-hidden="true">→</span>
+        </a>
       </div>
     </div>
 
@@ -682,6 +692,13 @@
         </div>
 
         <div id="cart" class="scroll-mt-28 bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
+          <div class="mb-4 rounded-md border border-[#0A415C]/15 bg-[#0A415C]/5 p-3">
+            <h2 class="text-base font-bold text-[#032130] mb-1">{t('ordersLinkTitle')}</h2>
+            <p class="text-gray-500 text-[.8125rem] leading-relaxed mb-3">{t('ordersLinkText')}</p>
+            <a href="/my-account/plasmid-orders" class="inline-flex items-center justify-center rounded bg-[#0A415C] px-3 py-2 text-xs font-bold text-white transition-colors hover:bg-[#063044]">
+              {t('ordersLinkCta')}
+            </a>
+          </div>
           <h2 class="text-base font-bold text-[#032130] mb-1">{t('cartTitle')}</h2>
           <p class="text-gray-500 text-[.8125rem]">{t('cartText')}</p>
           <div class="mt-2.5 [display:grid] gap-2.5">
@@ -719,7 +736,7 @@
 
   <!-- Modal -->
   {#if modalOpen}
-    <div class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50" on:click|self={closeModal} role="presentation">
+    <div class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50" on:click|self={closeModal} on:keydown={(e) => e.key === 'Escape' && closeModal()} role="presentation">
       <div class="w-full max-w-[920px] rounded-lg border border-gray-700 bg-[#032130] shadow-2xl overflow-hidden text-white" role="dialog" aria-modal="true">
         <div class="flex items-center justify-between p-4 pb-3 border-b border-white/10">
           <h3 class="text-[.9375rem] font-bold">
