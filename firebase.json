@@ -13,13 +13,13 @@
       "rewrites": [
         {
           "source": "**",
-          "destination": "/index.html"
+            "destination": "/index.html"
         }
       ],
       "headers": [
         {
-          "source": "/**",
-          "headers": [
+            "source": "/**",
+            "headers": [
             {
               "key": "Cache-Control",
               "value": "max-age=300"
@@ -268,7 +268,7 @@
       "rewrites": [
         {
           "source": "**",
-          "destination": "/index.html"
+            "destination": "/200.html"
         }
       ],
       "headers": [
@@ -277,7 +277,7 @@
           "headers": [
             {
               "key": "Cache-Control",
-              "value": "max-age=300"
+              "value": "no-cache, max-age=0, must-revalidate"
             },
             {
               "key": "x-frame-options",

@@ -55,9 +55,6 @@ export const PROJECTS = [
         callForProposals: 'DIGIT.2.2.01',
         coordinator: 'Genos d.o.o.',
         projectParticipants: 1,
-        toolUrl: '/tools/plasmid-builder',
-        toolLabelEn: 'Open tool',
-        toolLabelHr: 'Otvori alat',
       },
       {
         short: 'GlycoCardio (ESMP)',

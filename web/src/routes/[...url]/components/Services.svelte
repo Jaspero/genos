@@ -501,6 +501,15 @@
               : 'Dizajn i proizvodnja molekularnih alata temeljenih na CRISPR/dCas9 tehnologiji za specifične namjene'
           }
         </li>
+        <li>
+          <a href="/tools/plasmid-builder">
+            {
+              $language === 'en'
+                ? 'Genos Plasmid Builder tool'
+                : 'Genos Plasmid Builder alat'
+            }
+          </a>
+        </li>
       </ul>
     </div>
     <hr>

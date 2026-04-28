@@ -1,9 +1,32 @@
 import { firestore, bucket } from '$lib/utils/firebase-admin';
 import { redirect } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
+import type { EntryGenerator, PageServerLoad } from './$types';
+
+export const entries: EntryGenerator = async () => {
+  const snapshot = await firestore
+    .collection('pages')
+    .where('active', '==', true)
+    .select('url')
+    .get();
+
+  const entries = snapshot.docs
+    .map((doc) => doc.data().url as string)
+    .filter((url) => typeof url === 'string')
+    .map((url) => url.trim())
+    .filter((url) => url && url !== '/')
+    .map((url) => ({ url: url.replace(/^\/+/, '') }));
+
+  // '/home' is a public route alias for the CMS homepage stored at '/'.
+  entries.push({ url: 'home' });
+
+  return entries;
+};
 
 export const load: PageServerLoad = async ({ params }) => {
-  const url = params.url.trim();
+  const rawUrl = params.url.trim();
+  // The Firebase redirect sends '/' → '/home', but the CMS stores the homepage at URL '/'.
+  // Map 'home' back to the root so the Firestore lookup succeeds.
+  const url = rawUrl === 'home' ? '' : rawUrl;
 
   const { docs } = await firestore
     .collection('pages')

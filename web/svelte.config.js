@@ -9,7 +9,7 @@ const config = {
   kit: {
     adapter: adapter({
       pages: '../public/web',
-      fallback: 'index.html',
+      fallback: '200.html',
       strict: false,
       clearBuild: buildConfig.clearBuild,
       deleted: buildConfig.deleted || []
