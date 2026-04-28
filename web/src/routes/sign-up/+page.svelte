@@ -140,7 +140,7 @@
     justify-content: center;
     align-items: center;
     min-height: calc(100vh - 10rem);
-    padding: 8rem 1.5rem 3rem;
+    padding: 9rem 1.5rem 3rem;
   }
 
   .auth-card {
@@ -274,7 +274,7 @@
 
   @media (max-width: 600px) {
     .auth-page {
-      padding: 6.5rem 1rem 2rem;
+      padding: 7.25rem 1rem 2rem;
     }
     .auth-body {
       padding: 1.5rem;

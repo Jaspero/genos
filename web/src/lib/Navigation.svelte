@@ -178,7 +178,7 @@
 
 </script>
 
-<header class="navigation" class:scrolled={scrolled > 96 || $page.url.pathname.includes('/posts/') || $page.url.pathname.includes('/tools/') || $page.url.pathname.includes('/sign-in') || $page.url.pathname.includes('/sign-up') || $page.url.pathname.includes('/reset-password')} class:inactive={!showNavbar}>
+<header class="navigation" class:scrolled={scrolled > 96 || $page.url.pathname.includes('/posts/') || $page.url.pathname.includes('/tools/') || $page.url.pathname.includes('/my-account') || $page.url.pathname.includes('/sign-in') || $page.url.pathname.includes('/sign-up') || $page.url.pathname.includes('/reset-password')} class:inactive={!showNavbar}>
   <nav>
     <a href={$language === 'en' ? '/' : '/pocetna'}>
       <img class="logo" src="/brand/genos-logo-white.svg" alt="genos logo">

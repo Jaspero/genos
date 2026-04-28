@@ -168,10 +168,10 @@
 {:else}
   <div class="flex flex-col gap-4">
     {#each orders as order}
-      <div class="shadow rounded p-4">
+      <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
         <div class="flex justify-between items-center">
           <div>
-            <span class="font-bold">Order #{order.id.slice(0, 8)}</span>
+            <span class="font-bold text-[#032130]">Order #{order.id.slice(0, 8)}</span>
             <span class="text-gray-400 text-sm ml-2">{formatDate(order.createdAt)}</span>
           </div>
           <div class="flex items-center gap-3">
@@ -189,20 +189,17 @@
         <div class="text-sm text-gray-400 mt-1">
           {order.configurations.length} configuration{order.configurations.length !== 1 ? 's' : ''}
         </div>
-        <button
-          class="text-sm text-blue-400 mt-2 underline"
-          on:click={() => toggle(order.id)}
-        >
+        <button class="mt-2 text-sm font-semibold text-[#0A415C] underline" on:click={() => toggle(order.id)}>
           {expandedId === order.id ? 'Hide details' : 'Show details'}
         </button>
 
         {#if expandedId === order.id}
-          <div class="mt-3 border-t pt-3 text-sm">
+          <div class="mt-3 border-t border-slate-200 pt-3 text-sm">
             {#if order.notes}
               <p class="text-gray-400 mb-2"><b>Notes:</b> {order.notes}</p>
             {/if}
             {#each order.configurations as cfg, i}
-              <div class="mb-3 p-3 bg-slate-50 rounded" style="background:rgba(0,0,0,.02)">
+              <div class="mb-3 rounded-lg border border-slate-200 bg-slate-50 p-3">
                 <div class="font-bold mb-1">Configuration #{i + 1}</div>
                 <table class="text-sm w-full">
                   <tbody>
