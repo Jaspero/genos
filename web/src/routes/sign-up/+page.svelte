@@ -9,9 +9,6 @@
     signInWithPopup
   } from 'firebase/auth';
   import Recaptcha from '$lib/Recaptcha.svelte';
-  import GoogleButton from '$lib/GoogleButton.svelte';
-  import '@jaspero/web-components/dist/input.wc';
-  import '@jaspero/web-components/dist/input.css';
   import { renderAlert } from '@jaspero/web-components/dist/render-alert';
 
   let email = '';
@@ -34,18 +31,6 @@
     } catch {
       return '/my-account';
     }
-  }
-
-  function updateEmail(e: CustomEvent<{ value: string }>) {
-    email = e.detail.value;
-  }
-
-  function updatePassword(e: CustomEvent<{ value: string }>) {
-    password = e.detail.value;
-  }
-
-  function updatePasswordConfirm(e: CustomEvent<{ value: string }>) {
-    passwordConfirm = e.detail.value;
   }
 
   function toggleVisible() {
@@ -104,35 +89,31 @@
 
     <div class="auth-body">
       <form on:submit|preventDefault={signUp}>
-        <GoogleButton onClick={signupGoogle} label="Sign up with Google" />
+        <button type="button" class="google-auth-btn" on:click={signupGoogle}>
+          <svg viewBox="0 0 48 48" class="h-4 w-4" aria-hidden="true">
+            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+          </svg>
+          <span>Sign up with Google</span>
+        </button>
 
         <div class="auth-divider"><span>or sign up with email</span></div>
 
         <div class="auth-fields">
-          <jp-input
-            label="Email"
-            type="email"
-            value={email}
-            required
-            autocomplete="email"
-            on:value={updateEmail}
-          ></jp-input>
-          <jp-input
-            label="Password"
-            {type}
-            value={password}
-            required
-            autocomplete="new-password"
-            on:value={updatePassword}
-          ></jp-input>
-          <jp-input
-            label="Confirm Password"
-            {type}
-            value={passwordConfirm}
-            required
-            autocomplete="repeat-password"
-            on:value={updatePasswordConfirm}
-          ></jp-input>
+          <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpEmail">
+            Email
+            <input id="signUpEmail" type="email" bind:value={email} required autocomplete="email" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+          </label>
+          <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpPassword">
+            Password
+            <input id="signUpPassword" {type} bind:value={password} required autocomplete="new-password" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+          </label>
+          <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpPasswordConfirm">
+            Confirm Password
+            <input id="signUpPasswordConfirm" {type} bind:value={passwordConfirm} required autocomplete="new-password" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+          </label>
           <div class="auth-toggle-vis">
             <button type="button" on:click={toggleVisible}>
               {type === 'password' ? 'Show password' : 'Hide password'}
@@ -140,7 +121,7 @@
           </div>
         </div>
 
-        <button class="auth-btn" type="submit" class:loading>Sign up</button>
+        <button class="auth-btn" type="submit" class:loading={loading}>Sign up</button>
 
         <div class="auth-footer-link">
           <span>Already have an account?</span>
@@ -159,7 +140,7 @@
     justify-content: center;
     align-items: center;
     min-height: calc(100vh - 10rem);
-    padding: 6rem 1.5rem 3rem;
+    padding: 8rem 1.5rem 3rem;
   }
 
   .auth-card {
@@ -178,8 +159,9 @@
   }
 
   .auth-logo {
+    display: block;
+    margin: 0 auto 1rem;
     height: 2rem;
-    margin-bottom: 1rem;
   }
 
   .auth-header h1 {
@@ -257,6 +239,26 @@
     background: #e5e7eb;
   }
 
+  .google-auth-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    border: 1px solid #d1d5db;
+    border-radius: .375rem;
+    background: #fff;
+    color: #111827;
+    font-size: .875rem;
+    font-weight: 600;
+    padding: .7rem 1rem;
+    transition: background .2s;
+  }
+
+  .google-auth-btn:hover {
+    background: #f8fafc;
+  }
+
   .auth-footer-link {
     margin-top: 1.25rem;
     text-align: center;
@@ -272,7 +274,7 @@
 
   @media (max-width: 600px) {
     .auth-page {
-      padding: 5rem 1rem 2rem;
+      padding: 6.5rem 1rem 2rem;
     }
     .auth-body {
       padding: 1.5rem;

@@ -5,8 +5,6 @@
   import { goto } from '$app/navigation';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
   import { meta } from '$lib/meta/meta.store';
-  import '@jaspero/web-components/dist/input.wc';
-  import '@jaspero/web-components/dist/input.css';
   import { renderAlert } from '@jaspero/web-components/dist/render-alert';
   import { FirebaseError } from 'firebase/app';
   import { signOut } from 'firebase/auth';
@@ -113,61 +111,55 @@
   };
 </script>
 
-<main class="flex flex-col gap-4 max-w-[400px]">
-  <div class="shadow rounded p-4 w-full">
-    <h3 class="mb-2 text-l font-bold">Change Password</h3>
+<main class="mx-auto max-w-[760px] [display:grid] gap-4">
+  <section class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+    <h3 class="text-lg font-black text-[#032130]">Change Password</h3>
+    <p class="mt-1 text-sm text-slate-500">Update your account password.</p>
 
-    <form class="flex flex-col gap-2" on:submit|preventDefault={changePassword}>
-      <jp-input
-        label="New Password"
-        type="password"
-        value={newPassword}
-        required
-        on:value={(e) => (newPassword = e.detail.value)}
-      />
-      <jp-input
-        label="Repeat Password"
-        type="password"
-        value={repeatPassword}
-        required
-        on:value={(e) => (repeatPassword = e.detail.value)}
-      />
+    <form class="mt-4 [display:grid] gap-3" on:submit|preventDefault={changePassword}>
+      <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="newPassword">
+        New Password
+        <input id="newPassword" type="password" bind:value={newPassword} required class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+      </label>
+
+      <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="repeatPassword">
+        Repeat Password
+        <input id="repeatPassword" type="password" bind:value={repeatPassword} required class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+      </label>
 
       <div>
-        <button type="submit" class="button">Change Password</button>
+        <button type="submit" class="rounded-lg bg-[#0A415C] px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#063044]">Change Password</button>
       </div>
     </form>
-  </div>
-  <div class="shadow rounded p-4 w-full">
-    <h3 class="mb-2 text-l font-bold">Change Email</h3>
+  </section>
 
-    <form class="flex flex-col gap-2" on:submit|preventDefault={changeEmail}>
-      <jp-input
-        label="New Email"
-        type="email"
-        value={email}
-        required
-        on:value={(e) => (email = e.detail.value)}
-      />
+  <section class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+    <h3 class="text-lg font-black text-[#032130]">Change Email</h3>
+    <p class="mt-1 text-sm text-slate-500">Set a new email address for this account.</p>
+
+    <form class="mt-4 [display:grid] gap-3" on:submit|preventDefault={changeEmail}>
+      <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="newEmail">
+        New Email
+        <input id="newEmail" type="email" bind:value={email} required class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+      </label>
 
       <div>
-        <button type="submit" class="button">Change Email</button>
+        <button type="submit" class="rounded-lg bg-[#0A415C] px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#063044]">Change Email</button>
       </div>
     </form>
-  </div>
-  <div class="shadow rounded p-4 w-full">
-    <h3 class="mb-2 text-l font-bold text-red-400">Delete Account</h3>
-    <p>
+  </section>
+
+  <section class="rounded-xl border border-red-200 bg-red-50/60 p-5 shadow-sm">
+    <h3 class="text-lg font-black text-red-700">Delete Account</h3>
+    <p class="mt-2 text-sm text-slate-700">
       In case you want to remove your account and any information associated with it from our
       system. You can do so here.
     </p>
-    <p>
+    <p class="mt-2 text-sm text-slate-700">
       Be careful this action is irreversible and all of your personal information will be removed.
     </p>
-    <button type="button" class="button mt-2" on:click={() => (deleteDialog = true)}
-      >Delete Account</button
-    >
-  </div>
+    <button type="button" class="mt-3 rounded-lg bg-red-700 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-red-800" on:click={() => (deleteDialog = true)}>Delete Account</button>
+  </section>
 </main>
 
 <Dialog bind:showing={deleteDialog}>

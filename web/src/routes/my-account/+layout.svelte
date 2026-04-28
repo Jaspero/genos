@@ -1,7 +1,7 @@
 <script lang="ts">
   import { signOut } from 'firebase/auth';
   import { goto } from '$app/navigation';
-  import { auth, user } from '$lib/utils/firebase';
+  import { auth } from '$lib/utils/firebase';
   import { page } from '$app/stores';
   import { meta } from '$lib/meta/meta.store';
   import { onMount } from 'svelte';
@@ -18,20 +18,8 @@
 
   const links = [
     {
-      label: 'Orders',
-      url: '/my-account'
-    },
-    {
       label: 'Plasmid Orders',
       url: '/my-account/plasmid-orders'
-    },
-    {
-      label: 'Favorites',
-      url: '/my-account/favorites'
-    },
-    {
-      label: 'Coupons',
-      url: '/my-account/coupons'
     },
     {
       label: 'Settings',
@@ -62,53 +50,46 @@
     {@html data.header}
   {/if}
 
-  <div class="flex flex-wrap p-20">
-    <div class="flex justify-start w-full gap-4">
-      <aside class="w-[300px] flex flex-col gap-4">
-        <div class="shadow rounded p-4 flex gap-2 items-center">
-          <div class="w-10 h-10 rounded-full bg-slate-500 text-white text-center leading-10">
-            {($user?.name || 'A').charAt(0).toUpperCase()}
-          </div>
-          <div>
-            <div>{$user?.name}</div>
-            <div class="text-gray-400">{$user?.email}</div>
-          </div>
-        </div>
-
-        <nav class="shadow p-4 rounded flex flex-col text-lg">
+  <section class="mx-auto max-w-[1180px] px-4 pt-36 pb-16 mlg:pt-32">
+    <div class="[display:grid] grid-cols-[260px_minmax(0,1fr)] gap-6 mlg:grid-cols-1">
+      <aside class="h-fit rounded-xl border border-slate-200 bg-white p-3 shadow-sm mlg:sticky mlg:top-24">
+        <div class="px-3 py-2 text-xs font-black uppercase tracking-[.14em] text-slate-400">My Account</div>
+        <nav class="mt-1 flex flex-col gap-1">
           {#each links as link}
             <a
-              class="p-2 transition hover:bg-slate-400 hover:text-white"
-              class:active={pathname === link.url}
+              class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors"
+              class:bg-[#0A415C]={pathname === link.url}
+              class:text-white={pathname === link.url}
+              class:text-slate-700={pathname !== link.url}
+              class:hover:bg-slate-100={pathname !== link.url}
               href={link.url}
             >
               {link.label}
             </a>
           {/each}
-          <div class="mt-20">
-            <button
-              type="button"
-              class=" p-2 hover:bg-slate-400 hover:text-white w-full text-left"
-              on:click={logOut}>Sign Out</button
-            >
-          </div>
+          <button
+            type="button"
+            class="mt-3 rounded-lg border border-slate-200 px-3 py-2 text-left text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100"
+            on:click={logOut}
+          >
+            Sign Out
+          </button>
         </nav>
       </aside>
-      <div class="flex-1">
-        <div class="mb-4 h-[80px] flex flex-col justify-center">
-          <h2 class="text-2xl font-bold">{$meta.title}</h2>
-          <div class="text-sm">
-            <a class="text-gray-400 underline hover:text-black" href="/">Home</a>
-            <span class="text-gray-400">/</span>
-            <a class="text-gray-400 underline hover:text-black" href="/my-account">My Account</a>
-            <span class="text-gray-400">/</span>
+
+      <div class="min-w-0">
+        <div class="mb-5 rounded-xl border border-slate-200 bg-white px-5 py-4 shadow-sm">
+          <h2 class="text-2xl font-black text-[#032130]">{$meta.title}</h2>
+          <div class="mt-1 text-sm text-slate-500">
+            <a class="underline hover:text-slate-700" href="/">Home</a>
+            <span class="mx-1">/</span>
             <span>{$meta.title}</span>
           </div>
         </div>
         <slot />
       </div>
     </div>
-  </div>
+  </section>
 
   {#if data.footer}
     {@html data.footer}
@@ -118,14 +99,3 @@
     <p>Loading...</p>
   </div>
 {/if}
-
-<style lang="pcss">
-  .active {
-    background: #64748b;
-    color: #fff;
-  }
-
-  aside {
-    height: fit-content;
-  }
-</style>
