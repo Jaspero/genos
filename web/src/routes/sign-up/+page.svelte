@@ -2,21 +2,68 @@
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
-  import { auth } from '$lib/utils/firebase';
+  import { auth, db } from '$lib/utils/firebase';
   import {
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
-    signInWithPopup
+    signInWithPopup,
+    updateProfile
   } from 'firebase/auth';
+  import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
   import Recaptcha from '$lib/Recaptcha.svelte';
   import { renderAlert } from '@jaspero/web-components/dist/render-alert';
 
   let email = '';
   let password = '';
   let passwordConfirm = '';
+  let firstName = '';
+  let lastName = '';
+  let recoveryEmail = '';
+  let institution = '';
+  let position = '';
+  let institutionAddress = '';
   let loading = false;
   let recaptchaVerify: () => Promise<string>;
   let type = 'password';
+
+  function displayNameValue() {
+    return [firstName.trim(), lastName.trim()].filter(Boolean).join(' ').trim();
+  }
+
+  function validateProfileFields() {
+    if (
+      !firstName.trim() ||
+      !lastName.trim() ||
+      !recoveryEmail.trim() ||
+      !institution.trim() ||
+      !position.trim() ||
+      !institutionAddress.trim()
+    ) {
+      renderAlert({
+        title: 'Error',
+        message: 'Please fill in all required profile fields.',
+        state: 'error'
+      });
+
+      return false;
+    }
+
+    return true;
+  }
+
+  function profilePayload(baseEmail: string) {
+    return {
+      email: baseEmail.trim(),
+      name: displayNameValue(),
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
+      recoveryEmail: recoveryEmail.trim(),
+      institution: institution.trim(),
+      position: position.trim(),
+      institutionAddress: institutionAddress.trim(),
+      updatedAt: serverTimestamp()
+    };
+  }
 
   function getForwardPath() {
     const forward = $page.url.searchParams.get('forward');
@@ -42,16 +89,42 @@
       return renderAlert({ title: 'Error', message: 'Passwords do not match!', state: 'error' });
     }
 
+    if (!validateProfileFields()) {
+      return;
+    }
+
     email = email.trim();
 
     loading = true;
 
-    await alertWrapper(
+    const result = await alertWrapper(
       createUserWithEmailAndPassword(auth, email, password),
       'Sign up successful',
       '',
       () => (loading = false)
     );
+
+    if (!result) {
+      loading = false;
+      return;
+    }
+
+    if (auth.currentUser) {
+      const name = displayNameValue();
+
+      if (name) {
+        await updateProfile(auth.currentUser, { displayName: name });
+      }
+
+      await setDoc(
+        doc(db, 'customers', auth.currentUser.uid),
+        {
+          ...profilePayload(email),
+          createdAt: serverTimestamp()
+        },
+        { merge: true }
+      );
+    }
 
     loading = false;
     navigate();
@@ -60,16 +133,42 @@
   async function signupGoogle() {
     loading = true;
 
-    await alertWrapper(
+    const result = await alertWrapper(
       signInWithPopup(auth, new GoogleAuthProvider()),
       'Sign up successful',
       '',
       () => (loading = false)
     );
 
+    if (result && auth.currentUser) {
+      const userRef = doc(db, 'customers', auth.currentUser.uid);
+      const existing = await getDoc(userRef);
+
+      if (!existing.exists()) {
+        const parts = (auth.currentUser.displayName || '').trim().split(/\s+/).filter(Boolean);
+
+        await setDoc(
+          userRef,
+          {
+            email: auth.currentUser.email || '',
+            name: auth.currentUser.displayName || '',
+            firstName: parts[0] || '',
+            lastName: parts.slice(1).join(' '),
+            recoveryEmail: '',
+            institution: '',
+            position: '',
+            institutionAddress: '',
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp()
+          },
+          { merge: true }
+        );
+      }
+    }
+
     loading = false;
 
-    navigate();
+    goto('/my-account/settings?completeProfile=1');
   }
 
   function navigate() {
@@ -101,10 +200,36 @@
 
         <div class="auth-divider"><span>or sign up with email</span></div>
 
+        <p class="auth-profile-hint">Google sign-up redirects you to complete the remaining profile details after authentication.</p>
+
         <div class="auth-fields">
+          <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpFirstName">
+            First Name
+            <input id="signUpFirstName" type="text" bind:value={firstName} required autocomplete="given-name" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+          </label>
+          <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpLastName">
+            Last Name
+            <input id="signUpLastName" type="text" bind:value={lastName} required autocomplete="family-name" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+          </label>
           <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpEmail">
             Email
             <input id="signUpEmail" type="email" bind:value={email} required autocomplete="email" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+          </label>
+          <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpRecoveryEmail">
+            Recovery Email
+            <input id="signUpRecoveryEmail" type="email" bind:value={recoveryEmail} required autocomplete="email" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+          </label>
+          <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpInstitution">
+            Institution
+            <input id="signUpInstitution" type="text" bind:value={institution} required autocomplete="organization" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+          </label>
+          <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpPosition">
+            Position in Institution
+            <input id="signUpPosition" type="text" bind:value={position} required autocomplete="organization-title" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+          </label>
+          <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpInstitutionAddress">
+            Institution Address
+            <textarea id="signUpInstitutionAddress" bind:value={institutionAddress} required rows="3" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]"></textarea>
           </label>
           <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpPassword">
             Password
@@ -237,6 +362,13 @@
     flex: 1;
     height: 1px;
     background: #e5e7eb;
+  }
+
+  .auth-profile-hint {
+    margin: -0.5rem 0 1rem;
+    color: #64748b;
+    font-size: 0.75rem;
+    line-height: 1.5;
   }
 
   .google-auth-btn {

@@ -36,6 +36,16 @@ interface IncomingPayload {
   language?: 'en' | 'hr';
 }
 
+interface CustomerProfileSnapshot {
+  email: string;
+  name: string;
+  firstName: string;
+  lastName: string;
+  institution: string;
+  position: string;
+  institutionAddress: string;
+}
+
 const SIZE_BP: Record<string, number> = {
   'Standard Backbone': 2013,
   'Lentiviral backbone': 7528,
@@ -107,17 +117,25 @@ function esc(value: unknown): string {
   return String(value ?? '').replace(/[&<>"']/g, (m) => ESC_MAP[m]);
 }
 
+function sizedList(items: string[]): string {
+  if (!items.length) {
+    return '—';
+  }
+
+  return items.map((item) => `${esc(item)} (${sizeOf(item)} bp)`).join(', ');
+}
+
 function configHtml(cfg: IncomingConfiguration, idx: number): string {
   const gRNA = (cfg.gRNAs ?? [])
     .map(
       (g, i) =>
         `<li>${esc(g.type)}${g.name ? ` — <b>${esc(g.name)}</b>` : ''}${
           g.sequence ? ` — seq: ${esc(g.sequence)}` : ''
-        }${g.target ? ` — target: ${esc(g.target)}` : ''}</li>`
+        }${g.target ? ` — target: ${esc(g.target)}` : ''} (${sizeOf(g.type)} bp)</li>`
     )
     .join('');
-  const fluor = (cfg.markersFluorescent ?? []).map(esc).join(', ') || '—';
-  const abx = (cfg.markersAntibiotic ?? []).map(esc).join(', ') || '—';
+  const fluor = sizedList(cfg.markersFluorescent ?? []);
+  const abx = sizedList(cfg.markersAntibiotic ?? []);
   return `
     <h3 style="margin:24px 0 8px;font-family:sans-serif;">Configuration #${idx + 1}</h3>
     <table cellpadding="6" cellspacing="0" border="0" style="border-collapse:collapse;font-family:sans-serif;font-size:13px;border:1px solid #ddd;">
@@ -128,8 +146,23 @@ function configHtml(cfg: IncomingConfiguration, idx: number): string {
       <tr><td><b>dCas9</b></td><td>${esc(cfg.dcas)} (${cfg.dcasSizeBp ?? 0} bp)</td></tr>
       <tr><td><b>Markers (fluor)</b></td><td>${fluor}</td></tr>
       <tr><td><b>Markers (abx)</b></td><td>${abx}</td></tr>
+      <tr><td><b>Markers total</b></td><td>${cfg.markersSizeBp ?? 0} bp</td></tr>
       <tr><td><b>Terminator</b></td><td>${esc(cfg.terminator)} (${cfg.terminatorSizeBp ?? 0} bp)</td></tr>
       <tr><td><b>Total size</b></td><td>${cfg.totalSizeBp ?? 0} bp</td></tr>
+    </table>
+  `;
+}
+
+function customerProfileHtml(profile: CustomerProfileSnapshot): string {
+  return `
+    <h3 style="margin:24px 0 8px;font-family:sans-serif;">Customer profile</h3>
+    <table cellpadding="6" cellspacing="0" border="0" style="border-collapse:collapse;font-family:sans-serif;font-size:13px;border:1px solid #ddd;">
+      <tr><td><b>First name</b></td><td>${esc(profile.firstName || '—')}</td></tr>
+      <tr><td><b>Last name</b></td><td>${esc(profile.lastName || '—')}</td></tr>
+      <tr><td><b>Email</b></td><td>${esc(profile.email || '—')}</td></tr>
+      <tr><td><b>Institution</b></td><td>${esc(profile.institution || '—')}</td></tr>
+      <tr><td><b>Position</b></td><td>${esc(profile.position || '—')}</td></tr>
+      <tr><td><b>Institution address</b></td><td>${esc(profile.institutionAddress || '—')}</td></tr>
     </table>
   `;
 }
@@ -173,13 +206,37 @@ export const submitPlasmidOrder = onCall(
 
     let customerEmail = request.auth!.token.email ?? '';
     let customerName = (request.auth!.token.name as string) ?? '';
+    const customerProfile: CustomerProfileSnapshot = {
+      email: customerEmail,
+      name: customerName,
+      firstName: '',
+      lastName: '',
+      institution: '',
+      position: '',
+      institutionAddress: ''
+    };
     try {
       const customerSnap = await fs.collection('customers').doc(uid).get();
-      const cd = customerSnap.data() as { email?: string; firstName?: string; lastName?: string; name?: string } | undefined;
+      const cd = customerSnap.data() as {
+        email?: string;
+        firstName?: string;
+        lastName?: string;
+        name?: string;
+        institution?: string;
+        position?: string;
+        institutionAddress?: string;
+      } | undefined;
       if (cd) {
         customerEmail = cd.email || customerEmail;
         const composed = [cd.firstName, cd.lastName].filter(Boolean).join(' ').trim();
         customerName = composed || cd.name || customerName;
+        customerProfile.email = customerEmail;
+        customerProfile.name = customerName;
+        customerProfile.firstName = cd.firstName || '';
+        customerProfile.lastName = cd.lastName || '';
+        customerProfile.institution = cd.institution || '';
+        customerProfile.position = cd.position || '';
+        customerProfile.institutionAddress = cd.institutionAddress || '';
       }
     } catch {
       // ignore
@@ -187,6 +244,19 @@ export const submitPlasmidOrder = onCall(
 
     if (!customerEmail) {
       throw new HttpsError('failed-precondition', 'No email on customer profile');
+    }
+
+    if (
+      !customerProfile.firstName ||
+      !customerProfile.lastName ||
+      !customerProfile.institution ||
+      !customerProfile.position ||
+      !customerProfile.institutionAddress
+    ) {
+      throw new HttpsError(
+        'failed-precondition',
+        'Please complete your profile details before submitting a plasmid order.'
+      );
     }
 
     const configurations = payload.configurations!.map((cfg) => {
@@ -234,6 +304,7 @@ export const submitPlasmidOrder = onCall(
       customerId: uid,
       customerEmail,
       customerName,
+      customerProfile,
       configurations,
       notes: typeof payload.notes === 'string' ? payload.notes.slice(0, 4000) : '',
       language: payload.language === 'hr' ? 'hr' : 'en',
@@ -251,6 +322,7 @@ export const submitPlasmidOrder = onCall(
           <p><b>Customer:</b> ${esc(customerName || '—')} &lt;${esc(customerEmail)}&gt;</p>
           <p><b>Order ID:</b> ${esc(orderRef.id)}</p>
           <p><b>Configurations:</b> ${configurations.length}</p>
+          ${customerProfileHtml(customerProfile)}
           ${payload.notes ? `<p><b>Notes:</b><br>${esc(payload.notes).replace(/\n/g, '<br>')}</p>` : ''}
           ${configurations.map((c, i) => configHtml(c, i)).join('')}
         </div>

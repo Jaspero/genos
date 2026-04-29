@@ -86,7 +86,7 @@
       bbDesc5: "Puromycin resistance already under the strong promoter with cloning cassette for other modules",
       bbDesc6: "mClover3 already under the strong promoter with cloning cassette for other modules",
       bghTerm: "BGH terminator", sv40Term: "SV40 terminator",
-      submitOrder: "Submit order", submitting: "Submitting\u2026",
+      submitOrder: "Submit order and request quotation", submitting: "Submitting\u2026",
       notes: "Notes (optional)", notesPlaceholder: "Additional notes or requirements\u2026",
       orderSubmitted: "Order submitted successfully! ID:",
       dSpCas9Desc: "Compatible with all effector domains.",
@@ -174,7 +174,7 @@
       bbDesc5: "Puromycin resistance je već pod jakim promotorom s klonirajućom kasetom za druge module",
       bbDesc6: "mClover3 je već pod jakim promotorom s klonirajućom kasetom za druge module",
       bghTerm: "BGH terminator", sv40Term: "SV40 terminator",
-      submitOrder: "Pošalji narudžbu", submitting: "Slanje\u2026",
+      submitOrder: "Pošalji narudžbu i zatraži ponudu", submitting: "Slanje\u2026",
       notes: "Napomene (opcionalno)", notesPlaceholder: "Dodatne napomene ili zahtjevi\u2026",
       orderSubmitted: "Narudžba je uspješno poslana! ID:",
       dSpCas9Desc: "Kompatibilan sa svim efektorskim domenama.",
@@ -357,6 +357,12 @@
     if (!plasmidStage) return;
     const stageW = plasmidStage.clientWidth || 620;
     const stageH = plasmidStage.clientHeight || 650;
+    const scale = stageW / 620;
+    const centerX = stageW / 2;
+    const centerY = centerX;
+    const labelOrbit = 270 * scale;
+    const plasmidRadius = 150 * scale;
+    const labelGapFromPlasmid = 52 * scale;
     const items: any[] = [];
     for (const k of MODULE_KEYS) {
       const el = ringLabelEls[k];
@@ -364,12 +370,12 @@
       const seg = segments[k];
       const midAngle = (seg.start + seg.end) / 2;
       const rad = (midAngle - 90) * Math.PI / 180;
-      const px = 310 + 270 * Math.cos(rad);
-      const py = 310 + 270 * Math.sin(rad);
+      const px = centerX + labelOrbit * Math.cos(rad);
+      const py = centerY + labelOrbit * Math.sin(rad);
       el.style.left = "0px"; el.style.top = "0px";
       const w = el.offsetWidth || 150;
       const h = el.offsetHeight || 46;
-      items.push({ el, w, h, preferredX: clamp(px - w/2, 16, stageW - w - 16), preferredY: clamp(py - h/2, 24, stageH - h - 16), side: px >= 310 ? "right" : "left" });
+      items.push({ el, w, h, preferredX: clamp(px - w/2, 16, stageW - w - 16), preferredY: clamp(py - h/2, 24, stageH - h - 16), side: px >= centerX ? "right" : "left" });
     }
     const groups: Record<string, any[]> = { left: [], right: [] };
     items.forEach(it => groups[it.side].push(it));
@@ -382,7 +388,11 @@
       const overflow = g[g.length-1].y + g[g.length-1].h + 16 - stageH;
       if (overflow > 0) { for (let i = g.length-1; i >= 0; i--) g[i].y -= overflow; g[0].y = Math.max(g[0].y, 24); for (let i = 1; i < g.length; i++) g[i].y = Math.max(g[i].y, g[i-1].y + g[i-1].h + 10); }
       g.forEach((it: any) => {
-        it.x = it.side === "right" ? clamp(Math.max(it.preferredX, 420), 16, stageW - it.w - 16) : clamp(Math.min(it.preferredX, 200 - it.w), 16, stageW - it.w - 16);
+        const leftAnchor = centerX - plasmidRadius - labelGapFromPlasmid - it.w;
+        const rightAnchor = centerX + plasmidRadius + labelGapFromPlasmid;
+        it.x = it.side === "right"
+          ? clamp(rightAnchor, 16, stageW - it.w - 16)
+          : clamp(leftAnchor, 16, stageW - it.w - 16);
         it.y = clamp(it.y, 24, stageH - it.h - 16);
         it.el.style.left = `${it.x}px`; it.el.style.top = `${it.y}px`;
       });

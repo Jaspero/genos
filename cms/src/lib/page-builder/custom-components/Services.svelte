@@ -502,7 +502,7 @@
           }
         </li>
         <li>
-          <a href="/tools/plasmid-builder">
+          <a class="button-filled inline-block mt-2" href="/tools/plasmid-builder">
             {
               $language === 'en'
                 ? 'Genos Plasmid Builder tool'

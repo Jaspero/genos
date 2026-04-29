@@ -52,6 +52,14 @@ function displaySize(stored: unknown, label: unknown): number {
   return Number(stored) || sizeOf(label);
 }
 
+function sizedList(items: string[]): string {
+  if (!items.length) {
+    return '—';
+  }
+
+  return items.map((item) => `${esc(item)} (${sizeOf(item)} bp)`).join(', ');
+}
+
 interface PlasmidOrderDoc {
   customerEmail: string;
   customerName?: string;
@@ -99,11 +107,11 @@ function configSummaryHtml(cfg: NonNullable<PlasmidOrderDoc['configurations']>[n
       (g) =>
         `<li>${esc(g.type)}${g.name ? ` — <b>${esc(g.name)}</b>` : ''}${
           g.sequence ? ` — ${t('seq', 'sek')}: ${esc(g.sequence)}` : ''
-        }${g.target ? ` — ${t('target', 'cilj')}: ${esc(g.target)}` : ''}</li>`
+        }${g.target ? ` — ${t('target', 'cilj')}: ${esc(g.target)}` : ''} (${sizeOf(g.type)} bp)</li>`
     )
     .join('');
-  const fluor = (cfg.markersFluorescent ?? []).map(esc).join(', ') || '—';
-  const abx = (cfg.markersAntibiotic ?? []).map(esc).join(', ') || '—';
+  const fluor = sizedList(cfg.markersFluorescent ?? []);
+  const abx = sizedList(cfg.markersAntibiotic ?? []);
   return `
     <h3 style="margin:20px 0 8px;font-family:sans-serif;">${t('Configuration', 'Konfiguracija')} #${idx + 1}</h3>
     <table cellpadding="6" cellspacing="0" border="0" style="border-collapse:collapse;font-family:sans-serif;font-size:13px;border:1px solid #ddd;">
@@ -113,7 +121,8 @@ function configSummaryHtml(cfg: NonNullable<PlasmidOrderDoc['configurations']>[n
       <tr><td><b>${t('Effector domain', 'Efektorska domena')}</b></td><td>${esc(cfg.ed)} (${displaySize(cfg.edSizeBp, cfg.ed)} bp)</td></tr>
       <tr><td><b>dCas9</b></td><td>${esc(cfg.dcas)} (${displaySize(cfg.dcasSizeBp, cfg.dcas)} bp)</td></tr>
       <tr><td><b>${t('Markers (fluor)', 'Markeri (fluor)')}</b></td><td>${fluor}</td></tr>
-      <tr><td><b>${t('Markers (abx)', 'Markeri (abx)')}</b></td><td>${abx} (${markersSizeBp} bp)</td></tr>
+      <tr><td><b>${t('Markers (abx)', 'Markeri (abx)')}</b></td><td>${abx}</td></tr>
+      <tr><td><b>${t('Markers total', 'Markeri ukupno')}</b></td><td>${markersSizeBp} bp</td></tr>
       <tr><td><b>${t('Terminator', 'Terminator')}</b></td><td>${esc(cfg.terminator)} (${displaySize(cfg.terminatorSizeBp, cfg.terminator)} bp)</td></tr>
       <tr><td><b>${t('Total size', 'Ukupna veličina')}</b></td><td>${totalSizeBp} bp</td></tr>
     </table>

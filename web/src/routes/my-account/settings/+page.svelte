@@ -1,6 +1,6 @@
 <script lang="ts">
   import Dialog from '$lib/Dialog.svelte';
-  import { auth } from '$lib/utils/firebase';
+  import { auth, db, user } from '$lib/utils/firebase';
   import { deleteUser, updateEmail, updatePassword } from 'firebase/auth';
   import { goto } from '$app/navigation';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
@@ -8,6 +8,8 @@
   import { renderAlert } from '@jaspero/web-components/dist/render-alert';
   import { FirebaseError } from 'firebase/app';
   import { signOut } from 'firebase/auth';
+  import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+  import { page } from '$app/stores';
 
   meta.set({
     title: 'Settings',
@@ -17,7 +19,22 @@
   let newPassword = '';
   let repeatPassword = '';
   let email = '';
+  let firstName = '';
+  let lastName = '';
+  let recoveryEmail = '';
+  let institution = '';
+  let position = '';
+  let institutionAddress = '';
   let deleteDialog = false;
+
+  $: if ($user) {
+    firstName = firstName || $user.firstName || '';
+    lastName = lastName || $user.lastName || '';
+    recoveryEmail = recoveryEmail || $user.recoveryEmail || '';
+    institution = institution || $user.institution || '';
+    position = position || $user.position || '';
+    institutionAddress = institutionAddress || $user.institutionAddress || '';
+  }
 
   async function changePassword() {
     if (newPassword !== repeatPassword) {
@@ -83,6 +100,37 @@
     email = '';
   }
 
+  async function updateProfileDetails() {
+    if (!auth.currentUser) {
+      return;
+    }
+
+    const profile = {
+      email: auth.currentUser.email || $user?.email || '',
+      name: [firstName.trim(), lastName.trim()].filter(Boolean).join(' ').trim(),
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
+      recoveryEmail: recoveryEmail.trim(),
+      institution: institution.trim(),
+      position: position.trim(),
+      institutionAddress: institutionAddress.trim(),
+      updatedAt: serverTimestamp()
+    };
+
+    await alertWrapper(
+      setDoc(doc(db, 'customers', auth.currentUser.uid), profile, { merge: true }),
+      'Profile updated successfully.',
+      ''
+    );
+
+    user.set({
+      id: auth.currentUser.uid,
+      ...($user || {}),
+      ...profile,
+      updatedAt: undefined
+    } as any);
+  }
+
   const confirmDelete = async () => {
     try {
       if (auth.currentUser) {
@@ -112,6 +160,53 @@
 </script>
 
 <main class="mx-auto max-w-[760px] [display:grid] gap-4">
+  {#if $page.url.searchParams.get('completeProfile')}
+    <section class="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900 shadow-sm">
+      Please complete your profile details before submitting an order.
+    </section>
+  {/if}
+
+  <section class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+    <h3 class="text-lg font-black text-[#032130]">Profile Details</h3>
+    <p class="mt-1 text-sm text-slate-500">These details are used for quotations, order administration and MTA preparation.</p>
+
+    <form class="mt-4 [display:grid] gap-3" on:submit|preventDefault={updateProfileDetails}>
+      <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="profileFirstName">
+        First Name
+        <input id="profileFirstName" type="text" bind:value={firstName} required class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+      </label>
+
+      <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="profileLastName">
+        Last Name
+        <input id="profileLastName" type="text" bind:value={lastName} required class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+      </label>
+
+      <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="profileRecoveryEmail">
+        Recovery Email
+        <input id="profileRecoveryEmail" type="email" bind:value={recoveryEmail} required class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+      </label>
+
+      <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="profileInstitution">
+        Institution
+        <input id="profileInstitution" type="text" bind:value={institution} required class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+      </label>
+
+      <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="profilePosition">
+        Position in Institution
+        <input id="profilePosition" type="text" bind:value={position} required class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+      </label>
+
+      <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="profileInstitutionAddress">
+        Institution Address
+        <textarea id="profileInstitutionAddress" bind:value={institutionAddress} required rows="3" class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]"></textarea>
+      </label>
+
+      <div>
+        <button type="submit" class="rounded-lg bg-[#0A415C] px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#063044]">Save Profile Details</button>
+      </div>
+    </form>
+  </section>
+
   <section class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
     <h3 class="text-lg font-black text-[#032130]">Change Password</h3>
     <p class="mt-1 text-sm text-slate-500">Update your account password.</p>
