@@ -1,0 +1,1 @@
+import{u as E,a5 as S,E as T,A as c,U as q}from"./custom-element.YfTZRdDm.js";function A(i,r){return i===r||(i==null?void 0:i[q])===r}function B(i={},r,h,k){return E(()=>{var s,f;return S(()=>{s=f,f=(k==null?void 0:k())||[],T(()=>{i!==h(...f)&&(r(i,...f),s&&A(h(...s),i)&&r(null,...s))})}),()=>{c(()=>{f&&A(h(...f),i)&&r(null,...f)})}}),i}export{B as b};
