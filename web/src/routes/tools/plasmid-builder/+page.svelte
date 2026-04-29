@@ -556,13 +556,13 @@
   const STROKE_COLORS: Record<string, string> = { bb: '#355070', gRNA: '#3a86ff', pro: '#2fbf71', ed: '#ff8c42', dcas: '#9b5de5', m: '#e63946', ter: '#00b894' };
 
   $: moduleBtns = [
-    { key: 'bb', abbr: 'B', tag: t('moduleBackbone'), subKey: 'moduleBackboneSub', valFn: () => backbone ? `${getVal('backbone')} · ${backboneSize} ${t('bp')}` : t('notSelected') },
-    { key: 'gRNA', abbr: 'gRNAs', tag: 'B → A', subKey: 'moduleGrnaSub', valFn: () => gRNAs.length ? `${getMainName('gRNA')} · ${gRNASize} ${t('bp')}` : t('noGRNA') },
-    { key: 'pro', abbr: 'Pro', tag: 'A → I', subKey: 'moduleProSub', valFn: () => promoter ? `${getVal('promoter')} · ${promoterSize} ${t('bp')}` : t('notSelected') },
-    { key: 'ed', abbr: 'ED', tag: 'I → II', subKey: 'moduleEdSub', valFn: () => ed ? `${getMainName('ed')} · ${edSize} ${t('bp')}` : t('notSelected') },
-    { key: 'dcas', abbr: 'dCas9', tag: 'II → III', subKey: 'moduleDcasSub', valFn: () => dcas ? `${getVal('dcas')} · ${dcasSize} ${t('bp')}` : t('notSelected') },
-    { key: 'm', abbr: 'M', tag: 'III → IV', subKey: 'moduleMSub', valFn: () => markerSize ? `${getMainName('markers')} · ${markerSize} ${t('bp')}` : t('optional') },
-    { key: 'ter', abbr: 'Ter', tag: 'IV → Z', subKey: 'moduleTerSub', valFn: () => terminator ? `${getVal('terminator')} · ${terminatorSize} ${t('bp')}` : t('notSelected') },
+    { key: 'bb', abbr: 'B', tag: t('moduleBackbone'), subKey: 'moduleBackboneSub', val: backboneVal ? `${backboneVal} · ${backboneSize} ${t('bp')}` : t('notSelected') },
+    { key: 'gRNA', abbr: 'gRNAs', tag: 'B → A', subKey: 'moduleGrnaSub', val: gRNAs.length ? `${[...new Set(gRNAs.map(g => g.type))].join(', ')} · ${gRNASize} ${t('bp')}` : t('noGRNA') },
+    { key: 'pro', abbr: 'Pro', tag: 'A → I', subKey: 'moduleProSub', val: promoterVal ? `${promoterVal} · ${promoterSize} ${t('bp')}` : t('notSelected') },
+    { key: 'ed', abbr: 'ED', tag: 'I → II', subKey: 'moduleEdSub', val: edVal ? `${baseED(edVal)} · ${edSize} ${t('bp')}` : t('notSelected') },
+    { key: 'dcas', abbr: 'dCas9', tag: 'II → III', subKey: 'moduleDcasSub', val: dcasVal ? `${dcasVal} · ${dcasSize} ${t('bp')}` : t('notSelected') },
+    { key: 'm', abbr: 'M', tag: 'III → IV', subKey: 'moduleMSub', val: markerSize ? `${[...markersFluorescent, ...markersAntibiotic].join(', ')} · ${markerSize} ${t('bp')}` : t('optional') },
+    { key: 'ter', abbr: 'Ter', tag: 'IV → Z', subKey: 'moduleTerSub', val: terminatorVal ? `${terminatorVal} · ${terminatorSize} ${t('bp')}` : t('notSelected') },
   ];
 
   $: backboneOptions = [
@@ -591,13 +591,13 @@
   ];
 
   $: summaryItems = [
-    { label: t('sumKb'), value: backbone ? `${getVal('backbone')} · ${backboneSize} ${t('bp')}` : '—' },
+    { label: t('sumKb'), value: backboneVal ? `${backboneVal} · ${backboneSize} ${t('bp')}` : '—' },
     { label: t('sumKg'), value: gRNAs.length ? gRNAs.map((g, i) => `${i+1}. ${g.type}${g.name ? ` — ${g.name}` : ''}${g.sequence ? ` — ${g.sequence}` : ''}${g.target ? ` — ${g.target}` : ''}`).join(' | ') + ` · ${gRNASize} ${t('bp')}` : '—' },
-    { label: t('sumKp'), value: promoter ? `${getVal('promoter')} · ${promoterSize} ${t('bp')}` : '—' },
-    { label: t('sumKe'), value: ed ? `${getMainName('ed')} · ${edSize} ${t('bp')}` : '—' },
-    { label: t('sumKd'), value: dcas ? `${getVal('dcas')} · ${dcasSize} ${t('bp')}` : '—' },
-    { label: t('sumKm'), value: markerSize ? `${getMainName('markers')} · ${markerSize} ${t('bp')}` : '—' },
-    { label: t('sumKt'), value: terminator ? `${getVal('terminator')} · ${terminatorSize} ${t('bp')}` : '—' },
+    { label: t('sumKp'), value: promoterVal ? `${promoterVal} · ${promoterSize} ${t('bp')}` : '—' },
+    { label: t('sumKe'), value: edVal ? `${baseED(edVal)} · ${edSize} ${t('bp')}` : '—' },
+    { label: t('sumKd'), value: dcasVal ? `${dcasVal} · ${dcasSize} ${t('bp')}` : '—' },
+    { label: t('sumKm'), value: markerSize ? `${[...markersFluorescent, ...markersAntibiotic].join(', ')} · ${markerSize} ${t('bp')}` : '—' },
+    { label: t('sumKt'), value: terminatorVal ? `${terminatorVal} · ${terminatorSize} ${t('bp')}` : '—' },
     { label: t('sumKtotal'), value: `${totalSize} ${t('bp')}` },
   ];
 
@@ -612,13 +612,13 @@
   ];
 
   $: ringLabelTitles = {
-    bb: getMainName('backbone'),
-    gRNA: getMainName('gRNA'),
-    pro: getMainName('promoter'),
-    ed: getMainName('ed'),
-    dcas: getMainName('dcas'),
-    m: getMainName('markers'),
-    ter: getMainName('terminator'),
+    bb: backboneVal || t('notSelected'),
+    gRNA: gRNAs.length ? [...new Set(gRNAs.map(g => g.type))].join(', ') : t('notSelected'),
+    pro: promoterVal || t('notSelected'),
+    ed: edVal ? baseED(edVal) : t('notSelected'),
+    dcas: dcasVal || t('notSelected'),
+    m: ([...markersFluorescent, ...markersAntibiotic].join(', ')) || t('notSelected'),
+    ter: terminatorVal || t('notSelected'),
   } as Record<string, string>;
   $: ringLabelSizes = {
     bb: backboneSize, gRNA: gRNASize, pro: promoterSize, ed: edSize,
@@ -681,7 +681,7 @@
                 <span class="text-xs px-2 py-1.5 rounded-full border border-white/20 bg-black/10">{mod.tag}</span>
               </div>
               <div class="text-xs text-white/80 leading-snug min-h-[1.875rem]">{t(mod.subKey)}</div>
-              <div class="text-[.8125rem] text-white/80 overflow-hidden whitespace-nowrap text-ellipsis">{mod.valFn()}</div>
+              <div class="text-[.8125rem] text-white/80 overflow-hidden whitespace-nowrap text-ellipsis">{mod.val}</div>
             </button>
           {/each}
         </div>
