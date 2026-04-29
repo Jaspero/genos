@@ -40,7 +40,7 @@
       gRNAIntro: "Choose gRNA type and add as many gRNAs as you want.",
       gRNAType: "gRNA type", gRNADetails: "gRNA details",
       existingGRNAs: "Existing gRNAs", clearFields: "Clear fields",
-      addGRNA: "Add gRNA", done: "Done", remove: "Remove",
+      addGRNA: "Add gRNA", done: "Done", remove: "Remove", copy: "Copy",
       gRNAName: "gRNA name", gRNASeq: "gRNA sequence (without PAM)",
       gRNATarget: "Target gene / UCSC coordinates",
       saDesc: "Enter gRNA name and sequence without PAM.",
@@ -73,6 +73,7 @@
       toastMarkersUpdated: "Markers updated", toastMarkersCleared: "Markers cleared",
       toastTer: "Terminator selected", toastReset: "Reset done",
       toastCart: "Added to cart", toastNeedAll: "Please select all required modules first",
+      toastCopied: "Configuration copied to builder",
       toastNeedSeq: "Please enter gRNA sequence without PAM",
       toastNeedTarget: "Please enter target gene / UCSC coordinates",
       toastDcasReset: "dCas9 reset (incompatible with selected ED)",
@@ -128,7 +129,7 @@
       gRNAIntro: "Odaberi tip gRNA i dodaj koliko god gRNA želiš.",
       gRNAType: "Tip gRNA", gRNADetails: "Detalji gRNA",
       existingGRNAs: "Postojeće gRNA", clearFields: "Očisti polja",
-      addGRNA: "Dodaj gRNA", done: "Gotovo", remove: "Ukloni",
+      addGRNA: "Dodaj gRNA", done: "Gotovo", remove: "Ukloni", copy: "Kopiraj",
       gRNAName: "Naziv gRNA", gRNASeq: "gRNA sekvenca (bez PAM-a)",
       gRNATarget: "Ciljni gen / UCSC koordinate",
       saDesc: "Unesi naziv gRNA i sekvencu bez PAM-a.",
@@ -161,6 +162,7 @@
       toastMarkersUpdated: "Markeri su ažurirani", toastMarkersCleared: "Markeri su obrisani",
       toastTer: "Terminator je odabran", toastReset: "Reset je napravljen",
       toastCart: "Dodano u košaricu", toastNeedAll: "Molimo odaberi sve obavezne module",
+      toastCopied: "Konfiguracija kopirana u builder",
       toastNeedSeq: "Molimo unesi gRNA sekvencu bez PAM-a",
       toastNeedTarget: "Molimo unesi ciljni gen / UCSC koordinate",
       toastDcasReset: "dCas9 je resetiran (nije kompatibilan s odabranim ED)",
@@ -276,15 +278,22 @@
     goto('/my-account/plasmid-orders');
   }
 
-  $: backboneSize = sizeOf(getVal('backbone'));
+  // Reactive computed values — reference state vars directly so Svelte tracks them
+  $: backboneVal = !backbone ? '' : backbone === 'Custom' ? (backboneCustom || 'Custom') : backbone;
+  $: promoterVal = !promoter ? '' : promoter === 'Custom' ? (promoterCustom || 'Custom') : promoter;
+  $: edVal = !ed ? '' : ed === 'Custom' ? (edCustom || 'Custom') : ed;
+  $: dcasVal = !dcas ? '' : dcas === 'Custom' ? (dcasCustom || 'Custom') : dcas;
+  $: terminatorVal = !terminator ? '' : terminator === 'Custom' ? (terminatorCustom || 'Custom') : terminator;
+
+  $: backboneSize = sizeOf(backboneVal);
   $: gRNASize = gRNAs.reduce((s, g) => s + sizeOf(g.type), 0);
-  $: promoterSize = sizeOf(getVal('promoter'));
-  $: edSize = sizeOf(getVal('ed'));
-  $: dcasSize = sizeOf(getVal('dcas'));
+  $: promoterSize = sizeOf(promoterVal);
+  $: edSize = sizeOf(edVal);
+  $: dcasSize = sizeOf(dcasVal);
   $: markerSize = [...markersFluorescent, ...markersAntibiotic].reduce((s, x) => s + sizeOf(x), 0);
-  $: terminatorSize = sizeOf(getVal('terminator'));
+  $: terminatorSize = sizeOf(terminatorVal);
   $: totalSize = backboneSize + gRNASize + promoterSize + edSize + dcasSize + markerSize + terminatorSize;
-  $: requiredComplete = !!getVal('backbone') && gRNAs.length > 0 && !!getVal('promoter') && !!getVal('ed') && !!getVal('dcas') && !!getVal('terminator');
+  $: requiredComplete = !!backboneVal && gRNAs.length > 0 && !!promoterVal && !!edVal && !!dcasVal && !!terminatorVal;
 
   function getMainName(field: string): string {
     if (field === 'gRNA') return gRNAs.length ? [...new Set(gRNAs.map(g => g.type))].join(", ") : t("notSelected");
@@ -448,22 +457,7 @@
 
   function selectTerminator(val: string) { terminator = val; showToast(t("toastTer")); if (val !== "Custom") closeModal(); }
 
-  function addToCart() {
-    if (!requiredComplete) { showToast(t("toastNeedAll")); return; }
-    cart = [{
-      backbone: getVal('backbone'), backboneSizeBp: backboneSize,
-      gRNAs: gRNAs.map(g => ({ ...g })), gRNAsSizeBp: gRNASize,
-      promoter: getVal('promoter'), promoterSizeBp: promoterSize,
-      ed: baseED(getVal('ed')), edSizeBp: edSize,
-      dcas: getVal('dcas'), dcasSizeBp: dcasSize,
-      markersFluorescent: [...markersFluorescent], markersAntibiotic: [...markersAntibiotic], markersSizeBp: markerSize,
-      terminator: getVal('terminator'), terminatorSizeBp: terminatorSize,
-      totalSizeBp: totalSize
-    }, ...cart];
-    showToast(t("toastCart"));
-  }
-
-  function resetAll() {
+  function clearBuilder() {
     backbone = null; backboneCustom = ""; gRNAs = [];
     promoter = null; promoterCustom = "";
     ed = null; edCustom = "";
@@ -471,6 +465,55 @@
     markersFluorescent = []; markersAntibiotic = [];
     terminator = null; terminatorCustom = "";
     gDraftType = "SpCas9-gRNA"; gDraftName = ""; gDraftSeq = ""; gDraftTarget = "";
+  }
+
+  function addToCart() {
+    if (!requiredComplete) { showToast(t("toastNeedAll")); return; }
+    cart = [{
+      backbone: backboneVal, backboneSizeBp: backboneSize,
+      backboneRaw: backbone, backboneCustomRaw: backboneCustom,
+      gRNAs: gRNAs.map(g => ({ ...g })), gRNAsSizeBp: gRNASize,
+      promoter: promoterVal, promoterSizeBp: promoterSize,
+      promoterRaw: promoter, promoterCustomRaw: promoterCustom,
+      ed: baseED(edVal), edSizeBp: edSize,
+      edRaw: ed, edCustomRaw: edCustom,
+      dcas: dcasVal, dcasSizeBp: dcasSize,
+      dcasRaw: dcas, dcasCustomRaw: dcasCustom,
+      markersFluorescent: [...markersFluorescent], markersAntibiotic: [...markersAntibiotic], markersSizeBp: markerSize,
+      terminator: terminatorVal, terminatorSizeBp: terminatorSize,
+      terminatorRaw: terminator, terminatorCustomRaw: terminatorCustom,
+      totalSizeBp: totalSize
+    }, ...cart];
+    clearBuilder();
+    showToast(t("toastCart"));
+  }
+
+  function copyCartItem(idx: number) {
+    const c = cart[idx];
+    if (!c) return;
+    backbone = c.backboneRaw ?? c.backbone ?? null;
+    backboneCustom = c.backboneCustomRaw ?? "";
+    gRNAs = (c.gRNAs || []).map((g: any) => ({ ...g }));
+    promoter = c.promoterRaw ?? c.promoter ?? null;
+    promoterCustom = c.promoterCustomRaw ?? "";
+    ed = c.edRaw ?? c.ed ?? null;
+    edCustom = c.edCustomRaw ?? "";
+    dcas = c.dcasRaw ?? c.dcas ?? null;
+    dcasCustom = c.dcasCustomRaw ?? "";
+    markersFluorescent = [...(c.markersFluorescent || [])];
+    markersAntibiotic = [...(c.markersAntibiotic || [])];
+    terminator = c.terminatorRaw ?? c.terminator ?? null;
+    terminatorCustom = c.terminatorCustomRaw ?? "";
+    showToast(t("toastCopied"));
+    if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function removeCartItem(idx: number) {
+    cart = cart.filter((_, i) => i !== idx);
+  }
+
+  function resetAll() {
+    clearBuilder();
     showToast(t("toastReset"));
   }
 
@@ -568,14 +611,19 @@
     { key: 'ter', colorClass: 'bg-[#00b894]', labelKey: 'legTer' },
   ];
 
-  function ringLabelTitle(k: string): string {
-    const map: Record<string, string> = { bb: 'backbone', gRNA: 'gRNA', pro: 'promoter', ed: 'ed', dcas: 'dcas', m: 'markers', ter: 'terminator' };
-    return getMainName(map[k]);
-  }
-  function ringLabelSize(k: string): number {
-    const map: Record<string, number> = { bb: backboneSize, gRNA: gRNASize, pro: promoterSize, ed: edSize, dcas: dcasSize, m: markerSize, ter: terminatorSize };
-    return map[k] ?? 0;
-  }
+  $: ringLabelTitles = {
+    bb: getMainName('backbone'),
+    gRNA: getMainName('gRNA'),
+    pro: getMainName('promoter'),
+    ed: getMainName('ed'),
+    dcas: getMainName('dcas'),
+    m: getMainName('markers'),
+    ter: getMainName('terminator'),
+  } as Record<string, string>;
+  $: ringLabelSizes = {
+    bb: backboneSize, gRNA: gRNASize, pro: promoterSize, ed: edSize,
+    dcas: dcasSize, m: markerSize, ter: terminatorSize,
+  } as Record<string, number>;
 
   onMount(() => {
     const unsub = authenticated.subscribe((val) => {
@@ -658,8 +706,8 @@
                   on:mouseleave={() => hoveredSegment = null}
                   on:keydown={e => e.key === 'Enter' && openModal(moduleModalMap[k])}
                 >
-                  {ringLabelTitle(k)}
-                  <span class="block text-[.6875rem] font-semibold opacity-90 mt-0.5">{t('size')}: {ringLabelSize(k)} {t('bp')}</span>
+                  {ringLabelTitles[k]}
+                  <span class="block text-[.6875rem] font-semibold opacity-90 mt-0.5">{t('size')}: {ringLabelSizes[k]} {t('bp')}</span>
                 </div>
               {/each}
 
@@ -737,7 +785,13 @@
             {:else}
               {#each cart as c, idx}
                 <div class="border border-gray-100 rounded-md p-3 bg-gray-50">
-                  <div class="text-[.8125rem] font-black text-gray-800">{t('configNum')} #{cart.length - idx}</div>
+                  <div class="flex items-center justify-between gap-2">
+                    <div class="text-[.8125rem] font-black text-gray-800">{t('configNum')} #{cart.length - idx}</div>
+                    <div class="flex gap-1.5">
+                      <button type="button" class="px-2 py-1 rounded border border-gray-300 bg-white text-gray-700 text-xs hover:bg-gray-100 transition-colors" on:click={() => copyCartItem(idx)}>{t('copy')}</button>
+                      <button type="button" class="px-2 py-1 rounded border border-gray-300 bg-white text-gray-700 text-xs hover:bg-gray-100 transition-colors" on:click={() => removeCartItem(idx)}>{t('remove')}</button>
+                    </div>
+                  </div>
                   <div class="mt-1.5 text-xs text-gray-600 leading-relaxed">
                     <b>B</b>: {c.backbone} · {c.backboneSizeBp} bp<br>
                     <b>gRNAs</b>: {c.gRNAs.length} · {c.gRNAsSizeBp} bp<br>
