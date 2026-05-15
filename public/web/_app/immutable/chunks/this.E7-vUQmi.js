@@ -1,0 +1,1 @@
+import{u as S,a5 as T,E as c,z as q,U as x}from"./custom-element.ClMSU3hd.js";function E(i,r){return i===r||(i==null?void 0:i[x])===r}function A(i={},r,h,k){return S(()=>{var s,f;return T(()=>{s=f,f=(k==null?void 0:k())||[],c(()=>{i!==h(...f)&&(r(i,...f),s&&E(h(...s),i)&&r(null,...s))})}),()=>{q(()=>{f&&E(h(...f),i)&&r(null,...f)})}}),i}export{A as b};
