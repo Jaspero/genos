@@ -225,8 +225,8 @@
             {/if}
           </div>
           <span class="article-content">
-            <h2 class="article-title">{article.title}</h2>
-            <span class="article-description">{article.description}</span>
+            <h2 class="article-title">{$language === 'hr' ? (article.titleHr || article.title) : (article.titleEn || article.title)}</h2>
+            <span class="article-description">{$language === 'hr' ? (article.descriptionHr || article.description) : (article.descriptionEn || article.description)}</span>
           </span>
         </a>
       {/each}
