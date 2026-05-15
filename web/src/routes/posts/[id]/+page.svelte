@@ -66,9 +66,6 @@
     <div class="gc-12 single-article spacer">
       <h2 class="single-article-title">{getField(article, 'title', $language)}</h2>
       <p class="single-article-description">{getField(article, 'description', $language)}</p>
-      {#if article.image}
-        <img class="single-article-image" src={article.image} alt={article.imageAlt || ''} />
-      {/if}
       <div class="single-article-content">
         <p>{@html getField(article, 'content', $language)}</p>
       </div>
