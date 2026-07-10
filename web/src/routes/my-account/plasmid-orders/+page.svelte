@@ -210,7 +210,7 @@
                     {/each}
                     <tr><td class="text-gray-400 pr-3">Promoter</td><td>{cfg.promoter} ({displaySize(cfg.promoterSizeBp, cfg.promoter)} bp)</td></tr>
                     <tr><td class="text-gray-400 pr-3">Effector</td><td>{cfg.ed} ({displaySize(cfg.edSizeBp, cfg.ed)} bp)</td></tr>
-                    <tr><td class="text-gray-400 pr-3">dCas9</td><td>{cfg.dcas} ({displaySize(cfg.dcasSizeBp, cfg.dcas)} bp)</td></tr>
+                    {#if cfg.dcas}<tr><td class="text-gray-400 pr-3">dCas9</td><td>{cfg.dcas} ({displaySize(cfg.dcasSizeBp, cfg.dcas)} bp)</td></tr>{/if}
                     <tr><td class="text-gray-400 pr-3">Markers</td><td>{[...cfg.markersFluorescent, ...cfg.markersAntibiotic].join(', ') || '—'} ({markersSize(cfg)} bp)</td></tr>
                     <tr><td class="text-gray-400 pr-3">Terminator</td><td>{cfg.terminator} ({displaySize(cfg.terminatorSizeBp, cfg.terminator)} bp)</td></tr>
                     <tr><td class="text-gray-400 pr-3 font-bold">Total</td><td class="font-bold">{totalSize(cfg)} bp</td></tr>

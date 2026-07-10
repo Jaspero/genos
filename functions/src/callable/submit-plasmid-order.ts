@@ -73,6 +73,7 @@ const SIZE_BP: Record<string, number> = {
   'G9a-me3': 1181,
   dSpCas9: 4290,
   dSaCas9: 3276,
+  SpCas9: 4290,
   mRuby3: 809,
   mClover3: 815,
   mCerulean3: 810,
@@ -143,7 +144,7 @@ function configHtml(cfg: IncomingConfiguration, idx: number): string {
       <tr><td><b>gRNAs</b></td><td>${cfg.gRNAs?.length ?? 0} total (${cfg.gRNAsSizeBp ?? 0} bp)<ul>${gRNA}</ul></td></tr>
       <tr><td><b>Promoter</b></td><td>${esc(cfg.promoter)} (${cfg.promoterSizeBp ?? 0} bp)</td></tr>
       <tr><td><b>Effector domain</b></td><td>${esc(cfg.ed)} (${cfg.edSizeBp ?? 0} bp)</td></tr>
-      <tr><td><b>dCas9</b></td><td>${esc(cfg.dcas)} (${cfg.dcasSizeBp ?? 0} bp)</td></tr>
+      ${cfg.dcas ? `<tr><td><b>dCas9</b></td><td>${esc(cfg.dcas)} (${cfg.dcasSizeBp ?? 0} bp)</td></tr>` : ''}
       <tr><td><b>Markers (fluor)</b></td><td>${fluor}</td></tr>
       <tr><td><b>Markers (abx)</b></td><td>${abx}</td></tr>
       <tr><td><b>Markers total</b></td><td>${cfg.markersSizeBp ?? 0} bp</td></tr>
@@ -175,11 +176,13 @@ function validate(payload: IncomingPayload): void {
     throw new HttpsError('invalid-argument', 'Too many configurations');
   }
   payload.configurations.forEach((cfg, i) => {
+    // Gene knockout mode uses catalytically active SpCas9 as the effector — no separate dCas9.
+    const isGeneKnockout = baseED(normalizeLabel(cfg.ed)) === 'SpCas9';
     const required: Array<[keyof IncomingConfiguration, string]> = [
       ['backbone', 'backbone'],
       ['promoter', 'promoter'],
       ['ed', 'effector domain'],
-      ['dcas', 'dCas9'],
+      ...(isGeneKnockout ? [] : ([['dcas', 'dCas9']] as Array<[keyof IncomingConfiguration, string]>)),
       ['terminator', 'terminator']
     ];
     for (const [field, label] of required) {

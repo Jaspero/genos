@@ -9,9 +9,9 @@
   const I18N: Record<string, Record<string, string>> = {
     en: {
       heroTitle: "Design your own expression plasmid",
-      heroText: "Choose number of gRNAs (gRNAs), eukaryotic promoter type (Pro), effector domain (ED), selection markers - fluorescence markers or antibiotic resistance markers (M), transcriptional terminators (Ter) and backbone type (B).",
+      heroText: "Choose number of gRNAs (gRNAs), eukaryotic promoter type (Pro), epigenetic effector domain or gene knockout (ED), selection markers – fluorescence markers or antibiotic resistance markers (M), transcriptional terminators (Ter) and backbone type (B).",
       rulesTitle: "Quick rules",
-      rulesText: '• dSpCas9 works with all ED domains<br>• dSaCas9 works only with: <b>DNMT3A, TET1, VPR, KRAB</b><br>• gRNA: unlimited number can be added<br>• Custom option for each module is available.',
+      rulesText: '• dSpCas9 works with all ED domains<br>• dSaCas9 works only with: <b>DNMT3A, TET1, VPR, KRAB</b><br>• Gene knockout works with SpCas9.<br>• gRNA: unlimited number can be added<br>• Custom option for each module is available.',
       buildTitle: "Build modules",
       buildText: "Click module cards below or click colored boxes around the plasmid map to edit the same module.",
       plasmidMapTitle: "Plasmid map",
@@ -20,6 +20,7 @@
       legDcas: "dCas9", legM: "Markers", legTer: "Terminator",
       configTitle: "Current configuration",
       configText: "\u201CAdd to cart\u201D is enabled when B, gRNAs, Pro, ED, dCas9 and Ter are selected.",
+      configTextKnockout: "\u201CAdd to cart\u201D is enabled when B, gRNAs, Pro, ED and Ter are selected (dCas9 is not used for gene knockout).",
       sumKb: "Backbone (B)", sumKg: "gRNAs", sumKp: "Eukaryotic promoter type (Pro)",
       sumKe: "Effector domain (ED)", sumKd: "dCas9", sumKm: "Selection markers (M)",
       sumKt: "Transcription terminator (Ter)", sumKtotal: "Total plasmid size",
@@ -28,7 +29,7 @@
       notSelected: "Not selected", noGRNA: "No gRNAs added", optional: "Optional",
       moduleBackbone: "Backbone",
       moduleBackboneSub: "(backbone type)", moduleGrnaSub: "(guide RNAs)",
-      moduleProSub: "(eukaryotic promoter type)", moduleEdSub: "(effector domain)",
+      moduleProSub: "(eukaryotic promoter type)", moduleEdSub: "(epigenome editing effector domain or gene knockout)",
       moduleDcasSub: "(dCas9 type)", moduleMSub: "(selection markers)",
       moduleTerSub: "(transcription terminator)",
       strongPromoters: "Strong promoters", weakPromoters: "Weak promoters",
@@ -49,7 +50,8 @@
       noGRNAsAdded: "No gRNAs added.",
       promoterTitle: "Eukaryotic promoter type (Pro)",
       promoterCustom: "Custom promoter (if selected Custom)",
-      effectorTitle: "Effector domains (ED)",
+      effectorTitle: "Effector domain or gene knockout (ED)",
+      catActiveCas9: "Catalytically active Cas9",
       dnaMeth: "Manipulation of DNA methylation",
       directGene: "Direct gene expression manipulation",
       acetylation: "Histone acetylation",
@@ -98,9 +100,9 @@
     },
     hr: {
       heroTitle: "Dizajniraj svoj ekspresijski plazmid",
-      heroText: "Odaberi broj gRNA (gRNAs), tip eukariotskog promotora (Pro), efektorsku domenu (ED), selekcijske markere - fluorescentne markere ili markere antibiotske rezistencije (M), transkripcijske terminatore (Ter) i tip okosnice plazmida (B).",
+      heroText: "Odaberi broj gRNA (gRNAs), tip eukariotskog promotora (Pro), epigenetsku efektorsku domenu ili gene knockout (ED), selekcijske markere – fluorescentne markere ili markere antibiotske rezistencije (M), transkripcijske terminatore (Ter) i tip okosnice plazmida (B).",
       rulesTitle: "Brza pravila",
-      rulesText: '• dSpCas9 radi sa svim ED domenama<br>• dSaCas9 radi samo s: <b>DNMT3A, TET1, VPR, KRAB</b><br>• gRNA: može se dodati neograničen broj<br>• Za svaki modul dostupna je Custom opcija.',
+      rulesText: '• dSpCas9 radi sa svim ED domenama<br>• dSaCas9 radi samo s: <b>DNMT3A, TET1, VPR, KRAB</b><br>• Gene knockout radi sa SpCas9.<br>• gRNA: može se dodati neograničen broj<br>• Za svaki modul dostupna je Custom opcija.',
       buildTitle: "Odabir modula",
       buildText: "Klikni kartice modula ispod ili klikni obojane prozorčiće oko mape plazmida za uređivanje istog modula.",
       plasmidMapTitle: "Mapa plazmida",
@@ -109,6 +111,7 @@
       legDcas: "dCas9", legM: "Markeri", legTer: "Terminator",
       configTitle: "Trenutna konfiguracija",
       configText: "\u201EDodaj u košaricu\u201C je aktivan kada su odabrani B, gRNAs, Pro, ED, dCas9 i Ter.",
+      configTextKnockout: "„Dodaj u košaricu“ je aktivan kada su odabrani B, gRNAs, Pro, ED i Ter (dCas9 se ne koristi za gene knockout).",
       sumKb: "Okosnica (B)", sumKg: "gRNA", sumKp: "Tip eukariotskog promotora (Pro)",
       sumKe: "Efektorska domena (ED)", sumKd: "dCas9", sumKm: "Selekcijski markeri (M)",
       sumKt: "Transkripcijski terminator (Ter)", sumKtotal: "Ukupna veličina plazmida",
@@ -117,7 +120,7 @@
       notSelected: "Nije odabrano", noGRNA: "Nijedna gRNA nije dodana", optional: "Opcionalno",
       moduleBackbone: "Okosnica",
       moduleBackboneSub: "(tip okosnice)", moduleGrnaSub: "(guide RNA)",
-      moduleProSub: "(tip eukariotskog promotora)", moduleEdSub: "(efektorska domena)",
+      moduleProSub: "(tip eukariotskog promotora)", moduleEdSub: "(epigenetska efektorska domena ili gene knockout)",
       moduleDcasSub: "(tip dCas9)", moduleMSub: "(selekcijski markeri)",
       moduleTerSub: "(transkripcijski terminator)",
       strongPromoters: "Jaki promotori", weakPromoters: "Slabi promotori",
@@ -138,7 +141,8 @@
       noGRNAsAdded: "Nijedna gRNA nije dodana.",
       promoterTitle: "Tip eukariotskog promotora (Pro)",
       promoterCustom: "Custom promotor (ako je odabran Custom)",
-      effectorTitle: "Efektorske domene (ED)",
+      effectorTitle: "Efektorska domena ili gene knockout (ED)",
+      catActiveCas9: "Katalitički aktivan Cas9",
       dnaMeth: "Manipulacija DNA metilacijom",
       directGene: "Izravna manipulacija ekspresijom gena",
       acetylation: "Histonska acetilacija",
@@ -199,7 +203,7 @@
     "DNMT3A": 1001, "TET1": 2219, "VPR": 1643, "KRAB": 275,
     "p300": 1958, "HDAC3": 1334, "LSD1": 2609, "KDM5A": 2447,
     "RIOX1": 1973, "PRDM9": 965, "G9a": 1181, "G9a-me3": 1181,
-    "dSpCas9": 4290, "dSaCas9": 3276,
+    "dSpCas9": 4290, "dSaCas9": 3276, "SpCas9": 4290,
     "mRuby3": 809, "mClover3": 815, "mCerulean3": 810,
     "Puromycin resistance": 676, "Hygromycin resistance": 1105,
     "Blasticidin resistance": 472,
@@ -292,8 +296,10 @@
   $: dcasSize = sizeOf(dcasVal);
   $: markerSize = [...markersFluorescent, ...markersAntibiotic].reduce((s, x) => s + sizeOf(x), 0);
   $: terminatorSize = sizeOf(terminatorVal);
-  $: totalSize = backboneSize + gRNASize + promoterSize + edSize + dcasSize + markerSize + terminatorSize;
-  $: requiredComplete = !!backboneVal && gRNAs.length > 0 && !!promoterVal && !!edVal && !!dcasVal && !!terminatorVal;
+  // Gene knockout mode: catalytically active SpCas9 selected as ED → no separate dCas9 module.
+  $: geneKnockout = baseED(edVal) === 'SpCas9';
+  $: totalSize = backboneSize + gRNASize + promoterSize + edSize + (geneKnockout ? 0 : dcasSize) + markerSize + terminatorSize;
+  $: requiredComplete = !!backboneVal && gRNAs.length > 0 && !!promoterVal && !!edVal && (geneKnockout || !!dcasVal) && !!terminatorVal;
 
   function getMainName(field: string): string {
     if (field === 'gRNA') return gRNAs.length ? [...new Set(gRNAs.map(g => g.type))].join(", ") : t("notSelected");
@@ -306,6 +312,7 @@
   }
 
   function allowedDcasOptions(): string[] {
+    if (baseED(getVal('ed')) === 'SpCas9') return []; // gene knockout → dCas9 not applicable
     if (!ed) return ["dSpCas9", "dSaCas9", "Custom"];
     if (ed === "Custom") return ["dSpCas9", "Custom"];
     const edBase = baseED(getVal('ed'));
@@ -336,21 +343,21 @@
 
   const MODULE_KEYS = ["bb","gRNA","pro","ed","dcas","m","ter"] as const;
 
+  // Modules shown on the ring / build flow. Gene knockout mode drops the dCas9 module.
+  $: activeModuleKeys = (geneKnockout ? MODULE_KEYS.filter(k => k !== 'dcas') : [...MODULE_KEYS]) as string[];
+
+  // Segments are distributed evenly around the ring (equal wedges) so the map always
+  // reads as a balanced circle, and re-flows dynamically as modules appear/disappear.
   $: segments = (() => {
-    const sizes: Record<string, number> = {
-      bb: backboneSize || 300, gRNA: gRNASize || 300,
-      pro: promoterSize || 300, ed: edSize || 300,
-      dcas: dcasSize || 300, m: markerSize || 300,
-      ter: terminatorSize || 300
-    };
-    const total = MODULE_KEYS.reduce((s, k) => s + sizes[k], 0);
-    let start = 0;
+    const keys = activeModuleKeys;
     const sizeGetter: Record<string, number> = { bb: backboneSize, gRNA: gRNASize, pro: promoterSize, ed: edSize, dcas: dcasSize, m: markerSize, ter: terminatorSize };
+    const angleEach = 360 / keys.length;
+    const gap = keys.length > 1 ? 5 : 0; // degrees of visual separation between wedges
+    let start = 0;
     const out: Record<string, {start: number; end: number; path: string; active: boolean}> = {};
-    MODULE_KEYS.forEach(k => {
-      const angle = sizes[k] / total * 360;
-      const end = start + angle;
-      out[k] = { start, end, path: arcPath(310, 310, 150, start, end), active: !!sizeGetter[k] };
+    keys.forEach(k => {
+      const end = start + angleEach;
+      out[k] = { start, end, path: arcPath(310, 310, 150, start + gap / 2, end - gap / 2), active: !!sizeGetter[k] };
       start = end;
     });
     return out;
@@ -369,11 +376,9 @@
     const scale = stageW / 620;
     const centerX = stageW / 2;
     const centerY = centerX;
-    const labelOrbit = 270 * scale;
-    const plasmidRadius = 150 * scale;
-    const labelGapFromPlasmid = 52 * scale;
+    const labelOrbit = 258 * scale;
     const items: any[] = [];
-    for (const k of MODULE_KEYS) {
+    for (const k of activeModuleKeys) {
       const el = ringLabelEls[k];
       if (!el) continue;
       const seg = segments[k];
@@ -397,11 +402,10 @@
       const overflow = g[g.length-1].y + g[g.length-1].h + 16 - stageH;
       if (overflow > 0) { for (let i = g.length-1; i >= 0; i--) g[i].y -= overflow; g[0].y = Math.max(g[0].y, 24); for (let i = 1; i < g.length; i++) g[i].y = Math.max(g[i].y, g[i-1].y + g[i-1].h + 10); }
       g.forEach((it: any) => {
-        const leftAnchor = centerX - plasmidRadius - labelGapFromPlasmid - it.w;
-        const rightAnchor = centerX + plasmidRadius + labelGapFromPlasmid;
-        it.x = it.side === "right"
-          ? clamp(rightAnchor, 16, stageW - it.w - 16)
-          : clamp(leftAnchor, 16, stageW - it.w - 16);
+        // Keep each label at its segment's true angular position around the ring
+        // (collision handling above only nudges vertically), so the map reads as a
+        // balanced circle rather than two fixed side columns.
+        it.x = clamp(it.preferredX, 16, stageW - it.w - 16);
         it.y = clamp(it.y, 24, stageH - it.h - 16);
         it.el.style.left = `${it.x}px`; it.el.style.top = `${it.y}px`;
       });
@@ -414,6 +418,8 @@
   const moduleModalMap: Record<string, ModalType> = { bb: 'backbone', gRNA: 'gRNA', pro: 'promoter', ed: 'ed', dcas: 'dcas', m: 'markers', ter: 'terminator' };
 
   function openModal(type: ModalType) {
+    // In gene knockout mode the dCas9 module is not available — clicking it does nothing.
+    if (type === 'dcas' && geneKnockout) return;
     modalType = type;
     modalOpen = true;
     document.body.style.overflow = "hidden";
@@ -444,7 +450,13 @@
     if (!match) return { title: option, desc: "", value: option };
     return { title: match[1].trim(), desc: `(${match[2].trim()})`, value: option };
   }
-  function selectED(val: string) { ed = val; reconcileDcasWithED(); showToast(t("toastED")); if (val !== "Custom") closeModal(); }
+  function selectED(val: string) {
+    ed = val;
+    if (baseED(val) === 'SpCas9') { dcas = null; dcasCustom = ""; } // gene knockout → no dCas9
+    else reconcileDcasWithED();
+    showToast(t("toastED"));
+    if (val !== "Custom") closeModal();
+  }
   function selectDcas(val: string) { dcas = val; showToast(t("toastDcas")); if (val !== "Custom") closeModal(); }
 
   function toggleMarker(group: 'fluorescent' | 'antibiotic', name: string) {
@@ -563,7 +575,7 @@
     { key: 'dcas', abbr: 'dCas9', tag: 'II → III', subKey: 'moduleDcasSub', val: dcasVal ? `${dcasVal} · ${dcasSize} ${t('bp')}` : t('notSelected') },
     { key: 'm', abbr: 'M', tag: 'III → IV', subKey: 'moduleMSub', val: markerSize ? `${[...markersFluorescent, ...markersAntibiotic].join(', ')} · ${markerSize} ${t('bp')}` : t('optional') },
     { key: 'ter', abbr: 'Ter', tag: 'IV → Z', subKey: 'moduleTerSub', val: terminatorVal ? `${terminatorVal} · ${terminatorSize} ${t('bp')}` : t('notSelected') },
-  ];
+  ].filter(m => activeModuleKeys.includes(m.key));
 
   $: backboneOptions = [
     { name: t("standardBackbone"), desc: t("bbDesc1") },
@@ -587,6 +599,7 @@
     { title: t("acetylation"), items: ["p300 (histone acetylation)","HDAC3 (histone deacetylation)"] },
     { title: t("h3k4"), items: ["LSD1 (H3K4me1/2 demethylation)","KDM5A (H3K4me2/3 demethylation)","RIOX1 (H3K4me1/2/3 demethylation)","PRDM9 (introduction of H3K4me3)"] },
     { title: t("h3k9"), items: ["G9a (introduction of H3K9me2)","G9a-me3 (introduction of H3K9me3)"] },
+    { title: t("catActiveCas9"), items: ["SpCas9 (gene knockout)"] },
     { title: "Custom", items: ["Custom"] },
   ];
 
@@ -595,7 +608,7 @@
     { label: t('sumKg'), value: gRNAs.length ? gRNAs.map((g, i) => `${i+1}. ${g.type}${g.name ? ` — ${g.name}` : ''}${g.sequence ? ` — ${g.sequence}` : ''}${g.target ? ` — ${g.target}` : ''}`).join(' | ') + ` · ${gRNASize} ${t('bp')}` : '—' },
     { label: t('sumKp'), value: promoterVal ? `${promoterVal} · ${promoterSize} ${t('bp')}` : '—' },
     { label: t('sumKe'), value: edVal ? `${baseED(edVal)} · ${edSize} ${t('bp')}` : '—' },
-    { label: t('sumKd'), value: dcasVal ? `${dcasVal} · ${dcasSize} ${t('bp')}` : '—' },
+    ...(geneKnockout ? [] : [{ label: t('sumKd'), value: dcasVal ? `${dcasVal} · ${dcasSize} ${t('bp')}` : '—' }]),
     { label: t('sumKm'), value: markerSize ? `${[...markersFluorescent, ...markersAntibiotic].join(', ')} · ${markerSize} ${t('bp')}` : '—' },
     { label: t('sumKt'), value: terminatorVal ? `${terminatorVal} · ${terminatorSize} ${t('bp')}` : '—' },
     { label: t('sumKtotal'), value: `${totalSize} ${t('bp')}` },
@@ -694,7 +707,7 @@
               <div class="text-white/60 text-[.8125rem]">{t('plasmidMapText')}</div>
             </div>
             <div class="relative w-full min-h-[650px] md:min-h-[660px]" bind:this={plasmidStage}>
-              {#each MODULE_KEYS as k}
+              {#each activeModuleKeys as k (k)}
                 <div
                   bind:this={ringLabelEls[k]}
                   class="absolute p-2.5 rounded-lg text-white text-xs font-bold cursor-pointer max-w-[10.625rem] border shadow-lg select-none transition-all hover:scale-105 hover:brightness-110 md:max-w-[8.75rem] md:text-[.6875rem]"
@@ -714,7 +727,7 @@
               <svg class="w-full h-auto block" viewBox="0 0 620 620" role="img" aria-label="Plasmid map">
                 <rect x="10" y="10" width="600" height="600" rx="22" fill="rgba(255,255,255,.02)" stroke="rgba(255,255,255,.08)"/>
                 <circle cx="310" cy="310" r="150" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="20"/>
-                {#each MODULE_KEYS as k}
+                {#each activeModuleKeys as k (k)}
                   <path
                     d={segments[k].path} fill="none" stroke={STROKE_COLORS[k]}
                     stroke-width={hoveredSegment === k ? 28 : 20} stroke-linecap="round"
@@ -726,7 +739,7 @@
                 <text x="310" y="300" text-anchor="middle" font-size="18" fill="rgba(255,255,255,.94)" font-weight="800">Expression plasmid</text>
                 <text x="310" y="326" text-anchor="middle" font-size="14" fill="rgba(255,255,255,.82)" font-weight="700">{totalSize} {t('bp')}</text>
                 <g opacity="0">
-                  {#each MODULE_KEYS as k}
+                  {#each activeModuleKeys as k (k)}
                     <path
                       d={segments[k].path} fill="none" stroke="#fff" stroke-width="34" stroke-linecap="round"
                       style="cursor:pointer"
@@ -739,7 +752,7 @@
               </svg>
             </div>
             <div class="flex gap-2.5 flex-wrap mt-3.5">
-              {#each legendItems as leg}
+              {#each legendItems.filter(leg => activeModuleKeys.includes(leg.key)) as leg}
                 <div class="flex items-center gap-2 text-xs text-white/75 px-2 py-1.5 rounded-full border border-white/10 bg-white/5">
                   <span class="w-2.5 h-2.5 rounded-sm {leg.colorClass}"></span>
                   <span>{t(leg.labelKey)}</span>
@@ -754,7 +767,7 @@
       <div class="flex flex-col gap-3 sticky top-24 mlg:relative mlg:top-auto">
         <div class="bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
           <h2 class="text-base font-bold text-[#032130] mb-1">{t('configTitle')}</h2>
-          <p class="text-gray-500 text-[.8125rem]">{t('configText')}</p>
+          <p class="text-gray-500 text-[.8125rem]">{geneKnockout ? t('configTextKnockout') : t('configText')}</p>
           <div class="[display:grid] gap-2.5 mt-2.5">
             {#each summaryItems as item}
               <div class="border border-gray-100 bg-gray-50 rounded-md p-3">
@@ -797,7 +810,7 @@
                     <b>gRNAs</b>: {c.gRNAs.length} · {c.gRNAsSizeBp} bp<br>
                     <b>Pro</b>: {c.promoter} · {c.promoterSizeBp} bp<br>
                     <b>ED</b>: {c.ed} · {c.edSizeBp} bp<br>
-                    <b>dCas9</b>: {c.dcas} · {c.dcasSizeBp} bp<br>
+                    {#if c.dcas}<b>dCas9</b>: {c.dcas} · {c.dcasSizeBp} bp<br>{/if}
                     <b>M</b>: {[...c.markersFluorescent, ...c.markersAntibiotic].join(', ') || '—'} · {c.markersSizeBp} bp<br>
                     <b>Ter</b>: {c.terminator} · {c.terminatorSizeBp} bp<br>
                     <b>{t('totalSize')}</b>: {c.totalSizeBp} {t('bp')}
