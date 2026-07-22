@@ -51,16 +51,16 @@
           <span> {$language === 'en' ? 'Closed on public holidays' : 'Tijekom državnih praznika i blagdana ne radimo'} </span>
         </div>
       </div>
-      <!--<div class="contact-links">
-        <span class="span-label font-bold">{$language === 'en' ? 'NOTICE OF WINTER WORKING HOURS FOR THE DNA LABORATORY:' : 'OBAVIJEST O ZIMSKOM RADNOM VREMENU DNA LABORATORIJA:'}</span>
+      <div class="contact-links">
+        <span class="span-label font-bold">{$language === 'en' ? 'NOTICE OF SUMMER WORKING HOURS FOR THE DNA LABORATORY:' : 'OBAVIJEST O LJETNOM RADNOM VREMENU DNA LABORATORIJA:'}</span>
         <span>
             {
               $language === 'en' ?
-                'The DNA laboratory will be closed from 25 December 2025 to 06 January 2026, and no samples will be accepted for analysis during this period. From 07 January 2026, the laboratory will operate according to its standard working hours.' :
-                'DNA laboratorij neće raditi u periodu od 25. prosinca 2025. do 06. siječnja 2026. te se u tom periodu neće zaprimati uzorci za analize. Od 07. siječnja 2026. laboratorij će raditi prema standardnom radnom vremenu.'
+                'The DNA laboratory will be closed from 03 August 2026 to 10 August 2026, and no samples will be accepted for analysis during this period. From 11 August 2026, the laboratory will operate according to its standard working hours.' :
+                'DNA laboratorij neće raditi u periodu od 03. kolovoza 2026. do 10. kolovoza 2026. te se u tom periodu neće zaprimati uzorci za analize. Od 11. kolovoza 2026. laboratorij će raditi prema standardnom radnom vremenu.'
             }
           </span>
-      </div>-->
+      </div>
     </div>
   </div>
   <div class="gc-12 contact-section spacer">
