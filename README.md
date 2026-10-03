@@ -28,8 +28,8 @@
 - Change the env-config files throughout the project
 - Change the .firebaserc targets
 - Change the action URL in authenticaiton templates to `https://europe-west1-[project].cloudfunctions.net/actioncontroller`
-- Download a service account and store it in `web/key.json`
-- Add the service account to GitHub secrets with the name SERVICE_ACCOUNT
+- The web build and `scripts/configure-release.ts` use Application Default Credentials. Locally, run `gcloud auth application-default login` (or point `GOOGLE_APPLICATION_CREDENTIALS` at a credentials file)
+- GitHub Actions authenticate with Workload Identity Federation: set the repository variables `GCP_WORKLOAD_IDENTITY_PROVIDER` and `GCP_SERVICE_ACCOUNT` (no service account key is stored in GitHub)
 - To enable website releases you'll need to generate a github token and add it to GCE-s secret manager under the name `GITHUB_TOKEN`
 - Look for any `TODO(Project Specific)` references in the codebase and update them accordingly
 

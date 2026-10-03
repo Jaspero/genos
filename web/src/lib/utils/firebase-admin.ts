@@ -1,10 +1,9 @@
 import admin from 'firebase-admin';
-import credential from '../../../key.json';
 import { CONFIG } from '../consts/config.const';
 
 const app = admin.initializeApp(
   {
-    credential: admin.credential.cert(credential as any),
+    credential: admin.credential.applicationDefault(),
     storageBucket: CONFIG.storageBucketName + '.firebasestorage.app'
   },
   'app-' + Date.now()

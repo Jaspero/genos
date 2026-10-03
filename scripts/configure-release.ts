@@ -5,15 +5,12 @@ import admin from 'firebase-admin';
 import { document, TRACKED_COLLECTIONS, type ChangeDocument } from '../shared/consts/tracked-collection.const';
 import { writeFile, readFile } from 'fs/promises';
 import { existsSync } from 'fs';
-// @ts-ignore
-import credential from '../web/key.json';
 import { CONFIG } from '../web/src/lib/consts/config.const';
 import { DateTime } from 'luxon';
 import { join } from 'path';
 
 admin.initializeApp({
-  // @ts-ignore
-  credential: admin.credential.cert(credential)
+  credential: admin.credential.applicationDefault()
 });
 
 const job = process.env.JOB;
