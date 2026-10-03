@@ -9,11 +9,13 @@ on:
       - 'shared/**/*'
 env:
   PROJECT: genos-ec52a
-  SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
   TARGET: cms
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Use Node.js 20.9.0
         uses: actions/setup-node@v1
@@ -23,11 +25,12 @@ jobs:
         uses: actions/checkout@v3
       - name: Build
         run: npm ci --prefix cms --legacy-peer-deps && npm run build:prod --prefix cms
-      - name: Deploy
-        uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools@15.32.1
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: ${{ env.SERVICE_ACCOUNT }}
-          channelId: live
-          projectId: ${{ env.PROJECT }}
-          target: ${{ env.TARGET }}
+          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
+      - name: Deploy
+        run: firebase deploy --only hosting:$TARGET --project $PROJECT --non-interactive
