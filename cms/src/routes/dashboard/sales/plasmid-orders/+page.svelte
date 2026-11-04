@@ -5,6 +5,7 @@
 
   interface PlasmidOrder {
     id: string;
+    orderNumber?: string;
     customerId: string;
     customerEmail: string;
     customerName: string;
@@ -61,6 +62,7 @@
       <table class="w-full text-sm">
         <thead>
           <tr class="border-b text-left">
+            <th class="py-2 px-3">Order</th>
             <th class="py-2 px-3">Date</th>
             <th class="py-2 px-3">Customer</th>
             <th class="py-2 px-3">Configs</th>
@@ -72,6 +74,7 @@
         <tbody>
           {#each orders as order}
             <tr class="border-b hover:bg-slate-50">
+              <td class="py-2 px-3 whitespace-nowrap font-bold">{order.orderNumber ?? `#${order.id.slice(0, 8)}`}</td>
               <td class="py-2 px-3 whitespace-nowrap">{formatDate(order.createdAt)}</td>
               <td class="py-2 px-3">
                 <div class="font-bold">{order.customerName || '—'}</div>

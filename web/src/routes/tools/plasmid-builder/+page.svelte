@@ -4,6 +4,7 @@
   import { authenticated, functions } from '$lib/utils/firebase';
   import { httpsCallable } from 'firebase/functions';
   import { language } from '$lib/stores/language';
+  import { parseCustomDomains } from '$lib/utils/plasmid-domains';
 
   // ── I18N ──
   const I18N: Record<string, Record<string, string>> = {
@@ -57,6 +58,9 @@
       acetylation: "Histone acetylation",
       h3k4: "Histone H3K4 methylation", h3k9: "Histone H3K9 methylation",
       edCustom: "Custom ED (if selected Custom)",
+      edCustomDomains: "Desired domains (one per line or comma separated)",
+      edCustomDomainNote: "Domains entered here are not drawn on the plasmid map \u2014 they are listed with the configuration when you add it to the cart.",
+      cartDomains: "Custom domains",
       edNote: "Compatibility: dSaCas9 only with DNMT3A, TET1, VPR, KRAB. Others \u2192 dSpCas9.",
       dcasTitle: "Select dCas9",
       dcasCustom: "Custom dCas9 (if selected Custom)",
@@ -148,6 +152,9 @@
       acetylation: "Histonska acetilacija",
       h3k4: "Metilacija histona H3K4", h3k9: "Metilacija histona H3K9",
       edCustom: "Custom ED (ako je odabran Custom)",
+      edCustomDomains: "\u017deljene domene (jedna po redu ili odvojene zarezom)",
+      edCustomDomainNote: "Unesene domene ne prikazuju se na mapi plazmida \u2014 navedene su uz konfiguraciju kada je doda\u0161 u ko\u0161aricu.",
+      cartDomains: "Custom domene",
       edNote: "Kompatibilnost: dSaCas9 samo s DNMT3A, TET1, VPR, KRAB. Ostalo \u2192 dSpCas9.",
       dcasTitle: "Odaberi dCas9",
       dcasCustom: "Custom dCas9 (ako je odabran Custom)",
@@ -193,6 +200,9 @@
 
   $: t = (key: string) => I18N[$language]?.[key] ?? key;
 
+  // Effector option that only collects free text domains (no size, not drawn on the map).
+  const CUSTOM_DOMAIN_ED = "Custom domain";
+
   // ── Size data ──
   const SIZE_BP: Record<string, number> = {
     "Standard Backbone": 2013, "Lentiviral backbone": 7528,
@@ -219,6 +229,7 @@
   let promoterCustom = "";
   let ed: string | null = null;
   let edCustom = "";
+  let edCustomDomainsText = "";
   let dcas: string | null = null;
   let dcasCustom = "";
   let markersFluorescent: string[] = [];
@@ -261,6 +272,8 @@
   function baseED(label: string): string {
     if (!label) return "";
     if (label === "Custom") return "Custom";
+    // "Custom domain" is a label of its own, not a "Custom" variant.
+    if (label === CUSTOM_DOMAIN_ED) return CUSTOM_DOMAIN_ED;
     return label.split(" ")[0];
   }
 
@@ -289,6 +302,8 @@
   $: dcasVal = !dcas ? '' : dcas === 'Custom' ? (dcasCustom || 'Custom') : dcas;
   $: terminatorVal = !terminator ? '' : terminator === 'Custom' ? (terminatorCustom || 'Custom') : terminator;
 
+  $: customDomains = edVal === CUSTOM_DOMAIN_ED ? parseCustomDomains(edCustomDomainsText) : [];
+
   $: backboneSize = sizeOf(backboneVal);
   $: gRNASize = gRNAs.reduce((s, g) => s + sizeOf(g.type), 0);
   $: promoterSize = sizeOf(promoterVal);
@@ -314,7 +329,7 @@
   function allowedDcasOptions(): string[] {
     if (baseED(getVal('ed')) === 'SpCas9') return []; // gene knockout → dCas9 not applicable
     if (!ed) return ["dSpCas9", "dSaCas9", "Custom"];
-    if (ed === "Custom") return ["dSpCas9", "Custom"];
+    if (ed === "Custom" || ed === CUSTOM_DOMAIN_ED) return ["dSpCas9", "Custom"];
     const edBase = baseED(getVal('ed'));
     if (["DNMT3A","TET1","VPR","KRAB"].includes(edBase)) return ["dSpCas9","dSaCas9","Custom"];
     return ["dSpCas9", "Custom"];
@@ -455,7 +470,7 @@
     if (baseED(val) === 'SpCas9') { dcas = null; dcasCustom = ""; } // gene knockout → no dCas9
     else reconcileDcasWithED();
     showToast(t("toastED"));
-    if (val !== "Custom") closeModal();
+    if (val !== "Custom" && val !== CUSTOM_DOMAIN_ED) closeModal();
   }
   function selectDcas(val: string) { dcas = val; showToast(t("toastDcas")); if (val !== "Custom") closeModal(); }
 
@@ -472,7 +487,7 @@
   function clearBuilder() {
     backbone = null; backboneCustom = ""; gRNAs = [];
     promoter = null; promoterCustom = "";
-    ed = null; edCustom = "";
+    ed = null; edCustom = ""; edCustomDomainsText = "";
     dcas = null; dcasCustom = "";
     markersFluorescent = []; markersAntibiotic = [];
     terminator = null; terminatorCustom = "";
@@ -489,6 +504,7 @@
       promoterRaw: promoter, promoterCustomRaw: promoterCustom,
       ed: baseED(edVal), edSizeBp: edSize,
       edRaw: ed, edCustomRaw: edCustom,
+      customDomains: [...customDomains], customDomainsRaw: edCustomDomainsText,
       dcas: dcasVal, dcasSizeBp: dcasSize,
       dcasRaw: dcas, dcasCustomRaw: dcasCustom,
       markersFluorescent: [...markersFluorescent], markersAntibiotic: [...markersAntibiotic], markersSizeBp: markerSize,
@@ -510,6 +526,7 @@
     promoterCustom = c.promoterCustomRaw ?? "";
     ed = c.edRaw ?? c.ed ?? null;
     edCustom = c.edCustomRaw ?? "";
+    edCustomDomainsText = c.customDomainsRaw ?? (c.customDomains ?? []).join('\n');
     dcas = c.dcasRaw ?? c.dcas ?? null;
     dcasCustom = c.dcasCustomRaw ?? "";
     markersFluorescent = [...(c.markersFluorescent || [])];
@@ -535,8 +552,8 @@
     try {
       const fn = httpsCallable(functions, 'submitPlasmidOrder');
       const res = await fn({ configurations: cart, notes: notes.trim(), language: $language });
-      const orderId = (res.data as any)?.orderId as string;
-      showToast(`${t("orderSubmitted")} ${orderId}`);
+      const data = res.data as { orderId?: string; orderNumber?: string } | undefined;
+      showToast(`${t("orderSubmitted")} ${data?.orderNumber || data?.orderId || ''}`);
       cart = []; notes = "";
     } catch (e: any) {
       console.error(e);
@@ -600,7 +617,7 @@
     { title: t("h3k4"), items: ["LSD1 (H3K4me1/2 demethylation)","KDM5A (H3K4me2/3 demethylation)","RIOX1 (H3K4me1/2/3 demethylation)","PRDM9 (introduction of H3K4me3)"] },
     { title: t("h3k9"), items: ["G9a (introduction of H3K9me2)","G9a-me3 (introduction of H3K9me3)"] },
     { title: t("catActiveCas9"), items: ["SpCas9 (gene knockout)"] },
-    { title: "Custom", items: ["Custom"] },
+    { title: "Custom", items: ["Custom", CUSTOM_DOMAIN_ED] },
   ];
 
   $: summaryItems = [
@@ -810,6 +827,7 @@
                     <b>gRNAs</b>: {c.gRNAs.length} · {c.gRNAsSizeBp} bp<br>
                     <b>Pro</b>: {c.promoter} · {c.promoterSizeBp} bp<br>
                     <b>ED</b>: {c.ed} · {c.edSizeBp} bp<br>
+                    {#if c.customDomains?.length}<b>{t('cartDomains')}</b>: {c.customDomains.join(', ')}<br>{/if}
                     {#if c.dcas}<b>dCas9</b>: {c.dcas} · {c.dcasSizeBp} bp<br>{/if}
                     <b>M</b>: {[...c.markersFluorescent, ...c.markersAntibiotic].join(', ') || '—'} · {c.markersSizeBp} bp<br>
                     <b>Ter</b>: {c.terminator} · {c.terminatorSizeBp} bp<br>
@@ -941,6 +959,12 @@
             {/each}
             {#if ed === 'Custom'}
               <div class="mt-3"><input class="w-full p-2.5 rounded border border-white/15 bg-white/5 text-white text-[.8125rem] outline-none" placeholder={t('edCustom')} bind:value={edCustom} /></div>
+            {/if}
+            {#if ed === CUSTOM_DOMAIN_ED}
+              <div class="mt-3">
+                <textarea class="w-full resize-y p-2.5 rounded border border-white/15 bg-white/5 text-white text-[.8125rem] outline-none" rows="3" placeholder={t('edCustomDomains')} bind:value={edCustomDomainsText}></textarea>
+                <p class="mt-1.5 text-xs text-white/75">{t('edCustomDomainNote')}</p>
+              </div>
             {/if}
             <p class="mt-2.5 text-xs text-white/75">{t('edNote')}</p>
 

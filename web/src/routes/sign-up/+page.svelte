@@ -22,6 +22,7 @@
   let institution = '';
   let position = '';
   let institutionAddress = '';
+  let vatId = '';
   let loading = false;
   let recaptchaVerify: () => Promise<string>;
   let type = 'password';
@@ -61,6 +62,7 @@
       institution: institution.trim(),
       position: position.trim(),
       institutionAddress: institutionAddress.trim(),
+      vatId: vatId.trim(),
       updatedAt: serverTimestamp()
     };
   }
@@ -158,6 +160,7 @@
             institution: '',
             position: '',
             institutionAddress: '',
+            vatId: '',
             createdAt: serverTimestamp(),
             updatedAt: serverTimestamp()
           },
@@ -230,6 +233,10 @@
           <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpInstitutionAddress">
             Institution Address
             <textarea id="signUpInstitutionAddress" bind:value={institutionAddress} required rows="3" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]"></textarea>
+          </label>
+          <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpVatId">
+            VAT ID
+            <input id="signUpVatId" type="text" bind:value={vatId} class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
           </label>
           <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpPassword">
             Password

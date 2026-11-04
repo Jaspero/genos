@@ -27,6 +27,7 @@ interface IncomingConfiguration {
   markersSizeBp?: number;
   terminator?: string;
   terminatorSizeBp?: number;
+  customDomains?: string[];
   totalSizeBp?: number;
 }
 
@@ -44,6 +45,7 @@ interface CustomerProfileSnapshot {
   institution: string;
   position: string;
   institutionAddress: string;
+  vatId: string;
 }
 
 const SIZE_BP: Record<string, number> = {
@@ -118,6 +120,39 @@ function esc(value: unknown): string {
   return String(value ?? '').replace(/[&<>"']/g, (m) => ESC_MAP[m]);
 }
 
+const MAX_CUSTOM_DOMAINS = 50;
+
+/**
+ * Custom domains are free text — one domain per line or comma separated.
+ * They are informative only (no size contribution, not drawn on the plasmid map).
+ */
+function sanitizeDomains(domains: unknown): string[] {
+  if (!Array.isArray(domains)) {
+    return [];
+  }
+
+  return domains
+    .map((domain) => normalizeLabel(domain).slice(0, 200))
+    .filter(Boolean)
+    .slice(0, MAX_CUSTOM_DOMAINS);
+}
+
+/**
+ * Sequential, human readable order number (GPB-0001, GPB-0002, …) kept in a
+ * counter document so concurrent submissions can't take the same number.
+ */
+async function nextOrderNumber(fs: admin.firestore.Firestore): Promise<string> {
+  const counterRef = fs.collection('counters').doc('plasmid-orders');
+  const count = await fs.runTransaction(async (transaction) => {
+    const snapshot = await transaction.get(counterRef);
+    const next = (Number(snapshot.data()?.count) || 0) + 1;
+    transaction.set(counterRef, { count: next }, { merge: true });
+    return next;
+  });
+
+  return `GPB-${String(count).padStart(4, '0')}`;
+}
+
 function sizedList(items: string[]): string {
   if (!items.length) {
     return '—';
@@ -149,6 +184,7 @@ function configHtml(cfg: IncomingConfiguration, idx: number): string {
       <tr><td><b>Markers (abx)</b></td><td>${abx}</td></tr>
       <tr><td><b>Markers total</b></td><td>${cfg.markersSizeBp ?? 0} bp</td></tr>
       <tr><td><b>Terminator</b></td><td>${esc(cfg.terminator)} (${cfg.terminatorSizeBp ?? 0} bp)</td></tr>
+      ${cfg.customDomains?.length ? `<tr><td><b>Custom domains</b></td><td><ul>${cfg.customDomains.map((d) => `<li>${esc(d)}</li>`).join('')}</ul></td></tr>` : ''}
       <tr><td><b>Total size</b></td><td>${cfg.totalSizeBp ?? 0} bp</td></tr>
     </table>
   `;
@@ -164,6 +200,7 @@ function customerProfileHtml(profile: CustomerProfileSnapshot): string {
       <tr><td><b>Institution</b></td><td>${esc(profile.institution || '—')}</td></tr>
       <tr><td><b>Position</b></td><td>${esc(profile.position || '—')}</td></tr>
       <tr><td><b>Institution address</b></td><td>${esc(profile.institutionAddress || '—')}</td></tr>
+      <tr><td><b>VAT ID</b></td><td>${esc(profile.vatId || '—')}</td></tr>
     </table>
   `;
 }
@@ -216,7 +253,8 @@ export const submitPlasmidOrder = onCall(
       lastName: '',
       institution: '',
       position: '',
-      institutionAddress: ''
+      institutionAddress: '',
+      vatId: ''
     };
     try {
       const customerSnap = await fs.collection('customers').doc(uid).get();
@@ -228,6 +266,7 @@ export const submitPlasmidOrder = onCall(
         institution?: string;
         position?: string;
         institutionAddress?: string;
+        vatId?: string;
       } | undefined;
       if (cd) {
         customerEmail = cd.email || customerEmail;
@@ -240,6 +279,7 @@ export const submitPlasmidOrder = onCall(
         customerProfile.institution = cd.institution || '';
         customerProfile.position = cd.position || '';
         customerProfile.institutionAddress = cd.institutionAddress || '';
+        customerProfile.vatId = cd.vatId || '';
       }
     } catch {
       // ignore
@@ -296,14 +336,17 @@ export const submitPlasmidOrder = onCall(
         markersSizeBp,
         terminator: cfg.terminator ?? '',
         terminatorSizeBp,
+        customDomains: sanitizeDomains(cfg.customDomains),
         totalSizeBp
       };
     });
 
     const now = admin.firestore.FieldValue.serverTimestamp();
     const orderRef = fs.collection('plasmid-orders').doc();
+    const orderNumber = await nextOrderNumber(fs);
 
     await orderRef.set({
+      orderNumber,
       customerId: uid,
       customerEmail,
       customerName,
@@ -323,7 +366,7 @@ export const submitPlasmidOrder = onCall(
         <div style="font-family:sans-serif;max-width:720px;margin:0 auto;">
           <h2>New plasmid order</h2>
           <p><b>Customer:</b> ${esc(customerName || '—')} &lt;${esc(customerEmail)}&gt;</p>
-          <p><b>Order ID:</b> ${esc(orderRef.id)}</p>
+          <p><b>Order number:</b> ${esc(orderNumber)}</p>
           <p><b>Configurations:</b> ${configurations.length}</p>
           ${customerProfileHtml(customerProfile)}
           ${payload.notes ? `<p><b>Notes:</b><br>${esc(payload.notes).replace(/\n/g, '<br>')}</p>` : ''}
@@ -333,7 +376,7 @@ export const submitPlasmidOrder = onCall(
       try {
         await sendResendEmail({
           to: adminRecipients,
-          subject: `New plasmid order — ${customerEmail}`,
+          subject: `New plasmid order ${orderNumber} — ${customerEmail}`,
           html,
           replyTo: customerEmail
         });
@@ -344,6 +387,6 @@ export const submitPlasmidOrder = onCall(
       console.warn('No admin recipients configured for plasmid order notifications');
     }
 
-    return { orderId: orderRef.id };
+    return { orderId: orderRef.id, orderNumber };
   }
 );

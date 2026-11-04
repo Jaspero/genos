@@ -8,5 +8,6 @@ export interface User {
   institution?: string;
   position?: string;
   institutionAddress?: string;
+  vatId?: string;
   favorites?: string[];
 }

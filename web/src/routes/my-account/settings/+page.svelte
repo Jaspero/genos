@@ -25,6 +25,7 @@
   let institution = '';
   let position = '';
   let institutionAddress = '';
+  let vatId = '';
   let deleteDialog = false;
 
   $: if ($user) {
@@ -34,6 +35,7 @@
     institution = institution || $user.institution || '';
     position = position || $user.position || '';
     institutionAddress = institutionAddress || $user.institutionAddress || '';
+    vatId = vatId || $user.vatId || '';
   }
 
   async function changePassword() {
@@ -114,6 +116,7 @@
       institution: institution.trim(),
       position: position.trim(),
       institutionAddress: institutionAddress.trim(),
+      vatId: vatId.trim(),
       updatedAt: serverTimestamp()
     };
 
@@ -199,6 +202,11 @@
       <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="profileInstitutionAddress">
         Institution Address
         <textarea id="profileInstitutionAddress" bind:value={institutionAddress} required rows="3" class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]"></textarea>
+      </label>
+
+      <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="profileVatId">
+        VAT ID
+        <input id="profileVatId" type="text" bind:value={vatId} class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
       </label>
 
       <div>

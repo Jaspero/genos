@@ -61,6 +61,7 @@ function sizedList(items: string[]): string {
 }
 
 interface PlasmidOrderDoc {
+  orderNumber?: string;
   customerEmail: string;
   customerName?: string;
   status: string;
@@ -83,6 +84,7 @@ interface PlasmidOrderDoc {
     markersSizeBp?: number;
     terminator?: string;
     terminatorSizeBp?: number;
+    customDomains?: string[];
     totalSizeBp?: number;
   }>;
   confirmationEmailSentAt?: unknown;
@@ -124,6 +126,7 @@ function configSummaryHtml(cfg: NonNullable<PlasmidOrderDoc['configurations']>[n
       <tr><td><b>${t('Markers (abx)', 'Markeri (abx)')}</b></td><td>${abx}</td></tr>
       <tr><td><b>${t('Markers total', 'Markeri ukupno')}</b></td><td>${markersSizeBp} bp</td></tr>
       <tr><td><b>${t('Terminator', 'Terminator')}</b></td><td>${esc(cfg.terminator)} (${displaySize(cfg.terminatorSizeBp, cfg.terminator)} bp)</td></tr>
+      ${cfg.customDomains?.length ? `<tr><td><b>${t('Custom domains', 'Custom domene')}</b></td><td><ul>${cfg.customDomains.map((d) => `<li>${esc(d)}</li>`).join('')}</ul></td></tr>` : ''}
       <tr><td><b>${t('Total size', 'Ukupna veličina')}</b></td><td>${totalSizeBp} bp</td></tr>
     </table>
   `;
@@ -148,9 +151,10 @@ function buildInvoiceEmail(orderId: string, data: PlasmidOrderDoc): { subject: s
   const lang: 'en' | 'hr' = data.language === 'hr' ? 'hr' : 'en';
   const t = (en: string, hr: string) => (lang === 'hr' ? hr : en);
   const price = typeof data.priceEur === 'number' ? `${data.priceEur.toFixed(2)} €` : '—';
+  const orderNumber = data.orderNumber || orderId.slice(0, 8);
   const subject = t(
-    `Plasmid order confirmed — invoice (#${orderId.slice(0, 8)})`,
-    `Plazmid narudžba potvrđena — račun (#${orderId.slice(0, 8)})`
+    `Plasmid order confirmed — invoice (${orderNumber})`,
+    `Plazmid narudžba potvrđena — račun (${orderNumber})`
   );
   const configs = (data.configurations ?? []).map((c, i) => configSummaryHtml(c, i, lang)).join('');
   const html = `
@@ -162,7 +166,7 @@ function buildInvoiceEmail(orderId: string, data: PlasmidOrderDoc): { subject: s
         'Hvala na narudžbi. U nastavku se nalaze detalji narudžbe i upute za plaćanje.'
       )}</p>
       <table cellpadding="6" cellspacing="0" border="0" style="border-collapse:collapse;font-family:sans-serif;font-size:13px;border:1px solid #ddd;">
-        <tr><td><b>${t('Order ID', 'ID narudžbe')}</b></td><td>${esc(orderId)}</td></tr>
+        <tr><td><b>${t('Order number', 'Broj narudžbe')}</b></td><td>${esc(orderNumber)}</td></tr>
         <tr><td><b>${t('Total price', 'Ukupna cijena')}</b></td><td>${esc(price)}</td></tr>
         ${data.priceNotes ? `<tr><td><b>${t('Notes', 'Napomena')}</b></td><td>${esc(data.priceNotes)}</td></tr>` : ''}
       </table>
@@ -170,8 +174,8 @@ function buildInvoiceEmail(orderId: string, data: PlasmidOrderDoc): { subject: s
       <h3 style="margin:24px 0 8px;font-family:sans-serif;">${t('Order details', 'Detalji narudžbe')}</h3>
       ${configs}
       <p style="margin-top:24px;color:#666;font-size:12px;">${t(
-        'Please use the Order ID as the payment reference.',
-        'Molimo koristite ID narudžbe kao poziv na broj prilikom plaćanja.'
+        'Please use the order number as the payment reference.',
+        'Molimo koristite broj narudžbe kao poziv na broj prilikom plaćanja.'
       )}</p>
     </div>
   `;
@@ -181,9 +185,10 @@ function buildInvoiceEmail(orderId: string, data: PlasmidOrderDoc): { subject: s
 function buildPaidEmail(orderId: string, data: PlasmidOrderDoc): { subject: string; html: string } {
   const lang: 'en' | 'hr' = data.language === 'hr' ? 'hr' : 'en';
   const t = (en: string, hr: string) => (lang === 'hr' ? hr : en);
+  const orderNumber = data.orderNumber || orderId.slice(0, 8);
   const subject = t(
-    `Payment received — plasmid order #${orderId.slice(0, 8)}`,
-    `Plaćanje zaprimljeno — plazmid narudžba #${orderId.slice(0, 8)}`
+    `Payment received — plasmid order ${orderNumber}`,
+    `Plaćanje zaprimljeno — plazmid narudžba ${orderNumber}`
   );
   const html = `
     <div style="font-family:sans-serif;max-width:720px;margin:0 auto;color:#0b1220;">
@@ -193,7 +198,7 @@ function buildPaidEmail(orderId: string, data: PlasmidOrderDoc): { subject: stri
         'We have received your payment. Your plasmid order is now in production.',
         'Zaprimili smo vašu uplatu. Vaša plazmid narudžba je sada u izradi.'
       )}</p>
-      <p><b>${t('Order ID', 'ID narudžbe')}:</b> ${esc(orderId)}</p>
+      <p><b>${t('Order number', 'Broj narudžbe')}:</b> ${esc(orderNumber)}</p>
     </div>
   `;
   return { subject, html };

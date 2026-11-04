@@ -180,7 +180,7 @@
     <p>Order not found.</p>
   {:else}
     <div class="flex items-center gap-3 mb-4">
-      <h1 class="text-2xl font-bold">Order #{order.id.slice(0, 8)}</h1>
+      <h1 class="text-2xl font-bold">Order {order.orderNumber ?? `#${order.id.slice(0, 8)}`}</h1>
       <span
         class="text-xs font-bold px-2 py-1 rounded"
         style="background: {statusColor(order.status)}22; color: {statusColor(order.status)};"
@@ -194,6 +194,13 @@
         <h3 class="font-bold mb-2">Customer</h3>
         <p>{order.customerName || '—'}</p>
         <p class="text-gray-400 text-sm">{order.customerEmail}</p>
+        {#if order.customerProfile?.institution}
+          <p class="text-sm mt-1">{order.customerProfile.institution}{order.customerProfile.position ? ` — ${order.customerProfile.position}` : ''}</p>
+        {/if}
+        {#if order.customerProfile?.institutionAddress}
+          <p class="text-gray-400 text-sm whitespace-pre-wrap">{order.customerProfile.institutionAddress}</p>
+        {/if}
+        <p class="text-sm mt-1">VAT ID: {order.customerProfile?.vatId || '—'}</p>
         <p class="text-gray-400 text-xs mt-1">UID: {order.customerId}</p>
       </div>
       <div class="shadow rounded p-4">
@@ -286,6 +293,9 @@
               <tr><td class="text-gray-400 pr-3 py-1">dCas9</td><td>{cfg.dcas} ({displaySize(cfg.dcasSizeBp, cfg.dcas)} bp)</td></tr>
               <tr><td class="text-gray-400 pr-3 py-1">Markers (fluor)</td><td>{(cfg.markersFluorescent ?? []).join(', ') || '—'}</td></tr>
               <tr><td class="text-gray-400 pr-3 py-1">Markers (abx)</td><td>{(cfg.markersAntibiotic ?? []).join(', ') || '—'} ({markersSize(cfg)} bp)</td></tr>
+              {#if cfg.customDomains?.length}
+                <tr><td class="text-gray-400 pr-3 py-1">Custom domains</td><td>{cfg.customDomains.join(', ')}</td></tr>
+              {/if}
               <tr><td class="text-gray-400 pr-3 py-1">Terminator</td><td>{cfg.terminator} ({displaySize(cfg.terminatorSizeBp, cfg.terminator)} bp)</td></tr>
             </tbody>
           </table>

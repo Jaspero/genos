@@ -171,7 +171,7 @@
       <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
         <div class="flex justify-between items-center">
           <div>
-            <span class="font-bold text-[#032130]">Order #{order.id.slice(0, 8)}</span>
+            <span class="font-bold text-[#032130]">Order {order.orderNumber ?? `#${order.id.slice(0, 8)}`}</span>
             <span class="text-gray-400 text-sm ml-2">{formatDate(order.createdAt)}</span>
           </div>
           <div class="flex items-center gap-3">
@@ -212,6 +212,9 @@
                     <tr><td class="text-gray-400 pr-3">Effector</td><td>{cfg.ed} ({displaySize(cfg.edSizeBp, cfg.ed)} bp)</td></tr>
                     {#if cfg.dcas}<tr><td class="text-gray-400 pr-3">dCas9</td><td>{cfg.dcas} ({displaySize(cfg.dcasSizeBp, cfg.dcas)} bp)</td></tr>{/if}
                     <tr><td class="text-gray-400 pr-3">Markers</td><td>{[...cfg.markersFluorescent, ...cfg.markersAntibiotic].join(', ') || '—'} ({markersSize(cfg)} bp)</td></tr>
+                    {#if cfg.customDomains?.length}
+                      <tr><td class="text-gray-400 pr-3">Custom domains</td><td>{cfg.customDomains.join(', ')}</td></tr>
+                    {/if}
                     <tr><td class="text-gray-400 pr-3">Terminator</td><td>{cfg.terminator} ({displaySize(cfg.terminatorSizeBp, cfg.terminator)} bp)</td></tr>
                     <tr><td class="text-gray-400 pr-3 font-bold">Total</td><td class="font-bold">{totalSize(cfg)} bp</td></tr>
                   </tbody>

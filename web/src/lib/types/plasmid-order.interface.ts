@@ -27,11 +27,14 @@ export interface PlasmidConfiguration {
   markersSizeBp: number;
   terminator: string;
   terminatorSizeBp: number;
+  /** Free text domains for the "Custom domain" effector option — never drawn on the plasmid map. */
+  customDomains?: string[];
   totalSizeBp: number;
 }
 
 export interface PlasmidOrder {
   id: string;
+  orderNumber?: string;
   customerId: string;
   customerEmail: string;
   customerName: string;
