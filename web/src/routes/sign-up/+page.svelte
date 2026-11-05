@@ -38,7 +38,8 @@
       !recoveryEmail.trim() ||
       !institution.trim() ||
       !position.trim() ||
-      !institutionAddress.trim()
+      !institutionAddress.trim() ||
+      !vatId.trim()
     ) {
       renderAlert({
         title: 'Error',
@@ -236,7 +237,7 @@
           </label>
           <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpVatId">
             VAT ID
-            <input id="signUpVatId" type="text" bind:value={vatId} class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+            <input id="signUpVatId" type="text" bind:value={vatId} required class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
           </label>
           <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpPassword">
             Password

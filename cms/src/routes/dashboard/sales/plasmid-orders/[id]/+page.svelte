@@ -283,20 +283,20 @@
           <div class="font-bold mb-2">Configuration #{i + 1} — {totalSize(cfg)} bp total</div>
           <table class="text-sm w-full">
             <tbody>
-              <tr><td class="text-gray-400 pr-3 py-1">Backbone</td><td>{cfg.backbone} ({displaySize(cfg.backboneSizeBp, cfg.backbone)} bp)</td></tr>
+              <tr><td class="text-gray-400 pr-3 py-1">Backbone</td><td>{cfg.backbone || '—'} ({displaySize(cfg.backboneSizeBp, cfg.backbone)} bp)</td></tr>
               <tr><td class="text-gray-400 pr-3 py-1">gRNAs</td><td>{cfg.gRNAs?.length ?? 0} ({gRNAsSize(cfg)} bp)</td></tr>
               {#each (cfg.gRNAs ?? []) as g, j}
                 <tr><td></td><td class="text-gray-500 py-0.5">#{j+1} {g.type}{g.name ? ` — ${g.name}` : ''}{g.sequence ? ` — seq: ${g.sequence}` : ''}{g.target ? ` — target: ${g.target}` : ''}</td></tr>
               {/each}
-              <tr><td class="text-gray-400 pr-3 py-1">Promoter</td><td>{cfg.promoter} ({displaySize(cfg.promoterSizeBp, cfg.promoter)} bp)</td></tr>
-              <tr><td class="text-gray-400 pr-3 py-1">Effector</td><td>{cfg.ed} ({displaySize(cfg.edSizeBp, cfg.ed)} bp)</td></tr>
-              <tr><td class="text-gray-400 pr-3 py-1">dCas9</td><td>{cfg.dcas} ({displaySize(cfg.dcasSizeBp, cfg.dcas)} bp)</td></tr>
+              <tr><td class="text-gray-400 pr-3 py-1">Promoter</td><td>{cfg.promoter || '—'} ({displaySize(cfg.promoterSizeBp, cfg.promoter)} bp)</td></tr>
+              <tr><td class="text-gray-400 pr-3 py-1">Effector</td><td>{cfg.ed || '—'} ({displaySize(cfg.edSizeBp, cfg.ed)} bp)</td></tr>
+              <tr><td class="text-gray-400 pr-3 py-1">dCas9</td><td>{cfg.dcas || '—'} ({displaySize(cfg.dcasSizeBp, cfg.dcas)} bp)</td></tr>
               <tr><td class="text-gray-400 pr-3 py-1">Markers (fluor)</td><td>{(cfg.markersFluorescent ?? []).join(', ') || '—'}</td></tr>
               <tr><td class="text-gray-400 pr-3 py-1">Markers (abx)</td><td>{(cfg.markersAntibiotic ?? []).join(', ') || '—'} ({markersSize(cfg)} bp)</td></tr>
               {#if cfg.customDomains?.length}
                 <tr><td class="text-gray-400 pr-3 py-1">Custom domains</td><td>{cfg.customDomains.join(', ')}</td></tr>
               {/if}
-              <tr><td class="text-gray-400 pr-3 py-1">Terminator</td><td>{cfg.terminator} ({displaySize(cfg.terminatorSizeBp, cfg.terminator)} bp)</td></tr>
+              <tr><td class="text-gray-400 pr-3 py-1">Terminator</td><td>{cfg.terminator || '—'} ({displaySize(cfg.terminatorSizeBp, cfg.terminator)} bp)</td></tr>
             </tbody>
           </table>
         </div>

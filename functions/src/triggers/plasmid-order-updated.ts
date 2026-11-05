@@ -117,15 +117,15 @@ function configSummaryHtml(cfg: NonNullable<PlasmidOrderDoc['configurations']>[n
   return `
     <h3 style="margin:20px 0 8px;font-family:sans-serif;">${t('Configuration', 'Konfiguracija')} #${idx + 1}</h3>
     <table cellpadding="6" cellspacing="0" border="0" style="border-collapse:collapse;font-family:sans-serif;font-size:13px;border:1px solid #ddd;">
-      <tr><td><b>${t('Backbone', 'Okosnica')}</b></td><td>${esc(cfg.backbone)} (${displaySize(cfg.backboneSizeBp, cfg.backbone)} bp)</td></tr>
+      <tr><td><b>${t('Backbone', 'Okosnica')}</b></td><td>${esc(cfg.backbone || '—')} (${displaySize(cfg.backboneSizeBp, cfg.backbone)} bp)</td></tr>
       <tr><td><b>gRNAs</b></td><td>${cfg.gRNAs?.length ?? 0} (${gRNAsSizeBp} bp)<ul>${gRNA}</ul></td></tr>
-      <tr><td><b>${t('Promoter', 'Promotor')}</b></td><td>${esc(cfg.promoter)} (${displaySize(cfg.promoterSizeBp, cfg.promoter)} bp)</td></tr>
-      <tr><td><b>${t('Effector domain', 'Efektorska domena')}</b></td><td>${esc(cfg.ed)} (${displaySize(cfg.edSizeBp, cfg.ed)} bp)</td></tr>
-      <tr><td><b>dCas9</b></td><td>${esc(cfg.dcas)} (${displaySize(cfg.dcasSizeBp, cfg.dcas)} bp)</td></tr>
+      <tr><td><b>${t('Promoter', 'Promotor')}</b></td><td>${esc(cfg.promoter || '—')} (${displaySize(cfg.promoterSizeBp, cfg.promoter)} bp)</td></tr>
+      <tr><td><b>${t('Effector domain', 'Efektorska domena')}</b></td><td>${esc(cfg.ed || '—')} (${displaySize(cfg.edSizeBp, cfg.ed)} bp)</td></tr>
+      <tr><td><b>dCas9</b></td><td>${esc(cfg.dcas || '—')} (${displaySize(cfg.dcasSizeBp, cfg.dcas)} bp)</td></tr>
       <tr><td><b>${t('Markers (fluor)', 'Markeri (fluor)')}</b></td><td>${fluor}</td></tr>
       <tr><td><b>${t('Markers (abx)', 'Markeri (abx)')}</b></td><td>${abx}</td></tr>
       <tr><td><b>${t('Markers total', 'Markeri ukupno')}</b></td><td>${markersSizeBp} bp</td></tr>
-      <tr><td><b>${t('Terminator', 'Terminator')}</b></td><td>${esc(cfg.terminator)} (${displaySize(cfg.terminatorSizeBp, cfg.terminator)} bp)</td></tr>
+      <tr><td><b>${t('Terminator', 'Terminator')}</b></td><td>${esc(cfg.terminator || '—')} (${displaySize(cfg.terminatorSizeBp, cfg.terminator)} bp)</td></tr>
       ${cfg.customDomains?.length ? `<tr><td><b>${t('Custom domains', 'Custom domene')}</b></td><td><ul>${cfg.customDomains.map((d) => `<li>${esc(d)}</li>`).join('')}</ul></td></tr>` : ''}
       <tr><td><b>${t('Total size', 'Ukupna veličina')}</b></td><td>${totalSizeBp} bp</td></tr>
     </table>

@@ -25,6 +25,10 @@
       sumKb: "Backbone (B)", sumKg: "gRNAs", sumKp: "Eukaryotic promoter type (Pro)",
       sumKe: "Effector domain (ED)", sumKd: "dCas9", sumKm: "Selection markers (M)",
       sumKt: "Transcription terminator (Ter)", sumKtotal: "Total plasmid size",
+      sumKcd: "Custom domains (CD)",
+      cdTitle: "Custom domains (CD)",
+      cdEnable: "Order custom domains",
+      cdEnableNote: "Enable this to order custom domains. You can add them to the cart on their own, without selecting the other modules — the plasmid map then stays empty.",
       cartTitle: "Cart", cartText: "Saved configurations.",
       addToCart: "Add to cart", reset: "Reset",
       notSelected: "Not selected", noGRNA: "No gRNAs added", optional: "Optional",
@@ -33,6 +37,7 @@
       moduleProSub: "(eukaryotic promoter type)", moduleEdSub: "(epigenome editing effector domain or gene knockout)",
       moduleDcasSub: "(dCas9 type)", moduleMSub: "(selection markers)",
       moduleTerSub: "(transcription terminator)",
+      moduleCdSub: "(custom domains, not drawn on the map)",
       strongPromoters: "Strong promoters", weakPromoters: "Weak promoters",
       custom: "Custom",
       modalBackbone: "Select backbone (B)",
@@ -119,6 +124,10 @@
       sumKb: "Okosnica (B)", sumKg: "gRNA", sumKp: "Tip eukariotskog promotora (Pro)",
       sumKe: "Efektorska domena (ED)", sumKd: "dCas9", sumKm: "Selekcijski markeri (M)",
       sumKt: "Transkripcijski terminator (Ter)", sumKtotal: "Ukupna veličina plazmida",
+      sumKcd: "Custom domene (CD)",
+      cdTitle: "Custom domene (CD)",
+      cdEnable: "Naruči custom domene",
+      cdEnableNote: "Uključi ovo za naručivanje custom domena. Možeš ih dodati u košaricu samostalno, bez odabira ostalih modula — mapa plazmida tada ostaje prazna.",
       cartTitle: "Košarica", cartText: "Spremljene konfiguracije.",
       addToCart: "Dodaj u košaricu", reset: "Reset",
       notSelected: "Nije odabrano", noGRNA: "Nijedna gRNA nije dodana", optional: "Opcionalno",
@@ -127,6 +136,7 @@
       moduleProSub: "(tip eukariotskog promotora)", moduleEdSub: "(epigenetska efektorska domena ili gene knockout)",
       moduleDcasSub: "(tip dCas9)", moduleMSub: "(selekcijski markeri)",
       moduleTerSub: "(transkripcijski terminator)",
+      moduleCdSub: "(custom domene, ne prikazuju se na mapi)",
       strongPromoters: "Jaki promotori", weakPromoters: "Slabi promotori",
       custom: "Custom",
       modalBackbone: "Odaberi okosnicu (B)",
@@ -200,7 +210,8 @@
 
   $: t = (key: string) => I18N[$language]?.[key] ?? key;
 
-  // Effector option that only collects free text domains (no size, not drawn on the map).
+  // Legacy ED option: custom domains used to live inside ED before they became their
+  // own CD module. Kept so older orders and copied cart items still read correctly.
   const CUSTOM_DOMAIN_ED = "Custom domain";
 
   // ── Size data ──
@@ -229,7 +240,9 @@
   let promoterCustom = "";
   let ed: string | null = null;
   let edCustom = "";
-  let edCustomDomainsText = "";
+  // Custom domains are their own module (CD), independent of the ED selection.
+  let customDomainsOn = false;
+  let customDomainsText = "";
   let dcas: string | null = null;
   let dcasCustom = "";
   let markersFluorescent: string[] = [];
@@ -244,7 +257,7 @@
 
   // Modal
   let modalOpen = false;
-  type ModalType = 'backbone' | 'gRNA' | 'promoter' | 'ed' | 'dcas' | 'markers' | 'terminator' | null;
+  type ModalType = 'backbone' | 'gRNA' | 'promoter' | 'ed' | 'dcas' | 'markers' | 'terminator' | 'customDomain' | null;
   let modalType: ModalType = null;
 
   // gRNA draft
@@ -302,7 +315,9 @@
   $: dcasVal = !dcas ? '' : dcas === 'Custom' ? (dcasCustom || 'Custom') : dcas;
   $: terminatorVal = !terminator ? '' : terminator === 'Custom' ? (terminatorCustom || 'Custom') : terminator;
 
-  $: customDomains = edVal === CUSTOM_DOMAIN_ED ? parseCustomDomains(edCustomDomainsText) : [];
+  $: customDomains = customDomainsOn ? parseCustomDomains(customDomainsText) : [];
+  // A domains-only order is allowed: no modules selected, nothing drawn on the map.
+  $: domainsOnly = customDomainsOn && customDomains.length > 0;
 
   $: backboneSize = sizeOf(backboneVal);
   $: gRNASize = gRNAs.reduce((s, g) => s + sizeOf(g.type), 0);
@@ -314,7 +329,7 @@
   // Gene knockout mode: catalytically active SpCas9 selected as ED → no separate dCas9 module.
   $: geneKnockout = baseED(edVal) === 'SpCas9';
   $: totalSize = backboneSize + gRNASize + promoterSize + edSize + (geneKnockout ? 0 : dcasSize) + markerSize + terminatorSize;
-  $: requiredComplete = !!backboneVal && gRNAs.length > 0 && !!promoterVal && !!edVal && (geneKnockout || !!dcasVal) && !!terminatorVal;
+  $: requiredComplete = domainsOnly || (!!backboneVal && gRNAs.length > 0 && !!promoterVal && !!edVal && (geneKnockout || !!dcasVal) && !!terminatorVal);
 
   function getMainName(field: string): string {
     if (field === 'gRNA') return gRNAs.length ? [...new Set(gRNAs.map(g => g.type))].join(", ") : t("notSelected");
@@ -430,7 +445,7 @@
   $: if (segments && plasmidStage) requestAnimationFrame(layoutLabels);
 
   // ── Modal ──
-  const moduleModalMap: Record<string, ModalType> = { bb: 'backbone', gRNA: 'gRNA', pro: 'promoter', ed: 'ed', dcas: 'dcas', m: 'markers', ter: 'terminator' };
+  const moduleModalMap: Record<string, ModalType> = { bb: 'backbone', gRNA: 'gRNA', pro: 'promoter', ed: 'ed', dcas: 'dcas', m: 'markers', ter: 'terminator', cd: 'customDomain' };
 
   function openModal(type: ModalType) {
     // In gene knockout mode the dCas9 module is not available — clicking it does nothing.
@@ -470,7 +485,7 @@
     if (baseED(val) === 'SpCas9') { dcas = null; dcasCustom = ""; } // gene knockout → no dCas9
     else reconcileDcasWithED();
     showToast(t("toastED"));
-    if (val !== "Custom" && val !== CUSTOM_DOMAIN_ED) closeModal();
+    if (val !== "Custom") closeModal();
   }
   function selectDcas(val: string) { dcas = val; showToast(t("toastDcas")); if (val !== "Custom") closeModal(); }
 
@@ -487,7 +502,8 @@
   function clearBuilder() {
     backbone = null; backboneCustom = ""; gRNAs = [];
     promoter = null; promoterCustom = "";
-    ed = null; edCustom = ""; edCustomDomainsText = "";
+    ed = null; edCustom = "";
+    customDomainsOn = false; customDomainsText = "";
     dcas = null; dcasCustom = "";
     markersFluorescent = []; markersAntibiotic = [];
     terminator = null; terminatorCustom = "";
@@ -504,7 +520,7 @@
       promoterRaw: promoter, promoterCustomRaw: promoterCustom,
       ed: baseED(edVal), edSizeBp: edSize,
       edRaw: ed, edCustomRaw: edCustom,
-      customDomains: [...customDomains], customDomainsRaw: edCustomDomainsText,
+      customDomains: [...customDomains], customDomainsRaw: customDomainsText, customDomainsOn,
       dcas: dcasVal, dcasSizeBp: dcasSize,
       dcasRaw: dcas, dcasCustomRaw: dcasCustom,
       markersFluorescent: [...markersFluorescent], markersAntibiotic: [...markersAntibiotic], markersSizeBp: markerSize,
@@ -526,7 +542,9 @@
     promoterCustom = c.promoterCustomRaw ?? "";
     ed = c.edRaw ?? c.ed ?? null;
     edCustom = c.edCustomRaw ?? "";
-    edCustomDomainsText = c.customDomainsRaw ?? (c.customDomains ?? []).join('\n');
+    // Cart items from before CD was its own module carried the domains under ED.
+    customDomainsText = c.customDomainsRaw ?? (c.customDomains ?? []).join('\n');
+    customDomainsOn = c.customDomainsOn ?? (c.customDomains ?? []).length > 0;
     dcas = c.dcasRaw ?? c.dcas ?? null;
     dcasCustom = c.dcasCustomRaw ?? "";
     markersFluorescent = [...(c.markersFluorescent || [])];
@@ -572,6 +590,7 @@
     dcas: 'background: linear-gradient(180deg, rgba(155,93,229,.38), rgba(155,93,229,.20)); border-color: rgba(155,93,229,.74);',
     m: 'background: linear-gradient(180deg, rgba(230,57,70,.34), rgba(230,57,70,.18)); border-color: rgba(230,57,70,.74);',
     ter: 'background: linear-gradient(180deg, rgba(0,184,148,.38), rgba(0,184,148,.20)); border-color: rgba(0,184,148,.74);',
+    cd: 'background: linear-gradient(180deg, rgba(0,168,232,.38), rgba(0,168,232,.20)); border-color: rgba(0,168,232,.74);',
   };
   const RING_LABEL_BG: Record<string, string> = {
     bb: 'background: linear-gradient(180deg, rgba(53,80,112,.44), rgba(53,80,112,.24)); border-color: rgba(53,80,112,.76);',
@@ -592,7 +611,9 @@
     { key: 'dcas', abbr: 'dCas9', tag: 'II → III', subKey: 'moduleDcasSub', val: dcasVal ? `${dcasVal} · ${dcasSize} ${t('bp')}` : t('notSelected') },
     { key: 'm', abbr: 'M', tag: 'III → IV', subKey: 'moduleMSub', val: markerSize ? `${[...markersFluorescent, ...markersAntibiotic].join(', ')} · ${markerSize} ${t('bp')}` : t('optional') },
     { key: 'ter', abbr: 'Ter', tag: 'IV → Z', subKey: 'moduleTerSub', val: terminatorVal ? `${terminatorVal} · ${terminatorSize} ${t('bp')}` : t('notSelected') },
-  ].filter(m => activeModuleKeys.includes(m.key));
+    // Eighth box. Deliberately not a ring module: no size, nothing drawn on the map.
+    { key: 'cd', abbr: 'CD', tag: '—', subKey: 'moduleCdSub', val: customDomains.length ? customDomains.join(', ') : t('notSelected') },
+  ].filter(m => m.key === 'cd' || activeModuleKeys.includes(m.key));
 
   $: backboneOptions = [
     { name: t("standardBackbone"), desc: t("bbDesc1") },
@@ -617,7 +638,7 @@
     { title: t("h3k4"), items: ["LSD1 (H3K4me1/2 demethylation)","KDM5A (H3K4me2/3 demethylation)","RIOX1 (H3K4me1/2/3 demethylation)","PRDM9 (introduction of H3K4me3)"] },
     { title: t("h3k9"), items: ["G9a (introduction of H3K9me2)","G9a-me3 (introduction of H3K9me3)"] },
     { title: t("catActiveCas9"), items: ["SpCas9 (gene knockout)"] },
-    { title: "Custom", items: ["Custom", CUSTOM_DOMAIN_ED] },
+    { title: "Custom", items: ["Custom"] },
   ];
 
   $: summaryItems = [
@@ -628,6 +649,7 @@
     ...(geneKnockout ? [] : [{ label: t('sumKd'), value: dcasVal ? `${dcasVal} · ${dcasSize} ${t('bp')}` : '—' }]),
     { label: t('sumKm'), value: markerSize ? `${[...markersFluorescent, ...markersAntibiotic].join(', ')} · ${markerSize} ${t('bp')}` : '—' },
     { label: t('sumKt'), value: terminatorVal ? `${terminatorVal} · ${terminatorSize} ${t('bp')}` : '—' },
+    { label: t('sumKcd'), value: customDomains.length ? customDomains.join(', ') : '—' },
     { label: t('sumKtotal'), value: `${totalSize} ${t('bp')}` },
   ];
 
@@ -823,14 +845,14 @@
                     </div>
                   </div>
                   <div class="mt-1.5 text-xs text-gray-600 leading-relaxed">
-                    <b>B</b>: {c.backbone} · {c.backboneSizeBp} bp<br>
-                    <b>gRNAs</b>: {c.gRNAs.length} · {c.gRNAsSizeBp} bp<br>
-                    <b>Pro</b>: {c.promoter} · {c.promoterSizeBp} bp<br>
-                    <b>ED</b>: {c.ed} · {c.edSizeBp} bp<br>
+                    {#if c.backbone}<b>B</b>: {c.backbone} · {c.backboneSizeBp} bp<br>{/if}
+                    {#if c.gRNAs.length}<b>gRNAs</b>: {c.gRNAs.length} · {c.gRNAsSizeBp} bp<br>{/if}
+                    {#if c.promoter}<b>Pro</b>: {c.promoter} · {c.promoterSizeBp} bp<br>{/if}
+                    {#if c.ed}<b>ED</b>: {c.ed} · {c.edSizeBp} bp<br>{/if}
                     {#if c.customDomains?.length}<b>{t('cartDomains')}</b>: {c.customDomains.join(', ')}<br>{/if}
                     {#if c.dcas}<b>dCas9</b>: {c.dcas} · {c.dcasSizeBp} bp<br>{/if}
-                    <b>M</b>: {[...c.markersFluorescent, ...c.markersAntibiotic].join(', ') || '—'} · {c.markersSizeBp} bp<br>
-                    <b>Ter</b>: {c.terminator} · {c.terminatorSizeBp} bp<br>
+                    {#if c.markersSizeBp}<b>M</b>: {[...c.markersFluorescent, ...c.markersAntibiotic].join(', ')} · {c.markersSizeBp} bp<br>{/if}
+                    {#if c.terminator}<b>Ter</b>: {c.terminator} · {c.terminatorSizeBp} bp<br>{/if}
                     <b>{t('totalSize')}</b>: {c.totalSizeBp} {t('bp')}
                   </div>
                 </div>
@@ -862,6 +884,7 @@
             {:else if modalType === 'dcas'}{t('dcasTitle')}
             {:else if modalType === 'markers'}{t('markersTitle')}
             {:else if modalType === 'terminator'}{t('terminatorTitle')}
+            {:else if modalType === 'customDomain'}{t('cdTitle')}
             {/if}
           </h3>
           <button type="button" class="w-9 h-9 rounded border border-white/15 bg-white/5 text-white text-lg cursor-pointer hover:bg-white/10" on:click={closeModal}>×</button>
@@ -960,13 +983,22 @@
             {#if ed === 'Custom'}
               <div class="mt-3"><input class="w-full p-2.5 rounded border border-white/15 bg-white/5 text-white text-[.8125rem] outline-none" placeholder={t('edCustom')} bind:value={edCustom} /></div>
             {/if}
-            {#if ed === CUSTOM_DOMAIN_ED}
+            <p class="mt-2.5 text-xs text-white/75">{t('edNote')}</p>
+
+          {:else if modalType === 'customDomain'}
+            <label class="flex gap-2.5 items-start p-3 rounded-md border cursor-pointer transition-all hover:bg-white/10 {customDomainsOn ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}">
+              <input type="checkbox" bind:checked={customDomainsOn} class="mt-0.5 scale-110" />
+              <div>
+                <div class="font-black text-[.8125rem]">{t('cdEnable')}</div>
+                <div class="text-xs text-white/75 mt-1">{t('cdEnableNote')}</div>
+              </div>
+            </label>
+            {#if customDomainsOn}
               <div class="mt-3">
-                <textarea class="w-full resize-y p-2.5 rounded border border-white/15 bg-white/5 text-white text-[.8125rem] outline-none" rows="3" placeholder={t('edCustomDomains')} bind:value={edCustomDomainsText}></textarea>
+                <textarea class="w-full resize-y p-2.5 rounded border border-white/15 bg-white/5 text-white text-[.8125rem] outline-none" rows="4" placeholder={t('edCustomDomains')} bind:value={customDomainsText}></textarea>
                 <p class="mt-1.5 text-xs text-white/75">{t('edCustomDomainNote')}</p>
               </div>
             {/if}
-            <p class="mt-2.5 text-xs text-white/75">{t('edNote')}</p>
 
           {:else if modalType === 'dcas'}
             <div class="[display:grid] grid-cols-2 gap-2.5 sm:grid-cols-1">

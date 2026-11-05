@@ -175,15 +175,15 @@ function configHtml(cfg: IncomingConfiguration, idx: number): string {
   return `
     <h3 style="margin:24px 0 8px;font-family:sans-serif;">Configuration #${idx + 1}</h3>
     <table cellpadding="6" cellspacing="0" border="0" style="border-collapse:collapse;font-family:sans-serif;font-size:13px;border:1px solid #ddd;">
-      <tr><td><b>Backbone</b></td><td>${esc(cfg.backbone)} (${cfg.backboneSizeBp ?? 0} bp)</td></tr>
+      <tr><td><b>Backbone</b></td><td>${esc(cfg.backbone || '—')} (${cfg.backboneSizeBp ?? 0} bp)</td></tr>
       <tr><td><b>gRNAs</b></td><td>${cfg.gRNAs?.length ?? 0} total (${cfg.gRNAsSizeBp ?? 0} bp)<ul>${gRNA}</ul></td></tr>
-      <tr><td><b>Promoter</b></td><td>${esc(cfg.promoter)} (${cfg.promoterSizeBp ?? 0} bp)</td></tr>
-      <tr><td><b>Effector domain</b></td><td>${esc(cfg.ed)} (${cfg.edSizeBp ?? 0} bp)</td></tr>
+      <tr><td><b>Promoter</b></td><td>${esc(cfg.promoter || '—')} (${cfg.promoterSizeBp ?? 0} bp)</td></tr>
+      <tr><td><b>Effector domain</b></td><td>${esc(cfg.ed || '—')} (${cfg.edSizeBp ?? 0} bp)</td></tr>
       ${cfg.dcas ? `<tr><td><b>dCas9</b></td><td>${esc(cfg.dcas)} (${cfg.dcasSizeBp ?? 0} bp)</td></tr>` : ''}
       <tr><td><b>Markers (fluor)</b></td><td>${fluor}</td></tr>
       <tr><td><b>Markers (abx)</b></td><td>${abx}</td></tr>
       <tr><td><b>Markers total</b></td><td>${cfg.markersSizeBp ?? 0} bp</td></tr>
-      <tr><td><b>Terminator</b></td><td>${esc(cfg.terminator)} (${cfg.terminatorSizeBp ?? 0} bp)</td></tr>
+      <tr><td><b>Terminator</b></td><td>${esc(cfg.terminator || '—')} (${cfg.terminatorSizeBp ?? 0} bp)</td></tr>
       ${cfg.customDomains?.length ? `<tr><td><b>Custom domains</b></td><td><ul>${cfg.customDomains.map((d) => `<li>${esc(d)}</li>`).join('')}</ul></td></tr>` : ''}
       <tr><td><b>Total size</b></td><td>${cfg.totalSizeBp ?? 0} bp</td></tr>
     </table>
@@ -213,6 +213,12 @@ function validate(payload: IncomingPayload): void {
     throw new HttpsError('invalid-argument', 'Too many configurations');
   }
   payload.configurations.forEach((cfg, i) => {
+    // The "Custom domains" (CD) module can be ordered on its own: when domains are
+    // given, the other modules are optional and nothing is drawn on the plasmid map.
+    if (sanitizeDomains(cfg.customDomains).length > 0) {
+      return;
+    }
+
     // Gene knockout mode uses catalytically active SpCas9 as the effector — no separate dCas9.
     const isGeneKnockout = baseED(normalizeLabel(cfg.ed)) === 'SpCas9';
     const required: Array<[keyof IncomingConfiguration, string]> = [
@@ -299,6 +305,15 @@ export const submitPlasmidOrder = onCall(
       throw new HttpsError(
         'failed-precondition',
         'Please complete your profile details before submitting a plasmid order.'
+      );
+    }
+
+    // VAT ID is required (Genos request). Customers who registered before it was
+    // added have to fill it in under My account > Settings first.
+    if (!customerProfile.vatId) {
+      throw new HttpsError(
+        'failed-precondition',
+        'Please add your VAT ID under My account > Settings before submitting a plasmid order.'
       );
     }
 

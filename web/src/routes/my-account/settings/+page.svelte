@@ -107,6 +107,16 @@
       return;
     }
 
+    if (!vatId.trim()) {
+      renderAlert({
+        state: 'error',
+        title: 'Error',
+        message: 'VAT ID is required.'
+      });
+
+      return;
+    }
+
     const profile = {
       email: auth.currentUser.email || $user?.email || '',
       name: [firstName.trim(), lastName.trim()].filter(Boolean).join(' ').trim(),
@@ -206,7 +216,7 @@
 
       <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="profileVatId">
         VAT ID
-        <input id="profileVatId" type="text" bind:value={vatId} class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+        <input id="profileVatId" type="text" bind:value={vatId} required class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
       </label>
 
       <div>
