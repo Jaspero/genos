@@ -39,6 +39,16 @@
     return d.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
   }
 
+  function statusLabel(status: string): string {
+    switch (status) {
+      case 'pending-confirmation': return 'Pending confirmation';
+      case 'confirmed': return 'Confirmed';
+      case 'paid': return 'Paid';
+      case 'cancelled': return 'Cancelled';
+      default: return status;
+    }
+  }
+
   function statusColor(status: string): string {
     switch (status) {
       case 'pending-confirmation': return '#ff8c42';
@@ -86,7 +96,7 @@
                   class="text-xs font-bold px-2 py-1 rounded"
                   style="background: {statusColor(order.status)}22; color: {statusColor(order.status)};"
                 >
-                  {order.status}
+                  {statusLabel(order.status)}
                 </span>
               </td>
               <td class="py-2 px-3">{typeof order.priceEur === 'number' ? `${order.priceEur.toFixed(2)} €` : '—'}</td>

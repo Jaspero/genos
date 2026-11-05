@@ -383,6 +383,7 @@ export const submitPlasmidOrder = onCall(
           <p><b>Customer:</b> ${esc(customerName || '—')} &lt;${esc(customerEmail)}&gt;</p>
           <p><b>Order number:</b> ${esc(orderNumber)}</p>
           <p><b>Configurations:</b> ${configurations.length}</p>
+          <p><a href="https://genos-ec52a-cms.web.app/dashboard/sales/plasmid-orders/${esc(orderRef.id)}">Open the order in the CMS</a> to set the price, approve it or change its status.</p>
           ${customerProfileHtml(customerProfile)}
           ${payload.notes ? `<p><b>Notes:</b><br>${esc(payload.notes).replace(/\n/g, '<br>')}</p>` : ''}
           ${configurations.map((c, i) => configHtml(c, i)).join('')}

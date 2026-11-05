@@ -169,6 +169,57 @@
       default: return '#999';
     }
   }
+
+  const STATUSES = [
+    { value: 'pending-confirmation', label: 'Pending confirmation' },
+    { value: 'confirmed', label: 'Confirmed' },
+    { value: 'paid', label: 'Paid' },
+    { value: 'cancelled', label: 'Cancelled' }
+  ];
+
+  function statusLabel(status: string): string {
+    return STATUSES.find((s) => s.value === status)?.label ?? status;
+  }
+
+  /**
+   * Set any status, in any direction (a confirmed order can go back to pending).
+   * The customer emails are sent by the onPlasmidOrderUpdated trigger and are
+   * guarded by their own sent-at fields, so they never go out twice.
+   */
+  async function saveStatus() {
+    if (!order || editStatus === order.status) return;
+
+    const price = parseFloat(editPrice);
+    if (editStatus === 'confirmed' && (isNaN(price) || price <= 0)) {
+      alert('Please set a valid price before confirming.');
+      return;
+    }
+
+    const note = editStatus === 'confirmed' && !order.invoiceEmailSentAt
+      ? ' The customer will receive the invoice email.'
+      : editStatus === 'paid' && !order.paidEmailSentAt
+        ? ' The customer will receive the payment confirmation email.'
+        : '';
+
+    if (!confirm(`Change status to "${statusLabel(editStatus)}"?${note}`)) {
+      editStatus = order.status;
+      return;
+    }
+
+    saving = true;
+    const updates: Record<string, any> = { status: editStatus, updatedAt: serverTimestamp() };
+    if (editStatus === 'confirmed') {
+      updates.priceEur = price;
+      updates.priceNotes = editPriceNotes;
+    }
+    try {
+      await updateDoc(doc(db, 'plasmid-orders', orderId), updates);
+    } catch (e: any) {
+      alert(e.message);
+      editStatus = order.status;
+    }
+    saving = false;
+  }
 </script>
 
 <div class="p-6 max-w-4xl">
@@ -185,7 +236,7 @@
         class="text-xs font-bold px-2 py-1 rounded"
         style="background: {statusColor(order.status)}22; color: {statusColor(order.status)};"
       >
-        {order.status}
+        {statusLabel(order.status)}
       </span>
     </div>
 
@@ -239,6 +290,26 @@
         >
           Save
         </button>
+      </div>
+      <div class="flex gap-4 items-end flex-wrap mt-4 pt-4 border-t">
+        <div>
+          <label class="block text-sm text-gray-500 mb-1" for="status">Status</label>
+          <select id="status" class="border rounded px-3 py-2 w-56" bind:value={editStatus}>
+            {#each STATUSES as s}
+              <option value={s.value}>{s.label}</option>
+            {/each}
+          </select>
+        </div>
+        <button
+          class="bg-slate-200 hover:bg-slate-300 px-4 py-2 rounded text-sm font-bold disabled:opacity-45 disabled:cursor-not-allowed"
+          on:click={saveStatus}
+          disabled={saving || editStatus === order.status}
+        >
+          Save status
+        </button>
+        <p class="text-xs text-gray-400 flex-1 min-w-[16rem]">
+          Any status can be set, in any order. Confirmation and payment emails are sent once each, the first time the order reaches that status.
+        </p>
       </div>
       <div class="flex gap-3 mt-4">
         {#if order.status === 'pending-confirmation'}
