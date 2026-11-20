@@ -84,7 +84,8 @@ Visual impact is described against the live site.
 | 24 | Page titles: English contact page titled "Kontakt" (CMS), 404 and sign-up and plasmid builder titled "Home" | 2.4.2 | "Contact" on the English page (build-time, only when the stored title is "Kontakt"); titles for 404 (translated), Sign Up, Plasmid builder / Izrada plazmida | None |
 | 25 | News post: title was an h2, no h1 | 1.3.1 | h1 with the same size | None |
 | 26 | Intro photo was added by JavaScript (late LCP) | (performance) | The photo is in the prerendered HTML with fetchpriority="high"; the pb-intro block reuses it | None |
-| 27 | No reduced-motion handling | 2.3.3 (AAA, good practice) | CSS transitions/animations shortened under prefers-reduced-motion | None |
+| 27 | Team job titles were 10.5 px on phones (Lighthouse "legible font sizes", best practices 96 on /tim) | (best practice) | At least 12 px | Job titles on phones slightly larger. `compare/team-grid-mobile` |
+| 28 | No reduced-motion handling | 2.3.3 (AAA, good practice) | CSS transitions/animations shortened under prefers-reduced-motion | None |
 
 ## Not changed
 

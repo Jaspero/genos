@@ -125,3 +125,8 @@ a.list-link {
 .publication-card {
   overflow-wrap: anywhere;
 }
+
+/* Job titles on the team page were 10.5 px on phones (the root font is 12 px there): at least 12 px. */
+.team-members .team-member h3 {
+  font-size: max(.875rem, 12px);
+}
