@@ -95,3 +95,15 @@ Visual impact is described against the live site.
   view of the post (CMS content).
 - Shared styles (`shared/`) were not touched, so the CMS does not need a redeploy; all overrides are in
   `web/src/lib/styles/a11y.css`.
+
+## Live after deploy (genos.hr, commit e5364c22)
+
+- axe: 0 violations on the same 23 pages at 1366 and 390 px, and in the same open states (mobile menu, team
+  dialog, service dropdowns, project details, news tab, contact form, reset-password dialog). The plasmid builder
+  needs a signed-in account, so its dialogs were checked on the local build only.
+- Layout shift on load: 0.000 to 0.001 on home, usluge, news, contact, tim, a post and sign-in. No console errors.
+- Lighthouse 12, median of 3, mobile / desktop:
+  /home 79/100/100/100 and 98/100/100/100, /usluge 71/100/100/100 and 96/100/100/100,
+  /kontakt 78/100/100/100 and 98/100/100/100, /tim 77/100/100/100 and 96/100/100/100
+  (before: /home 48/95 and 71/95, /usluge 59/87 and 71/91, /kontakt 55/91 and 82/95).
+- Footer credit "Made by jaspero.co" / "Izradio jaspero.co" is still there.
