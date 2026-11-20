@@ -197,7 +197,7 @@
         <span class:active={$language === 'en'}>EN</span>
         <span class:active={$language === 'hr'}>HR</span>
       </button>
-      <button class="menu-toggle" on:click={() => open = !open}>
+      <button class="menu-toggle" aria-label="Menu" on:click={() => open = !open}>
         <img src="/icons/menu.svg" alt="">
       </button>
     </div>

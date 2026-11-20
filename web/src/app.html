@@ -4,8 +4,13 @@
     <meta charset="utf-8" />
     <base href="/" />
     <link rel="icon" href="%sveltekit.assets%/brand/favicon.ico" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="preconnect" href="https://firebasestorage.googleapis.com" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <!-- Swiper styles only apply to sliders, which are drawn after the app starts, so they need not block the first paint. -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" /></noscript>
+    <!-- Deferred: sliders wait for window.Swiper before they start (renderSwiper in [...url]/+page.svelte). -->
+    <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     %sveltekit.head%
   </head>
