@@ -48,6 +48,8 @@
   });
 </script>
 
+<!-- The article loads in the browser: one screen of height is reserved so the footer does not jump. -->
+<div class="post-page">
 {#if loading}
   <div class="grid grid-small">
     <div class="gc-12 single-article spacer" style="text-align: center; padding: 4rem;">
@@ -64,7 +66,7 @@
 {:else if article}
   <div class="grid grid-small">
     <div class="gc-12 single-article spacer">
-      <h2 class="single-article-title">{getField(article, 'title', $language)}</h2>
+      <h1 class="single-article-title">{getField(article, 'title', $language)}</h1>
       <p class="single-article-description">{getField(article, 'description', $language)}</p>
       <div class="single-article-content">
         <p>{@html getField(article, 'content', $language)}</p>
@@ -72,11 +74,23 @@
     </div>
   </div>
 {/if}
+</div>
 <style>
+    .post-page {
+        min-height: 100vh;
+    }
+    /* Same size as the h2 it used to be. */
+    .single-article-title {
+        font-size: 2rem;
+        line-height: 125%;
+    }
+    @media (max-width: 600px) {
+        .single-article-title {
+            font-size: 1.5rem;
+        }
+    }
     .single-article {
         padding: 6.5rem;
-    }
-    .single-article-title {
     }
     .single-article-description {
         margin-top: .5rem;

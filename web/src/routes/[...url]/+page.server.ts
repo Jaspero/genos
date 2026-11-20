@@ -98,9 +98,19 @@ export const load: PageServerLoad = async ({ params }) => {
     return acc;
   }, '');
 
+  const lang = langFromPath('/' + url) || 'en';
+
+  // The English contact page was saved in the CMS with the Croatian title "Kontakt" (WCAG 2.4.2, 3.1.2).
+  if (lang === 'en' && data.meta?.title === 'Kontakt') {
+    data.meta = { ...data.meta, title: 'Contact' };
+  }
+  if (lang === 'en' && data.title === 'Kontakt') {
+    data.title = 'Contact';
+  }
+
   return {
     ...data,
-    content: `${fixCmsHtml(content, langFromPath('/' + url) || 'en')}<style>${style}</style>`,
+    content: `${fixCmsHtml(content, lang)}<style>${style}</style>`,
     scripts: await scriptRef.toString()
   };
 };

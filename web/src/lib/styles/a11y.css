@@ -114,3 +114,14 @@ a.list-link {
   color: #6b7280;
   opacity: 1;
 }
+
+/* Small "Quick links" sub-links on the services page: 24 px tall targets. */
+.services .sticky-items .sub-link {
+  display: block;
+  padding: 3px 0;
+}
+
+/* Long unbroken words in publication titles may break instead of making the page scroll sideways (1.4.10, 1.4.12). */
+.publication-card {
+  overflow-wrap: anywhere;
+}

@@ -11,6 +11,9 @@
   } from 'firebase/auth';
   import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
   import Recaptcha from '$lib/Recaptcha.svelte';
+  import { meta } from '$lib/meta/meta.store';
+
+  meta.set({ title: 'Sign Up' });
   import { renderAlert } from '@jaspero/web-components/dist/render-alert';
 
   let email = '';

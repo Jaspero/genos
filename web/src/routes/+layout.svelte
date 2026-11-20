@@ -35,11 +35,11 @@
     }
   }
 
-  // Pages without a language version: the plasmid builder is translated, the others (sign-in, account,
-  // posts) are written in English. The header and footer carry their own lang attribute.
+  // Pages without a language version: the plasmid builder, posts and 404 are translated, the others
+  // (sign-in, account) are written in English. The header and footer carry their own lang attribute.
   $: if (browser) {
     document.documentElement.lang =
-      langFromPath($page.url.pathname) ?? ($page.url.pathname.startsWith('/tools/') || $page.url.pathname === '/404' ? $language : 'en');
+      langFromPath($page.url.pathname) ?? (/^\/(tools|posts)\/|^\/404$/.test($page.url.pathname) ? $language : 'en');
   }
 
   function skipToContent() {

@@ -1,5 +1,8 @@
 <script>
   import {language} from '$lib/stores/language';
+  import { meta } from '$lib/meta/meta.store';
+
+  $: meta.set({ title: $language === 'en' ? 'Page not found' : 'Stranica nije pronađena', noIndex: true });
 </script>
 
 <div class="intro-container">

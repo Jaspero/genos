@@ -5,6 +5,7 @@
   import { httpsCallable } from 'firebase/functions';
   import { language } from '$lib/stores/language';
   import { announce } from '$lib/utils/announce';
+  import { meta } from '$lib/meta/meta.store';
   import { parseCustomDomains } from '$lib/utils/plasmid-domains';
 
   // ── I18N ──
@@ -210,6 +211,7 @@
   };
 
   $: t = (key: string) => I18N[$language]?.[key] ?? key;
+  $: meta.set({ title: $language === 'hr' ? 'Izrada plazmida' : 'Plasmid builder' });
 
   // Legacy ED option: custom domains used to live inside ED before they became their
   // own CD module. Kept so older orders and copied cart items still read correctly.
