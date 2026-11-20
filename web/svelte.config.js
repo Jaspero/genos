@@ -7,6 +7,11 @@ const buildConfig = JSON.parse(readFileSync('build-config.json'));
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   kit: {
+    /**
+     * The stylesheets (about 9 KB gzip in all) are written into each page's HTML instead of being
+     * separate files the first paint has to wait for.
+     */
+    inlineStyleThreshold: 60000,
     adapter: adapter({
       pages: '../public/web',
       fallback: '200.html',
