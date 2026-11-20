@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, tick } from 'svelte';
   import { goto } from '$app/navigation';
   import { authenticated, functions } from '$lib/utils/firebase';
   import { httpsCallable } from 'firebase/functions';
   import { language } from '$lib/stores/language';
+  import { announce } from '$lib/utils/announce';
   import { parseCustomDomains } from '$lib/utils/plasmid-domains';
 
   // ── I18N ──
@@ -268,6 +269,7 @@
 
   function showToast(msg: string) {
     toastMsg = msg;
+    announce(msg);
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => toastMsg = "", 1800);
   }
@@ -447,17 +449,42 @@
   // ── Modal ──
   const moduleModalMap: Record<string, ModalType> = { bb: 'backbone', gRNA: 'gRNA', pro: 'promoter', ed: 'ed', dcas: 'dcas', m: 'markers', ter: 'terminator', cd: 'customDomain' };
 
+  let modalEl: HTMLDivElement;
+  let modalOpener: HTMLElement | null = null;
+
   function openModal(type: ModalType) {
     // In gene knockout mode the dCas9 module is not available — clicking it does nothing.
     if (type === 'dcas' && geneKnockout) return;
+    modalOpener = document.activeElement as HTMLElement | null;
     modalType = type;
     modalOpen = true;
     document.body.style.overflow = "hidden";
+    // Move keyboard focus into the dialog (WCAG 2.4.3).
+    tick().then(() => modalEl?.querySelector<HTMLElement>('button, input, textarea, select')?.focus());
   }
   function closeModal() {
     modalOpen = false;
     modalType = null;
     document.body.style.overflow = "";
+    // Back to the module the dialog was opened from.
+    if (modalOpener && document.contains(modalOpener)) modalOpener.focus();
+    modalOpener = null;
+  }
+
+  /** Tab and Shift+Tab stay inside the open dialog. */
+  function trapModalFocus(event: KeyboardEvent) {
+    if (event.key !== 'Tab' || !modalEl) return;
+    const items = [...modalEl.querySelectorAll<HTMLElement>('button:not([disabled]), input, textarea, select, a[href]')];
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   }
 
   function selectBackbone(val: string) { backbone = val; showToast(t("toastBackbone")); if (val !== "Custom") closeModal(); }
@@ -756,7 +783,7 @@
                   on:click={() => openModal(moduleModalMap[k])}
                   on:mouseenter={() => hoveredSegment = k}
                   on:mouseleave={() => hoveredSegment = null}
-                  on:keydown={e => e.key === 'Enter' && openModal(moduleModalMap[k])}
+                  on:keydown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(moduleModalMap[k]); } }}
                 >
                   {ringLabelTitles[k]}
                   <span class="block text-[.6875rem] font-semibold opacity-90 mt-0.5">{t('size')}: {ringLabelSizes[k]} {t('bp')}</span>
@@ -861,7 +888,7 @@
           </div>
           <div class="mt-3">
             <label class="block text-gray-500 text-[.8125rem] mb-1.5" for="notesInput">{t('notes')}</label>
-            <textarea id="notesInput" bind:value={notes} class="w-full resize-y rounded border border-gray-200 bg-gray-50 p-2.5 text-[.8125rem] text-gray-800 outline-none focus:border-[#0A415C]" rows="3" placeholder={t('notesPlaceholder')}></textarea>
+            <textarea id="notesInput" bind:value={notes} class="w-full resize-y rounded border border-gray-500 bg-gray-50 p-2.5 text-[.8125rem] text-gray-800 outline-none focus:border-[#0A415C]" rows="3" placeholder={t('notesPlaceholder')}></textarea>
           </div>
           <div class="mt-3">
             <button type="button" class="w-full py-3 px-3.5 rounded bg-[#0A415C] text-white font-bold hover:bg-[#063044] disabled:opacity-45 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors" disabled={!cart.length || isSubmitting} on:click={submitOrder}>{isSubmitting ? t('submitting') : t('submitOrder')}</button>
@@ -874,9 +901,9 @@
   <!-- Modal -->
   {#if modalOpen}
     <div class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50" on:click|self={closeModal} on:keydown={(e) => e.key === 'Escape' && closeModal()} role="presentation">
-      <div class="w-full max-w-[920px] rounded-lg border border-gray-700 bg-[#032130] shadow-2xl overflow-hidden text-white" role="dialog" aria-modal="true">
+      <div class="w-full max-w-[920px] rounded-lg border border-gray-700 bg-[#032130] shadow-2xl overflow-hidden text-white" role="dialog" aria-modal="true" aria-labelledby="pb-modal-title" bind:this={modalEl} on:keydown={trapModalFocus}>
         <div class="flex items-center justify-between p-4 pb-3 border-b border-white/10">
-          <h3 class="text-[.9375rem] font-bold">
+          <h3 class="text-[.9375rem] font-bold" id="pb-modal-title">
             {#if modalType === 'backbone'}{t('modalBackbone')}
             {:else if modalType === 'gRNA'}{t('configureGRNA')}
             {:else if modalType === 'promoter'}{t('promoterTitle')}
@@ -887,21 +914,21 @@
             {:else if modalType === 'customDomain'}{t('cdTitle')}
             {/if}
           </h3>
-          <button type="button" class="w-9 h-9 rounded border border-white/15 bg-white/5 text-white text-lg cursor-pointer hover:bg-white/10" on:click={closeModal}>×</button>
+          <button type="button" class="w-9 h-9 rounded border border-white/15 bg-white/5 text-white text-lg cursor-pointer hover:bg-white/10" on:click={closeModal} aria-label={$language === 'hr' ? 'Zatvori' : 'Close'}><span aria-hidden="true">×</span></button>
         </div>
         <div class="p-4 max-h-[70vh] overflow-y-auto">
 
           {#if modalType === 'backbone'}
             <div class="[display:grid] grid-cols-2 gap-2.5 sm:grid-cols-1">
               {#each backboneOptions as opt}
-                <button type="button" class="p-3 rounded-md border text-left transition-all hover:bg-white/10 {backbone === opt.name ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}" on:click={() => selectBackbone(opt.name)}>
+                <button type="button" aria-pressed={backbone === opt.name} class="p-3 rounded-md border text-left transition-all hover:bg-white/10 {backbone === opt.name ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}" on:click={() => selectBackbone(opt.name)}>
                   <div class="font-black text-[.8125rem]">{opt.name}</div>
                   {#if opt.desc}<div class="mt-1.5 text-xs text-white/75 leading-snug">{opt.desc}</div>{/if}
                 </button>
               {/each}
             </div>
             {#if backbone === 'Custom'}
-              <div class="mt-3"><input class="w-full p-2.5 rounded border border-white/15 bg-white/5 text-white text-[.8125rem] outline-none" placeholder={t('modalBackboneCustom')} bind:value={backboneCustom} /></div>
+              <div class="mt-3"><label class="block"><span class="block mb-1 text-xs text-white/75">{t('modalBackboneCustom')}</span><input class="w-full p-2.5 rounded border border-white/40 bg-white/5 text-white text-[.8125rem] outline-none" placeholder={t('modalBackboneCustom')} bind:value={backboneCustom} /></label></div>
             {/if}
             <p class="mt-2.5 text-xs text-white/75">{t('modalBackboneNote')}</p>
 
@@ -910,7 +937,7 @@
             <div class="text-xs uppercase tracking-widest text-white/75 mb-2">{t('gRNAType')}</div>
             <div class="[display:grid] grid-cols-2 gap-2.5 sm:grid-cols-1">
               {#each ["SaCas9-gRNA", "SpCas9-gRNA", "Custom"] as gType}
-                <button type="button" class="p-3 rounded-md border text-left transition-all hover:bg-white/10 {gDraftType === gType ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}" on:click={() => selectGRNAType(gType)}>
+                <button type="button" aria-pressed={gDraftType === gType} class="p-3 rounded-md border text-left transition-all hover:bg-white/10 {gDraftType === gType ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}" on:click={() => selectGRNAType(gType)}>
                   <div class="font-black text-[.8125rem]">{gType}</div>
                   <div class="mt-1.5 text-xs text-white/75">{gType === 'SaCas9-gRNA' ? t('saDesc') : gType === 'SpCas9-gRNA' ? t('spDesc') : t('customDesc')}</div>
                 </button>
@@ -918,11 +945,11 @@
             </div>
             <div class="text-xs uppercase tracking-widest text-white/75 mt-3.5 mb-2">{t('gRNADetails')}</div>
             <div class="flex gap-2.5 flex-wrap">
-              <input class="flex-1 min-w-[220px] p-2.5 rounded border border-white/15 bg-white/5 text-white text-[.8125rem] outline-none" placeholder={t('gRNAName')} bind:value={gDraftName} />
-              <input class="flex-1 min-w-[220px] p-2.5 rounded border border-white/15 bg-white/5 text-white text-[.8125rem] outline-none" placeholder={t('gRNASeq')} bind:value={gDraftSeq} />
+              <label class="flex-1 min-w-[220px]"><span class="block mb-1 text-xs text-white/75">{t('gRNAName')}</span><input class="w-full p-2.5 rounded border border-white/40 bg-white/5 text-white text-[.8125rem] outline-none" placeholder={t('gRNAName')} bind:value={gDraftName} /></label>
+              <label class="flex-1 min-w-[220px]"><span class="block mb-1 text-xs text-white/75">{t('gRNASeq')}</span><input class="w-full p-2.5 rounded border border-white/40 bg-white/5 text-white text-[.8125rem] outline-none" placeholder={t('gRNASeq')} bind:value={gDraftSeq} /></label>
             </div>
             {#if gDraftType === 'Custom'}
-              <div class="mt-3"><input class="w-full p-2.5 rounded border border-white/15 bg-white/5 text-white text-[.8125rem] outline-none" placeholder={t('gRNATarget')} bind:value={gDraftTarget} /></div>
+              <div class="mt-3"><label class="block"><span class="block mb-1 text-xs text-white/75">{t('gRNATarget')}</span><input class="w-full p-2.5 rounded border border-white/40 bg-white/5 text-white text-[.8125rem] outline-none" placeholder={t('gRNATarget')} bind:value={gDraftTarget} /></label></div>
             {/if}
             <div class="flex gap-2.5 mt-3">
               <button type="button" class="px-2.5 py-2 rounded border border-white/15 bg-white/5 text-white text-xs hover:bg-white/10" on:click={() => { gDraftName=''; gDraftSeq=''; gDraftTarget=''; }}>{t('clearFields')}</button>
@@ -957,14 +984,14 @@
               <div class="text-xs uppercase tracking-widest text-white/75 mt-3.5 first:mt-0 mb-2">{group.title}</div>
               <div class="[display:grid] grid-cols-2 gap-2.5 sm:grid-cols-1">
                 {#each group.items as val}
-                  <button type="button" class="p-3 rounded-md border text-left transition-all hover:bg-white/10 {promoter === val ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}" on:click={() => selectPromoter(val)}>
+                  <button type="button" aria-pressed={promoter === val} class="p-3 rounded-md border text-left transition-all hover:bg-white/10 {promoter === val ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}" on:click={() => selectPromoter(val)}>
                     <div class="font-black text-[.8125rem]">{val}</div>
                   </button>
                 {/each}
               </div>
             {/each}
             {#if promoter === 'Custom'}
-              <div class="mt-3"><input class="w-full p-2.5 rounded border border-white/15 bg-white/5 text-white text-[.8125rem] outline-none" placeholder={t('promoterCustom')} bind:value={promoterCustom} /></div>
+              <div class="mt-3"><label class="block"><span class="block mb-1 text-xs text-white/75">{t('promoterCustom')}</span><input class="w-full p-2.5 rounded border border-white/40 bg-white/5 text-white text-[.8125rem] outline-none" placeholder={t('promoterCustom')} bind:value={promoterCustom} /></label></div>
             {/if}
 
           {:else if modalType === 'ed'}
@@ -973,7 +1000,7 @@
               <div class="[display:grid] grid-cols-2 gap-2.5 sm:grid-cols-1">
                 {#each group.items as val}
                   {@const parsed = parseEDOption(val)}
-                  <button type="button" class="p-3 rounded-md border text-left transition-all hover:bg-white/10 {ed === parsed.value ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}" on:click={() => selectED(parsed.value)}>
+                  <button type="button" aria-pressed={ed === parsed.value} class="p-3 rounded-md border text-left transition-all hover:bg-white/10 {ed === parsed.value ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}" on:click={() => selectED(parsed.value)}>
                     <div class="font-black text-[.8125rem]">{parsed.title}</div>
                     {#if parsed.desc}<div class="mt-1.5 text-xs text-white/75">{parsed.desc}</div>{/if}
                   </button>
@@ -981,7 +1008,7 @@
               </div>
             {/each}
             {#if ed === 'Custom'}
-              <div class="mt-3"><input class="w-full p-2.5 rounded border border-white/15 bg-white/5 text-white text-[.8125rem] outline-none" placeholder={t('edCustom')} bind:value={edCustom} /></div>
+              <div class="mt-3"><label class="block"><span class="block mb-1 text-xs text-white/75">{t('edCustom')}</span><input class="w-full p-2.5 rounded border border-white/40 bg-white/5 text-white text-[.8125rem] outline-none" placeholder={t('edCustom')} bind:value={edCustom} /></label></div>
             {/if}
             <p class="mt-2.5 text-xs text-white/75">{t('edNote')}</p>
 
@@ -995,7 +1022,7 @@
             </label>
             {#if customDomainsOn}
               <div class="mt-3">
-                <textarea class="w-full resize-y p-2.5 rounded border border-white/15 bg-white/5 text-white text-[.8125rem] outline-none" rows="4" placeholder={t('edCustomDomains')} bind:value={customDomainsText}></textarea>
+                <label class="block"><span class="block mb-1 text-xs text-white/75">{t('edCustomDomains')}</span><textarea class="w-full resize-y p-2.5 rounded border border-white/40 bg-white/5 text-white text-[.8125rem] outline-none" rows="4" placeholder={t('edCustomDomains')} bind:value={customDomainsText}></textarea></label>
                 <p class="mt-1.5 text-xs text-white/75">{t('edCustomDomainNote')}</p>
               </div>
             {/if}
@@ -1003,7 +1030,7 @@
           {:else if modalType === 'dcas'}
             <div class="[display:grid] grid-cols-2 gap-2.5 sm:grid-cols-1">
               {#each allowedDcasOptions() as val}
-                <button type="button" class="p-3 rounded-md border text-left transition-all hover:bg-white/10 {dcas === val ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}" on:click={() => selectDcas(val)}>
+                <button type="button" aria-pressed={dcas === val} class="p-3 rounded-md border text-left transition-all hover:bg-white/10 {dcas === val ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}" on:click={() => selectDcas(val)}>
                   <div class="font-black text-[.8125rem]">{val}</div>
                   {#if val === 'dSpCas9'}<div class="mt-1.5 text-xs text-white/75">{t('dSpCas9Desc')}</div>{/if}
                   {#if val === 'dSaCas9'}<div class="mt-1.5 text-xs text-white/75">{t('dSaCas9Desc')}</div>{/if}
@@ -1011,7 +1038,7 @@
               {/each}
             </div>
             {#if dcas === 'Custom'}
-              <div class="mt-3"><input class="w-full p-2.5 rounded border border-white/15 bg-white/5 text-white text-[.8125rem] outline-none" placeholder={t('dcasCustom')} bind:value={dcasCustom} /></div>
+              <div class="mt-3"><label class="block"><span class="block mb-1 text-xs text-white/75">{t('dcasCustom')}</span><input class="w-full p-2.5 rounded border border-white/40 bg-white/5 text-white text-[.8125rem] outline-none" placeholder={t('dcasCustom')} bind:value={dcasCustom} /></label></div>
             {/if}
 
           {:else if modalType === 'markers'}
@@ -1048,13 +1075,13 @@
           {:else if modalType === 'terminator'}
             <div class="[display:grid] grid-cols-2 gap-2.5 sm:grid-cols-1">
               {#each [t('bghTerm'), t('sv40Term'), 'Custom'] as val}
-                <button type="button" class="p-3 rounded-md border text-left transition-all hover:bg-white/10 {terminator === val ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}" on:click={() => selectTerminator(val)}>
+                <button type="button" aria-pressed={terminator === val} class="p-3 rounded-md border text-left transition-all hover:bg-white/10 {terminator === val ? 'bg-white/[.12] border-white/40' : 'border-white/15 bg-white/5'}" on:click={() => selectTerminator(val)}>
                   <div class="font-black text-[.8125rem]">{val}</div>
                 </button>
               {/each}
             </div>
             {#if terminator === 'Custom'}
-              <div class="mt-3"><input class="w-full p-2.5 rounded border border-white/15 bg-white/5 text-white text-[.8125rem] outline-none" placeholder={t('customTer')} bind:value={terminatorCustom} /></div>
+              <div class="mt-3"><label class="block"><span class="block mb-1 text-xs text-white/75">{t('customTer')}</span><input class="w-full p-2.5 rounded border border-white/40 bg-white/5 text-white text-[.8125rem] outline-none" placeholder={t('customTer')} bind:value={terminatorCustom} /></label></div>
             {/if}
           {/if}
         </div>
@@ -1064,7 +1091,7 @@
 
   <!-- Toast -->
   {#if toastMsg}
-    <div class="fixed left-1/2 bottom-5 -translate-x-1/2 bg-[#032130] border border-white/15 px-3.5 py-2.5 rounded-md shadow-2xl text-white text-[.8125rem] z-[60]">
+    <div aria-hidden="true" class="fixed left-1/2 bottom-5 -translate-x-1/2 bg-[#032130] border border-white/15 px-3.5 py-2.5 rounded-md shadow-2xl text-white text-[.8125rem] z-[60]">
       {toastMsg}
     </div>
   {/if}

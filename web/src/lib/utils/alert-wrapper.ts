@@ -1,5 +1,8 @@
 import { renderAlert } from '@jaspero/web-components/dist/render-alert.js';
 import { FirebaseError } from 'firebase/app';
+import { get } from 'svelte/store';
+import { language } from '$lib/stores/language';
+import { announce } from './announce';
 
 const firebaseErrors: { [key: string]: string } = {
   'auth/invalid-credential':
@@ -35,12 +38,13 @@ export async function alertWrapper(
   try {
     resp = await request;
     if (successMessage) {
-      renderAlert({ title: 'Success', message: successMessage, state: 'success' });
+      renderAlert({ title: get(language) === 'hr' ? 'Uspjeh' : 'Success', message: successMessage, state: 'success' });
+      announce(successMessage);
     }
   } catch (e: any) {
     if ((errorMessage as any) !== false) {
       const content = {
-        title: 'Error',
+        title: get(language) === 'hr' ? 'Greška' : 'Error',
         state: 'error',
         message: typeof errorMessage === 'function' ? errorMessage(e) : errorMessage || e.toString()
       };
@@ -55,6 +59,7 @@ export async function alertWrapper(
 
       if (e.code !== 'auth/multi-factor-auth-required' && e.code !== 'auth/unverified-email') {
         renderAlert(content as any);
+        announce(content.message, true);
       }
     }
 

@@ -125,9 +125,12 @@
 </script>
 
 <div class="grid grid-large news">
+  <span id="news-pdf-note" class="sr-only">{$language === 'en' ? 'PDF, opens in a new tab' : 'PDF, otvara se u novoj kartici'}</span>
   <div class="gc-12 filters">
     <button
+      type="button"
       class:active={linkedin}
+      aria-pressed={linkedin}
       on:click={() => {
         linkedin = true;
       }}
@@ -135,7 +138,9 @@
       LinkedIn {$language === 'en' ? 'Feed' : 'Objave'}
     </button>
     <button
+      type="button"
       class:active={!linkedin}
+      aria-pressed={!linkedin}
       on:click={() => {
         linkedin = false;
       }}
@@ -148,6 +153,7 @@
       <iframe
         src="https://widgets.sociablekit.com/linkedin-profile-posts/iframe/25556751"
         class="social-feed"
+        title={$language === 'en' ? 'Genos posts on LinkedIn' : 'Genosove objave na LinkedInu'}
         frameborder="0"
         width="100%"
       ></iframe>
@@ -156,7 +162,9 @@
     {#if showCategoryFilters}
       <div class="gc-12 filters">
         <button
+          type="button"
           class:active={category === ''}
+          aria-pressed={category === ''}
           on:click={() => {
             category = '';
             typeChanges(pageSize, category, author, authorMap);
@@ -166,7 +174,9 @@
         </button>
         {#each categories as cat}
           <button
+            type="button"
             class:active={category === cat.id}
+            aria-pressed={category === cat.id}
             on:click={() => {
               category = cat.id;
               typeChanges(pageSize, category, author, authorMap);
@@ -185,9 +195,10 @@
             class="article gc-4"
             href="/pdfs/en/ISO_9001-ENG-C765442-0-20250529.pdf"
             target="_blank"
+            aria-describedby="news-pdf-note"
           >
             <div class="article-image">
-              <img src="/images/lab.jpg" alt="ISO 9001:2015" />
+              <img src="/images/lab.jpg" alt="" />
             </div>
             <span class="article-content">
               <h2 class="article-title">Genos Secures ISO 9001:2015 Certification</h2>
@@ -202,9 +213,10 @@
             class="article gc-4"
             href="/pdfs/hr/ISO_9001-HRV-C765442-0-20250529.pdf"
             target="_blank"
+            aria-describedby="news-pdf-note"
           >
             <div class="article-image">
-              <img src="/images/lab.jpg" alt="ISO 9001:2015" />
+              <img src="/images/lab.jpg" alt="" />
             </div>
             <span class="article-content">
               <h2 class="article-title">Genos je dobio ISO 9001:2015 certifikat</h2>
@@ -219,7 +231,8 @@
       {#each articles as article}
         <a class="article gc-4" href={'/posts/' + article.url}>
           <div class="article-image">
-            <img src={article.image} alt={article.imageAlt || article.title} />
+            <!-- The title follows in the same link, so the image would only repeat it. -->
+            <img src={article.image} alt="" />
             {#if article.category}
               <div class="article-category">{categoryMap[article.category]?.name || ''}</div>
             {/if}
@@ -244,7 +257,7 @@
           class:loading={loading || resetLoading}
           on:click={loadMore}
         >
-          {loadmorelabel}
+          {loadmorelabel || ($language === 'en' ? 'Load more' : 'Učitaj još')}
         </button>
       </div>
     {/if}

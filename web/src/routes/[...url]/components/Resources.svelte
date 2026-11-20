@@ -114,7 +114,7 @@
           }
         </p>
         <div>
-          <a class="button-filled" href="https://glycanage.com/" target="blank">
+          <a class="button-filled" href="https://glycanage.com/" target="_blank">
             {$language === 'en' ? 'Official website' : 'Službena stranica'}
           </a>
         </div>

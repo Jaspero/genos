@@ -224,7 +224,7 @@
           </p>
           <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="verificationCode">
             Verification Code
-            <input id="verificationCode" type="text" bind:value={codeInput} required class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+            <input id="verificationCode" type="text" bind:value={codeInput} required class="w-full rounded-md border border-slate-500 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
           </label>
 
           <button type="submit" class="auth-btn" class:loading={confirmLoader}>Confirm</button>
@@ -239,11 +239,11 @@
           <div class="auth-fields">
             <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signInEmail">
               Email
-              <input id="signInEmail" type="email" bind:value={email} required autocomplete="email" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+              <input id="signInEmail" type="email" bind:value={email} required autocomplete="email" class="w-full rounded-md border border-slate-500 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
             </label>
             <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signInPassword">
               Password
-              <input id="signInPassword" {type} bind:value={password} required autocomplete="current-password" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+              <input id="signInPassword" {type} bind:value={password} required autocomplete="current-password" class="w-full rounded-md border border-slate-500 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
             </label>
             <div class="auth-toggle-vis">
               <button type="button" on:click={toggleVisible}>
@@ -290,7 +290,7 @@
   <form on:submit|preventDefault={resetPassword}>
     <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="resetEmail">
       Email
-      <input id="resetEmail" type="email" bind:value={rEmail} required autocomplete="email" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+      <input id="resetEmail" type="email" bind:value={rEmail} required autocomplete="email" class="w-full rounded-md border border-slate-500 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
     </label>
 
     <div class="mt-4">

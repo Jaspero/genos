@@ -22,7 +22,16 @@ const config = {
   },
   preprocess: vitePreprocess(),
   vitePlugin: {
-    inspector: true
+    inspector: true,
+    /**
+     * Only the page-builder blocks (pb-*) are custom elements. Compiling every other component
+     * (navigation, footer, pages) as a custom element made Svelte inject their styles with
+     * JavaScript, so the prerendered header and footer were unstyled until the app started
+     * and the page jumped (layout shift). Their CSS is now emitted into the stylesheet.
+     */
+    dynamicCompileOptions({ filename }) {
+      return { customElement: filename.includes('/routes/[...url]/components/') };
+    }
   },
   compilerOptions: {
     customElement: true

@@ -4,10 +4,40 @@
   import {TEAM} from './team.const';
   import {language} from '$lib/stores/language';
 
-  let selectedMember: any = '';
+  import { tick } from 'svelte';
 
-  function selectMember(gr: any, mem: any) {
+  let selectedMember: any = '';
+  let opener: HTMLElement | null = null;
+  let dialogEl: HTMLDivElement;
+
+  async function selectMember(gr: any, mem: any, event: MouseEvent) {
+    opener = event.currentTarget as HTMLElement;
     selectedMember = TEAM[gr].members[mem];
+    await tick();
+    dialogEl?.querySelector<HTMLElement>('.selected-member-dialog-close')?.focus();
+  }
+
+  function closeMember() {
+    selectedMember = '';
+    opener?.focus();
+  }
+
+  /** Escape closes the dialog; Tab stays inside it. */
+  function dialogKeydown(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      closeMember();
+    } else if (event.key === 'Tab' && dialogEl) {
+      const items = [...dialogEl.querySelectorAll<HTMLElement>('a[href], button')];
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
   }
 
   $: {
@@ -23,7 +53,7 @@
   {#each TEAM as group, i}
     {#each group.members as member, m}
       <div class="gc-3 gc-sm-6">
-        <button on:click={() => selectMember(i,m)} class="team-member">
+        <button type="button" on:click={(e) => selectMember(i, m, e)} class="team-member" aria-haspopup="dialog">
           <div>
             <img src="/team/{member.img}.jpg" alt="">
           </div>
@@ -40,16 +70,16 @@
 </div>
 
 {#if selectedMember}
-  <button class="overlay" on:click={() => selectedMember = ''} aria-label="overlay"></button>
-  <div class="selected-member-dialog">
+  <div class="overlay" on:click={closeMember} aria-hidden="true"></div>
+  <div class="selected-member-dialog" role="dialog" aria-modal="true" aria-labelledby="selected-member-name" bind:this={dialogEl} on:keydown={dialogKeydown}>
     <div class="selected-member-dialog-header">
       <img class="selected-member-dialog-image" src="/team/{selectedMember.img}.jpg" alt="">
       <div class="flex-1">
-        <div class="selected-member-dialog-name">{selectedMember.name}</div>
+        <div class="selected-member-dialog-name" id="selected-member-name">{selectedMember.name}</div>
         <div class="selected-member-dialog-job">{$language === 'en' ? selectedMember.job.en : selectedMember.job.hr}</div>
       </div>
-      <button class="selected-member-dialog-close" on:click={() => selectedMember = ''}>
-        <img src="/images/close.svg" alt="">
+      <button type="button" class="selected-member-dialog-close" on:click={closeMember}>
+        <img src="/images/close.svg" alt={$language === 'en' ? 'Close' : 'Zatvori'}>
       </button>
     </div>
     <p class="selected-member-description">

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { clickOutside } from '$lib/utils/click-outside.ts';
   import { fade } from 'svelte/transition';
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, tick } from 'svelte';
   import { browser } from '$app/environment';
 
   export let showing = false;
@@ -26,6 +26,36 @@
     }
   }
 
+  let dialogEl: HTMLDivElement;
+  let opener: HTMLElement | null = null;
+  let wasShowing = false;
+
+  // Focus moves into the dialog when it opens and back to where it was when it closes (WCAG 2.4.3).
+  $: if (browser && showing !== wasShowing) {
+    wasShowing = showing;
+    if (showing) {
+      opener = document.activeElement as HTMLElement | null;
+      tick().then(() => dialogEl?.querySelector<HTMLElement>('input, select, textarea, button, a[href]')?.focus());
+    } else if (opener && document.contains(opener)) {
+      opener.focus();
+      opener = null;
+    }
+  }
+
+  function trapFocus(event: KeyboardEvent) {
+    if (event.key !== 'Tab' || !dialogEl) return;
+    const items = [...dialogEl.querySelectorAll<HTMLElement>('input, select, textarea, button:not([disabled]), a[href]')];
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
   $: if (browser && showing) {
     document.documentElement.classList.add('scroll-disabled');
   } else if (browser) {
@@ -41,6 +71,10 @@
   {/if}
   <div
     class="dialog"
+    role="dialog"
+    aria-modal="true"
+    bind:this={dialogEl}
+    on:keydown={trapFocus}
     class:fullscreen={fullScreen}
     class:min-w-0={removeMinW}
     class:button-outside={buttonOutside}
@@ -54,8 +88,8 @@
     <div class="dialog-content" class:contentfull>
       <slot />
     </div>
-    <button type="button" class="dialog-close" on:click={close}>
-      <span class="material-symbols-outlined">close</span>
+    <button type="button" class="dialog-close" on:click={close} aria-label="Close">
+      <span class="material-symbols-outlined" aria-hidden="true">close</span>
     </button>
   </div>
 {/if}

@@ -96,7 +96,9 @@
                   </p>
                 {/if}
                 <button
+                  type="button"
                   class="details-toggle"
+                  aria-expanded={selectedProject === project}
                   on:click={() => (selectedProject = selectedProject === project ? '' : project)}
                 >
                   {#if $language === 'en'}
@@ -261,7 +263,9 @@
                       </p>
                     {/if}
                     <button
-                      class="details-toggle"
+                      type="button"
+                  class="details-toggle"
+                  aria-expanded={selectedProject === project}
                       on:click={() =>
                         (selectedProject = selectedProject === project ? '' : project)}
                     >

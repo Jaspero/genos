@@ -56,7 +56,7 @@
           }
         </p>
         <div>
-          <a class="button-filled" href="{$language === 'en' ? 'services#2.0.' : 'usluge#2.0.'}">
+          <a class="button-filled" href="/{$language === 'en' ? 'services#2.0.' : 'usluge#2.0.'}">
             {$language === 'en' ? 'Epigenetics services' : 'Usluge za epigenetiku'}
           </a>
         </div>

@@ -255,7 +255,14 @@
   });
 </script>
 
-{@html data.content}
+<!--
+  The page-builder blocks (pb-*) are drawn in the browser. Until then the page is only the intro, so the
+  footer would start near the top and jump down when the blocks appear (layout shift). Every CMS page is
+  taller than the screen once drawn, so reserving one screen height changes nothing in the final layout.
+-->
+<div class="pb-page">
+  {@html data.content}
+</div>
 
 <svelte:body use:classList={classes} />
 
@@ -265,3 +272,9 @@
   on:resize|passive={scroll}
   on:load={scroll}
 />
+
+<style>
+  .pb-page {
+    min-height: 100vh;
+  }
+</style>

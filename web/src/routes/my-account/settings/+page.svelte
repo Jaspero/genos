@@ -172,7 +172,7 @@
   };
 </script>
 
-<main class="mx-auto max-w-[760px] [display:grid] gap-4">
+<div class="mx-auto max-w-[760px] [display:grid] gap-4">
   {#if $page.url.searchParams.get('completeProfile')}
     <section class="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900 shadow-sm">
       Please complete your profile details before submitting an order.
@@ -186,37 +186,37 @@
     <form class="mt-4 [display:grid] gap-3" on:submit|preventDefault={updateProfileDetails}>
       <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="profileFirstName">
         First Name
-        <input id="profileFirstName" type="text" bind:value={firstName} required class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+        <input id="profileFirstName" type="text" bind:value={firstName} required class="w-full rounded-lg border border-slate-500 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
       </label>
 
       <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="profileLastName">
         Last Name
-        <input id="profileLastName" type="text" bind:value={lastName} required class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+        <input id="profileLastName" type="text" bind:value={lastName} required class="w-full rounded-lg border border-slate-500 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
       </label>
 
       <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="profileRecoveryEmail">
         Recovery Email
-        <input id="profileRecoveryEmail" type="email" bind:value={recoveryEmail} required class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+        <input id="profileRecoveryEmail" type="email" bind:value={recoveryEmail} required class="w-full rounded-lg border border-slate-500 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
       </label>
 
       <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="profileInstitution">
         Institution
-        <input id="profileInstitution" type="text" bind:value={institution} required class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+        <input id="profileInstitution" type="text" bind:value={institution} required class="w-full rounded-lg border border-slate-500 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
       </label>
 
       <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="profilePosition">
         Position in Institution
-        <input id="profilePosition" type="text" bind:value={position} required class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+        <input id="profilePosition" type="text" bind:value={position} required class="w-full rounded-lg border border-slate-500 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
       </label>
 
       <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="profileInstitutionAddress">
         Institution Address
-        <textarea id="profileInstitutionAddress" bind:value={institutionAddress} required rows="3" class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]"></textarea>
+        <textarea id="profileInstitutionAddress" bind:value={institutionAddress} required rows="3" class="w-full rounded-lg border border-slate-500 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]"></textarea>
       </label>
 
       <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="profileVatId">
         VAT ID
-        <input id="profileVatId" type="text" bind:value={vatId} required class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+        <input id="profileVatId" type="text" bind:value={vatId} required class="w-full rounded-lg border border-slate-500 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
       </label>
 
       <div>
@@ -232,12 +232,12 @@
     <form class="mt-4 [display:grid] gap-3" on:submit|preventDefault={changePassword}>
       <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="newPassword">
         New Password
-        <input id="newPassword" type="password" bind:value={newPassword} required class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+        <input id="newPassword" type="password" bind:value={newPassword} required class="w-full rounded-lg border border-slate-500 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
       </label>
 
       <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="repeatPassword">
         Repeat Password
-        <input id="repeatPassword" type="password" bind:value={repeatPassword} required class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+        <input id="repeatPassword" type="password" bind:value={repeatPassword} required class="w-full rounded-lg border border-slate-500 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
       </label>
 
       <div>
@@ -253,7 +253,7 @@
     <form class="mt-4 [display:grid] gap-3" on:submit|preventDefault={changeEmail}>
       <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="newEmail">
         New Email
-        <input id="newEmail" type="email" bind:value={email} required class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+        <input id="newEmail" type="email" bind:value={email} required class="w-full rounded-lg border border-slate-500 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
       </label>
 
       <div>
@@ -273,7 +273,7 @@
     </p>
     <button type="button" class="mt-3 rounded-lg bg-red-700 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-red-800" on:click={() => (deleteDialog = true)}>Delete Account</button>
   </section>
-</main>
+</div>
 
 <Dialog bind:showing={deleteDialog}>
   <div class="w-full text-center">

@@ -3,13 +3,14 @@
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
   import { goto } from '$app/navigation';
+  import { tick } from 'svelte';
   import {language} from '$lib/stores/language';
+  import { pathInLang } from '$lib/i18n/routes';
 
   let scrolled = 0;
   let previousScrollY = 0;
   let showNavbar = true;
   let open = false;
-  let languageDisabled = false;
 
   let links = [
     {
@@ -107,66 +108,75 @@
     scrolled = currentScrollY;
   }
 
+  let menuButton: HTMLButtonElement;
+  let menuEl: HTMLDivElement;
+
+  function openMenu() {
+    open = true;
+    tick().then(() => menuEl?.querySelector<HTMLElement>('a')?.focus());
+  }
+
+  function closeMenu(returnFocus = true) {
+    if (!open) return;
+    open = false;
+    if (returnFocus) menuButton?.focus();
+  }
+
   function handleKeydown(event: KeyboardEvent) {
-    if (event.key === 'Escape') {
-      open = false;
+    if (event.key === 'Escape' && open) {
+      closeMenu();
     }
   }
 
-  function switchLanguage() {
-    if (languageDisabled) return;
-    languageDisabled = true;
-    setTimeout(() => {
-      languageDisabled = false;
-    }, 500);
-
-    language.update((lang) => {
-      const newLang = lang === 'en' ? 'hr' : 'en';
-      if (typeof window === 'undefined') return newLang;
-
-      localStorage.setItem('language', newLang);
-
-      const routeMapping: Record<string, string> = {
-        '/': '/pocetna',
-        '/pocetna': '/',
-        '/about': '/o-nama',
-        '/o-nama': '/about',
-        '/projects': '/projekti',
-        '/projekti': '/projects',
-        '/publications': '/publikacije',
-        '/publikacije': '/publications',
-        '/services': '/usluge',
-        '/usluge': '/services',
-        '/resources': '/korisni-linkovi',
-        '/korisni-linkovi': '/resources',
-        '/news': '/novosti',
-        '/novosti': '/news',
-        '/team': '/tim',
-        '/tim': '/team',
-        '/contact': '/kontakt',
-        '/kontakt': '/contact'
-      };
-
-      const currentPath = window.location.pathname;
-      const stableRoutePrefixes = ['/tools', '/my-account', '/sign-in', '/sign-up', '/reset-password', '/checkout'];
-      const isStableRoute = stableRoutePrefixes.some((prefix) => currentPath === prefix || currentPath.startsWith(`${prefix}/`));
-      const newPath = routeMapping[currentPath] || (isStableRoute ? currentPath : newLang === 'en' ? '/' : '/pocetna');
-
-      if (newPath !== currentPath) {
-        goto(newPath);
-      }
-
-      return newLang;
-    });
+  /** Keep keyboard focus inside the open menu (it covers the page like a dialog). */
+  function trapFocus(event: KeyboardEvent) {
+    if (event.key !== 'Tab' || !menuEl) return;
+    const items = [...menuEl.querySelectorAll<HTMLElement>('a, button')];
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   }
 
+  /** Remember the visitor's choice for pages that have no language version (tools, account). */
+  function chooseLanguage(lang: 'en' | 'hr', event: MouseEvent) {
+    if (lang === $language) {
+      event.preventDefault();
+      return;
+    }
+
+    localStorage.setItem('language', lang);
+
+    if (!pathInLang($page.url.pathname, lang)) {
+      event.preventDefault();
+      const currentPath = window.location.pathname;
+      const stableRoutePrefixes = ['/tools', '/my-account', '/sign-in', '/sign-up', '/reset-password', '/checkout', '/posts'];
+      const isStableRoute = stableRoutePrefixes.some((prefix) => currentPath === prefix || currentPath.startsWith(`${prefix}/`));
+
+      language.set(lang);
+
+      if (!isStableRoute) {
+        goto(lang === 'en' ? '/' : '/pocetna');
+      }
+    }
+  }
+
+  function languageHref(lang: 'en' | 'hr', path: string) {
+    return pathInLang(path, lang) || path;
+  }
 
   onMount(() => {
     handleScroll();
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('keydown', handleKeydown);
 
-    if (window.location.pathname === '/' && localStorage.getItem('language') === 'hr') {
+    // genos.hr/ redirects to /home: send visitors who chose Croatian before to the Croatian home page.
+    if (['/', '/home'].includes(window.location.pathname) && localStorage.getItem('language') === 'hr' && !document.referrer.startsWith(window.location.origin)) {
       goto('/pocetna');
     }
 
@@ -178,26 +188,27 @@
 
 </script>
 
-<header class="navigation" class:scrolled={scrolled > 96 || $page.url.pathname.includes('/posts/') || $page.url.pathname.includes('/tools/') || $page.url.pathname.includes('/my-account') || $page.url.pathname.includes('/sign-in') || $page.url.pathname.includes('/sign-up') || $page.url.pathname.includes('/reset-password')} class:inactive={!showNavbar}>
-  <nav>
+<header lang={$language} class="navigation" class:scrolled={scrolled > 96 || $page.url.pathname.includes('/posts/') || $page.url.pathname.includes('/tools/') || $page.url.pathname.includes('/my-account') || $page.url.pathname.includes('/sign-in') || $page.url.pathname.includes('/sign-up') || $page.url.pathname.includes('/reset-password')} class:inactive={!showNavbar}>
+  <nav aria-label={$language === 'en' ? 'Main' : 'Glavna navigacija'}>
     <a href={$language === 'en' ? '/' : '/pocetna'}>
-      <img class="logo" src="/brand/genos-logo-white.svg" alt="genos logo">
+      <img class="logo" src="/brand/genos-logo-white.svg" alt={$language === 'en' ? 'Genos, home page' : 'Genos, početna stranica'}>
     </a>
     <div class="links">
       {#each links as link}
         <a href={$language === 'en' ? link.en.link : link.hr.link}
            class:active={($language === 'en' ? link.en.link : link.hr.link) === $page.url.pathname}
+           aria-current={($language === 'en' ? link.en.link : link.hr.link) === $page.url.pathname ? 'page' : undefined}
         >
           {$language === 'en' ? link.en.label : link.hr.label}
         </a>
       {/each}
     </div>
     <div class="flex gap-8">
-      <button class="language-toggle" on:click={() => {switchLanguage()}} disabled={languageDisabled}>
-        <span class:active={$language === 'en'}>EN</span>
-        <span class:active={$language === 'hr'}>HR</span>
-      </button>
-      <button class="menu-toggle" aria-label="Menu" on:click={() => open = !open}>
+      <div class="language-toggle" role="group" aria-label={$language === 'en' ? 'Language' : 'Jezik'}>
+        <a href={languageHref('en', $page.url.pathname)} lang="en" hreflang="en" aria-label="English" class:active={$language === 'en'} aria-current={$language === 'en' ? 'true' : undefined} on:click={(e) => chooseLanguage('en', e)}>EN</a>
+        <a href={languageHref('hr', $page.url.pathname)} lang="hr" hreflang="hr" aria-label="Hrvatski" class:active={$language === 'hr'} aria-current={$language === 'hr' ? 'true' : undefined} on:click={(e) => chooseLanguage('hr', e)}>HR</a>
+      </div>
+      <button class="menu-toggle" type="button" bind:this={menuButton} aria-label={$language === 'en' ? 'Menu' : 'Izbornik'} aria-expanded={open} aria-controls="mobile-menu" on:click={() => (open ? closeMenu() : openMenu())}>
         <img src="/icons/menu.svg" alt="">
       </button>
     </div>
@@ -205,34 +216,40 @@
 </header>
 
 {#if open}
-  <button class="overlay" transition:fly on:click={() => open = false}></button>
-  <div class="menu" transition:fly={{y: -1000}}>
-    <div class="menu-links">
+  <!-- Clicking outside closes the menu; keyboard users close it with Escape or the close button. -->
+  <div class="overlay" transition:fly on:click={() => closeMenu()} aria-hidden="true"></div>
+  <div lang={$language} class="menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label={$language === 'en' ? 'Menu' : 'Izbornik'} bind:this={menuEl} on:keydown={trapFocus} transition:fly={{y: -1000}}>
+    <nav class="menu-links" aria-label={$language === 'en' ? 'Main' : 'Glavna navigacija'}>
       <a
         class:active={($language === 'en' ? '/' : '/pocetna') === $page.url.pathname}
+        aria-current={($language === 'en' ? '/' : '/pocetna') === $page.url.pathname ? 'page' : undefined}
         href={$language === 'en' ? '/' : '/pocetna'}
-        on:click={() => open = false}
+        on:click={() => closeMenu(false)}
       >
         {$language === 'en' ? 'Home' : 'Početna'}
       </a>
       {#each links as link}
         <a
           class:active={($language === 'en' ? link.en.link : link.hr.link) === $page.url.pathname}
+          aria-current={($language === 'en' ? link.en.link : link.hr.link) === $page.url.pathname ? 'page' : undefined}
           href={$language === 'en' ? link.en.link : link.hr.link}
-          on:click={() => open = false}
+          on:click={() => closeMenu(false)}
         >
           {$language === 'en' ? link.en.label : link.hr.label}
         </a>
       {/each}
-    </div>
+    </nav>
 
     <div class="socials">
       <a href="https://x.com/gglycoscience?lang=hr" target="_blank" rel="noreferrer noopener">
-        <img src="/icons/x.svg" alt="">
+        <img src="/icons/x.svg" alt={$language === 'en' ? 'Genos on X (opens in a new tab)' : 'Genos na X-u (otvara se u novoj kartici)'}>
       </a>
       <a href="https://www.linkedin.com/company/genos-ltd/posts/?feedView=all" target="_blank" rel="noreferrer noopener">
-        <img src="/icons/linkedin.svg" alt="">
+        <img src="/icons/linkedin.svg" alt={$language === 'en' ? 'Genos on LinkedIn (opens in a new tab)' : 'Genos na LinkedInu (otvara se u novoj kartici)'}>
       </a>
+      <button type="button" class="menu-close" on:click={() => closeMenu()}>
+        {$language === 'en' ? 'Close' : 'Zatvori'}
+      </button>
     </div>
   </div>
 {/if}
@@ -248,6 +265,11 @@
 
         &.inactive {
             transform: translateY(-100%);
+        }
+
+        /* Never hide the header while keyboard focus is in it. */
+        &.inactive:focus-within {
+            transform: none;
         }
 
         &.scrolled {
@@ -317,7 +339,8 @@
             padding: .125rem;
         }
 
-        span {
+        a {
+            display: block;
             border-radius: 999px;
             padding: .125rem .5rem;
             font-size: .75rem;
@@ -370,7 +393,16 @@
 
     .socials {
         display: flex;
+        align-items: center;
         gap: 1rem;
         padding: 1rem;
+    }
+
+    .menu-close {
+        margin-left: auto;
+        padding: .5rem .75rem;
+        font-weight: bold;
+        border: 1px solid #032130;
+        border-radius: .25rem;
     }
 </style>

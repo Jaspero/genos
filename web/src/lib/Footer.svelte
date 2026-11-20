@@ -1,10 +1,12 @@
 <script>
   import {language} from '$lib/stores/language';
+
+  const year = new Date().getFullYear();
 </script>
 
-<footer class="spacer">
+<footer class="spacer" lang={$language}>
   <div>
-    <img src="/brand/genos-logo-white.svg" alt="genos logo" class="footer-logo">
+    <img src="/brand/genos-logo-white.svg" alt="Genos" class="footer-logo">
   </div>
   <h2 class="footer-title">
     {@html
@@ -16,22 +18,22 @@
   <div class="flex-1"></div>
   <div class="subfooter">
     <div class="subfooter-social">
-      <a href="https://www.linkedin.com/company/genos-ltd" target="_blank">
-        <img src="/icons/linkedin-w.svg" alt="linkedin">
+      <a href="https://www.linkedin.com/company/genos-ltd" target="_blank" rel="noreferrer noopener">
+        <img src="/icons/linkedin-w.svg" alt={$language === 'en' ? 'Genos on LinkedIn (opens in a new tab)' : 'Genos na LinkedInu (otvara se u novoj kartici)'}>
       </a>
-      <a href="https://x.com/gglycoscience" target="_blank">
-        <img src="/icons/x-w.svg" alt="x">
+      <a href="https://x.com/gglycoscience" target="_blank" rel="noreferrer noopener">
+        <img src="/icons/x-w.svg" alt={$language === 'en' ? 'Genos on X (opens in a new tab)' : 'Genos na X-u (otvara se u novoj kartici)'}>
       </a>
     </div>
     <div class="subfooter-legal">
-      <a href="/privacy-policy.pdf" target="_blank">
+      <a href="/privacy-policy.pdf" target="_blank" aria-describedby="footer-pdf-note">
         {
           $language === 'en'
             ? 'Privacy policy'
             : 'Pravila privatnosti'
         }
       </a>
-      <a href="/gep.pdf" target="_blank">
+      <a href="/gep.pdf" target="_blank" aria-describedby="footer-pdf-note">
         {
           $language === 'en'
             ? 'Gender Equality Plan'
@@ -39,27 +41,32 @@
         }
       </a>
       {#if $language === 'en'}
-        <a href="/conflict-of-interest.pdf" target="_blank">
+        <a href="/conflict-of-interest.pdf" target="_blank" aria-describedby="footer-pdf-note">
           Conflict of interest
         </a>
       {:else}
-        <a href="/sukob-interesa.pdf" target="_blank">
+        <a href="/sukob-interesa.pdf" target="_blank" aria-describedby="footer-pdf-note">
           Sukob interesa
         </a>
       {/if}
     </div>
     <div class="subfooter-contact">
       <a href="mailto:info@genos.hr">info@genos.hr</a>
-      <span>© 2025 Genos Glyco</span>
+      <span>© {year} Genos Glyco</span>
       <span>{$language === 'en' ? 'Made by' : 'Izradio'} <a href="https://jaspero.co">jaspero.co</a></span>
     </div>
   </div>
+  <span id="footer-pdf-note" class="sr-only">{$language === 'en' ? 'PDF, opens in a new tab' : 'PDF, otvara se u novoj kartici'}</span>
   <img class="footer-bg" src="/images/footer.jpg" alt="">
 </footer>
 
 <style>
     footer {
         position: relative;
+        /* Keeps the background photo and its shade inside the footer; the colour shows if the photo does not load. */
+        isolation: isolate;
+        border-radius: .5rem;
+        background-color: #0A415C;
         display: flex;
         flex-direction: column;
         height: 29rem;
@@ -95,12 +102,25 @@
     }
 
     .subfooter a {
-        opacity: .8;
+        display: inline-flex;
+        align-items: center;
+        min-height: 24px;
         transition: .25s;
     }
 
     .subfooter a:hover {
-        opacity: 1;
+        text-decoration: underline;
+    }
+
+    /* Darkens the bottom of the photo slightly so the small white text keeps 4.5:1. */
+    footer::after {
+        content: '';
+        z-index: -1;
+        position: absolute;
+        inset: 0;
+        border-radius: .5rem;
+        background: linear-gradient(to top, rgba(3, 33, 48, .3), rgba(3, 33, 48, 0) 45%);
+        pointer-events: none;
     }
 
     .subfooter-social {

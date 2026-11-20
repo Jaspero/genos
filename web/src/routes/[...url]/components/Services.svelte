@@ -28,7 +28,7 @@
       }
     </p>
     <div class="sticky-items">
-      <button class="flex text-left" on:click={() => {
+      <button type="button" class="flex text-left" aria-expanded={glycomics} aria-controls="services-links-glycomics" on:click={() => {
           glycomics = !glycomics;
           epigenetics = false;
           forensics = false;
@@ -37,7 +37,7 @@
         <img src="/icons/arrow_dropdown.svg" alt="" class:rotate-180={glycomics}>
       </button>
       {#if glycomics}
-        <div class="flex flex-col gap-y-1" transition:slide>
+        <div class="flex flex-col gap-y-1" id="services-links-glycomics" transition:slide>
           <a href="{$language === 'en' ? '/services#1.0.' : '/usluge#1.0.'}" class="sub-link">
             1. {$language === 'en' ? 'Glycomics & Glycoproteomics' : 'Glikomika i glikoproteomika'}
           </a>
@@ -64,7 +64,7 @@
           </a>
         </div>
       {/if}
-      <button class="flex text-left" on:click={() => {
+      <button type="button" class="flex text-left" aria-expanded={epigenetics} aria-controls="services-links-epigenetics" on:click={() => {
           glycomics = false;
           epigenetics = !epigenetics;
           forensics = false;
@@ -73,7 +73,7 @@
         <img src="/icons/arrow_dropdown.svg" alt="" class:rotate-180={epigenetics}>
       </button>
       {#if epigenetics}
-        <div class="flex flex-col gap-y-1" transition:slide>
+        <div class="flex flex-col gap-y-1" id="services-links-epigenetics" transition:slide>
           <a href="{$language === 'en' ? '/services#2.0.' : '/usluge#2.0.'}" class="sub-link">
             2. {$language === 'en' ? 'Epigenetics' : 'Epigenetika'}
           </a>
@@ -85,7 +85,7 @@
           </a>
         </div>
       {/if}
-      <button class="flex text-left" on:click={() => {
+      <button type="button" class="flex text-left" aria-expanded={forensics} aria-controls="services-links-forensics" on:click={() => {
           glycomics = false;
           epigenetics = false;
           forensics = !forensics;
@@ -94,7 +94,7 @@
         <img src="/icons/arrow_dropdown.svg" alt="" class:rotate-180={forensics}>
       </button>
       {#if forensics}
-        <div class="flex flex-col gap-y-1" transition:slide>
+        <div class="flex flex-col gap-y-1" id="services-links-forensics" transition:slide>
           <a href="{$language === 'en' ? '/services#3.0.' : '/usluge#3.0.'}" class="sub-link">
             3. {$language === 'en' ? 'DNA & Forensics' : 'DNA i Forenzika'}
           </a>
@@ -191,18 +191,30 @@
         </div>
       </div>
       <ul>
-        {$language === 'en' ? 'Complex biological samples' : 'Složeni biološki uzorci'}
-        <li class="ml-6">{$language === 'en' ? '(e.g. human serum/plasma, cell lysates, tissues)' : '(npr. ljudski serum/plazma, stanični lizati, tkiva)'}</li>
+        <li class="list-none !ml-0">
+          {$language === 'en' ? 'Complex biological samples' : 'Složeni biološki uzorci'}
+          <ul class="!my-0">
+            <li class="ml-6">{$language === 'en' ? '(e.g. human serum/plasma, cell lysates, tissues)' : '(npr. ljudski serum/plazma, stanični lizati, tkiva)'}</li>
+          </ul>
+        </li>
       </ul>
 
       <ul>
-        {$language === 'en' ? 'Purified glycoproteins' : 'Pročišćeni glikoproteini'}
-        <li class="ml-6">{$language === 'en' ? '(e.g. human IgG, IgA, AGP, C3, transferrin, HDL, LDL, rodent IgG)' : '(npr. ljudski IgG, IgA, AGP, C3, transferin, HDL, LDL, IgG glodavaca)'}</li>
+        <li class="list-none !ml-0">
+          {$language === 'en' ? 'Purified glycoproteins' : 'Pročišćeni glikoproteini'}
+          <ul class="!my-0">
+            <li class="ml-6">{$language === 'en' ? '(e.g. human IgG, IgA, AGP, C3, transferrin, HDL, LDL, rodent IgG)' : '(npr. ljudski IgG, IgA, AGP, C3, transferin, HDL, LDL, IgG glodavaca)'}</li>
+          </ul>
+        </li>
       </ul>
 
       <ul>
-        {$language === 'en' ? 'Biopharmaceuticals' : 'Biofarmaceutici'}
-        <li class="ml-6">{$language === 'en' ? '(e.g. mAb)' : '(npr. monoklonska antitijela)'}</li>
+        <li class="list-none !ml-0">
+          {$language === 'en' ? 'Biopharmaceuticals' : 'Biofarmaceutici'}
+          <ul class="!my-0">
+            <li class="ml-6">{$language === 'en' ? '(e.g. mAb)' : '(npr. monoklonska antitijela)'}</li>
+          </ul>
+        </li>
       </ul>
     </div>
     <div class="services-segment">
@@ -262,7 +274,7 @@
           </span>
         </span>
         <span class="dropdown-content">
-          <img src="/images/glycoprofiling/analysis_of_total_human_serum.jpg" alt="">
+          <img src="/images/glycoprofiling/analysis_of_total_human_serum.jpg" alt="{$language === 'en' ? 'Chart: Analysis of total human serum/plasma N-glycans' : 'Grafikon: Analiza ukupnih N-glikana humanog seruma/plazme'}">
         </span>
       </label>
       <label class="dropdown-container">
@@ -280,7 +292,7 @@
           </span>
         </span>
         <span class="dropdown-content">
-          <img src="/images/glycoprofiling/analysis_of_total_human_igg_n-glycans.jpg" alt="">
+          <img src="/images/glycoprofiling/analysis_of_total_human_igg_n-glycans.jpg" alt="{$language === 'en' ? 'Chart: Analysis of total human IgG N-glycans' : 'Grafikon: Analiza ukupnih N-glikana humanog IgG'}">
         </span>
       </label>
       <label class="dropdown-container">
@@ -298,7 +310,7 @@
           </span>
         </span>
         <span class="dropdown-content">
-          <img src="/images/glycoprofiling/analysis_of_total_human_iga_n-glycans.jpg" alt="">
+          <img src="/images/glycoprofiling/analysis_of_total_human_iga_n-glycans.jpg" alt="{$language === 'en' ? 'Chart: Analysis of total human IgA N-glycans' : 'Grafikon: Analiza ukupnih N-glikana humanog IgA'}">
         </span>
       </label>
       <label class="dropdown-container">
@@ -316,7 +328,7 @@
           </span>
         </span>
         <span class="dropdown-content">
-          <img src="/images/glycoprofiling/analysis_of_human_igg_n-glycopeptides.jpg" alt="">
+          <img src="/images/glycoprofiling/analysis_of_human_igg_n-glycopeptides.jpg" alt="{$language === 'en' ? 'Chart: Analysis of subclass-specific human IgG N-glycopeptides' : 'Grafikon: Analiza podtip-specifičnih N-glikopeptida humanog IgG'}">
         </span>
       </label>
       <label class="dropdown-container">
@@ -334,7 +346,7 @@
           </span>
         </span>
         <span class="dropdown-content">
-          <img src="/images/glycoprofiling/analysis_of_human_agp_n-glycopeptides.jpg" alt="">
+          <img src="/images/glycoprofiling/analysis_of_human_agp_n-glycopeptides.jpg" alt="{$language === 'en' ? 'Chart: Analysis of human AGP N-glycopeptides' : 'Grafikon: Analiza N-glikopeptida humanog AGP'}">
         </span>
       </label>
       <label class="dropdown-container">
@@ -352,7 +364,7 @@
           </span>
         </span>
         <span class="dropdown-content">
-          <img src="/images/glycoprofiling/analysis_of_human_c3_n-glycopeptides.jpg" alt="">
+          <img src="/images/glycoprofiling/analysis_of_human_c3_n-glycopeptides.jpg" alt="{$language === 'en' ? 'Chart: Analysis of human C3 N-glycopeptides' : 'Grafikon: Analiza N-glikopeptida humanog C3'}">
         </span>
       </label>
       <label class="dropdown-container">
@@ -370,7 +382,7 @@
           </span>
         </span>
         <span class="dropdown-content">
-          <img src="/images/glycoprofiling/analysis_of_rodent_igg_n-glycopeptides.jpg" alt="">
+          <img src="/images/glycoprofiling/analysis_of_rodent_igg_n-glycopeptides.jpg" alt="{$language === 'en' ? 'Chart: Analysis of subclass-specific rodent IgG N-glycopeptides' : 'Grafikon: Analiza podtip-specifičnih N-glikopeptida IgG glodavaca'}">
         </span>
       </label>
     </div>
@@ -1088,16 +1100,16 @@
       <ul>
         <li>
           {#if $language === 'en'}
-            <a href="/pdfs/genbird-en.pdf" target="_blank" class="underline">View intructions for the GENBird test (PDF)</a>
+            <a href="/pdfs/genbird-en.pdf" target="_blank" class="underline list-link">View instructions for the GENBird test (PDF)</a>
           {:else}
-            <a href="/pdfs/genbird-hr.pdf" target="_blank" class="underline">Pogledaj uputstva za GENBird test (PDF)</a>
+            <a href="/pdfs/genbird-hr.pdf" target="_blank" class="underline list-link">Pogledaj uputstva za GENBird test (PDF)</a>
           {/if}
         </li>
         <li>
-          <a href="/pdfs/genbird-order-form.pdf" target="_blank" class="underline">{$language === 'en' ? 'Order form for the GENBird test' : 'Narudžbenica za GENBird test'} (PDF)</a>
+          <a href="/pdfs/genbird-order-form.pdf" target="_blank" class="underline list-link">{$language === 'en' ? 'Order form for the GENBird test' : 'Narudžbenica za GENBird test'} (PDF)</a>
         </li>
         <li>
-          <a href="/pdfs/genbird-order-form-appendix.pdf" target="_blank" class="underline">{$language === 'en' ? 'Appendix to the order form for a larger number of samples' : 'Dodatak narudžbenici za veći broj uzoraka'} (PDF)</a>
+          <a href="/pdfs/genbird-order-form-appendix.pdf" target="_blank" class="underline list-link">{$language === 'en' ? 'Appendix to the order form for a larger number of samples' : 'Dodatak narudžbenici za veći broj uzoraka'} (PDF)</a>
         </li>
       </ul>
     </div>

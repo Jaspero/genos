@@ -1,7 +1,7 @@
 export const CONFIG = {
   title: 'Genos',
   fallbackSocialImage: '/brand/open-graph-featured.png',
-  websiteUrl: 'https://genos-ec52a.web.app',
+  websiteUrl: 'https://genos.hr',
   storageBucketName: 'genos-ec52a',
 
   /**

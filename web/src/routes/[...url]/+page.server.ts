@@ -1,6 +1,26 @@
 import { firestore, bucket } from '$lib/utils/firebase-admin';
 import { redirect } from '@sveltejs/kit';
 import type { EntryGenerator, PageServerLoad } from './$types';
+import { langFromPath } from '$lib/i18n/routes';
+
+const FIELD_LABELS: Record<string, { en: string; hr: string }> = {
+  email: { en: 'Email', hr: 'E-pošta' },
+  message: { en: 'Message', hr: 'Poruka' }
+};
+
+/**
+ * Accessibility fixes applied to the CMS page HTML at build time; the stored content is not changed.
+ * - Form fields the editor left with the placeholder label "Label" are named after their field.
+ * - E-mail fields get autocomplete="email" (WCAG 1.3.5).
+ */
+function fixCmsHtml(html: string, lang: 'en' | 'hr') {
+  return html
+    .replace(
+      /(<label\b[^>]*>)\s*Label\s*(<(?:input|textarea)\b[^>]*?\bname=("?)([\w-]+)\3)/g,
+      (match, open, field, _q, name) => (FIELD_LABELS[name] ? open + FIELD_LABELS[name][lang] + field : match)
+    )
+    .replace(/<input(?![^>]*\bautocomplete=)([^>]*\btype=("?)email\2)/g, '<input autocomplete=email$1');
+}
 
 export const entries: EntryGenerator = async () => {
   const snapshot = await firestore
@@ -80,7 +100,7 @@ export const load: PageServerLoad = async ({ params }) => {
 
   return {
     ...data,
-    content: `${content}<style>${style}</style>`,
+    content: `${fixCmsHtml(content, langFromPath('/' + url) || 'en')}<style>${style}</style>`,
     scripts: await scriptRef.toString()
   };
 };

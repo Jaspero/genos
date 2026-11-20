@@ -6,6 +6,17 @@
   import { goto } from '$app/navigation';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
   import { DateTime } from 'luxon';
+  import { language } from '$lib/stores/language';
+
+  /** The CMS default messages are English; show them in Croatian on Croatian pages. */
+  const HR_MESSAGES: Record<string, string> = {
+    'Form submitted successfully!': 'Poruka je uspješno poslana!',
+    'There was an error submitting the form. Please try again later.': 'Slanje poruke nije uspjelo. Pokušajte ponovno kasnije.'
+  };
+
+  function localized(message: string) {
+    return $language === 'hr' ? HR_MESSAGES[message] || message : message;
+  }
 
   export let id: string | null = null;
   export let label: string;
@@ -39,14 +50,20 @@
       const formData = new FormData(formEl);
       const data = Object.fromEntries(formData);
 
-      await alertWrapper(
-        addDoc(collection(db, 'forms', form, 'form-responses'), {
-          createdOn: DateTime.now().toUTC().toISO(),
-          ...data
-        }),
-        success,
-        error
-      );
+      try {
+        await alertWrapper(
+          addDoc(collection(db, 'forms', form, 'form-responses'), {
+            createdOn: DateTime.now().toUTC().toISO(),
+            ...data
+          }),
+          localized(success),
+          localized(error)
+        );
+      } catch {
+        // The error is already shown and announced; keep what was typed so it can be sent again.
+        loading = false;
+        return;
+      }
 
       if (redirect) {
         if (redirect.startsWith('http')) {
@@ -63,6 +80,6 @@
   }
 </script>
 
-<button class="button" type="submit" bind:this={button} {id} class:loading>
+<button class="button" type="submit" bind:this={button} {id} class:loading aria-disabled={loading}>
   {label}
 </button>

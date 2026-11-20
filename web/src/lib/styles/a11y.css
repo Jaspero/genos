@@ -1,0 +1,110 @@
+/*
+ * Accessibility additions (WCAG 2.1 AA). Kept in the web app so the shared styles, and the CMS that
+ * also uses them, stay unchanged.
+ */
+
+/* Skip link: hidden until it gets keyboard focus. */
+.skip-link {
+  position: fixed;
+  top: .75rem;
+  left: .75rem;
+  z-index: 100;
+  padding: .75rem 1rem;
+  background-color: #032130;
+  color: #fff;
+  font-weight: 700;
+  border-radius: .25rem;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+main:focus {
+  outline: none;
+}
+
+/* Visible keyboard focus everywhere: dark ring on light backgrounds, white ring on photos and dark areas. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:not([tabindex='-1']):focus-visible {
+  outline: 2px solid #0a415c;
+  outline-offset: 2px;
+}
+
+.navigation a:focus-visible,
+.navigation button:focus-visible,
+footer a:focus-visible,
+pb-intro a:focus-visible,
+.leaders a:focus-visible,
+.skip-link:focus-visible {
+  outline-color: #fff;
+}
+
+/* The service dropdowns are labels around an invisible checkbox: show the focus on the visible header. */
+.dropdown-container .dropdown-checkbox:focus-visible ~ .dropdown-header {
+  outline: 2px solid #0a415c;
+  outline-offset: 2px;
+  border-radius: .25rem;
+}
+
+/*
+ * Text on photos. The photos sit at z-index -1; without a stacking context they were painted behind the
+ * page itself, so contrast tools saw white text on the light page background. The colour is only seen
+ * if a photo does not load, and it keeps the white text readable then.
+ */
+pb-intro,
+.leaders {
+  isolation: isolate;
+  background-color: #0a415c;
+}
+
+.leaders {
+  border-radius: .5rem;
+}
+
+/* Slight shade on the "Global Leaders" photo so the white paragraph text keeps 4.5:1. */
+.leaders::after {
+  content: '';
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+  border-radius: .5rem;
+  background: rgba(3, 33, 48, .2);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Links that are the whole list item: the full 24 px line is the target (WCAG 2.5.8). */
+a.list-link {
+  display: inline-block;
+}
+
+/* Form fields: visible boundary of 3:1 against white and the page background (#c4d8ce was 1.4:1),
+   and placeholder text of 4.5:1. */
+.input,
+.select,
+.textarea {
+  border-color: #7b8f86;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: #6b7280;
+  opacity: 1;
+}

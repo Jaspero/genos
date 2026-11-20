@@ -209,43 +209,43 @@
         <div class="auth-fields">
           <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpFirstName">
             First Name
-            <input id="signUpFirstName" type="text" bind:value={firstName} required autocomplete="given-name" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+            <input id="signUpFirstName" type="text" bind:value={firstName} required autocomplete="given-name" class="w-full rounded-md border border-slate-500 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
           </label>
           <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpLastName">
             Last Name
-            <input id="signUpLastName" type="text" bind:value={lastName} required autocomplete="family-name" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+            <input id="signUpLastName" type="text" bind:value={lastName} required autocomplete="family-name" class="w-full rounded-md border border-slate-500 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
           </label>
           <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpEmail">
             Email
-            <input id="signUpEmail" type="email" bind:value={email} required autocomplete="email" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+            <input id="signUpEmail" type="email" bind:value={email} required autocomplete="email" class="w-full rounded-md border border-slate-500 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
           </label>
           <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpRecoveryEmail">
             Recovery Email
-            <input id="signUpRecoveryEmail" type="email" bind:value={recoveryEmail} required autocomplete="email" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+            <input id="signUpRecoveryEmail" type="email" bind:value={recoveryEmail} required autocomplete="email" class="w-full rounded-md border border-slate-500 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
           </label>
           <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpInstitution">
             Institution
-            <input id="signUpInstitution" type="text" bind:value={institution} required autocomplete="organization" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+            <input id="signUpInstitution" type="text" bind:value={institution} required autocomplete="organization" class="w-full rounded-md border border-slate-500 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
           </label>
           <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpPosition">
             Position in Institution
-            <input id="signUpPosition" type="text" bind:value={position} required autocomplete="organization-title" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+            <input id="signUpPosition" type="text" bind:value={position} required autocomplete="organization-title" class="w-full rounded-md border border-slate-500 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
           </label>
           <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpInstitutionAddress">
             Institution Address
-            <textarea id="signUpInstitutionAddress" bind:value={institutionAddress} required rows="3" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]"></textarea>
+            <textarea id="signUpInstitutionAddress" bind:value={institutionAddress} required rows="3" class="w-full rounded-md border border-slate-500 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]"></textarea>
           </label>
           <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpVatId">
             VAT ID
-            <input id="signUpVatId" type="text" bind:value={vatId} required class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+            <input id="signUpVatId" type="text" bind:value={vatId} required class="w-full rounded-md border border-slate-500 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
           </label>
           <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpPassword">
             Password
-            <input id="signUpPassword" {type} bind:value={password} required autocomplete="new-password" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+            <input id="signUpPassword" {type} bind:value={password} required autocomplete="new-password" class="w-full rounded-md border border-slate-500 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
           </label>
           <label class="[display:grid] gap-1.5 text-sm font-semibold text-slate-700" for="signUpPasswordConfirm">
             Confirm Password
-            <input id="signUpPasswordConfirm" {type} bind:value={passwordConfirm} required autocomplete="new-password" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
+            <input id="signUpPasswordConfirm" {type} bind:value={passwordConfirm} required autocomplete="new-password" class="w-full rounded-md border border-slate-500 px-3 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-[#0A415C]" />
           </label>
           <div class="auth-toggle-vis">
             <button type="button" on:click={toggleVisible}>
