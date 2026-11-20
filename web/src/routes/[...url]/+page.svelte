@@ -3,7 +3,7 @@
   import { page } from '$app/stores';
   import { browser } from '$app/environment';
   import { meta } from '$lib/meta/meta.store';
-  import './components';
+  import { loadBlocks } from './components';
   import { onMount, onDestroy } from 'svelte';
   import type { Page } from '@sveltejs/kit';
   import type { Unsubscriber } from 'svelte/store';
@@ -33,6 +33,9 @@
 
   $: scrolled(y);
 
+  // Defines the page's blocks; runs again with the new HTML after navigating to another page.
+  $: if (browser) loadBlocks(data.content);
+
   const classes: string[] = [];
 
   meta.set({ title: data.title, ...data.meta });
@@ -55,11 +58,30 @@
     });
   }
 
-  async function renderSwiper() {
-    while (!window.Swiper) {
-      await new Promise((r) => setTimeout(r, 50));
+  const SWIPER = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min';
+  let swiperLoading: Promise<void> | undefined;
+
+  /** Adds the Swiper script and styles to the page the first time a slider needs them. */
+  function loadSwiper() {
+    if (!swiperLoading) {
+      swiperLoading = new Promise<void>((resolve, reject) => {
+        const style = document.createElement('link');
+        style.rel = 'stylesheet';
+        style.href = SWIPER + '.css';
+        document.head.appendChild(style);
+
+        const script = document.createElement('script');
+        script.src = SWIPER + '.js';
+        script.onload = () => resolve();
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
     }
 
+    return swiperLoading;
+  }
+
+  async function renderSwiper() {
     let attempts = 0;
 
     while (!window.swipers && attempts < 100) {
@@ -69,6 +91,10 @@
 
     if (!window.swipers || !Object.keys(window.swipers).length) {
       return;
+    }
+
+    if (!window.Swiper) {
+      await loadSwiper();
     }
 
     for (const key in window.swipers) {

@@ -1,13 +1,12 @@
 <script lang="ts">
   import { cartState } from '$lib/cart/cart-state';
   import Meta from '$lib/meta/Meta.svelte';
-  import { db, user } from '$lib/utils/firebase';
   import '@jaspero/web-components/dist/alert.wc';
   import '@jaspero/web-components/dist/confirm.wc';
-  import { doc, getDoc } from 'firebase/firestore';
   import { onMount } from 'svelte';
   import '../../../shared/styles/index.pcss';
   import '$lib/styles/a11y.css';
+  import '$lib/styles/fonts.css';
   import Navigation from '$lib/Navigation.svelte';
   import Footer from '$lib/Footer.svelte';
   import { page } from '$app/stores';
@@ -52,14 +51,24 @@
     .map((lang) => ({ lang, path: pathInLang($page.url.pathname, lang) }))
     .filter((a) => a.path);
 
+  /**
+   * Firebase (about 100 KB of JavaScript, plus the sign-in frame it loads) is only needed here to
+   * restore a saved cart, so it is loaded only when there is one. Pages that use Firebase import it
+   * themselves.
+   */
   onMount(async () => {
-    const userDoc: any = $user;
-    let currentCartState;
     const items = localStorage.getItem('cart');
 
-    if (items) {
-      currentCartState = JSON.parse(items);
+    if (!items) {
+      return;
     }
+
+    const [{ db, user }, { doc, getDoc }] = await Promise.all([
+      import('$lib/utils/firebase'),
+      import('firebase/firestore')
+    ]);
+    const userDoc: any = get(user);
+    let currentCartState = JSON.parse(items);
 
     if (userDoc && userDoc.cartItems) {
       if (currentCartState && currentCartState.cartUpdate) {

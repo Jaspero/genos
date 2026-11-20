@@ -1,11 +1,8 @@
 <svelte:options customElement={{ tag: 'pb-submit', shadow: 'none' }} />
 
 <script lang="ts">
-  import { addDoc, collection } from 'firebase/firestore';
-  import { db } from '$lib/utils/firebase';
   import { goto } from '$app/navigation';
   import { alertWrapper } from '$lib/utils/alert-wrapper';
-  import { DateTime } from 'luxon';
   import { language } from '$lib/stores/language';
 
   /** The CMS default messages are English; show them in Croatian on Croatian pages. */
@@ -50,15 +47,22 @@
       const formData = new FormData(formEl);
       const data = Object.fromEntries(formData);
 
+      // Firebase and Luxon are loaded when a form is sent, so pages with a form do not download them up front.
+      const save = (async () => {
+        const [{ addDoc, collection }, { db }, { DateTime }] = await Promise.all([
+          import('firebase/firestore'),
+          import('$lib/utils/firebase'),
+          import('luxon')
+        ]);
+
+        return addDoc(collection(db, 'forms', form, 'form-responses'), {
+          createdOn: DateTime.now().toUTC().toISO(),
+          ...data
+        });
+      })();
+
       try {
-        await alertWrapper(
-          addDoc(collection(db, 'forms', form, 'form-responses'), {
-            createdOn: DateTime.now().toUTC().toISO(),
-            ...data
-          }),
-          localized(success),
-          localized(error)
-        );
+        await alertWrapper(save, localized(success), localized(error));
       } catch {
         // The error is already shown and announced; keep what was typed so it can be sent again.
         loading = false;

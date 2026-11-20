@@ -1,0 +1,26 @@
+/*
+ * Open Sans as WOFF2 instead of the TTF files in shared/styles/typography.pcss: the same fonts,
+ * losslessly compressed (woff2_compress), so text renders pixel for pixel the same with less to
+ * download. Of faces with the same descriptors the browser uses the last declared one, so these
+ * replace the TTF faces, which are then not downloaded.
+ */
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/fonts/OpenSans-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/fonts/OpenSans-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/fonts/OpenSans-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}

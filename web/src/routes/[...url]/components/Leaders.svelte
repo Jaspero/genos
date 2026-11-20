@@ -6,7 +6,7 @@
 
 <div class="grid grid-large">
   <div class="gc-12 leaders">
-    <img src="/images/team.jpg" alt="">
+    <img loading="lazy" src="/images/team.jpg" alt="">
     <h2>
       {
         $language === 'en'

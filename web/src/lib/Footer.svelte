@@ -1,7 +1,23 @@
 <script>
   import {language} from '$lib/stores/language';
+  import { onMount } from 'svelte';
 
   const year = new Date().getFullYear();
+
+  /*
+   * The background photo (about 270 KB) is added once the page has loaded. In the HTML it was
+   * downloaded together with the page's main image, because before the blocks are drawn the footer
+   * sits close to the top. Until then the footer shows its background colour.
+   */
+  let showBg = false;
+
+  onMount(() => {
+    if (document.readyState === 'complete') {
+      showBg = true;
+    } else {
+      window.addEventListener('load', () => (showBg = true), { once: true });
+    }
+  });
 </script>
 
 <footer class="spacer" lang={$language}>
@@ -57,7 +73,9 @@
     </div>
   </div>
   <span id="footer-pdf-note" class="sr-only">{$language === 'en' ? 'PDF, opens in a new tab' : 'PDF, otvara se u novoj kartici'}</span>
-  <img class="footer-bg" src="/images/footer.jpg" alt="">
+  {#if showBg}
+    <img class="footer-bg" src="/images/footer.jpg" alt="" loading="lazy" decoding="async">
+  {/if}
 </footer>
 
 <style>

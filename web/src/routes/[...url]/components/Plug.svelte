@@ -8,7 +8,7 @@
   <div class="gc-12">
     <div class="image-text">
       <div class="image">
-        <img src="/images/hgp-card.jpg" alt="{$language === 'en' ? 'The Human Glycome Project' : 'Projekt Humanog Glikoma'} Logo">
+        <img loading="lazy" src="/images/hgp-card.jpg" alt="{$language === 'en' ? 'The Human Glycome Project' : 'Projekt Humanog Glikoma'} Logo">
       </div>
       <div class="text">
         <h2>
@@ -37,7 +37,7 @@
   <div class="gc-12">
     <div class="image-text">
       <div class="image">
-        <img src="/images/glycanage.jpg" alt="glycanage kit">
+        <img loading="lazy" src="/images/glycanage.jpg" alt="glycanage kit">
       </div>
       <div class="text">
         <h2>{$language === 'en' ? 'From Science to Product: GlycanAge' : 'Od znanosti do proizvoda: GlycanAge'}</h2>
@@ -60,7 +60,7 @@
   <div class="gc-12">
     <div class="image-text">
       <div class="image">
-        <img src="/images/test-kit.jpg" alt="{$language === 'en' ? 'DNA Sample Collection Kit' : 'Set za prikupljanje DNA uzorka'}">
+        <img loading="lazy" src="/images/test-kit.jpg" alt="{$language === 'en' ? 'DNA Sample Collection Kit' : 'Set za prikupljanje DNA uzorka'}">
       </div>
       <div class="text">
         <h2>{$language === 'en' ? 'DNA Testing Sample Collection Kit' : 'Set za izuzimanje uzoraka za analizu DNA'}</h2>
