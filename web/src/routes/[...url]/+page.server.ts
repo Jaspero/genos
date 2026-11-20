@@ -18,7 +18,6 @@ function attr(tag: string, name: string) {
 /**
  * The intro photo was only added by JavaScript after the app started, which made it the late
  * Largest Contentful Paint. It is now part of the page HTML; the pb-intro block reuses it.
- * Returns the HTML and the first photo (the page's main image, preloaded in the head).
  */
 async function prerenderIntroImage(html: string) {
   const tags = html.match(/<pb-intro\b[^>]*>/g) ?? [];
@@ -33,7 +32,6 @@ async function prerenderIntroImage(html: string) {
   }
 
   let first = true;
-  let lcpImage: string | null = null;
 
   const result = html.replace(/<pb-intro\b[^>]*>/g, (tag) => {
     const src = attr(tag, 'src');
@@ -49,16 +47,12 @@ async function prerenderIntroImage(html: string) {
       ? ` onerror="this.onerror=null;this.src=this.dataset.src" data-src="${storageSrc}"`
       : '';
 
-    if (first) {
-      lcpImage = local ?? decodeEntities(src);
-    }
-
     first = false;
 
     return `${tag}<img class="intro-bg" src="${local ?? storageSrc}"${fallback} alt="${alt.replace(/"/g, '&quot;')}"${priority}>`;
   });
 
-  return { html: result, lcpImage };
+  return result;
 }
 
 /**
@@ -68,7 +62,7 @@ async function prerenderIntroImage(html: string) {
  * - E-mail fields get autocomplete="email" (WCAG 1.3.5).
  */
 async function fixCmsHtml(source: string, lang: 'en' | 'hr') {
-  const { html, lcpImage } = await prerenderIntroImage(source);
+  const html = await prerenderIntroImage(source);
 
   const fixed = html
     .replace(
@@ -77,7 +71,7 @@ async function fixCmsHtml(source: string, lang: 'en' | 'hr') {
     )
     .replace(/<input(?![^>]*\bautocomplete=)([^>]*\btype=("?)email\2)/g, '<input autocomplete=email$1');
 
-  return { html: fixed, lcpImage };
+  return fixed;
 }
 
 export const entries: EntryGenerator = async () => {
@@ -166,12 +160,9 @@ export const load: PageServerLoad = async ({ params }) => {
     data.title = 'Contact';
   }
 
-  const fixed = await fixCmsHtml(content, lang);
-
   return {
     ...data,
-    lcpImage: fixed.lcpImage,
-    content: `${fixed.html}<style>${style}</style>`,
+    content: `${await fixCmsHtml(content, lang)}<style>${style}</style>`,
     scripts: await scriptRef.toString()
   };
 };

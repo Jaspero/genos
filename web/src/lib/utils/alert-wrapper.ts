@@ -1,5 +1,4 @@
 import { renderAlert } from '@jaspero/web-components/dist/render-alert.js';
-import { FirebaseError } from 'firebase/app';
 import { get } from 'svelte/store';
 import { language } from '$lib/stores/language';
 import { announce } from './announce';
@@ -49,7 +48,9 @@ export async function alertWrapper(
         message: typeof errorMessage === 'function' ? errorMessage(e) : errorMessage || e.toString()
       };
 
-      if (e instanceof FirebaseError) {
+      // Firebase errors (auth, Firestore, functions) are FirebaseError instances, named so. Checked by
+      // name so that this helper, used by the contact form, does not pull Firebase into every page.
+      if (e?.name === 'FirebaseError' && typeof e.code === 'string') {
         if (e.code === 'functions/internal') {
           content.message = e.toString().replace('FirebaseError: ', '');
         } else {
