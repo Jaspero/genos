@@ -20,6 +20,7 @@
     };
     scripts: string;
     renderLayout?: boolean;
+    lcpImage?: string | null;
   };
 
   let scrolls: Array<{ el: any; className: string; height: number }> = [];
@@ -280,6 +281,13 @@
     }
   });
 </script>
+
+<svelte:head>
+  {#if data.lcpImage}
+    <!-- The intro photo is the page's main image: fetched first, before the scripts. -->
+    <link rel="preload" as="image" href={data.lcpImage} fetchpriority="high" />
+  {/if}
+</svelte:head>
 
 <!--
   The page-builder blocks (pb-*) are drawn in the browser. Until then the page is only the intro, so the
