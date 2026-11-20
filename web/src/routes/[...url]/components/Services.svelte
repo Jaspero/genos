@@ -34,7 +34,7 @@
           forensics = false;
         }}>
         {$language === 'en' ? 'Glycomics & glycoproteomics' : 'Glikomika i glikoproteomika'}
-        <img src="/icons/arrow_dropdown.svg" width="24" height="24" style="height: auto" alt="" class:rotate-180={glycomics}>
+        <img src="/icons/arrow_dropdown.svg" width="24" height="24" style="height: auto; min-width: 24px" alt="" class:rotate-180={glycomics}>
       </button>
       {#if glycomics}
         <div class="flex flex-col gap-y-1" id="services-links-glycomics" transition:slide>
@@ -70,7 +70,7 @@
           forensics = false;
         }}>
         {$language === 'en' ? 'Epigenetics' : 'Epigenetika'}
-        <img src="/icons/arrow_dropdown.svg" width="24" height="24" style="height: auto" alt="" class:rotate-180={epigenetics}>
+        <img src="/icons/arrow_dropdown.svg" width="24" height="24" style="height: auto; min-width: 24px" alt="" class:rotate-180={epigenetics}>
       </button>
       {#if epigenetics}
         <div class="flex flex-col gap-y-1" id="services-links-epigenetics" transition:slide>
@@ -91,7 +91,7 @@
           forensics = !forensics;
         }}>
         {$language === 'en' ? 'DNA & Forensics' : 'DNA i Forenzika'}
-        <img src="/icons/arrow_dropdown.svg" width="24" height="24" style="height: auto" alt="" class:rotate-180={forensics}>
+        <img src="/icons/arrow_dropdown.svg" width="24" height="24" style="height: auto; min-width: 24px" alt="" class:rotate-180={forensics}>
       </button>
       {#if forensics}
         <div class="flex flex-col gap-y-1" id="services-links-forensics" transition:slide>
