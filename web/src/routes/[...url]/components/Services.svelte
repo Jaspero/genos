@@ -132,7 +132,7 @@
   </div>
   <div class="gc-9 gc-xs-12 services-container">
     <h3 id="1.0.">1. {$language === 'en' ? 'Glycomics & Glycoproteomics' : 'Glikomika i glikoproteomika'}</h3>
-    <img src="/illustrations/glycomics.jpg" alt="" class="w-full">
+    <img src="/illustrations/glycomics.jpg" width="688" height="320" style="height: auto" alt="" class="w-full">
     <div class="services-segment">
       <h4 id="1.1.">1.1. {$language === 'en' ? 'Technologies' : 'Tehnologije'}</h4>
       <div class="services-images-row">
@@ -419,7 +419,7 @@
     <hr>
     <div class="services-segment">
       <h3 id="2.0.">2. {$language === 'en' ? 'Epigenetics' : 'Epigenetika'}</h3>
-      <img src="/illustrations/epigenetics.jpg" alt="" class="w-full">
+      <img src="/illustrations/epigenetics.jpg" width="688" height="320" style="height: auto" alt="" class="w-full">
       <h4 id="2.1.">2.1. {$language === 'en' ? 'Technologies' : 'Tehnologije'}</h4>
       <ul>
         <li>{$language === 'en' ? 'Epigenetics analyses' : 'Epigenetske analize'}</li>
@@ -527,7 +527,7 @@
     <hr>
     <div class="services-segment">
       <h3 id="3.0.">3. {$language === 'en' ? 'DNA & Forensics' : 'DNA i Forenzika'}</h3>
-      <img src="/illustrations/dna.jpg" alt="" class="w-full">
+      <img src="/illustrations/dna.jpg" width="688" height="320" style="height: auto" alt="" class="w-full">
       <h4 id="3.1.">3.1. {$language === 'en' ? 'Paternity testing' : 'Utvrđivanje očinstva'}</h4>
       <ul>
         <li>
