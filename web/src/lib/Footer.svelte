@@ -51,6 +51,7 @@
     <div class="subfooter-contact">
       <a href="mailto:info@genos.hr">info@genos.hr</a>
       <span>© 2025 Genos Glyco</span>
+      <span>{$language === 'en' ? 'Made by' : 'Izradio'} <a href="https://jaspero.co">jaspero.co</a></span>
     </div>
   </div>
   <img class="footer-bg" src="/images/footer.jpg" alt="">
@@ -114,6 +115,11 @@
     .subfooter-legal, .subfooter-contact {
         display: flex;
         gap: 1.5rem;
+    }
+
+    .subfooter-contact {
+        flex-wrap: wrap;
+        row-gap: .5rem;
     }
 
     .footer-bg {
