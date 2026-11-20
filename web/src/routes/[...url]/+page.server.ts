@@ -8,13 +8,40 @@ const FIELD_LABELS: Record<string, { en: string; hr: string }> = {
   message: { en: 'Message', hr: 'Poruka' }
 };
 
+function attr(tag: string, name: string) {
+  // Preceded by whitespace, so that "?alt=media" inside a URL is not taken for the alt attribute.
+  const m = tag.match(new RegExp(`\\s${name}=(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`));
+  return m ? (m[1] ?? m[2] ?? m[3]) : null;
+}
+
+/**
+ * The intro photo was only added by JavaScript after the app started, which made it the late
+ * Largest Contentful Paint. It is now part of the page HTML; the pb-intro block reuses it.
+ */
+function prerenderIntroImage(html: string) {
+  let first = true;
+
+  return html.replace(/<pb-intro\b[^>]*>/g, (tag) => {
+    const src = attr(tag, 'src');
+
+    if (!src) return tag;
+
+    const alt = attr(tag, 'alt') ?? '';
+    const priority = first ? ' fetchpriority="high"' : ' loading="lazy"';
+    first = false;
+
+    return `${tag}<img class="intro-bg" src="${src.replace(/"/g, '&quot;')}" alt="${alt.replace(/"/g, '&quot;')}"${priority}>`;
+  });
+}
+
 /**
  * Accessibility fixes applied to the CMS page HTML at build time; the stored content is not changed.
  * - Form fields the editor left with the placeholder label "Label" are named after their field.
+ * - The intro photo is part of the HTML (see prerenderIntroImage).
  * - E-mail fields get autocomplete="email" (WCAG 1.3.5).
  */
 function fixCmsHtml(html: string, lang: 'en' | 'hr') {
-  return html
+  return prerenderIntroImage(html)
     .replace(
       /(<label\b[^>]*>)\s*Label\s*(<(?:input|textarea)\b[^>]*?\bname=("?)([\w-]+)\3)/g,
       (match, open, field, _q, name) => (FIELD_LABELS[name] ? open + FIELD_LABELS[name][lang] + field : match)

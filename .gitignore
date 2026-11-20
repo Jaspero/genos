@@ -2,3 +2,6 @@ node_modules
 public
 web/key.json
 .firebase
+# a11y-report: screenshots stay local
+a11y-report/screenshots/
+a11y-report/compare/
