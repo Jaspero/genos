@@ -1,8 +1,15 @@
 /*
  * Open Sans as WOFF2 instead of the TTF files in shared/styles/typography.pcss: the same fonts,
  * losslessly compressed (woff2_compress), so text renders pixel for pixel the same with less to
- * download. Of faces with the same descriptors the browser uses the last declared one, so these
- * replace the TTF faces, which are then not downloaded.
+ * download. Of faces with the same descriptors the browser uses the last declared one whose
+ * unicode-range has the character, so these replace the TTF faces, which are then not downloaded.
+ *
+ * The -latin files (about 27 KB instead of 58 KB each) are subsets made with fontTools pyftsubset
+ * (--layout-features='*') for Latin, Latin Extended, combining marks, punctuation, currency and
+ * the fi/fl ligatures (U+FB00-FB06: they must stay mapped, otherwise FreeType hints the ligature
+ * glyphs differently). Text in them renders pixel for pixel like the full fonts (checked with every
+ * character on the site, all three weights, 12-48 px). Other characters (Greek, Cyrillic, maths)
+ * come from the full fonts, which are only downloaded when a page uses such a character.
  */
 @font-face {
   font-family: 'Open Sans';
@@ -23,4 +30,34 @@
   src: url('/fonts/OpenSans-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/fonts/OpenSans-Regular-latin.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  unicode-range: U+0000-02CC, U+02CE-02D7, U+02DA, U+02DC-036F, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+    U+2000-206F, U+20A0-20C0, U+2113, U+2122, U+2191, U+2193, U+2212, U+2215, U+2C60-2C7F, U+A720-A7FF,
+    U+FB00-FB06, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/fonts/OpenSans-SemiBold-latin.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  unicode-range: U+0000-02CC, U+02CE-02D7, U+02DA, U+02DC-036F, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+    U+2000-206F, U+20A0-20C0, U+2113, U+2122, U+2191, U+2193, U+2212, U+2215, U+2C60-2C7F, U+A720-A7FF,
+    U+FB00-FB06, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/fonts/OpenSans-Bold-latin.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  unicode-range: U+0000-02CC, U+02CE-02D7, U+02DA, U+02DC-036F, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+    U+2000-206F, U+20A0-20C0, U+2113, U+2122, U+2191, U+2193, U+2212, U+2215, U+2C60-2C7F, U+A720-A7FF,
+    U+FB00-FB06, U+FEFF, U+FFFD;
 }
