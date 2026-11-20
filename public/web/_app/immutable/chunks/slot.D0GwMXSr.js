@@ -1,0 +1,1 @@
+import{a4 as s,a5 as l}from"./custom-element.mhvlARxE.js";function u(n,e,r,t,d){var i;s&&l();var a=(i=e.$$slots)==null?void 0:i[r],f=!1;a===!0&&(a=e.children,f=!0),a===void 0||a(n,f?()=>t:t)}export{u as s};

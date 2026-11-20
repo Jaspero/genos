@@ -1,0 +1,2 @@
+// _app/immutable/assets/4.DHjG2jIS.css
+export default ".intro-container.svelte-9mbb1k{position:relative;isolation:isolate;background-color:#0a415c;display:flex;align-items:flex-end;width:100%;height:25rem;border-radius:.5rem;overflow:hidden}.intro-bg.svelte-9mbb1k{z-index:-1;position:absolute;top:0;left:0;width:100%;height:100%;-o-object-fit:cover;object-fit:cover}h1.svelte-9mbb1k{color:#fff}\n";

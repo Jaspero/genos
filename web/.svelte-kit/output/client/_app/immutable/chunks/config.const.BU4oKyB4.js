@@ -1,0 +1,1 @@
+const e={title:"Genos",fallbackSocialImage:"/brand/open-graph-featured.png",websiteUrl:"https://genos.hr",storageBucketName:"genos-ec52a",singlePostUrlPrefix:"/posts/",singleBlogAuthorUrlPrefix:"/authors/",singleProductUrlPrefix:"/products/",singleHeader:"",singleFooter:""};export{e as C};

@@ -1,0 +1,1 @@
+import{a4 as n,ag as s,ar as o}from"./custom-element.mhvlARxE.js";function _(e){n&&s(e)!==null&&o(e)}let a=!1;function f(){a||(a=!0,document.addEventListener("reset",e=>{Promise.resolve().then(()=>{var r;if(!e.defaultPrevented)for(const t of e.target.elements)(r=t.__on_r)==null||r.call(t)})},{capture:!0}))}export{f as a,_ as r};

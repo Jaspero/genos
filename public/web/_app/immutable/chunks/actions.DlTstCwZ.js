@@ -1,0 +1,1 @@
+import{y as c,v as o,z as i,k as d,A as k}from"./custom-element.mhvlARxE.js";function u(e,n,f){c(()=>{var r=o(()=>n(e,f==null?void 0:f())||{});if(f&&(r!=null&&r.update)){var a=!1,t={};i(()=>{var s=f();d(s),a&&k(t,s)&&(t=s,r.update(s))}),a=!0}if(r!=null&&r.destroy)return()=>r.destroy()})}export{u as a};
