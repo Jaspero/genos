@@ -90,9 +90,15 @@ pb-intro,
   }
 }
 
-/* Links that are the whole list item: the full 24 px line is the target (WCAG 2.5.8). */
+/* Links that are the whole list item: a 24 px tall target (WCAG 2.5.8). */
 a.list-link {
   display: inline-block;
+  padding: 3px 0;
+}
+
+/* Stacked phone links on the contact page were 22.5 px tall on phones. */
+.contact-section .contact-links a {
+  min-height: 24px;
 }
 
 /* Form fields: visible boundary of 3:1 against white and the page background (#c4d8ce was 1.4:1),

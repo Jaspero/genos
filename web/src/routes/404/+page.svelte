@@ -23,6 +23,8 @@
 <style>
     .intro-container {
         position: relative;
+        isolation: isolate;
+        background-color: #0a415c;
         display: flex;
         align-items: flex-end;
         width: 100%;

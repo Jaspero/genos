@@ -804,14 +804,14 @@
                 <circle cx="310" cy="310" r="98" fill="rgba(15,26,51,.84)" stroke="rgba(255,255,255,.10)"/>
                 <text x="310" y="300" text-anchor="middle" font-size="18" fill="rgba(255,255,255,.94)" font-weight="800">Expression plasmid</text>
                 <text x="310" y="326" text-anchor="middle" font-size="14" fill="rgba(255,255,255,.82)" font-weight="700">{totalSize} {t('bp')}</text>
-                <g opacity="0">
+                <!-- Mouse shortcut on the ring; keyboard and screen reader users use the module labels above, which do the same. -->
+                <g opacity="0" aria-hidden="true">
                   {#each activeModuleKeys as k (k)}
+                    <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
                     <path
                       d={segments[k].path} fill="none" stroke="#fff" stroke-width="34" stroke-linecap="round"
                       style="cursor:pointer"
                       on:click={() => openModal(moduleModalMap[k])}
-                      on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && openModal(moduleModalMap[k])}
-                      role="button" tabindex="-1"
                     />
                   {/each}
                 </g>
@@ -851,7 +851,7 @@
         <div id="cart" class="scroll-mt-28 bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
           <div class="mb-4 rounded-md border border-[#0A415C]/15 bg-[#0A415C]/5 p-3">
             <h2 class="text-base font-bold text-[#032130] mb-1">{t('ordersLinkTitle')}</h2>
-            <p class="text-gray-500 text-[.8125rem] leading-relaxed mb-3">{t('ordersLinkText')}</p>
+            <p class="text-gray-600 text-[.8125rem] leading-relaxed mb-3">{t('ordersLinkText')}</p>
             <a href="/my-account/plasmid-orders" class="inline-flex items-center justify-center rounded bg-[#0A415C] px-3 py-2 text-xs font-bold text-white transition-colors hover:bg-[#063044]" on:click={openOrders}>
               {t('ordersLinkCta')}
             </a>

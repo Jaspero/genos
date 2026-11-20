@@ -186,7 +186,7 @@
   }
 
   .auth-footer-link a {
-    color: #1486ad;
+    color: #127a9e;
     font-weight: 600;
     text-decoration: underline;
   }

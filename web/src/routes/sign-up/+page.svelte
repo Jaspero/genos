@@ -328,7 +328,7 @@
 
   .auth-toggle-vis button {
     font-size: .8125rem;
-    color: #1486ad;
+    color: #127a9e;
     text-decoration: underline;
     cursor: pointer;
     background: none;
@@ -360,7 +360,7 @@
     align-items: center;
     gap: .75rem;
     margin: 1.25rem 0;
-    color: #9ca3af;
+    color: #6b7280;
     font-size: .8125rem;
   }
 
@@ -407,7 +407,7 @@
   }
 
   .auth-footer-link a {
-    color: #1486ad;
+    color: #127a9e;
     font-weight: 600;
     text-decoration: underline;
   }

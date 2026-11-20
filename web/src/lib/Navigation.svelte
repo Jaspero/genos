@@ -205,8 +205,8 @@
     </div>
     <div class="flex gap-8">
       <div class="language-toggle" role="group" aria-label={$language === 'en' ? 'Language' : 'Jezik'}>
-        <a href={languageHref('en', $page.url.pathname)} lang="en" hreflang="en" aria-label="English" class:active={$language === 'en'} aria-current={$language === 'en' ? 'true' : undefined} on:click={(e) => chooseLanguage('en', e)}>EN</a>
-        <a href={languageHref('hr', $page.url.pathname)} lang="hr" hreflang="hr" aria-label="Hrvatski" class:active={$language === 'hr'} aria-current={$language === 'hr' ? 'true' : undefined} on:click={(e) => chooseLanguage('hr', e)}>HR</a>
+        <a href={languageHref('en', $page.url.pathname)} lang="en" hreflang="en" class:active={$language === 'en'} aria-current={$language === 'en' ? 'true' : undefined} on:click={(e) => chooseLanguage('en', e)}>EN<span class="sr-only"> (English)</span></a>
+        <a href={languageHref('hr', $page.url.pathname)} lang="hr" hreflang="hr" class:active={$language === 'hr'} aria-current={$language === 'hr' ? 'true' : undefined} on:click={(e) => chooseLanguage('hr', e)}>HR<span class="sr-only"> (hrvatski)</span></a>
       </div>
       <button class="menu-toggle" type="button" bind:this={menuButton} aria-label={$language === 'en' ? 'Menu' : 'Izbornik'} aria-expanded={open} aria-controls="mobile-menu" on:click={() => (open ? closeMenu() : openMenu())}>
         <img src="/icons/menu.svg" alt="">
@@ -272,8 +272,13 @@
             transform: none;
         }
 
+        /* Light shade at the top of the photo the transparent header sits on; it also gives the white
+           links a dark backdrop where a page has no photo under the header yet. */
+        background-image: linear-gradient(to bottom, rgba(3, 33, 48, .5), rgba(3, 33, 48, 0));
+
         &.scrolled {
             background-color: #032130;
+            background-image: none;
         }
 
         nav {
@@ -311,12 +316,13 @@
                 }
                 a {
                     font-weight: 600;
-                    opacity: .8;
                     transition: .25s;
                     &.contact {
                     }
                     &:hover {
-                        opacity: 1;
+                        text-decoration: underline;
+                        text-underline-offset: .75rem;
+                        text-decoration-thickness: .125rem;
                     }
                     &.active {
                         opacity: 1;
@@ -345,7 +351,7 @@
             padding: .125rem .5rem;
             font-size: .75rem;
             font-weight: bold;
-            color: rgba(255,255,255,.8);
+            color: #fff;
             &.active {
                 color: #032130;
                 background-color: white;

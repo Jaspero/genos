@@ -39,7 +39,13 @@
   // posts) are written in English. The header and footer carry their own lang attribute.
   $: if (browser) {
     document.documentElement.lang =
-      langFromPath($page.url.pathname) ?? ($page.url.pathname.startsWith('/tools/') ? $language : 'en');
+      langFromPath($page.url.pathname) ?? ($page.url.pathname.startsWith('/tools/') || $page.url.pathname === '/404' ? $language : 'en');
+  }
+
+  function skipToContent() {
+    const main = document.getElementById('main');
+    main?.focus();
+    main?.scrollIntoView();
   }
 
   $: alternates = (['en', 'hr'] as const)
@@ -99,7 +105,8 @@
   {/if}
 </svelte:head>
 
-<a class="skip-link" href="#main" lang={$language}>{$language === 'en' ? 'Skip to content' : 'Preskoči na sadržaj'}</a>
+<!-- <base href="/"> would turn a bare "#main" into a link to the home page, so the path is included and focus is moved here. -->
+<a class="skip-link" href={$page.url.pathname + '#main'} lang={$language} on:click|preventDefault={skipToContent}>{$language === 'en' ? 'Skip to content' : 'Preskoči na sadržaj'}</a>
 
 <Navigation></Navigation>
 
